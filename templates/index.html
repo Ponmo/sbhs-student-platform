@@ -112,7 +112,7 @@
         newMode.innerHTML = '<p class="message-combine-time">' + messageMoment + '</p><p class="message-combine">' + data.message + '</p>';
       }
       alert('recieved');
-      document.getElementById('messages').prepend(newMode);
+      document.getElementById('messages').append(newMode);
     });
     
     socket.on('join_room_announcement', function (data) {
