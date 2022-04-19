@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Santa Barbara High School</title>
+  </head>
+  <body>
+    <div id="first-all">
+      <div id="background">
+      </div>
+      <div id="content">
+        <div id="header">
+        </div>
+        <div id="information">
+        </div>
+        <div id="channels">
+        </div>
+<!--         when new message is sent, make the new message appear above the message bar and not mess up the scrolling (Safari only). -->
+        <div id="chats">
+          <div id="chat">
+            <div id="messages">
+            </div>
+          </div>
+          <form id="message_input_form">
+            <!--see w3schools input attributes like max char, spam, etc. -->
+            <textarea id="message_input" placeholder="Enter message"></textarea>
+<!--             <input type="text" id="message_input" placeholder="Enter message"> -->
+              <button type="submit" id="submit"><img id="send" src="/static/images/send.png" alt="Send"></button>
+          </form>
+        </div>
+        <div id="members">
+        </div>
+      </div>
+    </div>
+    <div id="footer">
+      <div id="profile">
+        <!-- load exclamation mark icon if not showing -->
+        <img src={{ picture }} alt="pfp" id="profile_picture">
+        <p id="username">{{ name }}</p>
+        <p id="settings">#</p>
+      </div>
+      <div id="spaces">
+        <span id="space_align_helper"></span>
+        <img src="/static/images/Space.jpeg" alt="pfp" class="space">
+        <img src="/static/images/Space.jpeg" alt="pfp" class="space">
+        <img src="/static/images/Space.jpeg" alt="pfp" class="space">
+        <img src="/static/images/Space.jpeg" alt="pfp" class="space">
+        <img src="/static/images/Space.jpeg" alt="pfp" class="space">
+        <img src="/static/images/Space.jpeg" alt="pfp" class="space" id="add">
+<!--         <button type="button" id="create"><img src="/static/images/ppicons-plus.svg" alt="create" style="width:25px;height:25px;"></button> -->
+      </div>
+  </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
+  <script type="text/javascript" charset="utf-8">
+    var socket = io();
+    var chat_history_skip = 0;
+    //let last_message = '';
+    $(window).on("load", function() { 
+      loadChatHistory();
+    });
+    
+    $('#chat').scroll(function() { //$('#chat').scrollTop() + $('#chat').height();
+      if (Math.abs($('#chat').scrollTop()) == document.getElementById("chat").scrollHeight - document.getElementById("chat").offsetHeight) {  
+        loadChatHistory();
+      }
+    });
+    
+    socket.on('connect', function() {
+      socket.emit('join_room', {
+        room: '{{ room }}'
+      });
+  
+      let message_input = document.getElementById('message_input');
+      
+      document.getElementById('message_input_form').onsubmit = function (e) {
+        e.preventDefault();
+        let message = message_input.value.trim();
+        //let last_message = message;
+        if (message.length) {
+          socket.emit('send_message', {
+            name: "{{ name }}",
+            room: "{{ room }}",
+            picture: "{{ picture }}",
+            message: message
+          });
+        }
+        message_input.value = '';
+        message_input.focus();
+        //last_message = message;
+      }
+    });
+
+    socket.on('recieve_message', function (data) {
+      const newMode = document.createElement('div');
+      var messageMoment = moment(data.datetime).local().format('h:mm A');
+      if (data.combine == 'false') {
+        newMode.className = 'message-container';
+        messageMoment = 'at ' + messageMoment;
+        // Give pfp image default fallback image
+        newMode.innerHTML = '<img class="pfp" src="' + data.picture + '" alt="!"> <p class="message-title"> <span class="name"> <b>' + data.name + ' </b> </span> <span class="datetime">' + messageMoment + '</span> </p> <p class="message">' + data.message + '</p>';
+      }
+      else {
+        newMode.className = 'message-container-combine';
+        newMode.innerHTML = '<p class="message-combine-time">' + messageMoment + '</p><p class="message-combine">' + data.message + '</p>'
+      }
+      alert('recieved');
+      document.getElementById('messages').prepend(newMode);
+    });
+    
+    socket.on('join_room_announcement', function (data) {
+      const newMode = document.createElement('div');
+      newMode.innerHTML = data.username + ' has joined';
+      document.getElementById('messages').prepend(newMode);
+    });
+    
+    function loadChatHistory() {
+      $.ajax({
+        type: 'POST',
+        url: '/chat_history',
+        dataType: "json",
+        data: JSON.stringify({'i': String(chat_history_skip)}),
+        contentType: 'application/json;charset=UTF-8',
+        success: function(chat_history) {
+          chat_history_skip += 100;
+          var nowMoment = moment();
+          var timeDisplayMode = 0;
+          chat_history.forEach(function(item) {
+            var messageMoment = moment(item.datetime).local();
+            const newMode = document.createElement('div');
+            if (item.combine == 'false') {
+              newMode.className = 'message-container';
+              var timeDifference = nowMoment.diff(moment(item.datetime), 'days');
+              if (timeDisplayMode == 0) {
+                if (timeDifference >= 2) {
+                  messageMoment = 'on ' + messageMoment.format('M/D/YYYY');
+                }
+                else if (timeDifference >= 1) {
+                  timeDisplayMode = 1;
+                  messageMoment = 'Yesterday at ' + messageMoment.format('h:mm A'); //There should be a better method than this
+                }
+                else {
+                  timeDisplayMode = 2;
+                  messageMoment = 'at ' + messageMoment.format('h:mm A');
+                }
+              }
+              else if (timeDisplayMode == 1) {
+                if (timeDifference >= 1) {
+                  messageMoment = 'Yesterday at ' + messageMoment.format('h:mm A');
+                }
+                else {
+                  messageMoment = 'at ' + messageMoment.format('h:mm A');
+                }
+              }
+              else {
+                messageMoment = 'at ' + messageMoment.format('h:mm A');
+              }
+              newMode.innerHTML = '<img class="pfp" src="' + item.picture + '" alt="!"> <p class="message-title"> <span class="name"> <b>' + item.name + ' </b> </span> <span class="datetime">' + messageMoment + '</span> </p> <p class="message">' + item.message + '</p>';
+            }
+            else {
+              newMode.className = 'message-container-combine';
+              newMode.innerHTML = '<p class="message-combine-time">' + messageMoment.format('h:mm A') + '</p><p class="message-combine">' + item.message + '</p>';
+            }
+            document.getElementById('messages').prepend(newMode);
+          });
+        } 
+      });
+    }
+    
+  </script>
+</html>

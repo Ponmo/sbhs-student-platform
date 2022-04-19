@@ -1,0 +1,295 @@
+img { /* make images and create button undraggable and unhighlitable*/
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+     -moz-user-select: -moz-none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+} 
+
+#background { /* Should background extend to full height or not including navbar at bottom? */
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url(images/temp-background.jpeg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  z-index: -1;
+}
+#content { /* make calc good on all browsers ; Make margin and padding 0 because of broswer differences ; make no horizontal scroll at small screen sizes*/
+  display: grid;
+  grid-template-rows: 48px calc(100vh - 98px);
+  grid-template-columns: 270px minmax(0px, auto) 220px;
+  height: 100vh;
+  width: 100vw;
+  gap: 0px;
+}
+#header {
+  grid-column: 1;
+  grid-row: 1;
+  background-color: white;
+}
+#information {
+  grid-column: 2 / 4;
+  grid-row: 1;
+  background-color: hotpink;
+}
+#channels {
+  grid-column: 1;
+  grid-row: 2;
+  background-color: gray;
+}
+#chats {
+  display: flex;
+  flex-direction: column;
+  grid-column: 2;
+  grid-row: 2;
+  background-color: #36393e;
+  
+}
+#chat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #36393e;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  flex-direction: column-reverse;
+}
+/* #message_input_form {
+  text-align: center;
+  margin-top: auto;
+  margin-bottom: 20px;
+  margin-right: 80px;
+  margin-left: 80px;
+  height: 40px;
+  border-radius: 4px;
+  background: white;
+} */
+.message-container {
+  display: grid;
+  color: #d7d9da;
+  grid-template-columns: 2px auto;
+  grid-auto-rows: minmax(min-content, max-content);
+  padding-top: 2px;
+  padding-right: 20px;
+  padding-left: 20px;
+  font-size: 14px;
+  margin-top: 10px;
+}
+.message-container:hover {
+  background-color: #32353a;
+}
+.message-title {
+  margin-left: 50px;
+  white-space: initial;
+  word-break: break-all;
+  overflow: hidden;
+  grid-column: 2;
+  grid-row: 1;
+  margin-bottom: 0px;
+  
+}
+.datetime {
+  font-size: 10px;
+  opacity: 0.9;
+}
+.message {
+  margin-bottom: 2px;
+  padding: 0;
+  margin-left: 50px;
+  white-space: initial;
+  word-break: break-all;
+  overflow: hidden;
+  grid-column: 2;
+  grid-row: 2;
+  white-space: pre-wrap;
+
+}
+.pfp {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  grid-column: 1;
+  grid-row: 1 / 3;
+}
+.message-container-combine {
+  display: grid;
+  color: #d7d9da;
+  grid-template-columns: 50px auto;
+  grid-auto-rows: minmax(min-content);
+  padding-top: 0px;
+  padding-right: 20px;
+  padding-left: 20px;
+  font-size: 14px;
+}
+.message-container-combine:hover {
+  background-color: #32353a;
+}
+.message-combine-time {
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding: 0;
+  padding-top: 6px;
+  margin: 0;
+  white-space: initial;
+  word-break: break-all;
+  overflow: hidden;
+  font-size: 10px;
+  grid-column: 1;
+  grid-row: 1;
+  visibility: hidden;
+  opacity: 0.9;
+}
+.message-combine {
+  padding: 2px;
+  margin: 0;
+  white-space: initial;
+  word-break: break-all;
+  overflow: hidden;
+  grid-column: 2;
+  grid-row: 1;
+  white-space: pre-wrap;
+}
+#message_input_form {
+  margin-bottom: 20px;
+  margin-right: 15px;
+  margin-left: 15px;
+  bottom: 20px;
+  border-radius: 4px;
+  background: white;
+  min-height: 44px;
+}
+#message_input { /* make textbox (textarea?) expandable for chunked messages; different highlight on click */
+  width: calc(100% - 38px);
+  float: left;
+  padding-left: 10px;
+  padding-top: 10px;
+  background: transparent;
+  
+  border: none;
+  resize: none;
+}
+#submit {
+  float: right;
+  width: 38px;
+  height: 38px;
+  background-color: transparent;
+  border: none;
+}
+#send {
+  margin-right: 10px;
+  width: 26px;
+  height: 25px;
+}
+#members {
+  grid-column: 3;
+  grid-row: 2;
+  background-color: gray;
+}
+#footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  background-color: white;
+  overflow: hidden;
+  background: linear-gradient(225deg, transparent 20px, white 20px);
+}
+
+
+#profile {
+  display: inline-block;
+  width: 220px;
+  height: 46px;
+  margin-left: 50px;
+  margin-top: 2px;
+  border-radius: 2px;
+  background-color: hotpink;
+  overflow: hidden;
+}
+#profile_picture {
+  display: inline-block;
+  line-height: 48px;
+  margin-left: 9px;
+  margin-top: -1px;
+  width: 39px;
+  height: 39px;
+  border-radius: 50%;
+}
+#username {
+  display: inline-block;
+  margin-left: 2px;
+  line-height: 48px;
+  margin-top: -1px;
+}
+#settings {
+  display: inline-block;
+  line-height: 48px;
+  margin-left: 44px;
+  margin-top: -1px;
+}
+/* add a min width and responsive thing to spaces */
+/* Some math is needed for the width responsiveness; take 1 - percentage of the profile pixels*/
+#spaces {/* arrow key rolling between each space shown below */
+  display: inline-block;
+  width: 68%;
+  min-width: 200px;
+  margin-left: 20px;
+  height: 50px;
+  border-radius: 2px;
+  overflow: hidden;
+  line-height: 50px;
+  vertical-align: top;
+}
+#space_align_helper {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+.space {
+  display: inline-block;
+  line-height: 48px;
+  width: 55px;
+  height: 39px;
+  border-radius: 10%;
+  margin-right: 3px;
+}
+::-webkit-scrollbar {
+  width: 8px;
+
+}
+::-webkit-scrollbar-track {
+  background-color: darkgray;
+  border-radius: 10px;
+  margin-top: 4px;
+  margin-bottom: 8px;
+  
+  
+}
+::-webkit-scrollbar-thumb {
+  background-color: black;
+  border-radius: 10px;
+}
+/* Implement Scroll to bottom on send
+
+5:14 PM
+
+Enter message box css and send button css
+
+5:15 PM
+
+Time appear on hover
+
+5:15 PM
+
+CSS of datetime on regular messages */
