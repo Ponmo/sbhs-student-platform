@@ -12,24 +12,20 @@
     <title>Santa Barbara High School</title>
   </head>
   <body>
-    <div id="home"> 
+    <div id="home">
+      <div id="footer">
+        <div id="profile">
+          <!-- load exclamation mark icon if not showing -->
+          <img src={{ picture }} alt="pfp" id="profile_picture">
+          <p id="username">{{ name }}</p>
+          <p id="settings">#</p>
+        </div>
+        <div id="spaces">
+          <span id="space_align_helper"></span>
+          <img src="/static/images/Space.jpeg" alt="pfp" class="space">
+          <button type="button" id="create"><img src="/static/images/ppicons-plus.svg" alt="create" style="width:25px;height:25px;"></button>
+        </div>
+      </div>
     </div>
-    <div id="footer">
-      <div id="profile">
-        <!-- load exclamation mark icon if not showing -->
-        <img src="/static/images/960x0.jpeg" alt="pfp" id="profile_picture">
-        <p id="username">Ponmo#9931</p>
-        <p id="settings">#</p>
-      </div>
-      <div id="spaces">
-        <span id="space_align_helper"></span>
-        <img src="/static/images/Space.jpeg" alt="pfp" class="space" id="first">
-        <img src="/static/images/Space.jpeg" alt="pfp" class="space">
-        <img src="/static/images/Space.jpeg" alt="pfp" class="space">
-        <img src="/static/images/Space.jpeg" alt="pfp" class="space">
-        <img src="/static/images/Space.jpeg" alt="pfp" class="space">
-        <img src="/static/images/Space.jpeg" alt="pfp" class="space" id="add">
-<!--         <button type="button" id="create"><img src="/static/images/ppicons-plus.svg" alt="create" style="width:25px;height:25px;"></button> -->
-      </div>
   </body>
 </html>
