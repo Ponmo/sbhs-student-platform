@@ -48,7 +48,10 @@ window.onclick = function(event) {
 //       put placeholder message (message is loading but is faded out to account for lag time or disconnected if wanted)
     }
   });
-  $(".space").click(function() {
+  $("#chat").on('mouseenter', '.message-container-combine', function(){
+    $(this).find(".message-combine-time").css("visibility", "visible");
+  });
+  $(document).on('click', '.space', function() {
     $.ajax({
       type: "POST",
       url: '/space',

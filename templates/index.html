@@ -69,6 +69,8 @@
   <script type="text/javascript" charset="utf-8">
     var socket = io();
     var chat_history_skip = 0;
+    var room = 1;
+    var space = 1;
     //let last_message = '';
     $(window).on("load", function() { 
       loadChatHistory();
@@ -83,7 +85,6 @@
             newMode.id = item._id.str;
             newMode.src = '/static/images/Space.jpeg';
             referenceNode = document.getElementById('space_align_helper');
-            
             referenceNode.parentNode.insertBefore(newMode, referenceNode.nextSibling);
           });
         }
