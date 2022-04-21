@@ -82,7 +82,8 @@
             newMode.className = 'space';
             newMode.id = item._id.str;
             newMode.src = '/static/images/Space.jpeg';
-            document.getElementById('spaces').append(newMode);
+            referenceNode = document.getElementById('space_align_helper');
+            referenceNode.document.getElementById('spaces').insertBefore(newMode, referenceNode.nextSibling);
           });
         }
       });
@@ -186,7 +187,7 @@
             }
             else {
               newMode.className = 'message-container-combine';
-              newMode.innerHTML = '<p id="message-combine-time">' + messageMoment.format('h:mm A') + '</p><p class="message-combine">' + item.message + '</p>';
+              newMode.innerHTML = '<p class="message-combine-time">' + messageMoment.format('h:mm A') + '</p><p class="message-combine">' + item.message + '</p>';
             }
             document.getElementById('messages').prepend(newMode);
           });
