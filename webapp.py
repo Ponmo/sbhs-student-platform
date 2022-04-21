@@ -172,7 +172,7 @@ def render_main_page():
 @app.route('/list_spaces', methods=['GET', 'POST'])
 def list_spaces():
 	if request.method == 'POST':
-		spaces_list = dumps(list(collection_spaces))
+		spaces_list = dumps(list(collection_spaces.find()))
 		return Response(spaces_list, mimetype='application/json')
 	
 
