@@ -178,7 +178,8 @@ def chat_history():
 @app.route('/create_space', methods=['GET', 'POST'])
 def create_space():
 	if request.method == 'POST':
-		collection_spaces.insert_one({'name': request.json['space_name']})
+		collection_spaces.insert_one({'name': request.json['space_name']})\
+	return
 
 @app.route('/space', methods=['GET', 'POST'])#/<space_id>')
 def render_space():
