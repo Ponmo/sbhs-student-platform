@@ -48,7 +48,6 @@
       </div>
       <div id="spaces">
         <span id="space_align_helper"></span>
-          <img src="/static/images/Space.jpeg" alt="pfp" class="space">
           <button type="button" id="create"><img src="/static/images/ppicons-plus.svg" alt="create" style="width:25px;height:25px;"></button>
         </div>
       </div>
@@ -82,7 +81,8 @@
           spaces_list.forEach(function(item) {
             const newMode = document.createElement('img');
             newMode.className = 'space';
-            newMode.id = item._id.str;
+            newMode.id = JSON.parse(JSON.stringify(item._id));//item._id.str;
+            JSON.parse(JSON.stringify())
             newMode.src = '/static/images/Space.jpeg';
             referenceNode = document.getElementById('space_align_helper');
             referenceNode.parentNode.insertBefore(newMode, referenceNode.nextSibling);
