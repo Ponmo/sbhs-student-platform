@@ -83,7 +83,8 @@
             newMode.id = item._id.str;
             newMode.src = '/static/images/Space.jpeg';
             referenceNode = document.getElementById('space_align_helper');
-            referenceNode.document.getElementById('spaces').insertBefore(newMode, referenceNode.nextSibling);
+            
+            referenceNode.parentNode.insertBefore(newMode, referenceNode.nextSibling);
           });
         }
       });
