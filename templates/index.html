@@ -81,7 +81,7 @@
           spaces_list.forEach(function(item) {
             const newMode = document.createElement('img');
             newMode.className = 'space';
-            newMode.id = JSON.stringify(item._id.$oid);//item._id.str; 
+            newMode.id = item._id.$oid;
             newMode.src = '/static/images/Space.jpeg';
             referenceNode = document.getElementById('space_align_helper');
             referenceNode.parentNode.insertBefore(newMode, referenceNode.nextSibling);
