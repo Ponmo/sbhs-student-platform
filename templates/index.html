@@ -77,7 +77,7 @@
         url: '/list_spaces',
         dataType: "json",
         success: function(spaces_list) {
-          chat_history.forEach(function(item) {
+          spaces_list.forEach(function(item) {
             const newMode = document.createElement('img');
             newMode.className = 'space';
             newMode.id = item._id;
