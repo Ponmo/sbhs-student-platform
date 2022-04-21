@@ -72,6 +72,14 @@
     //let last_message = '';
     $(window).on("load", function() { 
       loadChatHistory();
+      $.ajax({
+        type: 'POST',
+        url: '/list_spaces',
+        contentType: 'application/json;charset=UTF-8',
+        success: function(spaces_list) {
+          alert(spaces_list);
+        }
+      });
     });
     
     $('#chat').scroll(function() { //$('#chat').scrollTop() + $('#chat').height();
@@ -118,7 +126,6 @@
         newMode.className = 'message-container-combine';
         newMode.innerHTML = '<p class="message-combine-time">' + messageMoment + '</p><p class="message-combine">' + data.message + '</p>';
       }
-      alert('recieved');
       document.getElementById('messages').append(newMode);
     });
     
@@ -192,7 +199,7 @@
           dataType: "json",
           data: JSON.stringify({'space_name': space_name}),
           contentType: 'application/json;charset=UTF-8',
-          success: function(chat_history) {
+          success: function() {
             alert('created a space yep');
           }
         });

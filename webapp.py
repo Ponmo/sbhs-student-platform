@@ -169,6 +169,13 @@ def render_main_page():
     return render_template('index.html', name = session['users_name'], room = '1', picture = session['picture'])
     return render_template('home.html')#, username = session['users_name'], room = '1')
 
+@app.route('/list_spaces', methods=['GET', 'POST'])
+def list_spaces():
+	if request.method == 'POST':
+		spaces_list = dumps(list(collection_spaces))
+		return Response(spaces_list, mimetype='application/json')
+	
+
 @app.route('/chat_history', methods=['GET', 'POST'])
 def chat_history():
     if request.method == 'POST': #get data for the room that user is currently in
