@@ -114,6 +114,7 @@
     }
 
     socket.on('recieve_message', function (data) {
+      alert('recieved message user end');
       const newMode = document.createElement('div');
       var messageMoment = moment(data.datetime).local().format('h:mm A');
       if (data.combine == 'false') {
