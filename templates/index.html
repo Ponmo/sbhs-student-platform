@@ -95,12 +95,6 @@
       }
     });
     
-    socket.on('connect', function() {
-      socket.emit('join_room', {
-        room: '{{ room }}'
-      });
-    });
-    
     let message_input = document.getElementById('message_input');
     document.getElementById('message_input_form').onsubmit = function (e) {
       e.preventDefault();
@@ -214,6 +208,9 @@
     
     $(document).on('click', '.space', function() {
       var space_name = this.id;
+      socket.emit('join_room', {
+        room: '{{ room }}'
+      });
       $.ajax({
         type: "POST",
         url: '/space',
