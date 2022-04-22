@@ -11,7 +11,7 @@ img { /* make images and create button undraggable and unhighlitable*/
    user-select: none;
 } 
 #first-all {
-  visibility: hidden;
+  visibility: visible;
 }
 #background { /* Should background extend to full height or not including navbar at bottom? */
   position: absolute;

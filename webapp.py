@@ -1,4 +1,4 @@
-from flask_socketio import SocketIO, emit, join_room
+from flask_socketio import SocketIO, emit, join_room, leave_room
 
 import json
 import os
@@ -148,6 +148,10 @@ def logout():
 def join(data):
     join_room(data['room'])
     #socketio.emit('join_room_announcement', data, room = data['room'])
+    
+@socketio.on('leave_room')
+def leave(data):
+	leave_room(data['room'])
     
 @socketio.on('send_message')
 def send_message(data):
