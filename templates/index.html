@@ -207,6 +207,12 @@
     }
     
     $(document).on('click', '.space', function() {
+      //hide homepage div 
+      //show space div
+      //reset chat_history_skip
+      //set room = id of first room
+      //clear .messages div and call loadChatHistory (needs to be modified to take room id)
+      $('#first-all').css('visibility', 'visible')
       var space_name = this.id;
       socket.emit('join_room', {
         room: '{{ room }}'

@@ -189,6 +189,7 @@ def chat_history():
 
 @app.route('/create_space', methods=['GET', 'POST'])
 def create_space():
+#create similar to handle AJAX requests
 	if request.method == 'POST':
 		space_id = ObjectId()
 		collection_spaces.insert_one({'_id': space_id, 'name': request.json['space_name']})
@@ -197,6 +198,12 @@ def create_space():
 
 @app.route('/space', methods=['GET', 'POST'])#/<space_id>')
 def render_space():
+#make user leave_room currently
+#make user join_room 
+#in JS, make user join the room that has order one in collection
+#in JS, render chat, render sidebar, and thats pretty much it I think (also think about
+#adding space information like title/bg/anything.
+
     if request.method == 'POST':
         results = {'processed': request.json['space_name']}
         rooms = dumps(list(collection_rooms.find({'space': request.json['space_name']})))
@@ -204,5 +211,12 @@ def render_space():
         return jsonify(results)
         return render_template('index.html', username = session['users_name'], room = '1')
 
+@app.route('space_info', methods=['GET', 'POST'])
+def space_info:
+	if request.method == 'POST':
+		space = dumps(collection_spaces.find_one({'_id': ObjectId(request.json['space_name'])}))
+		return Respons(space, mimetype='application/json')
+	
+	
 if __name__ == '__main__':
     socketio.run(app, debug=False)
