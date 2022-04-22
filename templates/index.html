@@ -114,7 +114,6 @@
     }
 
     socket.on('recieve_message', function (data) {
-      alert('recieved message user end');
       const newMode = document.createElement('div');
       var messageMoment = moment(data.datetime).local().format('h:mm A');
       if (data.combine == 'false') {
@@ -232,6 +231,7 @@
           document.getElementById('messages').textContent = '';
           chat_history_skip = 0;
           loadChatHistory();
+          alert(room);
         } 
       });
     });
