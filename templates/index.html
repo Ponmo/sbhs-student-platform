@@ -225,6 +225,9 @@
         contentType: 'application/json;charset=UTF-8',
         success: function(result) { //set room variable inside here
           alert(JSON.stringify(result));
+          //socket.emit('join_room', {
+          //  room: room
+          //});
         } 
       });
     });
