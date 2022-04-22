@@ -226,7 +226,7 @@
         success: function(result) { //set room variable inside here
           //result.forEach(function(item) {
           //});
-          alert(result[0]['space']);
+          alert(result[0]['_id']['$oid']);
           //socket.emit('join_room', {
           //  room: room
           //});
