@@ -68,11 +68,10 @@
   <script type="text/javascript" charset="utf-8">
     var socket = io();
     var chat_history_skip = 0;
-    var room = 1;
-    var space = '6237a59f1587f8cffe50d11c';
-    //let last_message = '';
+    var room = '';
+    var space = '';
     $(window).on("load", function() { 
-      loadChatHistory();
+      //loadChatHistory(); important
       $.ajax({
         type: 'POST',
         url: '/list_spaces',
@@ -215,7 +214,6 @@
     }
     
     $(document).on('click', '.space', function() {
-      alert(this.id);
       var space_name = this.id;
       $.ajax({
         type: "POST",
