@@ -103,7 +103,7 @@
       if (message.length) {
         socket.emit('send_message', {
           name: "{{ name }}",
-          room: "{{ room }}",
+          room: room,
           picture: "{{ picture }}",
           message: message
         });
