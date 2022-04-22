@@ -51,21 +51,6 @@ window.onclick = function(event) {
   $("#chat").on('mouseenter', '.message-container-combine', function(){
     $(this).find(".message-combine-time").css("visibility", "visible");
   });
-  $(document).on('click', '.space', function() {
-    $.ajax({
-      type: "POST",
-      url: '/space',
-      dataType: "json",
-      data: JSON.stringify([{'space_i': 'test'}]), //JSOn.stringify
-      contentType: 'application/json;charset=UTF-8',
-      success: function(result) {
-        alert(JSON.stringify(result));
-      } 
-    });
-  });
-  $("#chat").on('mouseenter', '.message-container-combine', function(){
-    $(this).find(".message-combine-time").css("visibility", "visible");
-  });
   $("#chat").on('mouseleave', '.message-container-combine', function(){
     $(this).find(".message-combine-time").css("visibility", "hidden");
   });

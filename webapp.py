@@ -35,6 +35,7 @@ client = pymongo.MongoClient(connection_string)
 db = client[db_name]
 collection_users = db['Users']
 collection_spaces = db['Spaces']
+collection_rooms = db['Rooms']
 collection_messages = db['Messages']
 
 app = Flask(__name__)
@@ -191,6 +192,7 @@ def create_space():
 @app.route('/space', methods=['GET', 'POST'])#/<space_id>')
 def render_space():
     if request.method == 'POST':
+    	cursor = collection_rooms.find({'space': request.json['space_name']})
         results = {'processed': 'true'}
         return jsonify(results)
         return render_template('index.html', username = session['users_name'], room = '1')

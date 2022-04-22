@@ -69,7 +69,7 @@
     var socket = io();
     var chat_history_skip = 0;
     var room = 1;
-    var space = 1;
+    var space = '6237a59f1587f8cffe50d11c';
     //let last_message = '';
     $(window).on("load", function() { 
       loadChatHistory();
@@ -213,6 +213,21 @@
         });
       }
     }
+    
+    $(document).on('click', '.space', function() {
+      alert(this.id);
+      var space_name = this.id
+      $.ajax({
+        type: "POST",
+        url: '/space',
+        dataType: "json",
+        data: JSON.stringify([{'space_name': space}]), //JSOn.stringify
+        contentType: 'application/json;charset=UTF-8',
+        success: function(result) {
+          alert(JSON.stringify(result));
+        } 
+      });
+    });
     
   </script>
 </html>
