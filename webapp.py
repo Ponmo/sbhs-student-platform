@@ -211,7 +211,7 @@ def render_space():
         return jsonify(results)
         return render_template('index.html', username = session['users_name'], room = '1')
 
-@app.route('space_info', methods=['GET', 'POST'])
+@app.route('/space_info', methods=['GET', 'POST'])
 def space_info():
 	if request.method == 'POST':
 		space = dumps(collection_spaces.find_one({'_id': ObjectId(request.json['space_name'])}))
