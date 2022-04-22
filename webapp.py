@@ -215,7 +215,7 @@ def render_space():
 def space_info:
 	if request.method == 'POST':
 		space = dumps(collection_spaces.find_one({'_id': ObjectId(request.json['space_name'])}))
-		return Respons(space, mimetype='application/json')
+		return Response(space, mimetype='application/json')
 	
 	
 if __name__ == '__main__':
