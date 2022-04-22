@@ -213,17 +213,17 @@
       //set room = id of first room
       //clear .messages div and call loadChatHistory (needs to be modified to take room id)
       $('#first-all').css('visibility', 'visible')
-      var space_name = this.id;
-      socket.emit('join_room', {
-        room: '{{ room }}'
-      });
+      space = this.id;
+      //socket.emit('join_room', {
+      //  room: '{{ room }}'
+      //});
       $.ajax({
         type: "POST",
         url: '/space',
         dataType: "json",
-        data: JSON.stringify({'space_name': space_name}), //JSOn.stringify
+        data: JSON.stringify({'space_name': space}), //JSOn.stringify
         contentType: 'application/json;charset=UTF-8',
-        success: function(result) {
+        success: function(result) { //set room variable inside here
           alert(JSON.stringify(result));
         } 
       });
