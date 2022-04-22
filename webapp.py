@@ -192,7 +192,7 @@ def create_space():
 @app.route('/space', methods=['GET', 'POST'])#/<space_id>')
 def render_space():
     if request.method == 'POST':
-        results = {'processed': 'true'}
+        results = {'processed': request.json['space_name']}
         query = collection_rooms.find({'space': '6237a59f1587f8cffe50d11c'})
         return jsonify(results)
         return render_template('index.html', username = session['users_name'], room = '1')
