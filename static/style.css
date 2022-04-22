@@ -32,6 +32,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   width: 100vw;
   gap: 0px;
 }
+
 #header {
   grid-column: 1;
   grid-row: 1;
