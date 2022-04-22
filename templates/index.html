@@ -224,11 +224,9 @@
         data: JSON.stringify({'space_name': space}), //JSOn.stringify
         contentType: 'application/json;charset=UTF-8',
         success: function(result) { //set room variable inside here
-          result = JSON.parse(result);
           //result.forEach(function(item) {
-          
           //});
-          alert(result['space']);
+          alert(result[0]['space']);
           //socket.emit('join_room', {
           //  room: room
           //});
