@@ -216,12 +216,12 @@
     
     $(document).on('click', '.space', function() {
       alert(this.id);
-      var space_name = this.id
+      var space_name = this.id;
       $.ajax({
         type: "POST",
         url: '/space',
         dataType: "json",
-        data: JSON.stringify([{'space_name': space}]), //JSOn.stringify
+        data: JSON.stringify([{'space_name': space_name}]), //JSOn.stringify
         contentType: 'application/json;charset=UTF-8',
         success: function(result) {
           alert(JSON.stringify(result));
