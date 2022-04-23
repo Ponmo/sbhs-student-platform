@@ -161,9 +161,9 @@ def send_message(data):
     latest_message = collection_messages.find_one({'room': data['room']}, sort=[( '_id', pymongo.DESCENDING )])
     try:
         duration = datetime.now() - datetime.fromisoformat(latest_message.get('datetime').replace('Z', ''))
-    	if latest_message.get('name') == session['users_name'] and latest_message.get('picture') == session['picture'] and duration.total_seconds() < 180:
+        if latest_message.get('name') == session['users_name'] and latest_message.get('picture') == session['picture'] and duration.total_seconds() < 180:
         	data['combine'] = 'true'
-    	else:
+        else:
         	data['combine'] = 'false'
     except:
     	data['combine'] = 'false'
