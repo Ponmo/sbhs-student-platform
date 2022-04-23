@@ -226,13 +226,13 @@
         contentType: 'application/json;charset=UTF-8',
         success: function(result) { //set room variable inside here
           room = result[0]['_id']['$oid'];
+          alert(room + ' space clicked and room set');
           socket.emit('join_room', {
             room: room
           });
           document.getElementById('messages').textContent = '';
           chat_history_skip = 0;
           loadChatHistory();
-          alert(room);
         } 
       });
     });
