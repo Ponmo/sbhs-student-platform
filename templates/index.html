@@ -143,7 +143,6 @@
         data: JSON.stringify({'i': String(chat_history_skip), 'room': room}),
         contentType: 'application/json;charset=UTF-8',
         success: function(chat_history) {
-          alert('loadChatHistorySuccess');
           chat_history_skip += 100;
           var nowMoment = moment();
           var timeDisplayMode = 0;
@@ -226,7 +225,6 @@
         contentType: 'application/json;charset=UTF-8',
         success: function(result) { //set room variable inside here
           room = result[0]['_id']['$oid'];
-          alert(room + ' space clicked and room set');
           socket.emit('join_room', {
             room: room
           });
