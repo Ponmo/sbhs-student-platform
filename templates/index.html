@@ -143,6 +143,7 @@
         data: JSON.stringify({'i': String(chat_history_skip), 'room': room}),
         contentType: 'application/json;charset=UTF-8',
         success: function(chat_history) {
+          alert('loadChatHistorySuccess');
           chat_history_skip += 100;
           var nowMoment = moment();
           var timeDisplayMode = 0;
@@ -206,7 +207,7 @@
       }
     }
     
-    $(document).on('click', '.space', function() {
+    $(document).on('click', '.space', function() { //do not do anything if user already on clicked space
       //hide homepage div 
       //show space div
       //reset chat_history_skip

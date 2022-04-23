@@ -251,7 +251,6 @@ img { /* make images and create button undraggable and unhighlitable*/
   height: 50px;
   border-radius: 2px;
   overflow: hidden;
-  line-height: 50px;
   vertical-align: top;
 }
 #space_align_helper {
@@ -261,7 +260,6 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 .space {
   display: inline-block;
-  line-height: 48px;
   width: 55px;
   height: 39px;
   border-radius: 10%;
