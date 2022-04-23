@@ -30,7 +30,7 @@
           </div>
           <form id="message_input_form">
             <!--see w3schools input attributes like max char, spam, etc. -->
-            <textarea id="message_input" placeholder="Enter message"></textarea>
+            <textarea id="message_input" rows="1" placeholder="Enter message"></textarea>
 <!--             <input type="text" id="message_input" placeholder="Enter message"> -->
               <button type="submit" id="submit"><img id="send" src="/static/images/send.png" alt="Send"></button>
           </form>
@@ -68,8 +68,8 @@
   <script type="text/javascript" charset="utf-8">
     var socket = io();
     var chat_history_skip = 0;
-    var room = '';
-    var space = '';
+    var current_room = '';
+    var current_space = '';
     $(window).on("load", function() { 
       //loadChatHistory(); important
       $.ajax({
@@ -103,7 +103,7 @@
       if (message.length) {
         socket.emit('send_message', {
           name: "{{ name }}",
-          room: room,
+          room: current_room,
           picture: "{{ picture }}",
           message: message
         });
@@ -140,7 +140,7 @@
         type: 'POST',
         url: '/chat_history',
         dataType: "json",
-        data: JSON.stringify({'i': String(chat_history_skip), 'room': room}),
+        data: JSON.stringify({'i': String(chat_history_skip), 'room': current_room}),
         contentType: 'application/json;charset=UTF-8',
         success: function(chat_history) {
           chat_history_skip += 100;
@@ -199,8 +199,10 @@
           dataType: "json",
           data: JSON.stringify({'space_name': space_name}),
           contentType: 'application/json;charset=UTF-8',
-          success: function() {
-            alert('created a space yep');
+          success: function(room) {
+          	$('#first-all').css('visibility', 'visible')
+          	current_space = this.id;
+          	current_room = room['_id']['$oid'];
           }
         });
       }
@@ -213,7 +215,7 @@
       //set room = id of first room
       //clear .messages div and call loadChatHistory (needs to be modified to take room id)
       $('#first-all').css('visibility', 'visible')
-      space = this.id;
+      current_space = this.id;
       //socket.emit('join_room', {
       //  room: '{{ room }}'
       //});
@@ -221,12 +223,12 @@
         type: "POST",
         url: '/space',
         dataType: "json",
-        data: JSON.stringify({'space_name': space}), //JSOn.stringify
+        data: JSON.stringify({'space_name': current_space}), //JSOn.stringify
         contentType: 'application/json;charset=UTF-8',
-        success: function(result) { //set room variable inside here
-          room = result[0]['_id']['$oid'];
+        success: function(rooms) { //set room variable inside here
+          current_room = rooms[0]['_id']['$oid'];
           socket.emit('join_room', {
-            room: room
+            room: current_room
           });
           document.getElementById('messages').textContent = '';
           chat_history_skip = 0;
