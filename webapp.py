@@ -192,7 +192,6 @@ def chat_history():
 
 @app.route('/create_space', methods=['GET', 'POST'])
 def create_space():
-#create similar to handle AJAX requests
 	if request.method == 'POST':
 		space_id = ObjectId()
 		collection_spaces.insert_one({'_id': space_id, 'name': request.json['space_name']})

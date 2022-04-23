@@ -200,11 +200,16 @@
           data: JSON.stringify({'space_name': space_name}),
           contentType: 'application/json;charset=UTF-8',
           success: function(room) {
-          	$('#first-all').css('visibility', 'visible')
-          	current_space = this.id;
+          	//current_space = this.id;
           	current_room = room['_id']['$oid'];
+          	alert(current_room);
+          	socket.emit('join_room', {
+              room: current_room
+            });
+            $('#first-all').css('visibility', 'visible')
           }
         });
+        //call to join room
       }
     }
     
@@ -216,9 +221,6 @@
       //clear .messages div and call loadChatHistory (needs to be modified to take room id)
       $('#first-all').css('visibility', 'visible')
       current_space = this.id;
-      //socket.emit('join_room', {
-      //  room: '{{ room }}'
-      //});
       $.ajax({
         type: "POST",
         url: '/space',
