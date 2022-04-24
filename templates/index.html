@@ -206,7 +206,7 @@
           	socket.emit('join_room', {
               room: current_room
             });
-            $('#first-all').css('visibility', 'visible')
+            $('#first-all').css('visibility', 'visible');
           }
         });
         //call to join room
@@ -219,7 +219,7 @@
       //reset chat_history_skip
       //set room = id of first room
       //clear .messages div and call loadChatHistory (needs to be modified to take room id)
-      $('#first-all').css('visibility', 'visible')
+      $('#first-all').css('visibility', 'visible');
       current_space = this.id;
       $.ajax({
         type: "POST",
