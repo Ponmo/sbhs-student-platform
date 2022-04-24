@@ -154,7 +154,7 @@
             const newMode = document.createElement('div');
             if (item.combine == 'false') {
               newMode.className = 'message-container';
-              var timeDifference = nowMoment.diff(messageMoment, 'days');
+              var timeDifference = moment.utc().local().diff(messageMoment, 'days');
               alert(timeDifference);
               if (timeDisplayMode == 0) {
                 if (timeDifference >= 2) {
