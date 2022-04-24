@@ -153,10 +153,10 @@
           chat_history.forEach(function(item) {
             var messageDate = moment(item.datetime);
             var messageMoment = moment.utc(item.datetime).local();
-            if(moment(messageDate).isSame(today, 'day')) {
+            if(moment(messageDate).isSame(todayDate, 'day')) {
               alert('Today');
             }
-            else if(moment(messageDate).isSame(yesterday, 'day')) {
+            else if(moment(messageDate).isSame(yesterdayDate, 'day')) {
               alert('Yesterday');
             }
             const newMode = document.createElement('div');
