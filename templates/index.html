@@ -146,12 +146,19 @@
         success: function(chat_history) {
           chat_history_skip += 100;
           //var nowMomentTwo = DateTime.utc().toLocal();
-          var nowMoment = moment.utc().local();
-          alert(nowMoment);
+          var todayDate = moment();
+          var yesterdayDate = moment().subtract(1, 'day');
+          
           var timeDisplayMode = 0;
           chat_history.forEach(function(item) {
+            var messageDate = moment(item.datetime);
             var messageMoment = moment.utc(item.datetime).local();
-            alert(messageMoment);
+            if(moment(messageDate).isSame(today, 'day')) {
+              alert('Today');
+            }
+            else if(moment(messageDate).isSame(yesterday, 'day')) {
+              alert('Yesterday');
+            }
             const newMode = document.createElement('div');
             if (item.combine == 'false') {
               newMode.className = 'message-container';
