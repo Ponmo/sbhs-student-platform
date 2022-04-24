@@ -155,6 +155,7 @@
             if (item.combine == 'false') {
               newMode.className = 'message-container';
               var timeDifference = nowMoment.diff(messageMoment, 'days');
+              alert(timeDifference);
               if (timeDisplayMode == 0) {
                 if (timeDifference >= 2) {
                   messageMoment = 'on ' + messageMoment.format('M/D/YYYY');
