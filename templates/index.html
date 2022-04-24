@@ -65,7 +65,9 @@
   </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
+  <!--><script src="https://cdn.jsdelivr.net/npm/luxon@2.3.2/build/global/luxon.min.js"></script>-->
   <script type="text/javascript" charset="utf-8">
+    //var DateTime = luxon.DateTime;
     var socket = io();
     var chat_history_skip = 0;
     var current_room = '';
@@ -143,14 +145,15 @@
         contentType: 'application/json;charset=UTF-8',
         success: function(chat_history) {
           chat_history_skip += 100;
-          var nowMoment = moment().local();
+          //var nowMomentTwo = DateTime.utc().toLocal();
+          var nowMoment = moment.utc().local();
           var timeDisplayMode = 0;
           chat_history.forEach(function(item) {
-            var messageMoment = moment(item.datetime).local();
+            var messageMoment = moment.utc(item.datetime).local();
             const newMode = document.createElement('div');
             if (item.combine == 'false') {
               newMode.className = 'message-container';
-              var timeDifference = nowMoment.diff(moment(item.datetime), 'days');
+              var timeDifference = nowMoment.diff(messageMoment, 'days');
               if (timeDisplayMode == 0) {
                 if (timeDifference >= 2) {
                   messageMoment = 'on ' + messageMoment.format('M/D/YYYY');
