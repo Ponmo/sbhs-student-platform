@@ -194,8 +194,10 @@ def chat_history():
 def create_space():
 	if request.method == 'POST':
 		space_id = ObjectId()
+		room_id = ObjectId()
 		collection_spaces.insert_one({'_id': space_id, 'name': request.json['space_name']})
-		room = dumps(collection_rooms.insert_one({'space': str(space_id), 'name': 'general', 'order': '1'}))
+		collection_rooms.insert_one({'_id': room_id, 'space': str(space_id), 'name': 'general', 'order': '1'})
+		room = dumps(collection_rooms.find_one({'_id': room_id}))
 		return Response(room, mimetype='application/json')
 
 @app.route('/space', methods=['GET', 'POST'])#/<space_id>')
