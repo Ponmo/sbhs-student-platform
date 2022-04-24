@@ -28,7 +28,6 @@
             <div id="messages">
             </div>
           </div>
-          <div id="chat_spacer"></div>
           <form id="message_input_form">
             <!--see w3schools input attributes like max char, spam, etc. -->
             <textarea id="message_input" rows="1" placeholder="Enter message"></textarea>
@@ -148,14 +147,15 @@
           chat_history_skip += 100;
           //var nowMomentTwo = DateTime.utc().toLocal();
           var nowMoment = moment.utc().local();
+          alert(nowMoment);
           var timeDisplayMode = 0;
           chat_history.forEach(function(item) {
             var messageMoment = moment.utc(item.datetime).local();
+            alert(messageMoment);
             const newMode = document.createElement('div');
             if (item.combine == 'false') {
               newMode.className = 'message-container';
               var timeDifference = moment.utc().local().diff(messageMoment, 'days');
-              alert(timeDifference);
               if (timeDisplayMode == 0) {
                 if (timeDifference >= 2) {
                   messageMoment = 'on ' + messageMoment.format('M/D/YYYY');
