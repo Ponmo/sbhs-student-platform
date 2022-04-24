@@ -143,7 +143,7 @@
         contentType: 'application/json;charset=UTF-8',
         success: function(chat_history) {
           chat_history_skip += 100;
-          var nowMoment = moment();
+          var nowMoment = moment().local();
           var timeDisplayMode = 0;
           chat_history.forEach(function(item) {
             var messageMoment = moment(item.datetime).local();
