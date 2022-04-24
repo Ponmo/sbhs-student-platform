@@ -200,9 +200,9 @@
           data: JSON.stringify({'space_name': space_name}),
           contentType: 'application/json;charset=UTF-8',
           success: function(room) {
-          	//current_space = this.id;
+          	current_space = room['space'];
           	current_room = room['_id']['$oid'];
-          	alert(current_room);
+          	alert(current_space);
           	socket.emit('join_room', {
               room: current_room
             });

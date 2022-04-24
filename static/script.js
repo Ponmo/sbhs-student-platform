@@ -34,7 +34,6 @@ window.onclick = function(event) {
     chatDiv.scrollTop = chatDiv.scrollHeight; 
   }
   var textarea = document.getElementById("message_input");
-  var limit = 200;
   textarea.oninput = function() {
     textarea.style.height = "";
     textarea.style.height = Math.min(textarea.scrollHeight, 300) + "px";
@@ -45,6 +44,8 @@ window.onclick = function(event) {
     
         $(this).closest("form").submit();
         chatDiv.scrollTop = chatDiv.scrollHeight; 
+        textarea.setAttribute("style", "");
+        textarea.value = "";
 //       put placeholder message (message is loading but is faded out to account for lag time or disconnected if wanted)
     }
   });
