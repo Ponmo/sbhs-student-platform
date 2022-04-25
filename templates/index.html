@@ -153,39 +153,15 @@
           chat_history.forEach(function(item) {
             var messageDate = moment(item.datetime);
             var messageMoment = moment.utc(item.datetime).local();
-            if(moment(messageDate).isSame(todayDate, 'day')) {
-              alert('Today');
-            }
-            else if(moment(messageDate).isSame(yesterdayDate, 'day')) {
-              alert('Yesterday');
-            }
             const newMode = document.createElement('div');
             if (item.combine == 'false') {
               newMode.className = 'message-container';
-              var timeDifference = moment.utc().local().diff(messageMoment, 'days');
-              if (timeDisplayMode == 0) {
-                if (timeDifference >= 2) {
-                  messageMoment = 'on ' + messageMoment.format('M/D/YYYY');
-                }
-                else if (timeDifference >= 1) {
-                  timeDisplayMode = 1;
-                  messageMoment = 'Yesterday at ' + messageMoment.format('h:mm A'); //There should be a better method than this
-                }
-                else {
-                  timeDisplayMode = 2;
-                  messageMoment = 'at ' + messageMoment.format('h:mm A');
-                }
+              if(moment(messageDate).isSame(todayDate, 'day')) {
+                alert('Today');
+                messageDate = 'at ' + messageDate.format('h:mm A');
               }
-              else if (timeDisplayMode == 1) {
-                if (timeDifference >= 1) {
-                  messageMoment = 'Yesterday at ' + messageMoment.format('h:mm A');
-                }
-                else {
-                  messageMoment = 'at ' + messageMoment.format('h:mm A');
-                }
-              }
-              else {
-                messageMoment = 'at ' + messageMoment.format('h:mm A');
+              else if(moment(messageDate).isSame(yesterdayDate, 'day')) {
+                messageDate = 'Yesterday at ' + messageDate.format('h:mm A');
               }
               newMode.innerHTML = '<img class="pfp" src="' + item.picture + '" alt="!"> <p class="message-title"> <span class="name"> <b>' + item.name + ' </b> </span> <span class="datetime">' + messageMoment + '</span> </p> <p class="message">' + item.message + '</p>';
             }
