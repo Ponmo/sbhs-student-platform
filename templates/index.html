@@ -229,7 +229,7 @@
             room: current_room
           });
           document.getElementById('messages').textContent = '';
-          document.getElementById('header').textContent = rooms[0]['space'];
+          document.getElementById('header').textContent = document.getElementById(rooms[0]['space']).getAttribute('data-name');
           chat_history_skip = 0;
           loadChatHistory();
         } 
