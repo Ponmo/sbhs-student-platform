@@ -157,7 +157,6 @@
             if (item.combine == 'false') {
               newMode.className = 'message-container';
               if(moment(messageDate).isSame(todayDate, 'day')) {
-                alert('Today');
                 messageDate = 'at ' + messageDate.format('h:mm A');
               }
               else if(moment(messageDate).isSame(yesterdayDate, 'day')) {
