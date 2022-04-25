@@ -98,6 +98,7 @@
     document.getElementById('message_input_form').onsubmit = function (e) {
       e.preventDefault();
       let message = message_input.value.trim();
+      document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight; 
       //let last_message = message;
       if (message.length) {
         socket.emit('send_message', {
