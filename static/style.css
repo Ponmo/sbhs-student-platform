@@ -4,25 +4,15 @@ img { /* make images and create button undraggable and unhighlitable*/
   -moz-user-drag: none;
   -osuser-drag: none;
   user-drag: none;
-     -moz-user-select: -moz-none;
-   -khtml-user-select: none;
-   -webkit-user-select: none;
-   -ms-user-select: none;
-   user-select: none;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 } 
 #first-all {
   visibility: hidden;
-}
-#background { /* Should background extend to full height or not including navbar at bottom? */
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: url(images/temp-background.jpeg) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  z-index: -1;
+  overflow: hidden;
 }
 #content { /* make calc good on all browsers ; Make margin and padding 0 because of broswer differences ; make no horizontal scroll at small screen sizes*/
   display: grid;
@@ -30,6 +20,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   grid-template-columns: 270px minmax(0px, auto) 220px;
   height: 100vh;
   width: 100vw;
+  overflow-x: hidden;
   gap: 0px;
 }
 
@@ -64,35 +55,25 @@ img { /* make images and create button undraggable and unhighlitable*/
   overflow-y: scroll;
   overflow-x: hidden;
   flex-direction: column-reverse;
+  margin-right: 3px;
 }
-/* #message_input_form {
-  text-align: center;
-  margin-top: auto;
-  margin-bottom: 20px;
-  margin-right: 80px;
-  margin-left: 80px;
-  height: 40px;
-  border-radius: 4px;
-  background: white;
-} */
 .message-container {
   display: grid;
   color: #d7d9da;
   grid-template-columns: 2px auto;
   grid-auto-rows: minmax(min-content, max-content);
   padding-top: 2px;
-  padding-right: 20px;
+  padding-right: 47px;
   padding-left: 20px;
   font-size: 14px;
-  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .message-container:hover {
   background-color: #32353a;
 }
 .message-title {
   margin-left: 50px;
-  white-space: initial;
-  word-break: break-all;
+  overflow-wrap: break-word;
   overflow: hidden;
   grid-column: 2;
   grid-row: 1;
@@ -101,14 +82,15 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 .datetime {
   font-size: 10px;
+  overflow-wrap: break-word; /* Maybe not necessary for datetime and combine time */
+  overflow: hidden;
   opacity: 0.9;
 }
 .message {
   margin-bottom: 2px;
   padding: 0;
   margin-left: 50px;
-  white-space: initial;
-  word-break: break-all;
+  overflow-wrap: break-word;
   overflow: hidden;
   grid-column: 2;
   grid-row: 2;
@@ -116,8 +98,8 @@ img { /* make images and create button undraggable and unhighlitable*/
 
 }
 .pfp {
-  width: 38px;
-  height: 38px;
+  width: 39px;
+  height: 39px;
   border-radius: 50%;
   grid-column: 1;
   grid-row: 1 / 3;
@@ -128,8 +110,10 @@ img { /* make images and create button undraggable and unhighlitable*/
   grid-template-columns: 50px auto;
   grid-auto-rows: minmax(min-content);
   padding-top: 0px;
-  padding-right: 20px;
+  padding-right: 47px;
   padding-left: 20px;
+  margin-top: -10px;
+  margin-bottom: 10px;
   font-size: 14px;
 }
 .message-container-combine:hover {
@@ -144,8 +128,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   padding: 0;
   padding-top: 6px;
   margin: 0;
-  white-space: initial;
-  word-break: break-all;
+  overflow-wrap: break-word;
   overflow: hidden;
   font-size: 10px;
   grid-column: 1;
@@ -156,8 +139,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 .message-combine {
   padding: 2px;
   margin: 0;
-  white-space: initial;
-  word-break: break-all;
+  overflow-wrap: break-word;
   overflow: hidden;
   grid-column: 2;
   grid-row: 1;
@@ -165,19 +147,22 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 #message_input_form {
   margin-bottom: 20px;
-  margin-right: 15px;
-  margin-left: 15px;
+  margin-right: 18px;
+  margin-left: 18px;
   bottom: 20px;
   border-radius: 4px;
   background: white;
-  min-height: 38px;
+  min-height: 39px;
+  min-width: 81px;
 }
 #message_input { /* make textbox (textarea?) expandable for chunked messages; different highlight on click */
-  width: calc(100% - 38px);
+  width: calc(100% - 39px);
+  min-width: 43px;
+  overflow-x: hidden;
   float: left;
   padding-left: 10px;
   padding-top: 9px;
-  padding-bottom: 9px;
+  padding-bottom: 10px;
   background: transparent;
   border: none;
   resize: none;
@@ -187,18 +172,18 @@ img { /* make images and create button undraggable and unhighlitable*/
   top: 100%;
   transform: translateY(-100%);
   float: right;
-  width: 38px;
-  height: 38px;
+  width: 39px;
+  height: 39px;
   background-color: transparent;
   border: none;
 }
 #send {
-  margin-right: 10px;
   width: 26px;
-  height: 25px;
+  height: 26px;
 }
 #members {
   grid-column: 3;
+  z-index: 1; /* to make the send button not overlay the members div on small screen sizes can change once small version introduced */
   grid-row: 2;
   background-color: gray;
 }
@@ -225,7 +210,6 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 #profile_picture {
   display: inline-block;
-  line-height: 48px;
   margin-left: 9px;
   margin-top: -1px;
   width: 39px;
@@ -240,7 +224,6 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 #settings {
   display: inline-block;
-  line-height: 48px;
   margin-left: 44px;
   margin-top: -1px;
 }
