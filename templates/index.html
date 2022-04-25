@@ -162,11 +162,11 @@
               else if(moment(messageDate).isSame(yesterdayDate, 'day')) {
                 messageDate = 'Yesterday at ' + messageDate.format('h:mm A');
               }
-              newMode.innerHTML = '<img class="pfp" src="' + item.picture + '" alt="!"> <p class="message-title"> <span class="name"> <b>' + item.name + ' </b> </span> <span class="datetime">' + messageMoment + '</span> </p> <p class="message">' + item.message + '</p>';
+              newMode.innerHTML = '<img class="pfp" src="' + item.picture + '" alt="!"> <p class="message-title"> <span class="name"> <b>' + item.name + ' </b> </span> <span class="datetime">' + messageDate + '</span> </p> <p class="message">' + item.message + '</p>';
             }
             else {
               newMode.className = 'message-container-combine';
-              newMode.innerHTML = '<p class="message-combine-time">' + messageMoment.format('h:mm A') + '</p><p class="message-combine">' + item.message + '</p>';
+              newMode.innerHTML = '<p class="message-combine-time">' + messageDate.format('h:mm A') + '</p><p class="message-combine">' + item.message + '</p>';
             }
             document.getElementById('messages').prepend(newMode);
           });
