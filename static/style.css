@@ -153,7 +153,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   border-radius: 4px;
   background: white;
   min-height: 39px;
-  min-width: 81px;
+  min-width: 84px;
 }
 #message_input { /* make textbox (textarea?) expandable for chunked messages; different highlight on click */
   width: calc(100% - 39px);
