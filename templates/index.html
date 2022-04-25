@@ -232,6 +232,7 @@
           document.getElementById('header').textContent = document.getElementById(rooms[0]['space']).getAttribute('data-name');
           chat_history_skip = 0;
           loadChatHistory();
+          document.getElementById('channels').textContent = ''; 
           rooms.forEach(function(item) {
           	const newNode = document.createElement('div');
           	newNode.className = 'room';
