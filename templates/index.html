@@ -162,6 +162,9 @@
               else if(moment(messageDate).isSame(yesterdayDate, 'day')) {
                 messageDate = 'Yesterday at ' + messageDate.format('h:mm A');
               }
+              else {
+                  messageDate = 'on ' + messageDate.format('M/D/YYYY');
+              }
               newMode.innerHTML = '<img class="pfp" src="' + item.picture + '" alt="!"> <p class="message-title"> <span class="name"> <b>' + item.name + ' </b> </span> <span class="datetime">' + messageDate + '</span> </p> <p class="message">' + item.message + '</p>';
             }
             else {
