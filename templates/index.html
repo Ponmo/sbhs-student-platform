@@ -192,24 +192,21 @@
           success: function(room) {
           	current_space = room['space'];
           	current_room = room['_id']['$oid'];
-          	alert(current_space);
           	socket.emit('join_room', {
               room: current_room
             });
             document.getElementById('messages').textContent = '';
+            document.getElementById('channels').textContent = ''; 
+            document.getElementById('header_text').textContent = ''; 
             chat_history_skip = 0;
             const newNode = document.createElement('img');
             newNode.className = 'space';
             newNode.id = current_space;
             newNode.src = '/static/images/Space.jpeg';
-            document.getElementById('channels').textContent = ''; 
-            document.getElementById('messages').textContent = ''; 
-            document.getElementById('header_text').textContent = ''; 
-            document.getElementById('header_text').textContent = space_name;
             newNode.setAttribute('data-name', space_name);
-            
             referenceNode = document.getElementById('space_align_helper');
             referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+            document.getElementById('header_text').textContent = space_name;
             newNode = document.createElement('div');
           	newNode.className = 'room';
           	newNode.id = current_room;
