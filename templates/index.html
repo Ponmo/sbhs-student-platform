@@ -15,6 +15,7 @@
     <div id="first-all">
       <div id="content">
         <div id="header">
+          <span id="header_text"></span>
         </div>
         <div id="information">
         </div>
@@ -229,7 +230,7 @@
             room: current_room
           });
           document.getElementById('messages').textContent = '';
-          document.getElementById('header').textContent = document.getElementById(rooms[0]['space']).getAttribute('data-name');
+          document.getElementById('header_text').textContent = document.getElementById(rooms[0]['space']).getAttribute('data-name');
           chat_history_skip = 0;
           loadChatHistory();
           document.getElementById('channels').textContent = ''; 
