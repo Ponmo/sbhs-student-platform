@@ -198,12 +198,18 @@
             });
             document.getElementById('messages').textContent = '';
             chat_history_skip = 0;
-            const newMode = document.createElement('img');
-            newMode.className = 'space';
-            newMode.id = current_space;
-            newMode.src = '/static/images/Space.jpeg';
+            const newNode = document.createElement('img');
+            newNode.className = 'space';
+            newNode.id = current_space;
+            newNode.src = '/static/images/Space.jpeg';
+            document.getElementById('channels').textContent = ''; 
             referenceNode = document.getElementById('space_align_helper');
-            referenceNode.parentNode.insertBefore(newMode, referenceNode.nextSibling);
+            referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+            newNode = document.createElement('div');
+          	newNode.className = 'room';
+          	newNode.id = current_room;
+          	newNode.textContent = 'general';
+          	document.getElementById('channels').prepend(newNode);
             $('#first-all').css('visibility', 'visible');
           }
         });
