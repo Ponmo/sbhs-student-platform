@@ -207,6 +207,7 @@
             document.getElementById('header_text').textContent = ''; 
             document.getElementById('header_text').textContent = space_name;
             newNode.setAttribute('data-name', space_name);
+            
             referenceNode = document.getElementById('space_align_helper');
             referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
             newNode = document.createElement('div');
