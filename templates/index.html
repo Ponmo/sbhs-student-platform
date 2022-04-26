@@ -190,6 +190,7 @@
           data: JSON.stringify({'space_name': space_name}),
           contentType: 'application/json;charset=UTF-8',
           success: function(room) {
+            document.getElementById("create-space").style.display = "none";
           	current_space = room['space'];
           	current_room = room['_id']['$oid'];
           	socket.emit('join_room', {
@@ -199,7 +200,7 @@
             document.getElementById('channels').textContent = ''; 
             document.getElementById('header_text').textContent = ''; 
             chat_history_skip = 0;
-            const newNode = document.createElement('img');
+            var newNode = document.createElement('img');
             newNode.className = 'space';
             newNode.id = current_space;
             newNode.src = '/static/images/Space.jpeg';
