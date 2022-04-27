@@ -26,10 +26,7 @@ window.onclick = function(event) {
 }
 
   var textarea = document.getElementById("message_input");
-  //textarea.oninput = function() {
-  //  textarea.style.height = "";
-  //  textarea.style.height = Math.min(textarea.scrollHeight, 300) + "px";
-  //}; 
+  
   $("#message_input").keypress(function (e) {
     //isTyping();
     textarea.style.height = "";
@@ -38,7 +35,6 @@ window.onclick = function(event) {
         e.preventDefault();
     
         $(this).closest("form").submit();
-        chatDiv.scrollTop = chatDiv.scrollHeight; 
         textarea.setAttribute("style", "");
         textarea.value = "";
         //stoppedTyping();
