@@ -25,20 +25,13 @@ window.onclick = function(event) {
   }
 }
 
-
-
-
-  var chatDiv = document.getElementById("chat");
-  var element = document.getElementById("submit"); //grab the element
-  element.onclick = function() { 
-    chatDiv.scrollTop = chatDiv.scrollHeight; 
-  }
   var textarea = document.getElementById("message_input");
   textarea.oninput = function() {
     textarea.style.height = "";
     textarea.style.height = Math.min(textarea.scrollHeight, 300) + "px";
   }; 
   $("#message_input").keypress(function (e) {
+    isTyping();
     if(e.which === 13 && !e.shiftKey) {
         e.preventDefault();
     
@@ -46,6 +39,7 @@ window.onclick = function(event) {
         chatDiv.scrollTop = chatDiv.scrollHeight; 
         textarea.setAttribute("style", "");
         textarea.value = "";
+        stoppedTyping();
 //       put placeholder message (message is loading but is faded out to account for lag time or disconnected if wanted)
     }
   });
