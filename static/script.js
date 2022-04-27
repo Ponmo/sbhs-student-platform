@@ -25,7 +25,7 @@ window.onclick = function(event) {
   }
 }
 
-  //var textarea = document.getElementById("message_input");
+  var textarea = document.getElementById("message_input");
   //textarea.oninput = function() {
   //  textarea.style.height = "";
   //  textarea.style.height = Math.min(textarea.scrollHeight, 300) + "px";
