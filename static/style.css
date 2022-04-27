@@ -30,7 +30,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   background-color: #2f3136;
   border-bottom: 1px solid #232428; /* pseudo element for double border */
 }
-#header-text {
+#header_text {
   line-height: 48px;
   margin-left: 18px;
   font-size: 16px;
