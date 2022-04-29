@@ -25,26 +25,6 @@ window.onclick = function(event) {
   }
 }
 
-
-
-
-  var chatDiv = document.getElementById("chat");
-
-  var textarea = document.getElementById("message_input");
-  textarea.oninput = function() {
-    textarea.style.height = "";
-    textarea.style.height = Math.min(textarea.scrollHeight, 300) + "px";
-  }; 
-  $("#message_input").keypress(function (e) {
-    if(e.which === 13 && !e.shiftKey) {
-        e.preventDefault();
-    
-        $(this).closest("form").submit();
-        textarea.setAttribute("style", "");
-        textarea.value = "";
-//       put placeholder message (message is loading but is faded out to account for lag time or disconnected if wanted)
-    }
-  });
   $("#chat").on('mouseenter', '.message-container-combine', function(){
     $(this).find(".message-combine-time").css("visibility", "visible");
   });
