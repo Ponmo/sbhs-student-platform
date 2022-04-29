@@ -29,10 +29,7 @@ window.onclick = function(event) {
 
 
   var chatDiv = document.getElementById("chat");
-  var element = document.getElementById("submit"); //grab the element
-  element.onclick = function() { 
-    chatDiv.scrollTop = chatDiv.scrollHeight; 
-  }
+
   var textarea = document.getElementById("message_input");
   textarea.oninput = function() {
     textarea.style.height = "";

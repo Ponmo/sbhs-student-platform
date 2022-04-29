@@ -68,7 +68,28 @@
     var socket = io();
     var chat_history_skip = 0;
     var current_room = '';
+    var typing = false;
+    var timeout = undefined;
     var current_space = '';
+    
+    function stoppedTyping() {
+      typing = false;
+      socket.emit('stopped_typing', {
+      });
+    }
+    function isTyping() {
+      if (typing == false) {
+        typing = true;
+        socket.emit('is_typing', {
+        });
+        timeout = setTimeout(stoppedTyping, 5000);
+      }
+      else {
+        clearTimeout(timeout);
+        timeout = setTimeout(stoppedTyping, 5000);
+      }
+    }
+    
     $(window).on("load", function() { 
       $.ajax({
         type: 'POST',
