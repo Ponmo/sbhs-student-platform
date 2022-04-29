@@ -180,7 +180,7 @@
     });
     
     socket.on('stopped_typing', function (data) {
-      if typing_list.includes(data.name) {
+      if (typing_list.includes(data.name)) {
         const index = typing_list.indexOf(data.name);
         if (index > -1) {
           typing_list.splice(index, 1); 
@@ -198,13 +198,13 @@
         typing_display.textContent = typing_list[0] + ' is typing...';
       }
       else if (typing_list.length == 2) {
-        typing_display.textContent = typing_list[1] + ' and ' + typing_list[2] + ' are typing...';
+        typing_display.textContent = typing_list[0] + ' and ' + typing_list[1] + ' are typing...';
       }
       else if (typing_list.length == 3) {
-        typing_display.textContent = typing_list[2] + ', ' + typing_list[1] + ', and ' + typing_list[0] + ' are typing...';
+        typing_display.textContent = typing_list[0] + ', ' + typing_list[1] + ', and ' + typing_list[2] + ' are typing...';
       }
       else {
-        typing_display.textContent = typing_list[2] + ', ' + typing_list[1] + ', ' + typing_list[0] + ', and' + String(typing_list.length - 3) + ' others are typing...';
+        typing_display.textContent = typing_list[0] + ', ' + typing_list[1] + ', ' + typing_list[2] + ', and' + String(typing_list.length - 3) + ' others are typing...';
       }
     }
     
