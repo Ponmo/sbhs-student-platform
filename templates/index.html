@@ -33,7 +33,7 @@
 <!--             <input type="text" id="message_input" placeholder="Enter message"> -->
               <button type="submit" id="submit"><img id="send" src="/static/images/send.png" alt="Send"></button>
           </form>
-          <span id="typing"></span>
+          <span id="typing_display"></span>
         </div>
         <div id="members">
         </div>
@@ -72,6 +72,7 @@
     var typing = false;
     var timeout = undefined;
     var current_space = '';
+    var typing_list = [];
     
     function stoppedTyping() {
       typing = false;
@@ -171,14 +172,41 @@
       }
       document.getElementById('messages').append(newMode);
     });
-    
     socket.on('is_typing', function (data) {
-      alert(data);
+      if (!typing_list.includes(data.name)) {
+        typing_list.push(data.name);
+      }
+      changeTypingDisplay();
     });
     
     socket.on('stopped_typing', function (data) {
-      alert(data);
+      if typing_list.includes(data.name) {
+        const index = typing_list.indexOf(data.name);
+        if (index > -1) {
+          typing_list.splice(index, 1); 
+        }
+        changeTypingDisplay();
+      }
     });
+    
+    let typing_display = document.getElementById('typing_display');
+    function changeTypingDisplay() {
+      if (typing_list.length == 0) {
+        typing_display.textContent = '';
+      }
+      else if (typing_list.length == 1) {
+        typing_display.textContent = typing_list[0] + ' is typing...';
+      }
+      else if (typing_list.length == 2) {
+        typing_display.textContent = typing_list[1] + ' and ' + typing_list[2] + ' are typing...';
+      }
+      else if (typing_list.length == 3) {
+        typing_display.textContent = typing_list[2] + ', ' + typing_list[1] + ', and ' + typing_list[0] + ' are typing...';
+      }
+      else {
+        typing_display.textContent = typing_list[2] + ', ' + typing_list[1] + ', ' + typing_list[0] + ', and' + String(typing_list.length - 3) + ' others are typing...';
+      }
+    }
     
     socket.on('join_room_announcement', function (data) {
       const newMode = document.createElement('div');
@@ -292,7 +320,8 @@
           chat_history_skip = 0;
           loadChatHistory();
           document.getElementById('channels').textContent = ''; 
-          document.getElementById('typing').textContent = ''; 
+          typing_display.textContent = '';
+          typing_list = [];
           rooms.forEach(function(item) {
           	const newNode = document.createElement('div');
           	newNode.className = 'room';
