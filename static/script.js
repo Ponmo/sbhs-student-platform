@@ -40,7 +40,6 @@ window.onclick = function(event) {
         e.preventDefault();
     
         $(this).closest("form").submit();
-        chatDiv.scrollTop = chatDiv.scrollHeight; 
         textarea.setAttribute("style", "");
         textarea.value = "";
 //       put placeholder message (message is loading but is faded out to account for lag time or disconnected if wanted)
