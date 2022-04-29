@@ -172,6 +172,14 @@
       document.getElementById('messages').append(newMode);
     });
     
+    socket.on('is_typing', function (data) {
+      alert(data);
+    });
+    
+    socket.on('stopped_typing', function (data) {
+      alert(data);
+    });
+    
     socket.on('join_room_announcement', function (data) {
       const newMode = document.createElement('div');
       newMode.innerHTML = data.username + ' has joined';
@@ -284,6 +292,7 @@
           chat_history_skip = 0;
           loadChatHistory();
           document.getElementById('channels').textContent = ''; 
+          document.getElementById('typing').textContent = ''; 
           rooms.forEach(function(item) {
           	const newNode = document.createElement('div');
           	newNode.className = 'room';

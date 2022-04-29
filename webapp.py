@@ -152,7 +152,15 @@ def join(data):
 @socketio.on('leave_room')
 def leave(data):
 	leave_room(data['room'])
-    
+	
+@socketio.on('is_typing')
+def is_typing(data):
+	socketio.emit('is_typing', data, room = data['room'])
+
+@socketio.on('stopped_typing')
+def stopped_typing(data):
+	socketio.emit('stopped_typing', data, room = data['room'])
+
 @socketio.on('send_message')
 def send_message(data):
     utc_dt = datetime.now().isoformat() + 'Z'
