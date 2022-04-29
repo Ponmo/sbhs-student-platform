@@ -33,6 +33,7 @@
 <!--             <input type="text" id="message_input" placeholder="Enter message"> -->
               <button type="submit" id="submit"><img id="send" src="/static/images/send.png" alt="Send"></button>
           </form>
+          <span id="typing"></span>
         </div>
         <div id="members">
         </div>
@@ -73,16 +74,18 @@
     var current_space = '';
     
     function stoppedTyping() {
-      alert('stoppedTyping');
       typing = false;
       socket.emit('stopped_typing', {
+        name: "{{ name }}",
+        room: current_room
       });
     }
     function isTyping() {
-      alert('isTyping');
       if (typing == false) {
         typing = true;
         socket.emit('is_typing', {
+          name: "{{ name }}",
+          room: current_room
         });
         timeout = setTimeout(stoppedTyping, 5000);
       }
