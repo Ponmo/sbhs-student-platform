@@ -174,7 +174,7 @@
       document.getElementById('messages').append(newMode);
     });
     socket.on('is_typing', function (data) {
-      if (!typing_list.includes(data.name)) {
+      if (!typing_list.includes(data.name) and data.name != {{ name }}) {
         typing_list.push(data.name);
       }
       changeTypingDisplay();
