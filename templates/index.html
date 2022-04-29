@@ -73,11 +73,13 @@
     var current_space = '';
     
     function stoppedTyping() {
+      alert('stoppedTyping');
       typing = false;
       socket.emit('stopped_typing', {
       });
     }
     function isTyping() {
+      alert('isTyping');
       if (typing == false) {
         typing = true;
         socket.emit('is_typing', {
@@ -127,6 +129,9 @@
         message_input.setAttribute("style", "");
         message_input.value = "";
 //       put placeholder message (message is loading but is faded out to account for lag time or disconnected if wanted)
+      }
+      else {
+      	isTyping();
       }
     });
     
