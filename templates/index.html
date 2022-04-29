@@ -143,7 +143,8 @@
       e.preventDefault();
       let message = message_input.value.trim();
       document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight; 
-      //let last_message = message;
+      stoppedTyping();
+      clearTimeout(timeout);
       if (message.length) {
         socket.emit('send_message', {
           name: "{{ name }}",
