@@ -194,8 +194,9 @@
     function changeTypingDisplay() {
       if (typing_list.length == 0) {
         typing_display.textContent = '';
+        var newNode = '';
       }
-      else if (typing_list.length == 1) { // replace innerHTML later
+      else if (typing_list.length == 1) {
         typing_display.innerHTML = '<b>' + typing_list[0] + '</b> is typing...';
       }
       else if (typing_list.length == 2) {
