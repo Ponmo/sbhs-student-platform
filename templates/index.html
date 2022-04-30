@@ -196,16 +196,16 @@
         typing_display.textContent = '';
       }
       else if (typing_list.length == 1) {
-        typing_display.textContent = typing_list[0] + ' is typing...';
+        typing_display.textContent = '<b>' + typing_list[0] + '</b> is typing...';
       }
       else if (typing_list.length == 2) {
-        typing_display.textContent = typing_list[0] + ' and ' + typing_list[1] + ' are typing...';
+        typing_display.textContent = '<b>' + typing_list[0] + '</b> and <b>' + typing_list[1] + '</b> are typing...';
       }
       else if (typing_list.length == 3) {
-        typing_display.textContent = typing_list[0] + ', ' + typing_list[1] + ', and ' + typing_list[2] + ' are typing...';
+        typing_display.textContent = '<b>' + typing_list[0] + '</b>, <b>' + typing_list[1] + '</b>, and <b>' + typing_list[2] + '</b> are typing...';
       }
       else {
-        typing_display.textContent = typing_list[0] + ', ' + typing_list[1] + ', ' + typing_list[2] + ', and' + String(typing_list.length - 3) + ' others are typing...';
+        typing_display.textContent = '<b>' + typing_list[0] + '</b>, <b>' + typing_list[1] + '</b>, <b>' + typing_list[2] + '</b>, and' + String(typing_list.length - 3) + ' others are typing...';
       }
     }
     
