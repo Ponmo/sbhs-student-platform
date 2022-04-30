@@ -88,7 +88,8 @@ img { /* make images and create button undraggable and unhighlitable*/
   padding-right: 51px;
   padding-left: 20px;
   font-size: 14px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  margin-top: -10px;
 }
 .message-container:hover {
   background-color: #32353a;
@@ -134,8 +135,8 @@ img { /* make images and create button undraggable and unhighlitable*/
   padding-top: 0px;
   padding-right: 51px;
   padding-left: 20px;
-  margin-top: -10px;
-  margin-bottom: 10px;
+  margin-top: -20px;
+  margin-bottom: 20px;
   font-size: 14px;
 }
 .message-container-combine:hover {
@@ -169,7 +170,6 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 #message_input_form {
   z-index: 1; /* For more chrome versions; the hightlight focus on textarea top gets obscured by chat div*/
-  margin-bottom: 20px;
   margin-right: 18px;
   margin-left: 18px;
   border-radius: 4px;
@@ -202,6 +202,13 @@ img { /* make images and create button undraggable and unhighlitable*/
 #send {
   width: 26px;
   height: 26px;
+}
+#typing_display {
+  height: 20px;
+  line-height: 20px;
+  color: #d7d9da;
+  margin-left: 29px;
+  font-size: 12px;
 }
 #members {
   grid-column: 3;
