@@ -280,7 +280,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   border-radius: 10%;
   margin-right: 3px;
 }
-#create {
+#create-space-button {
   width: 55px;
   height: 39px;
 }

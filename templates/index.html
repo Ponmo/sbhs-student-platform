@@ -20,7 +20,7 @@
         <div id="information">
         </div>
         <div id="channels">
-          <div id="create_channel"></div>
+          <button type="button" id="create-channel-button"></button>
         </div>
 <!--         when new message is sent, make the new message appear above the message bar and not mess up the scrolling (Safari only). -->
         <div id="chats">
@@ -49,11 +49,21 @@
       </div>
       <div id="spaces">
         <span id="space_align_helper"></span>
-          <button type="button" id="create"><img src="/static/images/ppicons-plus.svg" alt="create" style="width:25px;height:25px;"></button>
+          <button type="button" id="create-space-button"><img src="/static/images/ppicons-plus.svg" alt="create" style="width:25px;height:25px;"></button>
         </div>
       </div>
     </div>
     <div id="create-space" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <form id="create-space-form" action="/createSpace" method="POST">
+          <label for="space-name">Space Name:</label><br>
+          <input type="text" id="space-name" name="spaceName"><br>
+          <input type="submit" value="Submit">
+        </form>
+      </div>
+    </div>
+    <div id="create-room" class="modal">
       <div class="modal-content">
         <span class="close">&times;</span>
         <form id="create-space-form" action="/createSpace" method="POST">
@@ -299,6 +309,9 @@
           	document.getElementById('channels').append(newNode);
           	newNode = document.createElement('div');
             newNode.className = 'room';
+            newMode.id = 'create-room-button';
+            newMode.type = 'button';
+            newNode.textContent = 'Create Room';
             document.getElementById('channels').append(newNode);
             $('#first-all').css('visibility', 'visible');
           }
@@ -350,8 +363,10 @@
               }
             });
           });
-          newNode = document.createElement('div');
           newNode.className = 'room';
+          newMode.id = 'create-room-button';
+          newMode.type = 'button';
+          newNode.textContent = 'Create Room';
           document.getElementById('channels').append(newNode);
         }
       });
