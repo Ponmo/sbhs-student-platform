@@ -265,10 +265,14 @@
       });
     }
     
-    let space_name_input = document.getElementById('space-name');
+    document.getElementById('create-room-form').onsubmit = function (e) {
+      e.preventDefault();
+      
+    }
+    
     document.getElementById('create-space-form').onsubmit = function (e) {
       e.preventDefault();
-      let space_name = space_name_input.value.trim();
+      let space_name = document.getElementById('space-name').value.trim();
       if (space_name.length) { 
         $.ajax({
           type: 'POST',
