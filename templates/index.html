@@ -277,7 +277,7 @@
       if (room_name.length) {
         $.ajax({
           type: 'POST',
-          url: '/create-room',
+          url: '/create_room',
           dataType: 'json',
           data: JSON.stringify({'room_name': room_name, 'section_id': selected_section, 'space_id': current_space}),
           contentType: 'application/json;charset=UTF-8',
