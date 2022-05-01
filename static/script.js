@@ -8,11 +8,6 @@ $(document).ready(function(){
   $(document).on('click', '#close-create-space', function() {
     createSpaceModal.style.display = "none";
   });
-  window.onclick = function(event) {
-    if (event.target == createSpaceModal) {
-      createSpaceModal.style.display = "none";
-    }
-  }
   
   var createRoomModal = document.getElementById("create-room");
 
@@ -25,6 +20,9 @@ $(document).ready(function(){
   window.onclick = function(event) {
     if (event.target == createRoomModal) {
       createRoomModal.style.display = "none";
+    }
+    if (event.target == createSpaceModal) {
+      createSpaceModal.style.display = "none";
     }
   }
    
