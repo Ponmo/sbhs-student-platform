@@ -37,6 +37,7 @@ collection_users = db['Users']
 collection_spaces = db['Spaces']
 collection_rooms = db['Rooms']
 collection_messages = db['Messages']
+collection_sections = db['Sections']
 
 app = Flask(__name__)
 app.secret_key = "?W6e{:*-RuaqEX2E0]$jTK(]HSc^|:2sfY~#jBbuz,BYH2yBt(66E7~j)')l@`a" #os.environ['SECRET_KEY']
@@ -204,7 +205,7 @@ def create_space():
 		space_id = ObjectId()
 		room_id = ObjectId()
 		collection_spaces.insert_one({'_id': space_id, 'name': request.json['space_name']})
-		collection_rooms.insert_one({'_id': room_id, 'space': str(space_id), 'name': 'general', 'order': '1'})
+		collection_rooms.insert_one({'_id': room_id, 'space': str(space_id), 'name': 'general', 'order': '1', 'category': ObjectId(), 'category_name': 'discussion', 'category_order', '1')
 		room = dumps(collection_rooms.find_one({'_id': room_id}))
 		return Response(room, mimetype='application/json')
 
