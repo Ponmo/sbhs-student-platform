@@ -63,10 +63,10 @@
     </div>
     <div id="create-room" class="modal">
       <div class="modal-content">
-        <span class="close">&times;</span>
-        <form id="create-section-form" action="/createSpace" method="POST">
-          <label for="space-name">Space Name:</label><br>
-          <input type="text" id="space-name" name="spaceName"><br>
+        <span id="close-create-room" class="close">&times;</span>
+        <form id="create-room-form" action="/createRoom" method="POST">
+          <label for="room-name">Room Name:</label><br>
+          <input type="text" id="room-name" name="roomName"><br>
           <input type="submit" value="Submit">
         </form>
       </div>
