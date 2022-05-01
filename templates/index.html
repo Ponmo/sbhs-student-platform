@@ -364,8 +364,8 @@
             newNode = document.createElement('div');
             newNode.className = 'section';
             newNode.id = section['_id']['$oid'];
-            newNode.textContent = section['name'];
-            newMode.innerHTML = '<div class="section-name">' + section['name'] + '</div><div class="create-room-button" type="button"> + </div>'
+            //newNode.textContent = section['name'];
+            newNode.innerHTML = '<div class="section-name">' + section['name'] + '</div><div class="create-room-button" type="button"> + </div>'
             document.getElementById('channels').append(newNode);
             rooms_and_sections[0].forEach(function(room) {
               if (room['section'] == section['_id']['$oid']) {
