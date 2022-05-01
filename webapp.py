@@ -205,9 +205,12 @@ def create_space():
 		space_id = ObjectId()
 		room_id = ObjectId()
 		section_id = ObjectId()
+		room = {'_id': room_id, 'space': str(space_id), 'section': str(section_id), 'name': 'general', 'order': '1'}
+		section = {'_id': section_id, 'space': str(space_id), 'name': 'discussion', 'order': '1'}
 		collection_spaces.insert_one({'_id': space_id, 'name': request.json['space_name']})
-		collection_rooms.insert_many({'_id': room_id, 'space': str(space_id), 'section': str(section_id), 'name': 'general', 'order': '1'}, {'_id': section_id, 'space': str(space_id), 'name': 'discussion', 'order': '1'})
-		room = dumps(collection_rooms.find_one({'_id': room_id}))
+		collection_rooms.insert_one(room)
+		collection_sections.insert_one(section)
+		room_and_section = dumps([[room],[section]])
 		return Response(room, mimetype='application/json')
 
 @app.route('/space', methods=['GET', 'POST'])#/<space_id>')

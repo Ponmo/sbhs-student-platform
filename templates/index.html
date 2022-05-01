@@ -314,7 +314,7 @@
         data: JSON.stringify({'space_name': current_space}), //JSOn.stringify
         contentType: 'application/json;charset=UTF-8',
         success: function(rooms) {
-          current_room = rooms[0]['_id']['$oid'];
+          current_room = rooms[0][0]['_id']['$oid'];
           socket.emit('join_room', {
             room: current_room
           });
@@ -327,7 +327,7 @@
           typing_list = [];
           stoppedTyping();
           clearTimeout(timeout);
-          rooms.forEach(function(item) {
+          rooms[0].forEach(function(item) {
             const newNode = document.createElement('div');
           	newNode.className = 'room';
           	newNode.id = item['_id']['$oid'];
