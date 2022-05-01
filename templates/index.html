@@ -332,14 +332,14 @@
             newNode.className = 'section';
             newNode.id = section['_id']['$oid'];
             newNode.textContent = section['name'];
-            document.getElementById('channels').prepend(newNode);
+            document.getElementById('channels').append(newNode);
             rooms_and_sections[0].forEach(function(room) {
               if (room['section'] == section['_id']['$oid']) {
                 newNode = document.createElement('div');
                 newNode.className = 'room';
               	newNode.id = room['_id']['$oid'];
              	newNode.textContent = room['name'];
-             	document.getElementById('channels').prepend(newNode);
+             	document.getElementById('channels').append(newNode);
               }
             });
           });
