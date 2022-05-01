@@ -278,7 +278,7 @@
             });
             document.getElementById('messages').textContent = '';
             document.getElementById('channels').textContent = ''; 
-            document.getElementById('header_text').textContent = ''; 
+            document.getElementById('header_text').textContent = space_name; 
             chat_history_skip = 0;
             var newNode = document.createElement('img');
             newNode.className = 'space';
@@ -287,7 +287,6 @@
             newNode.setAttribute('data-name', space_name);
             referenceNode = document.getElementById('space_align_helper');
             referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-            document.getElementById('header_text').textContent = space_name;
             newNode = document.createElement('div');
             newNode.className = 'section';
             newNode.id = room_and_section[1][0]['_id']['$oid'];
@@ -348,13 +347,6 @@
               }
             });
           });
-          /*rooms_and_sections[0].forEach(function(item) {
-            const newNode = document.createElement('div');
-          	newNode.className = 'room';
-          	newNode.id = item['_id']['$oid'];
-          	newNode.textContent = item['name'];
-          	document.getElementById('channels').prepend(newNode);
-          });*/
         }
       });
     });
