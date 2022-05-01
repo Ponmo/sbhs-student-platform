@@ -231,8 +231,8 @@ def render_space():
 #adding space information like title/bg/anything.
 
     if request.method == 'POST':
-        results = {'processed': request.json['space_name']}
-        rooms_and_sections = dumps([list(collection_rooms.find({'space': request.json['space_name']}).sort('order', 1)), list(collection_sections.find({'space': request.json['space_name']}).sort('order', 1))])
+        results = {'processed': request.json['space_id']}
+        rooms_and_sections = dumps([list(collection_rooms.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_sections.find({'space': request.json['space_id']}).sort('order', 1))])
         #join_room(str(collection_rooms.find_one({'space': request.json['space_name'], 'order': '1'})['_id']))
         return Response(rooms_and_sections, mimetype='application/json')
         return jsonify(results)

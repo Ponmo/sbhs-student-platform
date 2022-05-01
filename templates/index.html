@@ -281,9 +281,13 @@
           dataType: 'json',
           data: JSON.stringify({'room_name': room_name, 'section_id': selected_section, 'space_id': current_space}),
           contentType: 'application/json;charset=UTF-8',
-          success: function(data) {
+          success: function(room) {
             document.getElementById("create-room").style.display = "none";
-            alert(JSON.stringify(data));
+            const newNode = document.createElement('div');
+            newNode.id = room['_id']['$oid'];
+            newNode.className = 'room';
+            newNode.textContent = room_name;
+            document.getElementById('channels').append(newNode);
           }
         });
       }
@@ -320,18 +324,13 @@
             newNode = document.createElement('div');
             newNode.className = 'section';
             newNode.id = room_and_section[1][0]['_id']['$oid'];
-            newNode.textContent = room_and_section[1][0]['name'];
+            newNode.innerHTML = '<div class="section-name">' + room_and_section[1][0]['name'] + '</div><div class="create-room-button" type="button">+</div>'
             document.getElementById('channels').append(newNode);
             newNode = document.createElement('div');
           	newNode.className = 'room';
           	newNode.id = current_room;
           	newNode.textContent = 'general';
           	document.getElementById('channels').append(newNode);
-          	newNode = document.createElement('div');
-            newNode.className = 'room';
-            newNode.id = 'create-room-button';
-            newNode.type = 'button';
-            newNode.textContent = 'Create Room';
             document.getElementById('channels').append(newNode);
             $('#first-all').css('visibility', 'visible');
           }
@@ -351,7 +350,7 @@
         type: "POST",
         url: '/space',
         dataType: "json",
-        data: JSON.stringify({'space_name': current_space}), //JSOn.stringify
+        data: JSON.stringify({'space_id': current_space}), //JSOn.stringify
         contentType: 'application/json;charset=UTF-8',
         success: function(rooms_and_sections) {
           current_room = rooms_and_sections[0][0]['_id']['$oid'];
@@ -388,5 +387,27 @@
       });
     });
     
+	$(document).on('click', '.room', function() {
+	  current_room = this.id;
+	  $.ajax({
+	    type: "POST",
+        url: '/room',
+        dataType: "json",
+        data: JSON.stringify({'room_id': current_room}), //JSOn.stringify
+        contentType: 'application/json;charset=UTF-8',
+        success: function(data) {
+          socket.emit('join_room', {
+            room: current_room
+          });
+          document.getElementById('messages').textContent = '';
+          chat_history_skip = 0;
+          loadChatHistory();
+          typing_display.textContent = '';
+          typing_list = [];
+          stoppedTyping();
+          clearTimeout(timeout);
+        }
+	  });
+	});
   </script>
 </html>
