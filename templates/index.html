@@ -271,8 +271,8 @@
           contentType: 'application/json;charset=UTF-8',
           success: function(room) {
             document.getElementById("create-space").style.display = "none";
-          	current_space = room['space'];
-          	current_room = room['_id']['$oid'];
+          	current_space = room[0]['space'];
+          	current_room = room[0]['_id']['$oid'];
           	socket.emit('join_room', {
               room: current_room
             });
