@@ -297,6 +297,9 @@
           	newNode.id = current_room;
           	newNode.textContent = 'general';
           	document.getElementById('channels').append(newNode);
+          	newNode = document.createElement('div');
+            newNode.id = 'create-channel';
+            document.getElementById('channels').append(newNode);
             $('#first-all').css('visibility', 'visible');
           }
         });
@@ -347,6 +350,9 @@
               }
             });
           });
+          newNode = document.createElement('div');
+          newNode.id = 'create-channel';
+          document.getElementById('channels').append(newNode);
         }
       });
     });
