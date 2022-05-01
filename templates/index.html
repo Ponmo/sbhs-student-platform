@@ -19,9 +19,7 @@
         </div>
         <div id="information">
         </div>
-        <div id="channels">
-          <button type="button" id="create-channel-button"></button>
-        </div>
+        <div id="channels"></div>
 <!--         when new message is sent, make the new message appear above the message bar and not mess up the scrolling (Safari only). -->
         <div id="chats">
           <div id="chat">
@@ -81,7 +79,7 @@
     var chat_history_skip = 0;
     var current_room = '';
     var typing = false;
-    var timeout = undefined;
+    var timeout = null;
     var current_space = '';
     var typing_list = [];
     
@@ -205,7 +203,6 @@
     function changeTypingDisplay() {
       if (typing_list.length == 0) {
         typing_display.textContent = '';
-        var newNode = '';
       }
       else if (typing_list.length == 1) {
         typing_display.innerHTML = '<b>' + typing_list[0] + '</b> is typing...';
@@ -347,8 +344,9 @@
           typing_list = [];
           stoppedTyping();
           clearTimeout(timeout);
+          var newNode = null;
           rooms_and_sections[1].forEach(function(section) {
-            var newNode = document.createElement('div');
+            newNode = document.createElement('div');
             newNode.className = 'section';
             newNode.id = section['_id']['$oid'];
             newNode.textContent = section['name'];
