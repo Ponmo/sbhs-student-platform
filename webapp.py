@@ -211,7 +211,7 @@ def create_space():
 		collection_rooms.insert_one(room)
 		collection_sections.insert_one(section)
 		room_and_section = dumps([[room],[section]])
-		return Response(room, mimetype='application/json')
+		return Response(room_and_section, mimetype='application/json')
 
 @app.route('/space', methods=['GET', 'POST'])#/<space_id>')
 def render_space():
