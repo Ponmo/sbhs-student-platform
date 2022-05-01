@@ -205,7 +205,7 @@ def create_space():
 		space_id = ObjectId()
 		room_id = ObjectId()
 		collection_spaces.insert_one({'_id': space_id, 'name': request.json['space_name']})
-		collection_rooms.insert_one({'_id': room_id, 'space': str(space_id), 'name': 'general', 'order': '1', 'category': ObjectId(), 'category_name': 'discussion', 'category_order': '1')
+		collection_rooms.insert_one({'_id': room_id, 'space': str(space_id), 'name': 'general', 'order': '1', 'category': ObjectId(), 'category_name': 'discussion', 'category_order': '1'})
 		room = dumps(collection_rooms.find_one({'_id': room_id}))
 		return Response(room, mimetype='application/json')
 
