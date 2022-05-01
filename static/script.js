@@ -16,21 +16,21 @@ $(document).ready(function(){
     }
   }
   
-  //var createRoomModal = document.getElementById("create-room");
-  //var createRoomButton = document.getElementById("create-room-button");
-  //var closeRoomModal = document.getElementById("close-create-room");
+  var createRoomModal = document.getElementById("create-room");
+  var createRoomButton = document.getElementById("create-room-button");
+  var closeRoomModal = document.getElementById("close-create-room");
 
-  /*$(document).on('click', '#create-space-button', function() {
-    createSpaceModal.style.display = "block";
+  $(document).on('click', '#create-room-button', function() {
+    createRoomModal.style.display = "block";
   });
-  $(document).on('click', '#close-create-space', function() {
-    createSpaceModal.style.display = "none";
+  $(document).on('click', '#close-create-room', function() {
+    createRoomModal.style.display = "none";
   });
   window.onclick = function(event) {
-    if (event.target == createSpaceModal) {
-      createSpaceModal.style.display = "none";
+    if (event.target == createRoomModal) {
+      createRoomModal.style.display = "none";
     }
-  }*/
+  }
    
   $("#chat").on('mouseenter', '.message-container-combine', function(){
     $(this).find(".message-combine-time").css("visibility", "visible");
