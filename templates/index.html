@@ -270,10 +270,9 @@
           data: JSON.stringify({'space_name': space_name}),
           contentType: 'application/json;charset=UTF-8',
           success: function(room) {
-            alert(JSON.stringify(room));
-            /*document.getElementById("create-space").style.display = "none";
-          	current_space = room[0]['space'];
-          	current_room = room[0]['_id']['$oid'];
+            document.getElementById("create-space").style.display = "none";
+          	current_space = room[0][0]['space'];
+          	current_room = room[0][0]['_id']['$oid'];
           	socket.emit('join_room', {
               room: current_room
             });
@@ -294,7 +293,7 @@
           	newNode.id = current_room;
           	newNode.textContent = 'general';
           	document.getElementById('channels').prepend(newNode);
-            $('#first-all').css('visibility', 'visible');*/
+            $('#first-all').css('visibility', 'visible');
           }
         });
       }
