@@ -352,9 +352,8 @@
             newNode.textContent = section['name'];
             document.getElementById('channels').append(newNode);
             rooms_and_sections[0].forEach(function(room) {
-              alert(room['section']);
-              alert(section['_id']['$oid']);
               if (room['section'] == section['_id']['$oid']) {
+                alert('uahwx');
                 newNode = document.createElement('div');
                 newNode.className = 'room';
               	newNode.id = room['_id']['$oid'];
@@ -363,6 +362,7 @@
               }
             });
           });
+          newNode = document.createElement('div');
           newNode.className = 'room';
           newNode.id = 'create-room-button';
           newNode.type = 'button';
