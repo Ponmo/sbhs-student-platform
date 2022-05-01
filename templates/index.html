@@ -282,6 +282,7 @@
           data: JSON.stringify({'room_name': room_name, 'section_id': selected_section, 'space_id': current_space}),
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
+            document.getElementById("create-room").style.display = "none";
             alert(JSON.stringify(data));
           }
         });
