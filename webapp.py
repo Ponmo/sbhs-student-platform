@@ -223,9 +223,9 @@ def render_space():
 
     if request.method == 'POST':
         results = {'processed': request.json['space_name']}
-        rooms = dumps(list(collection_rooms.find({'space': request.json['space_name']}).sort('order', 1)))
+        rooms_and_sections = dumps([[list(collection_rooms.find({'space': request.json['space_name']}).sort('order', 1))],[list(collection_sections.find({'space': request.json['space_name']}).sort('order', 1))]])
         #join_room(str(collection_rooms.find_one({'space': request.json['space_name'], 'order': '1'})['_id']))
-        return Response(rooms, mimetype='application/json')
+        return Response(rooms_and_sections, mimetype='application/json')
         return jsonify(results)
         return render_template('index.html', username = session['users_name'], room = '1')
 
