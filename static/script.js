@@ -9,11 +9,11 @@ var closeSpaceModal = document.getElementById("close-create-space");
 //}
 
 
-//window.onclick = function(event) {
-//  if (event.target == createSpaceModal) {
-//    createSpaceModal.style.display = "none";
-//  }
-//}
+window.onclick = function(event) {
+  if (event.target == createSpaceModal) {
+    createSpaceModal.style.display = "none";
+  }
+}
 
   $(document).on('click', '#create-space-button', function() {
     createSpaceModal.style.display = "block";
@@ -21,8 +21,14 @@ var closeSpaceModal = document.getElementById("close-create-space");
   $(document).on('click', '#close-create-space', function() {
     createSpaceModal.style.display = "none";
   });
-  $(document).on('click', '#c')
   
+  //$(document).on('click', function(e) {
+  //  if(!(($(e.target).closest("#modalBox").length > 0 ) || ($(e.target).closest("#modal-btn").length > 0))){
+  //  $("#modalBox").hide();
+ //  }
+ // });
+  
+   
   $("#chat").on('mouseenter', '.message-container-combine', function(){
     $(this).find(".message-combine-time").css("visibility", "visible");
   });

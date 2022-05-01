@@ -306,8 +306,8 @@
           	document.getElementById('channels').append(newNode);
           	newNode = document.createElement('div');
             newNode.className = 'room';
-            newMode.id = 'create-room-button';
-            newMode.type = 'button';
+            newNode.id = 'create-room-button';
+            newNode.type = 'button';
             newNode.textContent = 'Create Room';
             document.getElementById('channels').append(newNode);
             $('#first-all').css('visibility', 'visible');
