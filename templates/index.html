@@ -314,8 +314,7 @@
         data: JSON.stringify({'space_name': current_space}), //JSOn.stringify
         contentType: 'application/json;charset=UTF-8',
         success: function(rooms) {
-          alert(JSON.stringify(rooms));
-          /*current_room = rooms[0][0]['_id']['$oid'];
+          current_room = rooms[0][0]['_id']['$oid'];
           socket.emit('join_room', {
             room: current_room
           });
@@ -334,7 +333,7 @@
           	newNode.id = item['_id']['$oid'];
           	newNode.textContent = item['name'];
           	document.getElementById('channels').prepend(newNode);
-          });*/
+          });
         }
       });
     });
