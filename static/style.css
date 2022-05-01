@@ -1,7 +1,3 @@
-@font-face {
-	font-family: 'uni-sans';
-	src: url('fonts/unisans.otf');
-}
 img { /* make images and create button undraggable and unhighlitable*/
   -webkit-user-drag: none;
   -khtml-user-drag: none;
