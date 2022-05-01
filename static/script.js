@@ -1,7 +1,5 @@
 $(document).ready(function(){
 
-  var createSpaceModal = document.getElementById("create-space");
-  var createSpaceButton = document.getElementById("create-space-button");
   var closeSpaceModal = document.getElementById("close-create-space");
 
   $(document).on('click', '#create-space-button', function() {
@@ -17,10 +15,8 @@ $(document).ready(function(){
   }
   
   var createRoomModal = document.getElementById("create-room");
-  var createRoomButton = document.getElementById("create-room-button");
-  var closeRoomModal = document.getElementById("close-create-room");
 
-  $(document).on('click', '#create-room-button', function() {
+  $(document).on('click', '.create-room-button', function() {
     createRoomModal.style.display = "block";
   });
   $(document).on('click', '#close-create-room', function() {

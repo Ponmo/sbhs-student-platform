@@ -267,7 +267,18 @@
     
     document.getElementById('create-room-form').onsubmit = function (e) {
       e.preventDefault();
-      
+      let room_name = document.getElementById('room-name').value.trim();
+      if (room_name.length) {
+        $.ajax({
+          type: 'POST',
+          url: '/create-room',
+          dataType: 'json',
+          data: JSON.stringify({'room_name': room_name}),
+          contentType: 'application/json;charset=UTF-8',
+          success: function(data) {
+          }
+        });
+      }
     }
     
     document.getElementById('create-space-form').onsubmit = function (e) {
@@ -354,6 +365,7 @@
             newNode.className = 'section';
             newNode.id = section['_id']['$oid'];
             newNode.textContent = section['name'];
+            newMode.innerHTML = '<div class="section-name">' + section['name'] + '</div><div class="create-room-button" type="button"> + </div>'
             document.getElementById('channels').append(newNode);
             rooms_and_sections[0].forEach(function(room) {
               if (room['section'] == section['_id']['$oid']) {
@@ -365,12 +377,6 @@
               }
             });
           });
-          newNode = document.createElement('div');
-          newNode.className = 'room';
-          newNode.id = 'create-room-button';
-          newNode.type = 'button';
-          newNode.textContent = 'Create Room';
-          document.getElementById('channels').append(newNode);
         }
       });
     });
