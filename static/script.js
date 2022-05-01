@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-  var closeSpaceModal = document.getElementById("close-create-space");
+  var createSpaceModal = document.getElementById("create-space");
 
   $(document).on('click', '#create-space-button', function() {
     createSpaceModal.style.display = "block";
