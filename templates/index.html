@@ -54,9 +54,9 @@
     <div id="create-space" class="modal">
       <div class="modal-content">
         <span id="close-create-space" class="close">&times;</span>
-        <form id="create-space-form" action="/createSpace" method="POST">
+        <form id="create-space-form">
           <label for="space-name">Space Name:</label><br>
-          <input type="text" id="space-name" name="spaceName"><br>
+          <input type="text" id="space-name"><br>
           <input type="submit" value="Submit">
         </form>
       </div>
@@ -353,7 +353,6 @@
             document.getElementById('channels').append(newNode);
             rooms_and_sections[0].forEach(function(room) {
               if (room['section'] == section['_id']['$oid']) {
-                alert('uahwx');
                 newNode = document.createElement('div');
                 newNode.className = 'room';
               	newNode.id = room['_id']['$oid'];
