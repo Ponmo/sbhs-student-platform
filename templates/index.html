@@ -82,6 +82,12 @@
     var timeout = null;
     var current_space = '';
     var typing_list = [];
+    var selected_section = '';
+    
+    $(document).on('click', '.section', function() {
+      selected_section = this.id;
+      alert(selected_section);
+    });
     
     function stoppedTyping() {
       typing = false;
@@ -273,7 +279,7 @@
           type: 'POST',
           url: '/create-room',
           dataType: 'json',
-          data: JSON.stringify({'room_name': room_name}),
+          data: JSON.stringify({'room_name': room_name, 'section_id': }),
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
           }
@@ -364,8 +370,7 @@
             newNode = document.createElement('div');
             newNode.className = 'section';
             newNode.id = section['_id']['$oid'];
-            //newNode.textContent = section['name'];
-            newNode.innerHTML = '<div class="section-name">' + section['name'] + '</div><div class="create-room-button" type="button"> + </div>'
+            newNode.innerHTML = '<div class="section-name">' + section['name'] + '</div><div class="create-room-button" type="button">+</div>'
             document.getElementById('channels').append(newNode);
             rooms_and_sections[0].forEach(function(room) {
               if (room['section'] == section['_id']['$oid']) {
