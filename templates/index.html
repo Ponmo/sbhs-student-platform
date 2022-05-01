@@ -389,23 +389,16 @@
     
 	$(document).on('click', '.room', function() {
 	  current_room = this.id;
-	  $.ajax({
-	    type: "POST",
-        url: '/room',
-        dataType: "json",
-        data: JSON.stringify({'room_id': current_room}), //JSOn.stringify
-        contentType: 'application/json;charset=UTF-8',
-        success: function(data) {
-          socket.emit('join_room', {
-            room: current_room
-          });
-          document.getElementById('messages').textContent = '';
-          chat_history_skip = 0;
-          loadChatHistory();
-          typing_display.textContent = '';
-          typing_list = [];
-          stoppedTyping();
-          clearTimeout(timeout);
+      socket.emit('join_room', {
+        room: current_room
+      });
+      document.getElementById('messages').textContent = '';
+      chat_history_skip = 0;
+      loadChatHistory();
+      typing_display.textContent = '';
+      typing_list = [];
+      stoppedTyping();
+      clearTimeout(timeout);
         }
 	  });
 	});
