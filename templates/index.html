@@ -328,7 +328,7 @@
           stoppedTyping();
           clearTimeout(timeout);
           rooms_and_sections[1].forEach(function(section) {
-            const newNode = document.createElement('div');
+            var newNode = document.createElement('div');
             newNode.className = 'section';
             newNode.id = section['_id']['$oid'];
             newNode.textContent = section['name'];
