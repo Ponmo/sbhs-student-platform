@@ -1,6 +1,6 @@
 @font-face {
 	font-family: 'uni-sans';
-	src: url('unisans.otf');
+	src: url('fonts/unisans.otf');
 }
 img { /* make images and create button undraggable and unhighlitable*/
   -webkit-user-drag: none;
