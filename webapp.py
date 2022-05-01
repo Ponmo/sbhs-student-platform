@@ -191,13 +191,22 @@ def list_spaces():
 	if request.method == 'POST':
 		spaces_list = dumps(list(collection_spaces.find()))
 		return Response(spaces_list, mimetype='application/json')
-	
 
 @app.route('/chat_history', methods=['GET', 'POST'])
 def chat_history():
     if request.method == 'POST': #get data for the room that user is currently in
         chat_history = dumps(list(collection_messages.find({'room': request.json['room']}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(100))) #LIMITs,
         return Response(chat_history, mimetype='application/json')
+
+@app.route('/create_room', methods=['GET', 'POST'])
+def create_room():
+	if request.method == 'POST':
+		room_id = ObjectId()
+		rooms_list = list(collection_rooms.find({'space': request.json['space_id'], 'section': request.json['section_id']}))
+		room = {'_id': room_id, 'space': request.json['space_id'], 'section': request.json['section_id'], 'name': request.json['room_name'], 'order': str(len(rooms_list) + 1)}
+		collection_rooms.insert_one(room)
+		room = dumps(room)
+		return Response(room, mimetype='application/json')
 
 @app.route('/create_space', methods=['GET', 'POST'])
 def create_space():

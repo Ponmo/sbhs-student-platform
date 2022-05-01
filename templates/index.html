@@ -279,9 +279,10 @@
           type: 'POST',
           url: '/create-room',
           dataType: 'json',
-          data: JSON.stringify({'room_name': room_name, 'section_id': 'd'}),
+          data: JSON.stringify({'room_name': room_name, 'section_id': selected_section, 'space_id': current_space}),
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
+            alert(JSON.stringify(data));
           }
         });
       }
