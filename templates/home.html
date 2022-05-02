@@ -38,4 +38,23 @@
       </div>
     </div>
   </body>
+  <script>
+  	let space_name_input = document.getElementById('space-name');
+  	document.getElementById('create-space-form').onsubmit = function (e) {
+        e.preventDefault();
+        let space_name = space_name_input.value.trim();
+        if (space_name.length) {
+          socket.emit('send_message', {
+            name: "{{ name }}",
+            room: "{{ room }}",
+            picture: "{{ picture }}",
+            message: space_name
+          });
+        }
+        message_input.value = '';
+        message_input.focus();
+        //last_message = message;
+      }
+    });
+  </script>
 </html>
