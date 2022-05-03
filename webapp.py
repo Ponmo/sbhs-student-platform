@@ -212,6 +212,7 @@ def create_room():
 def delete_room():
 	if request.method == 'POST':
 	    collection_rooms.delete_one({'_id': ObjectId(request.json['room_id'])})
+	    collection_messages.delete_many({'room': request.json['room_id']})
 	    return Response(dumps({'success': True}), mimetype='application/json')
 
 @app.route('/create_space', methods=['GET', 'POST'])
