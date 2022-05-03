@@ -333,7 +333,7 @@
           	newNode.innerHTML = 'general<img class="room-settings" src="/static/images/Space.jpeg">';
           	document.getElementById('channels').append(newNode);
             document.getElementById('channels').append(newNode);
-            $('#home').css('visibility', 'hidden');
+            $('#home-page').css('visibility', 'hidden');
             $('#first-all').css('visibility', 'visible');
           }
         });
@@ -342,7 +342,7 @@
 
     $(document).on('click', '.space', function() { //do not do anything if user already on clicked space
       if (current_space != this.id) {
-        $('#home').css('visibility', 'hidden');
+        $('#home-page').css('visibility', 'hidden');
         $('#first-all').css('visibility', 'visible');
         current_space = this.id;
         $.ajax({
@@ -388,7 +388,7 @@
     });
     
     $(document).on('click', '.home', function() {
-      $('#home').css('visibility', 'visible');
+      $('#home-page').css('visibility', 'visible');
       $('#first-all').css('visibility', 'hidden');
     });
     
