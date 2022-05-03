@@ -211,7 +211,7 @@ def create_room():
 @app.route('/delete_room', methods=['GET', 'POST'])
 def delete_room():
 	if request.method == 'POST':
-	    if collection_rooms.count_documents() != 1:
+	    if collection_rooms.count_documents({}) != 1:
 	      collection_rooms.delete_one({'_id': ObjectId(request.json['room_id'])})
 	      collection_messages.delete_many({'room': request.json['room_id']})
 	      return Response(dumps({'success': 'true'}), mimetype='application/json')
