@@ -12,6 +12,7 @@
     <title>Santa Barbara High School</title>
   </head>
   <body>
+  	<div id="home"></div>
     <div id="first-all">
       <div id="content">
         <div id="header">
@@ -332,6 +333,7 @@
           	newNode.textContent = 'general';
           	document.getElementById('channels').append(newNode);
             document.getElementById('channels').append(newNode);
+            $('#home').css('visibility', 'hidden');
             $('#first-all').css('visibility', 'visible');
           }
         });
@@ -339,52 +341,50 @@
     }
     
     $(document).on('click', '.space', function() { //do not do anything if user already on clicked space
-      //hide homepage div 
-      //show space div
-      //reset chat_history_skip
-      //set room = id of first room
-      //clear .messages div and call loadChatHistory (needs to be modified to take room id)
-      $('#first-all').css('visibility', 'visible');
-      current_space = this.id;
-      $.ajax({
-        type: "POST",
-        url: '/space',
-        dataType: "json",
-        data: JSON.stringify({'space_id': current_space}), //JSOn.stringify
-        contentType: 'application/json;charset=UTF-8',
-        success: function(rooms_and_sections) {
-          current_room = rooms_and_sections[0][0]['_id']['$oid'];
-          socket.emit('join_room', {
-            room: current_room
-          });
-          document.getElementById('messages').textContent = '';
-          document.getElementById('header_text').textContent = document.getElementById(rooms_and_sections[0][0]['space']).getAttribute('data-name');
-          chat_history_skip = 0;
-          loadChatHistory();
-          document.getElementById('channels').textContent = ''; 
-          typing_display.textContent = '';
-          typing_list = [];
-          stoppedTyping();
-          clearTimeout(timeout);
-          var newNode = null;
-          rooms_and_sections[1].forEach(function(section) {
-            newNode = document.createElement('div');
-            newNode.className = 'section';
-            newNode.id = section['_id']['$oid'];
-            newNode.innerHTML = '<div class="section-name">' + section['name'] + '</div><div class="create-room-button" type="button">+</div>'
-            document.getElementById('channels').append(newNode);
-            rooms_and_sections[0].forEach(function(room) {
-              if (room['section'] == section['_id']['$oid']) {
-                newNode = document.createElement('div');
-                newNode.className = 'room';
-              	newNode.id = room['_id']['$oid'];
-             	newNode.textContent = room['name'];
-             	document.getElementById('channels').append(newNode);
-              }
+      if (current space != this.id) {
+        $('#home').css('visibility', 'hidden');
+        $('#first-all').css('visibility', 'visible');
+        current_space = this.id;
+        $.ajax({
+          type: "POST",
+          url: '/space',
+          dataType: "json",
+          data: JSON.stringify({'space_id': current_space}), //JSOn.stringify
+          contentType: 'application/json;charset=UTF-8',
+          success: function(rooms_and_sections) {
+            current_room = rooms_and_sections[0][0]['_id']['$oid'];
+            socket.emit('join_room', {
+              room: current_room
             });
-          });
-        }
-      });
+            document.getElementById('messages').textContent = '';
+            document.getElementById('header_text').textContent = document.getElementById(rooms_and_sections[0][0]['space']).getAttribute('data-name');
+            chat_history_skip = 0;
+            loadChatHistory();
+            document.getElementById('channels').textContent = ''; 
+            typing_display.textContent = '';
+            typing_list = [];
+            stoppedTyping();
+            clearTimeout(timeout);
+            var newNode = null;
+            rooms_and_sections[1].forEach(function(section) {
+              newNode = document.createElement('div');
+              newNode.className = 'section';
+              newNode.id = section['_id']['$oid'];
+              newNode.innerHTML = '<div class="section-name">' + section['name'] + '</div><div class="create-room-button" type="button">+</div>'
+              document.getElementById('channels').append(newNode);
+              rooms_and_sections[0].forEach(function(room) {
+                if (room['section'] == section['_id']['$oid']) {
+                  newNode = document.createElement('div');
+                  newNode.className = 'room';
+              	  newNode.id = room['_id']['$oid'];
+             	  newNode.textContent = room['name'];
+               	  document.getElementById('channels').append(newNode);
+                }
+              });
+            });
+          }
+        });
+      }
     });
     
 	$(document).on('click', '.room', function() {
