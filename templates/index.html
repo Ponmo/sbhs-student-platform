@@ -287,7 +287,7 @@
             const newNode = document.createElement('div');
             newNode.id = room['_id']['$oid'];
             newNode.className = 'room';
-            newNode.textContent = room_name;
+            newNode.innerHTML = room_name + '<img class="room-settings" src="/static/images/Space.jpeg">';
             document.getElementById('channels').append(newNode);
           }
         });
@@ -330,7 +330,7 @@
             newNode = document.createElement('div');
           	newNode.className = 'room';
           	newNode.id = current_room;
-          	newNode.textContent = 'general';
+          	newNode.innerHTML = 'general<img class="room-settings" src="/static/images/Space.jpeg">';
           	document.getElementById('channels').append(newNode);
             document.getElementById('channels').append(newNode);
             $('#home').css('visibility', 'hidden');
@@ -377,7 +377,7 @@
                   newNode = document.createElement('div');
                   newNode.className = 'room';
               	  newNode.id = room['_id']['$oid'];
-             	  newNode.textContent = room['name'];
+              	  newNode.innerHTML = room['name'] + '<img class="room-settings" src="/static/images/Space.jpeg">';
                	  document.getElementById('channels').append(newNode);
                 }
               });
