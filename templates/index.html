@@ -225,12 +225,6 @@
       }
     }
     
-    socket.on('join_room_announcement', function (data) {
-      const newMode = document.createElement('div');
-      newMode.innerHTML = data.username + ' has joined';
-      document.getElementById('messages').prepend(newMode);
-    });
-    
     function loadChatHistory() {
       $.ajax({
         type: 'POST',
@@ -387,7 +381,7 @@
       }
     });
     
-    $(document).on('click', '.home', function() {
+    $(document).on('click', '#home', function() {
       $('#home-page').css('visibility', 'visible');
       $('#first-all').css('visibility', 'hidden');
     });
@@ -405,6 +399,9 @@
       stoppedTyping();
 	});
 	
+	$(document).on('click', '#close-create-room', function() {
+      createRoomModal.style.display = "none";
+    });
 
   </script>
 </html>
