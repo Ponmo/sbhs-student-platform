@@ -41,6 +41,16 @@ img { /* make images and create button undraggable and unhighlitable*/
   grid-column: 2 / 4;
   grid-row: 1;
   background-color: hotpink;
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+}
+#home {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 12px;
 }
 #channels {
   grid-column: 1;
@@ -87,7 +97,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   padding-top: 4px;
   padding-right: 51px;
   padding-left: 20px;
-  font-size: 14px;
+  padding-bottom: 14px; /*wefghnrfedfr*/
   margin-bottom: 20px;
   margin-top: -10px;
 }
@@ -101,7 +111,6 @@ img { /* make images and create button undraggable and unhighlitable*/
   grid-column: 2;
   grid-row: 1;
   margin-bottom: 0px;
-  
 }
 .datetime {
   font-size: 10px;
@@ -110,7 +119,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   opacity: 0.9;
 }
 .message {
-  margin-bottom: 2px;
+  margin-bottom: 0px;
   padding: 0;
   margin-left: 50px;
   overflow-wrap: break-word;
@@ -132,12 +141,11 @@ img { /* make images and create button undraggable and unhighlitable*/
   color: #d7d9da;
   grid-template-columns: 50px auto;
   grid-auto-rows: minmax(min-content);
-  padding-top: 0px;
   padding-right: 51px;
   padding-left: 20px;
   margin-top: -20px;
   margin-bottom: 20px;
-  font-size: 14px;
+  
 }
 .message-container-combine:hover {
   background-color: #32353a;
@@ -218,12 +226,14 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 #footer {
   position: fixed;
+  display: flex;
+  align-items: center;
   bottom: 0;
   width: 100%;
   height: 50px;
-  background-color: white;
+  background-color: hotpink;
   overflow: hidden;
-  background: linear-gradient(225deg, transparent 20px, white 20px);
+  background: linear-gradient(225deg, hotpink 20px, hotpink 20px);
 }
 
 
@@ -231,15 +241,14 @@ img { /* make images and create button undraggable and unhighlitable*/
   display: inline-block;
   width: 220px;
   height: 46px;
-  margin-left: 50px;
-  margin-top: 2px;
+  margin-left: 2px;
   border-radius: 2px;
   background-color: hotpink;
   overflow: hidden;
 }
 #profile_picture {
   display: inline-block;
-  margin-left: 9px;
+  margin-left: 12px;
   margin-top: -1px;
   width: 39px;
   height: 39px;
@@ -266,7 +275,6 @@ img { /* make images and create button undraggable and unhighlitable*/
   height: 50px;
   border-radius: 2px;
   overflow: hidden;
-  vertical-align: top;
 }
 #space_align_helper {
   display: inline-block;
