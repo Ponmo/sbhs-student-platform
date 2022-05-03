@@ -52,6 +52,13 @@ img { /* make images and create button undraggable and unhighlitable*/
   border-radius: 50%;
   margin-right: 12px;
 }
+#room-settings {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
 #channels {
   grid-column: 1;
   grid-row: 2;
