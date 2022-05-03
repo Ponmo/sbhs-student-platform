@@ -208,6 +208,12 @@ def create_room():
 		room = dumps(room)
 		return Response(room, mimetype='application/json')
 
+@app.route('/delete_room', methods=['GET', 'POST'])
+def delete_room():
+	if request.method == 'POST':
+	    collection_rooms.delete_one({'_id': ObjectId(request.json['room_id'])})
+	    return Response(dumps({'success': True}), mimetype='application/json')
+
 @app.route('/create_space', methods=['GET', 'POST'])
 def create_space():
 	if request.method == 'POST':
