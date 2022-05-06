@@ -387,16 +387,7 @@
     });
     
 	$(document).on('click', '.room', function() {
-	  current_room = this.id;
-      socket.emit('join_room', {
-        room: current_room
-      });
-      document.getElementById('messages').textContent = '';
-      chat_history_skip = 0;
-      loadChatHistory();
-      typing_display.textContent = '';
-      typing_list = [];
-      stoppedTyping();
+	  joinRoom(this.id);
 	});
 	
 	$(document).on('click', '.room-settings', function() {
@@ -409,8 +400,8 @@
         contentType: 'application/json;charset=UTF-8',
         success: function(data) {
           if (data['success'] == 'true') {
-            alert('Successfully deleted room');
-            alert($('#channels').find('.room')[0].id);
+            joinRoom($('#channels').find('.room')[0].id);
+            this.remove();
           }
           else {
             alert('Spaces must have at least one room');
@@ -421,6 +412,18 @@
         }
       });
     });
-
+    
+	function joinRoom(room_id) {
+	  current_room = room_id;
+	  socket.emit('join_room', {
+        room: current_room
+      });
+      document.getElementById('messages').textContent = '';
+      chat_history_skip = 0;
+      loadChatHistory();
+      typing_display.textContent = '';
+      typing_list = [];
+      stoppedTyping();
+	}
   </script>
 </html>
