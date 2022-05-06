@@ -400,21 +400,24 @@
 	});
 	
 	$(document).on('click', '.room-settings', function() {
-      const room_id = $(this).parent().attr('id');
-      
+      const deleted_room = $(this).parent().attr('id');
       $.ajax({
         type: "POST",
         url: '/delete_room',
         dataType: "json",
-        data: JSON.stringify({'room_id': room_id, 'space_id': current_space}),
+        data: JSON.stringify({'room_id': deleted_room, 'space_id': current_space}),
         contentType: 'application/json;charset=UTF-8',
         success: function(data) {
           if (data['success'] == 'true') {
             alert('Successfully deleted room');
+            alert($('#channels').find('.room')[0].id;);
           }
           else {
             alert('Spaces must have at least one room');
           }
+          //socket.emit('deleted_room', {
+          //	room: deleted_room
+          //});
         }
       });
     });
