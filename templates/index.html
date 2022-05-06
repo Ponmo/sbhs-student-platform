@@ -401,7 +401,7 @@
         success: function(data) {
           if (data['success'] == 'true') {
             joinRoom($('#channels').find('.room')[0].id);
-            $(this).remove();
+            $(document.getElementById(deleted_room)).remove();
             //make websocket call to delete the room for every user in any room in space.
           }
           else {
