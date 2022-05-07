@@ -180,8 +180,8 @@ def send_message(data):
     socketio.emit('recieve_message', data, room = data['room'])
     
 @socketio.on('deleted_room')
-def deleted_message(data):
-	socketio.emit('move_room', data, room = data['room'])
+def deleted_message():
+	socketio.emit('move_room', room = data['room'])
 	#data is unnecessary
 
 @app.route('/sbhs')
