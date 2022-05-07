@@ -396,11 +396,17 @@
       $('#first-all').css('display', 'none');
     });
     
-	$(document).on('click', '.room', function() {
-	  joinRoom(this.id);
+	$(document).on('click', '.room', function(e) {
+	  alert(e.target.className);
+	  if (e.target.className == 'room-settings') {
+	    alert('room settings yeahhhh');
+	  }
+	  else {
+	    joinRoom(this.id);
+	  }
 	});
 	
-	$(document).on('click', '.room-settings', function() {
+	/*$(document).on('click', '.room-settings', function() {
       const deleted_room = $(this).parent().attr('id');
       $.ajax({
         type: "POST",
@@ -422,7 +428,7 @@
           //});
         }
       });
-    });
+    });*/
     
 	function joinRoom(room_id) {
 	  current_room = room_id;
