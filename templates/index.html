@@ -211,9 +211,9 @@
       }
     });
     
-    socket.on('move_room', function() {
-      $(document.getElementById(current_room)).remove();
+    socket.on('move_room', function(data) {
       joinRoom($('#channels').find('.room')[0].id);
+      $(document.getElementById(data.room)).remove();
     });
     
     let typing_display = document.getElementById('typing_display');
@@ -410,7 +410,11 @@
         contentType: 'application/json;charset=UTF-8',
         success: function(data) {
           if (data['success'] == 'true') {
-            socket.emit('deleted_room');
+            socket.emit('deleted_room', {
+              room: deleted_room
+            });
+            joinRoom($('#channels').find('.room')[0].id);
+            //$(document.getElementById(deleted_room)).remove();
             //make websocket call to delete the room for every user in any room in space.
           }
           else {
