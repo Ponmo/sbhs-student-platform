@@ -360,6 +360,7 @@
             socket.emit('join_room', {
               room: current_room
             });
+             $('#' + current_room).css('background-color', '#43474d !important');
             document.getElementById('messages').textContent = '';
             document.getElementById('header_text').textContent = document.getElementById(rooms_and_sections[0][0]['space']).getAttribute('data-name');
             chat_history_skip = 0;

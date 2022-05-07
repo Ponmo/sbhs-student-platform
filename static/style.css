@@ -52,13 +52,6 @@ img { /* make images and create button undraggable and unhighlitable*/
   border-radius: 50%;
   margin-right: 12px;
 }
-.room-settings {
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  margin-right: 12px;
-}
 #channels {
   grid-column: 1;
   grid-row: 2;
@@ -69,7 +62,6 @@ img { /* make images and create button undraggable and unhighlitable*/
   width: 254px;
   height: 32px;
   border-radius: 4px;
-  background-color: #43474d;
   color: #ffffff;
   margin-left: 8px;
   line-height: 32px;
@@ -79,8 +71,19 @@ img { /* make images and create button undraggable and unhighlitable*/
 .room:hover {
   background-color: #3c3f45;
 }
+.room .room-settings {
+  visibility: hidden;
+}
+.room:hover .room-settings {
+  visibility: visible;
+}
 .room-settings {
-  z-index: 1;
+  float: right;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin-right: 14px;
+  margin-top: 9px;
 }
 #chats {
   display: flex;
