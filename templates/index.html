@@ -413,9 +413,6 @@
             socket.emit('deleted_room', {
               room: deleted_room
             });
-            joinRoom($('#channels').find('.room')[0].id);
-            //$(document.getElementById(deleted_room)).remove();
-            //make websocket call to delete the room for every user in any room in space.
           }
           else {
             alert('Spaces must have at least one room');

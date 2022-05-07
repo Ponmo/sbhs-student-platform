@@ -79,6 +79,9 @@ img { /* make images and create button undraggable and unhighlitable*/
 .room:hover {
   background-color: #3c3f45;
 }
+.room-settings {
+  z-index: 1;
+}
 #chats {
   display: flex;
   flex-direction: column;
