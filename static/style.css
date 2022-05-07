@@ -11,7 +11,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   user-select: none;
 } 
 #first-all {
-  visibility: hidden;
+  display: none;
   overflow: hidden;
 }
 #content { /* make calc good on all browsers ; Make margin and padding 0 because of broswer differences ; make no horizontal scroll at small screen sizes*/

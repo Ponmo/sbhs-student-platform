@@ -12,7 +12,9 @@
     <title>Santa Barbara High School</title>
   </head>
   <body>
-  	<div id="home-page"></div>
+  	<div id="home-page">
+  	  <h1>Santa Barbara High School Platform</h1>
+  	</div>
     <div id="first-all">
       <div id="content">
         <div id="header">
@@ -86,6 +88,9 @@
     var typing_list = [];
     var selected_section = '';
     
+    // list of messages being typed by user containing message (updated when user clicks on space or another room) and room id.
+    // ['2hu45iu2323', 'Hi I love apples and cakes they are cool', '34yubjub42', 'I love appels']
+    // Loop through this and check if joined room id is equal to any of these. If so, get index of that ID add one and make the message that message. Yep okay easy peasy lemon SQUEEEEZY.
     $(document).on('click', '.section', function() {
       selected_section = this.id;
     });
@@ -327,8 +332,8 @@
           	newNode.innerHTML = 'general<img class="room-settings" src="/static/images/Space.jpeg">';
           	document.getElementById('channels').append(newNode);
             document.getElementById('channels').append(newNode);
-            $('#home-page').css('visibility', 'hidden');
-            $('#first-all').css('visibility', 'visible');
+            $('#home-page').css('display', 'none');
+            $('#first-all').css('display', 'block');
           }
         });
       }
@@ -336,8 +341,8 @@
 
     $(document).on('click', '.space', function() { //do not do anything if user already on clicked space
       if (current_space != this.id) {
-        $('#home-page').css('visibility', 'hidden');
-        $('#first-all').css('visibility', 'visible');
+        $('#home-page').css('display', 'none');
+        $('#first-all').css('display', 'block');
         current_space = this.id;
         $.ajax({
           type: "POST",
@@ -382,8 +387,8 @@
     });
     
     $(document).on('click', '#home', function() {
-      $('#home-page').css('visibility', 'visible');
-      $('#first-all').css('visibility', 'hidden');
+      $('#home-page').css('display', 'block');
+      $('#first-all').css('display', 'none');
     });
     
 	$(document).on('click', '.room', function() {
@@ -400,8 +405,11 @@
         contentType: 'application/json;charset=UTF-8',
         success: function(data) {
           if (data['success'] == 'true') {
+            socket.emit('deleted_room', {
+              room: deleted_room
+            });
             joinRoom($('#channels').find('.room')[0].id);
-            $(document.getElementById(deleted_room)).remove();
+            //$(document.getElementById(deleted_room)).remove();
             //make websocket call to delete the room for every user in any room in space.
           }
           else {

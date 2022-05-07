@@ -179,6 +179,11 @@ def send_message(data):
     collection_messages.insert_one({'name': data['name'], 'picture': session['picture'], 'room': data['room'], 'datetime': utc_dt, 'message': data['message'], 'combine': data['combine']})
     socketio.emit('recieve_message', data, room = data['room'])
     
+@socketio.on('deleted_room')
+def deleted_message(data):
+	socketio.emit('move_room', data, room = data['room'])
+	#data is unnecessary
+
 @app.route('/sbhs')
 def render_main_page():
     #when creating the list of all the spaces, make sure they all have their own unique IDs stored
