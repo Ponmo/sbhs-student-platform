@@ -1,3 +1,5 @@
+#ROOM CREATION SocketIO
+#DELETE ROOM REARRANGES ROOM ORDER
 from flask_socketio import SocketIO, emit, join_room, leave_room
 
 import json
@@ -182,6 +184,11 @@ def send_message(data):
     collection_messages.insert_one({'name': data['name'], 'picture': session['picture'], 'room': data['room'], 'datetime': utc_dt, 'message': data['message'], 'combine': data['combine']})
     socketio.emit('recieve_message', data, room = data['room'])
     
+@socketio.on('created_room')
+def created_room(data):
+    for room in data['room_list']: #plug list
+    	socketio.emit('created_room', data, room = room)
+
 @socketio.on('deleted_room')
 def deleted_message(data):
     for room in data['room_list']:

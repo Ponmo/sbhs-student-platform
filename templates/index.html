@@ -291,6 +291,14 @@
           data: JSON.stringify({'room_name': room_name, 'section_id': selected_section, 'space_id': current_space}),
           contentType: 'application/json;charset=UTF-8',
           success: function(room) {
+            var room_list = []
+          	document.querySelectorAll(".room").forEach(function(item) {
+          	  room_list.push(item.id);
+          	});
+            socket.emit('created_room', {
+              room_list = room_list,
+              created_room = room['_id']['$oid']
+            });
             document.getElementById("create-room").style.display = "none";
             const newNode = document.createElement('div');
             newNode.id = room['_id']['$oid'];
@@ -301,6 +309,14 @@
         });
       }
     }
+    
+    socket.on('created_room', function(data) {
+      const newNode = document.createElement('div');
+      newNode.id = data.created_room;
+      newNode.className = 'room';
+      newNode.innerHTML = room_name + '<img class="room-settings" src="/static/images/Space.jpeg">';
+      document.getElementById('channels').append(newNode);
+    });
     
     document.getElementById('create-space-form').onsubmit = function (e) {
       e.preventDefault();
@@ -400,8 +416,8 @@
         	success: function(data) {
           	if (data['success'] == 'true') {
           	  var room_list = []
-          	  document.querySelectorAll(".room").forEach(function(room) {
-          	    room_list.push(room.id);
+          	  document.querySelectorAll(".room").forEach(function(item) {
+          	    room_list.push(item.id);
           	  });
               socket.emit('deleted_room', {
                 room: deleted_room,
