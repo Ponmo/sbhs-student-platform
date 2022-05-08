@@ -56,6 +56,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   grid-column: 1;
   grid-row: 2;
   border-top: 1px solid #2b2d32; /* remove once double border */
+  border-top: 1px solid #2b2d32; 
   background-color: #2f3136;
 }
 .room {
@@ -63,6 +64,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   height: 32px;
   border-radius: 4px;
   color: #ffffff;
+  background-color: #43474d;
   margin-left: 8px;
   line-height: 32px;
   padding-left: 24px;
@@ -110,7 +112,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   padding-top: 4px;
   padding-right: 51px;
   padding-left: 20px;
-  padding-bottom: 2px; /*wefghnrfedfr*/
+  padding-bottom: 2px; 
   margin-bottom: 20px;
   margin-top: -10px;
 }
@@ -239,49 +241,72 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 #footer {
   position: fixed;
+  border-top: 1px solid #232428;
   display: flex;
   align-items: center;
   bottom: 0;
   width: 100%;
   height: 50px;
-  background-color: hotpink;
+  background-color: #282a2e;
   overflow: hidden;
-  background: linear-gradient(225deg, hotpink 20px, hotpink 20px);
+  background: linear-gradient(225deg, #282a2e 20px, #282a2e 20px);
 }
 
 
 #profile {
-  display: inline-block;
-  width: 220px;
+  display: grid;
+  align-items: center;
+  grid-template-rows: minmax(min-content, max-content);
+  grid-template-columns: 2px auto 30px;
+  min-width: 270px;
+  padding-left: 20px;
+  
+/* 
   height: 46px;
   margin-left: 2px;
   border-radius: 2px;
   background-color: hotpink;
   overflow: hidden;
+ */
 }
 #profile_picture {
-  display: inline-block;
-  margin-left: 12px;
-  margin-top: -1px;
-  width: 39px;
-  height: 39px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
+  grid-column: 1;
+  grid-row: 1/3;
 }
 #username {
-  display: inline-block;
-  margin-left: 2px;
-  line-height: 48px;
-  margin-top: -1px;
+  color: #ffffff;
+  font-weight: bold;
+  margin-left: 50px;
+  white-space: nowrap;
+  overflow: hidden;
+  grid-column: 2;
+  grid-row: 1;
+  margin-bottom: 0px;
+}
+#student_id {
+  color: #d7d9da;
+  font-size: 12px;
+  margin-bottom: 0px;
+  white-space: nowrap;
+  word-break: keep-all;
+  padding: 0;
+  margin-left: 50px;
+  overflow: hidden;
+  grid-column: 2;
+  grid-row: 2;
 }
 #settings {
-  display: inline-block;
-  margin-left: 44px;
-  margin-top: -1px;
+  color: #d7d9da;
+  grid-column: 3;
+  grid-row: 1/3;
+  margin-bottom: 0px;
 }
 /* add a min width and responsive thing to spaces */
 /* Some math is needed for the width responsiveness; take 1 - percentage of the profile pixels*/
 #spaces {/* arrow key rolling between each space shown below */
-  display: inline-block;
   width: 68%;
   min-width: 200px;
   margin-left: 20px;
