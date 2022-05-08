@@ -415,7 +415,7 @@
           	    room_list.push(room.id);
           	  });
               socket.emit('deleted_room', {
-                room: deleted_room
+                room: deleted_room,
                 room_list: room_list
               });
             }
