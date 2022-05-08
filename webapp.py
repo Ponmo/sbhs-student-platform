@@ -181,7 +181,9 @@ def send_message(data):
     
 @socketio.on('deleted_room')
 def deleted_message(data):
-	socketio.emit('deleted_room', data, room = data['room'])
+    for room in data['room_list']:
+    	socketio.emit('deleted_room', data, room = room)
+	#socketio.emit('deleted_room', data, room = data['room'])
 
 @app.route('/sbhs')
 def render_main_page():

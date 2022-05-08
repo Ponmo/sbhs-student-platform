@@ -212,7 +212,9 @@
     });
     
     socket.on('deleted_room', function(data) {
-      joinRoom($('#channels').find('.room')[0].id);
+      if (data.room == current_room) {
+        joinRoom($('#channels').find('.room')[0].id);
+      }
       $(document.getElementById(data.room)).remove();
     });
     
@@ -398,7 +400,6 @@
     });
     
 	$(document).on('click', '.room', function(e) {
-	  alert(e.target.className);
 	  if (e.target.className == 'room-settings') {
 	    const deleted_room = $(this).attr('id');
           $.ajax({
@@ -409,8 +410,13 @@
         	contentType: 'application/json;charset=UTF-8',
         	success: function(data) {
           	if (data['success'] == 'true') {
+          	  var room_list = []
+          	  document.querySelectorAll(".room").forEach(function(room) {
+          	    room_list.push(room.id);
+          	  });
               socket.emit('deleted_room', {
                 room: deleted_room
+                room_list: room_list
               });
             }
             else {
