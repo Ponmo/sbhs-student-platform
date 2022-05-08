@@ -147,10 +147,10 @@ def logout():
 
 @socketio.on('join_room')
 def change_room(data):
-    try: 
-    	leave_room(data['old_room'])
-    except:
-    	pass
+    #try: 
+    #	leave_room(data['old_room'])
+    #except:
+    #	pass
     join_room(data['room'])
     #socketio.emit('join_room_announcement', data, room = data['room'])
     
