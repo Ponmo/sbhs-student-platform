@@ -146,9 +146,11 @@ def logout():
     return redirect(url_for('render_login'))
 
 @socketio.on('join_room')
-def join_room(data):
-    for room in flask_socketio.rooms:
-    	leave_room(room)
+def change_room(data):
+    try: 
+    	leave_room(data['old_room'])
+    except:
+    	pass
     join_room(data['room'])
     #socketio.emit('join_room_announcement', data, room = data['room'])
     

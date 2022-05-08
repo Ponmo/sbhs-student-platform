@@ -83,6 +83,7 @@
     var socket = io();
     var chat_history_skip = 0;
     var current_room = '';
+    var old_room = '';
     var typing = false;
     var timeout = null;
     var current_space = '';
@@ -315,9 +316,11 @@
           success: function(room_and_section) {
             document.getElementById("create-space").style.display = "none";
           	current_space = room_and_section[0][0]['space'];
+          	old_room = current_room;
           	current_room = room_and_section[0][0]['_id']['$oid'];
           	socket.emit('join_room', {
-              room: current_room
+              room: current_room,
+              old_room: old_room
             });
             document.getElementById('messages').textContent = '';
             document.getElementById('channels').textContent = ''; 
@@ -360,9 +363,11 @@
           data: JSON.stringify({'space_id': current_space}), //JSOn.stringify
           contentType: 'application/json;charset=UTF-8',
           success: function(rooms_and_sections) {
+            old_room = current_room;
             current_room = rooms_and_sections[0][0]['_id']['$oid'];
             socket.emit('join_room', {
-              room: current_room
+              room: current_room,
+              old_room: old_room
             });
             $('#' + current_room).css('background-color', '#43474d !important');
             document.getElementById('messages').textContent = '';
@@ -433,9 +438,11 @@
 	});
     
 	function joinRoom(room_id) {
+	  old_room = current_room
 	  current_room = room_id;
 	  socket.emit('join_room', {
-        room: current_room
+        room: current_room,
+        old_room: old_room
       });
       $('#' + current_room).css('background-color', '#43474d !important');
       document.getElementById('messages').textContent = '';
