@@ -400,7 +400,7 @@
 	$(document).on('click', '.room', function(e) {
 	  alert(e.target.className);
 	  if (e.target.className == 'room-settings') {
-	    const deleted_room = $(this).parent().attr('id');
+	    const deleted_room = $(this).attr('id');
           $.ajax({
             type: "POST",
             url: '/delete_room',
