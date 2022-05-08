@@ -178,7 +178,6 @@
       }
       message_input.value = '';
       message_input.focus();
-      //last_message = message;
     }
 
     socket.on('recieve_message', function (data) {
@@ -316,16 +315,10 @@
           success: function(room_and_section) {
             document.getElementById("create-space").style.display = "none";
           	current_space = room_and_section[0][0]['space'];
-          	old_room = current_room;
-          	current_room = room_and_section[0][0]['_id']['$oid'];
-          	socket.emit('join_room', {
-              room: current_room,
-              old_room: old_room
-            });
+            joinRoom(room_and_section[0][0]['_id']['$oid']);
             document.getElementById('messages').textContent = '';
             document.getElementById('channels').textContent = ''; 
             document.getElementById('header_text').textContent = space_name; 
-            chat_history_skip = 0;
             var newNode = document.createElement('img');
             newNode.className = 'space';
             newNode.id = current_space;
@@ -346,6 +339,7 @@
             document.getElementById('channels').append(newNode);
             $('#home-page').css('display', 'none');
             $('#first-all').css('display', 'block');
+            joinRoom(room_and_section[0][0]['_id']['$oid']);
           }
         });
       }
@@ -363,22 +357,9 @@
           data: JSON.stringify({'space_id': current_space}), //JSOn.stringify
           contentType: 'application/json;charset=UTF-8',
           success: function(rooms_and_sections) {
-            old_room = current_room;
-            current_room = rooms_and_sections[0][0]['_id']['$oid'];
-            socket.emit('join_room', {
-              room: current_room,
-              old_room: old_room
-            });
-            $('#' + current_room).css('background-color', '#43474d !important');
             document.getElementById('messages').textContent = '';
             document.getElementById('header_text').textContent = document.getElementById(rooms_and_sections[0][0]['space']).getAttribute('data-name');
-            chat_history_skip = 0;
-            loadChatHistory();
             document.getElementById('channels').textContent = ''; 
-            typing_display.textContent = '';
-            typing_list = [];
-            stoppedTyping();
-            clearTimeout(timeout);
             var newNode = null;
             rooms_and_sections[1].forEach(function(section) {
               newNode = document.createElement('div');
@@ -396,6 +377,7 @@
                 }
               });
             });
+            joinRoom(rooms_and_sections[0][0]['_id']['$oid']);
           }
         });
       }

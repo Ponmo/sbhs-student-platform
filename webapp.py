@@ -152,7 +152,6 @@ def change_room(data):
     except:
     	pass
     join_room(data['room'])
-    #socketio.emit('join_room_announcement', data, room = data['room'])
     
 @socketio.on('leave_room')
 def leave(data):
