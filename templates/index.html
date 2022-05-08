@@ -296,8 +296,8 @@
           	  room_list.push(item.id);
           	});
             socket.emit('created_room', {
-              created_room = room['_id']['$oid'],
-              room_list = room_list
+              created_room: room['_id']['$oid'],
+              room_list: room_list
             });
             document.getElementById("create-room").style.display = "none";
             const newNode = document.createElement('div');
