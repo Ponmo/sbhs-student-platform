@@ -147,6 +147,8 @@ def logout():
 
 @socketio.on('join_room')
 def join(data):
+    for room in flask_socketio.rooms:
+    	leave_room(room)
     join_room(data['room'])
     #socketio.emit('join_room_announcement', data, room = data['room'])
     
