@@ -211,7 +211,7 @@
       }
     });
     
-    socket.on('move_room', function(data) {
+    socket.on('deleted_room', function(data) {
       joinRoom($('#channels').find('.room')[0].id);
       $(document.getElementById(data.room)).remove();
     });
@@ -360,7 +360,7 @@
             socket.emit('join_room', {
               room: current_room
             });
-             $('#' + current_room).css('background-color', '#43474d !important');
+            $('#' + current_room).css('background-color', '#43474d !important');
             document.getElementById('messages').textContent = '';
             document.getElementById('header_text').textContent = document.getElementById(rooms_and_sections[0][0]['space']).getAttribute('data-name');
             chat_history_skip = 0;
@@ -400,7 +400,24 @@
 	$(document).on('click', '.room', function(e) {
 	  alert(e.target.className);
 	  if (e.target.className == 'room-settings') {
-	    alert('room settings yeahhhh');
+	    const deleted_room = $(this).parent().attr('id');
+          $.ajax({
+            type: "POST",
+            url: '/delete_room',
+        	dataType: "json",
+        	data: JSON.stringify({'room_id': deleted_room, 'space_id': current_space}),
+        	contentType: 'application/json;charset=UTF-8',
+        	success: function(data) {
+          	if (data['success'] == 'true') {
+              socket.emit('deleted_room', {
+                room: deleted_room
+              });
+            }
+            else {
+              alert('Spaces must have at least one room');
+            }
+          }
+        });
 	  }
 	  else {
 	    joinRoom(this.id);
@@ -436,6 +453,7 @@
 	  socket.emit('join_room', {
         room: current_room
       });
+      $('#' + current_room).css('background-color', '#43474d !important');
       document.getElementById('messages').textContent = '';
       chat_history_skip = 0;
       loadChatHistory();
