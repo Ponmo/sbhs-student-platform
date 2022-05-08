@@ -223,6 +223,7 @@ def delete_room():
 	      return Response(dumps({'success': 'true'}), mimetype='application/json')
 	    else:
 	      return Response(dumps({'success': 'false'}), mimetype='application/json')
+	#rearrange room order
 
 @app.route('/create_space', methods=['GET', 'POST'])
 def create_space():
