@@ -409,7 +409,7 @@
             type: "POST",
             url: '/delete_room',
         	dataType: "json",
-        	data: JSON.stringify({'room_id': deleted_room, 'space_id': current_space, 'section': deleted_room_section}),
+        	data: JSON.stringify({'room_id': deleted_room, 'space_id': current_space, 'section_id': deleted_room_section}),
         	contentType: 'application/json;charset=UTF-8',
         	success: function(data) {
           	if (data['success'] == 'true') {

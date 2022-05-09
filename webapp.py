@@ -229,7 +229,7 @@ def delete_room():
 		if room_count > 1:
 			collection_rooms.delete_one({'_id': ObjectId(request.json['room_id'])})
 			collection_messages.delete_many({'room': request.json['room_id']})
-			cursor = collection_rooms.find({'section': request.json['section']}).sort('order', 1)
+			cursor = collection_rooms.find({'section': request.json['section_id']}).sort('order', 1)
 			order = 1
 			for document in cursor:
 				collection_rooms.update_one({'_id': document['_id']}, {'$set': {'order': order}})
