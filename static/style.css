@@ -37,6 +37,14 @@ img { /* make images and create button undraggable and unhighlitable*/
   font-weight: bold;
   color: #ffffff;
 }
+.space-settings {
+  float: right;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin-right: 14px;
+  margin-top: 9px;
+}
 #information {
   grid-column: 2 / 4;
   grid-row: 1;
