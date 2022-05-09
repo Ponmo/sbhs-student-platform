@@ -217,7 +217,7 @@ def create_room():
 	if request.method == 'POST':
 		room_id = ObjectId()
 		rooms_list = list(collection_rooms.find({'space': request.json['space_id'], 'section': request.json['section_id']}))
-		room = {'_id': room_id, 'space': request.json['space_id'], 'section': request.json['section_id'], 'name': request.json['room_name'], 'order': str(len(rooms_list) + 1)}
+		room = {'_id': room_id, 'space': request.json['space_id'], 'section': request.json['section_id'], 'name': request.json['room_name'], 'order': len(rooms_list) + 1)}
 		collection_rooms.insert_one(room)
 		room = dumps(room)
 		return Response(room, mimetype='application/json')
@@ -229,9 +229,11 @@ def delete_room():
 		if room_count > 1:
 			collection_rooms.delete_one({'_id': ObjectId(request.json['room_id'])})
 			collection_messages.delete_many({'room': request.json['room_id']})
-			cursor = collection_rooms.find({'space': request.json['space_id']}).sort('order', 1)
+			cursor = collection_rooms.find({'section': request.json['section']}).sort('order', 1)
+			order = 1
 			for document in cursor:
-				collection_rooms.update_one({'_id': ObjectId(request.json['room_id'])})
+				collection_rooms.update_one({'_id': document['_id']}, {'$set': {'order': order}})
+				order += 1
 			return Response(dumps({'success': 'true'}), mimetype='application/json')
 		else:
 			return Response(dumps({'success': 'false'}), mimetype='application/json')
@@ -243,8 +245,8 @@ def create_space():
 		space_id = ObjectId()
 		room_id = ObjectId()
 		section_id = ObjectId()
-		room = {'_id': room_id, 'space': str(space_id), 'section': str(section_id), 'name': 'general', 'order': '1'}
-		section = {'_id': section_id, 'space': str(space_id), 'name': 'discussion', 'order': '1'}
+		room = {'_id': room_id, 'space': str(space_id), 'section': str(section_id), 'name': 'general', 'order': 1}
+		section = {'_id': section_id, 'space': str(space_id), 'name': 'discussion', 'order': 1}
 		collection_spaces.insert_one({'_id': space_id, 'name': request.json['space_name']})
 		collection_rooms.insert_one(room)
 		collection_sections.insert_one(section)

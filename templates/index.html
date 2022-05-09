@@ -404,6 +404,7 @@
 	$(document).on('click', '.room', function(e) {
 	  if (e.target.className == 'room-settings') {
 	    const deleted_room = $(this).attr('id');
+	    const deleted_room_section = $(this).attr('data-section');
           $.ajax({
             type: "POST",
             url: '/delete_room',
@@ -418,6 +419,7 @@
           	  });
               socket.emit('deleted_room', {
                 room: deleted_room,
+                section: deleted_room_section,
                 room_list: room_list
               });
             }
