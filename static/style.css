@@ -37,7 +37,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   font-weight: bold;
   color: #ffffff;
 }
-.space-settings {
+#space-settings {
   float: right;
   width: 14px;
   height: 14px;
