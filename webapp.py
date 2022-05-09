@@ -230,11 +230,11 @@ def delete_room():
 			collection_rooms.delete_one({'_id': ObjectId(request.json['room_id'])})
 			collection_messages.delete_many({'room': request.json['room_id']})
 			cursor = collection_rooms.find({'space': request.json['space_id']}).sort('order', 1)
-	        for document in cursor:
-	            collection_rooms.update_one({'_id': ObjectId(request.json['room_id'])})
-	        return Response(dumps({'success': 'true'}), mimetype='application/json')
-	    else:
-	        return Response(dumps({'success': 'false'}), mimetype='application/json')
+			for document in cursor:
+				collection_rooms.update_one({'_id': ObjectId(request.json['room_id'])})
+			return Response(dumps({'success': 'true'}), mimetype='application/json')
+		else:
+	return Response(dumps({'success': 'false'}), mimetype='application/json')
 	#rearrange room order
 
 @app.route('/create_space', methods=['GET', 'POST'])
