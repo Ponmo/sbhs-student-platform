@@ -23,16 +23,15 @@ from datetime import datetime, date, timedelta
 import pytz
 from pytz import timezone
 
-# GOOGLE_CLIENT_ID = os.environ['GOOGLE_CLIENT_ID']
-GOOGLE_CLIENT_ID = '508195289716-ooj778o3qtc77j3lhef75ppqrfaru814.apps.googleusercontent.com'
+GOOGLE_CLIENT_ID = os.environ['GOOGLE_CLIENT_ID']
 
-GOOGLE_CLIENT_SECRET = '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' #os.environ['GOOGLE_CLIENT_SECRET']
+GOOGLE_CLIENT_SECRET = os.environ['GOOGLE_CLIENT_SECRET']
 GOOGLE_DISCOVERY_URL = (
     'https://accounts.google.com/.well-known/openid-configuration'
 )
 
 connection_string = 'mongodb+srv://first:EDqorw8lcCRVOMHI@cluster0.p7hdr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority' #os.environ['MONGO_CONNECTION_STRING']
-db_name = 'SBHSPlatform' #os.environ['MONGO_DBNAME']
+db_name = os.environ['MONGO_DBNAME']
 client = pymongo.MongoClient(connection_string)
 db = client[db_name]
 collection_users = db['Users']
@@ -42,7 +41,7 @@ collection_messages = db['Messages']
 collection_sections = db['Sections']
 
 app = Flask(__name__)
-app.secret_key = "?W6e{:*-RuaqEX2E0]$jTK(]HSc^|:2sfY~#jBbuz,BYH2yBt(66E7~j)')l@`a" #os.environ['SECRET_KEY']
+app.secret_key = os.environ['SECRET_KEY']
 
 socketio = SocketIO(app, async_mode='gevent')
 

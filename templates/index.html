@@ -301,11 +301,6 @@
               name: room_name
             });
             document.getElementById("create-room").style.display = "none";
-            const newNode = document.createElement('div');
-            newNode.id = room['_id']['$oid'];
-            newNode.className = 'room';
-            newNode.innerHTML = room_name + '<img class="room-settings" src="/static/images/Space.jpeg">';
-            document.getElementById('channels').append(newNode);
           }
         });
       }
