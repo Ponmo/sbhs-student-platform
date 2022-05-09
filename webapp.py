@@ -217,7 +217,7 @@ def create_room():
 	if request.method == 'POST':
 		room_id = ObjectId()
 		rooms_list = list(collection_rooms.find({'space': request.json['space_id'], 'section': request.json['section_id']}))
-		room = {'_id': room_id, 'space': request.json['space_id'], 'section': request.json['section_id'], 'name': request.json['room_name'], 'order': len(rooms_list) + 1)}
+		room = {'_id': room_id, 'space': request.json['space_id'], 'section': request.json['section_id'], 'name': request.json['room_name'], 'order': len(rooms_list) + 1}
 		collection_rooms.insert_one(room)
 		room = dumps(room)
 		return Response(room, mimetype='application/json')
