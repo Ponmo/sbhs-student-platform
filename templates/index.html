@@ -384,7 +384,7 @@
                   newNode = document.createElement('div');
                   newNode.className = 'room';
               	  newNode.id = room['_id']['$oid'];
-              	  newMode.setAttribute('data-section', room['section']);
+              	  newNode.setAttribute('data-section', room['section']);
               	  newNode.innerHTML = room['name'] + '<img class="room-settings" src="/static/images/Space.jpeg">';
                	  document.getElementById('channels').append(newNode);
                 }
