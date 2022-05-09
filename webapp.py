@@ -226,10 +226,10 @@ def create_room():
 def delete_room():
 	if request.method == 'POST':
 		room_count = collection_rooms.count_documents({'space': request.json['space_id']})
-	    if room_count > 1:
-	        collection_rooms.delete_one({'_id': ObjectId(request.json['room_id'])})
-	        collection_messages.delete_many({'room': request.json['room_id']})
-	        cursor = collection_rooms.find({'space': request.json['space_id']}).sort('order', 1)
+		if room_count > 1:
+			collection_rooms.delete_one({'_id': ObjectId(request.json['room_id'])})
+			collection_messages.delete_many({'room': request.json['room_id']})
+			cursor = collection_rooms.find({'space': request.json['space_id']}).sort('order', 1)
 	        for document in cursor:
 	            collection_rooms.update_one({'_id': ObjectId(request.json['room_id'])})
 	        return Response(dumps({'success': 'true'}), mimetype='application/json')
