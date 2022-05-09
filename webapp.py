@@ -1,4 +1,3 @@
-#ROOM CREATION SocketIO
 #DELETE ROOM REARRANGES ROOM ORDER
 from flask_socketio import SocketIO, emit, join_room, leave_room
 
@@ -226,12 +225,16 @@ def create_room():
 @app.route('/delete_room', methods=['GET', 'POST'])
 def delete_room():
 	if request.method == 'POST':
-	    if collection_rooms.count_documents({'space': request.json['space_id']}) > 1:
-	      collection_rooms.delete_one({'_id': ObjectId(request.json['room_id'])})
-	      collection_messages.delete_many({'room': request.json['room_id']})
-	      return Response(dumps({'success': 'true'}), mimetype='application/json')
+		room_count = collection_rooms.count_documents({'space': request.json['space_id']})
+	    if room_count > 1:
+	        collection_rooms.delete_one({'_id': ObjectId(request.json['room_id'])})
+	        collection_messages.delete_many({'room': request.json['room_id']})
+	        cursor = collection_rooms.find({'space': request.json['space_id']}).sort('order', 1)
+	        for document in cursor:
+	            collection_rooms.update_one({'_id': ObjectId(request.json['room_id'])})
+	        return Response(dumps({'success': 'true'}), mimetype='application/json')
 	    else:
-	      return Response(dumps({'success': 'false'}), mimetype='application/json')
+	        return Response(dumps({'success': 'false'}), mimetype='application/json')
 	#rearrange room order
 
 @app.route('/create_space', methods=['GET', 'POST'])

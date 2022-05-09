@@ -88,13 +88,13 @@
     var timeout = null;
     var current_space = '';
     var typing_list = [];
-    var selected_section = '';
+    var current_section = '';
     
     // list of messages being typed by user containing message (updated when user clicks on space or another room) and room id.
     // ['2hu45iu2323', 'Hi I love apples and cakes they are cool', '34yubjub42', 'I love appels']
     // Loop through this and check if joined room id is equal to any of these. If so, get index of that ID add one and make the message that message. Yep okay easy peasy lemon SQUEEEEZY.
     $(document).on('click', '.section', function() {
-      selected_section = this.id;
+      current_section = this.id;
     });
     
     function stoppedTyping() {
@@ -384,6 +384,7 @@
                   newNode = document.createElement('div');
                   newNode.className = 'room';
               	  newNode.id = room['_id']['$oid'];
+              	  newMode.setAttribute('data-section', room['section']);
               	  newNode.innerHTML = room['name'] + '<img class="room-settings" src="/static/images/Space.jpeg">';
                	  document.getElementById('channels').append(newNode);
                 }
