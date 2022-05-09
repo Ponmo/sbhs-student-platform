@@ -1,4 +1,3 @@
-#DELETE ROOM REARRANGES ROOM ORDER
 from flask_socketio import SocketIO, emit, join_room, leave_room
 
 import json

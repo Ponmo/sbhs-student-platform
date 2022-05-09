@@ -17,12 +17,25 @@ $(document).ready(function(){
   $(document).on('click', '#close-create-room', function() {
     createRoomModal.style.display = "none";
   });
+  
+  var createSectionModal = document.getElementById("create-section");
+  
+  $(document).on('click', '.create-section-button', function() {
+    createSectionModal.style.display = "block";
+  });
+  $(document).on('click', '#close-create-section', function() {
+    createSectionModal.style.display = "none";
+  });
+  
   window.onclick = function(event) {
     if (event.target == createRoomModal) {
       createRoomModal.style.display = "none";
     }
     if (event.target == createSpaceModal) {
       createSpaceModal.style.display = "none";
+    }
+    if (event.target == createSectionModal) {
+      createSectionModal.style.display = "none";
     }
   }
    
