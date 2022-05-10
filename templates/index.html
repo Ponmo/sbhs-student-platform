@@ -451,8 +451,7 @@
         room: current_room,
         old_room: old_room
       });
-      $('#' + current_room).css('background-color', '#43474d !important');
-      alert($('#' + current_room));
+      $(document.getElementById(current_room)).css('background-color', '#43474d !important');
       document.getElementById('messages').textContent = '';
       chat_history_skip = 0;
       loadChatHistory();
