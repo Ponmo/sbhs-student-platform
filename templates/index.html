@@ -387,10 +387,9 @@
         $('#home-page').css('display', 'none');
         $('#first-all').css('display', 'block');
         $('#space-search').css('display', 'none');
+        $(this).closest('.space-wrapper').find('.active-space').css('visibility', 'hidden');
         current_space = this.id;
-        
         $(this).closest('.space-wrapper').find('.active-space').css('visibility', 'visible');
-        
         $.ajax({
           type: "POST",
           url: '/space',
