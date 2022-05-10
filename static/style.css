@@ -32,6 +32,12 @@ img { /* make images and create button undraggable and unhighlitable*/
   grid-row: 1;
   background-color: #2f3136;
   border-bottom: 1px solid #232428; /* pseudo element for double border */
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  
 }
 #header_text {
   line-height: 48px;
@@ -45,8 +51,8 @@ img { /* make images and create button undraggable and unhighlitable*/
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  margin-right: 14px;
-  margin-top: 9px;
+  margin-right: 12px;
+  margin-top: 15px;
 }
 #information {
   grid-column: 2 / 4;
@@ -55,6 +61,11 @@ img { /* make images and create button undraggable and unhighlitable*/
   display: flex;
   align-items: center;
   flex-direction: row-reverse;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 #home {
   display: inline-block;
@@ -69,6 +80,11 @@ img { /* make images and create button undraggable and unhighlitable*/
   border-top: 1px solid #2b2d32; /* remove once double border */
   border-top: 1px solid #2b2d32; 
   background-color: #2f3136;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 .section {
   margin-top: 14px;
@@ -268,15 +284,14 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 #footer {
   position: fixed;
-  border-top: 1px solid #232428;
   display: flex;
   align-items: center;
   bottom: 0;
   width: 100%;
   height: 50px;
-  background-color: #282a2e;
+  background-color: hotpink;
   overflow: hidden;
-  background: linear-gradient(225deg, #282a2e 20px, #282a2e 20px);
+  background: linear-gradient(225deg, hotpink 20px, hotpink 20px);
 }
 
 
@@ -314,7 +329,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin-bottom: 0px;
 }
 #student_id {
-  color: #d7d9da;
+  color: #ffffff;
   font-size: 12px;
   margin-bottom: 0px;
   white-space: nowrap;
@@ -326,7 +341,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   grid-row: 2;
 }
 #settings {
-  color: #d7d9da;
+  color: #ffffff;
   grid-column: 3;
   grid-row: 1/3;
   margin-bottom: 0px;
