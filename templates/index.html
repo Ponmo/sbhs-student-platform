@@ -16,7 +16,7 @@
   	  <h1>Santa Barbara High School Platform</h1>
   	</div>
   	<div id="space-search">
-  	  
+  	  <img id="close-space-search-button" src="/static/images/Space.jpeg">
   	</div>
     <div id="first-all">
       <div id="content">
@@ -388,8 +388,8 @@
         $('#first-all').css('display', 'block');
         $('#space-search').css('display', 'none');
         $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').css('visibility', 'hidden');
-        current_space = this.id;
         $(this).closest('.space-wrapper').find('.active-space').css('visibility', 'visible');
+        current_space = this.id;
         $.ajax({
           type: "POST",
           url: '/space',
@@ -483,10 +483,11 @@
 	}
 	
 	$(document).on('click', '#space-search-button', function() {
-      $('#home-page').css('display', 'none');
-      $('#first-all').css('display', 'none');
-      $('#footer').css('display', 'none');
-      $('#space-search').css('display', 'block');
+      $('#space-search').css('z-index', '1');
+    });
+    
+    $(document).on('click', '#close-space-search-button', function() {
+      $('#space-search').css('z-index', '-1');
     });
     
   </script>
