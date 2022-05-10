@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+  //TODO: simplify and migrate
+  
   var createSpaceModal = document.getElementById("create-space");
 
   $(document).on('click', '#create-space-button', function() {
@@ -20,7 +22,7 @@ $(document).ready(function(){
   
   var createSectionModal = document.getElementById("create-section");
   
-  $(document).on('click', '.create-section-button', function() {
+  $(document).on('click', '#create-section-button', function() {
     createSectionModal.style.display = "block";
   });
   $(document).on('click', '#close-create-section', function() {
