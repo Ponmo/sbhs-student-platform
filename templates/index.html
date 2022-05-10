@@ -51,7 +51,7 @@
         <!-- load exclamation mark icon if not showing -->
         <img src={{ picture }} alt="pfp" id="profile_picture">
         <p id="username">{{ name }}</p>
-        <p id="student_id">Santa Barbara HS</p>
+        <p id="student_id">Santa Barbara High School</p>
         <p id="settings">#</p>
       </div>
       <div id="spaces">
@@ -141,13 +141,22 @@
         dataType: "json",
         success: function(spaces_list) {
           spaces_list.forEach(function(item) {
-            const newMode = document.createElement('img');
-            newMode.className = 'space';
-            newMode.id = item._id.$oid;
-            newMode.setAttribute('data-name', item.name);
-            newMode.src = '/static/images/Space.jpeg';
+            const newNode = document.createElement('div');
+            newNode.className = 'space-wrapper';
+            
+            const newNodeChild = document.createElement('img');
+            newNodeChild.className = 'space';
+            newNodeChild.id = item._id.$oid;
+            newNodeChild.setAttribute('data-name', item.name);
+            newNodeChild.src = '/static/images/Space.jpeg';
+            newNode.appendChild(newNodeChild);
+            
+            newNodeChild = document.createElement('div');
+            newNodeChild.className = 'active-space';
+            newNode.appendChild(newNodeChild);
+            
             referenceNode = document.getElementById('space_align_helper');
-            referenceNode.parentNode.insertBefore(newMode, referenceNode.nextSibling);
+            referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
           });
         }
       });

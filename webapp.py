@@ -115,7 +115,7 @@ def callback():
         picture = userinfo_response.json()['picture']
         users_name = userinfo_response.json()['name']
         if not users_email.endswith('@my.sbunified.org') and not users_email.endswith('@sbunified.org'):
-            return redirect(url_for('render_login', error = "Please use your school issued email"))
+            return redirect(url_for('render_login', error = "Please use your SBUnified school email"))
     else:
         return redirect(url_for('render_login', error = "Email not available or verified"))
     
