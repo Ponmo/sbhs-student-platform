@@ -445,14 +445,14 @@
 	});
     
 	function joinRoom(room_id) {
-	  old_room = current_room
+	  old_room = current_room;
 	  current_room = room_id;
 	  socket.emit('join_room', {
         room: current_room,
         old_room: old_room
       });
       $('#' + current_room).attr('style', 'background-color: #43474d !important');
-      $('#' + old_room).attr('style', 'background-color: #43474d !important');
+      $('#' + old_room).attr('style', ' ');
       $(document.getElementById('chat')).css('background-color', '#43474d !important');
       document.getElementById('messages').textContent = '';
       chat_history_skip = 0;
