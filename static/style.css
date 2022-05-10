@@ -14,6 +14,9 @@ img { /* make images and create button undraggable and unhighlitable*/
   display: none;
   overflow: hidden;
 }
+#space-search {
+  display: none;
+}
 #content { /* make calc good on all browsers ; Make margin and padding 0 because of broswer differences ; make no horizontal scroll at small screen sizes*/
   display: grid;
   grid-template-rows: 48px calc(100vh - 98px);
@@ -351,6 +354,10 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin-right: 3px;
 }
 #create-space-button {
+  width: 55px;
+  height: 39px;
+}
+#space-search-button {
   width: 55px;
   height: 39px;
 }

@@ -15,14 +15,14 @@
   	<div id="home-page">
   	  <h1>Santa Barbara High School Platform</h1>
   	</div>
-  	<div>
+  	<div id="space-search">
   	  
   	</div>
     <div id="first-all">
       <div id="content">
         <div id="header">
           <span id="header_text"></span>
-          <img id="space-settings" src="/static/images/Space.jpeg">
+          <img id="create-section-button" src="/static/images/Space.jpeg">
         </div>
         <div id="information">
           <img id="home" src="/static/images/Space.jpeg">
@@ -57,6 +57,7 @@
       <div id="spaces">
         <span id="space_align_helper"></span>
           <button type="button" id="create-space-button"><img src="/static/images/ppicons-plus.svg" alt="create" style="width:25px;height:25px;"></button>
+          <button type="button" id="space-search-button"><img src="/static/images/ppicons-plus.svg" alt="create" style="width:25px;height:25px;"></button>
         </div>
       </div>
     </div>
@@ -365,6 +366,7 @@
             document.getElementById('channels').append(newNode);
             $('#home-page').css('display', 'none');
             $('#first-all').css('display', 'block');
+            $('#space-search').css('display', 'none');
             joinRoom(room_and_section[0][0]['_id']['$oid']);
           }
         });
@@ -375,6 +377,7 @@
       if (current_space != this.id) {
         $('#home-page').css('display', 'none');
         $('#first-all').css('display', 'block');
+        $('#space-search').css('display', 'none');
         current_space = this.id;
         $.ajax({
           type: "POST",
@@ -413,6 +416,7 @@
     $(document).on('click', '#home', function() {
       $('#home-page').css('display', 'block');
       $('#first-all').css('display', 'none');
+      $('#space-search').css('display', 'none');
     });
     
 	$(document).on('click', '.room', function(e) {
@@ -466,5 +470,12 @@
         stoppedTyping();
       }
 	}
+	
+	$(document).on('click', '#space-search-button', function() {
+      $('#home-page').css('display', 'none');
+      $('#first-all').css('display', 'none');
+      $('#space-search').css('display', 'block');
+    });
+    
   </script>
 </html>
