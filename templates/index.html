@@ -15,6 +15,9 @@
   	<div id="home-page">
   	  <h1>Santa Barbara High School Platform</h1>
   	</div>
+  	<div>
+  	  
+  	</div>
     <div id="first-all">
       <div id="content">
         <div id="header">
@@ -452,8 +455,8 @@
           room: current_room,
           old_room: old_room
         });
-        $('#' + current_room).attr('style', 'background-color: #43474d !important');
-        $('#' + old_room).attr('style', ' ');
+        $(document.getElementById(current_room)).attr('style', 'background-color: #43474d !important');
+        $(document.getElementById(old_room)).attr('style', '');
         $(document.getElementById('chat')).css('background-color', '#43474d !important');
         document.getElementById('messages').textContent = '';
         chat_history_skip = 0;
