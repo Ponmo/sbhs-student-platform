@@ -67,16 +67,32 @@ img { /* make images and create button undraggable and unhighlitable*/
   border-top: 1px solid #2b2d32; 
   background-color: #2f3136;
 }
+.section {
+  margin-top: 14px;
+  color: white;
+  width: 100%;
+}
+.section-name {
+  display: inline-block;
+  margin-left: 14px;
+  font-weight: bold;
+}
+.create-room-button {
+  display: inline-block;
+  float: right;
+  font-size: 18px;
+  line-height: 18px;
+  margin-right: 14px;
+}
 .room {
   width: 254px;
   height: 32px;
   border-radius: 4px;
   color: #ffffff;
-  background-color: #43474d;
   margin-left: 8px;
   line-height: 32px;
   padding-left: 24px;
-  margin-top: 10px;
+  margin-top: 2px;
 }
 .room:hover {
   background-color: #3c3f45;
