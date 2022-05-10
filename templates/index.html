@@ -388,6 +388,9 @@
         $('#first-all').css('display', 'block');
         $('#space-search').css('display', 'none');
         current_space = this.id;
+        
+        this.closest('.space-wrapper').find('.active-space').css('visibility', 'visible');
+        
         $.ajax({
           type: "POST",
           url: '/space',

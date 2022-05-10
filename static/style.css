@@ -375,6 +375,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   width: 21px;
   height: 11px;
   background-color: white;
+  visibility: hidden;
 }
 .space {
   width: 55px;
