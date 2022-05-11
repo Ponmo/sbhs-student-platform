@@ -358,7 +358,6 @@
           success: function(room_and_section) {
             document.getElementById("create-space").style.display = "none";
           	current_space = room_and_section[0][0]['space'];
-            joinRoom(room_and_section[0][0]['_id']['$oid']);
             document.getElementById('messages').textContent = '';
             document.getElementById('channels').textContent = ''; 
             document.getElementById('header_text').textContent = space_name; 
@@ -389,6 +388,7 @@
             $('#home-page').css('display', 'none');
             $('#first-all').css('display', 'block');
             $('#space-search').css('display', 'none');
+            joinRoom(room_and_section[0][0]['_id']['$oid']);
           }
         });
       }
