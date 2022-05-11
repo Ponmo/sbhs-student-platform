@@ -329,7 +329,8 @@
             socket.emit('created_room', {
               created_room: room['_id']['$oid'],
               room_list: room_list,
-              name: room_name
+              name: room_name,
+              section_id: selected_section
             });
             document.getElementById("create-room").style.display = "none";
           }
@@ -341,6 +342,7 @@
       const newNode = document.createElement('div');
       newNode.id = data.created_room;
       newNode.className = 'room';
+      newNode.setAttribute('data-section', data.section_id);
       newNode.innerHTML = data.name + '<img class="room-settings" src="/static/images/settings-white.png">';
       document.getElementById('channels').append(newNode);
     });
