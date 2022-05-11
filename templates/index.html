@@ -16,7 +16,7 @@
   	  <h1>Santa Barbara High School Platform</h1>
   	</div>
   	<div id="space-search">
-  	  <img id="close-space-search-button" src="/static/images/Space.jpeg">
+  	  <img id="close-space-search-button" src="/static/images/back.png">
   	  <div id="user-directory">
   	    <h1>User Directory</h1>
   	  </div>
@@ -31,7 +31,7 @@
           <img id="create-section-button" src="/static/images/Space.jpeg">
         </div>
         <div id="information">
-          <img id="home" src="/static/images/Space.jpeg">
+          <img id="home" src="/static/images/home.png">
         </div>
         <div id="channels"></div>
 <!--         when new message is sent, make the new message appear above the message bar and not mess up the scrolling (Safari only). -->
@@ -341,7 +341,7 @@
       const newNode = document.createElement('div');
       newNode.id = data.created_room;
       newNode.className = 'room';
-      newNode.innerHTML = data.name + '<img class="room-settings" src="/static/images/Space.jpeg">';
+      newNode.innerHTML = data.name + '<img class="room-settings" src="/static/images/settings.png">';
       document.getElementById('channels').append(newNode);
     });
     
@@ -384,7 +384,7 @@
             newNode = document.createElement('div');
           	newNode.className = 'room';
           	newNode.id = room_and_section[0][0]['_id']['$oid'];
-          	newNode.innerHTML = 'general<img class="room-settings" src="/static/images/Space.jpeg">';
+          	newNode.innerHTML = 'general<img class="room-settings" src="/static/images/settings.png">';
           	document.getElementById('channels').append(newNode);
             document.getElementById('channels').append(newNode);
             $('#home-page').css('display', 'none');
@@ -428,7 +428,7 @@
                   newNode.className = 'room';
               	  newNode.id = room['_id']['$oid'];
               	  newNode.setAttribute('data-section', room['section']);
-              	  newNode.innerHTML = room['name'] + '<img class="room-settings" src="/static/images/Space.jpeg">';
+              	  newNode.innerHTML = room['name'] + '<img class="room-settings" src="/static/images/settings.png">';
                	  document.getElementById('channels').append(newNode);
                 }
               });
