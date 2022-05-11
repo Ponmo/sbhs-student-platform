@@ -397,7 +397,7 @@
     }
 
     $(document).on('click', '.space', function() { //do not do anything if user already on clicked space
-      if (current_space != this.id) {
+      if (current_space != this.id || background_page == 0) {
         background_page = 1;
         $('#home-page').css('display', 'none');
         $('#first-all').css('display', 'block');
