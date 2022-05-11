@@ -362,11 +362,17 @@
             document.getElementById('messages').textContent = '';
             document.getElementById('channels').textContent = ''; 
             document.getElementById('header_text').textContent = space_name; 
-            var newNode = document.createElement('img');
-            newNode.className = 'space';
-            newNode.id = current_space;
-            newNode.src = '/static/images/Space.jpeg';
-            newNode.setAttribute('data-name', space_name);
+            const newNode = document.createElement('div');
+            newNode.className = 'space-wrapper';
+            var newNodeChild = document.createElement('img');
+            newNodeChild.className = 'space';
+            newNodeChild.id = current_space;
+            newNodeChild.setAttribute('data-name', space_name);
+            newNodeChild.src = '/static/images/Space.jpeg';
+            newNode.appendChild(newNodeChild);
+            newNodeChild = document.createElement('div');
+            newNodeChild.className = 'active-space';
+            newNode.appendChild(newNodeChild);
             referenceNode = document.getElementById('space_align_helper');
             referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
             newNode = document.createElement('div');
@@ -383,7 +389,7 @@
             $('#home-page').css('display', 'none');
             $('#first-all').css('display', 'block');
             $('#space-search').css('display', 'none');
-            joinRoom(room_and_section[0][0]['_id']['$oid']);
+            joinRoom(room_and_section[0][0]['_id']['$oid']);        
           }
         });
       }
@@ -482,7 +488,6 @@
         });
         $(document.getElementById(current_room)).attr('style', 'background-color: #43474d !important');
         $(document.getElementById(old_room)).attr('style', '');
-        $(document.getElementById('chat')).css('background-color', '#43474d !important');
         document.getElementById('messages').textContent = '';
         chat_history_skip = 0;
         loadChatHistory();
