@@ -356,6 +356,7 @@
           data: JSON.stringify({'space_name': space_name}),
           contentType: 'application/json;charset=UTF-8',
           success: function(room_and_section) {
+            $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').css('visibility', 'hidden');
             document.getElementById("create-space").style.display = "none";
           	current_space = room_and_section[0][0]['space'];
             document.getElementById('messages').textContent = '';
@@ -371,6 +372,7 @@
             newNode.appendChild(newNodeChild);
             newNodeChild = document.createElement('div');
             newNodeChild.className = 'active-space';
+            newNodeChild.style.visibility = 'visible';
             newNode.appendChild(newNodeChild);
             referenceNode = document.getElementById('space_align_helper');
             referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
@@ -381,7 +383,7 @@
             document.getElementById('channels').append(newNode);
             newNode = document.createElement('div');
           	newNode.className = 'room';
-          	newNode.id = current_room;
+          	newNode.id = room_and_section[0][0]['_id']['$oid'];
           	newNode.innerHTML = 'general<img class="room-settings" src="/static/images/Space.jpeg">';
           	document.getElementById('channels').append(newNode);
             document.getElementById('channels').append(newNode);
