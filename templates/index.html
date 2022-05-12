@@ -375,7 +375,7 @@
             newNode.appendChild(newNodeChild);
             newNodeChild = document.createElement('div');
             newNodeChild.className = 'active-space';
-            newNodeChild.style.cssText = "width: 39px; -webkit-transition: width 0.1s ease-out; -moz-transition: width 0.1s ease-out; -o-transition: width 0.1s ease-out; transition: width 0.1s ease-out;" 
+            newNodeChild.style.width = '39px'
             newNode.appendChild(newNodeChild);
             referenceNode = document.getElementById('space_align_helper');
             referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
