@@ -362,7 +362,6 @@
             document.getElementById("create-space").style.display = "none";
             $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
           	current_space = room_and_section[0][0]['space'];
-            $(current_space).closest('.space-wrapper').find('.active-space').css({width: '39px', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
             document.getElementById('messages').textContent = '';
             document.getElementById('channels').textContent = ''; 
             document.getElementById('header_text').textContent = space_name; 
@@ -392,6 +391,7 @@
           	newNode.innerHTML = 'general<img class="room-settings" src="/static/images/settings-white.png">';
           	document.getElementById('channels').append(newNode);
             document.getElementById('channels').append(newNode);
+            $(current_space).closest('.space-wrapper').find('.active-space').css({width: '39px', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
             $('#home-page').css('display', 'none');
             $('#first-all').css('display', 'block');
             $('#space-search').css('display', 'none');
