@@ -49,7 +49,7 @@ h1 {
   background: blueviolet;
   display: inline-block;
 }
-#content { /* make calc good on all browsers ; Make margin and padding 0 because of broswer differences ; make no horizontal scroll at small screen sizes*/
+#content { /* make calc good on all browsers ; Make margin and padding 0 because of broswer differences ; */
   display: grid;
   grid-template-rows: 48px calc(100vh - 98px);
   grid-template-columns: 270px minmax(0px, auto) 220px;
@@ -110,7 +110,6 @@ h1 {
   grid-column: 1;
   grid-row: 2;
   border-top: 1px solid #2b2d32; /* remove once double border */
-  border-top: 1px solid #2b2d32; 
   background-color: #2f3136;
   -moz-user-select: -moz-none;
   -khtml-user-select: none;
@@ -275,7 +274,7 @@ h1 {
   min-height: 39px;
   min-width: 84px;
 }
-#message_input { /* make textbox (textarea?) expandable for chunked messages; different highlight on click */
+#message_input { /* different highlight on click */
   width: calc(100% - 39px);
   min-width: 43px;
   overflow-x: hidden;
@@ -335,14 +334,6 @@ h1 {
   grid-template-columns: 2px auto 30px;
   min-width: 270px;
   padding-left: 20px;
-  
-/* 
-  height: 46px;
-  margin-left: 2px;
-  border-radius: 2px;
-  background-color: hotpink;
-  overflow: hidden;
- */
 }
 #profile_picture {
   width: 40px;
@@ -444,16 +435,4 @@ h1 {
   background-color: #202225;
   border-radius: 10px;
 }
-/* Implement Scroll to bottom on send
 
-5:14 PM
-
-Enter message box css and send button css
-
-5:15 PM
-
-Time appear on hover
-
-5:15 PM
-
-CSS of datetime on regular messages */
