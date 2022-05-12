@@ -10,6 +10,9 @@ img { /* make images and create button undraggable and unhighlitable*/
   -ms-user-select: none;
   user-select: none;
 } 
+.pointer:hover {
+  cursor: pointer;
+}
 #first-all {
   display: none;
   overflow: hidden;
