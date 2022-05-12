@@ -375,7 +375,7 @@
             newNode.appendChild(newNodeChild);
             newNodeChild = document.createElement('div');
             newNodeChild.className = 'active-space';
-            newNodeChild.css({width: '39px', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
+            newNodeChild.style.cssText += "width: 39px;" // WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
             newNode.appendChild(newNodeChild);
             referenceNode = document.getElementById('space_align_helper');
             referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
