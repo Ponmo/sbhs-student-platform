@@ -401,7 +401,7 @@
     $(document).on('click', '.space', function() { //do not do anything if user already on clicked space
       if (current_space != this.id) {
         background_page = 1;
-        $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').css('width', '0px');
+        $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
         $(this).closest('.space-wrapper').find('.active-space').css({width: '39px', WebkitTransition: 'opacity 1s ease-in-out', MozTransition: 'opacity 1s ease-in-out', MsTransition: 'opacity 1s ease-in-out', OTransition: 'opacity 1s ease-in-out', transition: 'opacity 1s ease-in-out'});
         current_space = this.id;
         $.ajax({
