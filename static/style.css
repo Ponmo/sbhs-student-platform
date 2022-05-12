@@ -18,8 +18,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   display: none;
   width: 100%;
   height: 100%;
-  overflow-x: hidden;
-  gap: 0px;
+  overflow: hidden;
 }
 #close-space-search-button {
   display: inline-block;
@@ -30,11 +29,22 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin-top: 9px;
   float: right;
 }
+h1 {
+  display: inline-block;
+  margin-left: 9px;
+}
 #user-directory {
-
+  display: inline-block;
+  width: 270px;
+  height: 100vh;
+  background: hotpink;
+  float: left;
 }
 #space-directory-lfg {
-
+  width: calc(100vw - 270px);
+  height: 100vh;
+  background: blueviolet;
+  display: inline-block;
 }
 #content { /* make calc good on all browsers ; Make margin and padding 0 because of broswer differences ; make no horizontal scroll at small screen sizes*/
   display: grid;
