@@ -328,7 +328,7 @@
           	  room_list.push(item.id);
           	});
             socket.emit('created_room', {
-              created_room: room['_id']['$oid'],
+              room_id: room['_id']['$oid'],
               room_list: room_list,
               name: room_name,
               section_id: selected_section
@@ -341,7 +341,7 @@
     
     socket.on('created_room', function(data) {
       const newNode = document.createElement('div');
-      newNode.id = data.created_room;
+      newNode.id = data.room_id;
       newNode.className = 'room pointer';
       newNode.setAttribute('data-section', data.section_id);
       newNode.setAttribute('data-name', data.name);
@@ -360,11 +360,28 @@
           data: JSON.stringify({'section_name': section_name, 'space_id': current_space}),
           contentType: 'application/json;charset=UTF-8',
           success: function(section) {
-            alert(JSON.stringify(section));
+            var room_list = [];
+          	document.querySelectorAll(".room").forEach(function(item) {
+          	  room_list.push(item.id);
+            });
+            socket.emit('created_section', {
+              section_id: section['_id']['$oid'],
+              room_list: room_list,
+              name: section_name,
+            });
+            document.getElementById("create-section").style.display = "none";
           }
         });
       }
     }
+    
+    socket.on('created_section', function(data) {
+      newNode = document.createElement('div');
+      newNode.className = 'section pointer';
+      newNode.id = data.section_id;
+      newNode.innerHTML = '<div class="section-name">' + data.name + '</div><div class="create-room-button" type="button">+</div>'
+      document.getElementById('channels').append(newNode);
+    });
     
     document.getElementById('create-space-form').onsubmit = function (e) {
       e.preventDefault();

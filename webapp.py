@@ -187,10 +187,15 @@ def created_room(data):
     	socketio.emit('created_room', data, room = room)
 
 @socketio.on('deleted_room')
-def deleted_message(data):
+def deleted_room(data):
     for room in data['room_list']:
     	socketio.emit('deleted_room', data, room = room)
 	#socketio.emit('deleted_room', data, room = data['room'])
+
+@socketio.on('created_section')
+def created_section(data):
+	for room in data['room_list']:
+		socketio.emit('created_section', data, room = room)
 
 @app.route('/sbhs')
 def render_main_page():
