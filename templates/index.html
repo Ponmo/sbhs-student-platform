@@ -409,6 +409,7 @@
             background_page = 1;
             document.getElementById("create-space").style.display = "none";
             $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
+            $(document.getElementById(current_space)).attr('style', '');
           	current_space = room_and_section[0][0]['space'];
             document.getElementById('messages').textContent = '';
             document.getElementById('channels').textContent = ''; 
@@ -454,6 +455,7 @@
       if (current_space != this.id) {
         background_page = 1;
         $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
+        $(document.getElementById(current_space)).attr('style', '');
         $(this).css('border-radius', '3px');
         $(this).closest('.space-wrapper').find('.active-space').css({width: '39px', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
         current_space = this.id;
