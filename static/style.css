@@ -416,10 +416,10 @@ h1 {
   object-fit: cover;
   width: 55px;
   height: 39px;
-  border-radius: 10px;
+  border-radius: 7px;
 }
 .space:hover {
-  border-radius: 5px;
+  border-radius: 3px;
   -webkit-transition: border-radius 0.15s ease-out;
   -moz-transition: border-radius 0.15s ease-out;
   -o-transition: border-radius 0.15s ease-out;
