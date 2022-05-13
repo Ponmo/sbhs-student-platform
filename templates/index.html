@@ -500,7 +500,7 @@
         $(document.getElementById(current_room)).attr('style', 'background-color: #43474d !important');
         $(document.getElementById(old_room)).attr('style', '');
         document.getElementById('messages').textContent = '';
-        document.getElementById('room-name').textContent = document.getElementById(current_room).getAttr('data-name');
+        document.getElementById('room-name').textContent = document.getElementById(current_room).getAttribute('data-name');
         chat_history_skip = 0;
         loadChatHistory();
         typing_display.textContent = '';
