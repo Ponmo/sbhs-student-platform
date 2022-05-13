@@ -31,6 +31,7 @@
           <img class="pointer" id="create-section-button" src="/static/images/settings-white.png">
         </div>
         <div id="information">
+          <p id="room-name"></p>
           <img class="pointer" id="home" src="/static/images/home-white.png">
         </div>
         <div id="channels"></div>
@@ -343,6 +344,7 @@
       newNode.id = data.created_room;
       newNode.className = 'room pointer';
       newNode.setAttribute('data-section', data.section_id);
+      newNode.setAttribute('data-name', data.name);
       newNode.innerHTML = data.name + '<img class="room-settings" src="/static/images/settings-white.png">';
       document.getElementById('channels').append(newNode);
     });
@@ -385,8 +387,9 @@
             newNode.innerHTML = '<div class="section-name">' + room_and_section[1][0]['name'] + '</div><div class="create-room-button" type="button">+</div>'
             document.getElementById('channels').append(newNode);
             newNode = document.createElement('div');
-          	newNode.className = 'room pointer';
+          	newNode.className = 'room pointer'; 
           	newNode.setAttribute('data-section', room_and_section[1][0]['_id']['$oid']);
+    	    newNode.setAttribute('data-name', data.name);
           	newNode.id = room_and_section[0][0]['_id']['$oid'];
           	newNode.innerHTML = 'general<img class="room-settings" src="/static/images/settings-white.png">';
           	document.getElementById('channels').append(newNode);
@@ -429,6 +432,7 @@
                   newNode.className = 'room pointer';
               	  newNode.id = room['_id']['$oid'];
               	  newNode.setAttribute('data-section', room['section']);
+              	  newNode.setAttribute('data-name', data.name);
               	  newNode.innerHTML = room['name'] + '<img class="room-settings" src="/static/images/settings-white.png">';
                	  document.getElementById('channels').append(newNode);
                 }
@@ -496,6 +500,7 @@
         $(document.getElementById(current_room)).attr('style', 'background-color: #43474d !important');
         $(document.getElementById(old_room)).attr('style', '');
         document.getElementById('messages').textContent = '';
+        document.getElementById('room-name').textContent = document.getElementById(current_room).getAttr('data-name');
         chat_history_skip = 0;
         loadChatHistory();
         typing_display.textContent = '';
