@@ -349,6 +349,23 @@
       document.getElementById('channels').append(newNode);
     });
     
+    document.getElementById('create-section-form').onsubmit = function (e) {
+      e.preventDefault();
+      let section_name = document.getElementById('section-name').value.trim();
+      if (section_name.length) {
+        $.ajax({
+          type: 'POST',
+          url: '/create_space',
+          dataType: "json",
+          data: JSON.stringify({'section_name': section_name, 'space_id': current_space}),
+          contentType: 'application/json;charset=UTF-8',
+          success: function(section) {
+            alert(JSON.stringify(section));
+          }
+        });
+      }
+    }
+    
     document.getElementById('create-space-form').onsubmit = function (e) {
       e.preventDefault();
       let space_name = document.getElementById('space-name').value.trim();

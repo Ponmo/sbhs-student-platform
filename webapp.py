@@ -215,8 +215,8 @@ def chat_history():
 def create_room():
 	if request.method == 'POST':
 		room_id = ObjectId()
-		rooms_list = list(collection_rooms.find({'space': request.json['space_id'], 'section': request.json['section_id']}))
-		room = {'_id': room_id, 'space': request.json['space_id'], 'section': request.json['section_id'], 'name': request.json['room_name'], 'order': len(rooms_list) + 1}
+		room_list = list(collection_rooms.find({'space': request.json['space_id'], 'section': request.json['section_id']}))
+		room = {'_id': room_id, 'space': request.json['space_id'], 'section': request.json['section_id'], 'name': request.json['room_name'], 'order': len(room_list) + 1}
 		collection_rooms.insert_one(room)
 		room = dumps(room)
 		return Response(room, mimetype='application/json')
@@ -237,6 +237,13 @@ def delete_room():
 		else:
 			return Response(dumps({'success': 'false'}), mimetype='application/json')
 	#rearrange room order
+
+@app.route('/create_section', methods=['GET', 'POST'])
+def create_section();
+	if request.method == 'POST':
+	section_id = ObjectId()
+	section_list = list(collection_sections.find({'space': request.json['space_id']})
+	collection_sections.insert_one({'_id': section_id, 'space': request.json['space_id'], 'name': request.json['section_name', 'order': len(section_list) + 1]})
 
 @app.route('/create_space', methods=['GET', 'POST'])
 def create_space():
