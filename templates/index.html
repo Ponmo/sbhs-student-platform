@@ -28,7 +28,8 @@
       <div id="content">
         <div id="header">
           <span id="header_text"></span>
-          <img class="pointer" id="create-section-button" src="/static/images/settings-white.png">
+          <img class="pointer" id="create-section-button" src="https://iso.500px.com/wp-content/uploads/2016/03/stock-photo-142984111.jpg">
+          <!--<img class="pointer" id="create-section-button" src="/static/images/settings-white.png">-->
         </div>
         <div id="information">
           <img class="pointer" id="home" src="/static/images/home-white.png">
@@ -74,6 +75,8 @@
         <form id="create-space-form">
           <label for="space-name">Space Name:</label><br>
           <input type="text" id="space-name"><br>
+          <label for="space-picture">Space Picture (currently only accepts links):</label><br>
+          <input type="text" id="space-picture"><br>
           <input type="submit" value="Submit">
         </form>
       </div>
@@ -392,12 +395,17 @@
     document.getElementById('create-space-form').onsubmit = function (e) {
       e.preventDefault();
       let space_name = document.getElementById('space-name').value.trim();
+      let space_image = document.getElementById('space-picture').value.trim();
+      if (!/\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(space_image)) {
+        space_image = '/static/images/Space.jpeg'
+      }
+      alert(space_image);
       if (space_name.length) { 
         $.ajax({
           type: 'POST',
           url: '/create_space',
           dataType: "json",
-          data: JSON.stringify({'space_name': space_name}),
+          data: JSON.stringify({'space_name': space_name, 'space_image': space_image}),
           contentType: 'application/json;charset=UTF-8',
           success: function(room_and_section) {
             background_page = 1;
