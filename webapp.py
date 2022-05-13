@@ -241,12 +241,12 @@ def delete_room():
 @app.route('/create_section', methods=['GET', 'POST'])
 def create_section():
 	if request.method == 'POST':
-	section_id = ObjectId()
-	section_list = list(collection_sections.find({'space': request.json['space_id']})
-	section = {'_id': section_id, 'space': request.json['space_id'], 'name': request.json['section_name', 'order': len(section_list) + 1]}
-	collection_sections.insert_one(section)
-	section = dumps(section)
-	return Response(section, mimetype='application/json')
+		section_id = ObjectId()
+		section_list = list(collection_sections.find({'space': request.json['space_id']})
+		section = {'_id': section_id, 'space': request.json['space_id'], 'name': request.json['section_name', 'order': len(section_list) + 1]}
+		collection_sections.insert_one(section)
+		section = dumps(section)
+		return Response(section, mimetype='application/json')
 
 @app.route('/create_space', methods=['GET', 'POST'])
 def create_space():
