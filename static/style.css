@@ -416,7 +416,14 @@ h1 {
   object-fit: cover;
   width: 55px;
   height: 39px;
-  border-radius: 10%;
+  border-radius: 10px;
+}
+.space:hover {
+  border-radius: 5px;
+  -webkit-transition: border-radius 0.15s ease-out;
+  -moz-transition: border-radius 0.15s ease-out;
+  -o-transition: border-radius 0.15s ease-out;
+  transition: border-radius 0.15s ease-out;
 }
 #create-space-button {
   width: 55px;
