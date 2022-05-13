@@ -89,6 +89,7 @@ h1 {
 #information {
   grid-column: 2 / 4;
   grid-row: 1;
+  justify-content: space-between;
   background-color: hotpink;
   display: flex;
   align-items: center;
@@ -98,6 +99,11 @@ h1 {
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+#room-name-display {
+  margin-left: 18px;
+  color: white;
+  margin-top: 8px;
 }
 #home {
   display: inline-block;
