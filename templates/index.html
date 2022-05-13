@@ -346,7 +346,14 @@
       newNode.setAttribute('data-section', data.section_id);
       newNode.setAttribute('data-name', data.name);
       newNode.innerHTML = data.name + '<img class="room-settings" src="/static/images/settings-white.png">';
-      document.getElementById('channels').append(newNode);
+      const nodeList = document.getElementById('channels').querySelectorAll('.section');
+      const nodeListIndex = nodeList.indexOf(document.getElementById(data.section_id));
+      if (nodeListIndex != nodeList.length - 1) {
+        newNode.before(nodeList[nodeListIndex + 1])
+      }
+      else {
+        document.getElementById('channels').append(newNode);
+      }
     });
     
     document.getElementById('create-section-form').onsubmit = function (e) {
