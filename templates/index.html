@@ -246,10 +246,10 @@
     });
     
     socket.on('deleted_room', function(data) {
+      $(document.getElementById(data.room)).remove();
       if (data.room == current_room) {
         joinRoom($('#channels').find('.room')[0].id);
       }
-      $(document.getElementById(data.room)).remove();
     });
     
     let typing_display = document.getElementById('typing_display');
