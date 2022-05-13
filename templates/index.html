@@ -346,14 +346,14 @@
       newNode.setAttribute('data-section', data.section_id);
       newNode.setAttribute('data-name', data.name);
       newNode.innerHTML = data.name + '<img class="room-settings" src="/static/images/settings-white.png">';
-      const nodeList = document.getElementById('channels').querySelectorAll('.section');
-      const nodeListIndex = Array.prototype.indexOf.call(nodeList, document.getElementById(data.section_id));
-      //nodeList.indexOf(document.getElementById(data.section_id));
-      if (nodeListIndex != nodeList.length - 1) {
-        newNode.before(nodeList[nodeListIndex + 1])
+      const nodeList = document.querySelectorAll('div[data-section="' + data.section_id + '"]');
+      alert(nodeList);
+      alert(nodeList.length);
+      if (nodeList.length != 0) {
+      	newNode.after(nodeList[nodeList.length - 1])
       }
       else {
-        document.getElementById('channels').append(newNode);
+      	newNode.after(document.getElementById(data.section_id))
       }
     });
     
