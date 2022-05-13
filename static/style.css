@@ -413,6 +413,7 @@ h1 {
   background-color: white;
 }
 .space {
+  object-fit: cover;
   width: 55px;
   height: 39px;
   border-radius: 10%;
