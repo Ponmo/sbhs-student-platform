@@ -355,7 +355,7 @@
       if (section_name.length) {
         $.ajax({
           type: 'POST',
-          url: '/create_space',
+          url: '/create_section',
           dataType: "json",
           data: JSON.stringify({'section_name': section_name, 'space_id': current_space}),
           contentType: 'application/json;charset=UTF-8',
