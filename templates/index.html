@@ -12,18 +12,29 @@
     <title>Santa Barbara High School</title>
   </head>
   <body>
+    <!--Home Page-->
   	<div id="home-page">
   	  <h1>Santa Barbara High School Platform</h1>
   	</div>
+    <!--Space Directory Page-->
   	<div id="space-search">
   	  <div id="user-directory">
   	    <h1>User Directory</h1>
   	  </div>
   	  <div id="space-directory-lfg">
   	  	<h1>Club Directory</h1>
+        <!--R20 Grid/Table Scroll Layout-->
+        <div class="directory-space">
+          <!--In general, give all Images an ALT image-->
+          <img class="directory-space-img" src="/static/images/Space.jpeg">
+          <p class="directory-space-title">Title</p>
+          <p class="directory-space-description">Description of Space</p>
+          
+        </div>
   	    <img class="pointer" id="close-space-search-button" src="/static/images/back.png">
   	  </div>
   	</div>
+    <!--Spaces Page-->
     <div id="first-all">
       <div id="content">
         <div id="header">
@@ -74,6 +85,7 @@
         <form id="create-space-form">
           <label for="space-name">Space Name:</label><br>
           <input type="text" id="space-name"><br>
+          <!--Accept Files, Sanitize Files, Compress Files-->
           <label for="space-picture">Space Picture (currently only accepts links):</label><br>
           <input type="text" id="space-picture"><br>
           <input type="submit" value="Submit">
