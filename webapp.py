@@ -9,7 +9,7 @@ from flask import render_template
 
 from oauthlib.oauth2 import WebApplicationClient
 import requests
-from flask_talisman import Talisman
+from flask_talisman import Talisman # NOTE: Talisman not used, different used below. Test http.
 
 from bson.objectid import ObjectId
 from bson.json_util import dumps
@@ -44,6 +44,13 @@ app.secret_key = os.environ['SECRET_KEY']
 socketio = SocketIO(app, async_mode='gevent')
 
 client = WebApplicationClient(GOOGLE_CLIENT_ID)
+
+@app.before_request
+def before_request():
+    if not request.is_secure:
+        url = request.url.replace('http://', 'https://', 1)
+        code = 301
+        return redirect(url, code=code)
 
 @app.route('/') 
 def render_login():
@@ -147,9 +154,9 @@ def logout():
 @socketio.on('join_room')
 def change_room(data):
     try: 
-    	leave_room(data['old_room'])
+        leave_room(data['old_room'])
     except:
-    	pass
+        pass
     join_room(data['room'])
     
 @socketio.on('leave_room')
@@ -173,11 +180,11 @@ def send_message(data):
     try:
         duration = datetime.now() - datetime.fromisoformat(latest_message.get('datetime').replace('Z', ''))
         if latest_message.get('name') == session['users_name'] and latest_message.get('picture') == session['picture'] and duration.total_seconds() < 180:
-        	data['combine'] = 'true'
+            data['combine'] = 'true'
         else:
-        	data['combine'] = 'false'
+            data['combine'] = 'false'
     except:
-    	data['combine'] = 'false'
+        data['combine'] = 'false'
     collection_messages.insert_one({'name': data['name'], 'picture': session['picture'], 'room': data['room'], 'datetime': utc_dt, 'message': data['message'], 'combine': data['combine']})
     socketio.emit('recieve_message', data, room = data['room'])
     
