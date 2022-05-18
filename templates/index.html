@@ -463,7 +463,7 @@
       }
     }
 
-    $(document).on('click', '.space', function() { //do not do anything if user already on clicked space
+    $(document).on('click', '.space', function() {
       if (current_space != this.id) {
         background_page = 1;
         $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');

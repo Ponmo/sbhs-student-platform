@@ -44,6 +44,8 @@ socketio = SocketIO(app, async_mode='gevent')
 
 client = WebApplicationClient(GOOGLE_CLIENT_ID)
 
+# Redirects users on http to https.
+
 @app.before_request
 def before_request():
     if not request.is_secure:
@@ -51,11 +53,11 @@ def before_request():
         code = 301
         return redirect(url, code=code)
 
+# Loads login page.
+# If login fails, load page again with error message.
+
 @app.route('/') 
 def render_login():
-    
-    # Renders the login page. If user has attempted to log in and failed, then it renders page with error message.
-
     if request.args.get('error') != None:
         return render_template('login.html', login_error = request.args.get('error'))
     return render_template('login.html')
@@ -145,10 +147,15 @@ def get_google_provider_cfg():
     
     return requests.get(GOOGLE_DISCOVERY_URL).json()
     
+# TODO: not currently in use / functional needs logout button
+
 @app.route('/logout')
 def logout():
     session.clear()
     return redirect(url_for('render_login'))
+
+# When a room is clicked, make user join room
+# and leave old room.
 
 @socketio.on('join_room')
 def change_room(data):
@@ -157,18 +164,21 @@ def change_room(data):
     except:
         pass
     join_room(data['room'])
-    
-@socketio.on('leave_room')
-def leave(data):
-	leave_room(data['room'])
-	
+
+# When user starts typing, notify all users in that room.
+
 @socketio.on('is_typing')
 def is_typing(data):
 	socketio.emit('is_typing', data, room = data['room'])
 
+# When user stops typing, notify all users in that room.
+
 @socketio.on('stopped_typing')
 def stopped_typing(data):
 	socketio.emit('stopped_typing', data, room = data['room'])
+
+# When a message is sent, verify and store it in MongoDB.
+# Send the message data to all users in that room.
 
 @socketio.on('send_message')
 def send_message(data):
@@ -187,28 +197,37 @@ def send_message(data):
     collection_messages.insert_one({'name': data['name'], 'picture': session['picture'], 'room': data['room'], 'datetime': utc_dt, 'message': data['message'], 'combine': data['combine']})
     socketio.emit('recieve_message', data, room = data['room'])
     
+# When a room is created, send that room data to all
+# users in the space.
+
 @socketio.on('created_room')
 def created_room(data):
     for room in data['room_list']: #plug list
     	socketio.emit('created_room', data, room = room)
 
+# When a room is deleted, send that room data to all
+# users in the space.
+
 @socketio.on('deleted_room')
 def deleted_room(data):
     for room in data['room_list']:
     	socketio.emit('deleted_room', data, room = room)
-	#socketio.emit('deleted_room', data, room = data['room'])
+
+# When a section is created, send that section data to all
+# users in the space.
 
 @socketio.on('created_section')
 def created_section(data):
 	for room in data['room_list']:
 		socketio.emit('created_section', data, room = room)
 
+# Loads platform after login.
+
 @app.route('/sbhs')
 def render_main_page():
-    #when creating the list of all the spaces, make sure they all have their own unique IDs stored
-    #collection_users = 
     return render_template('index.html', name = session['users_name'], room = '1', picture = session['picture'])
-    return render_template('home.html')#, username = session['users_name'], room = '1')
+
+# Returns all space data from MongoDB.
 
 @app.route('/list_spaces', methods=['GET', 'POST'])
 def list_spaces():
@@ -216,21 +235,27 @@ def list_spaces():
 		spaces_list = dumps(list(collection_spaces.find()))
 		return Response(spaces_list, mimetype='application/json')
 
+# Returns all room and section data of the clicked space from MongoDB.
+
+@app.route('/space', methods=['GET', 'POST'])
+def render_space():
+    if request.method == 'POST':
+        results = {'processed': request.json['space_id']}
+        rooms_and_sections = dumps([list(collection_rooms.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_sections.find({'space': request.json['space_id']}).sort('order', 1))])
+        return Response(rooms_and_sections, mimetype='application/json')
+
+# Returns some message data of the loaded room.
+# Called when user first loads a room
+# or when more messages need to be loaded as user scrolls.
+
 @app.route('/chat_history', methods=['GET', 'POST'])
 def chat_history():
-    if request.method == 'POST': #get data for the room that user is currently in
-        chat_history = dumps(list(collection_messages.find({'room': request.json['room']}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(100))) #LIMITs,
+    if request.method == 'POST':
+        chat_history = dumps(list(collection_messages.find({'room': request.json['room']}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(100)))
         return Response(chat_history, mimetype='application/json')
 
-@app.route('/create_room', methods=['GET', 'POST'])
-def create_room():
-	if request.method == 'POST':
-		room_id = ObjectId()
-		room_list = list(collection_rooms.find({'space': request.json['space_id'], 'section': request.json['section_id']}))
-		room = {'_id': room_id, 'space': request.json['space_id'], 'section': request.json['section_id'], 'name': request.json['room_name'], 'order': len(room_list) + 1}
-		collection_rooms.insert_one(room)
-		room = dumps(room)
-		return Response(room, mimetype='application/json')
+# Deletes the room and all of its messages
+# in MongoDB.
 
 @app.route('/delete_room', methods=['GET', 'POST'])
 def delete_room():
@@ -248,6 +273,22 @@ def delete_room():
 		else:
 			return Response(dumps({'success': 'false'}), mimetype='application/json')
 
+# Adds the newly created room to MongoDB.
+# Returns the room data.
+
+@app.route('/create_room', methods=['GET', 'POST'])
+def create_room():
+	if request.method == 'POST':
+		room_id = ObjectId()
+		room_list = list(collection_rooms.find({'space': request.json['space_id'], 'section': request.json['section_id']}))
+		room = {'_id': room_id, 'space': request.json['space_id'], 'section': request.json['section_id'], 'name': request.json['room_name'], 'order': len(room_list) + 1}
+		collection_rooms.insert_one(room)
+		room = dumps(room)
+		return Response(room, mimetype='application/json')
+
+# Adds the newly created section to MongoDB.
+# Returns the section data.
+
 @app.route('/create_section', methods=['GET', 'POST'])
 def create_section():
 	if request.method == 'POST':
@@ -257,6 +298,10 @@ def create_section():
 		collection_sections.insert_one(section)
 		section = dumps(section)
 		return Response(section, mimetype='application/json')
+
+# Adds the newly created space, default room, and default
+# section to MongoDB.
+# Returns the room and section data.
 
 @app.route('/create_space', methods=['GET', 'POST'])
 def create_space():
@@ -271,15 +316,6 @@ def create_space():
 		collection_sections.insert_one(section)
 		room_and_section = dumps([[room],[section]])
 		return Response(room_and_section, mimetype='application/json')
-
-#
-
-@app.route('/space', methods=['GET', 'POST'])#/<space_id>')
-def render_space():
-    if request.method == 'POST':
-        results = {'processed': request.json['space_id']}
-        rooms_and_sections = dumps([list(collection_rooms.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_sections.find({'space': request.json['space_id']}).sort('order', 1))])
-        return Response(rooms_and_sections, mimetype='application/json')
 	
 if __name__ == '__main__':
     socketio.run(app, debug=False)
