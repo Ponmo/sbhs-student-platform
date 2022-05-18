@@ -9,7 +9,6 @@ from flask import render_template
 
 from oauthlib.oauth2 import WebApplicationClient
 import requests
-from flask_talisman import Talisman # NOTE: Talisman not used, different used below. Test http.
 
 from bson.objectid import ObjectId
 from bson.json_util import dumps

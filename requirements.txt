@@ -32,4 +32,3 @@ dnspython
 pytz
 flask-socketio
 gevent
-flask_talisman
