@@ -247,7 +247,6 @@ def delete_room():
 			return Response(dumps({'success': 'true'}), mimetype='application/json')
 		else:
 			return Response(dumps({'success': 'false'}), mimetype='application/json')
-	#rearrange room order
 
 @app.route('/create_section', methods=['GET', 'POST'])
 def create_section():
@@ -273,21 +272,14 @@ def create_space():
 		room_and_section = dumps([[room],[section]])
 		return Response(room_and_section, mimetype='application/json')
 
+#
+
 @app.route('/space', methods=['GET', 'POST'])#/<space_id>')
 def render_space():
     if request.method == 'POST':
         results = {'processed': request.json['space_id']}
         rooms_and_sections = dumps([list(collection_rooms.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_sections.find({'space': request.json['space_id']}).sort('order', 1))])
         return Response(rooms_and_sections, mimetype='application/json')
-
-# Returns the specified data 
-
-@app.route('/space_info', methods=['GET', 'POST'])
-def space_info():
-	if request.method == 'POST':
-		space = dumps(collection_spaces.find_one({'_id': ObjectId(request.json['space_name'])}))
-		return Response(space, mimetype='application/json')
-	
 	
 if __name__ == '__main__':
     socketio.run(app, debug=False)
