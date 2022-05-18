@@ -275,19 +275,12 @@ def create_space():
 
 @app.route('/space', methods=['GET', 'POST'])#/<space_id>')
 def render_space():
-#make user leave_room currently
-#make user join_room 
-#in JS, make user join the room that has order one in collection
-#in JS, render chat, render sidebar, and thats pretty much it I think (also think about
-#adding space information like title/bg/anything.
-
     if request.method == 'POST':
         results = {'processed': request.json['space_id']}
         rooms_and_sections = dumps([list(collection_rooms.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_sections.find({'space': request.json['space_id']}).sort('order', 1))])
-        #join_room(str(collection_rooms.find_one({'space': request.json['space_name'], 'order': '1'})['_id']))
         return Response(rooms_and_sections, mimetype='application/json')
-        return jsonify(results)
-        return render_template('index.html', username = session['users_name'], room = '1')
+
+# Returns the specified data 
 
 @app.route('/space_info', methods=['GET', 'POST'])
 def space_info():
