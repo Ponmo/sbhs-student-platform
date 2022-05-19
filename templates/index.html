@@ -21,18 +21,23 @@
   	  <!-- <div id="user-directory">
   	    <h1>User Directory</h1>
   	  </div> -->
+
   	  <div id="space-directory-lfg">
-  	  	<div id="space-directory-lfg-title">Club Directory</div>
-        <!--R20 Grid/Table Scroll Layout-->
+
+        <div id="space-directory-lfg-header">
+          <span id="space-directory-lfg-title">Club Directory</span>
+          <img class="pointer" id="space-directory-lfg-home" src="/static/images/home-white.png">
+        </div>
+
         <div class="directory-space">
-          <!--In general, give all Images an ALT image-->
           <img class="directory-space-img" src="/static/images/Space.jpeg">
           <div class="directory-space-title">Title</div>
           <div class="directory-space-description">Description of Space</div>
-          
         </div>
+
   	    <img class="pointer" id="close-space-search-button" src="/static/images/back.png">
-  	  </div>
+  	  
+      </div>
   	</div>
     <!--Spaces Page-->
     <div id="first-all">
@@ -232,7 +237,7 @@
       if (data.combine == 'false') {
         newMode.className = 'message-container';
         messageMoment = 'at ' + messageMoment;
-        // Give pfp image default fallback image
+        // TODO: Give pfp image default fallback image
         newMode.innerHTML = '<img class="pfp" src="' + data.picture + '" alt="!"> <p class="message-title"> <span class="name"> <b>' + data.name + ' </b> </span> <span class="datetime">' + messageMoment + '</span> </p> <p class="message">' + data.message + '</p>';
       }
       else {
