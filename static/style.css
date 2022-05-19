@@ -28,13 +28,15 @@ img { /* make images and create button undraggable and unhighlitable*/
   height: 100%;
   background-color: hotpink;
 }
-#space-directory-lfg-title {
-  line-height: 48px;
+#space-directory-lfg-header {
   margin-left: 18px;
-  font-size: 16px;
   margin-right: 18px;
   border-bottom: 1px solid black;
   width: auto;
+}
+#space-directory-lfg-title {
+  line-height: 48px;
+  font-size: 16px;
   font-weight: bold;
   color: #ffffff;
 }
@@ -45,7 +47,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   border-radius: 50%;
   margin-right: 12px;
   margin-top: 9px;
-  float: right;s
+  float: right;
 }
 /* #close-space-search-button {
   display: inline-block;
