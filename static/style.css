@@ -28,6 +28,16 @@ img { /* make images and create button undraggable and unhighlitable*/
   height: 100%;
   background-color: hotpink;
 }
+#space-directory-lfg-title {
+  line-height: 48px;
+  margin-left: 18px;
+  font-size: 16px;
+  margin-right: 18px;
+  border-bottom: 1px solid black;
+  width: auto;
+  font-weight: bold;
+  color: #ffffff;
+}
 /* #close-space-search-button {
   display: inline-block;
   width: 30px;
