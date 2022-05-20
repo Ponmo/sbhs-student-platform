@@ -460,9 +460,13 @@
           	newNode.innerHTML = 'general<img class="room-settings" src="/static/images/settings-white.png">';
           	document.getElementById('channels').append(newNode);
             document.getElementById('channels').append(newNode);
-            $('#home-page').css('display', 'none');
-            $('#first-all').css('display', 'block');
-            $('#space-search').css('display', 'none');
+            //$('#home-page').css('display', 'none');
+            //$('#first-all').css('display', 'block');
+            //$('#space-search').css('display', 'none');
+
+            $('#home-page').fadeOut();
+            $('#first-all').fadeIn();
+            $('#space-search').fadeOut();
             joinRoom(room_and_section[0][0]['_id']['$oid']);
           }
         });
@@ -507,9 +511,13 @@
               });
             });
             joinRoom(document.querySelector('.room').id);
-            $('#home-page').css('display', 'none');
-            $('#first-all').css('display', 'block');
-            $('#space-search').css('display', 'none');
+            //$('#home-page').css('display', 'none');
+            //$('#first-all').css('display', 'block');
+            //$('#space-search').css('display', 'none');
+
+            $('#home-page').fadeOut();
+            $('#first-all').fadeIn();
+            $('#space-search').fadeOut();
           }
         });
       }
@@ -520,9 +528,13 @@
       current_space = '';
       current_room = '';
       $('.active-space').attr('style', '');
-      $('#home-page').css('display', 'block');
-      $('#first-all').css('display', 'none');
-      $('#space-search').css('display', 'none');
+      //$('#home-page').css('display', 'block');
+      //$('#first-all').css('display', 'none');
+      //$('#space-search').css('display', 'none');
+
+      $('#home-page').fadeIn();
+      $('#first-all').fadeOut();
+      $('#space-search').fadeOut();
     });
     
 	$(document).on('click', '.room', function(e) {
