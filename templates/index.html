@@ -582,37 +582,37 @@
 	    //$('#home-page').css('display', 'none');
 	    //$('#space-search').css('display', 'block');
 
-      $('#home-page').fadeToggle();
-	    $('#space-search').fadeToggle();
+      $('#home-page').fadeOut();
+	    $('#space-search').fadeIn();
 	  }
 	  else {
 	    //$('#first-all').css('display', 'none');
 
-      $('#first-all').fadeToggle();
+      $('#first-all').fadeOut();
 	  }
 	  //$('#footer').css('display', 'none');
 	  //$('#space-search').css('display', 'block');
 
-    $('#footer').fadeToggle();
-	  $('#space-search').fadeToggle();
+    $('#footer').fadeOut();
+	  $('#space-search').fadeIn();
     });
     
     $(document).on('click', '#close-space-search-button', function() {
       if (background_page == 0) {
         //$('#home-page').css('display', 'block');
 
-        $('#home-page').fadeToggle();
+        $('#home-page').fadeIn();
       }
       else {
         //$('#first-all').css('display', 'block');
 
-        $('#first-all').fadeToggle();
+        $('#first-all').fadeIn();
       }
       //$('#footer').css('display', 'flex');
       //$('#space-search').css('display', 'none');
 
-      $('#footer').fadeToggle();
-      $('#space-search').fadeToggle();
+      $('#footer').fadeIn();
+      $('#space-search').fadeOut();
     });
     
   </script>
