@@ -14,6 +14,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   cursor: pointer;
 }
 #home-page-container {
+  z-index: -2;
   position: absolute;
   width: 100vw;
   height: 100vh;
