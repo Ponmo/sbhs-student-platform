@@ -20,7 +20,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   height: 100vh;
 }
 #first-all-container {
-  z-index: 0;
+  z-index: -2;
   position: absolute;
   width: 100vw;
   height: 100vh;
