@@ -34,6 +34,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   z-index: -2;
   width: 100vw;
   height: 100vh;
+  background-color: white;
 }
 #space-search {
   width: 100vw;
