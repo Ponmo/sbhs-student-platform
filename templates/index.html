@@ -619,16 +619,16 @@
           var newNode = document.createElement('div');
           newNode.className = 'form_space';
           newNode.id = space['_id']['$oid'];
-          document.getElementById('directory-space').appendChild(newNode);
+          document.getElementById('directory-space').append(newNode);
 
           newNode = document.createElement('img');
           newNode.className = 'form_space_picture';
           newNode.src = space['picture'];
-          document.getElementById('directory-space').appendChild(newNode);
+          document.getElementById('directory-space').append(newNode);
 
           newNode = document.createElement('div');
           newNode.className = 'form_space_name';
-          document.getElementById('directory-space').appendChild(newNode);
+          document.getElementById('directory-space').append(newNode);
         });
       }
     });
