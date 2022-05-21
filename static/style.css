@@ -16,6 +16,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 #home-page-container {
   z-index: 0;
   position: absolute;
+  background-color: white;
   width: 100vw;
   height: 100vh;
 }
