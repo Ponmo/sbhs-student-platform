@@ -615,7 +615,21 @@
       url: '/board',
       dataType: "json",
       success: function(board_spaces) {
-        alert(JSON.stringify(board_spaces));
+        board_spaces.forEach(function(space) {
+          const newNode = document.createElement('div');
+          newNode.className = 'form_space';
+          newNode.id = space['_id']['$oid'];
+          document.getElementById('space-directory-lfg').appendChild(newNode);
+
+          newNode = document.createElement('img');
+          newNode.className = 'form_space_picture';
+          newNode.src = space['picture'];
+          document.getElementById('space-directory-lfg').appendChild(newNode);
+
+          newNode = document.createElement('div');
+          newNode.className = 'form_space_name';
+          document.getElementById('space-directory-lfg').appendChild(newNode);
+        });
       }
     });
   });
