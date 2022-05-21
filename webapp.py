@@ -195,6 +195,8 @@ def send_message(data):
     except:
         data['combine'] = 'false'
     collection_messages.insert_one({'name': data['name'], 'picture': session['picture'], 'room': data['room'], 'datetime': utc_dt, 'message': data['message'], 'combine': data['combine']})
+    
+    
     socketio.emit('recieve_message', data, room = data['room'])
     
 # When a room is created, send that room data to all
@@ -317,5 +319,12 @@ def create_space():
 		room_and_section = dumps([[room],[section]])
 		return Response(room_and_section, mimetype='application/json')
 	
+@app.route('/board', methods=['GET', 'POST'])
+def board():
+    if request.method == 'POST':
+        spaces = dumps(list(collection_spaces.find({})))
+        return Response(spaces, mimetype='application/json')
+
+
 if __name__ == '__main__':
     socketio.run(app, debug=False)
