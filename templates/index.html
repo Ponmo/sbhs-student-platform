@@ -471,9 +471,9 @@
             $('#home-page-container').css({opacity: '0', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
             $('#first-all-container').css({opacity: '1', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
             $('#space-search-container').css({opacity: '0', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
-            $('#home-page-container').css('z-index', '-1');
+            $('#home-page-container').css('z-index', '-2');
             $('#first-all-container').css('z-index', '0');
-            $('#space-search-container').css('z-index', '-1');
+            $('#space-search-container').css('z-index', '-2');
             joinRoom(room_and_section[0][0]['_id']['$oid']);
           }
         });
@@ -521,9 +521,9 @@
             $('#home-page-container').css({opacity: '0', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
             $('#first-all-container').css({opacity: '1', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
             $('#space-search-container').css({opacity: '0', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
-            $('#home-page-container').css('z-index', '-1');
+            $('#home-page-container').css('z-index', '-2');
             $('#first-all-container').css('z-index', '0');
-            $('#space-search-container').css('z-index', '-1');
+            $('#space-search-container').css('z-index', '-2');
           }
         });
       }
@@ -538,8 +538,8 @@
       $('#first-all-container').css({opacity: '0', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
       $('#space-search-container').css({opacity: '0', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
       $('#home-page-container').css('z-index', '0');
-      $('#first-all-container').css('z-index', '-1');
-      $('#space-search-container').css('z-index', '-1');
+      $('#first-all-container').css('z-index', '-2');
+      $('#space-search-container').css('z-index', '-2');
     });
     
 	$(document).on('click', '.room', function(e) {
@@ -598,16 +598,16 @@
 	  if (background_page == 0) {
       $('#home-page-container').css({opacity: '0', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
 	    $('#space-search-container').css({opacity: '1', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
-      $('#home-page-container').css('z-index', '-1');
+      $('#home-page-container').css('z-index', '-2');
       $('#space-search-container').css('z-index', '0');
     }
 	  else {
       $('#first-all-container').css({opacity: '0', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
-      $('#first-all-container').css('z-index', '-1');
+      $('#first-all-container').css('z-index', '-2');
     }
     $('#footer-container').css({opacity: '0', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
 	  $('#space-search-container').css({opacity: '1', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
-    $('#footer-container').css('z-index', '-1');
+    $('#footer-container').css('z-index', '-2');
     $('#space-search-container').css('z-index', '0');
   });
     
@@ -623,7 +623,7 @@
     $('#footer-container').css({opacity: '1', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
     $('#space-search-container').css({opacity: '0', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
     $('#footer-container').css('z-index', '0');
-    $('#space-search-container').css('z-index', '-1');
+    $('#space-search-container').css('z-index', '-2');
   });
     
   </script>
