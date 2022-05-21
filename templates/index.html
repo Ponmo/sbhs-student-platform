@@ -618,20 +618,20 @@
       url: '/board',
       dataType: "json",
       success: function(board_spaces) {
-        board_spaces.forEach(function(space) {
+        board_spaces.forEach(function(board_space) {
           const newNode = document.createElement('div');
           newNode.className = 'form_space';
-          newNode.id = space['_id']['$oid'];
+          newNode.id = board_space['_id']['$oid'];
           document.getElementById('directory-space').append(newNode);
 
           var newNodeChild = document.createElement('img');
           newNodeChild.className = 'form_space_picture';
-          newNodeChild.src = space['picture'];
+          newNodeChild.src = board_space['picture'];
           newNode.appendChild(newNodeChild);
 
           newNodeChild = document.createElement('div');
           newNodeChild.className = 'form_space_name';
-          newNodeChild.textContent = space['name'];
+          newNodeChild.textContent = board_space['name'];
           newNode.appendChild(newNodeChild);
 
           document.getElementById('directory-space').append(newNode);
