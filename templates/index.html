@@ -616,18 +616,21 @@
       dataType: "json",
       success: function(board_spaces) {
         board_spaces.forEach(function(space) {
-          var newNode = document.createElement('div');
+          const newNode = document.createElement('div');
           newNode.className = 'form_space';
           newNode.id = space['_id']['$oid'];
           document.getElementById('directory-space').append(newNode);
 
-          newNode = document.createElement('img');
-          newNode.className = 'form_space_picture';
-          newNode.src = space['picture'];
-          document.getElementById('directory-space').append(newNode);
+          var newNodeChild = document.createElement('img');
+          newNodeChild.className = 'form_space_picture';
+          newNodeChild.src = space['picture'];
+          newNode.appendChild(newNodeChild);
 
-          newNode = document.createElement('div');
-          newNode.className = 'form_space_name';
+          newNodeChild = document.createElement('div');
+          newNodeChild.className = 'form_space_name';
+          newNodeChild.textContent = space['name'];
+          newNode.appendChild(newNodeChild);
+          
           document.getElementById('directory-space').append(newNode);
         });
       }
