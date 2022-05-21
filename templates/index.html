@@ -609,6 +609,15 @@
 	  $('#space-search-container').css({opacity: '1', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
     $('#footer-container').css('z-index', '-2');
     $('#space-search-container').css('z-index', '0');
+
+    $.ajax({
+      type: "POST",
+      url: '/board',
+      dataType: "json",
+      success: function(board_spaces) {
+        alert(JSON.stringify(board_spaces));
+      }
+    });
   });
     
   $(document).on('click', '#close-space-search-button', function() {
@@ -625,18 +634,10 @@
     $('#footer-container').css('z-index', '0');
     $('#space-search-container').css('z-index', '-2');
   });
+  
+  
+
     
-  $(document).on('click', '#space-search-button', function() {
-    
-    $.ajax({
-      type: "POST",
-      url: '/board',
-      dataType: "json",
-      success: function(board_spaces) {
-        alert(JSON.stringify(board_spaces));
-      }
-    });
-  });
 
   </script>
 </html>
