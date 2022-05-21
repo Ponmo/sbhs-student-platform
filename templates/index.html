@@ -631,10 +631,10 @@
     $.ajax({
       type: "POST",
       url: '/board',
-      dataType: "json",s
-      success: function(spaces) {
-        alert(JSON.stringify(spaces));
-      } 
+      dataType: "json",
+      success: function(board_spaces) {
+        alert(JSON.stringify(board_spaces));
+      }
     });
   });
 
