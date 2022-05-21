@@ -21,72 +21,75 @@
     
     <!--Space Directory Page-->
     <div id="space-search-container">
-  	<div id="space-search">
+  	  <div id="space-search">
   	  <!-- <div id="user-directory">
   	    <h1>User Directory</h1>
   	  </div> -->
 
-  	  <div id="space-directory-lfg">
+  	    <div id="space-directory-lfg">
 
-        <div id="space-directory-lfg-header">
-          <span id="space-directory-lfg-title">Club Directory</span>
-          <!--UI For Double Click (Back and Home Button Overlayed)-->
-          <img class="pointer" id="close-space-search-button" src="/static/images/back.png">
-        </div>
+          <div id="space-directory-lfg-header">
+            <span id="space-directory-lfg-title">Club Directory</span>
+            <!--UI For Double Click (Back and Home Button Overlayed)-->
+            <img class="pointer" id="close-space-search-button" src="/static/images/back.png">
+          </div>
 
-        <div class="directory-space">
-          <img class="directory-space-img" src="/static/images/Space.jpeg">
-          <div class="directory-space-title">Title</div>
-          <div class="directory-space-description">Description of Space</div>
-        </div>
+          <div class="directory-space">
+            <img class="directory-space-img" src="/static/images/Space.jpeg">
+            <div class="directory-space-title">Title</div>
+            <div class="directory-space-description">Description of Space</div>
+          </div>
   	  
-      </div>
-  	</div>
-  </div>
+        </div>
+  	  </div>
+    </div>
     <!--Spaces Page-->
     <div id="first-all-container">
-    <div id="first-all">
-      <div id="content">
-        <div id="header">
-          <span id="header_text"></span>
-          <img class="pointer" id="create-section-button" src="/static/images/settings-white.png">
-        </div>
-        <div id="information">
-          <img class="pointer" id="home" src="/static/images/home-white.png">
-          <p id="room-name-display"></p>
-        </div>
-        <div id="channels"></div>
-<!--         when new message is sent, make the new message appear above the message bar and not mess up the scrolling (Safari only). -->
-        <div id="chats">
-          <div id="chat">
-            <div id="messages">
-            </div>
+      <div id="first-all">
+        <div id="content">
+          <div id="header">
+            <span id="header_text"></span>
+            <img class="pointer" id="create-section-button" src="/static/images/settings-white.png">
           </div>
-          <form id="message_input_form">
-            <!--see w3schools input attributes like max char, spam, etc. -->
-            <textarea id="message_input" rows="1" placeholder="Enter message"></textarea>
+          <div id="information">
+            <img class="pointer" id="home" src="/static/images/home-white.png">
+            <p id="room-name-display"></p>
+          </div>
+          <div id="channels"></div>
+<!--         when new message is sent, make the new message appear above the message bar and not mess up the scrolling (Safari only). -->
+          <div id="chats">
+            <div id="chat">
+              <div id="messages">
+              </div>
+            </div>
+            <form id="message_input_form">
+              <!--see w3schools input attributes like max char, spam, etc. -->
+              <textarea id="message_input" rows="1" placeholder="Enter message"></textarea>
 <!--             <input type="text" id="message_input" placeholder="Enter message"> -->
-              <button type="submit" id="submit"><img id="send" src="/static/images/send.png" alt="Send"></button>
-          </form>
-          <span id="typing_display"></span>
-        </div>
-        <div id="members">
+                <button type="submit" id="submit"><img id="send" src="/static/images/send.png" alt="Send"></button>
+            </form>
+            <span id="typing_display"></span>
+          </div>
+          <div id="members">
+          </div>
         </div>
       </div>
     </div>
-    </div>
-    <div id="footer">
-      <div id="profile">
-        <!-- load exclamation mark icon if not showing -->
-        <img src={{ picture }} alt="pfp" id="profile_picture">
-        <p id="username">{{ name }}</p>
-        <p id="student_id">Santa Barbara High School</p>
-        <p id="settings">#</p>
-      </div>
-      <div id="spaces">
-        <span id="space_align_helper"></span>
-          <button type="button" id="create-space-button"><img src="/static/images/ppicons-plus.svg" alt="create" style="width:25px;height:25px;"></button>
-          <button type="button" id="space-search-button"><img src="/static/images/ppicons-plus.svg" alt="create" style="width:25px;height:25px;"></button>
+
+    <div id="footer-container">
+      <div id="footer">
+        <div id="profile">
+          <!-- load exclamation mark icon if not showing -->
+          <img src={{ picture }} alt="pfp" id="profile_picture">
+          <p id="username">{{ name }}</p>
+          <p id="student_id">Santa Barbara High School</p>
+          <p id="settings">#</p>
+        </div>
+        <div id="spaces">
+          <span id="space_align_helper"></span>
+            <button type="button" id="create-space-button"><img src="/static/images/ppicons-plus.svg" alt="create" style="width:25px;height:25px;"></button>
+            <button type="button" id="space-search-button"><img src="/static/images/ppicons-plus.svg" alt="create" style="width:25px;height:25px;"></button>
+          </div>
         </div>
       </div>
     </div>
@@ -465,13 +468,9 @@
           	newNode.innerHTML = 'general<img class="room-settings" src="/static/images/settings-white.png">';
           	document.getElementById('channels').append(newNode);
             document.getElementById('channels').append(newNode);
-            //$('#home-page').css('display', 'none');
-            //$('#first-all').css('display', 'block');
-            //$('#space-search').css('display', 'none');
-
-            $('#home-page').fadeOut();
-            $('#first-all').fadeIn();
-            $('#space-search').fadeOut();
+            $('#home-page-container').fadeOut();
+            $('#first-all-container').fadeIn();
+            $('#space-search-container').fadeOut();
             joinRoom(room_and_section[0][0]['_id']['$oid']);
           }
         });
@@ -516,13 +515,9 @@
               });
             });
             joinRoom(document.querySelector('.room').id);
-            //$('#home-page').css('display', 'none');
-            //$('#first-all').css('display', 'block');
-            //$('#space-search').css('display', 'none');
-
-            $('#home-page').fadeOut();
-            $('#first-all').fadeIn();
-            $('#space-search').fadeOut();
+            $('#home-page-container').fadeOut();
+            $('#first-all-container').fadeIn();
+            $('#space-search-container').fadeOut();
           }
         });
       }
@@ -533,13 +528,9 @@
       current_space = '';
       current_room = '';
       $('.active-space').attr('style', '');
-      //$('#home-page').css('display', 'block');
-      //$('#first-all').css('display', 'none');
-      //$('#space-search').css('display', 'none');
-
-      $('#home-page').fadeIn();
-      $('#first-all').fadeOut();
-      $('#space-search').fadeOut();
+      $('#home-page-container').fadeIn();
+      $('#first-all-container').fadeOut();
+      $('#space-search-container').fadeOut();
     });
     
 	$(document).on('click', '.room', function(e) {
@@ -577,59 +568,44 @@
 	function joinRoom(room_id) {
 	  if (current_room != room_id) {
 	    old_room = current_room;
-  	    current_room = room_id;
-  	    socket.emit('join_room', {
-          room: current_room,
-          old_room: old_room
-        });
-        $(document.getElementById(current_room)).attr('style', 'background-color: #43474d !important');
-        $(document.getElementById(old_room)).attr('style', '');
-        document.getElementById('messages').textContent = '';
-        document.getElementById('room-name-display').textContent = document.getElementById(current_room).getAttribute('data-name');
-        chat_history_skip = 0;
-        loadChatHistory();
-        typing_display.textContent = '';
-        typing_list = [];
-        stoppedTyping();
-      }
+  	  current_room = room_id;
+  	  socket.emit('join_room', {
+        room: current_room,
+        old_room: old_room
+      });
+      $(document.getElementById(current_room)).attr('style', 'background-color: #43474d !important');
+      $(document.getElementById(old_room)).attr('style', '');
+      document.getElementById('messages').textContent = '';
+      document.getElementById('room-name-display').textContent = document.getElementById(current_room).getAttribute('data-name');
+      chat_history_skip = 0;
+      loadChatHistory();
+      typing_display.textContent = '';
+      typing_list = [];
+      stoppedTyping();
+    }
 	}
 	
 	$(document).on('click', '#space-search-button', function() {
 	  if (background_page == 0) {
-	    //$('#home-page').css('display', 'none');
-	    //$('#space-search').css('display', 'block');
-
-      $('#home-page').fadeOut();
-	    $('#space-search').fadeIn();
+      $('#home-page-container').fadeOut();
+	    $('#space-search-container').fadeIn();
 	  }
 	  else {
-	    //$('#first-all').css('display', 'none');
-
       $('#first-all').fadeOut();
 	  }
-	  //$('#footer').css('display', 'none');
-	  //$('#space-search').css('display', 'block');
-
-    $('#footer').fadeOut();
-	  $('#space-search').fadeIn();
+    $('#footer-container').fadeOut();
+	  $('#space-search-container').fadeIn();
     });
     
     $(document).on('click', '#close-space-search-button', function() {
       if (background_page == 0) {
-        //$('#home-page').css('display', 'block');
-
-        $('#home-page').fadeIn();
+        $('#home-page-container').fadeIn();
       }
       else {
-        //$('#first-all').css('display', 'block');
-
-        $('#first-all').fadeIn();
+        $('#first-all-container').fadeIn();
       }
-      //$('#footer').css('display', 'flex');
-      //$('#space-search').css('display', 'none');
-
-      $('#footer').fadeIn();
-      $('#space-search').fadeOut();
+      $('#footer-container').fadeIn();
+      $('#space-search-container').fadeOut();
     });
     
   </script>
