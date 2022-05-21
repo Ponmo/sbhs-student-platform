@@ -24,7 +24,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   height: 100vh;
 }
 #first-all {
-  display: none;
+  /*display: none;*/
   overflow: hidden;
 }
 #space-search-container {
@@ -33,7 +33,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   height: 100vh;
 }
 #space-search {
-  display: none;
+  /*display: none;*/
   width: 100vw;
   height: 100vh;
   overflow: hidden;
