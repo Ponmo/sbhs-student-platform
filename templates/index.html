@@ -468,9 +468,12 @@
           	newNode.innerHTML = 'general<img class="room-settings" src="/static/images/settings-white.png">';
           	document.getElementById('channels').append(newNode);
             document.getElementById('channels').append(newNode);
-            $('#home-page-container').fadeOut();
-            $('#first-all-container').fadeIn();
-            $('#space-search-container').fadeOut();
+            $('#home-page-container').css({opacity: '0', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
+            $('#first-all-container').css({opacity: '1', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
+            $('#space-search-container').css({opacity: '0', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
+            $('#home-page-container').css('z-index', '-1');
+            $('#first-all-container').css('z-index', '0');
+            $('#space-search-container').css('z-index', '-1');
             joinRoom(room_and_section[0][0]['_id']['$oid']);
           }
         });
@@ -515,9 +518,12 @@
               });
             });
             joinRoom(document.querySelector('.room').id);
-            $('#home-page-container').fadeOut();
-            $('#first-all-container').fadeIn();
-            $('#space-search-container').fadeOut();
+            $('#home-page-container').css({opacity: '0', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
+            $('#first-all-container').css({opacity: '1', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
+            $('#space-search-container').css({opacity: '0', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
+            $('#home-page-container').css('z-index', '-1');
+            $('#first-all-container').css('z-index', '0');
+            $('#space-search-container').css('z-index', '-1');
           }
         });
       }
@@ -528,9 +534,12 @@
       current_space = '';
       current_room = '';
       $('.active-space').attr('style', '');
-      $('#home-page-container').fadeIn();
-      $('#first-all-container').fadeOut();
-      $('#space-search-container').fadeOut();
+      $('#home-page-container').css({opacity: '1', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
+      $('#first-all-container').css({opacity: '0', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
+      $('#space-search-container').css({opacity: '0', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
+      $('#home-page-container').css('z-index', '0');
+      $('#first-all-container').css('z-index', '-1');
+      $('#space-search-container').css('z-index', '-1');
     });
     
 	$(document).on('click', '.room', function(e) {
@@ -587,26 +596,35 @@
 	
 	$(document).on('click', '#space-search-button', function() {
 	  if (background_page == 0) {
-      $('#home-page-container').fadeOut();
-	    $('#space-search-container').fadeIn();
-	  }
+      $('#home-page-container').css({opacity: '0', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
+	    $('#space-search-container').css({opacity: '1', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
+      $('#home-page-container').css('z-index', '-1');
+      $('#space-search-container').css('z-index', '0');
+    }
 	  else {
-      $('#first-all').fadeOut();
-	  }
-    $('#footer-container').fadeOut();
-	  $('#space-search-container').fadeIn();
-    });
+      $('#first-all-container').css({opacity: '0', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
+      $('#first-all-container').css('z-index', '-1');
+    }
+    $('#footer-container').css({opacity: '0', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
+	  $('#space-search-container').css({opacity: '1', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
+    $('#footer-container').css('z-index', '-1');
+    $('#space-search-container').css('z-index', '0');
+  });
     
-    $(document).on('click', '#close-space-search-button', function() {
-      if (background_page == 0) {
-        $('#home-page-container').fadeIn();
-      }
-      else {
-        $('#first-all-container').fadeIn();
-      }
-      $('#footer-container').fadeIn();
-      $('#space-search-container').fadeOut();
-    });
+  $(document).on('click', '#close-space-search-button', function() {
+    if (background_page == 0) {
+      $('#home-page-container').css({opacity: '1', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
+      $('#home-page-container').css('z-index', '0');
+    }
+    else {
+      $('#first-all-container').css({opacity: '1', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
+      $('#first-all-container').css('z-index', '0');
+    }
+    $('#footer-container').css({opacity: '1', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
+    $('#space-search-container').css({opacity: '0', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
+    $('#footer-container').css('z-index', '0');
+    $('#space-search-container').css('z-index', '-1');
+  });
     
   </script>
 </html>

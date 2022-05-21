@@ -19,21 +19,21 @@ img { /* make images and create button undraggable and unhighlitable*/
   height: 100vh;
 }
 #first-all-container {
+  z-index: -1;
   position: absolute;
   width: 100vw;
   height: 100vh;
 }
 #first-all {
-  /*display: none;*/
   overflow: hidden;
 }
 #space-search-container {
   position: absolute;
+  z-index: -1;
   width: 100vw;
   height: 100vh;
 }
 #space-search {
-  /*display: none;*/
   width: 100vw;
   height: 100vh;
   overflow: hidden;
