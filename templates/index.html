@@ -482,6 +482,7 @@
 
     $(document).on('click', '.space', function() {
       if (current_space != this.id) {
+        alert('current_space not the same as clicked');
         background_page = 1;
         $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
         $(document.getElementById(current_space)).attr('style', '');
@@ -492,9 +493,10 @@
           type: "POST",
           url: '/space',
           dataType: "json",
-          data: JSON.stringify({'space_id': current_space}), //JSOn.stringify
+          data: JSON.stringify({'space_id': current_space}),
           contentType: 'application/json;charset=UTF-8',
           success: function(rooms_and_sections) {
+            alert('ajax success');
             document.getElementById('messages').textContent = '';
             document.getElementById('header_text').textContent = document.getElementById(rooms_and_sections[0][0]['space']).getAttribute('data-name');
             document.getElementById('channels').textContent = ''; 
@@ -630,7 +632,7 @@
           newNodeChild.className = 'form_space_name';
           newNodeChild.textContent = space['name'];
           newNode.appendChild(newNodeChild);
-          
+
           document.getElementById('directory-space').append(newNode);
         });
       }
