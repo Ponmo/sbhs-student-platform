@@ -18,6 +18,11 @@ img { /* make images and create button undraggable and unhighlitable*/
   display: none;
 }
 #space-search {
+  position: fixed;
+  display: none;
+  height: 100vh;
+  width: 100vw;
+  z-index: 10;
 }
 #space-directory-lfg-header {
   margin-left: 18px;
