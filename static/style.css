@@ -387,9 +387,6 @@ h1 {
   grid-row: 2;
   background-color: #2f3136;
 }
-#footer-container {
-  opacity: 0;
-}
 #footer {
   position: fixed;
   display: flex;
