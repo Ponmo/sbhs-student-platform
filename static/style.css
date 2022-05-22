@@ -18,6 +18,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   display: none;
 }
 #space-search {
+  background-color: white;
   position: fixed;
   display: none;
   height: 100vh;
