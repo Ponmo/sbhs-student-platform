@@ -500,9 +500,9 @@
           	newNode.id = room_and_section[0][0]['_id']['$oid'];
           	newNode.innerHTML = 'general<img class="room-settings" src="/static/images/settings-white.png">';
             document.getElementById('channels').append(newNode);
-            $('#home-page-container').css('opacity', '0');
-            $('#first-all-container').css('opacity', '1');
-            $('#space-search-container').css({opacity: '0', WebkitTransition: 'opacity 0.1s ease-out', MozTransition: 'opacity 0.1s ease-out', MsTransition: 'opacity 0.1s ease-out', OTransition: 'opacity 0.1s ease-out', transition: 'opacity 0.1s ease-out'});
+            $('#home-page-container').css('zIndex', '-10');
+            $('#first-all-container').css('zIndex', '0');
+            $('#space-search-container').css({zIndex: '-10', opacity: '0', WebkitTransition: 'opacity 0.1s ease-out', MozTransition: 'opacity 0.1s ease-out', MsTransition: 'opacity 0.1s ease-out', OTransition: 'opacity 0.1s ease-out', transition: 'opacity 0.1s ease-out'});
             joinRoom(room_and_section[0][0]['_id']['$oid']);
           }
         });
@@ -547,9 +547,9 @@
               });
             });
             joinRoom(document.querySelector('.room').id);
-            $('#home-page-container').css('opacity', '0');
-            $('#first-all-container').css('opacity', '1');
-            $('#space-search-container').css({opacity: '0', WebkitTransition: 'opacity 0.1s ease-out', MozTransition: 'opacity 0.1s ease-out', MsTransition: 'opacity 0.1s ease-out', OTransition: 'opacity 0.1s ease-out', transition: 'opacity 0.1s ease-out'});
+            $('#home-page-container').css('zIndex', '-10');
+            $('#first-all-container').css('zIndex', '0');
+            $('#space-search-container').css({zIndex: '-10', opacity: '0', WebkitTransition: 'opacity 0.1s ease-out', MozTransition: 'opacity 0.1s ease-out', MsTransition: 'opacity 0.1s ease-out', OTransition: 'opacity 0.1s ease-out', transition: 'opacity 0.1s ease-out'});
           }
         });
       }
@@ -560,9 +560,9 @@
       current_space = '';
       current_room = '';
       $('.active-space').attr('style', '');
-      $('#home-page-container').css('opacity', '1');
-      $('#first-all-container').css('opacity', '0');
-      $('#space-search-container').css({opacity: '0', WebkitTransition: 'opacity 0.1s ease-out', MozTransition: 'opacity 0.1s ease-out', MsTransition: 'opacity 0.1s ease-out', OTransition: 'opacity 0.1s ease-out', transition: 'opacity 0.1s ease-out'});
+      $('#home-page-container').css('zIndex', '0');
+      $('#first-all-container').css('zIndex', '-10');
+      $('#space-search-container').css({zIndex: '-10', opacity: '0', WebkitTransition: 'opacity 0.1s ease-out', MozTransition: 'opacity 0.1s ease-out', MsTransition: 'opacity 0.1s ease-out', OTransition: 'opacity 0.1s ease-out', transition: 'opacity 0.1s ease-out'});
     });
     
 	$(document).on('click', '.room', function(e) {
@@ -619,24 +619,24 @@
 	
 	$(document).on('click', '#space-search-button', function() {
 	  if (background_page == 0) {
-      $('#home-page-container').css('opacity', '0');
+      $('#home-page-container').css('zIndex', '-10');
     }
 	  else {
-      $('#first-all-container').css('opacity', '0');
+      $('#first-all-container').css('zIndex', '-10');
     }
-    $('#footer-container').css('opacity', '0');
-	  $('#space-search-container').css({opacity: '1', WebkitTransition: 'opacity 0.1s ease-out', MozTransition: 'opacity 0.1s ease-out', MsTransition: 'opacity 0.1s ease-out', OTransition: 'opacity 0.1s ease-out', transition: 'opacity 0.1s ease-out'});
+    $('#footer-container').css('zIndex', '-10');
+	  $('#space-search-container').css({zIndex: '0', opacity: '1', WebkitTransition: 'opacity 0.1s ease-out', MozTransition: 'opacity 0.1s ease-out', MsTransition: 'opacity 0.1s ease-out', OTransition: 'opacity 0.1s ease-out', transition: 'opacity 0.1s ease-out'});
   });
     
   $(document).on('click', '#close-space-search-button', function() {
     if (background_page == 0) {
-      $('#home-page-container').css('opacity', '1');
+      $('#home-page-container').css('zIndex', '0');
     }
     else {
-      $('#first-all-container').css('opacity', '1');
+      $('#first-all-container').css('zIndex', '0');
     }
-    $('#footer-container').css('opacity', '1');
-    $('#space-search-container').css({opacity: '0', WebkitTransition: 'opacity 0.1s ease-out', MozTransition: 'opacity 0.1s ease-out', MsTransition: 'opacity 0.1s ease-out', OTransition: 'opacity 0.1s ease-out', transition: 'opacity 0.1s ease-out'});
+    $('#footer-container').css('zIndex', '0');
+    $('#space-search-container').css({zIndex: '-10', opacity: '0', WebkitTransition: 'opacity 0.1s ease-out', MozTransition: 'opacity 0.1s ease-out', MsTransition: 'opacity 0.1s ease-out', OTransition: 'opacity 0.1s ease-out', transition: 'opacity 0.1s ease-out'});
   });
   
   
