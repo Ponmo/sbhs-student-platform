@@ -23,6 +23,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 #space-search {
   background-color: white;
+  opacity: 0;
   position: fixed;
   overflow-y: scroll;
   display: none;
