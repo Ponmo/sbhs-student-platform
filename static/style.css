@@ -24,6 +24,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 #space-search {
   background-color: white;
   position: fixed;
+  overflow-y: scroll;
   display: none;
   height: 100vh;
   width: 100vw;
