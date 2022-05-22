@@ -448,8 +448,6 @@
       newNode.innerHTML = '<div class="section-name">' + data.name + '</div><div class="create-room-button" type="button">+</div>'
       document.getElementById('channels').append(newNode);
     });
-    
-    //ERRORS BELOW:
 
     document.getElementById('create-space-form').onsubmit = function (e) {
       e.preventDefault();
@@ -626,7 +624,10 @@
       $('#first-all-container').css('zIndex', '-10');
     }
     $('#footer-container').css('zIndex', '-10');*/
-	  $('#space-search').css({display: 'block', opacity: '1', WebkitTransition: 'opacity 0.1s ease-out', MozTransition: 'opacity 0.1s ease-out', MsTransition: 'opacity 0.1s ease-out', OTransition: 'opacity 0.1s ease-out', transition: 'opacity 0.1s ease-out'});
+
+    $('#space-search').css('display', 'block');
+
+	  //$('#space-search').css({display: 'block', opacity: '1', WebkitTransition: 'opacity 0.1s ease-out', MozTransition: 'opacity 0.1s ease-out', MsTransition: 'opacity 0.1s ease-out', OTransition: 'opacity 0.1s ease-out', transition: 'opacity 0.1s ease-out'});
   });
     
   $(document).on('click', '#close-space-search-button', function() {
