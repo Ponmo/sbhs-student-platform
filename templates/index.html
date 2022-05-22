@@ -625,19 +625,30 @@
       dataType: "json",
       success: function(board_spaces) {
         board_spaces.forEach(function(space) {
+
+          <div class="form-space">
+            <img class="directory-space-img" src="/static/images/Space.jpeg">
+            <div class="directory-space-title">Title</div>
+            <div class="directory-space-description">Description of Space</div>
+          </div>
+
           const newNode = document.createElement('div');
-          newNode.className = 'form_space';
+          newNode.className = 'form-space';
           newNode.setAttribute('data-id', space['_id']['$oid']);
-          document.getElementById('directory-space').append(newNode);
 
           var newNodeChild = document.createElement('img');
-          newNodeChild.className = 'form_space_picture';
+          newNodeChild.className = 'directory-space-img';
           newNodeChild.src = space['picture'];
           newNode.appendChild(newNodeChild);
 
           newNodeChild = document.createElement('div');
-          newNodeChild.className = 'form_space_name';
+          newNodeChild.className = 'directory-space-title';
           newNodeChild.textContent = space['name'];
+          newNode.appendChild(newNodeChild);
+
+          newNodeChild = document.createElement('div');
+          newNodeChild.className = 'directory-space-description';
+          newNodeChild.textContent = 'Description of Space'
           newNode.appendChild(newNodeChild);
 
           document.getElementById('directory-space').append(newNode);
