@@ -625,13 +625,6 @@
       dataType: "json",
       success: function(board_spaces) {
         board_spaces.forEach(function(space) {
-
-          <div class="form-space">
-            <img class="directory-space-img" src="/static/images/Space.jpeg">
-            <div class="directory-space-title">Title</div>
-            <div class="directory-space-description">Description of Space</div>
-          </div>
-
           const newNode = document.createElement('div');
           newNode.className = 'form-space';
           newNode.setAttribute('data-id', space['_id']['$oid']);
