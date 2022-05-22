@@ -185,7 +185,7 @@
         dataType: "json",
         success: function(spaces_list) {
           spaces_list.forEach(function(item) {
-            const newNode = document.createElement('div');
+            var newNode = document.createElement('div');
             newNode.className = 'space-wrapper';
             
             var newNodeChild = document.createElement('img');
@@ -201,6 +201,36 @@
             
             referenceNode = document.getElementById('space_align_helper');
             referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+
+            
+
+            newNode = document.createElement('div');
+            newNode.className = 'form-space';
+            newNode.setAttribute('data-id', item['_id']['$oid']);
+
+            newNodeChild = document.createElement('img');
+            newNodeChild.className = 'directory-space-img';
+            newNodeChild.src = item['picture'];
+            newNode.appendChild(newNodeChild);
+
+            newNodeChild = document.createElement('div');
+            newNodeChild.className = 'directory-space-title';
+            newNodeChild.textContent = item['name'];
+            newNode.appendChild(newNodeChild);
+
+            newNodeChild = document.createElement('div');
+            newNodeChild.className = 'directory-space-description';
+            newNodeChild.textContent = 'Description of Space'
+            newNode.appendChild(newNodeChild);
+
+            document.getElementById('directory-space').append(newNode);
+        });
+      }
+    });
+
+
+
+
           });
         }
       });
@@ -618,36 +648,6 @@
     $('#space-search-container').css('z-index', '0');
     $('#footer-container').css({opacity: '0', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
 	  $('#space-search-container').css({opacity: '1', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
-
-    $.ajax({
-      type: "POST",
-      url: '/board',
-      dataType: "json",
-      success: function(board_spaces) {
-        board_spaces.forEach(function(space) {
-          const newNode = document.createElement('div');
-          newNode.className = 'form-space';
-          newNode.setAttribute('data-id', space['_id']['$oid']);
-
-          var newNodeChild = document.createElement('img');
-          newNodeChild.className = 'directory-space-img';
-          newNodeChild.src = space['picture'];
-          newNode.appendChild(newNodeChild);
-
-          newNodeChild = document.createElement('div');
-          newNodeChild.className = 'directory-space-title';
-          newNodeChild.textContent = space['name'];
-          newNode.appendChild(newNodeChild);
-
-          newNodeChild = document.createElement('div');
-          newNodeChild.className = 'directory-space-description';
-          newNodeChild.textContent = 'Description of Space'
-          newNode.appendChild(newNodeChild);
-
-          document.getElementById('directory-space').append(newNode);
-        });
-      }
-    });
   });
     
   $(document).on('click', '#close-space-search-button', function() {
