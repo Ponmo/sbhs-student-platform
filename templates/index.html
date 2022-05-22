@@ -31,6 +31,16 @@
           <!--UI For Double Click (Back and Home Button Overlayed)-->
           <img class="pointer" id="close-space-search-button" src="/static/images/back.png">
         </div>
+
+        <!--TODO: implement Table Layout Later-->
+        <!-- <table id="directory-space">
+          <tr>
+            <th>(Banner)</th>
+            <th>Moderator</th>
+            <th>Name / Description</th>
+            <th>Meta</th>
+          </tr>
+        <table> -->
         <div id="directory-space">
           <img class="directory-space-img" src="/static/images/Space.jpeg">
           <div class="directory-space-title">Title</div>
@@ -413,6 +423,8 @@
       document.getElementById('channels').append(newNode);
     });
     
+    //ERRORS BELOW:
+
     document.getElementById('create-space-form').onsubmit = function (e) {
       e.preventDefault();
       let space_name = document.getElementById('space-name').value.trim();
@@ -459,7 +471,7 @@
             newNode = document.createElement('div');
           	newNode.className = 'room pointer'; 
           	newNode.setAttribute('data-section', room_and_section[1][0]['_id']['$oid']);
-    	    newNode.setAttribute('data-name', data.name);
+    	      newNode.setAttribute('data-name', data.name);
           	newNode.id = room_and_section[0][0]['_id']['$oid'];
           	newNode.innerHTML = 'general<img class="room-settings" src="/static/images/settings-white.png">';
           	document.getElementById('channels').append(newNode);
@@ -614,7 +626,7 @@
         board_spaces.forEach(function(board_space) {
           const newNode = document.createElement('div');
           newNode.className = 'form_space';
-          newNode.id = board_space['_id']['$oid'];
+          newNode.setAttribute('data-id', board_space['_id']['$oid']);
           document.getElementById('directory-space').append(newNode);
 
           var newNodeChild = document.createElement('img');
