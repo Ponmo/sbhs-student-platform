@@ -149,7 +149,6 @@
     var current_space = '';
     var typing_list = [];
     var selected_section = '';
-    var background_page = 0;
     
     // list of messages being typed by user containing message (updated when user clicks on space or another room) and room id.
     // ['2hu45iu2323', 'Hi I love apples and cakes they are cool', '34yubjub42', 'I love appels']
@@ -467,7 +466,6 @@
           data: JSON.stringify({'space_name': space_name, 'space_image': space_image}),
           contentType: 'application/json;charset=UTF-8',
           success: function(room_and_section) {
-            background_page = 1;
             document.getElementById("create-space").style.display = "none";
             $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
             $(document.getElementById(current_space)).attr('style', '');
@@ -514,7 +512,6 @@
 
     $(document).on('click', '.space', function() {
       if (current_space != this.id) {
-        background_page = 1;
         $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
         $(document.getElementById(current_space)).attr('style', '');
         $(this).css('border-radius', '3px');
@@ -560,7 +557,6 @@
     });
     
     $(document).on('click', '#home', function() {
-      background_page = 0;
       current_space = '';
       current_room = '';
       $('.active-space').attr('style', '');
@@ -630,7 +626,7 @@
       $('#first-all-container').css('zIndex', '-10');
     }
     $('#footer-container').css('zIndex', '-10');*/
-	  $('#space-search').css({display: 'block', zIndex: '100', opacity: '1', WebkitTransition: 'opacity 0.1s ease-out', MozTransition: 'opacity 0.1s ease-out', MsTransition: 'opacity 0.1s ease-out', OTransition: 'opacity 0.1s ease-out', transition: 'opacity 0.1s ease-out'});
+	  $('#space-search').css({display: 'block', opacity: '1', WebkitTransition: 'opacity 0.1s ease-out', MozTransition: 'opacity 0.1s ease-out', MsTransition: 'opacity 0.1s ease-out', OTransition: 'opacity 0.1s ease-out', transition: 'opacity 0.1s ease-out'});
   });
     
   $(document).on('click', '#close-space-search-button', function() {
@@ -641,7 +637,7 @@
       $('#first-all-container').css('zIndex', '0');
     }
     $('#footer-container').css('zIndex', '0');*/
-    $('#space-search').css({display: 'none', zIndex: '-100', opacity: '0', WebkitTransition: 'opacity 0.1s ease-out', MozTransition: 'opacity 0.1s ease-out', MsTransition: 'opacity 0.1s ease-out', OTransition: 'opacity 0.1s ease-out', transition: 'opacity 0.1s ease-out'});
+    $('#space-search').css({display: 'none', opacity: '0', WebkitTransition: 'opacity 0.1s ease-out', MozTransition: 'opacity 0.1s ease-out', MsTransition: 'opacity 0.1s ease-out', OTransition: 'opacity 0.1s ease-out', transition: 'opacity 0.1s ease-out'});
   });
 
     
