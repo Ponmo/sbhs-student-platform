@@ -618,17 +618,14 @@
 	
 	$(document).on('click', '#space-search-button', function() {
 	  $('#space-search').css('display', 'block');
-    $("#space-search").animate({opacity: '1'}, 'fast');
+    $("#space-search").animate({opacity: '1'}, 100);
   });
     
   $(document).on('click', '#close-space-search-button', function() {
-    //$('#space-search').css('display', 'none');
-    $("#space-search").animate({opacity: '0'}, 'fast');
-
+    $("#space-search").animate({opacity: '0'}, 100);
     setTimeout(function() {
       $('#space-search').css('display', 'none');
-    },800);
-    
+    }, 100);
   });
 
     
