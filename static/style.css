@@ -33,13 +33,9 @@ img { /* make images and create button undraggable and unhighlitable*/
   position: absolute;
   z-index: -2;
   width: 100vw;
-  height: 100vh;
   background-color: white;
 }
 #space-search {
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
 }
 #space-directory-lfg-header {
   margin-left: 18px;
@@ -53,19 +49,35 @@ img { /* make images and create button undraggable and unhighlitable*/
   font-weight: bold;
 }
 #directory-space {
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 50px;
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 20px;
 }
+/*Make Responsive with Overlay Overflow Resize, word-break, etc. */
 .form-space {
-  
+  width: 302px;
+  height: 302px;
+  background-color: gray;
 }
+/* if image sizes are turned up to 40px instead of 39px, change aspect ratio */
 .directory-space-img {
-
+  object-fit: cover;
+  width: 302px;
+  height: 220px;
 }
 .directory-space-title {
-
+  font-weight: bold;
+  color: white;
+  margin-left: 18px;
+  margin-top: 10px;
 }
 .directory-space-description {
-
+  color: white;
+  margin-left: 18px;
+  margin-right: 18px;
 }
 #close-space-search-button {
   display: inline-block;
