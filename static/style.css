@@ -15,7 +15,6 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 #home-page-container {
   z-index: 0;
-  opacity: 0;
   position: absolute;
   background-color: white;
   width: 100vw;
@@ -34,6 +33,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 #space-search-container {
   position: absolute;
   z-index: -2;
+  opacity: 0;
   width: 100vw;
   background-color: white;
 }
@@ -387,6 +387,9 @@ h1 {
   grid-row: 2;
   background-color: #2f3136;
 }
+#footer-container {
+  opacity: 0;
+}
 #footer {
   position: fixed;
   display: flex;
@@ -399,8 +402,6 @@ h1 {
   overflow: hidden;
   background: linear-gradient(225deg, #282a2e 20px, #282a2e 20px);
 }
-
-
 #profile {
   display: grid;
   align-items: center;
