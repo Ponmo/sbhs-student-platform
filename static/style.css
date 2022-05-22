@@ -14,14 +14,13 @@ img { /* make images and create button undraggable and unhighlitable*/
   cursor: pointer;
 }
 #home-page-container {
-  /*z-index: 0;*/
   position: absolute;
   background-color: white;
   width: 100vw;
   height: 100vh;
 }
 #first-all-container {
-  /*z-index: -2;*/
+  z-index: -10;
   position: absolute;
   width: 100vw;
   height: 100vh;
@@ -31,8 +30,8 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 #space-search-container {
   position: absolute;
-  /*z-index: -2;*/
-  opacity: 0px;
+  z-index: -10;
+  opacity: 0;
   width: 100vw;
   background-color: white;
 }
