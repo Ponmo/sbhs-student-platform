@@ -52,6 +52,18 @@ img { /* make images and create button undraggable and unhighlitable*/
   font-size: 16px;
   font-weight: bold;
 }
+#directory-space {
+  display: grid;
+}
+.directory-space-img {
+
+}
+.directory-space-title {
+
+}
+.directory-space-description {
+
+}
 #close-space-search-button {
   display: inline-block;
   width: 30px;
