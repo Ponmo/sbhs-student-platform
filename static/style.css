@@ -17,6 +17,10 @@ img { /* make images and create button undraggable and unhighlitable*/
   overflow: hidden;
   display: none;
 }
+#home-page {
+  overflow: hidden;
+  display: block;
+}
 #space-search {
   background-color: white;
   position: fixed;
