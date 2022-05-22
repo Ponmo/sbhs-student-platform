@@ -473,10 +473,9 @@
             newNode = document.createElement('div');
           	newNode.className = 'room pointer'; 
           	newNode.setAttribute('data-section', room_and_section[1][0]['_id']['$oid']);
-    	      newNode.setAttribute('data-name', data.name);
+    	      newNode.setAttribute('data-name', room_and_section[0][0]['name']);
           	newNode.id = room_and_section[0][0]['_id']['$oid'];
           	newNode.innerHTML = 'general<img class="room-settings" src="/static/images/settings-white.png">';
-          	document.getElementById('channels').append(newNode);
             document.getElementById('channels').append(newNode);
             $('#home-page-container').css('z-index', '-2');
             $('#first-all-container').css('z-index', '0');
