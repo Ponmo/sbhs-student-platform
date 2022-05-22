@@ -55,6 +55,9 @@ img { /* make images and create button undraggable and unhighlitable*/
 #directory-space {
   display: grid;
 }
+.form-space {
+  
+}
 .directory-space-img {
 
 }
