@@ -637,7 +637,9 @@
       data: JSON.stringify({'space_id': this.getAttribute('data-id')}),
       contentType: 'application/json;charset=UTF-8',
       success: function(data) {
-        alert(JSON.stringify(data));
+        $('#home-page').css('display', 'none');
+        $('#first-all').css('display', 'block');
+        $('#space-search').css('display', 'none');
       }
     });
   });
