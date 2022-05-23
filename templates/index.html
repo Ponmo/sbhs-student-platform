@@ -630,7 +630,17 @@
 
 
   $(document).on('click', '.form-space', function() {
-    alert('it worked');
+    $.ajax({
+      type: "POST",
+      url: '/join_space',
+      dataType: "json",
+      data: JSON.stringify({'space_id': this.getAttribute('data-id')}),
+      contentType: 'application/json;charset=UTF-8',
+      success: function(data) {
+        alert('it added to list');
+        
+      }
+    });
   });
   
     
