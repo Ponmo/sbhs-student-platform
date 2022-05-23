@@ -637,7 +637,7 @@
       data: JSON.stringify({'space_id': this.getAttribute('data-id')}),
       contentType: 'application/json;charset=UTF-8',
       success: function(data) {
-        alert('it added to list');
+        alert(JSON.stringify(data));
       }
     });
   });
