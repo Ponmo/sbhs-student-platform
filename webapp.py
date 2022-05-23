@@ -195,8 +195,6 @@ def send_message(data):
     except:
         data['combine'] = 'false'
     collection_messages.insert_one({'name': data['name'], 'picture': session['picture'], 'room': data['room'], 'datetime': utc_dt, 'message': data['message'], 'combine': data['combine']})
-    
-    
     socketio.emit('recieve_message', data, room = data['room'])
     
 # When a room is created, send that room data to all
@@ -204,6 +202,8 @@ def send_message(data):
 
 @socketio.on('created_room')
 def created_room(data):
+    socketio.emit('created_room', data, room = '2948uihe9349')
+    
     for room in data['room_list']: #plug list
     	socketio.emit('created_room', data, room = room)
 
@@ -334,9 +334,6 @@ def join_space():
             collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': joined}})
         space = dumps(collection_spaces.find_one({'_id': ObjectId(request.json['space_id'])}))
         return Response(space, mimetype='application/json')
-
-
-
 
 if __name__ == '__main__':
     socketio.run(app, debug=False)
