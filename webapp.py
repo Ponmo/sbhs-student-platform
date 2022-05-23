@@ -332,8 +332,11 @@ def join_space():
         if request.json['space_id'] not in joined:
             joined.append(request.json['space_id'])
             collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': joined}})
-        space = dumps(collection_spaces.find_one('_id': ObjectId(request.json['space_id'])))
+        space = dumps(collection_spaces.find_one({'_id': ObjectId(request.json['space_id'])}))
         return Response(space, mimetype='application/json')
+
+
+
 
 if __name__ == '__main__':
     socketio.run(app, debug=False)
