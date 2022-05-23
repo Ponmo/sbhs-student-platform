@@ -137,7 +137,7 @@ def callback():
     # Store user data in MongoDB if new user.
     
     if not collection_users.count_documents({ '_id': unique_id}, limit = 1):
-        collection_users.insert_one({'_id': unique_id, 'name': users_name, 'email': users_email, 'picture': picture}) #check if profile picture the same !
+        collection_users.insert_one({'_id': unique_id, 'name': users_name, 'email': users_email, 'picture': picture, 'joined': []}) #check if profile picture the same !
         
     return redirect(url_for('render_main_page'))
 
@@ -329,8 +329,9 @@ def board():
 def join_space():
     if request.method == 'POST':
         joined = collection_users.find_one({"_id": session['unique_id']})['joined']
-        joined.append(request.json['space_id'])
-        collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': joined}})
+        if request.json['space_id'] not in joined:
+            joined.append(request.json['space_id'])
+            collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': joined}})
         json_data = {'weew': 'wewrrddf'}
         json_data = dumps(json_data)
         return Response(json_data, mimetype='application/json')
