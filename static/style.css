@@ -102,6 +102,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 
 #header {
+  position: relative;
   grid-column: 1;
   grid-row: 1;
   background-color: #2f3136;
@@ -126,6 +127,29 @@ img { /* make images and create button undraggable and unhighlitable*/
   border-radius: 50%;
   margin-right: 12px;
   margin-top: 15px;
+}
+#space-settings-popup {
+  position: absolute;
+  color: #dcddde;
+  font-size: 14px;
+  z-index: 10;
+  border-radius: 5px;
+  top: 54px;
+  left: 10px;
+  width: 250px;
+  height: 600px;
+  background-color: #17181b;
+}
+#create-section-button {
+  margin: 8px auto;
+  width: 230px;
+  height: 32px;
+  border-radius: 2px;
+  line-height: 32px;
+  padding-left: 8px;
+}
+#create-section-button:hover {
+  background-color: #4752c4;
 }
 #information {
   grid-column: 2 / 4;
