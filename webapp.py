@@ -339,14 +339,14 @@ def join_space():
 def call_route():
     if request.method == 'POST':
         spaces = collection_users.find_one({ "_id": session['unique_id']})['joined']
-        space_list = []
+        spaces_list = []
         for space_item in spaces:
-            space_list += collection_spaces.find_one({"_id": space_item})
+            spaces_list += collection_spaces.find_one({"_id": space_item})
         spaces_list = dumps(spaces_list)
-        return Response(spaces, mimetype='application/json')
+        return Response(spaces_list, mimetype='application/json')
 
-    return 
-    return render_template('index.html')
+    #return 
+    #return render_template('index.html')
 
 # and by the way to check if your code works you can deploy it to heroku. if you get an internal server error check the heroku logs
 # make sure heroku logs is open before you open up the webapp or else the error will not display
