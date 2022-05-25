@@ -341,7 +341,10 @@ def call_route():
         spaces = collection_users.find_one({ "_id": session['unique_id']})['joined']
         spaces_list = []
         for space_item in spaces:
-            spaces_list.append(collection_spaces.find_one({"_id": ObjectId(space_item)}))
+            try: 
+                spaces_list.append(collection_spaces.find_one({"_id": ObjectId(space_item)}))
+            except:
+                pass
         spaces_list = dumps(spaces_list)
         return Response(spaces_list, mimetype='application/json')
 
