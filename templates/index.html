@@ -625,7 +625,15 @@
     });
   });
 
-  
+  $(document).on('click', '.server-settings-button', function() {
+    if (document.getElementById('space-settings-popup').style.display != 'block') {
+      document.getElementById('space-settings-popup').style.display = 'block';
+    }
+    else {
+      document.getElementById('space-settings-popup').style.display = 'none';
+    }
+  });
+
   function space() {
         $.ajax({
           type: "POST",
