@@ -28,6 +28,8 @@ $(document).ready(function(){
   $(document).on('click', '#close-create-section', function() {
     createSectionModal.style.display = "none";
   });
+
+  var spaceSettingsPopup = document.getElementById('space-settings-popup')
   
   window.onclick = function(event) {
     if (event.target == createRoomModal) {
@@ -38,6 +40,9 @@ $(document).ready(function(){
     }
     if (event.target == createSectionModal) {
       createSectionModal.style.display = "none";
+    }
+    if (event.target == spaceSettingsPopup) {
+      spaceSettingsPopup.style.display = 'none';
     }
   }
    
