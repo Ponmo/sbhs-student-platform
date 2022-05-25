@@ -234,15 +234,6 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin-right: 14px;
   margin-top: 9px;
 }
-#space-settings-popup {
-  position: absolute;
-  z-index: 10;
-  top: 6px;
-  left: 10px;
-  width: 250px;
-  height: 600px;
-  background-color: black;
-}
 #chats {
   display: flex;
   flex-direction: column;
