@@ -58,14 +58,16 @@
         <div id="content">
           <div id="header">
             <span id="header_text"></span>
-            <img class="pointer" id="create-section-button" src="/static/images/settings-white.png">
+            <img class="pointer" id="server-settings-button" src="/static/images/settings-white.png">
           </div>
           <div id="information">
             <img class="pointer" id="home" src="/static/images/home-white.png">
             <p id="room-name-display"></p>
           </div>
-          <div id="channels"></div>
-          <div id="space-settings-popup">
+          <div id="channels">
+            <div id="space-settings-popup">
+              <div id="create-section-button"></div>
+            </div>
           </div>
 
 <!--         when new message is sent, make the new message appear above the message bar and not mess up the scrolling (Safari only). -->
@@ -183,6 +185,18 @@
     }
     
     $(window).on("load", function() { 
+      
+
+      $.ajax({
+        type: 'POST',
+        url: '/user_spaces',//what would the URL be? //name it something like "/user_spaces"
+        dataType: "json",
+        success: function(call_route) {
+          alert("success")
+        }
+      })
+      
+      
       $.ajax({
         type: 'POST',
         url: '/list_spaces',
@@ -344,7 +358,6 @@
         contentType: 'application/json;charset=UTF-8',
         success: function(chat_history) {
           chat_history_skip += 100;
-          //var nowMomentTwo = DateTime.utc().toLocal();
           var todayDate = moment();
           var yesterdayDate = moment().subtract(1, 'day');
           
@@ -505,7 +518,6 @@
             $('#home-page').css('display', 'none');
             $('#first-all').css('display', 'block');
             $('#space-search').css('display', 'none');
-            //$('#space-search-container').css({zIndex: '-10', opacity: '0', WebkitTransition: 'opacity 0.1s ease-out', MozTransition: 'opacity 0.1s ease-out', MsTransition: 'opacity 0.1s ease-out', OTransition: 'opacity 0.1s ease-out', transition: 'opacity 0.1s ease-out'});
             joinRoom(room_and_section[0][0]['_id']['$oid']);
           }
         });
@@ -530,7 +542,6 @@
       $('#home-page').css('display', 'block');
       $('#first-all').css('display', 'none');
       $('#space-search').css('display', 'none');
-      //$('#space-search-container').css({zIndex: '-10', opacity: '0', WebkitTransition: 'opacity 0.1s ease-out', MozTransition: 'opacity 0.1s ease-out', MsTransition: 'opacity 0.1s ease-out', OTransition: 'opacity 0.1s ease-out', transition: 'opacity 0.1s ease-out'});
     });
     
 	$(document).on('click', '.room', function(e) {

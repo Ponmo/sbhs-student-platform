@@ -335,5 +335,37 @@ def join_space():
         space = dumps(collection_spaces.find_one({'_id': ObjectId(request.json['space_id'])}))
         return Response(space, mimetype='application/json')
 
+@app.route('/user_spaces', methods=['GET', 'POST'])
+def call_route():
+    if request.method == 'POST':
+        spaces = collection_users.find_one({ "_id": session['unique_id']})['joined']
+        space_list = []
+        for space_item in spaces:
+            space_list += collection_spaces.find_one({"_id": space_item})
+        spaces_list = dumps(spaces_list)
+        return Response(spaces, mimetype='application/json')
+
+    return 
+    return render_template('index.html')
+
+# and by the way to check if your code works you can deploy it to heroku. if you get an internal server error check the heroku logs
+# make sure heroku logs is open before you open up the webapp or else the error will not display
+
+    #//Ajax function that calls a backend python route
+   #   //Python function would return a list of all documents of spaces that user has joined
+   #   //  Get the list of spaces from the user's profile document in MongoDB
+  #    //    Do this by querying collection_users.find_one by user id which is contained in session['userid'] and then getting the "joined" field.
+   #   //  Make a for loop through all the elements in that "joined" list and query collection_spaces for each one using collection_spaces.find_one... and then add the document to a new variable list that is declared outside the for loop.
+   #   /* ex. (pseudo code)
+
+   #   variablename = collection_users.find_one({ id : session['unique_id']}) ['joined']
+   #   listname = []
+   #   for each item inside variablename:
+   #     listname += collections_spaces.find_one(_id : item)
+      #return converted to json listname
+  
+    #  */ //okay good lucks
+    
+
 if __name__ == '__main__':
     socketio.run(app, debug=False)
