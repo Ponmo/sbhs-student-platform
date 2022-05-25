@@ -338,10 +338,10 @@ def join_space():
 @app.route('/user_spaces', methods=['GET', 'POST'])
 def call_route():
     if request.method == 'POST':
-        spaces = collection_users.find_one({ "_id": session['unique_id']})['joined']
+        spaces = collection_users.find_one({ "_id": ObjectId(session['unique_id'])})['joined']
         spaces_list = []
         for space_item in spaces:
-            spaces_list += collection_spaces.find_one({"_id": space_item})
+            spaces_list.append(collection_spaces.find_one({"_id": ObjectId(space_item)}))
         spaces_list = dumps(spaces_list)
         return Response(spaces_list, mimetype='application/json')
 

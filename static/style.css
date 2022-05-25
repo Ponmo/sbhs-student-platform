@@ -90,32 +90,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin-top: 9px;
   float: right;
 }
-/* #close-space-search-button {
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  margin-right: 12px;
-  margin-top: 9px;
-  float: right;
-}
-h1 {
-  display: inline-block;
-  margin-left: 9px;
-}
-#user-directory {
-  display: inline-block;
-  width: 270px;
-  height: 100vh;
-  background: hotpink;
-  float: left;
-}
-#space-directory-lfg {
-  width: calc(100vw - 270px);
-  height: 100vh;
-  background: blueviolet;
-  display: inline-block;
-} */
+
 #content { /* make calc good on all browsers ; Make margin and padding 0 because of broswer differences ; */
   display: grid;
   grid-template-rows: 48px calc(100vh - 98px);
@@ -136,7 +111,6 @@ h1 {
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  
 }
 #header_text {
   line-height: 48px;
@@ -145,7 +119,7 @@ h1 {
   font-weight: bold;
   color: #ffffff;
 }
-#create-section-button {
+#server-settings-button {
   float: right;
   width: 14px;
   height: 14px;
@@ -181,6 +155,7 @@ h1 {
   margin-right: 12px;
 }
 #channels {
+  position: relative;
   grid-column: 1;
   grid-row: 2;
   border-top: 1px solid #2b2d32; /* remove once double border */
