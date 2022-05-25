@@ -138,19 +138,42 @@ img { /* make images and create button undraggable and unhighlitable*/
   top: 54px;
   left: 10px;
   width: 250px;
-  height: 600px;
+  height: 260px;
   background-color: #17181b;
 }
 #create-section-button {
-  margin: 8px auto;
+  margin: 8px auto 1px auto;
   width: 230px;
   height: 32px;
   border-radius: 2px;
   line-height: 32px;
   padding-left: 8px;
+  border-bottom: 1px solid white;
 }
 #create-section-button:hover {
   background-color: #4752c4;
+  color: white;
+}
+#create-section-button:active {
+  background-color: #3c46a6;
+  color: white;
+}
+#leave-space {
+  margin: 1px auto;
+  width: 230px;
+  height: 32px;
+  border-radius: 2px;
+  line-height: 32px;
+  padding-left: 8px;
+  color: #d83c3f;
+}
+#leave-space:hover {
+  background-color: #d83c3f;
+  color: white;
+}
+#leave-space:active {
+  background-color: #b53739;
+  color: white;
 }
 #information {
   grid-column: 2 / 4;
