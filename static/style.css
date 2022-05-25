@@ -235,6 +235,9 @@ h1 {
   margin-right: 14px;
   margin-top: 9px;
 }
+#space-settings-popup {
+
+}
 #chats {
   display: flex;
   flex-direction: column;

@@ -599,6 +599,7 @@
 
 
   $(document).on('click', '.form-space', function() {
+    current_space = this.getAttribute('data-id');
     $.ajax({
       type: "POST",
       url: '/join_space',
@@ -608,7 +609,6 @@
       success: function(data) {
         $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
         $(document.getElementById(current_space)).attr('style', '');
-        current_space = this.getAttribute('data-id');
         space();
       }
     });
