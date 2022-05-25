@@ -29,7 +29,7 @@ $(document).ready(function(){
     createSectionModal.style.display = "none";
   });
 
-  var spaceSettingsPopup = document.getElementById('space-settings-popup')
+  var spaceSettingsPopup = document.getElementById('space-settings-popup');
   
   window.onclick = function(event) {
     if (event.target == createRoomModal) {
