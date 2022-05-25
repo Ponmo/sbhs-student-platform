@@ -92,7 +92,7 @@
           <img src={{ picture }} alt="pfp" id="profile_picture">
           <p id="username">{{ name }}</p>
           <p id="student_id">Santa Barbara High School</p>
-          <p id="settings">#</p>
+          <img class="pointer" id="settings" src="/static/images/settings-white.png">
         </div>
         <div id="spaces">
           <span id="space_align_helper"></span>
@@ -191,7 +191,8 @@
             
             var newNodeChild = document.createElement('img');
             newNodeChild.className = 'space pointer';
-            newNodeChild.id = item._id.$oid;
+            //newNodeChild.id = item._id.$oid;
+            newNodeChild.setAttribute('data-id', item._id.$oid)
             newNodeChild.setAttribute('data-name', item.name);
             newNodeChild.src = item.picture;
             newNode.appendChild(newNodeChild);
@@ -203,7 +204,8 @@
             referenceNode = document.getElementById('space_align_helper');
             referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 
-            
+            // Above is depreciating, because footers should not contain all spaces. 
+            // Below is code for the directory.
 
             newNode = document.createElement('div');
             newNode.className = 'form-space';

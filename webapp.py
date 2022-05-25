@@ -27,7 +27,7 @@ GOOGLE_DISCOVERY_URL = (
     'https://accounts.google.com/.well-known/openid-configuration'
 )
 
-connection_string = 'mongodb+srv://first:EDqorw8lcCRVOMHI@cluster0.p7hdr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority' #os.environ['MONGO_CONNECTION_STRING']
+connection_string = os.environ['MONGO_CONNECTION_STRING']
 db_name = os.environ['MONGO_DBNAME']
 client = pymongo.MongoClient(connection_string)
 db = client[db_name]
