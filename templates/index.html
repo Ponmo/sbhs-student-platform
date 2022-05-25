@@ -191,8 +191,7 @@
             
             var newNodeChild = document.createElement('img');
             newNodeChild.className = 'space pointer';
-            //newNodeChild.id = item._id.$oid;
-            newNodeChild.setAttribute('data-id', item._id.$oid)
+            newNodeChild.id = item._id.$oid;
             newNodeChild.setAttribute('data-name', item.name);
             newNodeChild.src = item.picture;
             newNode.appendChild(newNodeChild);
