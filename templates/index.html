@@ -38,11 +38,6 @@
           </tr>
         <table> -->
         <div id="directory-space">
-          <div class="form-space">
-            <img class="directory-space-img" src="/static/images/Space.jpeg">
-            <div class="directory-space-title">Title</div>
-            <div class="directory-space-description">Description of Space</div>
-          </div>
         </div>
 
       </div>
@@ -60,8 +55,8 @@
             <span id="header_text"></span>
             <img class="pointer" id="server-settings-button" src="/static/images/settings-white.png">
             <div id="space-settings-popup">
-              <div id="create-section-button">Create Section</div>
-              <div id="leave-space">Leave Space</div>
+              <div class="pointer" id="create-section-button">Create Section</div>
+              <div class="pointer" id="leave-space">Leave Space</div>
             </div>
           </div>
           <div id="information">
@@ -225,7 +220,7 @@
             // Below is code for the directory.
 
             newNode = document.createElement('div');
-            newNode.className = 'form-space';
+            newNode.className = 'form-space pointer';
             newNode.setAttribute('data-id', item['_id']['$oid']);
 
             newNodeChild = document.createElement('img');
