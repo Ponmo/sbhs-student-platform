@@ -190,14 +190,27 @@
         dataType: "json",
         success: function(call_route) {
           alert(JSON.stringify(call_route));
+          call_route.forEach(function(item) { 
+            var newNode = document.createElement('div'); 
+            newNode.className = 'space-wrapper';
+            
+            var newNodeChild = document.createElement('img'); 
+            newNodeChild.className = 'space pointer';
+            newNodeChild.id = item._id.$oid;
+            newNodeChild.setAttribute('data-name', item.name);
+            newNodeChild.src = item.picture;
+            newNode.appendChild(newNodeChild);
+            
+            newNodeChild = document.createElement('div');
+            newNodeChild.className = 'active-space';
+            newNode.appendChild(newNodeChild); 
+            
+            referenceNode = document.getElementById('space_align_helper'); 
+            referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling); 
 
-          // so do you remember what all of this ajax function is supposed to do? Call the app route wehn user logs in
-          // i mean what we want to do with webpage with this function in general
-          //oh yes, display on the footer only the spaces the user has joined
-          // yep i think it would be a good idea to visualize all of the data that the python returned 
-          // so I will rewrite the alert to display that data.ok
+          }); //okay lets deploy
         }
-      })
+      });
       
       
       $.ajax({
