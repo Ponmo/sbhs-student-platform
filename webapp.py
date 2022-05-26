@@ -307,17 +307,22 @@ def create_section():
 
 @app.route('/create_space', methods=['GET', 'POST'])
 def create_space():
-	if request.method == 'POST':
-		space_id = ObjectId()
-		room_id = ObjectId()
-		section_id = ObjectId()
-		room = {'_id': room_id, 'space': str(space_id), 'section': str(section_id), 'name': 'general', 'order': 1}
-		section = {'_id': section_id, 'space': str(space_id), 'name': 'discussion', 'order': 1}
-		collection_spaces.insert_one({'_id': space_id, 'name': request.json['space_name'], 'picture': request.json['space_image']})
-		collection_rooms.insert_one(room)
-		collection_sections.insert_one(section)
-		room_and_section = dumps([[room],[section]])
-		return Response(room_and_section, mimetype='application/json')
+    if request.method == 'POST':
+        space_id = ObjectId()
+        room_id = ObjectId()
+        section_id = ObjectId()
+        room = {'_id': room_id, 'space': str(space_id), 'section': str(section_id), 'name': 'general', 'order': 1}
+        section = {'_id': section_id, 'space': str(space_id), 'name': 'discussion', 'order': 1}
+        collection_spaces.insert_one({'_id': space_id, 'name': request.json['space_name'], 'picture': request.json['space_image']})
+        collection_rooms.insert_one(room)
+        collection_sections.insert_one(section)
+        room_and_section = dumps([[room],[section]])
+        
+        joined = collection_users.find_one({"_id": session['unique_id']})['joined']
+        joined.append(str(space_id))
+        collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': joined}})
+        
+        return Response(room_and_section, mimetype='application/json')
 	
 @app.route('/board', methods=['GET', 'POST'])
 def board():
@@ -345,33 +350,13 @@ def call_route():
             try:
                 spaces_list.append(collection_spaces.find_one({'_id': ObjectId(space_item)}))
             except:
-                pass
+                pass#ignore
         spaces_list = dumps(spaces_list)
         return Response(spaces_list, mimetype='application/json')
 
-    #Yep lets try deploying
-    # have you identified whats wrong? i think i might have figured it out
-    #Is it a wrong placement of ObjectId ? yes
-    # so line 342 searches for the user's document in MongoDB and gets the field called "joined"
-    # if you look at MongoDB and look at  joined what is the first value of the list?
-    #"" oh so would we add a [:1] or [+1] or something thqt skips the first?
-    # yeah and so I think in line 345 when we are trying to find the space document it cannot convert "" to 
-    # an ObjectId because it's really not an object id. 
-    # that's a great idea and it would work, but there is a better and simpler solution
-    # have you heard of the "try except" statements? yes
-    # so what we can do is "try" to run line 345 and if it doesn't work we have an "except" block that ignores it
-
-#    File "/app/webapp.py", line 345, in call_route
-#2022-05-26T02:17:49.007633+00:00 app[web.1]:     spaces_list.append(collection_spaces.find_one({"_id": ObjectId(space_item)}))
-#2022-05-26T02:17:49.007633+00:00 app[web.1]:   File "/app/.heroku/python/lib/python3.10/site-packages/bson/objectid.py", line 104, in __init__
-#2022-05-26T02:17:49.007634+00:00 app[web.1]:     self.__validate(oid)
-#2022-05-26T02:17:49.007634+00:00 app[web.1]:   File "/app/.heroku/python/lib/python3.10/site-packages/bson/objectid.py", line 204, in __validate
-#2022-05-26T02:17:49.007634+00:00 app[web.1]:     _raise_invalid_id(oid)
-#2022-05-26T02:17:49.007634+00:00 app[web.1]:   File "/app/.heroku/python/lib/python3.10/site-packages/bson/objectid.py", line 36, in _raise_invalid_id
-#2022-05-26T02:17:49.007634+00:00 app[web.1]:     raise InvalidId(
-#2022-05-26T02:17:49.007635+00:00 app[web.1]: bson.errors.InvalidId: '' is not a valid ObjectId, it must be a 12-byte input or a 24-character hex string
-    
-    
+    #
+    # i think it iwortkewd worked! line 187 in html file
+    #okay now this python function is done we can go back to javascript to complete the ajaxok
 
 if __name__ == '__main__':
     socketio.run(app, debug=False)
