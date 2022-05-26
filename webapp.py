@@ -12,7 +12,6 @@ import requests
 
 from bson.objectid import ObjectId
 from bson.json_util import dumps
-_id = ObjectId()
 
 #import pprint
 #import sys
@@ -340,19 +339,27 @@ def join_space():
 @app.route('/user_spaces', methods=['GET', 'POST'])
 def call_route():
     if request.method == 'POST':
-        spaces = collection_users.find_one({ "_id": session['unique_id']})['joined']
+        spaces = collection_users.find_one({"_id": session['unique_id']})['joined']
         spaces_list = []
         for space_item in spaces:
-            spaces_list.append(collection_spaces.find_one({'_id': ObjectId(space_item)}))
+            try:
+                spaces_list.append(collection_spaces.find_one({'_id': ObjectId(space_item)}))
+            except:
+                pass
         spaces_list = dumps(spaces_list)
         return Response(spaces_list, mimetype='application/json')
 
-    #You've got most of this complete but there is still an error we need to figure out from heroku logs
-    #okay
-    # do you want me to paste the error?
-    #is it in the logs? Sure
-    #try to figure out what the problem is while I finish another function
-    #sounds good
+    #Yep lets try deploying
+    # have you identified whats wrong? i think i might have figured it out
+    #Is it a wrong placement of ObjectId ? yes
+    # so line 342 searches for the user's document in MongoDB and gets the field called "joined"
+    # if you look at MongoDB and look at  joined what is the first value of the list?
+    #"" oh so would we add a [:1] or [+1] or something thqt skips the first?
+    # yeah and so I think in line 345 when we are trying to find the space document it cannot convert "" to 
+    # an ObjectId because it's really not an object id. 
+    # that's a great idea and it would work, but there is a better and simpler solution
+    # have you heard of the "try except" statements? yes
+    # so what we can do is "try" to run line 345 and if it doesn't work we have an "except" block that ignores it
 
 #    File "/app/webapp.py", line 345, in call_route
 #2022-05-26T02:17:49.007633+00:00 app[web.1]:     spaces_list.append(collection_spaces.find_one({"_id": ObjectId(space_item)}))
