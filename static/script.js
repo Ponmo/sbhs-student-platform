@@ -28,9 +28,9 @@ $(document).ready(function(){
   $(document).on('click', '#close-create-section', function() {
     createSectionModal.style.display = "none";
   });
-
-  var spaceSettingsPopup = document.getElementById('space-settings-popup');
   
+  var spaceSettingsPopup = document.getElementById('space-settings-popup'); 
+
   window.onclick = function(event) {
     if (event.target == createRoomModal) {
       createRoomModal.style.display = "none";
@@ -41,7 +41,9 @@ $(document).ready(function(){
     if (event.target == createSectionModal) {
       createSectionModal.style.display = "none";
     }
-    if (event.target == spaceSettingsPopup) {
+    alert(event.target);
+    alert(spaceSettingsPopup.style.display);
+    if (event.target != spaceSettingsPopup && spaceSettingsPopup.style.display == 'block') {
       spaceSettingsPopup.style.display = 'none';
     }
   }
