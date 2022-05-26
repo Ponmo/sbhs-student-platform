@@ -606,7 +606,7 @@
 
 
   $(document).on('click', '.form-space', function() {
-    current_space = this.getAttribute('data-id');
+    var joined_space = this.getAttribute('data-id');
     $.ajax({
       type: "POST",
       url: '/join_space',
@@ -616,7 +616,10 @@
       success: function(data) {
         $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
         $(document.getElementById(current_space)).attr('style', '');
+        current_space = joined_space;
         space();
+        $(document.getElementById(current_space)).css('border-radius', '3px');
+        $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').css({width: '39px', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
       }
     });
   });
