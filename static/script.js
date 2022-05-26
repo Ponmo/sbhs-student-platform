@@ -41,8 +41,6 @@ $(document).ready(function(){
     if (event.target == createSectionModal) {
       createSectionModal.style.display = "none";
     }
-    alert(event.target);
-    alert(spaceSettingsPopup.style.display);
     if (event.target != spaceSettingsPopup && spaceSettingsPopup.style.display == 'block') {
       spaceSettingsPopup.style.display = 'none';
     }
