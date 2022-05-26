@@ -616,7 +616,7 @@
       success: function(data) {
         $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
         $(document.getElementById(current_space)).attr('style', '');
-        
+
         current_space = joined_space;
 
         var newNode = document.createElement('div');
@@ -625,14 +625,14 @@
         var newNodeChild = document.createElement('img');
         newNodeChild.className = 'space pointer';
         newNodeChild.id = data['_id']['$oid'];
-        newNodeChild.css('border-radius', '3px');
+        newNodeChild.style.borderRadius = '3px';
         newNodeChild.setAttribute('data-name', data['name']);
         newNodeChild.src = data['picture'];
         newNode.appendChild(newNodeChild);
             
         newNodeChild = document.createElement('div');
         newNodeChild.className = 'active-space';
-        newNodeChild.css({width: '39px', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
+        newNodeChild.style.width = '39px';
         newNode.appendChild(newNodeChild);
             
         referenceNode = document.getElementById('space_align_helper');
