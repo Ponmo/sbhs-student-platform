@@ -21,6 +21,19 @@ img { /* make images and create button undraggable and unhighlitable*/
   overflow: hidden;
   display: block;
 }
+#home-page {
+  overflow: hidden;
+  display: block;
+}
+#sbhs {
+  height: 100px;
+  margin-left: 20px;
+  display: inline-block;
+}
+#sbhs-title {
+  display: inline-block;
+  line-height: 90px;
+}
 #space-search {
   background-color: white;
   opacity: 0;
