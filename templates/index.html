@@ -189,7 +189,6 @@
         url: '/user_spaces',
         dataType: "json",
         success: function(call_route) {
-          alert(JSON.stringify(call_route));
           call_route.forEach(function(item) { 
             var newNode = document.createElement('div'); 
             newNode.className = 'space-wrapper';
@@ -208,7 +207,9 @@
             referenceNode = document.getElementById('space_align_helper'); 
             referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling); 
 
-          }); //okay lets deploy
+          }); // okay it looks like it worked somewhat but i forgot to delete the repeat code from where it used to be so it generated
+          // the divs twice
+          // I will deploy again
         }
       });
       
@@ -219,26 +220,6 @@
         dataType: "json",
         success: function(spaces_list) {
           spaces_list.forEach(function(item) {
-            var newNode = document.createElement('div');
-            newNode.className = 'space-wrapper';
-            
-            var newNodeChild = document.createElement('img');
-            newNodeChild.className = 'space pointer';
-            newNodeChild.id = item._id.$oid;
-            newNodeChild.setAttribute('data-name', item.name);
-            newNodeChild.src = item.picture;
-            newNode.appendChild(newNodeChild);
-            
-            newNodeChild = document.createElement('div');
-            newNodeChild.className = 'active-space';
-            newNode.appendChild(newNodeChild);
-            
-            referenceNode = document.getElementById('space_align_helper');
-            referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-            //what we're getting from the database is a list of the users' joined spaces on line 342 of webapp.py
-
-            // Above is depreciating, because footers should not contain all spaces. 
-            // Below is code for the directory.
 
             newNode = document.createElement('div');
             newNode.className = 'form-space pointer';
