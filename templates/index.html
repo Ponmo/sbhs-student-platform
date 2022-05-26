@@ -207,9 +207,7 @@
             referenceNode = document.getElementById('space_align_helper'); 
             referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling); 
 
-          }); // okay it looks like it worked somewhat but i forgot to delete the repeat code from where it used to be so it generated
-          // the divs twice
-          // I will deploy again
+          });
         }
       });
       
@@ -619,7 +617,6 @@
         $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
         $(document.getElementById(current_space)).attr('style', '');
         current_space = joined_space;
-        alert($('#' + joined_space).length);
         if ($('#' + joined_space).length == 0) {
 
           var newNode = document.createElement('div');
