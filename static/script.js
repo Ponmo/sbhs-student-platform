@@ -41,9 +41,6 @@ $(document).ready(function(){
     if (event.target == createSectionModal) {
       createSectionModal.style.display = "none";
     }
-    if (event.target != spaceSettingsPopup && spaceSettingsPopup.style.display == 'block') {
-      spaceSettingsPopup.style.display = 'none';
-    }
   }
    
   $("#chat").on('mouseenter', '.message-container-combine', function(){
