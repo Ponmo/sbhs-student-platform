@@ -332,6 +332,7 @@ def join_space():
         if request.json['space_id'] not in joined:
             joined.append(request.json['space_id'])
             collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': joined}})
+        #implement check if space has been deleted so it cannot find_one try except blocks
         space = dumps(collection_spaces.find_one({'_id': ObjectId(request.json['space_id'])}))
         return Response(space, mimetype='application/json')
 
@@ -341,7 +342,7 @@ def call_route():
         spaces = collection_users.find_one({ "_id": session['unique_id']})['joined']
         spaces_list = []
         for space_item in spaces:
-            try: 
+            try:
                 spaces_list.append(collection_spaces.find_one({"_id": ObjectId(space_item)}))
             except:
                 pass
