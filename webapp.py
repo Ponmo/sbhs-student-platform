@@ -342,30 +342,27 @@ def call_route():
         spaces = collection_users.find_one({ "_id": session['unique_id']})['joined']
         spaces_list = []
         for space_item in spaces:
-            spaces_list.append(collection_spaces.find_one({"_id": ObjectId(space_item)}))
+            spaces_list.append(collection_spaces.find_one({"_id": ObjectId(space_item)})))
         spaces_list = dumps(spaces_list)
         return Response(spaces_list, mimetype='application/json')
 
-    #return 
-    #return render_template('index.html')
+    #You've got most of this complete but there is still an error we need to figure out from heroku logs
+    #okay
+    # do you want me to paste the error?
+    #is it in the logs? Sure
+    #try to figure out what the problem is while I finish another function
+    #sounds good
 
-# and by the way to check if your code works you can deploy it to heroku. if you get an internal server error check the heroku logs
-# make sure heroku logs is open before you open up the webapp or else the error will not display
-
-    #//Ajax function that calls a backend python route
-   #   //Python function would return a list of all documents of spaces that user has joined
-   #   //  Get the list of spaces from the user's profile document in MongoDB
-  #    //    Do this by querying collection_users.find_one by user id which is contained in session['userid'] and then getting the "joined" field.
-   #   //  Make a for loop through all the elements in that "joined" list and query collection_spaces for each one using collection_spaces.find_one... and then add the document to a new variable list that is declared outside the for loop.
-   #   /* ex. (pseudo code)
-
-   #   variablename = collection_users.find_one({ id : session['unique_id']}) ['joined']
-   #   listname = []
-   #   for each item inside variablename:
-   #     listname += collections_spaces.find_one(_id : item)
-      #return converted to json listname
-  
-    #  */ //okay good lucks
+#    File "/app/webapp.py", line 345, in call_route
+#2022-05-26T02:17:49.007633+00:00 app[web.1]:     spaces_list.append(collection_spaces.find_one({"_id": ObjectId(space_item)}))
+#2022-05-26T02:17:49.007633+00:00 app[web.1]:   File "/app/.heroku/python/lib/python3.10/site-packages/bson/objectid.py", line 104, in __init__
+#2022-05-26T02:17:49.007634+00:00 app[web.1]:     self.__validate(oid)
+#2022-05-26T02:17:49.007634+00:00 app[web.1]:   File "/app/.heroku/python/lib/python3.10/site-packages/bson/objectid.py", line 204, in __validate
+#2022-05-26T02:17:49.007634+00:00 app[web.1]:     _raise_invalid_id(oid)
+#2022-05-26T02:17:49.007634+00:00 app[web.1]:   File "/app/.heroku/python/lib/python3.10/site-packages/bson/objectid.py", line 36, in _raise_invalid_id
+#2022-05-26T02:17:49.007634+00:00 app[web.1]:     raise InvalidId(
+#2022-05-26T02:17:49.007635+00:00 app[web.1]: bson.errors.InvalidId: '' is not a valid ObjectId, it must be a 12-byte input or a 24-character hex string
+    
     
 
 if __name__ == '__main__':
