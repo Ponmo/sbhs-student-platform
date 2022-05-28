@@ -157,6 +157,24 @@
     var typing_list = [];
     var selected_section = '';
     
+    $(document).on('click', '.log-out', function () {
+      $.post('/logout');
+    });
+
+    // .leave-space
+    $(document).on('click', '.leave-space', function() {
+      $.ajax({
+        type: 'POST',
+        url: '/leave_space',
+        dataType: "json",
+        data: JSON.stringify({'space-id': current_space}),
+        contentType: 'application/json;charset=UTF-8',
+        success: function(data) {
+          alert('this worked');
+        }
+      })
+    });
+
     // below psuedocode comments for saving unsent messages
     // list of messages being typed by user containing message (updated when user clicks on space or another room) and room id.
     // ['2hu45iu2323', 'Hi I love apples and cakes they are cool', '34yubjub42', 'I love appels']
