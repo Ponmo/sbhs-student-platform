@@ -227,7 +227,10 @@ def created_section(data):
 
 @app.route('/sbhs')
 def render_main_page():
-    return render_template('index.html', name = session['users_name'], room = '1', picture = session['picture'])
+    if 'users_name' in session:
+        return render_template('index.html', name = session['users_name'], room = '1', picture = session['picture']) # make room gone..
+    else:
+        return render_template('login.html')
 
 # Returns all space data from MongoDB.
 
