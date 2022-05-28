@@ -204,14 +204,12 @@
     }
     
     $(window).on("load", function() { 
-      
-
       $.ajax({
         type: 'POST',
         url: '/user_spaces',
         dataType: "json",
-        success: function(call_route) {
-          call_route.forEach(function(item) { 
+        success: function(user_space_list) {
+          user_space_list.forEach(function(item) { 
             var newNode = document.createElement('div'); 
             newNode.className = 'space-wrapper';
             

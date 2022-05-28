@@ -368,17 +368,17 @@ def join_space():
         return Response(space, mimetype='application/json')
 
 @app.route('/user_spaces', methods=['GET', 'POST'])
-def call_route():
+def user_spaces():
     if request.method == 'POST':
         spaces = collection_users.find_one({"_id": session['unique_id']})['joined']
-        spaces_list = []
+        space_list = []
         for space_item in spaces:
             try:
-                spaces_list.append(collection_spaces.find_one({'_id': ObjectId(space_item)}))
+                space_list.append(collection_spaces.find_one({'_id': ObjectId(space_item)}))
             except:
                 pass#ignore
-        spaces_list = dumps(spaces_list)
-        return Response(spaces_list, mimetype='application/json')
+        spaces_list = dumps(space_list)
+        return Response(space_list, mimetype='application/json')
 
     #
     # i think it iwortkewd worked! line 187 in html file
