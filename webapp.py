@@ -253,7 +253,7 @@ def render_space():
 def leave_space():
     if request.method == 'POST':
         joined = collection_users.find_one({"_id": session['unique_id']})['joined']
-        list.remove("request.json['space-id']")
+        joined.remove("request.json['space-id']")
         collection_users.update_one({"_id": session['unique_id']})['joined']
         return Response(joined, mimetype='application/json')
         #request.json['space-id']
