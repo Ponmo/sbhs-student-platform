@@ -614,6 +614,11 @@
     }
 	}
 	
+  $(document).on('click', '#settings', function() {
+	  $('#user-page').css('display', 'block');
+    $("#user-page").animate({opacity: '1'}, 100);
+  });
+
 	$(document).on('click', '#space-search-button', function() {
 	  $('#space-search').css('display', 'block');
     $("#space-search").animate({opacity: '1'}, 100);
