@@ -21,10 +21,6 @@ img { /* make images and create button undraggable and unhighlitable*/
   overflow: hidden;
   display: block;
 }
-#home-page {
-  overflow: hidden;
-  display: block;
-}
 #sbhs {
   height: 100px;
   margin-left: 20px;
@@ -33,6 +29,15 @@ img { /* make images and create button undraggable and unhighlitable*/
 #sbhs-title {
   display: inline-block;
   line-height: 90px;
+}
+#user-page {
+  background-color: white;
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  overflow-x: hidden;
 }
 #space-search {
   background-color: white;

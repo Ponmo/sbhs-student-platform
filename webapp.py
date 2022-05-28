@@ -254,7 +254,7 @@ def leave_space():
     if request.method == 'POST':
         joined = collection_users.find_one({"_id": session['unique_id']})['joined']
         joined.remove(request.json['space-id'])
-        collection_users.update_one({"_id": session['unique_id']})['joined']
+        collection_users.find_one_and_update({"_id": session['unique_id']})['joined']
         return Response(joined, mimetype='application/json')
         #request.json['space-id']
     # remove the space id from the list of "joined" spaces in the user's MongoDB profile (array)
