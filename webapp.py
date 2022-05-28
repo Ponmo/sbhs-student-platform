@@ -230,7 +230,7 @@ def render_main_page():
     if 'users_name' in session:
         return render_template('index.html', name = session['users_name'], room = '1', picture = session['picture']) # make room gone..
     else:
-        return render_template('login.html')
+        return redirect(url_for('render_login'))
 
 # Returns all space data from MongoDB.
 
