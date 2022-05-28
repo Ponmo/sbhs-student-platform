@@ -249,6 +249,16 @@ def render_space():
         rooms_and_sections = dumps([list(collection_rooms.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_sections.find({'space': request.json['space_id']}).sort('order', 1))])
         return Response(rooms_and_sections, mimetype='application/json')
 
+@app.route('/leave_space', methods=['GET', 'POST'])
+def leave_space():
+    if request.method == 'POST':
+        joined = collection_users.find_one({"_id": session['unique_id']})['joined']
+        list.remove(request.json['space-id'])
+        collection_users.update_one({"_id": session['unique_id']})['joined']
+        return Response(joined, mimetype='application/json')
+        #request.json['space-id']
+    # remove the space id from the list of "joined" spaces in the user's MongoDB profile (array)
+
 # Returns some message data of the loaded room.
 # Called when user first loads a room
 # or when more messages need to be loaded as user scrolls.
