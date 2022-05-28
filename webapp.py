@@ -253,11 +253,24 @@ def render_space():
 def leave_space():
     if request.method == 'POST':
         joined = collection_users.find_one({"_id": session['unique_id']})['joined']
-        list.remove(request.json['space-id'])
+        list.remove("request.json['space-id']")
         collection_users.update_one({"_id": session['unique_id']})['joined']
         return Response(joined, mimetype='application/json')
         #request.json['space-id']
     # remove the space id from the list of "joined" spaces in the user's MongoDB profile (array)
+#2022-05-28T03:56:16.550139+00:00 app[web.1]: [2022-05-28 03:56:16,549] ERROR in app: Exception on /leave_space [POST]
+#2022-05-28T03:56:16.550161+00:00 app[web.1]: Traceback (most recent call last):
+#2022-05-28T03:56:16.550162+00:00 app[web.1]:   File "/app/.heroku/python/lib/python3.10/site-packages/flask/app.py", line 2073, in wsgi_app
+#2022-05-28T03:56:16.550162+00:00 app[web.1]:     response = self.full_dispatch_request()
+#2022-05-28T03:56:16.550163+00:00 app[web.1]:   File "/app/.heroku/python/lib/python3.10/site-packages/flask/app.py", line 1518, in full_dispatch_request
+#2022-05-28T03:56:16.550163+00:00 app[web.1]:     rv = self.handle_user_exception(e)
+#2022-05-28T03:56:16.550164+00:00 app[web.1]:   File "/app/.heroku/python/lib/python3.10/site-packages/flask/app.py", line 1516, in full_dispatch_request
+#2022-05-28T03:56:16.550164+00:00 app[web.1]:     rv = self.dispatch_request()
+#2022-05-28T03:56:16.550164+00:00 app[web.1]:   File "/app/.heroku/python/lib/python3.10/site-packages/flask/app.py", line 1502, in dispatch_request
+#2022-05-28T03:56:16.550164+00:00 app[web.1]:     return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+#2022-05-28T03:56:16.550165+00:00 app[web.1]:   File "/app/webapp.py", line 256, in leave_space
+#2022-05-28T03:56:16.550165+00:00 app[web.1]:     list.remove(request.json['space-id'])
+#2022-05-28T03:56:16.550165+00:00 app[web.1]: TypeError: descriptor 'remove' for 'list' objects doesn't apply to a 'str' object
 
 # Returns some message data of the loaded room.
 # Called when user first loads a room
