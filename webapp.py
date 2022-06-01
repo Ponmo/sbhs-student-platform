@@ -255,7 +255,7 @@ def leave_space():
         joined = collection_users.find_one({"_id": session['unique_id']})['joined'] 
         joined.remove(request.json['space-id'])
         collection_users.update_one({"_id": session['unique_id']}, {"$set": {"joined": joined}})
-        return Response(dumps(joined), mimetype='application/json')
+        return Response(joined, mimetype='application/json')
 # https://www.w3schools.com/python/python_mongodb_update.asp
 #mycol.update_one({ "address": "Valley 345" }, { "$set": { "address": "Canyon 123" } })
 
