@@ -252,9 +252,10 @@ def render_space():
 @app.route('/leave_space', methods=['GET', 'POST'])
 def leave_space():
     if request.method == 'POST':
-        joined = collection_users.find_one({"_id": session['unique_id']})['joined'] 
+        joined = collection_users.find_one({"_id": session['unique_id']})['joined']
         joined.remove(request.json['space-id'])
         collection_users.update_one({"_id": session['unique_id']}, {"$set": {"joined": joined}})
+        joined = dumps(joined)#'joined' array/list coverted into json (list or dictionary)
         return Response(joined, mimetype='application/json')
 # https://www.w3schools.com/python/python_mongodb_update.asp
 #mycol.update_one({ "address": "Valley 345" }, { "$set": { "address": "Canyon 123" } })
