@@ -336,12 +336,6 @@ def create_space():
         collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': joined}})
         
         return Response(room_and_section, mimetype='application/json')
-	
-@app.route('/board', methods=['GET', 'POST'])
-def board():
-    if request.method == 'POST':
-        spaces = dumps(list(collection_spaces.find({})))
-        return Response(spaces, mimetype='application/json')
 
 @app.route('/join_space', methods=['GET', 'POST'])
 def join_space():
