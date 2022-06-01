@@ -168,7 +168,8 @@
         data: JSON.stringify({'space-id': current_space}),
         contentType: 'application/json;charset=UTF-8',
         success: function(data) {
-          alert('this worked');
+          $("#first-all").hide();
+          $("#home-page").show();
         }
       })
     });
