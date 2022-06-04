@@ -39,7 +39,11 @@ img { /* make images and create button undraggable and unhighlitable*/
   height: 100%;
   z-index: 10;
   overflow-x: hidden;
-  
+}
+#close-user-page {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
 }
 #log-out {
   background-color: hotpink;
