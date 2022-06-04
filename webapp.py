@@ -149,10 +149,11 @@ def get_google_provider_cfg():
     
 # TODO: not currently in use / functional needs logout button
 
-@app.route('/logout')
+@app.route('/logout', methods=['GET', 'POST'])
 def logout():
-    session.clear()
-    return redirect(url_for('render_login'))
+    if request.method == 'POST':
+        session.clear()
+        return redirect(url_for('render_login'))
 
 # When a room is clicked, make user join room
 # and leave old room.
