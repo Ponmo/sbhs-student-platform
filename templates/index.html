@@ -156,6 +156,7 @@
     var selected_section = '';
     
     $(document).on('click', '#log-out', function () {
+      alert('logout pressed');
       $.post('/logout');
     });
 
