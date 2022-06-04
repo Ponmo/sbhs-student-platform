@@ -157,8 +157,8 @@
     var selected_section = '';
     
     $(document).on('click', '#log-out', function () {
-      alert('logout pressed');
       $.get('/logout');
+      window.location.replace("https://sbhs-platform.herokuapp.com/");
     });
 
     // #leave-space

@@ -151,7 +151,7 @@ def get_google_provider_cfg():
 
 @app.route('/logout')
 def logout():
-    return redirect(url_for('render_login'))
+    session.clear()
 
 # When a room is clicked, make user join room
 # and leave old room.
