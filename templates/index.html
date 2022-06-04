@@ -616,7 +616,14 @@
     }
 	}
 	
-  $(document).on('click', '#settings', function() {
+  $(document).on('click', '#close-user-page', function() {
+    $("#user-page").animate({opacity: '0'}, 100);
+    setTimeout(function() {
+      $('#user-page').css('display', 'none');
+    }, 100);
+  });
+  
+  $(document).on('click', '#profile', function() {
 	  $('#user-page').css('display', 'block');
     $("#user-page").animate({opacity: '1'}, 100);
   });
