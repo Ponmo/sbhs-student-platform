@@ -155,6 +155,7 @@
     var current_space = '';
     var typing_list = [];
     var selected_section = '';
+    var space_admin = false;
     
     $(document).on('click', '#log-out', function () {
       $.get('/logout');
@@ -388,6 +389,7 @@
             const newMode = document.createElement('div');
             if (item.combine == 'false') {
               newMode.className = 'message-container';
+              newMode.id = item._id.$oid;
               if(moment(messageDate).isSame(todayDate, 'day')) {
                 messageDate = 'at ' + messageDate.format('h:mm A');
               }
@@ -543,6 +545,14 @@
         });
       }
     }
+
+    $(document).on('click', '.delete-message', function() {
+      $.ajax({
+        type: 'POST',
+        url: '/delete-message',
+        dataType: 'json'
+      })
+    });
 
     $(document).on('click', '.space', function() {
       if (current_space != this.id) {
