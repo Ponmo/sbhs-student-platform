@@ -246,7 +246,7 @@ def render_space():
     if request.method == 'POST':
         results = {'processed': request.json['space_id']}
         if collection_spaces.find({'admins': session['unique_id']}):
-            pass
+            return Response(dumps({'break': 'break'}), mimetype='application/json')
         rooms_and_sections = dumps([list(collection_rooms.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_sections.find({'space': request.json['space_id']}).sort('order', 1))])
         return Response(rooms_and_sections, mimetype='application/json')
 
