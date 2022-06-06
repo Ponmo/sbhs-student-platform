@@ -716,6 +716,7 @@
           data: JSON.stringify({'space_id': current_space}),
           contentType: 'application/json;charset=UTF-8',
           success: function(rooms_and_sections) {
+            alert(JSON.stringify(rooms_and_section));
             document.getElementById('messages').textContent = '';
             document.getElementById('header_text').textContent = document.getElementById(current_space).getAttribute('data-name');
             document.getElementById('channels').textContent = ''; 
