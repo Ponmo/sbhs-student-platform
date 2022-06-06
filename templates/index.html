@@ -739,12 +739,17 @@
                 }
               });
             });
-            /*rooms_and_sections[2]['members'].forEach(function(member) {
-              newNode = document.createElement('div');
-              newNode.className = 'member'
-              newNode.setAttribute('data-id', member)
-              document.getElementById('')
-            });*/
+            try {
+              rooms_and_sections[2]['members'].forEach(function(member) {
+                newNode = document.createElement('div');
+                newNode.className = 'member'
+                newNode.setAttribute('data-id', member)
+                document.getElementById('')
+              });
+            }
+            catch(error) {
+              console.error(error)
+            }
             joinRoom(document.querySelector('.room').id);
             $('#home-page').css('display', 'none');
             $('#first-all').css('display', 'block');
