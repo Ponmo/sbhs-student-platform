@@ -324,6 +324,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 .message-container:hover {
   background-color: #32353a;
 }
+
 .message-title {
   margin-left: 50px;
   overflow-wrap: break-word;
@@ -402,11 +403,18 @@ img { /* make images and create button undraggable and unhighlitable*/
   display: none;
   right: 10px;
   top: -10px;
-  background-color: gray;
+  background-color: #36393e;
   width: 80px;
-  height: 20px;
+  height: 25px;
   border-radius: 2px;
-  border: 1px solid black;
+  border: 1px solid #27292c;
+}
+.delete-message {
+  width: 16px;
+  height: 16px;
+  float: right;
+  margin-right: 5px;
+  margin-top: 3px;
 }
 .message-container:hover .message-options {
   display: block;
