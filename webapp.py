@@ -366,10 +366,9 @@ def user_spaces():
 def delete_message():
     if request.method == 'POST':
         collection_messages.delete_one({"_id": ObjectId(request.json['message_id'])})
-        collection_messages.find_one_and_update({"_id": ObjectId(request.json['message_id'])}, {'$set': {'deleted': deleted}})
-        return Response({'success': 'true'}, mimetype='application/json')
+        return Response(dumps({'success': 'true'}), mimetype='application/json')
     else:
-        return Response({'success': 'false'}, mimetype='application/json')
+        return Response(dumps({'success': 'false'}), mimetype='application/json')
 
 
 if __name__ == '__main__':

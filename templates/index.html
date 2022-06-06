@@ -551,7 +551,7 @@
         type: 'POST',
         url: '/delete_message',
         dataType: 'json',
-        data: JSON.stringify({'message_id': this.parentNode.parentNode.id})//this. parentNode goes to element that surrounds it, and then second one goes furhter out, and .id is a field inside the element
+        data: JSON.stringify({'message_id': this.parentNode.parentNode.id}),//this. parentNode goes to element that surrounds it, and then second one goes furhter out, and .id is a field inside the element
         success: function (delete_message){
           alert('delete message worked');
         }
