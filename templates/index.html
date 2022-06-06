@@ -742,13 +742,13 @@
             try {
               rooms_and_sections[2]['members'].forEach(function(member) {
                 newNode = document.createElement('div');
-                newNode.className = 'member'
-                newNode.setAttribute('data-id', member)
-                document.getElementById('')
+                newNode.className = 'member';
+                newNode.setAttribute('data-id', member);
+                document.getElementById('members').append(newNode);
               });
             }
             catch(error) {
-              console.error(error)
+              console.error(error);
             }
             joinRoom(document.querySelector('.room').id);
             $('#home-page').css('display', 'none');
