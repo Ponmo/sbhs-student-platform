@@ -222,6 +222,10 @@ def created_section(data):
 	for room in data['room_list']:
 		socketio.emit('created_section', data, room = room)
 
+@socketio.on('deleted_message')
+def deleted_message(data):
+    socketio.emit('deleted_message', data, room = data['current_room'])
+
 # Loads platform after login.
 
 @app.route('/sbhs')
