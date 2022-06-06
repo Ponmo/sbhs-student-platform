@@ -370,7 +370,7 @@ def delete_message():
         return Response({'success': 'true'}, mimetype='application/json')
     else:
         return Response({'success': 'false'}, mimetype='application/json')
-        
+
     #
     # i think it iwortkewd worked! line 187 in html file
     #okay now this python function is done we can go back to javascript to complete the ajaxok
