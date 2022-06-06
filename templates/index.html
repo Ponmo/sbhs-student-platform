@@ -741,7 +741,7 @@
             });
             try {
               alert(JSON.stringify(rooms_and_sections[2]));
-              rooms_and_sections[2]['members'].forEach(function(member, index) {
+              rooms_and_sections[2][0]['members'].forEach(function(member, index) {
                 newNode = document.createElement('div');
                 newNode.className = 'member';
                 newNode.setAttribute('data-id', member);
