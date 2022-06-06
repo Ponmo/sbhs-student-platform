@@ -365,8 +365,12 @@ def user_spaces():
 @app.route('/delete_message', methods=['GET', 'POST'])
 def delete_message():
     if request.method == 'POST':
-        message = collection_users.find_one({"_id": session['unique_id']})
-
+        collection_messages.delete_one({"_id": ObjectId(request.json['message_id'])})
+        collection_messages.find_one_and_update({"_id": ObjectId(request.json['message_id'])}, {'$set': {'deleted': deleted}})
+        return Response({'success': 'true'}, mimetype='application/json')
+    else:
+        return Response({'success': 'false'}, mimetype='application/json')
+        
     #
     # i think it iwortkewd worked! line 187 in html file
     #okay now this python function is done we can go back to javascript to complete the ajaxok
