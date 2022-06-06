@@ -716,6 +716,7 @@
           data: JSON.stringify({'space_id': current_space}),
           contentType: 'application/json;charset=UTF-8',
           success: function(rooms_and_sections) {
+            alert(JSON.stringify(rooms_and_sections));
             document.getElementById('messages').textContent = '';
             document.getElementById('header_text').textContent = document.getElementById(current_space).getAttribute('data-name');
             document.getElementById('channels').textContent = ''; 
@@ -739,7 +740,6 @@
               });
             });
             try {
-              alert(rooms_and_sections[2]['members']);
               rooms_and_sections[2]['members'].forEach(function(member, index) {
                 newNode = document.createElement('div');
                 newNode.className = 'member';
