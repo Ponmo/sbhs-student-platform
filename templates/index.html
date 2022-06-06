@@ -547,7 +547,7 @@
     }
 
     $(document).on('click', '.delete-message', function() {
-      var message_id = this.parentNode.parentNode.id
+      var message_id = this.parentNode.parentNode.id;
       $.ajax({
         type: 'POST', //POST, GET, etc.
         url: '/delete_message', //name of python app route
@@ -562,7 +562,7 @@
     });
 
     socket.on('deleted_message', function (data) {
-      alert('ALERT');
+      alert(data);
     });
 
     $(document).on('click', '.space', function() {
