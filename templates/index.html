@@ -547,15 +547,16 @@
     }
 
     $(document).on('click', '.delete-message', function() {
+      var message_id = this.parentNode.parentNode.id
       $.ajax({
         type: 'POST', //POST, GET, etc.
         url: '/delete_message', //name of python app route
         dataType: 'json', //type of data we are sending to python (one line below is the data)
-        data: JSON.stringify({'message_id': this.parentNode.parentNode.id}),//this. parentNode goes to element that surrounds it, and then second one goes furhter out, and .id is a field inside the element
+        data: JSON.stringify({'message_id': message_id}),//this. parentNode goes to element that surrounds it, and then second one goes furhter out, and .id is a field inside the element
         contentType: 'application/json;charset=UTF-8',//type of data received
         success: function (delete_message){
           //alert('delete message worked');//remove/delete element
-          socket.emit('deleted_message', {'message_id': this.parentNode.parentNode.id, 'room_id': current_room});//url of ajax equivalent, we don't need forward slash (/)
+          socket.emit('deleted_message', {'message_id': message_id, 'room_id': current_room});//url of ajax equivalent, we don't need forward slash (/)
         }
       })
     });
