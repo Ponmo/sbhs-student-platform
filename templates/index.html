@@ -556,6 +556,7 @@
     });
     
     $(document).on('click', '#home', function() {
+      $('#' + current_space).attr('style', '');
       current_space = '';
       current_room = '';
       $('.active-space').attr('style', '');
