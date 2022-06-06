@@ -747,7 +747,7 @@
                 }
               });
             });
-            try { //get rid of try block after deleting all spaces without member list another method
+            /*try { //get rid of try block after deleting all spaces without member list another method
               rooms_and_sections[2][0]['members'].forEach(function(member) {
                 newNode = document.createElement('div');
                 newNode.className = 'member';
@@ -758,7 +758,7 @@
             }
             catch(error) {
               console.error(error);
-            }
+            }*/
             joinRoom(document.querySelector('.room').id);
             $('#home-page').css('display', 'none');
             $('#first-all').css('display', 'block');
