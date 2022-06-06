@@ -245,9 +245,7 @@ def list_spaces():
 def render_space():
     if request.method == 'POST':
         results = {'processed': request.json['space_id']}
-        #if collection_spaces.find({'admins': session['unique_id']}): #need to have th
-        #    return Response(dumps({'break': 'break'}), mimetype='application/json')
-        rooms_and_sections = dumps([list(collection_rooms.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_sections.find({'space': request.json['space_id']}).sort('order', 1))])
+        rooms_and_sections = dumps([list(collection_rooms.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_sections.find({'space': request.json['space_id']}).sort('order', 1)), collection_spaces.find({'_id': ObjectId(request.json['space_id'])})])
         return Response(rooms_and_sections, mimetype='application/json')
 
 @app.route('/leave_space', methods=['GET', 'POST'])
@@ -347,7 +345,7 @@ def join_space():
             joined.append(request.json['space_id'])
             collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': joined}})
             collection_spaces.find_one_and_update({"_id": ObjectId(request.json['space_id'])}, {'$push': {'members': session['unique_id']}})
-        #implement check if space has been deleted so it cannot find_one try except blocks
+        #TODO? implement check if space has been deleted so it cannot find_one try except blocks 
         space = dumps(collection_spaces.find_one({'_id': ObjectId(request.json['space_id'])}))
         return Response(space, mimetype='application/json')
 
@@ -363,6 +361,11 @@ def user_spaces():
                 pass#ignore
         space_list = dumps(space_list)
         return Response(space_list, mimetype='application/json')
+
+@app.route('/delete_message', methods=['GET', 'POST'])
+def delete_message():
+    if request.method == 'POST':
+        message = collection_users.find_one({"_id": session['unique_id']})
 
     #
     # i think it iwortkewd worked! line 187 in html file
