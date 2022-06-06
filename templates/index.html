@@ -740,7 +740,7 @@
               });
             });
             try {
-              alert(rooms_and_sections[2].members);
+              alert(JSON.stringify(rooms_and_sections[2]));
               rooms_and_sections[2]['members'].forEach(function(member, index) {
                 newNode = document.createElement('div');
                 newNode.className = 'member';
