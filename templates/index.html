@@ -739,12 +739,12 @@
                 }
               });
             });
-            try {
-              alert(JSON.stringify(rooms_and_sections[2]));
+            try { //get rid of try block after deleting all spaces without member list
               rooms_and_sections[2][0]['members'].forEach(function(member, index) {
                 newNode = document.createElement('div');
                 newNode.className = 'member';
                 newNode.setAttribute('data-id', member);
+                newNode.textContent = member;
                 document.getElementById('members').append(newNode);
               });
             }

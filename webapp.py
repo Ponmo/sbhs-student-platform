@@ -371,9 +371,6 @@ def delete_message():
     else:
         return Response({'success': 'false'}, mimetype='application/json')
 
-    #
-    # i think it iwortkewd worked! line 187 in html file
-    #okay now this python function is done we can go back to javascript to complete the ajaxok
 
 if __name__ == '__main__':
     socketio.run(app, debug=False)
