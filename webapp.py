@@ -344,7 +344,7 @@ def join_space():
         if request.json['space_id'] not in joined:
             joined.append(request.json['space_id'])
             collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': joined}})
-            collection_spaces.find_one_and_update({"_id": ObjectId(request.json['space_id'])}, {'$push': {'members': session['unique_id']}})
+            collection_spaces.find_one_and_update({"_id": ObjectId(request.json['space_id'])}, {'$push': {'members': [session['unique_id'], session['users_name']]}})
         #TODO? implement check if space has been deleted so it cannot find_one try except blocks 
         space = dumps(collection_spaces.find_one({'_id': ObjectId(request.json['space_id'])}))
         return Response(space, mimetype='application/json')
