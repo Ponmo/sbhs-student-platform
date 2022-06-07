@@ -316,14 +316,16 @@
       var messageMoment = moment(data.datetime).local().format('h:mm A');
       if (data.combine == 'false') {
         newMode.className = 'message-container';
-        newMode.id = data._id.$oid;
+        alert(data._id);
+        newMode.id = data._id;
         messageMoment = 'at ' + messageMoment;
         // TODO: Give pfp image default fallback image
         newMode.innerHTML = '<img class="pfp" src="' + data.picture + '" alt="!"> <p class="message-title"> <span class="name"> <b>' + data.name + ' </b> </span> <span class="datetime">' + messageMoment + '</span> </p> <p class="message">' + data.message + '</p> <div class="message-options"> <img class="delete-message" src="/static/images/delete.png"></div>';
       }
       else {
         newMode.className = 'message-container-combine';
-        newMode.id = data._id.$oid;
+        alert(data._id);
+        newMode.id = data._id;
         newMode.innerHTML = '<p class="message-combine-time">' + messageMoment + '</p><p class="message-combine">' + data.message + '</p> <div class="message-options"> <img class="delete-message" src="/static/images/delete.png"></div>';
       }
       document.getElementById('messages').append(newMode);
