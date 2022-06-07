@@ -224,7 +224,7 @@ def created_section(data):
 
 @socketio.on('deleted_message')
 def deleted_message(data):
-    socketio.emit('deleted_message', data, room = data['current_room'])
+    socketio.emit('deleted_message', data, room = data['room_id'])
 
 # Loads platform after login.
 
