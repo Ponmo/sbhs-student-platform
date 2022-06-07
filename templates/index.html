@@ -732,6 +732,7 @@
             document.getElementById('messages').textContent = '';
             document.getElementById('header_text').textContent = document.getElementById(current_space).getAttribute('data-name');
             document.getElementById('channels').textContent = ''; 
+            document.getElementById('members').textContent = '';
             var newNode = null;
             rooms_and_sections[1].forEach(function(section) {
               newNode = document.createElement('div');
