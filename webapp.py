@@ -231,7 +231,7 @@ def deleted_message(data):
 @app.route('/sbhs')
 def render_main_page():
     if 'users_name' in session:
-        return render_template('index.html', name = session['users_name'], room = '1', picture = session['picture']) # make room gone..
+        return render_template('index.html', name = session['users_name'], room = '1', picture = session['picture'])
     else:
         return redirect(url_for('render_login'))
 
