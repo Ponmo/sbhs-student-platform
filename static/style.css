@@ -536,7 +536,9 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin-left: 20px;
   height: 50px;
   border-radius: 2px;
-  overflow: hidden;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 #space_align_helper {
   display: inline-block;
@@ -611,5 +613,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   background-color: #202225;
   border-radius: 4px;
 }
-
+#spaces::-webkit-scrollbar {
+  height: 0px;
+}
 /* Add User Select None Class */
