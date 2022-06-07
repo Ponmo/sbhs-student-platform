@@ -751,18 +751,18 @@
                 }
               });
             });
-            /*try { //get rid of try block after deleting all spaces without member list another method
-              rooms_and_sections[2][0]['members'].forEach(function(member) {
+            try { //get rid of try block after deleting all spaces without member list another method
+              rooms_and_sections[2].forEach(function(member) {
                 newNode = document.createElement('div');
                 newNode.className = 'member';
-                newNode.setAttribute('data-id', member[0]);
-                newNode.textContent = member[1];
+                newNode.setAttribute('data-id', member['_id']);
+                newNode.innerHTML = '<img class="pfp" src=' + member['picture'] + ' alt="!"><span class="name"><b>' + member['name'] + '</b></span>';
                 document.getElementById('members').append(newNode);
               });
             }
             catch(error) {
               console.error(error);
-            }*/
+            }
             joinRoom(document.querySelector('.room').id);
             $('#home-page').css('display', 'none');
             $('#first-all').css('display', 'block');
