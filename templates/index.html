@@ -29,7 +29,7 @@
       </div>
 
         <!--TODO: implement Table Layout Later-->
-        <!-- <table id="directory-space">
+        <!-- <div class = empty side columns> <table id="directory-space">
           <tr>
             <th>(Banner)</th>
             <th>Moderator</th>
@@ -95,7 +95,7 @@
       <div id="footer">
         <div id="profile">
           <!-- load exclamation mark icon if not showing -->
-          <img src={{ picture }} alt="pfp" id="profile_picture">
+          <img src={{ picture }} alt="pfp" id="profile-picture">
           <p id="username">{{ name }}</p>
           <p id="student_id">Santa Barbara High School</p>
           <img class="pointer" id="settings" src="/static/images/settings-white.png">
@@ -156,6 +156,12 @@
     var typing_list = [];
     var selected_section = '';
     var space_admin = false;
+    
+    window.onclick = function(event) {
+      if(!$(event.target).is('#space-settings-popup')) {
+        document.getElementById('space-settings-popup').css('display', 'none');
+      }
+    }
     
     $(document).on('click', '#log-out', function () {
       $.get('/logout');
@@ -567,6 +573,12 @@
     socket.on('deleted_message', function (data) {
       //alert(data);
       document.getElementById(data['message_id']).remove();
+        const no_message_profile = document.querySelectorAll('message-container-combine');
+          if (no_message_profile) {
+            q
+          } else{
+            //pass
+          }
     });
 
     $(document).on('click', '.space', function() {
