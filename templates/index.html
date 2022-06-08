@@ -158,7 +158,9 @@
     var space_admin = false;
     
     window.onclick = function(event) {
+      alert(event.target);
       if(!$(event.target).is('#space-settings-popup')) {
+        alert('yap');
         document.getElementById('space-settings-popup').css('display', 'none');
       }
     }
@@ -325,7 +327,7 @@
         newMode.id = data.message_id;
         messageMoment = 'at ' + messageMoment;
         // TODO: Give pfp image default fallback image
-        newMode.innerHTML = '<img class="pfp" src="' + data.picture + '" alt="!"> <p class="message-title"> <span class="name"> <b>' + data.name + ' </b> </span> <span class="datetime">' + messageMoment + '</span> </p> <p class="message">' + data.message + '</p> <div class="message-options"> <img class="delete-message" src="/static/images/delete.png"></div>';
+        newMode.innerHTML = '<img class="profile-picture" src="' + data.picture + '" alt="!"> <p class="message-title"> <span class="name"> <b>' + data.name + ' </b> </span> <span class="datetime">' + messageMoment + '</span> </p> <p class="message">' + data.message + '</p> <div class="message-options"> <img class="delete-message" src="/static/images/delete.png"></div>';
       }
       else {
         newMode.className = 'message-container-combine';
@@ -407,7 +409,7 @@
               else {
                   messageDate = 'on ' + messageDate.format('M/D/YYYY');
               }
-              newMode.innerHTML = '<img class="pfp" src="' + item.picture + '" alt="!"> <p class="message-title"> <span class="name"> <b>' + item.name + ' </b> </span> <span class="datetime">' + messageDate + '</span> </p> <p class="message">' + item.message + '</p> <div class="message-options"><img class="delete-message" src="/static/images/delete.png"></div>';
+              newMode.innerHTML = '<img class="profile-picture" src="' + item.picture + '" alt="!"> <p class="message-title"> <span class="name"> <b>' + item.name + ' </b> </span> <span class="datetime">' + messageDate + '</span> </p> <p class="message">' + item.message + '</p> <div class="message-options"><img class="delete-message" src="/static/images/delete.png"></div>';
             }
             else {
               newMode.className = 'message-container-combine';
@@ -768,7 +770,7 @@
                 newNode = document.createElement('div');
                 newNode.className = 'member';
                 newNode.setAttribute('data-id', member['_id']);
-                newNode.innerHTML = '<img class="pfp" src=' + member['picture'] + ' alt="!"><span class="name"><b>' + member['name'] + '</b></span>';
+                newNode.innerHTML = '<img class="profile-picture" src=' + member['picture'] + ' alt="!"><span class="name"><b>' + member['name'] + '</b></span>';
                 document.getElementById('members').append(newNode);
               });
             }
