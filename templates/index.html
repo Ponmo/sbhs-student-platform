@@ -568,11 +568,12 @@
       //alert(data);
       try {
         var class_name = document.getElementById(data['message_id']).className;//gets string of class name ("message-container" or "message-container-combine")
-        
         //https://stackoverflow.com/questions/574904/get-next-previous-element-using-javascript
         if (class_name == "message-container" && document.getElementById(data['message_id']).nextElementSibling.className == "message-container-combine") {
-          var message_text = document.getElementById(data['message_id']).nextElementSibling.firstChild.nextElementSibling.textContent;//accesses p tag that contains message (first child is the time, and it's sibling, or underneath it, is the actual text of the message); this would be the string of the message that gets deleted/replaced with
-          document.getElementById(data['message_id']).firstChild.nextElementSibling.nextElementSibling.textContent = message_text;
+          var new_message_text = document.getElementById(data['message_id']).nextElementSibling.firstChild.nextElementSibling.textContent;//accesses p tag that contains message (first child is the time, and it's sibling, or underneath it, is the actual text of the message); this would be the string of the message that gets deleted/replaced with
+          document.getElementById(data['message_id']).firstChild.nextElementSibling.nextElementSibling.textContent = new_message_text;
+          var new_message_time = document.getElementById(data['message_id']).nextSibling.firstChild.textContent;
+          document.getElementById(data['message_id']).firstChild.nextSibling.nextSibling.nextElementSibling.textContent = new_message_time;
           document.getElementById(data['message_id']).nextElementSibling.remove();
         } else {
           document.getElementById(data['message_id']).remove();
