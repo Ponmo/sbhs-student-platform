@@ -103,6 +103,7 @@
             <button type="button" id="space-search-button"><img src="/static/images/ppicons-plus.svg" alt="create" style="width:25px;height:25px;"></button>
           </div>
         </div>
+        <div
       </div>
 
 
@@ -319,12 +320,12 @@
         newMode.id = data.message_id;
         messageMoment = 'at ' + messageMoment;
         // TODO: Give pfp image default fallback image
-        newMode.innerHTML = '<img class="profile-picture" src="' + data.picture + '" alt="!"> <p class="message-title"> <span class="name"> <b>' + data.name + ' </b> </span> <span class="datetime">' + messageMoment + '</span> </p> <p class="message">' + data.message + '</p> <div class="message-options"> <img class="delete-message" src="/static/images/delete.png"></div>';
+        newMode.innerHTML = '<img class="profile-picture" src="' + data.picture + '" alt="!"><p class="message-title"><span class="name"><b>' + data.name + '</b></span><span class="datetime">' + messageMoment + '</span></p><p class="message">' + data.message + '</p><div class="message-options"><img class="delete-message" src="/static/images/delete.png"></div>';
       }
       else {
         newMode.className = 'message-container-combine';
         newMode.id = data.message_id;
-        newMode.innerHTML = '<p class="message-combine-time">' + messageMoment + '</p><p class="message-combine">' + data.message + '</p> <div class="message-options"> <img class="delete-message" src="/static/images/delete.png"></div>';
+        newMode.innerHTML = '<p class="message-combine-time">' + messageMoment + '</p><p class="message-combine">' + data.message + '</p><div class="message-options"><img class="delete-message" src="/static/images/delete.png"></div>';
       }
       document.getElementById('messages').append(newMode);
     });
@@ -401,12 +402,12 @@
               else {
                   messageDate = 'on ' + messageDate.format('M/D/YYYY');
               }
-              newMode.innerHTML = '<img class="profile-picture" src="' + item.picture + '" alt="!"> <p class="message-title"> <span class="name"> <b>' + item.name + ' </b> </span> <span class="datetime">' + messageDate + '</span> </p> <p class="message">' + item.message + '</p> <div class="message-options"><img class="delete-message" src="/static/images/delete.png"></div>';
+              newMode.innerHTML = '<img class="profile-picture" src="' + item.picture + '" alt="!"><p class="message-title"><span class="name"><b>' + item.name + ' </b></span><span class="datetime">' + messageDate + '</span></p><p class="message">' + item.message + '</p><div class="message-options"><img class="delete-message" src="/static/images/delete.png"></div>';
             }
             else {
               newMode.className = 'message-container-combine';
               newMode.id = item._id.$oid;
-              newMode.innerHTML = '<p class="message-combine-time">' + messageDate.format('h:mm A') + '</p><p class="message-combine">' + item.message + '</p> <div class="message-options"> <img class="delete-message" src="/static/images/delete.png"></div>';
+              newMode.innerHTML = '<p class="message-combine-time">' + messageDate.format('h:mm A') + '</p><p class="message-combine">' + item.message + '</p><div class="message-options"><img class="delete-message" src="/static/images/delete.png"></div>';
             }
             document.getElementById('messages').prepend(newMode);
           });
