@@ -569,9 +569,9 @@
       document.getElementById(data['message_id']).remove();
         const no_message_profile = document.querySelectorAll('message-container-combine');
         let message_profile = document.createElement('message-container');
-        message_profile.innerHTML =
           if (no_message_profile) {
-            q
+            message_profile.innerHTML = '<div>message-container</div>';
+            document.body.appendChild(message_profile);
           } else{
             //pass
           }
