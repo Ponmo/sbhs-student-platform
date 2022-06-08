@@ -571,7 +571,7 @@
       //https://stackoverflow.com/questions/574904/get-next-previous-element-using-javascript
       if (class_name == "message-container" && document.getElementById(data['message_id']).nextSibling.className == "message-container-combine") {
         var message_text = document.getElementById(data['message_id']).nextSibling.firstChild.nextSibling.textContent;//accesses p tag that contains message (first child is the time, and it's sibling, or underneath it, is the actual text of the message); this would be the string of the message that gets deleted/replaced with
-        document.getElementById(data['message_id']).firstChild.nextSibling.nextSibling.textContent = message_text;
+        document.getElementById(data['message_id']).firstChild.nextSibling.nextSibling.nextSibling.textContent = message_text;
         document.getElementById(data['message_id']).nextSibling.remove();
       } else {
         document.getElementById(data['message_id']).remove();
