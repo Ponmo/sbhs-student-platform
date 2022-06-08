@@ -566,7 +566,7 @@
 
     socket.on('deleted_message', function (data) {
       //alert(data);
-      document.getElementById(data['message_id']).remove();
+      /*document.getElementById(data['message_id']).remove();
         const no_message_profile = document.querySelectorAll('message-container-combine');
         let message_profile = document.createElement('message-container');
           if (no_message_profile) {
@@ -574,7 +574,7 @@
             document.body.appendChild(message_profile);
           } else{
             //pass
-          }
+          }*/
     });
 
     $(document).on('click', '.space', function() {
