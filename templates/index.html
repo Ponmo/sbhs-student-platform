@@ -566,15 +566,16 @@
 
     socket.on('deleted_message', function (data) {
       //alert(data);
-      document.getElementById(data['message_id']).remove();
-        const no_message_profile = document.querySelectorAll('message-container-combine');
-        let message_profile = document.createElement('message-container');
-          if (no_message_profile) {
-            message_profile.innerHTML = '<div>message-container</div>';
-            document.body.appendChild(message_profile);
-          } else{
-            //pass
-          }
+      var class_name = document.getElementById(data['message_id']).className;//gets string of class name ("message-container" or "message-container-combine")
+       
+      //https://stackoverflow.com/questions/574904/get-next-previous-element-using-javascript
+      if (class_name == "message-container" && document.getElementById(data['message_id']).nextSibling.className == "message-container-combine") {
+        var message_text = document.getElementById(data['message_id']).nextSibling.firstChild.nextSibling.textContent;//accesses p tag that contains message (first child is the time, and it's sibling, or underneath it, is the actual text of the message); this would be the string of the message that gets deleted/replaced with
+        document.getElementById(data['message_id']).firstChild.nextSibling.nextSibling.textContent = message_text;
+        document.getElementById(data['message_id']).nextSibling.remove();
+      } else {
+        document.getElementById(data['message_id']).remove();
+      }
     });
 
     $(document).on('click', '.space', function() {
