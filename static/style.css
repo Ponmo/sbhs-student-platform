@@ -508,7 +508,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   white-space: nowrap;
   word-break: keep-all;
   padding: 0;
-  margin-left: 50px;
+  margin-left: 12px;
   overflow: hidden;
   grid-column: 2;
   grid-row: 2;
