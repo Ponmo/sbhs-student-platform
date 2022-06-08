@@ -572,12 +572,12 @@
         //https://stackoverflow.com/questions/574904/get-next-previous-element-using-javascript
         if (class_name == "message-container" && document.getElementById(data['message_id']).nextElementSibling.className == "message-container-combine") {
           var new_message_text = document.getElementById(data['message_id']).nextElementSibling.firstChild.nextElementSibling.textContent;//accesses p tag that contains message (first child is the time, and it's sibling, or underneath it, is the actual text of the message); this would be the string of the message that gets deleted/replaced with
-          document.getElementById(data['message_id']).firstChild.nextElementSibling.nextElementSibling.textContent = new_message_text;
-          var new_message_time = document.getElementById(data['message_id']).nextElementSibling.firstChild.textContent;
-          document.getElementById(data['message_id']).firstChild.nextElementSibling.firstChild.nextElementSibling.textContent = new_message_time;
-          document.getElementById(data['message_id']).nextElementSibling.remove();
+          document.getElementById(data['message_id']).firstChild.nextElementSibling.nextElementSibling.textContent = new_message_text;//replaces old message text with new one
+          var new_message_time = document.getElementById(data['message_id']).nextElementSibling.firstChild.textContent;//accesses old time
+          document.getElementById(data['message_id']).firstChild.nextElementSibling.firstChild.nextElementSibling.textContent = new_message_time;//replaces old message time with new one
+          document.getElementById(data['message_id']).nextElementSibling.remove();//removes the old message (duplicate message as the result of the previous lines we created)
         } else {
-          document.getElementById(data['message_id']).remove();
+          document.getElementById(data['message_id']).remove();//removes the entire div completely if no additonal messages exist below
         }
       } catch(e) {
         //alert(e);
