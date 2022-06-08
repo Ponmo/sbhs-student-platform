@@ -480,6 +480,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 #profile {
   display: grid;
+  vertical-align: middle;
   align-items: center;
   grid-template-rows: minmax(min-content, max-content);
   grid-template-columns: 2px auto 30px;
@@ -580,6 +581,11 @@ img { /* make images and create button undraggable and unhighlitable*/
 #space-search-button {
   width: 55px;
   height: 39px;
+}
+#footer_align_helper {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
 }
 #chat::-webkit-scrollbar {
   width: 8px;
