@@ -412,6 +412,13 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin-right: 5px;
   margin-top: 3px;
 }
+.report-message {
+  width: 16px;
+  height: 16px;
+  float: center;
+  margin-right: 5px;
+  margin-top: 3px;
+}
 .message-container:hover .message-options {
   display: block;
 }
