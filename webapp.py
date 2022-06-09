@@ -382,10 +382,14 @@ def report_message():
         reported_message = collection_messages.find_one({'_id': ObjectId(request.json['message_id'])})
         name = reported_message['name']
         message = reported_message['message']
-        #later, store more information like reported time, reason for report, etc....
-        collection_reports.insert_one({'reported_name': name, 'reported_message': message})
-        return Response(dumps({'success': 'true'}), mimetype='application/json')
+        if collection_reports.find({'reported_id': reported_message}).count() == 0:
+            #later, store more information like reported time, reason for report, etc....
+            collection_reports.insert_one({'report_id': reported_message, 'reported_name': name, 'reported_message': message})
+            return Response(dumps({'success': 'true'}), mimetype='application/json')
+        else:
+            return Response(dumps({'success': 'false'}), mimetype='application/json')
     else:
         return Response(dumps({'success': 'false'}), mimetype='application/json')
+        
 if __name__ == '__main__':
     socketio.run(app, debug=False)
