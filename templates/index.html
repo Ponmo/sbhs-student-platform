@@ -391,7 +391,7 @@
             if (item.combine == 'false') {
               newMode.className = 'message-container';
               newMode.id = item._id.$oid;
-              newMode.setAttribute('data-datetime', messageDate.toString());
+              newMode.setAttribute('data-date', messageDate.format('M/D/YYYY'));
               if(moment(messageDate).isSame(todayDate, 'day')) {
                 messageDate = 'at ' + messageDate.format('h:mm A');
               }
@@ -406,6 +406,7 @@
             else {
               newMode.className = 'message-container-combine';
               newMode.id = item._id.$oid;
+              newMode.setAttribute('data-date', messageDate.format('M/D/YYYY'));
               newMode.innerHTML = '<p class="message-combine-time">' + messageDate.format('h:mm A') + '</p><p class="message-combine">' + item.message + '</p><div class="message-options"><img class="delete-message" src="/static/images/delete.png"></div>';
             }
             document.getElementById('messages').prepend(newMode);
