@@ -387,12 +387,11 @@
           var timeDisplayMode = 0;
           chat_history.forEach(function(item) {
             var messageDate = moment(item.datetime);
-            var messageMoment = moment.utc(item.datetime).local();
             const newMode = document.createElement('div');
             if (item.combine == 'false') {
               newMode.className = 'message-container';
               newMode.id = item._id.$oid;
-              newMode.setAttribute('data-datetime', messageMoment.toString());
+              newMode.setAttribute('data-datetime', messageDate.toString());
               if(moment(messageDate).isSame(todayDate, 'day')) {
                 messageDate = 'at ' + messageDate.format('h:mm A');
               }
@@ -572,8 +571,8 @@
         //https://stackoverflow.com/questions/574904/get-next-previous-element-using-javascript
         if (class_name == "message-container" && document.getElementById(data['message_id']).nextElementSibling.className == "message-container-combine") {
           var new_message_text = document.getElementById(data['message_id']).nextElementSibling.firstChild.nextElementSibling.textContent;//accesses p tag that contains message (first child is the time, and it's sibling, or underneath it, is the actual text of the message); this would be the string of the message that gets deleted/replaced with
-          document.getElementById(data['message_id']).firstChild.nextElementSibling.nextElementSibling.textContent = new_message_text;
-          var new_message_time = document.getElementById(data['message_id']).nextElementSibling.firstChild.textContent;
+          document.getElementById(data['message_id']).firstChild.nextElementSibling.nextElementSibling.textContent = new_message_text;//are you not able to do voice chat all of today?
+          var new_message_time = document.getElementById(data['message_id']).nextElementSibling.firstChild.textContent; //yes i am multitasking around, but I'll try to help you // also I need to add one more line of code to an old function before you can fix the bug//ok
           document.getElementById(data['message_id']).firstChild.nextElementSibling.firstChild.nextElementSibling.textContent = new_message_time;
           document.getElementById(data['message_id']).nextElementSibling.remove();
         } else {
