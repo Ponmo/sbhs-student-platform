@@ -811,6 +811,9 @@
         if (data['success'] == 'true') {
           alert("Your report has been recieved.")
         }
+        if (data['success'] == 'many') {
+          alert("Message has already been reported.")
+        }
         else {
           alert("Your report failed.")
         }
