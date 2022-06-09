@@ -131,7 +131,8 @@ img { /* make images and create button undraggable and unhighlitable*/
   grid-template-columns: 270px minmax(0px, auto) 220px;
   height: 100vh;
   width: 100vw;
-  overflow-x: hidden;
+  overflow: hidden;
+  /*Remove?*/
   gap: 0px;
 }
 
@@ -315,8 +316,8 @@ img { /* make images and create button undraggable and unhighlitable*/
   position: relative;
   display: grid;
   color: #d7d9da;
-  grid-template-columns: 2px auto;
-  grid-auto-rows: minmax(min-content, max-content);
+  grid-template-columns: 40px auto;
+  /*grid-auto-rows: minmax(min-content, max-content);*/
   padding-top: 4px;
   padding-right: 51px;
   padding-left: 20px;
@@ -329,7 +330,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 
 .message-title {
-  margin-left: 50px;
+  margin-left: 12px;
   overflow-wrap: break-word;
   overflow: hidden;
   grid-column: 2;
@@ -345,7 +346,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 .message {
   margin-bottom: 0px;
   padding: 0;
-  margin-left: 50px;
+  margin-left: 12px;
   overflow-wrap: break-word;
   overflow: hidden;
   grid-column: 2;
@@ -358,7 +359,6 @@ img { /* make images and create button undraggable and unhighlitable*/
   display: grid;
   color: #d7d9da;
   grid-template-columns: 50px auto;
-  grid-auto-rows: minmax(min-content);
   padding-right: 51px;
   padding-left: 20px;
   margin-top: -20px;
@@ -474,16 +474,15 @@ img { /* make images and create button undraggable and unhighlitable*/
   width: 100%;
   height: 50px;
   background-color: #282a2e;
+  /* Remove and use pseudo element to prevent it from messing up centering of profile? Alternative way possible */
   border-top: 1px solid #232428;
   overflow: hidden;
-  background: linear-gradient(225deg, #282a2e 20px, #282a2e 20px);
 }
 #profile {
   display: grid;
   align-items: center;
-  grid-template-rows: minmax(min-content, max-content);
-  grid-template-columns: 2px auto 30px;
-  min-width: 270px;
+  grid-template-columns: 40px auto 30px;
+  width: 270px;
   padding-left: 20px;
 }
 .profile-picture {
@@ -496,7 +495,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 #username {
   color: #ffffff;
   font-weight: bold;
-  margin-left: 50px;
+  margin-left: 10px;
   white-space: nowrap;
   overflow: hidden;
   grid-column: 2;
@@ -510,7 +509,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   white-space: nowrap;
   word-break: keep-all;
   padding: 0;
-  margin-left: 50px;
+  margin-left: 10px;
   overflow: hidden;
   grid-column: 2;
   grid-row: 2;
@@ -522,10 +521,8 @@ img { /* make images and create button undraggable and unhighlitable*/
   grid-row: 1/3;
   margin-bottom: 0px;
 }
-/* add a min width and responsive thing to spaces */
-/* Some math is needed for the width responsiveness; take 1 - percentage of the profile pixels*/
 #spaces {/* arrow key rolling between each space shown below */
-  width: 68%;
+  width: calc(100% - 290px);
   min-width: 200px;
   margin-left: 20px;
   height: 50px;
