@@ -195,7 +195,7 @@ def send_message(data):
     except:
         data['combine'] = 'false'
     data['message_id'] = str(ObjectId())
-    collection_messages.insert_one({'_id': ObjectId(data['message_id']),'name': data['name'], 'picture': session['picture'], 'room': data['room'], 'datetime': utc_dt, 'message': data['message'], 'combine': data['combine']})
+    collection_messages.insert_one({'_id': ObjectId(data['message_id']),'name': data['name'], 'picture': session['picture'], 'room': data['room'], 'datetime': utc_dt, 'message': data['message'], 'combine': data['combine'], 'email': session['users_email']})
     socketio.emit('recieve_message', data, room = data['room'])
     
 # When a room is created, send that room data to all
@@ -380,11 +380,9 @@ def delete_message():
 def report_message():
     if request.method == 'POST':
         reported_message = collection_messages.find_one({'_id': ObjectId(request.json['message_id'])})
-        name = reported_message['name']
-        message = reported_message['message']
-        if collection_reports.count_documents({'report_id': reported_message}) == 0:
+        if collection_reports.count_documents({'reported_message_id': reported_message}) == 0:
             #later, store more information like reported time, reason for report, etc....
-            collection_reports.insert_one({'report_id': reported_message, 'reported_name': name, 'reported_message': message})
+            collection_reports.insert_one({'reported_message_id': reported_message, 'reported_email': reported_message['email'], 'reported_content': reported_message['message'], 'reporter': session['users_email'], 'datetime': datetime.now().isoformat() + 'Z'})
             return Response(dumps({'success': 'true'}), mimetype='application/json')
         else:
             return Response(dumps({'success': 'many'}), mimetype='application/json')
