@@ -577,9 +577,6 @@
             var new_message_time = document.getElementById(data['message_id']).nextElementSibling.firstChild.textContent; 
             document.getElementById(data['message_id']).firstChild.nextElementSibling.firstChild.nextElementSibling.textContent = 'Yesterday at ' + new_message_time;
           }
-            //else if () {
-
-          //}
           //else if the textContent of the date in the messagecontainer div contains a string "/" { //the first if above handles what happens when its yesterday. this if right below where I'm typing handles the case where it should be MM/DD/YYYY (i.e. if the message is older than 1 day)
             //var new_message_date = document.document.getElementById(data['message_id']).nextElementSibling.firstChild.getAttribute called "data-date";
             //replace that text content with new_message_date
