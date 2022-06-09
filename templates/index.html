@@ -400,7 +400,7 @@
               }
               else {
                   messageDate = 'on ' + messageDate.format('M/D/YYYY');
-              }
+              } //Okay, so basically I added an attribute to each message div called "data-date" which contains the date the message was sent.//ok//go to the function
               newMode.innerHTML = '<img class="profile-picture" src="' + item.picture + '" alt="!"><p class="message-title"><span class="name"><b>' + item.name + ' </b></span><span class="datetime">' + messageDate + '</span></p><p class="message">' + item.message + '</p><div class="message-options"><img class="delete-message" src="/static/images/delete.png"></div>';
             }
             else {
@@ -571,10 +571,28 @@
         var class_name = document.getElementById(data['message_id']).className;//gets string of class name ("message-container" or "message-container-combine")
         //https://stackoverflow.com/questions/574904/get-next-previous-element-using-javascript
         if (class_name == "message-container" && document.getElementById(data['message_id']).nextElementSibling.className == "message-container-combine") {
-          var new_message_text = document.getElementById(data['message_id']).nextElementSibling.firstChild.nextElementSibling.textContent;//accesses p tag that contains message (first child is the time, and it's sibling, or underneath it, is the actual text of the message); this would be the string of the message that gets deleted/replaced with
-          document.getElementById(data['message_id']).firstChild.nextElementSibling.nextElementSibling.textContent = new_message_text;//are you not able to do voice chat all of today?
-          var new_message_time = document.getElementById(data['message_id']).nextElementSibling.firstChild.textContent; //yes i am multitasking around, but I'll try to help you // also I need to add one more line of code to an old function before you can fix the bug//ok
-          document.getElementById(data['message_id']).firstChild.nextElementSibling.firstChild.nextElementSibling.textContent = new_message_time;
+          var new_message_text = document.getElementById(data['message_id']).nextElementSibling.firstChild.nextElementSibling.textContent;
+          document.getElementById(data['message_id']).firstChild.nextElementSibling.nextElementSibling.textContent = new_message_text;
+          if (document.getElementById(data['message_id']).firstChild.nextElementSibling.nextElementSibling.textContent.includes('Yesterday')) {
+            var new_message_time = document.getElementById(data['message_id']).nextElementSibling.firstChild.textContent; 
+            document.getElementById(data['message_id']).firstChild.nextElementSibling.firstChild.nextElementSibling.textContent = 'Yesterday at ' + new_message_time;
+          }
+            //else if () {
+
+          //}
+          //else if the textContent of the date in the messagecontainer div contains a string "/" { //the first if above handles what happens when its yesterday. this if right below where I'm typing handles the case where it should be MM/DD/YYYY (i.e. if the message is older than 1 day)
+            //var new_message_date = document.document.getElementById(data['message_id']).nextElementSibling.firstChild.getAttribute called "data-date";
+            //replace that text content with new_message_date
+          //}
+          else { //this else statement was what we already wrote, but the above snippets handle the bug.
+            var new_message_time = document.getElementById(data['message_id']).nextElementSibling.firstChild.textContent; 
+            document.getElementById(data['message_id']).firstChild.nextElementSibling.firstChild.nextElementSibling.textContent = 'at ' + new_message_time;
+          }
+
+
+          //Do you want me to write some psuedocode explaining how we can write the new code?sure
+          /*var new_message_time = document.getElementById(data['message_id']).nextElementSibling.firstChild.textContent; 
+          document.getElementById(data['message_id']).firstChild.nextElementSibling.firstChild.nextElementSibling.textContent = new_message_time;*/
           document.getElementById(data['message_id']).nextElementSibling.remove();
         } else {
           document.getElementById(data['message_id']).remove();
