@@ -36,6 +36,7 @@ collection_spaces = db['Spaces']
 collection_rooms = db['Rooms']
 collection_messages = db['Messages']
 collection_sections = db['Sections']
+collection_reports = db['Reports']
 
 app = Flask(__name__)
 app.secret_key = os.environ['SECRET_KEY']
@@ -375,6 +376,16 @@ def delete_message():
     else:
         return Response(dumps({'success': 'false'}), mimetype='application/json')
 
-
+@app.route('/report_message', methods=['GET', 'POST'])
+def report_message():
+    if request.method == 'POST':
+        reported_message = collection_messages.find_one({'_id': ObjectId(request.json['message_id'])})
+        name = reported_message['name']
+        message = reported_message['message']
+        #later, store more information like reported time, reason for report, etc....
+        collection_reports.insert_one({'reported_name': name, 'reported_message': message})
+        return Response(dumps({'success': 'true'}), mimetype='application/json')
+    else:
+        return Response(dumps({'success': 'false'}), mimetype='application/json')
 if __name__ == '__main__':
     socketio.run(app, debug=False)

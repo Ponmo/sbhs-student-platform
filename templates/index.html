@@ -800,7 +800,23 @@
     });
   }
 
-
+  $(document).on('click', '.report-message', function() {
+    $.ajax({
+      type: "POST",
+      url: '/report_message',
+      dataType: "json",
+      data: JSON.stringify({'message_id': this.parentNode.parentNode.id}),
+      contentType: 'application/json;charset=UTF-8',
+      success: function(data) {
+        if (data['success'] == 'true') {
+          $.alert("Your report has been recieved.")
+        }
+        else {
+          $.alert("Your report failed.")
+        }
+      }
+    });
+  });
 
   //test:
   var createSpaceModal = document.getElementById("create-space");
