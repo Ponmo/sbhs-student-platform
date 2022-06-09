@@ -392,6 +392,7 @@
             if (item.combine == 'false') {
               newMode.className = 'message-container';
               newMode.id = item._id.$oid;
+              newMode.setAttribute('data-datetime', messageMoment.toString());
               if(moment(messageDate).isSame(todayDate, 'day')) {
                 messageDate = 'at ' + messageDate.format('h:mm A');
               }
