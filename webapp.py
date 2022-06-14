@@ -37,6 +37,7 @@ collection_rooms = db['Rooms']
 collection_messages = db['Messages']
 collection_sections = db['Sections']
 collection_reports = db['Reports']
+collection_deleted = db['Deleted Messages']
 
 app = Flask(__name__)
 app.secret_key = os.environ['SECRET_KEY']
@@ -372,6 +373,7 @@ def user_spaces():
 def delete_message():
     if request.method == 'POST':
         collection_messages.delete_one({"_id": ObjectId(request.json['message_id'])})
+        collection_deleted.insert_one({"_id": ObjectId(request.json['message_id'])})
         return Response(dumps({'success': 'true'}), mimetype='application/json')
     else:
         return Response(dumps({'success': 'false'}), mimetype='application/json')
