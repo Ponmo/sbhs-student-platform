@@ -372,8 +372,8 @@ def user_spaces():
 @app.route('/delete_message', methods=['GET', 'POST'])
 def delete_message():
     if request.method == 'POST':
-        deleted_message = collection_messages.find_one({'_id': ObjectId(request.json['message_id'])})
-        collection_deleted.insert_one({'name': session['users_email'], 'datetime': datetime.now().isoformat() + 'Z', 'deleted_message_content': deleted_message})
+        # deleted_message = collection_messages.find_one({'_id': ObjectId(request.json['message_id'])})
+        # collection_deleted.insert_one({'name': session['users_email'], 'datetime': datetime.now().isoformat() + 'Z', 'deleted_message_content': deleted_message})
         collection_messages.delete_one({"_id": ObjectId(request.json['message_id'])})
         return Response(dumps({'success': 'true'}), mimetype='application/json')
     else:
