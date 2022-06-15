@@ -379,18 +379,18 @@ def delete_message():
     else:
         return Response(dumps({'success': 'false'}), mimetype='application/json')
 
-# @app.route('/report_message', methods=['GET', 'POST'])
-# def report_message():
-#     if request.method == 'POST':
-#         reported_message = collection_messages.find_one({'_id': ObjectId(request.json['message_id'])})
-#         if collection_reports.count_documents({'reported_message_id': reported_message}) == 0:
-#             #later, store more information like reported time, reason for report, etc....
-#             collection_reports.insert_one({'reported_message_id': reported_message, 'reported_email': reported_message['email'], 'reported_content': reported_message['message'], 'reporter': session['users_email'], 'datetime': datetime.now().isoformat() + 'Z'})
-#             return Response(dumps({'success': 'true'}), mimetype='application/json')
-#         else:
-#             return Response(dumps({'success': 'many'}), mimetype='application/json')
-#     else:
-#         return Response(dumps({'success': 'false'}), mimetype='application/json')
+@app.route('/report_message', methods=['GET', 'POST'])
+def report_message():
+    if request.method == 'POST':
+        reported_message = collection_messages.find_one({'_id': ObjectId(request.json['message_id'])})
+        if collection_reports.count_documents({'reported_message_id': reported_message}) == 0:
+            #later, store more information like reported time, reason for report, etc....
+            collection_reports.insert_one({'reported_message_id': reported_message, 'reported_email': reported_message['email'], 'reported_content': reported_message['message'], 'reporter': session['users_email'], 'datetime': datetime.now().isoformat() + 'Z'})
+            return Response(dumps({'success': 'true'}), mimetype='application/json')
+        else:
+            return Response(dumps({'success': 'many'}), mimetype='application/json')
+    else:
+        return Response(dumps({'success': 'false'}), mimetype='application/json')
         
 if __name__ == '__main__':
     socketio.run(app, debug=False)
