@@ -591,6 +591,20 @@ img { /* make images and create button undraggable and unhighlitable*/
   width: 55px;
   height: 39px;
 }
+.modal {
+  background-color: rgba(0,0,0,0.4);
+  height: 100%;
+}
+.modal-content {
+  display: flex;
+  width: 490px;
+  padding: 20px;
+  margin: auto;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #fefefe;
+  /*opacity border*/
+}
 #chat::-webkit-scrollbar {
   width: 8px;
 }

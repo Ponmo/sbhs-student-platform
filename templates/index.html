@@ -353,6 +353,9 @@
       }
     });
     
+    socket.on('deleted_message', function(data) {
+      
+    });
     let typing_display = document.getElementById('typing_display');
     function changeTypingDisplay() {
       if (typing_list.length == 0) {
@@ -579,11 +582,7 @@
               var new_message_date = document.getElementById(data['message_id']).nextElementSibling.getAttribute("data-date");
               document.getElementById(data['message_id']).firstChild.nextElementSibling.firstChild.nextElementSibling.textContent = new_message_date;
             }
-            //else if the textContent of the date in the messagecontainer div contains a string "/" { //the first if above handles what happens when its yesterday. this if right below where I'm typing handles the case where it should be MM/DD/YYYY (i.e. if the message is older than 1 day)
-              //var new_message_date = document.document.getElementById(data['message_id']).nextElementSibling.firstChild.getAttribute called "data-date";
-              //replace that text content with new_message_date
-            //}
-            else { //this else statement was what we already wrote, but the above snippets handle the bug.
+            else {
               var new_message_time = document.getElementById(data['message_id']).nextElementSibling.firstChild.textContent; 
               document.getElementById(data['message_id']).firstChild.nextElementSibling.firstChild.nextElementSibling.textContent = 'at ' + new_message_time;
             }
