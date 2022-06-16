@@ -212,23 +212,26 @@
         dataType: "json",
         success: function(user_space_list) {
           user_space_list.forEach(function(item) { 
-            var newNode = document.createElement('div'); 
-            newNode.className = 'space-wrapper';
+            try {
+              var newNode = document.createElement('div'); 
+              newNode.className = 'space-wrapper';
             
-            var newNodeChild = document.createElement('img'); 
-            newNodeChild.className = 'space pointer';
-            newNodeChild.id = item._id.$oid;
-            newNodeChild.setAttribute('data-name', item.name);
-            newNodeChild.src = item.picture;
-            newNode.appendChild(newNodeChild);
+              var newNodeChild = document.createElement('img'); 
+              newNodeChild.className = 'space pointer';
+              newNodeChild.id = item._id.$oid;
+              newNodeChild.setAttribute('data-name', item.name);
+              newNodeChild.src = item.picture;
+              newNode.appendChild(newNodeChild);
             
-            newNodeChild = document.createElement('div');
-            newNodeChild.className = 'active-space';
-            newNode.appendChild(newNodeChild); 
+              newNodeChild = document.createElement('div');
+              newNodeChild.className = 'active-space';
+              newNode.appendChild(newNodeChild); 
             
-            referenceNode = document.getElementById('space_align_helper'); 
-            referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling); 
-
+              referenceNode = document.getElementById('space_align_helper'); 
+              referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling); 
+            }
+            catch(e) {
+            }
           });
         }
       });
