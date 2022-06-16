@@ -475,7 +475,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 .member {
   margin: 9px 0px 0px 12px;
 }
-.name {
+.member-name {
   margin-left: 10px;
   color: white;
 }
