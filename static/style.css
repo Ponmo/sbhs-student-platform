@@ -472,6 +472,13 @@ img { /* make images and create button undraggable and unhighlitable*/
   grid-row: 2;
   background-color: #2f3136;
 }
+.member {
+  margin: 9px 0px 0px 12px;
+}
+.name {
+  margin-left: 10px;
+  color: white;
+}
 #footer {
   position: fixed;
   display: flex;

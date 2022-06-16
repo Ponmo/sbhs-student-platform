@@ -561,16 +561,13 @@
         success: function (delete_message){
           //alert('delete message worked');//remove/delete element
           socket.emit('deleted_message', {'message_id': message_id, 'room_id': current_room});//url of ajax equivalent, we don't need forward slash (/)
-          alert("message deleted") // for testing broken messages
         }
       })
     });
 
     socket.on('deleted_message', function (data) {
-          //alert(data);
             try {
         var class_name = document.getElementById(data['message_id']).className;//gets string of class name ("message-container" or "message-container-combine")
-        //https://stackoverflow.com/questions/574904/get-next-previous-element-using-javascript
         if (class_name == "message-container" && document.getElementById(data['message_id']).nextElementSibling.className == "message-container-combine") {
           var new_message_text = document.getElementById(data['message_id']).nextElementSibling.firstChild.nextElementSibling.textContent;//accesses p tag that contains message (first child is the time, and it's sibling, or underneath it, is the actual text of the message); this would be the string of the message that gets deleted/replaced with
           document.getElementById(data['message_id']).firstChild.nextElementSibling.nextElementSibling.textContent = new_message_text;//replaces old message text with new one
@@ -595,7 +592,7 @@
           document.getElementById(data['message_id']).remove();//removes the entire div completely if no additonal messages exist below
         }
       } catch(e) {
-        //alert(e);
+        alert(e);
       }
     });
 
