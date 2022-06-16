@@ -589,10 +589,14 @@
               document.getElementById(data['message_id']).firstChild.nextElementSibling.firstChild.nextElementSibling.textContent = 'at ' + new_message_time;
             }
             document.getElementById(data['message_id']).nextElementSibling.remove();
-          }
           } else {
             document.getElementById(data['message_id']).remove();//removes the entire div completely if no additonal messages exist below
           }
+        }
+        else {
+          document.getElementById(data['message_id']).remove();
+        }
+
         } catch(e) {
           alert(e);
         }
@@ -785,7 +789,7 @@
                 newNode = document.createElement('div');
                 newNode.className = 'member';
                 newNode.setAttribute('data-id', member['_id']);
-                newNode.innerHTML = '<img class="profile-picture" src=' + member['picture'] + ' alt="!"><span class="member-name">' + member['name'] + '</span>';
+                newNode.innerHTML = '<img class="profile-picture" src=' + member['picture'] + ' alt="!"><span class="member-name"><b>' + member['name'] + '</b></span>';
                 document.getElementById('members').append(newNode);
               });
             }
