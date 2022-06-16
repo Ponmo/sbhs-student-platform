@@ -566,16 +566,16 @@
     });
 
     socket.on('deleted_message', function (data) {
-            try {
+      try {
         var class_name = document.getElementById(data['message_id']).className;//gets string of class name ("message-container" or "message-container-combine")
-        if (document.getElementById(data['message_id']).nextElementSibling.className !== null) {
+        if ($('#' + data['message_id']).next().length != 0) {
           if (class_name == "message-container" && document.getElementById(data['message_id']).nextElementSibling.className == "message-container-combine") {
             var new_message_text = document.getElementById(data['message_id']).nextElementSibling.firstChild.nextElementSibling.textContent;//accesses p tag that contains message (first child is the time, and it's sibling, or underneath it, is the actual text of the message); this would be the string of the message that gets deleted/replaced with
             document.getElementById(data['message_id']).firstChild.nextElementSibling.nextElementSibling.textContent = new_message_text;//replaces old message text with new one
             if (document.getElementById(data['message_id']).firstChild.nextElementSibling.nextElementSibling.textContent.includes('Yesterday')) {
               var new_message_time = document.getElementById(data['message_id']).nextElementSibling.firstChild.textContent; 
               document.getElementById(data['message_id']).firstChild.nextElementSibling.firstChild.nextElementSibling.textContent = 'Yesterday at ' + new_message_time;
-            } else if (document.getElementById(data['message_id']).firstChild.nextElementSibling.nextElementSibling.textContent.includes('/')){
+            } else if (document.getElementById(data['message_id']).firstChild.nextElementSibling.textContent.includes('/')){
               var new_message_date = document.getElementById(data['message_id']).nextElementSibling.firstChild.getAttribute("data-date");
               document.getElementById(data['message_id']).firstChild.nextElementSibling.nextElementSibling.textContent = new_message_date;
 
