@@ -566,7 +566,7 @@
         contentType: 'application/json;charset=UTF-8',//type of data received
         success: function (delete_message){
           //alert('delete message worked');//remove/delete element
-          alert(delete_message['success']);
+          alert(JSON.stringify(delete_message['success']));
           socket.emit('deleted_message', {'message_id': message_id, 'room_id': current_room});//url of ajax equivalent, we don't need forward slash (/)
         } //TypeError: Cannot read properties of null (reading 'className')
       })
