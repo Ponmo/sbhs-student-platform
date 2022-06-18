@@ -154,6 +154,12 @@
     var selected_section = '';
     var space_admin = false;
     
+    $(document).click(function(e){
+
+      if($(e.target).closest('#space-settings-popup').length != 0) return false;
+      $('#space-settings-popup').hide();
+    });
+
     $(document).on('click', '#log-out', function () {
       $.get('/logout');
       window.location.replace("https://sbhs-platform.herokuapp.com/");
