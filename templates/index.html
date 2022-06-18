@@ -742,20 +742,19 @@
   });
 
   $(document).on('click', '#server-settings-button', function() {
-    if (document.getElementById('space-settings-popup').style.display != 'block') {
-      document.getElementById('space-settings-popup').style.display = 'block';
+    var container = document.getElementById('space-settings-popup');
+    if (container.style.display != 'block') {
+      container.style.display = 'block';
     }
     else {
-      document.getElementById('space-settings-popup').style.display = 'none';
+      container.style.display = 'none';
     }
-  });
-  $(document).click(function() {
-    var container = $("#space-settings-popup");
-    if (container.style.display == 'block') {
-      if (!container.is(event.target) && !container.has(event.target).length) {
-          container.hide();
-      }
-    }
+    // if (document.getElementById('space-settings-popup').style.display != 'block') {
+    //   document.getElementById('space-settings-popup').style.display = 'block';
+    // }
+    // else {
+    //   document.getElementById('space-settings-popup').style.display = 'none';
+    // }
   });
 
   function space() {
