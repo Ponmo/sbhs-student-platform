@@ -708,7 +708,6 @@
 
   $(document).on('click', '.form-space', function() {
     var joined_space = this.getAttribute('data-id');
-    this.firstChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = "Joined";
     $.ajax({
       type: "POST",
       url: '/join_space',
@@ -749,6 +748,7 @@
         }
       }
     });
+    this.firstChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = "Joined";
   });
 
   $(document).on('click', '#server-settings-button', function() {
