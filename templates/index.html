@@ -708,7 +708,7 @@
 
   $(document).on('click', '.form-space', function() {
     var joined_space = this.getAttribute('data-id');
-    this.firstChild.nextElementSibling.nextElementSibling.nextElementSibling.text = "Joined";
+    this.firstChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = "Joined";
     $.ajax({
       type: "POST",
       url: '/join_space',
