@@ -406,7 +406,7 @@ def member_profile():
     if request.method == 'POST':
         member = collection_users.find_one({'_id': request.json['user_id']})
         user_data = {'name': member['name'], 'email': member['email'], 'picture': member['picture'], "joined": member['joined']}
-        return Response(user_data, mimetype='application/json')
+        return Response(dumps(user_data), mimetype='application/json')
     else:
         return Response(dumps({'success': 'false'}), mimetype='application/json')
 
@@ -414,7 +414,7 @@ def member_profile():
 def profile():
     if request.method == 'POST':
         data = collection_users.find_one({'_id': session['unique_id']})
-        return Response(data, mimetype='application/json')
+        return Response(dumps(data), mimetype='application/json')
     else:
         return Response(dumps({'success': 'false'}), mimetype='application/json')
         
