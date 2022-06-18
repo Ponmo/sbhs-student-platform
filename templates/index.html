@@ -154,6 +154,12 @@
     var selected_section = '';
     var space_admin = false;
     
+    $(document).click(function(e){
+
+      if($(e.target).closest('#space-settings-popup').length != 0) return false;
+      $('#space-settings-popup').hide();
+    });
+
     $(document).on('click', '#log-out', function () {
       $.get('/logout');
       window.location.replace("https://sbhs-platform.herokuapp.com/");
@@ -683,11 +689,6 @@
       $('#user-page').css('display', 'none');
     }, 100);
   });
-  
-  $(document).on('click', '#profile', function() {
-	  $('#user-page').css('display', 'block');
-    $("#user-page").animate({opacity: '1'}, 100);
-  });
 
 	$(document).on('click', '#space-search-button', function() {
 	  $('#space-search').css('display', 'block');
@@ -804,6 +805,20 @@
             $('#space-search').css('display', 'none');
           }
     });
+  }
+
+  $(document).on('click', '#profile', function()) {
+    $('#user-page').css('display', 'block');
+    $("#user-page").animate({opacity: '1'}, 100);
+    $.ajax({
+      type: "POST",
+      url: '/profile',
+      dataType: "json",
+      contentType: 'application/json;charset=UTF-8',
+      success: function(data){
+        
+      }
+    })
   }
 
   $(document).on('click', '.report-message', function() {
