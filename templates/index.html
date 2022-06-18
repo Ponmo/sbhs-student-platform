@@ -749,12 +749,6 @@
     else {
       container.style.display = 'none';
     }
-    // if (document.getElementById('space-settings-popup').style.display != 'block') {
-    //   document.getElementById('space-settings-popup').style.display = 'block';
-    // }
-    // else {
-    //   document.getElementById('space-settings-popup').style.display = 'none';
-    // }
   });
 
   function space() {
@@ -817,7 +811,7 @@
       dataType: "json",
       contentType: 'application/json;charset=UTF-8',
       success: function(data){
-        alert(JSON.stringify(data));
+        alert('This worked!');
       }
     })
   });
@@ -851,11 +845,11 @@
       data: JSON.stringify({'user_id': this.getAttribute("data-id")}), 
       contentType: 'application/json;charset=UTF-8',
       success: function(data) {
-        alert(JSON.stringify(data));
+        alert("worked");
       }
     })
   });
-  //test:
+
   var createSpaceModal = document.getElementById("create-space");
   $(document).on('click', '#create-space-button', function() {
     createSpaceModal.style.display = "block";
