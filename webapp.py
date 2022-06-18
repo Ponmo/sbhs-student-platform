@@ -400,6 +400,24 @@ def report_message():
             return Response(dumps({'success': 'many'}), mimetype='application/json')
     else:
         return Response(dumps({'success': 'false'}), mimetype='application/json')
+    
+@app.route('/open_member_profile', methods=['GET', 'POST'])
+def member_profile():
+    if request.method == 'POST':
+        user_data = collection_users.find_one({'_id': 'user_id'})
+        u_name = user_data['name']
+        u_email = user_data['email']
+        u_picture = user_data['picture']
+        u_joined = user_data['joined']
+        return Response(user_data, mimetype='application/json')
+    else:
+        return Response(dumps({'success': 'false'}), mimetype='application/json')
+
+@app.route('/profile', methods=['GET', 'POST'])
+def profile():
+    if request.method == 'POST':
+        data = collection_users.find_one({"_id":})
+        return 
         
 if __name__ == '__main__':
     socketio.run(app, debug=False)

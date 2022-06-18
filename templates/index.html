@@ -153,13 +153,6 @@
     var typing_list = [];
     var selected_section = '';
     var space_admin = false;
-    
-    $(document).click(function() {
-      var popup = document.getElementById('space-settings-popup');
-      if (!popup.is(event.target) && !popup.has(event.target).length) {
-        popup.style.display = 'none';
-      }
-    });
 
     $(document).on('click', '#log-out', function () {
       $.get('/logout');
@@ -756,6 +749,14 @@
       document.getElementById('space-settings-popup').style.display = 'none';
     }
   });
+  $(document).click(function() {
+    var container = $("#space-settings-popup");
+    if (container.style.display == 'block') {
+      if (!container.is(event.target) && !container.has(event.target).length) {
+          container.hide();
+      }
+    }
+  });
 
   function space() {
         $.ajax({
@@ -848,7 +849,7 @@
       type: "POST",
       url: '/open_member_profile',
       dataType: "json",
-      data: JSON.stringify({'message_id': this.getAttribute("data-id")}), 
+      data: JSON.stringify({'user_id': this.getAttribute("data-id")}), 
       contentType: 'application/json;charset=UTF-8',
       success: function(data) {
         
