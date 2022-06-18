@@ -159,8 +159,9 @@
       window.location.replace("https://sbhs-platform.herokuapp.com/");
     });
 
-    // #leave-space
     $(document).on('click', '#leave-space', function() {
+      document.querySelector('[data-id="' + current_space + '"]').firstChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = 'Not Joined';      
+      
       $.ajax({
         type: 'POST',
         url: '/leave_space',
@@ -707,6 +708,7 @@
 
   $(document).on('click', '.form-space', function() {
     var joined_space = this.getAttribute('data-id');
+    this.firstChild.nextElementSibling.nextElementSibling.nextElementSibling = "Joined";
     $.ajax({
       type: "POST",
       url: '/join_space',
