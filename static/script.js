@@ -1,4 +1,4 @@
-$(document).ready(function(){
+/*$(document).ready(function(){
 
   //TODO: simplify and migrate
   
@@ -51,3 +51,4 @@ $(document).ready(function(){
     $(this).find(".message-combine-time").css("visibility", "hidden");
   });
 });
+*/
