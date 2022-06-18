@@ -154,7 +154,12 @@
     var selected_section = '';
     var space_admin = false;
     
-
+    $(document).click(function() {
+      var popup = document.getElementById('space-settings-popup');
+      if (!popup.is(event.target) && !popup.has(event.target).length) {
+        popup.style.display = 'none';
+      }
+    });
 
     $(document).on('click', '#log-out', function () {
       $.get('/logout');
@@ -838,6 +843,18 @@
     });
   });
 
+  $(document).on('click', '.member', function() {
+    $.ajax({
+      type: "POST",
+      url: '/open_member_profile',
+      dataType: "json",
+      data: JSON.stringify({'message_id': this.getAttribute("data-id")}), 
+      contentType: 'application/json;charset=UTF-8',
+      success: function(data) {
+        
+      }
+    })
+  });
   //test:
   var createSpaceModal = document.getElementById("create-space");
   $(document).on('click', '#create-space-button', function() {
