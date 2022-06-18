@@ -751,6 +751,13 @@
     }
   });
 
+  $(document).mouseup(function(e) {
+    var container = $("space-settings-popup");
+    if (!container.is(e.target) && container.has(e.target).length === 0) 
+    {
+      container.hide();
+    }
+  });
   function space() {
         $.ajax({
           type: "POST",
