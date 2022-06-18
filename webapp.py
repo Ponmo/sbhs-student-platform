@@ -243,9 +243,11 @@ def render_main_page():
 
 @app.route('/list_spaces', methods=['GET', 'POST'])
 def list_spaces():
-	if request.method == 'POST':
-		spaces_list = dumps(list(collection_spaces.find()))
-		return Response(spaces_list, mimetype='application/json')
+    if request.method == 'POST':
+        spaces_list = list(collection_spaces.find())
+        user_id = session['unique_id']
+        data = [spaces_list, user_id]
+        return Response(dumps(data), mimetype='application/json')
 
 # Returns all room and section data of the clicked space from MongoDB.
 
