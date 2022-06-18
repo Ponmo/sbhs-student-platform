@@ -241,9 +241,8 @@
         type: 'POST',
         url: '/list_spaces',
         dataType: "json",
-        success: function(spaces_list) {
-          spaces_list.forEach(function(item) {
-
+        success: function(data) {
+          data[0].forEach(function(item) {
             newNode = document.createElement('div');
             newNode.className = 'form-space pointer';
             newNode.setAttribute('data-id', item['_id']['$oid']);
@@ -261,6 +260,15 @@
             newNodeChild = document.createElement('div');
             newNodeChild.className = 'directory-space-description';
             newNodeChild.textContent = 'Description of Space'
+            newNode.appendChild(newNodeChild);
+
+            newNodeChild = document.createElement('div');
+            newNodeChild.className = 'directory-space-joined-status';
+            if(item['members'].some(row => row.includes(data[1]))){
+              newNodeChild.textContent = 'Joined';
+            }else{
+              newNodeChild.textContent = 'Not Joined';
+            }
             newNode.appendChild(newNodeChild);
 
             document.getElementById('directory-space').append(newNode);
