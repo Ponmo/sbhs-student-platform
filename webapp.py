@@ -404,11 +404,8 @@ def report_message():
 @app.route('/open_member_profile', methods=['GET', 'POST'])
 def member_profile():
     if request.method == 'POST':
-        user_data = collection_users.find_one({'_id': 'user_id'})
-        u_name = user_data['name']
-        u_email = user_data['email']
-        u_picture = user_data['picture']
-        u_joined = user_data['joined']
+        member = collection_users.find_one({'_id': ObjectId(request.json['user_id'])})
+        user_data = {'name': member['name'], 'email': member['email'], 'picture': member['picture'], "joined": member['joined']}
         return Response(user_data, mimetype='application/json')
     else:
         return Response(dumps({'success': 'false'}), mimetype='application/json')
@@ -416,8 +413,10 @@ def member_profile():
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
     if request.method == 'POST':
-        data = collection_users.find_one({"_id":})
-        return 
+        data = collection_users.find_one({'_id': ObjectId(session['unique_id'])})
+        return Response(data, mimetype='application/json')
+    else:
+        return Response(dumps({'success': 'false'}), mimetype='application/json')
         
 if __name__ == '__main__':
     socketio.run(app, debug=False)

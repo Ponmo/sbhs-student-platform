@@ -818,7 +818,7 @@
       dataType: "json",
       contentType: 'application/json;charset=UTF-8',
       success: function(data){
-        
+        alert(JSON.stringify(data));
       }
     })
   });
@@ -852,7 +852,7 @@
       data: JSON.stringify({'user_id': this.getAttribute("data-id")}), 
       contentType: 'application/json;charset=UTF-8',
       success: function(data) {
-        
+        alert(JSON.stringify(data));
       }
     })
   });
