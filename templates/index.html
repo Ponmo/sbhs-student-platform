@@ -758,18 +758,21 @@
     var container = document.getElementById('space-settings-popup');
     if (container.style.display != 'block') {
       container.style.display = 'block';
+      alert("container-show");
     }
     else {
       container.style.display = 'none';
+      alert("container-none");
     }
   });
   $(document).on('mouseup', function(e) {
     var container = $("#space-settings-popup");
+    alert("mouseup detected");
     if (!container.is(e.target) && container.has(e.target).length === 0) 
     {
       container.hide();
-      //not sure if this works (removes event listener)
-      $("#space-settings-popup").off('click', clickDocument);
+      alert("mouseup-container-hide");
+      // TODO: Remove event listener with .off jquery
     }
   });
 
