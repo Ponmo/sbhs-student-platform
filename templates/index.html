@@ -754,6 +754,18 @@
     });
   });
 
+  $(document).on('mouseup', function(e) {
+    var container = $("#space-settings-popup");
+    alert("mouseup detected");
+    if (!container.is(e.target) && container.has(e.target).length === 0) 
+    {
+      container.hide();
+      alert("mouseup-container-hide");
+      // TODO: Remove event listener with .off jquery
+      $(document).off('mouseup', 'nameselector');
+    }
+  });
+  
   $(document).on('click', '#server-settings-button', function() {
     var container = document.getElementById('space-settings-popup');
     if (container.style.display != 'block') {
@@ -763,17 +775,6 @@
     else {
       container.style.display = 'none';
       alert("container-none");
-    }
-  });
-  $(document).on('mouseup', function(e) {
-    var container = $("#space-settings-popup");
-    alert("mouseup detected");
-    if (!container.is(e.target) && container.has(e.target).length === 0) 
-    {
-      container.hide();
-      alert("mouseup-container-hide");
-      // TODO: Remove event listener with .off jquery
-      $(document).off('mouseup', 'nameselector')
     }
   });
 
