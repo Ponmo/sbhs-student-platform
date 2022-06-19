@@ -708,7 +708,10 @@
 
   $(document).on('click', '.form-space', function() {
     var joined_space = this.getAttribute('data-id');
-    var clicked_div = this;
+    var clicked_space = this;
+    setTimeout(function() {
+      clicked_space.firstChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = "Joined";
+    }, 5000)
     $.ajax({
       type: "POST",
       url: '/join_space',
@@ -747,7 +750,6 @@
           $('#' + current_space).closest('.space-wrapper').find('.active-space').css('width', '39px');
           space();
         }
-        clicked_div.firstChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = "Joined";
       }
     });
   });
