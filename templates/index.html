@@ -807,7 +807,7 @@
             try { //get rid of try block after deleting all spaces without member list another method
               rooms_and_sections[2].forEach(function(member) {
                 newNode = document.createElement('div');
-                newNode.className = 'member';
+                newNode.className = 'member pointer';
                 newNode.setAttribute('data-id', member['_id']);
                 newNode.innerHTML = '<img class="profile-picture" src=' + member['picture'] + ' alt="!"><span class="member-name"><b>' + member['name'] + '</b></span>';
                 document.getElementById('members').append(newNode);
