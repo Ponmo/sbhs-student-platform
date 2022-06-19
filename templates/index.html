@@ -773,6 +773,7 @@
       container.hide();
       alert("mouseup-container-hide");
       // TODO: Remove event listener with .off jquery
+      $(document).off('mouseup', 'nameselector')
     }
   });
 
