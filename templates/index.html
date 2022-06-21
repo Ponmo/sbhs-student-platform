@@ -755,13 +755,7 @@
   });
 
 
-
-  $(document).on('click', '#server-settings-button', function() {
-    var container = document.getElementById('space-settings-popup');
-    if (container.style.display != 'block') {
-      container.style.display = 'block';
-      alert("container-show");
-      $(document).one('mouseup', function(e) {
+  $(document).on('mouseup', function(e) {
     var container = $("#space-settings-popup");
     alert("mouseup detected");
     if (!container.is(e.target) && container.has(e.target).length === 0) 
@@ -772,6 +766,11 @@
       //$(document).off('mouseup', 'nameselector');
     }
   });
+  $(document).on('click', '#server-settings-button', function() {
+    var container = document.getElementById('space-settings-popup');
+    if (container.style.display != 'block') {
+      container.style.display = 'block';
+      alert("container-show");
     }
     else {
       container.style.display = 'none';
