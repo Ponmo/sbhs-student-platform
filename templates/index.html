@@ -789,13 +789,10 @@
     }
   });
 
-  function removePopup(e) {
+  function removePopup() {
     var container = $("#space-settings-popup");
-    if (!container.is(e.target) && container.has(e.target).length === 0) 
-    {
-      alert("got to removePopup somehow");
-      container.hide();
-    }
+    alert("got to removePopup somehow");
+    container.hide();
   }
   function space() {
         $.ajax({
