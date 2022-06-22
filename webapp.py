@@ -264,10 +264,9 @@ def leave_space():
         joined = collection_users.find_one({"_id": session['unique_id']})['joined']
         joined.remove(request.json['space-id'])
         collection_users.update_one({"_id": session['unique_id']}, {"$set": {"joined": joined}})
-        joined = dumps(joined)#'joined' array/list coverted into json (list or dictionary)
+        collection_spaces.update_one({"_id": ObjectId(request.json['space-id'])}, { "$pull": {"members": session['unique_id']}})
+        joined = dumps(joined) #'joined' array/list coverted into json (list or dictionary)
         return Response(joined, mimetype='application/json')
-# https://www.w3schools.com/python/python_mongodb_update.asp
-#mycol.update_one({ "address": "Valley 345" }, { "$set": { "address": "Canyon 123" } })
 
 # Returns some message data of the loaded room.
 # Called when user first loads a room
