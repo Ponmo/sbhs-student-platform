@@ -759,25 +759,24 @@
     var container = document.getElementById('space-settings-popup');
     if (container.style.display != 'block') {
       container.style.display = 'block';
-      alert("container-show");
+      event.stopImmediatePropagation();
     }
     else {
       container.style.display = 'none';
-      alert("container-none");
+      event.stopImmediatePropagation();
     }
   });
 
   $(document).on('click', function(e) {
     var container = $("#space-settings-popup");
-    alert("mouseup detected");
     if (!container.is(e.target) && container.has(e.target).length === 0) 
     {
       container.hide();
-      alert("mouseup-container-hide");
+      
       // TODO: Make this function function only when popups appear (use .off function?)
     }
   });
-  
+
   function space() {
         $.ajax({
           type: "POST",
