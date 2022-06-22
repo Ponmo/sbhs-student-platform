@@ -769,13 +769,16 @@
     var container = document.getElementById('space-settings-popup');
     if (container.style.display != 'block') {
       container.style.display = 'block';
-      document.addEventListener("click", , {once : true});
+      document.addEventListener("click", removePopup(), {once: true});
     }
     else {
       container.style.display = 'none';
     }
   });
 
+  function removePopup(){
+    
+  }
 
   function space() {
         $.ajax({
