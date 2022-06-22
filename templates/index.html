@@ -777,11 +777,11 @@
   // });
 
   $(document).on('click', '#server-settings-button', function() {
-    var container = $("#space-settings-popup");
+    var container = document.getElementById('space-settings-popup');
     if (container.style.display != 'block') {
       container.style.display = 'block';
       alert("show popup");
-      document.addEventListener('click', removePopup(), {once: true});
+      document.addEventListener('click', removePopup(e), {once: true});
     }
     else {
       container.style.display = 'none';
