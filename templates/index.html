@@ -267,11 +267,9 @@
             newNodeChild.className = 'directory-space-joined-status';
             if(item['members'].some(row => row.includes(data[1]))){
               newNodeChild.textContent = 'Joined';
-              alert("joined");
             }
             else {
               newNodeChild.textContent = 'Not Joined';
-              alert("not joined");
             }
             newNode.appendChild(newNodeChild);
 
@@ -769,12 +767,14 @@
     }
   });
 
+
   $(document).on('click', function(e) {
     var container = $("#space-settings-popup");
     if (!container.is(e.target) && container.has(e.target).length === 0 && !$('#server-settings-button').is(e.target)) 
     {
       container.hide();
       // TODO: Make this function function only when popups appear (use .off function?)
+      // https://stackoverflow.com/questions/67973984/getting-desired-event-target-when-listener-is-on-the-document
     }
   });
 
