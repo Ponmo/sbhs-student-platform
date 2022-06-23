@@ -264,7 +264,7 @@ def leave_space():
         joined = collection_users.find_one({"_id": session['unique_id']})['joined']
         joined.remove(request.json['space-id'])
         collection_users.update_one({"_id": session['unique_id']}, {"$set": {"joined": joined}})
-        collection_spaces.update_one({"_id": ObjectId(request.json['space-id'])}, { "$pull": {"members": session['unique_id']}})
+        collection_spaces.update_one({"_id": ObjectId(request.json['space-id'])}, { "$pull": {"members": [session['unique_id'], session['users_name']]}})
         joined = dumps(joined) #'joined' array/list coverted into json (list or dictionary)
         return Response(joined, mimetype='application/json')
 
