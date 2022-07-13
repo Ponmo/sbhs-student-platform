@@ -66,8 +66,8 @@
             <img class="pointer" id="home" src="/static/images/home-white.png">
             <p id="room-name-display"></p>
           </div>
-          <div id="channels">
-          </div>
+          <ul id="channels">
+          </ul>
 
 <!--         when new message is sent, make the new message appear above the message bar and not mess up the scrolling (Safari only). -->
           <div id="chats">
@@ -79,7 +79,7 @@
               <!--see w3schools input attributes like max char, spam, etc. -->
               <textarea id="message_input" rows="1" placeholder="Enter message"></textarea>
 <!--             <input type="text" id="message_input" placeholder="Enter message"> -->
-                <button type="submit" id="submit"><img id="send" src="/static/images/send.png" alt="Send"></button>
+              <button type="submit" id="submit"><img id="send" src="/static/images/send.png" alt="Send"></button>
             </form>
             <span id="typing_display"></span>
           </div>
@@ -97,12 +97,12 @@
           <p id="student_id" class="pointer">Santa Barbara High School</p>
           <img class="pointer" id="settings" src="/static/images/settings-white.png">
         </div>
-        <div id="spaces">
+        <ul id="spaces">
           <span id="space_align_helper"></span>
             <button type="button" id="create-space-button"><img src="/static/images/ppicons-plus.svg" alt="create" style="width:25px;height:25px;"></button>
             <button type="button" id="space-search-button"><img src="/static/images/temporary-search.png" alt="create" style="width:25px;height:25px;"></button>
           </div>
-        </div>
+        </ul>
       </div>
 
 
@@ -214,7 +214,7 @@
         success: function(user_space_list) {
           user_space_list.forEach(function(item) { 
             try {
-              var newNode = document.createElement('div'); 
+              var newNode = document.createElement('li'); 
               newNode.className = 'space-wrapper';
             
               var newNodeChild = document.createElement('img'); 
@@ -459,7 +459,7 @@
     }
     
     socket.on('created_room', function(data) {
-      const newNode = document.createElement('div');
+      const newNode = document.createElement('li');
       newNode.id = data.room_id;
       newNode.className = 'room pointer';
       newNode.setAttribute('data-section', data.section_id);
@@ -501,7 +501,7 @@
     }
     
     socket.on('created_section', function(data) {
-      newNode = document.createElement('div');
+      newNode = document.createElement('li');
       newNode.className = 'section pointer';
       newNode.id = data.section_id;
       newNode.innerHTML = '<div class="section-name">' + data.name + '</div><div class="create-room-button" type="button">+</div>'
@@ -530,7 +530,7 @@
             document.getElementById('messages').textContent = '';
             document.getElementById('channels').textContent = ''; 
             document.getElementById('header_text').textContent = space_name; 
-            var newNode = document.createElement('div');
+            var newNode = document.createElement('li');
             newNode.className = 'space-wrapper';
             var newNodeChild = document.createElement('img');
             newNodeChild.className = 'space pointer';
@@ -545,12 +545,12 @@
             newNode.appendChild(newNodeChild);
             referenceNode = document.getElementById('space_align_helper');
             referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-            newNode = document.createElement('div');
+            newNode = document.createElement('li');
             newNode.className = 'section pointer';
             newNode.id = room_and_section[1][0]['_id']['$oid'];
             newNode.innerHTML = '<div class="section-name">' + room_and_section[1][0]['name'] + '</div><div class="create-room-button" type="button">+</div>'
             document.getElementById('channels').append(newNode);
-            newNode = document.createElement('div');
+            newNode = document.createElement('li');
           	newNode.className = 'room pointer'; 
           	newNode.setAttribute('data-section', room_and_section[1][0]['_id']['$oid']);
     	      newNode.setAttribute('data-name', room_and_section[0][0]['name']);
@@ -565,6 +565,13 @@
         });
       }
     }
+
+    $(document).on('click', '.edit-message', function() {
+      var message_id = this.parentNode.parentNode.id;
+      var message = this.parentNode.previousElementSibling.textContent;
+      alert(message);
+      $(this.parentNode.previousElementSibling).replaceWith('<textarea class="message-edit" rows="1" placeholder="Remove message"></textarea>');
+    });
 
     $(document).on('click', '.delete-message', function() {
       var message_id = this.parentNode.parentNode.id;
@@ -725,7 +732,7 @@
         current_space = joined_space;
         if ($('#' + joined_space).length == 0) {
 
-          var newNode = document.createElement('div');
+          var newNode = document.createElement('li');
           newNode.className = 'space-wrapper';
             
           var newNodeChild = document.createElement('img');
@@ -794,14 +801,14 @@
             document.getElementById('members').textContent = '';
             var newNode = null;
             rooms_and_sections[1].forEach(function(section) {
-              newNode = document.createElement('div');
+              newNode = document.createElement('li');
               newNode.className = 'section pointer';
               newNode.id = section['_id']['$oid'];
               newNode.innerHTML = '<div class="section-name">' + section['name'] + '</div><div class="create-room-button" type="button">+</div>'
               document.getElementById('channels').append(newNode);
               rooms_and_sections[0].forEach(function(room) {
                 if (room['section'] == section['_id']['$oid']) {
-                  newNode = document.createElement('div');
+                  newNode = document.createElement('li');
                   newNode.className = 'room pointer';
               	  newNode.id = room['_id']['$oid'];
               	  newNode.setAttribute('data-section', room['section']);
