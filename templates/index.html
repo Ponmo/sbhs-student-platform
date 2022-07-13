@@ -11,6 +11,14 @@
     <!--<script src="{{ url_for('static', filename='script.js') }}"></script>-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Santa Barbara High School</title>
+
+    <script>
+      $(function() {
+        $("channels").sortable();
+        $("spaces").sortable();
+      });
+    </script>
+
   </head>
   <body>
 
@@ -507,7 +515,6 @@
       newNode.id = data.section_id;
       newNode.innerHTML = '<div class="section-name">' + data.name + '</div><div class="create-room-button" type="button">+</div>'
       document.getElementById('channels').append(newNode);
-      $("section").sortable();
     });
 
     document.getElementById('create-space-form').onsubmit = function (e) {
@@ -563,8 +570,6 @@
             $('#first-all').css('display', 'block');
             $('#space-search').css('display', 'none');
             joinRoom(room_and_section[0][0]['_id']['$oid']);
-            $("room").sortable();
-            $("section").sortable();
           }
         });
       }
@@ -838,8 +843,6 @@
             $('#home-page').css('display', 'none');
             $('#first-all').css('display', 'block');
             $('#space-search').css('display', 'none');
-            $("room").sortable();
-            $("section").sortable();
           }
     });
   }
