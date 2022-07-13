@@ -404,19 +404,23 @@ img { /* make images and create button undraggable and unhighlitable*/
   border-radius: 2px;
   border: 1px solid #27292c;
 }
-.delete-message {
-  width: 16px;
-  height: 16px;
-  float: right;
-  margin-right: 5px;
-  margin-top: 3px;
-}
 .report-message {
+  display: inline-block;
   width: 16px;
   height: 16px;
-  float: center;
-  margin-right: 5px;
-  margin-top: 3px;
+  margin-left: 4px;
+}
+.edit-message {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-left: 4px;
+}
+.delete-message {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-left: 4px;
 }
 .message-container:hover .message-options {
   display: block;
