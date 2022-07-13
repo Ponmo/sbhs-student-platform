@@ -570,7 +570,7 @@
       var message_id = this.parentNode.parentNode.id;
       var message = this.parentNode.previousElementSibling.textContent;
       alert(message);
-      $(this.parentNode.previousElementSibling).replaceWith('<textarea class="message-edit" rows="1" placeholder="Remove message"></textarea>');
+      $(this.parentNode.previousElementSibling).replaceWith('<textarea class="message-edit" rows="1" placeholder="Remove message">' + message + '</textarea>');
     });
 
     $(document).on('click', '.delete-message', function() {
