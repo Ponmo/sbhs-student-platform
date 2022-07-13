@@ -250,6 +250,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   overflow-y: scroll;
   overflow-x: hidden;
   padding: 0;
+  margin: 0;
   list-style-type: none;
 }
 .section {
