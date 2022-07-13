@@ -332,7 +332,7 @@
         newMode.id = data.message_id;
         messageMoment = 'at ' + messageMoment;
         // TODO: Give pfp image default fallback image
-        newMode.innerHTML = '<img class="profile-picture" src="' + data.picture + '" alt="!"><p class="message-title"><span class="name"><b>' + data.name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message">' + data.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>';
+        newMode.innerHTML = '<img class="profile-picture" src="' + data.picture + '" alt="!"><p class="message-title"><span class="name"><b>' + data.name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message">' + data.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>';
       }
       else {
         newMode.className = 'message-container-combine';
