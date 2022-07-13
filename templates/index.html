@@ -481,6 +481,8 @@
       else {
       	document.getElementById(data.section_id).parentNode.insertBefore(newNode, document.getElementById(data.section_id).nextSibling);
       }
+      $("channels").sortable();
+        $("spaces").sortable();
     });
     
     document.getElementById('create-section-form').onsubmit = function (e) {
@@ -515,6 +517,8 @@
       newNode.id = data.section_id;
       newNode.innerHTML = '<div class="section-name">' + data.name + '</div><div class="create-room-button" type="button">+</div>'
       document.getElementById('channels').append(newNode);
+      $("channels").sortable();
+        $("spaces").sortable();
     });
 
     document.getElementById('create-space-form').onsubmit = function (e) {
@@ -570,6 +574,8 @@
             $('#first-all').css('display', 'block');
             $('#space-search').css('display', 'none');
             joinRoom(room_and_section[0][0]['_id']['$oid']);
+            $("channels").sortable();
+        $("spaces").sortable();
           }
         });
       }
@@ -843,6 +849,8 @@
             $('#home-page').css('display', 'none');
             $('#first-all').css('display', 'block');
             $('#space-search').css('display', 'none');
+            $("channels").sortable();
+        $("spaces").sortable();
           }
     });
   }
