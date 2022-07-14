@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.min.js" integrity="sha256-lnH4vnCtlKU2LmD0ZW1dU7ohTTKrcKP50WA9fa350cE=" crossorigin="anonymous"></script>
     <!--<script src="{{ url_for('static', filename='script.js') }}"></script>-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Santa Barbara High School</title>
@@ -355,8 +355,6 @@
       let message_id = this.parentNode.id;
       let edit = this.firstChild.value.trim();
       if (edit.length && edit != this.previousElementSibling.textContent) {
-        $(this.previousElementSibling).show();
-        $(this).remove();
         let combine = null;
         if(this.parentNode.className == 'message-container') {
           combine = 'false';
@@ -364,6 +362,8 @@
         else {
           combine = 'true';
         }
+        $(this.previousElementSibling).show();
+        $(this).remove();
         socket.emit('edited_message', {
           room_id: current_room,
           message_id: message_id,
