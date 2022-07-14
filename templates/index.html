@@ -369,7 +369,11 @@
     });
 
     socket.on('edited_message', function(data) {
-      document.getElementById(data.message_id).textContent = data.edit;
+      try {
+        document.getElementById(data.message_id).textContent = data.edit;
+      }
+      catch(e) {
+      }
     });
 
     /*let message_edit_input = document.getElementById("message_edit");
