@@ -167,6 +167,12 @@
       scroll: false,
       distance: '3'
     });
+    $('#spaces').on('sortstart', function() {
+      
+    });
+    $('#spaces').on('sortstop', function() {
+      
+    });
 
     $(document).on('click', '#log-out', function () {
       $.get('/logout');
@@ -339,10 +345,17 @@
     }
 
 
-    $(document).on('input', '.message_edit', function() {
-      this.style.height = "5px";
-      this.style.height = (this.scrollHeight)+"px";
+    $("textarea").each(function () {
+      this.setAttribute("style", "height:" + (this.scrollHeight) + "px;overflow-y:hidden;");
+    }).on("input", function () {
+      this.style.height = "auto";
+      this.style.height = (this.scrollHeight) + "px";
     });
+
+    // $(document).on('input', '.message_edit', function() {
+    //   this.style.height = "5px";
+    //   this.style.height = (this.scrollHeight)+"px";
+    // });
     $(document).on('keypress', '.message_edit', function(e) {
       if(e.which === 13 && !e.shiftKey) {
         e.preventDefault();
