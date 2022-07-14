@@ -566,6 +566,12 @@ img { /* make images and create button undraggable and unhighlitable*/
   height: 100%;
   vertical-align: middle;
 }
+.ui-sortable-helper {
+  top: 5px;
+}
+.ui-sortable-placeholder {
+  vertical-align: middle;
+}
 .space-wrapper {
   display: inline-block;
   width: 55px;
