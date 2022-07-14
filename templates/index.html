@@ -364,7 +364,6 @@
         else {
           combine = 'true';
         }
-
         socket.emit('edited_message', {
           room_id: current_room,
           message_id: message_id,
@@ -379,7 +378,12 @@
 
     socket.on('edited_message', function(data) {
       try {
-        document.getElementById(data.message_id).textContent = data.edit;
+        if(data.combine == 'true') {
+          document.getElementById(data.message_id).firstChild.nextElementSibling.nextElementSibling.textContent = data.edit;
+        }
+        else{
+          document.getElementById(data.message_id).firstChild.nextElementSibling.textContent = data.edit;
+        }
       }
       catch(e) {
       }
