@@ -167,13 +167,6 @@
       scroll: false,
       distance: '3'
     });
-    $('#spaces').on('sortstart', function() {
-      this.nextElementSibling.style.display = 'none';
-     // $('.active-space').css("display", "none");
-    });
-    $('#spaces').on('sortstop', function() {
-    this.nextElementSibling.style.display = 'block';
-    });
 
     $(document).on('click', '#log-out', function () {
       $.get('/logout');
