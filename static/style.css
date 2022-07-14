@@ -394,6 +394,12 @@ img { /* make images and create button undraggable and unhighlitable*/
   grid-row: 1;
   white-space: pre-wrap;
 }
+.message-edit {
+  resize: none;
+  overflow: hidden;
+  min-height: 50px;
+  max-height: 100px;
+}
 .message-options {
   position: absolute;
   display: none;
