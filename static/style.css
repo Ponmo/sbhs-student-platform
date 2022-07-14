@@ -318,7 +318,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   position: relative;
   display: grid;
   color: #d7d9da;
-  grid-template-columns: 50px auto;
+  grid-template-columns: 52px auto;
   /*grid-auto-rows: minmax(min-content, max-content);*/
   padding-top: 4px;
   padding-right: 51px;
