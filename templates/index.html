@@ -203,7 +203,7 @@
     function stoppedTyping() {
       typing = false;
       socket.emit('stopped_typing', {
-        name: "{{ name }}",
+        name: "{{ name }}", //REMOVE {{ name }} and others and instead access it from Session in backend.....
         room: current_room
       });
     }
@@ -352,15 +352,20 @@
     });
     $(document).on('submit', '.message_edit_input_form', function(e) {
       e.preventDefault();
-      let message = this.firstChild.value.trim();
-      if (message.length) {
-        alert(message);
-        /*socket.emit('edit_message', {
-          name: "{{ name }}",
+      let message_id = this.parentNode.id;
+      let edit = this.firstChild.value.trim();
+      if (edit.length && edit != this.previousElementSibling.textContent) {
+        alert(edit);
+        socket.emit('edit_message', {
+          //name: "{{ name }}",
           room: current_room,
-          picture: "{{ picture }}",
-          message: message
-        });*/
+          message_id: message_id,
+          //picture: "{{ picture }}",
+          edit: edit
+        });
+      }
+      else if (edit.length == 0) {
+        //call delete message
       }
     });
 
