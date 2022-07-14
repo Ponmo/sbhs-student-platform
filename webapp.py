@@ -230,6 +230,11 @@ def created_section(data):
 def deleted_message(data):
     socketio.emit('deleted_message', data, room = data['room_id'])
 
+@socketio.on('edited_message')
+def edited_message(data):
+    collection_messages.find_one_and_update({"_id": data['room_id']}, {'$set': {'message': data['edit']}})
+    socketio.emit('edited_message', data, room = data['room_id'])
+
 # Loads platform after login.
 
 @app.route('/sbhs')

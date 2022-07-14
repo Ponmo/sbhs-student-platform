@@ -204,7 +204,7 @@
       typing = false;
       socket.emit('stopped_typing', {
         name: "{{ name }}", //REMOVE {{ name }} and others and instead access it from Session in backend.....
-        room: current_room
+        room: current_room //room: current_room should be room_id: current_room.... and also combine Websocket and approutes...
       });
     }
     function isTyping() {
@@ -355,18 +355,21 @@
       let message_id = this.parentNode.id;
       let edit = this.firstChild.value.trim();
       if (edit.length && edit != this.previousElementSibling.textContent) {
-        alert(edit);
-        socket.emit('edit_message', {
-          //name: "{{ name }}",
-          room: current_room,
+        $(this.previousElementSibling).show();
+        $(this).remove();
+        socket.emit('edited_message', {
+          room_id: current_room,
           message_id: message_id,
-          //picture: "{{ picture }}",
           edit: edit
         });
       }
       else if (edit.length == 0) {
         //call delete message
       }
+    });
+
+    socket.on('edited_message', function(data) {
+      document.getElementById(data.message_id).textContent = data.edit;
     });
 
     /*let message_edit_input = document.getElementById("message_edit");
