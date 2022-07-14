@@ -341,7 +341,7 @@
     }
 
 
-    let message_edit_input = document.getElementById("message_edit");
+    /*let message_edit_input = document.getElementById("message_edit");
     message_edit_input.oninput = function() {
       message_edit_input.style.height = "";
       message_edit_input.style.height = Math.min(message_input.scrollHeight, 300) + "px";
@@ -373,7 +373,7 @@
       }
       message_input.value = '';
       message_input.focus();
-    }
+    }*/
 
 
     socket.on('recieve_message', function (data) {
