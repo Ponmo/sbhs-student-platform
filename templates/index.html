@@ -12,14 +12,6 @@
     <!--<script src="{{ url_for('static', filename='script.js') }}"></script>-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Santa Barbara High School</title>
-
-    <script>
-      //$(function() {
-      //  $("#channels").sortable();
-      //  $("#spaces").sortable();
-      //});
-    </script>
-
   </head>
   <body>
 
@@ -164,8 +156,14 @@
     var selected_section = '';
     var space_admin = false;
 
-    $("#channels").sortable();
-    $("#spaces").sortable();
+    $("#channels").sortable({
+      axis: 'y'
+
+    });
+    $("#spaces").sortable({
+      axis: 'x'
+
+    });
 
     $(document).on('click', '#log-out', function () {
       $.get('/logout');
