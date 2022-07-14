@@ -157,12 +157,12 @@
     var space_admin = false;
 
     $("#channels").sortable({
-      axis: 'y'
-
+      axis: 'y',
+      distance: '3'
     });
     $("#spaces").sortable({
-      axis: 'x'
-
+      axis: 'x',
+      distance: '3'
     });
 
     $(document).on('click', '#log-out', function () {

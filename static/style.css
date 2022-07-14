@@ -318,7 +318,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   position: relative;
   display: grid;
   color: #d7d9da;
-  grid-template-columns: 40px auto;
+  grid-template-columns: 50px auto;
   /*grid-auto-rows: minmax(min-content, max-content);*/
   padding-top: 4px;
   padding-right: 51px;
@@ -332,7 +332,6 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 
 .message-title {
-  margin-left: 12px;
   overflow-wrap: break-word;
   overflow: hidden;
   grid-column: 2;
@@ -348,7 +347,6 @@ img { /* make images and create button undraggable and unhighlitable*/
 .message {
   margin-bottom: 0px;
   padding: 0;
-  margin-left: 12px;
   overflow-wrap: break-word;
   overflow: hidden;
   grid-column: 2;
