@@ -14,10 +14,10 @@
     <title>Santa Barbara High School</title>
 
     <script>
-      $(function() {
-        $("#channels").sortable();
-        $("#spaces").sortable();
-      });
+      //$(function() {
+      //  $("#channels").sortable();
+      //  $("#spaces").sortable();
+      //});
     </script>
 
   </head>
@@ -163,6 +163,9 @@
     var typing_list = [];
     var selected_section = '';
     var space_admin = false;
+
+    $("#channels").sortable();
+    $("#spaces").sortable();
 
     $(document).on('click', '#log-out', function () {
       $.get('/logout');
