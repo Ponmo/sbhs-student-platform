@@ -169,6 +169,7 @@
       scroll: false,
       distance: '3'
     });
+    $("#spaces").on( "sortstart", function( event, ui ) {} );
 
     $(document).on('click', '#log-out', function () {
       $.get('/logout');
@@ -340,11 +341,11 @@
       message_input.focus();
     }
 
-    // If we want a maximum height:
-    // $(document).on('input', '.message_edit', function() {
-    //   this.style.height = "";
-    //   this.style.height = Math.min(message_input.scrollHeight, 300) + "px";
-    // });
+
+    $(document).on('input', '.message_edit', function() {
+      this.style.height = "";
+      this.style.height = Math.min(message_input.scrollHeight, 300) + "px";
+    });
     $(document).on('keypress', '.message_edit', function(e) {
       if(e.which === 13 && !e.shiftKey) {
         e.preventDefault();
