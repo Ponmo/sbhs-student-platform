@@ -341,8 +341,6 @@
     }
 
     $(document).on('input', '.message_edit', function() {
-      this.style.height = "";
-      this.style.height = Math.min(message_input.scrollHeight, 300) + "px";
     });
     $(document).on('keypress', '.message_edit', function(e) {
       if(e.which === 13 && !e.shiftKey) {
@@ -362,8 +360,6 @@
         else {
           combine = 'true';
         }
-        $(this.previousElementSibling).show();
-        $(this).remove();
         socket.emit('edited_message', {
           room_id: current_room,
           message_id: message_id,
@@ -374,6 +370,8 @@
       else if (edit.length == 0) {
         //call delete message
       }
+      $(this.previousElementSibling).show();
+      $(this).remove();
     });
 
     socket.on('edited_message', function(data) {
