@@ -169,7 +169,12 @@
       scroll: false,
       distance: '3'
     });
-    $("#spaces").on( "sortstart", function( event, ui ) {} );
+    $("#spaces").on('sortstart', function() {
+      $('.active-space').hide();
+    });
+    $("#spaces").on('sortstop', function() {
+      $('.active-space').hide();
+    });
 
     $(document).on('click', '#log-out', function () {
       $.get('/logout');
