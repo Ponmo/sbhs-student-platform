@@ -177,7 +177,6 @@
 
     $(document).on('click', '#leave-space', function() {
       document.querySelector('[data-id="' + current_space + '"]').firstChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = 'Not Joined';      
-      
       $.ajax({
         type: 'POST',
         url: '/leave_space',
@@ -196,6 +195,7 @@
     // list of messages being typed by user containing message (updated when user clicks on space or another room) and room id.
     // ['2hu45iu2323', 'Hi I love apples and cakes they are cool', '34yubjub42', 'I love appels']
     // Loop through this and check if joined room id is equal to any of these. If so, get index of that ID add one and make the message that message. Yep okay easy peasy lemon SQUEEEEZY.
+    
     $(document).on('click', '.section', function() {
       selected_section = this.id;
     });
@@ -203,16 +203,17 @@
     function stoppedTyping() {
       typing = false;
       socket.emit('stopped_typing', {
-        name: "{{ name }}", //REMOVE {{ name }} and others and instead access it from Session in backend.....
-        room: current_room //room: current_room should be room_id: current_room.... and also combine Websocket and approutes...
+        name: "{{ name }}",
+        room_id: current_room
       });
     }
+
     function isTyping() {
       if (typing == false) {
         typing = true;
         socket.emit('is_typing', {
           name: "{{ name }}",
-          room: current_room
+          room_id: current_room
         });
         timeout = setTimeout(stoppedTyping, 5000);
       }
@@ -331,7 +332,7 @@
       if (message.length) {
         socket.emit('send_message', {
           name: "{{ name }}",
-          room: current_room,
+          room_id: current_room,
           picture: "{{ picture }}",
           message: message
         });
@@ -494,7 +495,7 @@
         type: 'POST',
         url: '/chat_history',
         dataType: "json",
-        data: JSON.stringify({'i': String(chat_history_skip), 'room': current_room}),
+        data: JSON.stringify({'i': String(chat_history_skip), 'room_id': current_room}),
         contentType: 'application/json;charset=UTF-8',
         success: function(chat_history) {
           chat_history_skip += 100;
@@ -781,7 +782,7 @@
 	    old_room = current_room;
   	  current_room = room_id;
   	  socket.emit('join_room', {
-        room: current_room,
+        room_id: current_room,
         old_room: old_room
       });
       $(document.getElementById(current_room)).attr('style', 'background-color: #43474d !important');
