@@ -863,22 +863,20 @@
                 newNodeChild.innerHTML = '<div clas fs="section-name">' + section['name'] + '</div><div class="create-room-button" type="button">+</div>'
                 newNode.append(newNodeChild);
 
-                var newNodeChildContainer = null;
+                var newNodeChildContainer = document.createElement('ul');
+                newNodeChildContainer.className = 'room-group';
 
                 rooms_and_sections[0].forEach(function(room) {
                   if (room['section'] == section['_id']['$oid']) {
-
-                    var newNodeChildContainer = document.createElement('ul');
-                    newNodeChildContainer.className = 'room-group';
-
                     newNodeChild = document.createElement('li');
                     newNodeChild.className = 'room pointer';
                     newNodeChild.id = room['_id']['$oid'];
                     newNodeChild.setAttribute('data-section', room['section']);
                     newNodeChild.setAttribute('data-name', room['name']);
                     newNodeChild.innerHTML = room['name'] + '<img class="room-settings" src="/static/images/settings-white.png">';
-                    newNode.append(newNodeChildContainer.append(newNodeChild));
+                    newNodeChildContainer.append(newNodeChild);
                   }
+                  newNode.append(newNodeChildContainer);
                   document.getElementById('channels').append(newNode);
                 });
               });
