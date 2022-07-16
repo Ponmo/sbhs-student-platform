@@ -253,8 +253,6 @@
           });
         }
       });
-      
-      
       $.ajax({
         type: 'POST',
         url: '/list_spaces',
@@ -264,22 +262,18 @@
             newNode = document.createElement('div');
             newNode.className = 'form-space pointer';
             newNode.setAttribute('data-id', item['_id']['$oid']);
-
             newNodeChild = document.createElement('img');
             newNodeChild.className = 'directory-space-img';
             newNodeChild.src = item['picture'];
             newNode.appendChild(newNodeChild);
-
             newNodeChild = document.createElement('div');
             newNodeChild.className = 'directory-space-title';
             newNodeChild.textContent = item['name'];
             newNode.appendChild(newNodeChild);
-
             newNodeChild = document.createElement('div');
             newNodeChild.className = 'directory-space-description';
             newNodeChild.textContent = 'Description of Space'
             newNode.appendChild(newNodeChild);
-
             newNodeChild = document.createElement('div');
             newNodeChild.className = 'directory-space-joined-status';
             if(item['members'].some(row => row.includes(data[1]))){
@@ -289,14 +283,10 @@
               newNodeChild.textContent = 'Not Joined';
             }
             newNode.appendChild(newNodeChild);
-
             document.getElementById('directory-space').append(newNode);
           });
         }
       });
-
-
-
     });
     
     $('#chat').scroll(function() { //$('#chat').scrollTop() + $('#chat').height();
@@ -315,8 +305,7 @@
         e.preventDefault();
         $(document.getElementById('message_input_form')).submit();
         message_input.setAttribute("style", "");
-        message_input.value = "";
-//       put placeholder message (message is loading but is faded out to account for lag time or disconnected if wanted)
+        message_input.value = ""; //put placeholder message (message is loading but is faded out to account for lag time or disconnected if wanted)
       }
       else {
       	isTyping();
@@ -341,17 +330,18 @@
       message_input.focus();
     }
 
-
     $(document).on('input', '.message_edit', function() {
       this.style.height = "auto";
       this.style.height = (this.scrollHeight) + "px";
     });
+
     $(document).on('keypress', '.message_edit', function(e) {
       if(e.which === 13 && !e.shiftKey) {
         e.preventDefault();
         $(this.parentNode).submit();
       }
     });
+
     $(document).on('submit', '.message_edit_input_form', function(e) {
       e.preventDefault();
       let message_id = this.parentNode.id;
@@ -390,42 +380,7 @@
       catch(e) {
       }
     });
-
-    /*let message_edit_input = document.getElementById("message_edit");
-    message_edit_input.oninput = function() {
-      message_edit_input.style.height = "";
-      message_edit_input.style.height = Math.min(message_input.scrollHeight, 300) + "px";
-    }; 
-    $(message_edit_input).keypress(function (e) {
-      if(e.which === 13 && !e.shiftKey) {
-        e.preventDefault();
-        $(document.getElementById('message_edit_input_form')).submit();
-//       put placeholder message (message is loading but is faded out to account for lag time or disconnected if wanted)
-      }
-      else {
-      	isTyping();
-      }
-    });
     
-    document.getElementById('message_edit_input_form').onsubmit = function (e) {
-      e.preventDefault();
-      let message = message_input.value.trim();
-      document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight; 
-      stoppedTyping();
-      clearTimeout(timeout);
-      if (message.length) {
-        socket.emit('send_message', {
-          name: "{{ name }}",
-          room: current_room,
-          picture: "{{ picture }}",
-          message: message
-        });
-      }
-      message_input.value = '';
-      message_input.focus();
-    }*/
-
-
     socket.on('recieve_message', function (data) {
       const newMode = document.createElement('div');
       var messageMoment = moment(data.datetime).local().format('h:mm A');

@@ -358,7 +358,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   position: relative;
   display: grid;
   color: #d7d9da;
-  grid-template-columns: 50px auto;
+  grid-template-columns: 52px auto;
   padding-right: 51px;
   padding-left: 20px;
   margin-top: -20px;
@@ -386,7 +386,8 @@ img { /* make images and create button undraggable and unhighlitable*/
   opacity: 0.9;
 }
 .message-combine {
-  padding: 2px;
+  padding-top: 2px;
+  padding-bottom: 2px;
   margin: 0;
   overflow-wrap: break-word;
   overflow: hidden;
