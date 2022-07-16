@@ -230,6 +230,9 @@ def created_section(data):
 def deleted_message(data):
     socketio.emit('deleted_message', data, room = data['room_id'])
 
+# When a message is edited, update the message in MongoDB and
+# send the message data to all users in that room.
+
 @socketio.on('edited_message')
 def edited_message(data):
     collection_messages.find_one_and_update({"_id": data['message_id']}, {'$set': {'message': data['edit']}})
