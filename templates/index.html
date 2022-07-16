@@ -853,19 +853,15 @@
               document.getElementById('channels').textContent = ''; 
               document.getElementById('members').textContent = '';
               rooms_and_sections[1].forEach(function(section) {
-
                 var newNode = document.createElement('ul');
                 newNode.className = 'section-group'
-
                 var newNodeChild = document.createElement('li');
                 newNodeChild.className = 'section pointer';
                 newNodeChild.id = section['_id']['$oid'];
                 newNodeChild.innerHTML = '<div clas fs="section-name">' + section['name'] + '</div><div class="create-room-button" type="button">+</div>'
                 newNode.append(newNodeChild);
-
                 var newNodeChildContainer = document.createElement('ul');
                 newNodeChildContainer.className = 'room-group';
-
                 rooms_and_sections[0].forEach(function(room) {
                   if (room['section'] == section['_id']['$oid']) {
                     newNodeChild = document.createElement('li');

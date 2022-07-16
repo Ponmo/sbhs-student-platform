@@ -253,6 +253,11 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin: 0;
   list-style-type: none;
 }
+.section-group, .room-group {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
 .section {
   margin-top: 14px;
   color: white;
