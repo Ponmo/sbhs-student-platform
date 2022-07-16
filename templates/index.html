@@ -155,7 +155,7 @@
     var selected_section = '';
     var space_admin = false;
 
-    $("#channels").sortable({
+    /*$("#channels").sortable({
       axis: 'y',
       opacity: 0.7,
       scroll: false,
@@ -168,7 +168,7 @@
       opacity: 0.7,
       scroll: false,
       distance: '3'
-    });
+    });*/
 
     $(document).on('click', '#log-out', function () {
       $.get('/logout');
@@ -854,20 +854,24 @@
               document.getElementById('members').textContent = '';
               var newNode = null;
               rooms_and_sections[1].forEach(function(section) {
-                newNode = document.createElement('li');
-                newNode.className = 'section pointer';
-                newNode.id = section['_id']['$oid'];
-                newNode.innerHTML = '<div class="section-name">' + section['name'] + '</div><div class="create-room-button" type="button">+</div>'
-                document.getElementById('channels').append(newNode);
+
+                newNode = document.createElement('ul');
+                newNode.className = 'section-group'
+
+                newNodeChild = document.createElement('li');
+                newNodeChild.className = 'section pointer';
+                newNodeChild.id = section['_id']['$oid'];
+                newNodeChild.innerHTML = '<div clas fs="section-name">' + section['name'] + '</div><div class="create-room-button" type="button">+</div>'
+                newNode.append(newNodeChild);
                 rooms_and_sections[0].forEach(function(room) {
                   if (room['section'] == section['_id']['$oid']) {
-                    newNode = document.createElement('li');
-                    newNode.className = 'room pointer';
-                    newNode.id = room['_id']['$oid'];
-                    newNode.setAttribute('data-section', room['section']);
-                    newNode.setAttribute('data-name', room['name']);
-                    newNode.innerHTML = room['name'] + '<img class="room-settings" src="/static/images/settings-white.png">';
-                    document.getElementById('channels').append(newNode);
+                    newNodeChild = document.createElement('li');
+                    newNodeChild.className = 'room pointer';
+                    newNodeChild.id = room['_id']['$oid'];
+                    newNodeChild.setAttribute('data-section', room['section']);
+                    newNodeChild.setAttribute('data-name', room['name']);
+                    newNodeChild.innerHTML = room['name'] + '<img class="room-settings" src="/static/images/settings-white.png">';
+                    newNode.append(newNodeChild);
                   }
                 });
               });
