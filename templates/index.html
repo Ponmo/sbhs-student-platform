@@ -873,6 +873,7 @@
                     newNodeChild.innerHTML = room['name'] + '<img class="room-settings" src="/static/images/settings-white.png">';
                     newNode.append(newNodeChild);
                   }
+                  document.getElementById('channels').append(newNode);
                 });
               });
               try { //get rid of try block after deleting all spaces without member list another method
