@@ -832,6 +832,7 @@
 
     $(document).on('click', function(e) {
       var container = $("#space-settings-popup");
+      alert("annoying ya");
       if (!container.is(e.target) && container.has(e.target).length === 0 && !$('#server-settings-button').is(e.target)) 
       {
         container.hide();
