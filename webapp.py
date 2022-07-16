@@ -13,19 +13,17 @@ import requests
 from bson.objectid import ObjectId
 from bson.json_util import dumps
 
-#import pprint
-#import sys
 import pymongo
 from datetime import datetime, date, timedelta
 import pytz
 from pytz import timezone
 
 GOOGLE_CLIENT_ID = os.environ['GOOGLE_CLIENT_ID']
-
 GOOGLE_CLIENT_SECRET = os.environ['GOOGLE_CLIENT_SECRET']
 GOOGLE_DISCOVERY_URL = (
     'https://accounts.google.com/.well-known/openid-configuration'
 )
+client = WebApplicationClient(GOOGLE_CLIENT_ID)
 
 connection_string = os.environ['MONGO_CONNECTION_STRING']
 db_name = os.environ['MONGO_DBNAME']
@@ -45,8 +43,6 @@ app.secret_key = os.environ['SECRET_KEY']
 
 socketio = SocketIO(app, async_mode='gevent')
 
-client = WebApplicationClient(GOOGLE_CLIENT_ID)
-
 # Redirects users on http to https.
 
 @app.before_request
@@ -64,6 +60,8 @@ def render_login():
     if request.args.get('error') != None:
         return render_template('login.html', login_error = request.args.get('error'))
     return render_template('login.html')
+
+# Handles Google login
 
 @app.route('/login')
 def login():
