@@ -396,6 +396,10 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 .message_edit {
   resize: none;
+  width: 100%;
+  overflow-wrap: break-word;
+  overflow: hidden;
+  white-space: pre-wrap;
 }
 .message-options {
   position: absolute;
