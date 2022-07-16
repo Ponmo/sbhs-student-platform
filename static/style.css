@@ -394,7 +394,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   grid-row: 1;
   white-space: pre-wrap;
 }
-.message-edit {
+.message_edit {
   resize: none;
   overflow: hidden;
 }
