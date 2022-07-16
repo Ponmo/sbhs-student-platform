@@ -235,7 +235,7 @@ def deleted_message(data):
 
 @socketio.on('edited_message')
 def edited_message(data):
-    collection_messages.find_one_and_update({"_id": data['message_id']}, {'$set': {'message': data['edit']}})
+    collection_messages.find_one_and_update({"_id": ObjectId(data['message_id'])}, {'$set': {'message': data['edit']}})
     socketio.emit('edited_message', data, room = data['room_id'])
 
 # Loads platform after login.
