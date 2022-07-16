@@ -143,8 +143,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
   <script type="text/javascript" charset="utf-8">
-    
-    
 
     var socket = io();
     var chat_history_skip = 0;
@@ -163,6 +161,7 @@
       scroll: false,
       distance: '3'
     });
+
     $("#spaces").sortable({
       axis: 'x',
       items: "> li",
@@ -673,7 +672,7 @@
       var message = this.parentNode.previousElementSibling.textContent;
       $(this.parentNode.previousElementSibling).hide();
       $(this.parentNode.previousElementSibling).after('<form class="message_edit_input_form"><textarea class="message_edit" placeholder="Remove message">' + message + '</textarea></form>');
-      this.parentNode.previousElementSibling.firstChild.setAttribute("style", "height:" + (this.scrollHeight) + "px;overflow-y:hidden;");
+      $(this.parentNode.previousElementSibling.firstChild).setAttribute("style", "height:" + (this.scrollHeight) + "px;overflow-y:hidden;");
     });
 
     $(document).on('click', '.delete-message', function() {
