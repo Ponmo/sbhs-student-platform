@@ -156,93 +156,11 @@ def render_main_page():
     else:
         return redirect(url_for('render_login'))
 
-# Logs the user out.
+# When logout button is clicked, clear session.
 
 @app.route('/logout')
 def logout():
     session.clear()
-
-# When a room is clicked, make user join room
-# and leave old room.
-
-@socketio.on('join_room')
-def change_room(data):
-    try: 
-        leave_room(data['old_room'])
-    except:
-        pass
-    join_room(data['room'])
-
-# When user starts typing, notify all users in that room.
-
-@socketio.on('is_typing')
-def is_typing(data):
-	socketio.emit('is_typing', data, room = data['room'])
-
-# When user stops typing, notify all users in that room.
-
-@socketio.on('stopped_typing')
-def stopped_typing(data):
-	socketio.emit('stopped_typing', data, room = data['room'])
-
-# When a message is sent, verify and store it in MongoDB.
-# Send the message data to all users in that room.
-
-@socketio.on('send_message')
-def send_message(data):
-    utc_dt = datetime.now().isoformat() + 'Z'
-    data['datetime'] = utc_dt
-    data['message'] = re.sub('\\\n\\n\\\n+', '\\n\\n', data['message'])
-    latest_message = collection_messages.find_one({'room': data['room']}, sort=[( '_id', pymongo.DESCENDING )])
-    try:
-        duration = datetime.now() - datetime.fromisoformat(latest_message.get('datetime').replace('Z', ''))
-        if latest_message.get('name') == session['users_name'] and latest_message.get('picture') == session['picture'] and duration.total_seconds() < 180:
-            data['combine'] = 'true'
-        else:
-            data['combine'] = 'false'
-    except:
-        data['combine'] = 'false'
-    data['message_id'] = str(ObjectId())
-    collection_messages.insert_one({'_id': ObjectId(data['message_id']),'name': data['name'], 'picture': session['picture'], 'room': data['room'], 'datetime': utc_dt, 'message': data['message'], 'combine': data['combine'], 'email': session['users_email']})
-    socketio.emit('recieve_message', data, room = data['room'])
-    
-# When a room is created, send that room data to all
-# users in the space.
-
-@socketio.on('created_room')
-def created_room(data):
-    socketio.emit('created_room', data, room = '2948uihe9349')
-    
-    for room in data['room_list']: #plug list
-    	socketio.emit('created_room', data, room = room)
-
-# When a room is deleted, send that room data to all
-# users in the space.
-
-@socketio.on('deleted_room')
-def deleted_room(data):
-    for room in data['room_list']:
-    	socketio.emit('deleted_room', data, room = room)
-
-# When a section is created, send that section data to all
-# users in the space.
-
-@socketio.on('created_section')
-def created_section(data):
-	for room in data['room_list']:
-		socketio.emit('created_section', data, room = room)
-
-@socketio.on('deleted_message')
-def deleted_message(data):
-    socketio.emit('deleted_message', data, room = data['room_id'])
-
-# When a message is edited, update the message in MongoDB and
-# send the message data to all users in that room.
-
-@socketio.on('edited_message')
-def edited_message(data):
-    collection_messages.find_one_and_update({"_id": ObjectId(data['message_id'])}, {'$set': {'message': data['edit']}})
-    socketio.emit('edited_message', data, room = data['room_id'])
 
 # Returns all space data from MongoDB.
 
@@ -423,6 +341,88 @@ def profile():
         return Response(dumps(data), mimetype='application/json')
     else:
         return Response(dumps({'success': 'false'}), mimetype='application/json')
+
+# When a room is clicked, make user join room
+# and leave old room.
+
+@socketio.on('join_room')
+def change_room(data):
+    try: 
+        leave_room(data['old_room'])
+    except:
+        pass
+    join_room(data['room'])
+
+# When user starts typing, notify all users in that room.
+
+@socketio.on('is_typing')
+def is_typing(data):
+	socketio.emit('is_typing', data, room = data['room'])
+
+# When user stops typing, notify all users in that room.
+
+@socketio.on('stopped_typing')
+def stopped_typing(data):
+	socketio.emit('stopped_typing', data, room = data['room'])
+
+# When a message is sent, verify and store it in MongoDB.
+# Send the message data to all users in that room.
+
+@socketio.on('send_message')
+def send_message(data):
+    utc_dt = datetime.now().isoformat() + 'Z'
+    data['datetime'] = utc_dt
+    data['message'] = re.sub('\\\n\\n\\\n+', '\\n\\n', data['message'])
+    latest_message = collection_messages.find_one({'room': data['room']}, sort=[( '_id', pymongo.DESCENDING )])
+    try:
+        duration = datetime.now() - datetime.fromisoformat(latest_message.get('datetime').replace('Z', ''))
+        if latest_message.get('name') == session['users_name'] and latest_message.get('picture') == session['picture'] and duration.total_seconds() < 180:
+            data['combine'] = 'true'
+        else:
+            data['combine'] = 'false'
+    except:
+        data['combine'] = 'false'
+    data['message_id'] = str(ObjectId())
+    collection_messages.insert_one({'_id': ObjectId(data['message_id']),'name': data['name'], 'picture': session['picture'], 'room': data['room'], 'datetime': utc_dt, 'message': data['message'], 'combine': data['combine'], 'email': session['users_email']})
+    socketio.emit('recieve_message', data, room = data['room'])
+    
+# When a room is created, send that room data to all
+# users in the space.
+
+@socketio.on('created_room')
+def created_room(data):
+    socketio.emit('created_room', data, room = '2948uihe9349')
+    
+    for room in data['room_list']: #plug list
+    	socketio.emit('created_room', data, room = room)
+
+# When a room is deleted, send that room data to all
+# users in the space.
+
+@socketio.on('deleted_room')
+def deleted_room(data):
+    for room in data['room_list']:
+    	socketio.emit('deleted_room', data, room = room)
+
+# When a section is created, send that section data to all
+# users in the space.
+
+@socketio.on('created_section')
+def created_section(data):
+	for room in data['room_list']:
+		socketio.emit('created_section', data, room = room)
+
+@socketio.on('deleted_message')
+def deleted_message(data):
+    socketio.emit('deleted_message', data, room = data['room_id'])
+
+# When a message is edited, update the message in MongoDB and
+# send the message data to all users in that room.
+
+@socketio.on('edited_message')
+def edited_message(data):
+    collection_messages.find_one_and_update({"_id": ObjectId(data['message_id'])}, {'$set': {'message': data['edit']}})
+    socketio.emit('edited_message', data, room = data['room_id'])
         
 if __name__ == '__main__':
     socketio.run(app, debug=False)
