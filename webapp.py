@@ -150,7 +150,16 @@ def get_google_provider_cfg():
     
     return requests.get(GOOGLE_DISCOVERY_URL).json()
     
-# TODO: not currently in use / functional needs logout button
+# Loads platform after login.
+
+@app.route('/sbhs')
+def render_main_page():
+    if 'users_name' in session:
+        return render_template('index.html', name = session['users_name'], room = '1', picture = session['picture'])
+    else:
+        return redirect(url_for('render_login'))
+
+# Logs the user out.
 
 @app.route('/logout')
 def logout():
@@ -237,15 +246,6 @@ def deleted_message(data):
 def edited_message(data):
     collection_messages.find_one_and_update({"_id": ObjectId(data['message_id'])}, {'$set': {'message': data['edit']}})
     socketio.emit('edited_message', data, room = data['room_id'])
-
-# Loads platform after login.
-
-@app.route('/sbhs')
-def render_main_page():
-    if 'users_name' in session:
-        return render_template('index.html', name = session['users_name'], room = '1', picture = session['picture'])
-    else:
-        return redirect(url_for('render_login'))
 
 # Returns all space data from MongoDB.
 
