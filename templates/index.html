@@ -163,9 +163,10 @@
       distance: '3'
     });*/
 
-    $(".room-group").sortable({
+    $('.room-group').sortable({
       axis: 'x',
       items: "> li",
+      connectWith: '.sortable',
       opacity: 0.7,
       scroll: false,
       distance: '3'
