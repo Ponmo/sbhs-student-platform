@@ -852,10 +852,9 @@
               document.getElementById('header_text').textContent = document.getElementById(current_space).getAttribute('data-name');
               document.getElementById('channels').textContent = ''; 
               document.getElementById('members').textContent = '';
-              var newNode = null;
               rooms_and_sections[1].forEach(function(section) {
 
-                newNode = document.createElement('ul');
+                var newNode = document.createElement('ul');
                 newNode.className = 'section-group'
 
                 var newNodeChild = document.createElement('li');
@@ -863,15 +862,22 @@
                 newNodeChild.id = section['_id']['$oid'];
                 newNodeChild.innerHTML = '<div clas fs="section-name">' + section['name'] + '</div><div class="create-room-button" type="button">+</div>'
                 newNode.append(newNodeChild);
+
+                var newNodeChildContainer = null;
+
                 rooms_and_sections[0].forEach(function(room) {
                   if (room['section'] == section['_id']['$oid']) {
+
+                    var newNodeChildContainer = document.createElement('ul');
+                    newNodeChildContainer.className = 'room-group';
+
                     newNodeChild = document.createElement('li');
                     newNodeChild.className = 'room pointer';
                     newNodeChild.id = room['_id']['$oid'];
                     newNodeChild.setAttribute('data-section', room['section']);
                     newNodeChild.setAttribute('data-name', room['name']);
                     newNodeChild.innerHTML = room['name'] + '<img class="room-settings" src="/static/images/settings-white.png">';
-                    newNode.append(newNodeChild);
+                    newNode.append(newNodeChildContainer.append(newNodeChild));
                   }
                   document.getElementById('channels').append(newNode);
                 });
@@ -888,7 +894,7 @@
               catch(error) {
                 console.error(error);
               }
-              //joinRoom(document.querySelector('.room').id);
+              joinRoom(document.querySelector('.room').id);
               $('#home-page').css('display', 'none');
               $('#first-all').css('display', 'block');
               $('#space-search').css('display', 'none');
