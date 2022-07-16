@@ -858,7 +858,7 @@
                 newNode = document.createElement('ul');
                 newNode.className = 'section-group'
 
-                newNodeChild = document.createElement('li');
+                var newNodeChild = document.createElement('li');
                 newNodeChild.className = 'section pointer';
                 newNodeChild.id = section['_id']['$oid'];
                 newNodeChild.innerHTML = '<div clas fs="section-name">' + section['name'] + '</div><div class="create-room-button" type="button">+</div>'
