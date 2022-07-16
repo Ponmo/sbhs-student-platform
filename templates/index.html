@@ -380,7 +380,7 @@
       catch(e) {
       }
     });
-    
+
     socket.on('recieve_message', function (data) {
       const newMode = document.createElement('div');
       var messageMoment = moment(data.datetime).local().format('h:mm A');
@@ -426,6 +426,7 @@
     socket.on('deleted_message', function(data) {
       
     });
+
     let typing_display = document.getElementById('typing_display');
     function changeTypingDisplay() {
       if (typing_list.length == 0) {
@@ -456,7 +457,6 @@
           chat_history_skip += 100;
           var todayDate = moment();
           var yesterdayDate = moment().subtract(1, 'day');
-          
           var timeDisplayMode = 0;
           chat_history.forEach(function(item) {
             var messageDate = moment(item.datetime);
@@ -473,7 +473,7 @@
               }
               else {
                   messageDate = 'on ' + messageDate.format('M/D/YYYY');
-              } //Okay, so basically I added an attribute to each message div called "data-date" which contains the date the message was sent.//ok//go to the function
+              }
               newMode.innerHTML = '<img class="profile-picture" src="' + item.picture + '" alt="!"><p class="message-title"><span class="name"><b>' + item.name + ' </b></span><span class="datetime">' + messageDate + '</span></p><p class="message">' + item.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>';
             }
             else {
@@ -634,26 +634,25 @@
     $(document).on('click', '.delete-message', function() {
       var message_id = this.parentNode.parentNode.id;
       $.ajax({
-        type: 'POST', //POST, GET, etc.
-        url: '/delete_message', //name of python app route
-        dataType: 'json', //type of data we are sending to python (one line below is the data)
-        data: JSON.stringify({'message_id': message_id}),//this. parentNode goes to element that surrounds it, and then second one goes furhter out, and .id is a field inside the element
-        contentType: 'application/json;charset=UTF-8',//type of data received
+        type: 'POST',
+        url: '/delete_message',
+        dataType: 'json',
+        data: JSON.stringify({'message_id': message_id}),
+        contentType: 'application/json;charset=UTF-8',
         success: function (delete_message){
-          //alert('delete message worked');//remove/delete element
           alert(JSON.stringify(delete_message['success']));
-          socket.emit('deleted_message', {'message_id': message_id, 'room_id': current_room});//url of ajax equivalent, we don't need forward slash (/)
-        } //TypeError: Cannot read properties of null (reading 'className')
+          socket.emit('deleted_message', {'message_id': message_id, 'room_id': current_room});
+        }
       })
     });
 
     socket.on('deleted_message', function (data) {
       try {
-        var class_name = document.getElementById(data['message_id']).className;//gets string of class name ("message-container" or "message-container-combine")
+        var class_name = document.getElementById(data['message_id']).className;
         if ($('#' + data['message_id']).next().length != 0) {
           if (class_name == "message-container" && document.getElementById(data['message_id']).nextElementSibling.className == "message-container-combine") {
-            var new_message_text = document.getElementById(data['message_id']).nextElementSibling.firstChild.nextElementSibling.textContent;//accesses p tag that contains message (first child is the time, and it's sibling, or underneath it, is the actual text of the message); this would be the string of the message that gets deleted/replaced with
-            document.getElementById(data['message_id']).firstChild.nextElementSibling.nextElementSibling.textContent = new_message_text;//replaces old message text with new one
+            var new_message_text = document.getElementById(data['message_id']).nextElementSibling.firstChild.nextElementSibling.textContent;
+            document.getElementById(data['message_id']).firstChild.nextElementSibling.nextElementSibling.textContent = new_message_text;
             if (document.getElementById(data['message_id']).firstChild.nextElementSibling.nextElementSibling.textContent.includes('Yesterday')) {
               var new_message_time = document.getElementById(data['message_id']).nextElementSibling.firstChild.textContent; 
               document.getElementById(data['message_id']).firstChild.nextElementSibling.firstChild.nextElementSibling.textContent = 'Yesterday at ' + new_message_time;
@@ -667,7 +666,7 @@
             }
             document.getElementById(data['message_id']).nextElementSibling.remove();
           } else {
-            document.getElementById(data['message_id']).remove();//removes the entire div completely if no additonal messages exist below
+            document.getElementById(data['message_id']).remove();
           }
         }
         else {
@@ -700,293 +699,289 @@
       $('#space-search').css('display', 'none');
     });
     
-	$(document).on('click', '.room', function(e) {
-	  if (e.target.className == 'room-settings') {
-	    const deleted_room = $(this).attr('id');
-	    const deleted_room_section = $(this).attr('data-section');
-        $.ajax({
-          type: "POST",
-          url: '/delete_room',
-        	dataType: "json",
-        	data: JSON.stringify({'room_id': deleted_room, 'space_id': current_space, 'section_id': deleted_room_section}),
-        	contentType: 'application/json;charset=UTF-8',
-        	success: function(data) {
-          	if (data['success'] == 'true') {
-          	  var room_list = [];
-          	  document.querySelectorAll(".room").forEach(function(item) {
-          	    room_list.push(item.id);
-          	  });
-              socket.emit('deleted_room', {
-                room: deleted_room,
-                room_list: room_list
-              });
+    $(document).on('click', '.room', function(e) {
+      if (e.target.className == 'room-settings') {
+        const deleted_room = $(this).attr('id');
+        const deleted_room_section = $(this).attr('data-section');
+          $.ajax({
+            type: "POST",
+            url: '/delete_room',
+            dataType: "json",
+            data: JSON.stringify({'room_id': deleted_room, 'space_id': current_space, 'section_id': deleted_room_section}),
+            contentType: 'application/json;charset=UTF-8',
+            success: function(data) {
+              if (data['success'] == 'true') {
+                var room_list = [];
+                document.querySelectorAll(".room").forEach(function(item) {
+                  room_list.push(item.id);
+                });
+                socket.emit('deleted_room', {
+                  room: deleted_room,
+                  room_list: room_list
+                });
+              }
+              else {
+                alert('Spaces must have at least one room');
+              }
             }
-            else {
-              alert('Spaces must have at least one room');
-            }
-          }
+          });
+      }
+      else {
+        joinRoom(this.id);
+      }
+    });
+      
+    function joinRoom(room_id) {
+      if (current_room != room_id) {
+        old_room = current_room;
+        current_room = room_id;
+        socket.emit('join_room', {
+          room_id: current_room,
+          old_room: old_room
         });
-	  }
-	  else {
-	    joinRoom(this.id);
-	  }
-	});
-    
-	function joinRoom(room_id) {
-	  if (current_room != room_id) {
-	    old_room = current_room;
-  	  current_room = room_id;
-  	  socket.emit('join_room', {
-        room_id: current_room,
-        old_room: old_room
-      });
-      $(document.getElementById(current_room)).attr('style', 'background-color: #43474d !important');
-      $(document.getElementById(old_room)).attr('style', '');
-      document.getElementById('messages').textContent = '';
-      document.getElementById('room-name-display').textContent = document.getElementById(current_room).getAttribute('data-name');
-      chat_history_skip = 0;
-      loadChatHistory();
-      typing_display.textContent = '';
-      typing_list = [];
-      stoppedTyping();
-    }
-	}
-	
-  $(document).on('click', '#close-user-page', function() {
-    $("#user-page").animate({opacity: '0'}, 100);
-    setTimeout(function() {
-      $('#user-page').css('display', 'none');
-    }, 100);
-  });
-
-	$(document).on('click', '#space-search-button', function() {
-	  $('#space-search').css('display', 'block');
-    $("#space-search").animate({opacity: '1'}, 100);
-  });
-    
-  $(document).on('click', '#close-space-search-button', function() {
-    $("#space-search").animate({opacity: '0'}, 100);
-    setTimeout(function() {
-      $('#space-search').css('display', 'none');
-    }, 100);
-  });
-
-
-  $(document).on('click', '.form-space', function() {
-    var joined_space = this.getAttribute('data-id');
-    var clicked_space = this;
-    setTimeout(function() {
-      clicked_space.firstChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = "Joined";
-    }, 500)
-    $.ajax({
-      type: "POST",
-      url: '/join_space',
-      dataType: "json",
-      data: JSON.stringify({'space_id': this.getAttribute('data-id')}),
-      contentType: 'application/json;charset=UTF-8',
-      success: function(data) {
-        $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
-        $(document.getElementById(current_space)).attr('style', '');
-        current_space = joined_space;
-        if ($('#' + joined_space).length == 0) {
-
-          var newNode = document.createElement('li');
-          newNode.className = 'space-wrapper';
-            
-          var newNodeChild = document.createElement('img');
-          newNodeChild.className = 'space pointer';
-          newNodeChild.id = data['_id']['$oid'];
-          newNodeChild.style.borderRadius = '3px';
-          newNodeChild.setAttribute('data-name', data['name']);
-          newNodeChild.src = data['picture'];
-          newNode.appendChild(newNodeChild);
-            
-          newNodeChild = document.createElement('div');
-          newNodeChild.className = 'active-space';
-          newNodeChild.style.width = '39px';
-          newNode.appendChild(newNodeChild);
-            
-          referenceNode = document.getElementById('space_align_helper');
-          referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-
-          space();
-        }
-        else {
-          $('#' + current_space).css('border-radius', '3px');
-          $('#' + current_space).closest('.space-wrapper').find('.active-space').css('width', '39px');
-          space();
-        }
+        $(document.getElementById(current_room)).attr('style', 'background-color: #43474d !important');
+        $(document.getElementById(old_room)).attr('style', '');
+        document.getElementById('messages').textContent = '';
+        document.getElementById('room-name-display').textContent = document.getElementById(current_room).getAttribute('data-name');
+        chat_history_skip = 0;
+        loadChatHistory();
+        typing_display.textContent = '';
+        typing_list = [];
+        stoppedTyping();
       }
+    }
+
+    $(document).on('click', '#close-user-page', function() {
+      $("#user-page").animate({opacity: '0'}, 100);
+      setTimeout(function() {
+        $('#user-page').css('display', 'none');
+      }, 100);
     });
-  });
+
+    $(document).on('click', '#space-search-button', function() {
+      $('#space-search').css('display', 'block');
+      $("#space-search").animate({opacity: '1'}, 100);
+    });
+      
+    $(document).on('click', '#close-space-search-button', function() {
+      $("#space-search").animate({opacity: '0'}, 100);
+      setTimeout(function() {
+        $('#space-search').css('display', 'none');
+      }, 100);
+    });
 
 
-  $(document).on('click', '#server-settings-button', function() {
-    var container = document.getElementById('space-settings-popup');
-    if (container.style.display == 'block') {
-      container.style.display = 'none';
-      // document.addEventListener('click', removePopup(), {once: true});
-    }
-    else {
-      container.style.display = 'block';
-    }
-  });
+    $(document).on('click', '.form-space', function() {
+      var joined_space = this.getAttribute('data-id');
+      var clicked_space = this;
+      setTimeout(function() {
+        clicked_space.firstChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = "Joined";
+      }, 500)
+      $.ajax({
+        type: "POST",
+        url: '/join_space',
+        dataType: "json",
+        data: JSON.stringify({'space_id': this.getAttribute('data-id')}),
+        contentType: 'application/json;charset=UTF-8',
+        success: function(data) {
+          $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
+          $(document.getElementById(current_space)).attr('style', '');
+          current_space = joined_space;
+          if ($('#' + joined_space).length == 0) {
 
+            var newNode = document.createElement('li');
+            newNode.className = 'space-wrapper';
+              
+            var newNodeChild = document.createElement('img');
+            newNodeChild.className = 'space pointer';
+            newNodeChild.id = data['_id']['$oid'];
+            newNodeChild.style.borderRadius = '3px';
+            newNodeChild.setAttribute('data-name', data['name']);
+            newNodeChild.src = data['picture'];
+            newNode.appendChild(newNodeChild);
+              
+            newNodeChild = document.createElement('div');
+            newNodeChild.className = 'active-space';
+            newNodeChild.style.width = '39px';
+            newNode.appendChild(newNodeChild);
+              
+            referenceNode = document.getElementById('space_align_helper');
+            referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 
-  $(document).on('click', function(e) {
-    var container = $("#space-settings-popup");
-    if (!container.is(e.target) && container.has(e.target).length === 0 && !$('#server-settings-button').is(e.target)) 
-    {
-      container.hide();
-      // TODO: Make this function function only when popups appear (use .off function?)
-      // https://stackoverflow.com/questions/67973984/getting-desired-event-target-when-listener-is-on-the-document
-    }
-  });
-
-  
-
-  function space() {
-        $.ajax({
-          type: "POST",
-          url: '/space',
-          dataType: "json",
-          data: JSON.stringify({'space_id': current_space}),
-          contentType: 'application/json;charset=UTF-8',
-          success: function(rooms_and_sections) {
-            document.getElementById('messages').textContent = '';
-            document.getElementById('header_text').textContent = document.getElementById(current_space).getAttribute('data-name');
-            document.getElementById('channels').textContent = ''; 
-            document.getElementById('members').textContent = '';
-            var newNode = null;
-            rooms_and_sections[1].forEach(function(section) {
-              newNode = document.createElement('li');
-              newNode.className = 'section pointer';
-              newNode.id = section['_id']['$oid'];
-              newNode.innerHTML = '<div class="section-name">' + section['name'] + '</div><div class="create-room-button" type="button">+</div>'
-              document.getElementById('channels').append(newNode);
-              rooms_and_sections[0].forEach(function(room) {
-                if (room['section'] == section['_id']['$oid']) {
-                  newNode = document.createElement('li');
-                  newNode.className = 'room pointer';
-              	  newNode.id = room['_id']['$oid'];
-              	  newNode.setAttribute('data-section', room['section']);
-              	  newNode.setAttribute('data-name', room['name']);
-              	  newNode.innerHTML = room['name'] + '<img class="room-settings" src="/static/images/settings-white.png">';
-               	  document.getElementById('channels').append(newNode);
-                }
-              });
-            });
-            try { //get rid of try block after deleting all spaces without member list another method
-              rooms_and_sections[2].forEach(function(member) {
-                newNode = document.createElement('div');
-                newNode.className = 'member pointer';
-                newNode.setAttribute('data-id', member['_id']);
-                newNode.innerHTML = '<img class="profile-picture" src=' + member['picture'] + ' alt="!"><span class="member-name"><b>' + member['name'] + '</b></span>';
-                document.getElementById('members').append(newNode);
-              });
-            }
-            catch(error) {
-              console.error(error);
-            }
-            joinRoom(document.querySelector('.room').id);
-            $('#home-page').css('display', 'none');
-            $('#first-all').css('display', 'block');
-            $('#space-search').css('display', 'none');
+            space();
           }
+          else {
+            $('#' + current_space).css('border-radius', '3px');
+            $('#' + current_space).closest('.space-wrapper').find('.active-space').css('width', '39px');
+            space();
+          }
+        }
+      });
     });
-  }
 
-  $(document).on('click', '#profile', function() {
-    $('#user-page').css('display', 'block');
-    $("#user-page").animate({opacity: '1'}, 100);
-    $.ajax({
-      type: "POST",
-      url: '/profile',
-      dataType: "json",
-      contentType: 'application/json;charset=UTF-8',
-      success: function(data){
-        alert('This worked!');
+    $(document).on('click', '#server-settings-button', function() {
+      var container = document.getElementById('space-settings-popup');
+      if (container.style.display == 'block') {
+        container.style.display = 'none';
+        // document.addEventListener('click', removePopup(), {once: true});
       }
-    })
-  });
-
-  $(document).on('click', '.report-message', function() {
-    $.ajax({
-      type: "POST",
-      url: '/report_message',
-      dataType: "json",
-      data: JSON.stringify({'message_id': this.parentNode.parentNode.id}),
-      contentType: 'application/json;charset=UTF-8',
-      success: function(data) {
-        if (data['success'] == 'true') {
-          alert("Your report has been recieved.")
-        }
-        else if (data['success'] == 'many') {
-          alert("Message has already been reported.")
-        }
-        else {
-          alert("Your report failed.")
-        }
+      else {
+        container.style.display = 'block';
       }
     });
-  });
 
-  $(document).on('click', '.member', function() {
-    $.ajax({
-      type: "POST",
-      url: '/open_member_profile',
-      dataType: "json",
-      data: JSON.stringify({'user_id': this.getAttribute("data-id")}), 
-      contentType: 'application/json;charset=UTF-8',
-      success: function(data) {
-        alert(JSON.stringify(data));
+    $(document).on('click', function(e) {
+      var container = $("#space-settings-popup");
+      if (!container.is(e.target) && container.has(e.target).length === 0 && !$('#server-settings-button').is(e.target)) 
+      {
+        container.hide();
+        // TODO: Make this function function only when popups appear (use .off function?)
+        // https://stackoverflow.com/questions/67973984/getting-desired-event-target-when-listener-is-on-the-document
       }
-    })
-  });
+    });
 
-  var createSpaceModal = document.getElementById("create-space");
-  $(document).on('click', '#create-space-button', function() {
-    createSpaceModal.style.display = "block";
-  });
-  $(document).on('click', '#close-create-space', function() {
-    createSpaceModal.style.display = "none";
-  });
-
-  var createRoomModal = document.getElementById("create-room");
-  $(document).on('click', '.create-room-button', function() {
-    createRoomModal.style.display = "block";
-  });
-  $(document).on('click', '#close-create-room', function() {
-    createRoomModal.style.display = "none";
-  });
-
-  var createSectionModal = document.getElementById("create-section");
-  $(document).on('click', '#create-section-button', function() {
-    createSectionModal.style.display = "block";
-  });
-  $(document).on('click', '#close-create-section', function() {
-    createSectionModal.style.display = "none";
-  });
-
-  var spaceSettingsPopup = document.getElementById('space-settings-popup'); 
-  window.onclick = function(event) {
-    if (event.target == createRoomModal) {
-      createRoomModal.style.display = "none";
+    function space() {
+          $.ajax({
+            type: "POST",
+            url: '/space',
+            dataType: "json",
+            data: JSON.stringify({'space_id': current_space}),
+            contentType: 'application/json;charset=UTF-8',
+            success: function(rooms_and_sections) {
+              document.getElementById('messages').textContent = '';
+              document.getElementById('header_text').textContent = document.getElementById(current_space).getAttribute('data-name');
+              document.getElementById('channels').textContent = ''; 
+              document.getElementById('members').textContent = '';
+              var newNode = null;
+              rooms_and_sections[1].forEach(function(section) {
+                newNode = document.createElement('li');
+                newNode.className = 'section pointer';
+                newNode.id = section['_id']['$oid'];
+                newNode.innerHTML = '<div class="section-name">' + section['name'] + '</div><div class="create-room-button" type="button">+</div>'
+                document.getElementById('channels').append(newNode);
+                rooms_and_sections[0].forEach(function(room) {
+                  if (room['section'] == section['_id']['$oid']) {
+                    newNode = document.createElement('li');
+                    newNode.className = 'room pointer';
+                    newNode.id = room['_id']['$oid'];
+                    newNode.setAttribute('data-section', room['section']);
+                    newNode.setAttribute('data-name', room['name']);
+                    newNode.innerHTML = room['name'] + '<img class="room-settings" src="/static/images/settings-white.png">';
+                    document.getElementById('channels').append(newNode);
+                  }
+                });
+              });
+              try { //get rid of try block after deleting all spaces without member list another method
+                rooms_and_sections[2].forEach(function(member) {
+                  newNode = document.createElement('div');
+                  newNode.className = 'member pointer';
+                  newNode.setAttribute('data-id', member['_id']);
+                  newNode.innerHTML = '<img class="profile-picture" src=' + member['picture'] + ' alt="!"><span class="member-name"><b>' + member['name'] + '</b></span>';
+                  document.getElementById('members').append(newNode);
+                });
+              }
+              catch(error) {
+                console.error(error);
+              }
+              joinRoom(document.querySelector('.room').id);
+              $('#home-page').css('display', 'none');
+              $('#first-all').css('display', 'block');
+              $('#space-search').css('display', 'none');
+            }
+      });
     }
-    if (event.target == createSpaceModal) {
+
+    $(document).on('click', '#profile', function() {
+      $('#user-page').css('display', 'block');
+      $("#user-page").animate({opacity: '1'}, 100);
+      $.ajax({
+        type: "POST",
+        url: '/profile',
+        dataType: "json",
+        contentType: 'application/json;charset=UTF-8',
+        success: function(data){
+          alert('This worked!');
+        }
+      })
+    });
+
+    $(document).on('click', '.report-message', function() {
+      $.ajax({
+        type: "POST",
+        url: '/report_message',
+        dataType: "json",
+        data: JSON.stringify({'message_id': this.parentNode.parentNode.id}),
+        contentType: 'application/json;charset=UTF-8',
+        success: function(data) {
+          if (data['success'] == 'true') {
+            alert("Your report has been recieved.")
+          }
+          else if (data['success'] == 'many') {
+            alert("Message has already been reported.")
+          }
+          else {
+            alert("Your report failed.")
+          }
+        }
+      });
+    });
+
+    $(document).on('click', '.member', function() {
+      $.ajax({
+        type: "POST",
+        url: '/open_member_profile',
+        dataType: "json",
+        data: JSON.stringify({'user_id': this.getAttribute("data-id")}), 
+        contentType: 'application/json;charset=UTF-8',
+        success: function(data) {
+          alert(JSON.stringify(data));
+        }
+      })
+    });
+
+    var createSpaceModal = document.getElementById("create-space");
+    $(document).on('click', '#create-space-button', function() {
+      createSpaceModal.style.display = "block";
+    });
+    $(document).on('click', '#close-create-space', function() {
       createSpaceModal.style.display = "none";
-    }
-    if (event.target == createSectionModal) {
-      createSectionModal.style.display = "none";
-    }
-   }
- 
-  $("#chat").on('mouseenter', '.message-container-combine', function(){
-    $(this).find(".message-combine-time").css("visibility", "visible");
-  });
+    });
 
-  $("#chat").on('mouseleave', '.message-container-combine', function(){
-    $(this).find(".message-combine-time").css("visibility", "hidden");
-  });
+    var createRoomModal = document.getElementById("create-room");
+    $(document).on('click', '.create-room-button', function() {
+      createRoomModal.style.display = "block";
+    });
+    $(document).on('click', '#close-create-room', function() {
+      createRoomModal.style.display = "none";
+    });
+
+    var createSectionModal = document.getElementById("create-section");
+    $(document).on('click', '#create-section-button', function() {
+      createSectionModal.style.display = "block";
+    });
+    $(document).on('click', '#close-create-section', function() {
+      createSectionModal.style.display = "none";
+    });
+
+    var spaceSettingsPopup = document.getElementById('space-settings-popup'); 
+    window.onclick = function(event) {
+      if (event.target == createRoomModal) {
+        createRoomModal.style.display = "none";
+      }
+      if (event.target == createSpaceModal) {
+        createSpaceModal.style.display = "none";
+      }
+      if (event.target == createSectionModal) {
+        createSectionModal.style.display = "none";
+      }
+      }
+
+    $("#chat").on('mouseenter', '.message-container-combine', function(){
+      $(this).find(".message-combine-time").css("visibility", "visible");
+    });
+
+    $("#chat").on('mouseleave', '.message-container-combine', function(){
+      $(this).find(".message-combine-time").css("visibility", "hidden");
+    });
   </script>
 </html>
