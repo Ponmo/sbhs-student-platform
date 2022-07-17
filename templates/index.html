@@ -523,12 +523,12 @@
       newNode.setAttribute('data-section', data.section_id);
       newNode.setAttribute('data-name', data.name);
       newNode.innerHTML = data.name + '<img class="room-settings" src="/static/images/settings-white.png">';
-      const nodeList = document.querySelectorAll('div[data-section="' + data.section_id + '"]');
+      const nodeList = document.querySelectorAll('li[data-section="' + data.section_id + '"]');
       if (nodeList.length != 0) {
-        nodeList[nodeList.length - 1].parentNode.insertBefore(newNode, nodeList[nodeList.length - 1].nextSibling);
+        nodeList[nodeList.length - 1].parentNode.insertBefore(newNode, nodeList[nodeList.length - 1].nextElementSibling);
       }
       else {
-      	document.getElementById(data.section_id).parentNode.insertBefore(newNode, document.getElementById(data.section_id).nextSibling);
+      	document.getElementById(data.section_id).nextElementSibling.appendChild(newNode);
       }
     });
     
