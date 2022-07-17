@@ -568,6 +568,8 @@
       newNode.appendChild(newNodeChild);
       newNodeChild = document.createElement('ul');
       newNodeChild.className = 'room-group';
+      newNode.appendChild(newNodeChild);
+      document.getElementById('channels').append(newNode);
       $('.room-group').sortable({
         connectWith: '.room-group',
         axis: 'y',
@@ -576,8 +578,6 @@
         scroll: false,
         distance: '3'
       });
-      newNode.appendChild(newNodeChild);
-      document.getElementById('channels').append(newNode);
     });
 
     document.getElementById('create-space-form').onsubmit = function (e) {
