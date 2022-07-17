@@ -569,7 +569,9 @@
       newNode.appendChild(newNodeChild);
 
       newNodeChild = document.createElement('ul');
-      newNode.className = 'room-group ui-sortable'; //add resort
+      newNodeChild.className = 'room-group ui-sortable'; //add resort
+      newNode.appendChild(newNodeChild);
+
       document.getElementById('channels').append(newNode);
     });
 
