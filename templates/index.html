@@ -984,7 +984,9 @@
     $(document).on('click', '.member', function() {
       if (this.getAttribute('data-id') != selected_user) {
         if (!!document.getElementById("profile-popup")) {
-          $("#profile-popup").remove();
+          $('#profile-popup').remove();
+          $('.member').css('style', '');
+          $('.member').className('member pointer');
         }
         selected_user = this.getAttribute('data-id');
         $.ajax({
