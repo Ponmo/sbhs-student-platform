@@ -154,6 +154,7 @@
     var typing_list = [];
     var selected_section = '';
     var space_admin = false;
+    var selected_user = null;
 
     $("#channels").sortable({
       axis: 'y',
@@ -876,8 +877,9 @@
       }
       if (!profile_popup.is(e.target) && profile_popup.has(e.target).length === 0) {
         profile_popup.remove();
-        $('.member').css('background-color', '');
-        $('.member').click('true');
+        selected_user.className = 'member pointer';
+        selected_user.style.backgroundColor = ''
+        selected_user = null;
         // Removes Profile Popups, Probably Optimize and Combine This With Above
       }
     });
@@ -982,24 +984,25 @@
     });
 
     $(document).on('click', '.member', function() {
-      let member = this;
-      $.ajax({
-        type: "POST",
-        url: '/open_member_profile',
-        dataType: "json",
-        data: JSON.stringify({'user_id': member.getAttribute("data-id")}), 
-        contentType: 'application/json;charset=UTF-8',
-        success: function(data) {
-          //alert(JSON.stringify(data));
-          $('.member').click(true);
-          let newNode = document.createElement('div');
-          newNode.className = 'members-popup';
-          newNode.id = 'profile-popup';
-          member.appendChild(newNode);
-          $(member).click(false);
-          member.style.backgroundColor = '#3c3f45';
-        }
-      })
+      if (this != selected_user) {
+        selected_user = this;
+        $.ajax({
+          type: "POST",
+          url: '/open_member_profile',
+          dataType: "json",
+          data: JSON.stringify({'user_id': selected_user.getAttribute("data-id")}), 
+          contentType: 'application/json;charset=UTF-8',
+          success: function(data) {
+            //alert(JSON.stringify(data));
+            let newNode = document.createElement('div');
+            newNode.className = 'members-popup';
+            newNode.id = 'profile-popup';
+            member.appendChild(newNode);
+            selected_user.className = 'member';
+            selected_user.style.backgroundColor = '#3c3f45';
+          }
+        });
+      }
     });
 
     var createSpaceModal = document.getElementById("create-space");
