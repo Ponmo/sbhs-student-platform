@@ -511,19 +511,17 @@ img { /* make images and create button undraggable and unhighlitable*/
   background-color: #3c3f45;
 }
 .profile-popup {
-  display: none;
   position: absolute;
   color: #dcddde;
   font-size: 14px;
   z-index: 10;
   border-radius: 5px;
-  right: 20px;
-  width: 250px;
-  height: 260px;
+  width: 300px;
+  min-height: 320px;
   background-color: #17181b;
 }
 .members-popup {
-
+  left: -315px;
 }
 .chats-popup {
 
