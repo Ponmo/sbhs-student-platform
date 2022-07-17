@@ -561,15 +561,21 @@
     socket.on('created_section', function(data) {
       var newNode = document.createElement('ul');
       newNode.className = 'section-group';
-
       var newNodeChild = document.createElement('li');
       newNodeChild.className = 'section pointer';
       newNodeChild.id = data.section_id;
       newNodeChild.innerHTML = '<div class="section-name">' + data.name + '</div><div class="create-room-button" type="button">+</div>'
       newNode.appendChild(newNodeChild);
-
       newNodeChild = document.createElement('ul');
-      newNodeChild.className = 'room-group ui-sortable'; //add resort
+      newNodeChild.className = 'room-group';
+      $('.room-group').sortable({
+        connectWith: '.room-group',
+        axis: 'y',
+        items: '.room',
+        opacity: 0.7,
+        scroll: false,
+        distance: '3'
+      });
       newNode.appendChild(newNodeChild);
 
       document.getElementById('channels').append(newNode);
