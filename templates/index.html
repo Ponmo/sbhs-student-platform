@@ -990,7 +990,8 @@
         success: function(data) {
           alert(JSON.stringify(data));
           let newNode = document.createElement('div');
-          newNode.className = 'profile-popup members-popup';
+          newNode.className = 'members-popup';
+          newNode.id = 'profile-popup';
           member.appendChild(newNode);
         }
       })
