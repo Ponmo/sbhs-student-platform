@@ -258,6 +258,9 @@ img { /* make images and create button undraggable and unhighlitable*/
   padding: 0;
   list-style-type: none;
 }
+.room-group{
+  padding-top: 3px;
+}
 .section {
   margin-top: 14px;
   color: white;
@@ -495,6 +498,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   background-color: #2f3136;
 }
 .member {
+  position: relative;
   margin: 2px 8px 0px 8px;
   padding: 4px;
   border-radius: 4px;
@@ -505,6 +509,24 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 .member:hover {
   background-color: #3c3f45;
+}
+.profile-popup {
+  display: none;
+  position: absolute;
+  color: #dcddde;
+  font-size: 14px;
+  z-index: 10;
+  border-radius: 5px;
+  right: 20px;
+  width: 250px;
+  height: 260px;
+  background-color: #17181b;
+}
+.members_popup {
+
+}
+.chats_popup {
+
 }
 #footer {
   position: fixed;
