@@ -154,7 +154,7 @@
     var typing_list = [];
     var selected_section = '';
     var space_admin = false;
-    var selected_user = null;
+    var selected_user = '';
 
     $("#channels").sortable({
       axis: 'y',
@@ -875,13 +875,8 @@
         // TODO: Make this function function only when popups appear (use .off function?)
         // https://stackoverflow.com/questions/67973984/getting-desired-event-target-when-listener-is-on-the-document
       }
-      if (!profile_popup.is(e.target) && profile_popup.has(e.target).length === 0) {
+      if (!profile_popup.is(e.target) && profile_popup.has(e.target).length > 0) {
         profile_popup.remove();
-        if (selected_user != null && !$(selected_user).is(e.target)) {
-          selected_user.className = 'member pointer';
-          selected_user.style.backgroundColor = ''
-          selected_user = null;
-        }
         // Removes Profile Popups, Probably Optimize and Combine This With Above
       }
     });
@@ -986,24 +981,22 @@
     });
 
     $(document).on('click', '.member', function() {
-      if (this != selected_user) {
-        selected_user = this;
-        alert(selected_user);
+      if (this.getAttribute('data-id') != selected_user) {
+        selected_user = this.getAttribute('data-id');
         $.ajax({
           type: "POST",
           url: '/open_member_profile',
           dataType: "json",
-          data: JSON.stringify({'user_id': selected_user.getAttribute("data-id")}), 
+          data: JSON.stringify({'user_id': selected_user}), 
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
             //alert(JSON.stringify(data));
             let newNode = document.createElement('div');
             newNode.className = 'members-popup';
             newNode.id = 'profile-popup';
-            alert(selected_user);
-            selected_user.appendChild(newNode);
-            selected_user.className = 'member';
-            selected_user.style.backgroundColor = '#3c3f45';
+            document.getElementById(selected_user).appendChild(newNode);
+            document.getElementById(selected_user).className = 'member';
+            document.getElementById(selected_user).style.backgroundColor = '#3c3f45';
           }
         });
       }
