@@ -598,6 +598,23 @@
             document.getElementById("create-space").style.display = "none";
             $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
             $(document.getElementById(current_space)).attr('style', '');
+
+            var newNode = document.createElement('li');
+            newNode.className = 'space-wrapper';
+            var newNodeChild = document.createElement('img');
+            newNodeChild.className = 'space pointer';
+            newNodeChild.id = current_space;
+            newNodeChild.setAttribute('data-name', space_name);
+            newNodeChild.style.borderRadius = '3px'
+            newNodeChild.src = space_image;
+            newNode.appendChild(newNodeChild);
+            newNodeChild = document.createElement('div');
+            newNodeChild.className = 'active-space';
+            newNodeChild.style.width = '39px'
+            newNode.appendChild(newNodeChild);
+            referenceNode = document.getElementById('space_align_helper');
+            referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+
             current_space = room_and_section[0][0]['space'];
             space();
             /*document.getElementById("create-space").style.display = "none";
@@ -647,7 +664,7 @@
       var message_id = this.parentNode.parentNode.id;
       var message = this.parentNode.previousElementSibling.textContent;
       $(this.parentNode.previousElementSibling).hide();
-      $(this.parentNode.previousElementSibling).after('<form class="message_edit_input_form"><textarea class="message_edit" placeholder="Remove message">' + message + '</textarea></form>');
+      $(this.parentNode.previousElementSibling).after('<form class="message_edit_input_form"><textarea class="message_edit" rows="1" placeholder="Remove message">' + message + '</textarea></form>');
       this.parentNode.previousElementSibling.firstChild.setAttribute("style", "height:" + (this.parentNode.previousElementSibling.firstChild.scrollHeight) + "px;overflow-y:hidden;");
     });
 
