@@ -991,12 +991,13 @@
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
             //alert(JSON.stringify(data));
+            let member = document.querySelector('[data-id="' + selected_user + '"]')
             let newNode = document.createElement('div');
             newNode.className = 'members-popup';
             newNode.id = 'profile-popup';
-            document.getElementById(selected_user).appendChild(newNode);
-            document.getElementById(selected_user).className = 'member';
-            document.getElementById(selected_user).style.backgroundColor = '#3c3f45';
+            member.appendChild(newNode);
+            member.getElementById(selected_user).className = 'member';
+            member.getElementById(selected_user).style.backgroundColor = '#3c3f45';
           }
         });
       }
