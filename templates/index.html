@@ -991,6 +991,7 @@
         contentType: 'application/json;charset=UTF-8',
         success: function(data) {
           //alert(JSON.stringify(data));
+          $('.member').click(true);
           let newNode = document.createElement('div');
           newNode.className = 'members-popup';
           newNode.id = 'profile-popup';
