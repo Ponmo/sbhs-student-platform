@@ -877,9 +877,11 @@
       }
       if (!profile_popup.is(e.target) && profile_popup.has(e.target).length === 0) {
         profile_popup.remove();
-        selected_user.className = 'member pointer';
-        selected_user.style.backgroundColor = ''
-        selected_user = null;
+        if (selected_user != null) {
+          selected_user.className = 'member pointer';
+          selected_user.style.backgroundColor = ''
+          selected_user = null;
+        }
         // Removes Profile Popups, Probably Optimize and Combine This With Above
       }
     });
@@ -997,7 +999,7 @@
             let newNode = document.createElement('div');
             newNode.className = 'members-popup';
             newNode.id = 'profile-popup';
-            member.appendChild(newNode);
+            selected_user.appendChild(newNode);
             selected_user.className = 'member';
             selected_user.style.backgroundColor = '#3c3f45';
           }
