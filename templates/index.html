@@ -875,7 +875,7 @@
         // TODO: Make this function function only when popups appear (use .off function?)
         // https://stackoverflow.com/questions/67973984/getting-desired-event-target-when-listener-is-on-the-document
       }
-      if (!profile_popup.is(e.target) && profile_popup.has(e.target).length === 0) {
+      if (!$(selected_user).is(e.target) && !profile_popup.is(e.target) && profile_popup.has(e.target).length === 0) {
         profile_popup.remove();
         if (selected_user != null) {
           //selected_user.className = 'member pointer';
