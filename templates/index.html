@@ -975,14 +975,18 @@
     });
 
     $(document).on('click', '.member', function() {
+      let member = this;
       $.ajax({
         type: "POST",
         url: '/open_member_profile',
         dataType: "json",
-        data: JSON.stringify({'user_id': this.getAttribute("data-id")}), 
+        data: JSON.stringify({'user_id': member.getAttribute("data-id")}), 
         contentType: 'application/json;charset=UTF-8',
         success: function(data) {
           alert(JSON.stringify(data));
+          let newNode = document.createElement('div');
+          newNode.className = 'profile-popup members-popup';
+          member.appendChild(newNode);
         }
       })
     });
