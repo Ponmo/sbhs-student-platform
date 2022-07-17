@@ -510,6 +510,8 @@ img { /* make images and create button undraggable and unhighlitable*/
 .member-name {
   margin-left: 10px;
   color: gray;
+  font-weight: bold;
+
 }
 .member:hover {
   background-color: #3c3f45;
