@@ -143,7 +143,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
   <script type="text/javascript" charset="utf-8">
-
+    //Give small space to empty categories room-group 
     var socket = io();
     var chat_history_skip = 0;
     var current_room = '';
@@ -577,7 +577,6 @@
         distance: '3'
       });
       newNode.appendChild(newNodeChild);
-
       document.getElementById('channels').append(newNode);
     });
 
