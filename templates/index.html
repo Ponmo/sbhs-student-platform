@@ -867,11 +867,16 @@
 
     $(document).on('click', function(e) {
       var container = $("#space-settings-popup");
+      var profile_popup = $("#profile-popup");
       if (!container.is(e.target) && container.has(e.target).length === 0 && !$('#server-settings-button').is(e.target)) 
       {
         container.hide();
         // TODO: Make this function function only when popups appear (use .off function?)
         // https://stackoverflow.com/questions/67973984/getting-desired-event-target-when-listener-is-on-the-document
+      }
+      if (!container.is(e.target) && container.has(e.target).length === 0) {
+        profile_popup.remove();
+        // Removes Profile Popups, Probably Optimize and Combine This With Above
       }
     });
 
