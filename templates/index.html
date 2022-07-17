@@ -991,6 +991,13 @@
           $('.member').addClass('pointer');
         }
         selected_user = this.getAttribute('data-id');
+        let member = document.querySelector('[data-id="' + selected_user + '"]')
+        let newNode = document.createElement('div');
+        newNode.className = 'members-popup';
+        newNode.id = 'profile-popup';
+        member.appendChild(newNode);
+        member.className = 'member';
+        member.style.backgroundColor = '#3c3f45';
         $.ajax({
           type: "POST",
           url: '/open_member_profile',
@@ -998,14 +1005,6 @@
           data: JSON.stringify({'user_id': selected_user}), 
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
-            //alert(JSON.stringify(data));
-            let member = document.querySelector('[data-id="' + selected_user + '"]')
-            let newNode = document.createElement('div');
-            newNode.className = 'members-popup';
-            newNode.id = 'profile-popup';
-            member.appendChild(newNode);
-            member.className = 'member';
-            member.style.backgroundColor = '#3c3f45';
           }
         });
       }
