@@ -164,10 +164,17 @@
     });*/
 
     $('.room-group').sortable({
-      axis: 'x',
-      items: "> li",
+      axis: 'y',
       connectWith: '.sortable',
       items: '.room',
+      opacity: 0.7,
+      scroll: false,
+      distance: '3'
+    });
+
+    $('#spaces').sortable({
+      axis: 'x',
+      items: "> li",
       opacity: 0.7,
       scroll: false,
       distance: '3'
