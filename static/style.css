@@ -522,6 +522,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 .members-popup {
   left: -315px;
+  top: 0;
 }
 .chats-popup {
 
