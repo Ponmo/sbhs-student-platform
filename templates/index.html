@@ -988,6 +988,7 @@
     $(document).on('click', '.member', function() {
       if (this != selected_user) {
         selected_user = this;
+        alert(selected_user);
         $.ajax({
           type: "POST",
           url: '/open_member_profile',
