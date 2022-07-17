@@ -884,6 +884,13 @@
               newNode.append(newNodeChildContainer);
               document.getElementById('channels').append(newNode);
             });
+            $('.room-group').sortable({
+              axis: 'y',
+              items: '.room',
+              opacity: 0.7,
+              scroll: false,
+              distance: '3'
+            });
           });
           try { //get rid of try block after deleting all spaces without member list another method
             rooms_and_sections[2].forEach(function(member) {
