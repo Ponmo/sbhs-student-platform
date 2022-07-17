@@ -878,6 +878,8 @@
       if (!!document.getElementById("profile-popup") && !profile_popup.is(e.target) && !$('.member').is(e.target)) { //&& profile_popup.has(e.target).length === 0) {
         profile_popup.remove();
         selected_user = '';
+        $('.member').css('background-color', '');
+        $('.member').addClass('pointer');
         // Removes Profile Popups, Probably Optimize and Combine This With Above
       }
     });
@@ -1006,6 +1008,12 @@
             member.style.backgroundColor = '#3c3f45';
           }
         });
+      }
+      else if (!!document.getElementById("profile-popup")) {
+        $('#profile-popup').remove();
+        $('.member').css('background-color', '');
+        $('.member').addClass('pointer');
+        selected_user = '';
       }
     });
 
