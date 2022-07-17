@@ -492,6 +492,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   grid-column: 3;
   z-index: 1; /* to make the send button not overlay the members div on small screen sizes can change once small version introduced */
   grid-row: 2;
+  padding-top: 5px;
   background-color: #2f3136;
 }
 .member {
