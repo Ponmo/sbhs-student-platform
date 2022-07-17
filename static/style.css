@@ -346,9 +346,6 @@ img { /* make images and create button undraggable and unhighlitable*/
   grid-row: 1;
   margin-bottom: 0px;
 }
-.name {
-  cursor: pointer;
-}
 .datetime {
   font-size: 10px;
   overflow-wrap: break-word; /* Maybe not necessary for datetime and combine time */
@@ -552,7 +549,6 @@ img { /* make images and create button undraggable and unhighlitable*/
   border-radius: 50%;
   grid-column: 1;
   grid-row: 1/3;
-  cursor: pointer;
 }
 #username {
   color: #ffffff;
