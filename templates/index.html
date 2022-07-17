@@ -163,14 +163,6 @@
       distance: '3'
     });
 
-    $('.room-group').sortable({
-      axis: 'y',
-      items: '.room',
-      opacity: 0.7,
-      scroll: false,
-      distance: '3'
-    });
-
     $('#spaces').sortable({
       axis: 'x',
       items: "> li",
@@ -885,6 +877,7 @@
               document.getElementById('channels').append(newNode);
             });
             $('.room-group').sortable({
+              connectWith: '.room-group',
               axis: 'y',
               items: '.room',
               opacity: 0.7,
