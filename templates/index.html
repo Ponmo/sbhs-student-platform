@@ -595,7 +595,9 @@
           data: JSON.stringify({'space_name': space_name, 'space_image': space_image}),
           contentType: 'application/json;charset=UTF-8',
           success: function(room_and_section) {
-            document.getElementById("create-space").style.display = "none";
+            current_space = room_and_section[0][0]['space'];
+            space();
+            /*document.getElementById("create-space").style.display = "none";
             $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
             $(document.getElementById(current_space)).attr('style', '');
           	current_space = room_and_section[0][0]['space'];
@@ -632,7 +634,7 @@
             $('#home-page').css('display', 'none');
             $('#first-all').css('display', 'block');
             $('#space-search').css('display', 'none');
-            joinRoom(room_and_section[0][0]['_id']['$oid']);
+            joinRoom(room_and_section[0][0]['_id']['$oid']);*/
           }
         });
       }
