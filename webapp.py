@@ -453,9 +453,8 @@ def edited_message(data):
 def sorted_channels(data):
     for section in data['section_list']:
         collection_sections.find_one_and_update({"_id": ObjectId(section)}, {'$set': {'order': data['section_list'].index(section) + 1}})
-    socketio.emit('sorted_channels', data, room = '62d376cf2ce75e26ba79b507')
-    #for room in data['room_list']:
-    #    socketio.emit('sorted_channels', data, room = room)
+    for room in data['room_list']:
+        socketio.emit('sorted_channels', data, room = room)
     
 if __name__ == '__main__':
     socketio.run(app, debug=False)
