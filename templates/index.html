@@ -139,6 +139,8 @@
         </form>
       </div>
     </div>
+
+    <div id="context-menu"></div>
   </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
@@ -162,7 +164,7 @@
       scroll: false,
       items: '.section-group',
       distance: '3',
-      change: function(e) {
+      update: function(e) {
         var sections = document.querySelectorAll(".section");
         var list = [];
         for (let i = 0; i < sections.length; i++) {
