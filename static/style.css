@@ -668,6 +668,9 @@ img { /* make images and create button undraggable and unhighlitable*/
   background-color: #fefefe;
   /*opacity border*/
 }
+#context-menu {
+  display: none;
+}
 #chat::-webkit-scrollbar {
   width: 8px;
 }

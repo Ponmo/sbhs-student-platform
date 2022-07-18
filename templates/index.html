@@ -141,6 +141,7 @@
     </div>
 
     <div id="context-menu"></div>
+    
   </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
@@ -165,16 +166,26 @@
       items: '.section-group',
       distance: '3',
       update: function(e) {
+        var room_list = [];
+        document.querySelectorAll(".room").forEach(function(item) {
+          room_list.push(item.id);
+        });
         var sections = document.querySelectorAll(".section");
         var section_list = [];
         for (let i = 0; i < sections.length; i++) {
           section_list.push(sections[i].id);
         }
         socket.emit('sorted_channels', {
-          space_id: current_space,
-          section_list: section_list
+          section_list: section_list,
+          room_list: room_list
         });
       }
+    });
+
+    socket.on('sorted_channels', function (data) {
+      data.section_list.forEach(function(section_id) {
+        document.getElementById(section_id).parentElement.parentElement.appendChild(document.getElementById(section_id).parentElement);
+      });
     });
 
     $('#spaces').sortable({
@@ -185,9 +196,10 @@
       distance: '3'
     });
 
+    // Right-click menu, the if-else statement checks for broswer compatibility
     if (document.addEventListener) {
       document.addEventListener('contextmenu', function(e) {
-        alert("You've tried to open context menu"); //here you draw your own menu
+        alert("You've tried to open context menu"); 
         
         e.preventDefault();
       }, false);
