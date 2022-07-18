@@ -165,11 +165,12 @@
       scroll: false,
       items: '.section-group',
       distance: '3',
-      update: function(e) {
+      update: function() {
         var room_list = [];
         document.querySelectorAll(".room").forEach(function(item) {
           room_list.push(item.id);
         });
+        alert(room_list);
         var sections = document.querySelectorAll(".section");
         var section_list = [];
         for (let i = 0; i < sections.length; i++) {
