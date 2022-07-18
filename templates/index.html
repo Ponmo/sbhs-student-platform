@@ -504,10 +504,6 @@
         joinRoom($('#channels').find('.room')[0].id);
       }
     });
-    
-    socket.on('deleted_message', function(data) {
-      
-    });
 
     let typing_display = document.getElementById('typing_display');
     function changeTypingDisplay() {
@@ -827,10 +823,11 @@
             contentType: 'application/json;charset=UTF-8',
             success: function(data) {
               if (data['success'] == 'true') {
+                var rooms = document.querySelectorAll('.room')
                 var room_list = [];
-                document.querySelectorAll(".room").forEach(function(item) {
-                  room_list.push(item.id);
-                });
+                for (let i = 0; i < rooms.length; i++) {
+                  room_list.push(rooms[i].id);
+                }
                 socket.emit('deleted_room', {
                   room: deleted_room,
                   room_list: room_list
