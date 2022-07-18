@@ -433,7 +433,7 @@ def created_section(data):
 		socketio.emit('created_section', data, room = room)
 
 # When a message is deleted, send that message data to all
-# users in the space
+# users in the space.
 
 @socketio.on('deleted_message')
 def deleted_message(data):
@@ -447,12 +447,15 @@ def edited_message(data):
     collection_messages.find_one_and_update({"_id": ObjectId(data['message_id'])}, {'$set': {'message': data['edit']}})
     socketio.emit('edited_message', data, room = data['room_id'])
 
-# When sections are sorted, update the order in MongoDB
+# When sections are sorted, update the order in MongoDB.
 
 @socketio.on('sorted_channels')
 def sorted_channels(data):
     for section in data['section_list']:
         collection_sections.find_one_and_update({"_id": ObjectId(section)}, {'$set': {'order': data['section_list'].index(section) + 1}})
+    socketio.emit('sorted_channels', data, room = '62d376cf2ce75e26ba79b507')
+    #for room in data['room_list']:
+    #    socketio.emit('sorted_channels', data, room = room)
     
 if __name__ == '__main__':
     socketio.run(app, debug=False)
