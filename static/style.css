@@ -671,6 +671,16 @@ img { /* make images and create button undraggable and unhighlitable*/
 #context-menu {
   display: none;
 }
+#context-menu-show {
+  z-index: 1000;
+  position: absolute;
+  background-color: #C0C0C0;
+  padding: 2px;
+  display: block;
+  margin: 0;
+  list-style-type: none;
+  list-style: none;
+}
 #chat::-webkit-scrollbar {
   width: 8px;
 }

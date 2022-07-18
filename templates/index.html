@@ -183,6 +183,7 @@
     });
 
     socket.on('sorted_channels', function (data) {
+      alert("test alert");
       data.section_list.forEach(function(section_id) {
         document.getElementById(section_id).parentElement.parentElement.appendChild(document.getElementById(section_id).parentElement);
       });
