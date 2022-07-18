@@ -446,6 +446,13 @@ def deleted_message(data):
 def edited_message(data):
     collection_messages.find_one_and_update({"_id": ObjectId(data['message_id'])}, {'$set': {'message': data['edit']}})
     socketio.emit('edited_message', data, room = data['room_id'])
-        
+
+# When sections are sorted, update the order in MongoDB
+
+@socketio.on('sorted_channels')
+def sorted_channels(data):
+    for section in data['section_list']:
+        collection_sections.find_one_and_update({"_id": ObjectId(section)}, {'$set': {'order': data['section_list'].index(section) + 1}})
+    
 if __name__ == '__main__':
     socketio.run(app, debug=False)
