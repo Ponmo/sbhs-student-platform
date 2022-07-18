@@ -161,7 +161,19 @@
       opacity: 0.7,
       scroll: false,
       items: '.section-group',
-      distance: '3'
+      distance: '3',
+      change: function(e) {
+        var sections = document.querySelectorAll(".section");
+        var list = [];
+        for (let i = 0; i < sections.length; i++) {
+          list.push(sections[i].id);
+        }
+        alert(list);
+        socket.emit('sorted_channels', {
+          name: "{{ name }}",
+          room_id: current_room
+        });
+      }
     });
 
     $('#spaces').sortable({
@@ -171,6 +183,19 @@
       scroll: false,
       distance: '3'
     });
+
+    if (document.addEventListener) {
+      document.addEventListener('contextmenu', function(e) {
+        alert("You've tried to open context menu"); //here you draw your own menu
+        
+        e.preventDefault();
+      }, false);
+    } else {
+      document.attachEvent('oncontextmenu', function() {
+        alert("You've tried to open context menu");
+        window.event.returnValue = false;
+      });
+    }
 
     $(document).on('click', '#log-out', function () {
       $.get('/logout');
