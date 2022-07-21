@@ -203,10 +203,10 @@
       scroll: false,
       distance: '3',
       update: function() {
-        var spaces = document.querySelectorAll('.space');
+        var space = document.querySelectorAll('.space');
         var space_list = [];
         for (let i = 0; i < space.length; i++) {
-          space_list.push(spaces[i].id);
+          space_list.push(space[i].id);
         }
         alert(space_list);
         socket.emit('sorted_spaces', {
@@ -220,6 +220,9 @@
       var room_list = [];
       for (let i = 0; i < room_group.length; i++) {
         room_list.push(rooms[i].id);
+        for (let j = 0; j < rooms[i].length; j++) {
+          room_list.push(rooms[i][j]);
+        }
       }
       socket.emit('sorted_rooms', {
         room_list: room_list
