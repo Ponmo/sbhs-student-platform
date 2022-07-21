@@ -67,6 +67,8 @@
             <p id="room-name-display"></p>
           </div>
           <ul id="channels">
+            <div id="special-channels"></div>
+            <div id="regular-channels"></div>
           </ul>
 
 <!--         when new message is sent, make the new message appear above the message bar and not mess up the scrolling (Safari only). -->
@@ -197,6 +199,7 @@
       distance: '3'
     });
 
+    //Event.target (no), getClass Loop, one for every ID (no)
     // Right-click menu, the if-else statement checks for broswer compatibility
 //     if ($("#test").addEventListener) {
 //     $("#test").addEventListener('contextmenu', function(e) {
@@ -692,44 +695,6 @@
             referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
             current_space = room_and_section[0][0]['space'];
             space();
-            /*document.getElementById("create-space").style.display = "none";
-            $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
-            $(document.getElementById(current_space)).attr('style', '');
-          	current_space = room_and_section[0][0]['space'];
-            document.getElementById('messages').textContent = '';
-            document.getElementById('channels').textContent = ''; 
-            document.getElementById('header_text').textContent = space_name; 
-            var newNode = document.createElement('li');
-            newNode.className = 'space-wrapper';
-            var newNodeChild = document.createElement('img');
-            newNodeChild.className = 'space pointer';
-            newNodeChild.id = current_space;
-            newNodeChild.setAttribute('data-name', space_name);
-            newNodeChild.style.borderRadius = '3px'
-            newNodeChild.src = space_image;
-            newNode.appendChild(newNodeChild);
-            newNodeChild = document.createElement('div');
-            newNodeChild.className = 'active-space';
-            newNodeChild.style.width = '39px'
-            newNode.appendChild(newNodeChild);
-            referenceNode = document.getElementById('space_align_helper');
-            referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-            newNode = document.createElement('li');
-            newNode.className = 'section pointer';
-            newNode.id = room_and_section[1][0]['_id']['$oid'];
-            newNode.innerHTML = '<div class="section-name">' + room_and_section[1][0]['name'] + '</div><div class="create-room-button" type="button">+</div>'
-            document.getElementById('channels').append(newNode);
-            newNode = document.createElement('li');
-          	newNode.className = 'room pointer'; 
-          	newNode.setAttribute('data-section', room_and_section[1][0]['_id']['$oid']);
-    	      newNode.setAttribute('data-name', room_and_section[0][0]['name']);
-          	newNode.id = room_and_section[0][0]['_id']['$oid'];
-          	newNode.innerHTML = 'general<img class="room-settings" src="/static/images/settings-white.png">';
-            document.getElementById('channels').append(newNode);
-            $('#home-page').css('display', 'none');
-            $('#first-all').css('display', 'block');
-            $('#space-search').css('display', 'none');
-            joinRoom(room_and_section[0][0]['_id']['$oid']);*/
           }
         });
       }
