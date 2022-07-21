@@ -488,6 +488,11 @@ def sorted_channels(data):
         collection_sections.find_one_and_update({"_id": ObjectId(section)}, {'$set': {'order': data['section_list'].index(section) + 1}})
     for room in data['room_list']:
         socketio.emit('sorted_channels', data, room = room)
+        
+@socketio.on('sorted_spaces')
+def sorted_spaces(data):
+    for space in data['spaces_list'] :
+        collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': data['space_list'].index(space)}})
     
 if __name__ == '__main__':
     socketio.run(app, debug=False)
