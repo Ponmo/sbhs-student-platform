@@ -249,9 +249,14 @@ img { /* make images and create button undraggable and unhighlitable*/
   user-select: none;
   overflow-y: scroll;
   overflow-x: hidden;
-  padding: 0;
-  margin: 0;
+}
+#special-channels {
+
+}
+#regular-channels {
   list-style-type: none;
+  padding 0;
+  margin 0;
 }
 .section-group, .room-group {
   margin: 0;
