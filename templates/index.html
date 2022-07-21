@@ -67,7 +67,7 @@
             <p id="room-name-display"></p>
           </div>
           <div id="channels">
-            <div id="special-channels"></div>
+            <ul id="special-channels"></ul>
             <ul id="regular-channels"></ul>
           </div>
 
@@ -938,8 +938,8 @@
           document.getElementById('header_text').textContent = document.getElementById(current_space).getAttribute('data-name');
           document.getElementById('regular-channels').textContent = ''; 
           document.getElementById('members').textContent = '';
-          var newNode = document.createElement('div');
-          newNode.className = 'email';
+          var newNode = document.createElement('li');
+          newNode.className = 'email special-room';
           newNode.textContent = 'email';
           document.getElementById('special-channels').append(newNode);
 

@@ -250,7 +250,19 @@ img { /* make images and create button undraggable and unhighlitable*/
   overflow-x: hidden;
 }
 #special-channels {
-
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.special-room {
+  width: 254px;
+  height: 32px;
+  border-radius: 4px;
+  color: #ffffff;
+  margin-left: 8px;
+  line-height: 32px;
+  padding-left: 24px;
+  margin-top: 2px;
 }
 #regular-channels {
   list-style-type: none;
