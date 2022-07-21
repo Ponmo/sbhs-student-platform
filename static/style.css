@@ -253,8 +253,8 @@ img { /* make images and create button undraggable and unhighlitable*/
   list-style-type: none;
   padding: 0;
   margin: 0;
-  padding-top: 8px;
-  padding-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 12px;
   border-bottom: 1px solid #2b2d32;
 }
 .special-room {
@@ -266,6 +266,9 @@ img { /* make images and create button undraggable and unhighlitable*/
   line-height: 32px;
   padding-left: 6px;
   margin-top: 2px;
+}
+.special-room:hover {
+  background-color: #3c3f45;
 }
 #regular-channels {
   list-style-type: none;

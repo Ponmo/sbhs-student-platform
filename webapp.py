@@ -20,6 +20,10 @@ from datetime import datetime, date, timedelta
 import pytz
 from pytz import timezone
 
+import smtplib, ssl
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+
 GOOGLE_CLIENT_ID = os.environ['GOOGLE_CLIENT_ID']
 
 GOOGLE_CLIENT_SECRET = os.environ['GOOGLE_CLIENT_SECRET']
@@ -46,6 +50,108 @@ app.secret_key = os.environ['SECRET_KEY']
 socketio = SocketIO(app, async_mode='gevent')
 
 client = WebApplicationClient(GOOGLE_CLIENT_ID)
+
+
+
+def send_email(receiver_email, title, name, link, logged, comment):
+    try:
+        #get email and password of email bot through heroku environment.
+        smtp_server = 'smtp.gmail.com'
+        sender_email = #bot email
+        password = #bot password
+        message = MIMEMultipart('alternative')
+        message['Subject'] = 'SBHS Parent Board Notification' #subject of automatic email
+        message['From'] = sender_email #email of bot
+        message['To'] = receiver_email #sends to this email
+        text = """\
+        """ #basic text
+        html = """\
+        """ #text version with html
+        if logged == False: #email to user when an admin comments on their post
+            text = """\
+            Hello name,
+            Your post title has recieved a response from a staff member.
+            <link>
+            
+            Hola name,
+            Tu publicación title ha recibido una respuesta de un miembro del personal.
+            <link>"""
+            html = """\
+            <html>
+                <body>
+                    <p><b>Hi, """ + name + """.</b><br>
+                    Your post <a href='""" + link + """'>""" + title + """</a> has recieved a response from a staff member.<br>
+                    --------------------------------------------------------------------------------------------------------<br>
+                    <b>Hola, """ + name + """.</b><br>
+                    Tu publicación <a href='""" + link + """'>""" + title + """</a> ha recibido una respuesta de un miembro del personal.<br>
+                    --------------------------------------------------------------------------------------------------------<br>
+                    <small>*Please do not response to this email / Por favor, no responda a este correo electrónico.</small>
+                    </p>
+                </body>
+            </html>
+            """
+        elif comment == False: #email to admin when a user posts
+            text = """\
+            Hello.
+            A user has posted on the parent board forum.
+            <link>
+            
+            Hola.
+            Un usuario ha publicado en el foro del tablero principal.
+            <link>"""
+            html = """\
+            <html>
+                <body>
+                    <p><b>Hi.</b><br>
+                    """ + name + """ has posted <a href='""" + link + """'>""" + title + """</a> on the parent board forum<br>
+                    --------------------------------------------------------------------------------------------------------<br>
+                    <b>Hola.</b><br>
+                    """ + name + """ ha publicado <a href='""" + link + """'>""" + title + """</a> en el foro del tablero principal.<br>
+                    --------------------------------------------------------------------------------------------------------<br>
+                    <small>*Please do not response to this email / Por favor, no responda a este correo electrónico.</small>
+                    </p>
+                </body>
+            </html>
+            """
+        else: #email to admin when a user comments
+            text = """\
+            Hello.
+            A user has commented on the parent board forum.
+            <link>
+            
+            Hola.
+            Un usuario ha comentado en el foro del tablero principal.
+            <link>"""
+            html = """\
+            <html>
+                <body>
+                    <p><b>Hi.</b><br>
+                    """ + name + """ has commented on <a href='""" + link + """'>""" + title + """</a> on the parent board forum<br>
+                    --------------------------------------------------------------------------------------------------------<br>
+                    <b>Hola.</b><br>
+                    """ + name + """ ha comentado en <a href='""" + link + """'>""" + title + """</a> en el foro del tablero principal.<br>
+                    --------------------------------------------------------------------------------------------------------<br>
+                    <small>*Please do not response to this email / Por favor, no responda a este correo electrónico.</small>
+                    </p>
+                </body>
+            </html>
+            """
+        part1 = MIMEText(text, 'plain')
+        part2 = MIMEText(html, 'html')
+        message.attach(part1)
+        message.attach(part2)
+        context = ssl.create_default_context()
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
+            server.login(sender_email, password) #logs into the bot email
+            server.sendmail(sender_email, receiver_email, message.as_string()) #sends email
+    except:
+        return
+    return
+
+
+
+
+
 
 # Redirects users on http to https.
 
