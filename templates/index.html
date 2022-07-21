@@ -66,10 +66,10 @@
             <img class="pointer" id="home" src="/static/images/home-white.png">
             <p id="room-name-display"></p>
           </div>
-          <ul id="channels">
+          <div id="channels">
             <div id="special-channels"></div>
-            <div id="regular-channels"></div>
-          </ul>
+            <ul id="regular-channels"></ul>
+          </div>
 
 <!--         when new message is sent, make the new message appear above the message bar and not mess up the scrolling (Safari only). -->
           <div id="chats">
@@ -161,7 +161,7 @@
     var space_admin = false;
     var selected_user = '';
 
-    $("#channels").sortable({
+    $("#regular-channels").sortable({
       axis: 'y',
       opacity: 0.7,
       scroll: false,
@@ -504,7 +504,7 @@
     socket.on('deleted_room', function(data) {
       $(document.getElementById(data.room)).remove();
       if (data.room == current_room) {
-        joinRoom($('#channels').find('.room')[0].id);
+        joinRoom($('#regular-channels').find('.room')[0].id);
       }
     });
 
@@ -649,7 +649,7 @@
       newNodeChild = document.createElement('ul');
       newNodeChild.className = 'room-group';
       newNode.appendChild(newNodeChild);
-      document.getElementById('channels').append(newNode);
+      document.getElementById('regular-channels').append(newNode);
       $('.room-group').sortable({
         connectWith: '.room-group',
         axis: 'y',
@@ -936,7 +936,7 @@
         success: function(rooms_and_sections) {
           document.getElementById('messages').textContent = '';
           document.getElementById('header_text').textContent = document.getElementById(current_space).getAttribute('data-name');
-          document.getElementById('channels').textContent = ''; 
+          document.getElementById('regular-channels').textContent = ''; 
           document.getElementById('members').textContent = '';
           rooms_and_sections[1].forEach(function(section) {
             var newNode = document.createElement('ul');
@@ -959,7 +959,7 @@
                 newNodeChildContainer.append(newNodeChild);
               }
               newNode.append(newNodeChildContainer);
-              document.getElementById('channels').append(newNode);
+              document.getElementById('regular-channels').append(newNode);
             });
             $('.room-group').sortable({
               connectWith: '.room-group',
