@@ -206,9 +206,9 @@
         var spaces = document.querySelectorAll('.space');
         var space_list = [];
         for (let i = 0; i < rooms.length; i++) {
-          room_list.push(spaces[i].id);
+          space_list.push(spaces[i].id);
         }
-        alert(space_list)
+        alert(space_list);
         socket.emit('sorted_spaces', {
           space_list: space_list,
         });
@@ -219,8 +219,11 @@
       var rooms = document.querySelectorAll('.room');
       var room_list = [];
       for (let i = 0; i < rooms.length; i++) {
-          room_list.push(rooms[i].id);
+        room_list.push(rooms[i].id);
       }
+      socket.emit('sorted_rooms', {
+        room_list: room_list
+      });
     }
 
     //Event.target (no), getClass Loop, one for every ID (no)
