@@ -77,6 +77,11 @@
               <div id="messages">
               </div>
             </div>
+            <!--Recipients, Message, Date, Theme,
+             Name of Sender (email), Name of the space*/-->
+            <form id="email_input_form">
+            
+            </form>
             <form id="message_input_form">
               <!--see w3schools input attributes like max char, spam, etc. -->
               <textarea id="message_input" rows="1" placeholder="Enter message"></textarea>
@@ -196,7 +201,10 @@
       items: "> li",
       opacity: 0.7,
       scroll: false,
-      distance: '3'
+      distance: '3',
+      update: function() {
+        var spsaces = d
+      }
     });
 
     //Event.target (no), getClass Loop, one for every ID (no)
@@ -936,10 +944,11 @@
         success: function(rooms_and_sections) {
           document.getElementById('messages').textContent = '';
           document.getElementById('header_text').textContent = document.getElementById(current_space).getAttribute('data-name');
-          document.getElementById('regular-channels').textContent = ''; 
+          document.getElementById('special-channels').textContent = '';
+          document.getElementById('regular-channels').textContent = '';
           document.getElementById('members').textContent = '';
           var newNode = document.createElement('li');
-          newNode.className = 'email special-room';
+          newNode.className = 'email special-room pointer';
           newNode.textContent = 'email';
           document.getElementById('special-channels').append(newNode);
 
