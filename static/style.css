@@ -253,6 +253,9 @@ img { /* make images and create button undraggable and unhighlitable*/
   list-style-type: none;
   padding: 0;
   margin: 0;
+  padding-top: 8px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #2b2d32;
 }
 .special-room {
   width: 254px;
@@ -261,7 +264,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   color: #ffffff;
   margin-left: 8px;
   line-height: 32px;
-  padding-left: 24px;
+  padding-left: 6px;
   margin-top: 2px;
 }
 #regular-channels {
