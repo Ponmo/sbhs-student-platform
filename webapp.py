@@ -395,6 +395,15 @@ def profile():
     else:
         return Response(dumps({'success': 'false'}), mimetype='application/json')
 
+@app.route('/sorted_spaces', methods=['GET', 'POST'])
+def sorted_spaces():
+    if request.method == 'POST':
+        data = "space_list"
+        for space in data:
+            collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': data.index(space)}})
+        return Response(dumps(data), mimetype='application/json')
+    else:
+        return Response(dumps({'success': 'false'}), mimetype='application/json')
 # When a room is clicked, make user join room
 # and leave old room.
 
@@ -489,10 +498,8 @@ def sorted_channels(data):
     for room in data['room_list']:
         socketio.emit('sorted_channels', data, room = room)
         
-@socketio.on('sorted_spaces')
-def sorted_spaces(data):
-    for space in data['spaces_list'] :
-        collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': data['space_list'].index(space)}})
+
+    
     
 if __name__ == '__main__':
     socketio.run(app, debug=False)
