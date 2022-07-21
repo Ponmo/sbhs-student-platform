@@ -233,7 +233,7 @@
         let rooms = room_group[i].querySelectorAll('.room');
         let room_list = [];
         for (let j = 0; j < rooms.length; j++) {
-          room_list.push(rooms[j]);
+          room_list.push(rooms[j].id);
         }
         room_group_list.push(room_list);
       }
