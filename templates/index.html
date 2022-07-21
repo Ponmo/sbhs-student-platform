@@ -173,7 +173,7 @@
       items: '.section-group',
       distance: '3',
       update: function() {
-        var rooms = document.querySelectorAll('.room')
+        var rooms = document.querySelectorAll('.room');
         var room_list = [];
         for (let i = 0; i < rooms.length; i++) {
           room_list.push(rooms[i].id);
@@ -203,9 +203,25 @@
       scroll: false,
       distance: '3',
       update: function() {
-        var spsaces = d
+        var spaces = document.querySelectorAll('.space');
+        var space_list = [];
+        for (let i = 0; i < rooms.length; i++) {
+          room_list.push(spaces[i].id);
+        }
+        alert(space_list)
+        socket.emit('sorted_spaces', {
+          space_list: space_list,
+        });
       }
     });
+
+    function roomSort() {
+      var rooms = document.querySelectorAll('.room');
+      var room_list = [];
+      for (let i = 0; i < rooms.length; i++) {
+          room_list.push(rooms[i].id);
+      }
+    }
 
     //Event.target (no), getClass Loop, one for every ID (no)
     // Right-click menu, the if-else statement checks for broswer compatibility
@@ -664,7 +680,10 @@
         items: '.room',
         opacity: 0.7,
         scroll: false,
-        distance: '3'
+        distance: '3',
+        update: function() {
+          roomSort();
+        }
       });
     });
 
@@ -951,17 +970,6 @@
           newNode.className = 'email special-room pointer';
           newNode.textContent = 'email';
           document.getElementById('special-channels').append(newNode);
-
-          /*<div id="channels">
-            <div id="special-channels"></div>
-            <ul id="regular-channels"></ul>
-          </div>*/
-
-
-
-          /*Recipients, Message, Date, Theme,
-          Name of Sender (email), Name of the space*/
-
           rooms_and_sections[1].forEach(function(section) {
             newNode = document.createElement('ul');
             newNode.className = 'section-group'
@@ -991,7 +999,10 @@
               items: '.room',
               opacity: 0.7,
               scroll: false,
-              distance: '3'
+              distance: '3',
+              update: function() {
+                roomSort();
+              }
             });
           });
           try { //get rid of try block after deleting all spaces without member list another method
