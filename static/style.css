@@ -237,7 +237,6 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin-right: 12px;
 }
 #channels {
-  position: relative;
   grid-column: 1;
   grid-row: 2;
   border-top: 1px solid #2b2d32; /*remove once double border*/
