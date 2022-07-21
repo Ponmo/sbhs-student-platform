@@ -214,21 +214,24 @@
           dataType: "json",
           data: JSON.stringify({"space_list": space_list}),
           contentType: 'application/json;charset=UTF-8',
+          success: function(data) {
+          }
         });
       }
     });
 
     function roomSort() {
       var room_group = document.querySelectorAll('.room-group');
-      var room_list = [];
+      var room_group_list = [];
       for (let i = 0; i < room_group.length; i++) {
         let rooms = room_group[i].querySelectorAll('.room');
-        room_list.push([]);
+        let room_list = [];
         for (let j = 0; j < rooms.length; j++) {
-          room_list[i].push(rooms[j]);
+          room_list.push(rooms[j]);
         }
+        room_group_list.push[room_list];
       }
-      alert(JSON.stringify(room_list));
+      alert(room_group_list);
       //socket.emit('sorted_rooms', {
       //  room_list: room_list
       //});
