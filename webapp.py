@@ -398,10 +398,9 @@ def profile():
 @app.route('/sorted_spaces', methods=['GET', 'POST'])
 def sorted_spaces():
     if request.method == 'POST':
-        data = "space_list"
-        for space in data:
-            collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': data.index(space)}})
-        return Response(dumps(data), mimetype='application/json')
+        for space in request.json['space_list']:
+            collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': request.json['space_list'].index(space)}})
+        return Response(dumps({'success': 'true'}), mimetype='application/json')
     else:
         return Response(dumps({'success': 'false'}), mimetype='application/json')
 # When a room is clicked, make user join room
