@@ -255,8 +255,8 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 #regular-channels {
   list-style-type: none;
-  padding 0;
-  margin 0;
+  padding: 0;
+  margin: 0;
 }
 .section-group, .room-group {
   margin: 0;
