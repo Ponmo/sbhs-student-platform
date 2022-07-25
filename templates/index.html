@@ -253,11 +253,17 @@
 
   // Context context-menu
   // If we need more broswer compatibility: see https://stackoverflow.com/questions/4909167/how-to-add-a-custom-right-click-menu-to-a-webpage
-  // $("#home").addEventListener('contextmenu', function(e) {
-  //   alert("You've tried to open context menu"); //here you draw your own menu
-  //   document.getElemenatById("rmenu").className = "hide";
-  //   e.preventDefault();
-  // });
+//   if (document.addEventListener) {
+//   document.addEventListener('contextmenu', function(e) {
+//     alert("You've tried to open context menu"); //here you draw your own menu
+//     e.preventDefault();
+//   }, false);
+// } else {
+//   document.attachEvent('oncontextmenu', function() {
+//     alert("You've tried to open context menu");
+//     window.event.returnValue = false;
+//   });
+// }
 
   // // Close context menu on outside click
   // $(document).on("click", function(event) {
@@ -1070,7 +1076,9 @@
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
             alert(JSON.stringify(data));
-            document.getElementById("profile-popup").appendChild
+            icon = document.createElement('div');
+            icon.className = 'popup-icon';
+            document.getElementById("profile-popup").appendChild("icon")
           }
         });
       }
