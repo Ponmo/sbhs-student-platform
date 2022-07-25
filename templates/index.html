@@ -1001,6 +1001,9 @@
           if (rooms_and_sections[3][0].admins[0] == user_id) {
             space_admin = true;
           }
+          else {
+            space_admin = false;
+          }
           alert(space_admin);
           document.getElementById('messages').textContent = '';
           document.getElementById('header_text').textContent = document.getElementById(current_space).getAttribute('data-name');
@@ -1017,7 +1020,12 @@
             var newNodeChild = document.createElement('li');
             newNodeChild.className = 'section pointer';
             newNodeChild.id = section['_id']['$oid'];
-            newNodeChild.innerHTML = '<div class="section-name">' + section['name'] + '</div><div class="create-room-button" type="button">+</div>'
+            if (space_admin == true) {
+              newNodeChild.innerHTML = '<div class="section-name">' + section['name'] + '</div><div class="create-room-button" type="button">+</div>';
+            }
+            else {
+              newNodeChild.innerHTML = '<div class="section-name">' + section['name'] + '</div>';
+            }
             newNode.append(newNodeChild);
             var newNodeChildContainer = document.createElement('ul');
             newNodeChildContainer.className = 'room-group';
