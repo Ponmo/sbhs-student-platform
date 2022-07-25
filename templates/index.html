@@ -237,9 +237,9 @@
         }
         room_group_list.push(room_list);
       }
-      socket.emit('sorted_rooms', {
-        room_list: room_list,
 
+      socket.emit('sorted_rooms', {
+        room_list: room_list
       });
     }
 

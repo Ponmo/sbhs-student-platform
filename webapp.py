@@ -498,6 +498,7 @@ def sorted_channels(data):
     
 @socketio.on('sorted_rooms')
 def sorted_rooms(data):
+    socketio.emit('sorted_rooms', data, room = '62d5e94dc2ce65f07f7a8126')
     order = 1
     section_id = ''
     for item in data['room_list']:
