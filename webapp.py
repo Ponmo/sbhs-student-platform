@@ -211,7 +211,7 @@ def list_spaces():
 def render_space():
     if request.method == 'POST':
         #results = {'processed': request.json['space_id']}
-        rooms_and_sections = dumps([list(collection_rooms.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_sections.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_users.find({'joined': {'$in': [request.json['space_id']]}})), dumps(collection_spaces.find_one({'_id': ObjectId(request.json['space_id'])}))])
+        rooms_and_sections = dumps([list(collection_rooms.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_sections.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_users.find({'joined': {'$in': [request.json['space_id']]}})), list(collection_spaces.find_one({'_id': ObjectId(request.json['space_id'])}))])
         #[[room, room, room],[section, section, section], space]#data structure
         #list[2]
         
