@@ -210,8 +210,11 @@ def list_spaces():
 @app.route('/space', methods=['GET', 'POST'])
 def render_space():
     if request.method == 'POST':
-        results = {'processed': request.json['space_id']}
-        rooms_and_sections = dumps([list(collection_rooms.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_sections.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_users.find({'joined': {'$in': [request.json['space_id']]}}))])
+        #results = {'processed': request.json['space_id']}
+        rooms_and_sections = dumps([list(collection_rooms.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_sections.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_users.find({'joined': {'$in': [request.json['space_id']]}})), 'hi'])
+        #[[room, room, room],[section, section, section], space]#data structure
+        #list[2]
+        
         return Response(rooms_and_sections, mimetype='application/json')
 
 # When user clicks leave space button, that space is removed
@@ -238,7 +241,7 @@ def chat_history():
         chat_history = dumps(list(collection_messages.find({'room': request.json['room_id']}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(100)))
         return Response(chat_history, mimetype='application/json')
 
-# Deletes the room and all of its messages in MongoDB.
+# Deletes the room and all of its messages in MongoDB. 
 
 @app.route('/delete_room', methods=['GET', 'POST'])
 def delete_room():
