@@ -499,14 +499,11 @@ def sorted_channels(data):
 @socketio.on('sorted_rooms')
 def sorted_rooms(data):
     order = 1
-    section_id = ''
-    for item in data['room_group_list']:
-        if 'section' not in item:
-            collection_rooms.find_one_and_update({"_id": ObjectId(item)}, {'$set': {'order': order, 'section': section_id}})
+    for section in data['room_group_list']:
+        for room in section[1:]:
+            collection_rooms.find_one_and_update({"_id": ObjectId(room)}, {'$set': {'order': order, 'section': section[0]}})
             order += 1
-        else:
-            order = 1
-            section_id = item[7:]
+        order = 1
     socketio.emit('sorted_rooms', data, room = '62d5e94dc2ce65f07f7a8126')
 
 if __name__ == '__main__':
