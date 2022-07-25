@@ -637,7 +637,12 @@
               newMode.className = 'message-container-combine';
               newMode.id = item._id.$oid;
               newMode.setAttribute('data-date', messageDate.format('M/D/YYYY'));
-              newMode.innerHTML = '<p class="message-combine-time">' + messageDate.format('h:mm A') + '</p><p class="message-combine">' + item.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>'; //change 
+              if (space_admin == true){
+                newMode.innerHTML = '<p class="message-combine-time">' + messageDate.format('h:mm A') + '</p><p class="message-combine">' + item.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>'; 
+              } 
+              else {
+                newMode.innerHTML = '<p class="message-combine-time">' + messageDate.format('h:mm A') + '</p><p class="message-combine">' + item.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"></div>';
+              }
             }
             document.getElementById('messages').prepend(newMode);
           });
@@ -681,6 +686,9 @@
       if (space_admin == true){
       newNode.innerHTML = data.name + '<img class="room-settings" src="/static/images/settings-white.png">'; 
     }//change room settings
+    else{
+      //pass
+    }
       const nodeList = document.querySelectorAll('li[data-section="' + data.section_id + '"]');
       if (nodeList.length != 0) {
         nodeList[nodeList.length - 1].parentNode.insertBefore(newNode, nodeList[nodeList.length - 1].nextElementSibling);
