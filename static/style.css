@@ -747,10 +747,9 @@ img { /* make images and create button undraggable and unhighlitable*/
   padding-left: 14px;
 }
 #profile-picture-list {
-  
+  padding-top: 14px;
 }
 #popup-picture {
-  padding-top: 14px;
   height: 80px;
   width: 80px;
   border-radius: 50%;
