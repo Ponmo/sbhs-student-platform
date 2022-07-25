@@ -1165,10 +1165,11 @@
           success: function(data) {
             alert(JSON.stringify(data))   
             document.getElementById('profile-popup').innerHTML = '<ul id="profile-list"><li id="profile-picture-list"><img id="popup-picture" src=' + data['picture'] + ' alt="!"></li><li id="profile-name">' + data['name'] + '</li><li id="profile-email">' + data['email'] + '</li>';
-            for (let i = 0; i < data["joined"]; i++) {
+            /*for (let i = 0; i < data["joined"]; i++) {
               newNode = document.createElement("img")
-              newNode.setAttribute("src", )
-            }
+              newNode.setAttribute("src", data["joined"])
+              document.getElementById('profile-popup').appendChild(newNode)
+            }*/
           }
         });
       }
