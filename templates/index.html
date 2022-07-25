@@ -317,7 +317,7 @@
       selected_section = this.id;
       // document.getElementById('context-menu').style.top = mouseY(event) + 'px';
       // document.getElementById('context-menu').style.left = mouseX(event) + 'px';
-      alert(document.getElementById('context-menu'));
+      $(document.getElementById('context-menu')).show();
       alert('this worked?!');
       e.preventDefault();
       
@@ -1166,6 +1166,8 @@
             alert(JSON.stringify(data))   
             document.getElementById('profile-popup').innerHTML = '<ul id="profile-list"><li id="profile-picture-list"><img id="popup-picture" src=' + data['picture'] + ' alt="!"></li><li id="profile-name">' + data['name'] + '</li><li id="profile-email">' + data['email'] + '</li>';
             for (let i = 0; i < data["joined"]; i++) {
+              newNode = document.createElement("img")
+              newNode.setAttribute("src", )
             }
           }
         });
