@@ -750,6 +750,8 @@ img { /* make images and create button undraggable and unhighlitable*/
   
 }
 #popup-picture {
+  margin-left: 5px;
+  margin-top: 5px;
   height: 80px;
   width: 80px;
   border-radius: 50%;
