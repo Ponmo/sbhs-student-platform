@@ -237,7 +237,7 @@
         }
         room_group_list.push(room_list);
       }
-      alert(room_group_list);
+      alert(room_group_list.toString());
       socket.emit('sorted_rooms', {
         room_group_list: room_group_list
       });
