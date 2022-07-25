@@ -637,7 +637,7 @@
               newMode.className = 'message-container-combine';
               newMode.id = item._id.$oid;
               newMode.setAttribute('data-date', messageDate.format('M/D/YYYY'));
-              if (space_admin == true){
+              if (space_admin == true && item.user_id == user_id) {
                 newMode.innerHTML = '<p class="message-combine-time">' + messageDate.format('h:mm A') + '</p><p class="message-combine">' + item.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>'; 
               } 
               else {
@@ -1162,7 +1162,10 @@
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
             alert(JSON.stringify(data))   
-            document.getElementById('profile-popup').innerHTML = '<ul id="profile-list"><li id="profile-picture-list"><img id="popup-picture" src=' + data['picture'] + ' alt="!"></li><li id="profile-name">' + data['name'] + '</li><li id="profile-email">' + data['email'] + '</li><li id="profile-joined">' + data['joined'] + '</li></ul>';
+            document.getElementById('profile-popup').innerHTML = '<ul id="profile-list"><li id="profile-picture-list"><img id="popup-picture" src=' + data['picture'] + ' alt="!"></li><li id="profile-name">' + data['name'] + '</li><li id="profile-email">' + data['email'] + '</li>';
+            for (let i = 0; i < data["joined"].length; i++) {
+              room_list.push(rooms[i].id);
+            }
           }
         });
       }
