@@ -11,6 +11,17 @@ img { /* make images and create button undraggable and unhighlitable*/
   -ms-user-select: none;
   user-select: none;
 } 
+.hide {
+  display: none;
+}
+.show {
+  z-index: 1000;
+  position: absolute;
+  display: block;
+  margin: 0;
+  list-style-type: none;
+  list-style: none;
+}
 .pointer {
   cursor: pointer;
 }
