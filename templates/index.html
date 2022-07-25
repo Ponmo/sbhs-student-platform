@@ -971,7 +971,7 @@
         data: JSON.stringify({'space_id': current_space}),
         contentType: 'application/json;charset=UTF-8',
         success: function(rooms_and_sections) {
-          
+          if rooms_and_sections[2].admin
           alert(JSON.stringify(rooms_and_sections));
           document.getElementById('messages').textContent = '';
           document.getElementById('header_text').textContent = document.getElementById(current_space).getAttribute('data-name');
@@ -1097,16 +1097,9 @@
             alert(JSON.stringify(data));
             newNode = document.createElement('div');
             newNode.className = 'member pointer';
-            newNode.setAttribute('data-id', member['_id']);
-            newNode.innerHTML = '<img class="profile-picture" src=' + member['picture'] + ' alt="!"><span class="member-name">' + member['name'] + '</span>';
-              document.getElementById('members').append(newNode);
-            profileDiv = document.createElement('div');
-            profileDiv.className = 'profile-container';
-            document.getElementsByClassName("members-popup").appendChild(profileDiv)
-            icon = document.createElement("img")
-            icon.className = 'popup-icon'
-            icon.setAttribute = ("src", data['picture'])
-            profileDiv.appendChild(icon)
+            newNode.setAttribute('data-id', data['_id']);
+            newNode.innerHTML = '<img class="profile-picture" src=' + data['picture'] + ' alt="!"><span class="member-name">' + data['name'] + '</span>';
+            document.getElementById('profile-popup').append(newNode);
           }
         });
       }
