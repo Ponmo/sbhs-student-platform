@@ -382,6 +382,9 @@ def report_message():
 def member_profile():
     if request.method == 'POST':
         member = collection_users.find_one({'_id': request.json['user_id']})
+        queried_space = ""
+        for spaces in member['joined']:
+            collection_spaces.find_one({'_id': spaces})
         user_data = {'name': member['name'], 'email': member['email'], 'picture': member['picture'], "joined": member['joined']}
         return Response(dumps(user_data), mimetype='application/json')
     else:
@@ -446,7 +449,7 @@ def send_message(data):
     except:
         data['combine'] = 'false'
     data['message_id'] = str(ObjectId())
-    collection_messages.insert_one({'_id': ObjectId(data['message_id']),'name': data['name'], 'picture': session['picture'], 'room': data['room_id'], 'datetime': utc_dt, 'message': data['message'], 'combine': data['combine'], 'email': session['users_email'], 'user_id': session['user_id']})
+    collection_messages.insert_one({'_id': ObjectId(data['message_id']), 'name': data['name'], 'picture': session['picture'], 'room': data['room_id'], 'datetime': utc_dt, 'message': data['message'], 'combine': data['combine'], 'email': session['users_email'], 'user_id': session['user_id']})
     socketio.emit('recieve_message', data, room = data['room_id'])
     
 # When a room is created, send that room data to all
