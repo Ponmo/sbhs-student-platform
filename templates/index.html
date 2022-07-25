@@ -203,12 +203,13 @@
       scroll: false,
       distance: '3',
       update: function() {
-        var space = document.querySelectorAll('.space');
+        var spaces = document.querySelectorAll('.space');
         var space_list = [];
-        for (let i = 0; i < space.length; i++) {
-          space_list.push(space[i].id);
+        for (let i = 0; i < spaces.length; i++) {
+          space_list.push(spaces[i].id);
         }
-        $.ajax({
+        alert(space_list);
+        /*$.ajax({
           type: 'POST',
           url: '/sorted_spaces',
           dataType: "json",
@@ -216,13 +217,13 @@
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
             if (data['success'] == 'true') {
-              alert("success")
+              alert("success");
             }
             else {
-              alert("didnt save")
+              alert("didnt save");
             }
           }
-        });
+        });*/
       }
     });
 
