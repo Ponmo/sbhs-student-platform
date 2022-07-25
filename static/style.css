@@ -740,9 +740,13 @@ img { /* make images and create button undraggable and unhighlitable*/
 /*Add User Select None Class*/
 
 #profile-list {
-  border-radius: 50%;
   list-style: none;
   list-style-type: none;
   margin: 0;
   padding: 0;
+}
+#popup-picture {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
 }

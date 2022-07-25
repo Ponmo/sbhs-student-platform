@@ -998,12 +998,10 @@
         data: JSON.stringify({'space_id': current_space}),
         contentType: 'application/json;charset=UTF-8',
         success: function(rooms_and_sections) {
-          /*if (rooms_and_sections[3][0].admins[0] == user_id) {
+          if (rooms_and_sections[3][0].admins[0] == user_id) {
             space_admin = true;
-          }*/
-          //alert(space_admin);
-          alert(JSON.stringify(rooms_and_sections[3]));
-
+          }
+          alert(space_admin);
           document.getElementById('messages').textContent = '';
           document.getElementById('header_text').textContent = document.getElementById(current_space).getAttribute('data-name');
           document.getElementById('special-channels').textContent = '';
