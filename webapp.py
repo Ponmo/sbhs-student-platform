@@ -1,3 +1,4 @@
+from selectors import EpollSelector
 from flask_socketio import SocketIO, emit, join_room, leave_room
 
 import json
@@ -496,5 +497,15 @@ def sorted_channels(data):
     for room in data['room_list']:
         socketio.emit('sorted_channels', data, room = room)
     
+@socketio.on('sorted_rooms')
+def sorted_rooms(data):
+    order = 1
+    for room in data['room_list']:
+        if room != '':
+            collection_rooms.find_one_and_update({"_id": ObjectId(room)}, {'$set': {'order': order}})
+            order += 1
+        else:
+            order = 1
+
 if __name__ == '__main__':
     socketio.run(app, debug=False)
