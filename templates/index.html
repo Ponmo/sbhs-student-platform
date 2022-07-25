@@ -238,9 +238,14 @@
         room_group_list.push(room_list);
       }
       socket.emit('sorted_rooms', {
-        room_list: room_list
+        room_list: room_list,
+
       });
     }
+
+    socket.on('sorted_rooms', function (data) {
+      alert(data.room_list);
+    });
 
     //Event.target (no), getClass Loop, one for every ID (no)
     // Right-click menu, the if-else statement checks for broswer compatibility
