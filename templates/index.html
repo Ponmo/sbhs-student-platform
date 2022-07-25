@@ -316,7 +316,7 @@
     $(document).on('contextmenu', '.section', function (e) {
       selected_section = this.id;
       // document.getElementById('context-menu').style.top = mouseY(event) + 'px';
-      // document.getElementById('context-menu').style.left = mouseX(event) + 'px';
+      // document.getElementById('context-menu').style.left = mouseX(event) + 'px';a
       alert('this worked?');
       e.preventDefault();
       
@@ -1125,12 +1125,8 @@
           data: JSON.stringify({'user_id': selected_user}), 
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
-            alert(JSON.stringify(data));
-            newNode = document.createElement('div');
-            newNode.className = 'profile-wrapper';
-            newNode.setAttribute('data-id', data['_id']);
-            newNode.innerHTML = '<img class="profile-picture" src=' + data['picture'] + ' alt="!"><span class="profile-name">' + data['name'] + '</span><span class="profile-email">' + data['email'] + '</span><span class="profile-email">' + data['joined'] + '</span>';
-            document.getElementById('profile-popup').append(newNode);
+            alert(JSON.stringify(data))   
+            document.getElementById('profile-popup').innerHTML = '<img class="profile-picture" src=' + data['picture'] + ' alt="!"><span class="profile-name">' + data['name'] + '</span><span class="profile-email">' + data['email'] + '</span><span class="profile-email">' + data['joined'] + '</span>';
           }
         });
       }
