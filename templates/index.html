@@ -535,7 +535,7 @@
         newMode.id = data.message_id;
         messageMoment = 'at ' + messageMoment;
         // TODO: Give pfp image default fallback image
-        newMode.innerHTML = '<img class="profile-picture pointer" src="' + data.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + data.name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message">' + data.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>';
+        newMode.innerHTML = '<img class="profile-picture pointer" src="' + data.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + data.name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message">' + data.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>'; 
       }
       else {
         newMode.className = 'message-container-combine';
@@ -663,7 +663,8 @@
       newNode.className = 'room pointer';
       newNode.setAttribute('data-section', data.section_id);
       newNode.setAttribute('data-name', data.name);
-      newNode.innerHTML = data.name + '<img class="room-settings" src="/static/images/settings-white.png">';
+      if (space_admin == true){
+      newNode.innerHTML = data.name + '<img class="room-settings" src="/static/images/settings-white.png">'; }//change room settings
       const nodeList = document.querySelectorAll('li[data-section="' + data.section_id + '"]');
       if (nodeList.length != 0) {
         nodeList[nodeList.length - 1].parentNode.insertBefore(newNode, nodeList[nodeList.length - 1].nextElementSibling);
@@ -1004,7 +1005,7 @@
           else {
             space_admin = false;
           }
-          alert(space_admin);
+          //alert(space_admin);
           document.getElementById('messages').textContent = '';
           document.getElementById('header_text').textContent = document.getElementById(current_space).getAttribute('data-name');
           document.getElementById('special-channels').textContent = '';
@@ -1025,7 +1026,7 @@
             }
             else {
               newNodeChild.innerHTML = '<div class="section-name">' + section['name'] + '</div>';
-            }
+            }//change 
             newNode.append(newNodeChild);
             var newNodeChildContainer = document.createElement('ul');
             newNodeChildContainer.className = 'room-group';
@@ -1036,7 +1037,12 @@
                 newNodeChild.id = room['_id']['$oid'];
                 newNodeChild.setAttribute('data-section', room['section']);
                 newNodeChild.setAttribute('data-name', room['name']);
+                if (space_admin == true){
                 newNodeChild.innerHTML = room['name'] + '<img class="room-settings" src="/static/images/settings-white.png">';
+                } //change = remove room settings
+                else{
+                  //pass
+                }
                 newNodeChildContainer.append(newNodeChild);
               }
               newNode.append(newNodeChildContainer);
@@ -1132,7 +1138,7 @@
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
             alert(JSON.stringify(data))   
-            document.getElementById('profile-popup').innerHTML = '<ul id="profile-list"><li id="profile-picture-list"><img id="popup-picture" src=' + data['picture'] + ' alt="!"></li><li class="profile-name">' + data['name'] + '</li><li class="profile-email">' + data['email'] + '</li><li class="profile-joined">' + data['joined'] + '</li></ul>';
+            document.getElementById('profile-popup').innerHTML = '<ul id="profile-list"><li id="profile-picture-list"><img id="popup-picture" src=' + data['picture'] + ' alt="!"></li><li id="profile-name">' + data['name'] + '</li><li id="profile-email">' + data['email'] + '</li><li id="profile-joined">' + data['joined'] + '</li></ul>';
           }
         });
       }
