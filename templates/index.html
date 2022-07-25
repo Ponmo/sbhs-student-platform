@@ -208,12 +208,11 @@
         for (let i = 0; i < spaces.length; i++) {
           space_list.push(spaces[i].id);
         }
-        alert(space_list);
         $.ajax({
           type: 'POST',
           url: '/sorted_spaces',
           dataType: "json",
-          data: JSON.stringify({'space_list': space_list}),
+          data: JSON.stringify({'space_list': space_list.reverse()}),
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
             if (data['success'] == 'true') {
