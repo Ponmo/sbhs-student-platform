@@ -231,16 +231,16 @@
       var room_group_list = [];
       for (let i = 0; i < room_group.length; i++) {
         let rooms = room_group[i].querySelectorAll('.room');
-        let room_list = [];
+        let room_list = ['section' + room_group[i].previousElementSibling.id];
         for (let j = 0; j < rooms.length; j++) {
           room_list.push(rooms[j].id);
         }
         room_group_list.push(room_list);
       }
       alert(room_group_list);
-      //socket.emit('sorted_rooms', {
-      //  room_list: room_list
-      //});
+      socket.emit('sorted_rooms', {
+        room_list: room_list
+      });
     }
 
     //Event.target (no), getClass Loop, one for every ID (no)
