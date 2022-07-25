@@ -398,8 +398,7 @@ def profile():
 @app.route('/sorted_spaces', methods=['GET', 'POST'])
 def sorted_spaces():
     if request.method == 'POST':
-        data = request.json['space_list'] - 1
-        #collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': request.json['space_list']}})
+        collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': str(request.json['space_list'])}})
         return Response(dumps({'success': 'true'}), mimetype='application/json')
     else:
         return Response(dumps({'success': 'false'}), mimetype='application/json')
