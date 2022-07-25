@@ -315,37 +315,37 @@
     // Contextmenu for Sections
     $(document).on('contextmenu', '.section', function (e) {
       selected_section = this.id;
-      // document.getElementById('context-menu').style.top = mouseY(event) + 'px';
-      // document.getElementById('context-menu').style.left = mouseX(event) + 'px';
+      document.getElementById('context-menu').style.top = mouseY(event) + 'px';
+      document.getElementById('context-menu').style.left = mouseX(event) + 'px';
       $(document.getElementById('context-menu')).show();
       alert('this worked?!');
       e.preventDefault();
       
     });
 
-  // function mouseX(evt) {
-  //   if (evt.pageX) {
-  //     return evt.pageX;
-  //   } else if (evt.clientX) {
-  //     return evt.clientX + (document.documentElement.scrollLeft ?
-  //       document.documentElement.scrollLeft :
-  //       document.body.scrollLeft);
-  //   } else {
-  //     return null;
-  //   }
-  // }
+  function mouseX(evt) {
+    if (evt.pageX) {
+      return evt.pageX;
+    } else if (evt.clientX) {
+      return evt.clientX + (document.documentElement.scrollLeft ?
+        document.documentElement.scrollLeft :
+        document.body.scrollLeft);
+    } else {
+      return null;
+    }
+  }
 
-  // function mouseY(evt) {
-  //   if (evt.pageY) {
-  //     return evt.pageY;
-  //   } else if (evt.clientY) {
-  //     return evt.clientY + (document.documentElement.scrollTop ?
-  //       document.documentElement.scrollTop :
-  //       document.body.scrollTop);
-  //   } else {
-  //     return null;
-  //   }
-  // }
+  function mouseY(evt) {
+    if (evt.pageY) {
+      return evt.pageY;
+    } else if (evt.clientY) {
+      return evt.clientY + (document.documentElement.scrollTop ?
+        document.documentElement.scrollTop :
+        document.body.scrollTop);
+    } else {
+      return null;
+    }
+  }
 
     function stoppedTyping() {
       typing = false;
@@ -685,12 +685,7 @@
       newNode.className = 'room pointer';
       newNode.setAttribute('data-section', data.section_id);
       newNode.setAttribute('data-name', data.name);
-      if (space_admin == true){
       newNode.innerHTML = data.name + '<img class="room-settings" src="/static/images/settings-white.png">'; 
-    }//change room settings
-    else{
-      //pass
-    }
       const nodeList = document.querySelectorAll('li[data-section="' + data.section_id + '"]');
       if (nodeList.length != 0) {
         nodeList[nodeList.length - 1].parentNode.insertBefore(newNode, nodeList[nodeList.length - 1].nextElementSibling);
