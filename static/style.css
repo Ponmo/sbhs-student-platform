@@ -545,7 +545,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   z-index: 10;
   border-radius: 5px;
   width: 300px;
-  min-height: 320px;
+  min-height: 100px;
   background-color: #17181b;
 }
 .members-popup {
@@ -745,9 +745,27 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin: 0;
   padding: 0;
 }
-
+.profile-picture-list {
+  
+}
 #popup-picture {
   height: 80px;
   width: 80px;
   border-radius: 50%;
 }
+.profile-name {
+
+}
+.profile-email {
+
+}
+.profile-joined {
+
+}
+/* '<ul id="profile-list">
+<li id="profile-picture-list">
+<img id="popup-picture" src=' + data['picture'] + ' alt="!"></li>
+<li class="profile-name">' + data['name'] + '</li>
+<li class="profile-email">' + data['email'] + '</li>
+<li class="profile-joined">' + data['joined'] + '</li>
+</ul>';*/
