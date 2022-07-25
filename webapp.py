@@ -500,9 +500,10 @@ def sorted_channels(data):
 def sorted_rooms(data):
     order = 1
     for section in data['room_group_list']:
-        for room in section[1:]:
-            collection_rooms.find_one_and_update({"_id": ObjectId(room)}, {'$set': {'order': order, 'section': section[0]}})
-            order += 1
+        if len(section) > 1:
+            for room in section[1:]:
+                collection_rooms.find_one_and_update({"_id": ObjectId(room)}, {'$set': {'order': order, 'section': section[0]}})
+                order += 1
         order = 1
     socketio.emit('sorted_rooms', data, room = '62d5e94dc2ce65f07f7a8126')
 
