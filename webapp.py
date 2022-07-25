@@ -382,10 +382,10 @@ def report_message():
 def member_profile():
     if request.method == 'POST':
         member = collection_users.find_one({'_id': request.json['user_id']})
-        queried_space = ""
+        space_picture = ""
         for spaces in member['joined']:
-            collection_spaces.find_one({'_id': spaces})
-        user_data = {'name': member['name'], 'email': member['email'], 'picture': member['picture'], "joined": member['joined']}
+            space_picture = collection_spaces.find_one({'_id': spaces})["picture"]
+        user_data = {'name': member['name'], 'email': member['email'], 'picture': member['picture'], "joined": space_picture}
         return Response(dumps(user_data), mimetype='application/json')
     else:
         return Response(dumps({'success': 'false'}), mimetype='application/json')
