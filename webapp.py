@@ -185,7 +185,7 @@ def get_google_provider_cfg():
 @app.route('/sbhs')
 def render_main_page():
     if 'users_name' in session:
-        return render_template('index.html', name = session['users_name'], room = '1', picture = session['picture'])
+        return render_template('index.html', name = session['users_name'], room = '1', picture = session['picture'], user_id = session['unique_id'])
     else:
         return redirect(url_for('render_login'))
 

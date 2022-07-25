@@ -164,6 +164,7 @@
     var typing_list = [];
     var selected_section = '';
     var space_admin = false;
+    var user_id = '{{ user_id }}';
     var selected_user = '';
 
     $("#regular-channels").sortable({
@@ -250,60 +251,17 @@
       });
     });
 
-    //Event.target (no), getClass Loop, one for every ID (no)
-    // Right-click menu, the if-else statement checks for broswer compatibility
-//     if ($("#test").addEventListener) {
-//     $("#test").addEventListener('contextmenu', function(e) {
-//       alert("You've tried to open context menu"); //here you draw your own menu
-//       e.preventDefault();
-//     }, false);
-//   } else {
+  // Context context-menu
+  // If we need more broswer compatibility: see https://stackoverflow.com/questions/4909167/how-to-add-a-custom-right-click-menu-to-a-webpage
+  $("#").addEventListener('contextmenu', function(e) {
+    alert("You've tried to open context menu"); //here you draw your own menu
+    e.preventDefault();
+  });
 
-//     //document.getElementById("test").attachEvent('oncontextmenu', function() {
-//     //$(".test").bind('contextmenu', function() {
-//     $('body').on('contextmenu', 'a.test', function() {
-
-
-//       //alert("contextmenu"+event);
-//       document.getElementById("rmenu").className = "show";
-//       document.getElementById("rmenu").style.top = mouseY(event) + 'px';
-//       document.getElementById("rmenu").style.left = mouseX(event) + 'px';
-
-//       window.event.returnValue = false;
-
-
-//     });
-//   }
-
-// // this is from another SO post...  
-// $(document).bind("click", function(event) {
-//   document.getElementById("rmenu").className = "hide";
-// });
-
-
-// function mouseX(evt) {
-//   if (evt.pageX) {
-//     return evt.pageX;
-//   } else if (evt.clientX) {
-//     return evt.clientX + (document.documentElement.scrollLeft ?
-//       document.documentElement.scrollLeft :
-//       document.body.scrollLeft);
-//   } else {
-//     return null;
-//   }
-// }
-
-// function mouseY(evt) {
-//   if (evt.pageY) {
-//     return evt.pageY;
-//   } else if (evt.clientY) {
-//     return evt.clientY + (document.documentElement.scrollTop ?
-//       document.documentElement.scrollTop :
-//       document.body.scrollTop);
-//   } else {
-//     return null;
-//   }
-// }
+  // Close context menu on outside click
+  $(document).on("click", function(event) {
+    document.getElementById("rmenu").className = "hide";
+  });
 
 
     $(document).on('click', '#log-out', function () {
@@ -988,6 +946,7 @@
         data: JSON.stringify({'space_id': current_space}),
         contentType: 'application/json;charset=UTF-8',
         success: function(rooms_and_sections) {
+          alert(JSON.stringify(rooms_and_sections));
           document.getElementById('messages').textContent = '';
           document.getElementById('header_text').textContent = document.getElementById(current_space).getAttribute('data-name');
           document.getElementById('special-channels').textContent = '';
@@ -1109,6 +1068,9 @@
           data: JSON.stringify({'user_id': selected_user}), 
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
+            alert(JSON.stringify(data));
+            const popup = document.getElementsById("profile-popup");
+            popup.appendChild('div')
           }
         });
       }
