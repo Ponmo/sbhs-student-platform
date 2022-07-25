@@ -147,7 +147,7 @@
       </div>
     </div>
 
-    <div id="context-menu" class="hide"></div>
+    <div id="context-menu">Hello</div>
     
   </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.min.js"></script>
@@ -315,11 +315,11 @@
     // Contextmenu for Sections
     $(document).on('contextmenu', '.section', function (e) {
       selected_section = this.id;
-      e.preventDefault();
       document.getElementById('context-menu').style.top = mouseY(event) + 'px';
       document.getElementById('context-menu').style.left = mouseX(event) + 'px';
       document.getElementById('context-menu').show();
       alert('this worked?');
+      e.preventDefault();
       
     });
 
