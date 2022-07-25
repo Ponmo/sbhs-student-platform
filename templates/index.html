@@ -316,6 +316,7 @@
     $(document).on('contextmenu', '.section', function (e) {
       selected_section = this.id;
       e.preventDefault();
+      document.getElementById('context-menu').show();
       alert('this worked?');
     });
 
@@ -971,11 +972,11 @@
         data: JSON.stringify({'space_id': current_space}),
         contentType: 'application/json;charset=UTF-8',
         success: function(rooms_and_sections) {
-          /*if (rooms_and_sections[2].admins[0] == user_id) {
+          if (rooms_and_sections[3].admins[0] == user_id) {
             space_admin = true;
-          }*/
+          }
           alert(space_admin);
-          alert(JSON.stringify(rooms_and_sections));
+          alert(JSON.stringify(rooms_and_sections[3]));
 
           document.getElementById('messages').textContent = '';
           document.getElementById('header_text').textContent = document.getElementById(current_space).getAttribute('data-name');
@@ -1102,7 +1103,7 @@
             newNode = document.createElement('div');
             newNode.className = 'member pointer';
             newNode.setAttribute('data-id', data['_id']);
-            newNode.innerHTML = '<img class="profile-picture" src=' + data['picture'] + ' alt="!"><span class="member-name">' + data['name'] + '</span>';
+            newNode.innerHTML = '<img class="profile-picture" src=' + data['picture'] + ' alt="!"><span class="member-name">' + data['name'] + '</span><span class="member-email">' + data['email'] + '</span>';
             document.getElementById('profile-popup').append(newNode);
           }
         });

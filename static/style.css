@@ -691,6 +691,9 @@ img { /* make images and create button undraggable and unhighlitable*/
   /*opacity border*/
 }
 #context-menu {
+  position: absolute;
+  display: none;
+  z-index: 1000;
   width: 100px;
   height: 100px;
   background-color: black;
