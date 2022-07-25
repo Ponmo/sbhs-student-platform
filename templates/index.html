@@ -243,6 +243,26 @@
     }
 
     socket.on('sorted_rooms', function (data) {
+      data.room_group_list.forEach(function(room_group) {
+        room_group.slice(1).forEach(function(room_id) {
+          document.getElementById(room_group[0]).nextElementSibling.appendChild(document.getElementById(room_id));
+        });
+      });
+
+
+      data.room_group_list.forEach(room_group => {
+        room_group.forEach(room_id => {
+          document.getElementById(room_id).parentElement.parentElement.appendChild(document.getElementById(section_id).parentElement);
+        });
+      });
+
+
+      for section in data['room_group_list']:
+        if len(section) > 1:
+            for room in section[1:]:
+                collection_rooms.find_one_and_update({"_id": ObjectId(room)}, {'$set': {'order': order, 'section': section[0]}})
+                order += 1
+                socketio.emit('sorted_rooms', data, room = room)
     });
 
     //Event.target (no), getClass Loop, one for every ID (no)
