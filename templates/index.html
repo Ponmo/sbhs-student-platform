@@ -315,37 +315,37 @@
     // Contextmenu for Sections
     $(document).on('contextmenu', '.section', function (e) {
       selected_section = this.id;
-      document.getElementById('context-menu').style.top = mouseY(event) + 'px';
-      document.getElementById('context-menu').style.left = mouseX(event) + 'px';
+      // document.getElementById('context-menu').style.top = mouseY(event) + 'px';
+      // document.getElementById('context-menu').style.left = mouseX(event) + 'px';
       document.getElementById('context-menu').show();
       alert('this worked?');
       e.preventDefault();
       
     });
 
-  function mouseX(evt) {
-    if (evt.pageX) {
-      return evt.pageX;
-    } else if (evt.clientX) {
-      return evt.clientX + (document.documentElement.scrollLeft ?
-        document.documentElement.scrollLeft :
-        document.body.scrollLeft);
-    } else {
-      return null;
-    }
-  }
+  // function mouseX(evt) {
+  //   if (evt.pageX) {
+  //     return evt.pageX;
+  //   } else if (evt.clientX) {
+  //     return evt.clientX + (document.documentElement.scrollLeft ?
+  //       document.documentElement.scrollLeft :
+  //       document.body.scrollLeft);
+  //   } else {
+  //     return null;
+  //   }
+  // }
 
-  function mouseY(evt) {
-    if (evt.pageY) {
-      return evt.pageY;
-    } else if (evt.clientY) {
-      return evt.clientY + (document.documentElement.scrollTop ?
-        document.documentElement.scrollTop :
-        document.body.scrollTop);
-    } else {
-      return null;
-    }
-  }
+  // function mouseY(evt) {
+  //   if (evt.pageY) {
+  //     return evt.pageY;
+  //   } else if (evt.clientY) {
+  //     return evt.clientY + (document.documentElement.scrollTop ?
+  //       document.documentElement.scrollTop :
+  //       document.body.scrollTop);
+  //   } else {
+  //     return null;
+  //   }
+  // }
 
     function stoppedTyping() {
       typing = false;
@@ -1130,7 +1130,7 @@
             newNode = document.createElement('div');
             newNode.className = 'profile-wrapper';
             newNode.setAttribute('data-id', data['_id']);
-            newNode.innerHTML = '<img class="profile-picture" src=' + data['picture'] + ' alt="!"><span class="member-name">' + data['name'] + '</span><span class="member-email">' + data['email'] + '</span>';
+            newNode.innerHTML = '<img class="profile-picture" src=' + data['picture'] + ' alt="!"><span class="profile-name">' + data['name'] + '</span><span class="profile-email">' + data['email'] + '</span><span class="profile-email">' + data['joined'] + '</span>';
             document.getElementById('profile-popup').append(newNode);
           }
         });
