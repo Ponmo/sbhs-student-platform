@@ -500,7 +500,7 @@ def sorted_channels(data):
 def sorted_rooms(data):
     order = 1
     section_id = ''
-    for item in data['room_list']:
+    for item in data['room_group_list']:
         if 'section' not in item:
             collection_rooms.find_one_and_update({"_id": ObjectId(item)}, {'$set': {'order': order, 'section': section_id}})
             order += 1
