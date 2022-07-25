@@ -745,12 +745,12 @@ img { /* make images and create button undraggable and unhighlitable*/
   list-style-type: none;
   margin: 0;
   padding: 0;
+  margin-left: 5px;
 }
 #profile-picture-list {
   
 }
 #popup-picture {
-  margin-left: 5px;
   margin-top: 5px;
   height: 80px;
   width: 80px;
@@ -765,3 +765,13 @@ img { /* make images and create button undraggable and unhighlitable*/
 #profile-joined {
 
 }
+/* 
+font-size: 14px;
+opacity: (between 0 and 1)
+color: black; (hex code for the color of the text)
+font-weight: bold;  
+
+
+whitespace (later)
+
+*/

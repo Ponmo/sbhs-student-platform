@@ -535,12 +535,22 @@
         newMode.id = data.message_id;
         messageMoment = 'at ' + messageMoment;
         // TODO: Give pfp image default fallback image
+        if (space_admin == true){
         newMode.innerHTML = '<img class="profile-picture pointer" src="' + data.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + data.name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message">' + data.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>'; 
+        }//change message should not have edit or delete button
+        else {
+          newMode.innerHTML = '<img class="profile-picture pointer" src="' + data.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + data.name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message">' + data.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"></div>';
+        }
       }
       else {
         newMode.className = 'message-container-combine';
         newMode.id = data.message_id;
+        if (space_admin == true){
         newMode.innerHTML = '<p class="message-combine-time">' + messageMoment + '</p><p class="message-combine">' + data.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>';
+        } //change message should not have edit or delete button
+        else{
+          newMode.innerHTML = '<p class="message-combine-time">' + messageMoment + '</p><p class="message-combine">' + data.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"></div>';
+        }
       }
       document.getElementById('messages').append(newMode);
     });
@@ -616,13 +626,18 @@
               else {
                   messageDate = 'on ' + messageDate.format('M/D/YYYY');
               }
-              newMode.innerHTML = '<img class="profile-picture pointer" src="' + item.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + item.name + ' </b></span><span class="datetime">' + messageDate + '</span></p><p class="message">' + item.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>';
+              if (space_admin == true){
+                newMode.innerHTML = '<img class="profile-picture pointer" src="' + item.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + item.name + ' </b></span><span class="datetime">' + messageDate + '</span></p><p class="message">' + item.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>';
+              } //change 
+              else{
+                newMode.innerHTML = '<img class="profile-picture pointer" src="' + item.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + item.name + ' </b></span><span class="datetime">' + messageDate + '</span></p><p class="message">' + item.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"></div>';
+              }
             }
             else {
               newMode.className = 'message-container-combine';
               newMode.id = item._id.$oid;
               newMode.setAttribute('data-date', messageDate.format('M/D/YYYY'));
-              newMode.innerHTML = '<p class="message-combine-time">' + messageDate.format('h:mm A') + '</p><p class="message-combine">' + item.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>';
+              newMode.innerHTML = '<p class="message-combine-time">' + messageDate.format('h:mm A') + '</p><p class="message-combine">' + item.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>'; //change 
             }
             document.getElementById('messages').prepend(newMode);
           });
@@ -664,7 +679,8 @@
       newNode.setAttribute('data-section', data.section_id);
       newNode.setAttribute('data-name', data.name);
       if (space_admin == true){
-      newNode.innerHTML = data.name + '<img class="room-settings" src="/static/images/settings-white.png">'; }//change room settings
+      newNode.innerHTML = data.name + '<img class="room-settings" src="/static/images/settings-white.png">'; 
+    }//change room settings
       const nodeList = document.querySelectorAll('li[data-section="' + data.section_id + '"]');
       if (nodeList.length != 0) {
         nodeList[nodeList.length - 1].parentNode.insertBefore(newNode, nodeList[nodeList.length - 1].nextElementSibling);
