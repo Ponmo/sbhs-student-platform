@@ -147,7 +147,7 @@
       </div>
     </div>
 
-    <div id="context-menu"></div>
+    <div id="context-menu" class="hide"></div>
     
   </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.min.js"></script>
@@ -971,7 +971,9 @@
         data: JSON.stringify({'space_id': current_space}),
         contentType: 'application/json;charset=UTF-8',
         success: function(rooms_and_sections) {
-          if rooms_and_sections[2].admin
+          if (rooms_and_sections[2].admins[0] = user_id) {
+            space_admin = true;
+          }
           alert(JSON.stringify(rooms_and_sections));
           document.getElementById('messages').textContent = '';
           document.getElementById('header_text').textContent = document.getElementById(current_space).getAttribute('data-name');
@@ -1097,7 +1099,7 @@
             alert(JSON.stringify(data));
             newNode = document.createElement('div');
             newNode.className = 'member pointer';
-            newNode.setAttribute('data-id', data['_id']);
+            newNode.setAttribute('data-id', data['_id']);x
             newNode.innerHTML = '<img class="profile-picture" src=' + data['picture'] + ' alt="!"><span class="member-name">' + data['name'] + '</span>';
             document.getElementById('profile-popup').append(newNode);
           }
