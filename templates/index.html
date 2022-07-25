@@ -316,9 +316,36 @@
     $(document).on('contextmenu', '.section', function (e) {
       selected_section = this.id;
       e.preventDefault();
+      document.getElementById('context-menu').style.top = mouseY(event) + 'px';
+      document.getElementById('context-menu').style.left = mouseX(event) + 'px';
       document.getElementById('context-menu').show();
       alert('this worked?');
+      
     });
+
+  function mouseX(evt) {
+    if (evt.pageX) {
+      return evt.pageX;
+    } else if (evt.clientX) {
+      return evt.clientX + (document.documentElement.scrollLeft ?
+        document.documentElement.scrollLeft :
+        document.body.scrollLeft);
+    } else {
+      return null;
+    }
+  }
+
+  function mouseY(evt) {
+    if (evt.pageY) {
+      return evt.pageY;
+    } else if (evt.clientY) {
+      return evt.clientY + (document.documentElement.scrollTop ?
+        document.documentElement.scrollTop :
+        document.body.scrollTop);
+    } else {
+      return null;
+    }
+  }
 
     function stoppedTyping() {
       typing = false;
@@ -975,8 +1002,8 @@
           /*if (rooms_and_sections[3].admins[0] == user_id) {
             space_admin = true;
           }*/
-          alert(space_admin);
-          alert(JSON.stringify(rooms_and_sections[3]));
+          //alert(space_admin);
+          alert(JSON.stringify(rooms_and_sections[2]));
 
           document.getElementById('messages').textContent = '';
           document.getElementById('header_text').textContent = document.getElementById(current_space).getAttribute('data-name');
@@ -1101,7 +1128,7 @@
           success: function(data) {
             alert(JSON.stringify(data));
             newNode = document.createElement('div');
-            newNode.className = 'member pointer';
+            newNode.className = 'profile-wrapper';
             newNode.setAttribute('data-id', data['_id']);
             newNode.innerHTML = '<img class="profile-picture" src=' + data['picture'] + ' alt="!"><span class="member-name">' + data['name'] + '</span><span class="member-email">' + data['email'] + '</span>';
             document.getElementById('profile-popup').append(newNode);
