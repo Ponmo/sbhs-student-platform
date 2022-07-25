@@ -972,9 +972,9 @@
         data: JSON.stringify({'space_id': current_space}),
         contentType: 'application/json;charset=UTF-8',
         success: function(rooms_and_sections) {
-          if (rooms_and_sections[3].admins[0] == user_id) {
+          /*if (rooms_and_sections[3].admins[0] == user_id) {
             space_admin = true;
-          }
+          }*/
           alert(space_admin);
           alert(JSON.stringify(rooms_and_sections[3]));
 
