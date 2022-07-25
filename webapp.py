@@ -384,7 +384,8 @@ def member_profile():
         member = collection_users.find_one({'_id': request.json['user_id']})
         space_picture = ""
         for spaces in member['joined']:
-            space_picture = collection_spaces.find_one({'_id': spaces})["picture"]
+            space = collection_spaces.find_one({'_id': spaces})
+            space_picture = space["picture"]
         user_data = {'name': member['name'], 'email': member['email'], 'picture': member['picture'], "joined": space_picture}
         return Response(dumps(user_data), mimetype='application/json')
     else:
