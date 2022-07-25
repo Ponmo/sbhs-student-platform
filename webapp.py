@@ -398,7 +398,8 @@ def profile():
 @app.route('/sorted_spaces', methods=['GET', 'POST'])
 def sorted_spaces():
     if request.method == 'POST':
-        collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': request.json['space_list']}})
+        data = request.json['space_list'] - 1
+        #collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': request.json['space_list']}})
         return Response(dumps({'success': 'true'}), mimetype='application/json')
     else:
         return Response(dumps({'success': 'false'}), mimetype='application/json')
@@ -495,9 +496,6 @@ def sorted_channels(data):
         collection_sections.find_one_and_update({"_id": ObjectId(section)}, {'$set': {'order': data['section_list'].index(section) + 1}})
     for room in data['room_list']:
         socketio.emit('sorted_channels', data, room = room)
-        
-
-    
     
 if __name__ == '__main__':
     socketio.run(app, debug=False)
