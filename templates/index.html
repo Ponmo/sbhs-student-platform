@@ -971,9 +971,9 @@
         data: JSON.stringify({'space_id': current_space}),
         contentType: 'application/json;charset=UTF-8',
         success: function(rooms_and_sections) {
-          if (rooms_and_sections[2].admins[0] == user_id) {
+          /*if (rooms_and_sections[2].admins[0] == user_id) {
             space_admin = true;
-          }
+          }*/
           alert(space_admin);
           alert(JSON.stringify(rooms_and_sections));
 
@@ -1101,7 +1101,7 @@
             alert(JSON.stringify(data));
             newNode = document.createElement('div');
             newNode.className = 'member pointer';
-            newNode.setAttribute('data-id', data['_id']);x
+            newNode.setAttribute('data-id', data['_id']);
             newNode.innerHTML = '<img class="profile-picture" src=' + data['picture'] + ' alt="!"><span class="member-name">' + data['name'] + '</span>';
             document.getElementById('profile-popup').append(newNode);
           }
