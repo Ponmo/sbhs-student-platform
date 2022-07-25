@@ -998,7 +998,7 @@
         data: JSON.stringify({'space_id': current_space}),
         contentType: 'application/json;charset=UTF-8',
         success: function(rooms_and_sections) {
-          /*if (rooms_and_sections[3].admins[0] == user_id) {
+          /*if (rooms_and_sections[3][0].admins[0] == user_id) {
             space_admin = true;
           }*/
           //alert(space_admin);
@@ -1126,7 +1126,7 @@
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
             alert(JSON.stringify(data))   
-            document.getElementById('profile-popup').innerHTML = '<ul id="profile-list"><li><img class="profile-picture" src=' + data['picture'] + ' alt="!"></li><li class="profile-name">' + data['name'] + '</li><li class="profile-email">' + data['email'] + '</li><li class="profile-email">' + data['joined'] + '</li></ul>';
+            document.getElementById('profile-popup').innerHTML = '<ul id="profile-list"><li id="profile-picture-list"><img class="profile-picture" src=' + data['picture'] + ' alt="!"></li><li class="profile-name">' + data['name'] + '</li><li class="profile-email">' + data['email'] + '</li><li class="profile-email">' + data['joined'] + '</li></ul>';
           }
         });
       }
