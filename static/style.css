@@ -745,8 +745,9 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin: 0;
   padding: 0;
 }
+
 #popup-picture {
-  height: 100px;
-  width: 100px;
+  height: 80px;
+  width: 80px;
   border-radius: 50%;
 }
