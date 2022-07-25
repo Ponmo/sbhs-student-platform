@@ -1126,7 +1126,7 @@
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
             alert(JSON.stringify(data))   
-            document.getElementById('profile-popup').innerHTML = '<li><img class="profile-picture" src=' + data['picture'] + ' alt="!"><span class="profile-name">' + data['name'] + '</span><span class="profile-email">' + data['email'] + '</span><span class="profile-email">' + data['joined'] + '</span></li>';
+            document.getElementById('profile-popup').innerHTML = '<li id="profile-list"><img class="profile-picture" src=' + data['picture'] + ' alt="!"><span class="profile-name">' + data['name'] + '</span><span class="profile-email">' + data['email'] + '</span><span class="profile-email">' + data['joined'] + '</span></li>';
           }
         });
       }
