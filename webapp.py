@@ -507,7 +507,7 @@ def sorted_rooms(data):
         else:
             order = 1
             section_id = item[7:]
-    socketio.emit('sorted_rooms', data, room = '2345')
+    socketio.emit('sorted_rooms', data, room = '62d5e94dc2ce65f07f7a8126')
 
 if __name__ == '__main__':
     socketio.run(app, debug=False)
