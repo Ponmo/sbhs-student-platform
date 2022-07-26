@@ -968,6 +968,7 @@
     });
 
     $(document).on('click', function(e) {
+      $(document.getElementById('context-menu')).hide();
       var container = $("#space-settings-popup");
       var profile_popup = $("#profile-popup");
       if (!container.is(e.target) && container.has(e.target).length === 0 && !$('#server-settings-button').is(e.target)) 
@@ -995,6 +996,8 @@
         success: function(rooms_and_sections) {
           if (rooms_and_sections[3][0].admins[0] == user_id) {
             space_admin = true;
+            var deleteSpace = document.findElementById('red-space-butoo')
+
             var newNode = document.createElement("div");
             newNode.class = 'pointer';
             newNode.id = "delete-space";
