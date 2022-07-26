@@ -1053,10 +1053,10 @@
                 newNodeChild.id = room['_id']['$oid'];
                 newNodeChild.setAttribute('data-section', room['section']);
                 newNodeChild.setAttribute('data-name', room['name']);
-                if (space_admin == true){
+                if (space_admin == true) {
                   newNodeChild.innerHTML = room['name'] + '<img class="room-settings" src="/static/images/settings-white.png">';
                 } //change = remove room settings
-                else{
+                else {
                   newNodeChild.innerHTML = room['name']
                 }
                 newNodeChildContainer.append(newNodeChild);
