@@ -978,7 +978,7 @@
       {
         context_menu.hide();
       }
-      if (!container.is(e.target) && !$('#server-settings-button').is(e.target) && container.has(e.target).length === 0) 
+      if (!container.is(e.target) && !$('#server-settings-button').is(e.target)) 
       {
         container.hide();
         // TODO: Make this function function only when popups appear (use .off function?)
@@ -1124,7 +1124,7 @@
       });
     });
 
-    $(document).on('click', '.member', function() {
+    $(document).on('click', '.member', function(e) {
       if (this.getAttribute('data-id') != selected_user) {
         if (!!document.getElementById("profile-popup")) {
           $('#profile-popup').remove();
@@ -1157,7 +1157,7 @@
           }
         });
       }
-      else if (!!document.getElementById("profile-popup")) {
+      else if (!!document.getElementById("profile-popup") && $('.member').is(e.target) || $('.member').is(e.target.parentNode)) {
         $('#profile-popup').remove();
         $('.member').css('background-color', '');
         $('.member').addClass('pointer');
