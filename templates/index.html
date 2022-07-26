@@ -1132,6 +1132,7 @@
           $('.member').addClass('pointer');
         }
         selected_user = this.getAttribute('data-id');
+        alert(selected_user);
         let member = document.querySelector('[data-id="' + selected_user + '"]')
         let newNode = document.createElement('div');
         newNode.className = 'members-popup';
