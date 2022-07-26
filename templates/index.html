@@ -59,7 +59,7 @@
             <img class="pointer" id="server-settings-button" src="/static/images/settings-white.png">
             <div id="space-settings-popup">
               <div class="pointer" id="create-section-button">Create Section</div>
-              <div class="pointer" id="leave-space">Leave Space</div>
+              <div class="pointer" id="red-space-button"></div>
             </div>
           </div>
           <div id="information">
@@ -996,21 +996,15 @@
         success: function(rooms_and_sections) {
           if (rooms_and_sections[3][0].admins[0] == user_id) {
             space_admin = true;
-            var deleteSpace = document.findElementById('red-space-butoo')
-
-            var newNode = document.createElement("div");
-            newNode.class = 'pointer';
-            newNode.id = "delete-space";
-            newNode.textContent = "Delete Space";
-            document.getElementById('space-settings-popup').appendChild(newNode);
+            var red_space_button = document.findElementById('red-space-button');
+            red_space_button.id = 'delete-space';
+            red_space_button.textContent = 'Delete Space';
           }
           else {
             space_admin = false;
-            var newNode = document.createElement("div");
-            newNode.class = 'pointer';
-            newNode.id = "leave-space";
-            newNode.textContent = "Leave Space";
-            document.getElementById('space-settings-popup').appendChild(newNode);
+            var red_space_button = document.findElementById('red-space-button');
+            red_space_button.id = 'leave-space';
+            red_space_button.textContent = 'Leave Space';
             
           }
           //alert(space_admin);
