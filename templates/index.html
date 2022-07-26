@@ -1140,7 +1140,6 @@
           $('.member').addClass('pointer');
         }
         selected_user = this.getAttribute('data-id');
-        alert(selected_user);
         let member = document.querySelector('[data-id="' + selected_user + '"]')
         let newNode = document.createElement('div');
         newNode.className = 'members-popup';
@@ -1155,7 +1154,6 @@
           data: JSON.stringify({'user_id': selected_user}), 
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
-            alert(JSON.stringify(data['joined']))   
             document.getElementById('profile-popup').innerHTML = '<ul id="profile-list"><li id="profile-picture-list"><img id="popup-picture" src=' + data['picture'] + ' alt="!"></li><li id="profile-name">' + data['name'] + '</li><li id="profile-email">' + data['email'] + '</li>';
             for (let i = 0; i < data["joined"]; i++) {
               newNode = document.createElement("img")
