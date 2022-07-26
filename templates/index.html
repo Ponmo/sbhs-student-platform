@@ -972,7 +972,7 @@
       $(document.getElementById('context-menu')).hide();
       var container = $("#space-settings-popup");
       var profile_popup = $("#profile-popup");
-      if (!container.is(e.target) && container.has(e.target).length === 0 && !$('#server-settings-button').is(e.target)) 
+      if (!container.is(e.target) && !$('#server-settings-button').is(e.target)) 
       {
         container.hide();
         // TODO: Make this function function only when popups appear (use .off function?)
