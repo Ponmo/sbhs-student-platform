@@ -538,6 +538,8 @@ img { /* make images and create button undraggable and unhighlitable*/
 .member:hover {
   background-color: #3c3f45;
 }
+
+/* If instead make it relative to document border instead of being inside member, then logic for getting rid of the popup must be changed*/
 #profile-popup {
   position: absolute;
   color: #dcddde;
