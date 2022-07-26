@@ -59,7 +59,7 @@
             <img class="pointer" id="server-settings-button" src="/static/images/settings-white.png">
             <div id="space-settings-popup">
               <div class="pointer" id="create-section-button">Create Section</div>
-              <div class="pointer" id="red-space-button"></div>
+              <div class="pointer" class="red-space-button"></div>
             </div>
           </div>
           <div id="information">
@@ -968,6 +968,7 @@
     });
 
     $(document).on('click', function(e) {
+      
       $(document.getElementById('context-menu')).hide();
       var container = $("#space-settings-popup");
       var profile_popup = $("#profile-popup");
@@ -977,7 +978,7 @@
         // TODO: Make this function function only when popups appear (use .off function?)
         // https://stackoverflow.com/questions/67973984/getting-desired-event-target-when-listener-is-on-the-document
       }
-      if (!!document.getElementById("profile-popup") && !profile_popup.is(e.target) && !$('.member').is(e.target) && !$('.member').is(e.target.parentNode)) { //&& profile_popup.has(e.target).length === 0) {
+      if (!document.getElementById("profile-popup") && !profile_popup.is(e.target) && !$('.member').is(e.target) && !$('.member').is(e.target.parentNode)) { //&& profile_popup.has(e.target).length === 0) {
         profile_popup.remove();
         selected_user = '';
         $('.member').css('background-color', '');
@@ -996,13 +997,13 @@
         success: function(rooms_and_sections) {
           if (rooms_and_sections[3][0].admins[0] == user_id) {
             space_admin = true;
-            var red_space_button = document.findElementById('red-space-button');
+            var red_space_button = document.findElementByClass('red-space-button')[0];
             red_space_button.id = 'delete-space';
             red_space_button.textContent = 'Delete Space';
           }
           else {
             space_admin = false;
-            var red_space_button = document.findElementById('red-space-button');
+            var red_space_button = document.findElementByClass('red-space-button')[0];
             red_space_button.id = 'leave-space';
             red_space_button.textContent = 'Leave Space';
             
