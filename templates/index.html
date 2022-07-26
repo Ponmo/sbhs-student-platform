@@ -972,7 +972,7 @@
       // hide contextmenu on popup and viceversa
       var container = $("#space-settings-popup");
       var profile_popup = $("#profile-popup");
-      var context_menu = $('context-menu');
+      var context_menu = $('#context-menu');
       // For container and context_menu, check if it exists as well.
       if (!context_menu.is(e.target)) 
       {
@@ -984,7 +984,7 @@
         // TODO: Make this function function only when popups appear (use .off function?)
         // https://stackoverflow.com/questions/67973984/getting-desired-event-target-when-listener-is-on-the-document
       }
-      if (!!document.getElementById("profile-popup")) { //(!$('.member').is(e.target) && !$('.member').is(e.target.parentNode) || (!profile_popup.is(e.target) && profile_popup.contains(e.target)))) { 
+      if (!!document.getElementById("profile-popup") && (!$('.member').is(e.target) && !$('.member').is(e.target.parentNode) || (!profile_popup.is(e.target) && profile_popup.contains(e.target)))) { 
         profile_popup.remove();
         selected_user = '';
         $('.member').css('background-color', '');
