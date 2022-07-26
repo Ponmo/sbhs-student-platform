@@ -997,13 +997,13 @@
         success: function(rooms_and_sections) {
           if (rooms_and_sections[3][0].admins[0] == user_id) {
             space_admin = true;
-            var red_space_button = document.findElementByClass('red-space-button')[0];
+            var red_space_button = document.getElementsByClassName('red-space-button')[0];
             red_space_button.id = 'delete-space';
             red_space_button.textContent = 'Delete Space';
           }
           else {
             space_admin = false;
-            var red_space_button = document.findElementByClass('red-space-button')[0];
+            var red_space_button = document.getElementsByClassName('red-space-button')[0];
             red_space_button.id = 'leave-space';
             red_space_button.textContent = 'Leave Space';
             
