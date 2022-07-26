@@ -251,18 +251,6 @@
       });
     });
 
-  // Context context-menu
-  // If we need more broswer compatibility: see https://stackoverflow.com/questions/4909167/how-to-add-a-custom-right-click-menu-to-a-webpage
-//   if (document.addEventListener) {
-//   var elements = document.getElementsByClassName("classname");
-
-
-  // // Close context menu on outside click
-  // $(document).on("click", function(event) {
-  //   document.getElementById("rmenu").className = "hide";
-  // });
-
-
     $(document).on('click', '#log-out', function () {
       $.get('/logout');
       window.location.replace("https://sbhs-platform.herokuapp.com/");
