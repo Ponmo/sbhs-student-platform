@@ -978,7 +978,7 @@
         // TODO: Make this function function only when popups appear (use .off function?)
         // https://stackoverflow.com/questions/67973984/getting-desired-event-target-when-listener-is-on-the-document
       }
-      if (!!document.getElementById("profile-popup") && !profile_popup.is(e.target) && !profile_popup.contains(e.target) && !$('.member').is(e.target) && !$('.member').is(e.target.parentNode)) { //&& profile_popup.has(e.target).length === 0) {
+      if (!!document.getElementById("profile-popup") && !profile_popup.is(e.target) && profile_popup.has(e.target).length === 0 && !$('.member').is(e.target) && !$('.member').is(e.target.parentNode)) { //&& profile_popup.has(e.target).length === 0) {
         profile_popup.remove();
         selected_user = '';
         $('.member').css('background-color', '');
