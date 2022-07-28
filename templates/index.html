@@ -214,15 +214,6 @@
           url: '/sorted_spaces',
           dataType: "json",
           data: JSON.stringify({'space_list': space_list.reverse()}),
-          contentType: 'application/json;charset=UTF-8',
-          success: function(data) {
-            /*if (data['success'] == 'true') {
-              alert("success");
-            }
-            else {
-              alert("didnt save");
-            }*/
-          }
         });
       }
     });
@@ -1011,21 +1002,18 @@
         contentType: 'application/json;charset=UTF-8',
         success: function(rooms_and_sections) {
           if (rooms_and_sections[3][0].admins[0] == user_id) {
-            alert('true');
             space_admin = true;
             var red_space_button = document.getElementsByClassName('red-space-button')[0];
             red_space_button.id = 'delete-space';
             red_space_button.textContent = 'Delete Space';
           }
           else {
-            alert('false');
             space_admin = false;
             var red_space_button = document.getElementsByClassName('red-space-button')[0];
             red_space_button.id = 'leave-space';
             red_space_button.textContent = 'Leave Space';
             
           }
-          //alert(space_admin);
           document.getElementById('messages').textContent = '';
           document.getElementById('header_text').textContent = document.getElementById(current_space).getAttribute('data-name');
           document.getElementById('special-channels').textContent = '';
@@ -1115,7 +1103,7 @@
         dataType: "json",
         contentType: 'application/json;charset=UTF-8',
         success: function(data){
-          alert('This worked!');
+          alert(JSON.stringify(data));
         }
       })
     });
