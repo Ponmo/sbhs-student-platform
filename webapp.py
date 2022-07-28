@@ -506,6 +506,8 @@ def sorted_channels(data):
     for room in data['room_list']:
         socketio.emit('sorted_channels', data, room = room)
     
+# When rooms are sorted, update the order in MongoDB.
+
 @socketio.on('sorted_rooms')
 def sorted_rooms(data):
     order = 1
