@@ -171,7 +171,7 @@
     var selected_user = '';
 
     if (window.location.href.indexOf('/sbhs/') != -1) {
-      current_space = window.location.href.substring(window.location.href.indexOf('/sbhs/') + 6);
+      current_space = window.location.href.substring(window.location.href.indexOf('/sbhs/') + 6).replace('#','');;
       joinSpace();
     }
 
