@@ -927,7 +927,7 @@
         data: JSON.stringify({'space_id': current_space}),
         contentType: 'application/json;charset=UTF-8',
         success: function(data) {
-          if (data['members'].some(row => row.includes(user_id))) {
+          if (!data['members'].some(row => row.includes(user_id))) {
             var newNode = document.createElement('li');
             newNode.className = 'space-wrapper';
             var newNodeChild = document.createElement('img');
