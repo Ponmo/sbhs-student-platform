@@ -519,5 +519,9 @@ def sorted_rooms(data):
                 socketio.emit('sorted_rooms', data, room = room)
         order = 1
 
+@app.route('/sbhs/<space_id>')
+def direct_space(space_id):
+    return f"<h1>{space_id}</h1>"
+
 if __name__ == '__main__':
     socketio.run(app, debug=False)
