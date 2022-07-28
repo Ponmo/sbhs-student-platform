@@ -170,8 +170,9 @@
     var user_id = '{{ user_id }}';
     var selected_user = '';
 
-    //if (window.location.href.partition('/sbhs/')[2]) {
-    //}
+    if (window.location.href.indexOf('/sbhs/') != -1) {
+      alert(window.location.href.indexOf('/sbhs/'));
+    }
 
     $("#regular-channels").sortable({
       axis: 'y',
@@ -906,9 +907,8 @@
       }, 100);
     });
 
-
     $(document).on('click', '.form-space', function() {
-      var joined_space = this.getAttribute('data-id');
+      current_space = this.getAttribute('data-id');
       var clicked_space = this;
       setTimeout(function() {
         clicked_space.firstChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = "Joined";
@@ -917,12 +917,11 @@
         type: "POST",
         url: '/join_space',
         dataType: "json",
-        data: JSON.stringify({'space_id': this.getAttribute('data-id')}),
+        data: JSON.stringify({'space_id': current_space}),
         contentType: 'application/json;charset=UTF-8',
         success: function(data) {
           $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
           $(document.getElementById(current_space)).attr('style', '');
-          current_space = joined_space;
           if ($('#' + joined_space).length == 0) {
 
             var newNode = document.createElement('li');
@@ -954,6 +953,10 @@
         }
       });
     });
+
+    function joinSpace(joined_space_id) {
+      
+    }
 
     $(document).on('click', '#server-settings-button', function() {
       var container = document.getElementById('space-settings-popup');
@@ -1098,7 +1101,6 @@
           $('#space-search').css('display', 'none');
         }
       });
-      alert(window.location.href.indexOf('/sbhs/'));
     }
 
     $(document).on('click', '#profile', function() {
