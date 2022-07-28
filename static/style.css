@@ -7,7 +7,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   user-drag: none;
   -moz-user-select: -moz-none;
   -khtml-user-select: none;
-  -webkit-user-seslect: none;
+  -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
 } 
@@ -723,9 +723,59 @@ img { /* make images and create button undraggable and unhighlitable*/
   position: absolute;
   display: none;
   z-index: 1000;
-  width: 100px;
-  height: 100px;
-  background-color: black;
+  width: 190px;
+  background-color: #17181b;
+  list-style-type: none;
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+  color: #dcddde;
+  font-size: 14px;
+  border-radius: 5px;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -osuser-drag: none;
+  user-drag: none;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+#edit-section {
+  width: 174px;
+  height: 32px;
+  line-height: 32px;
+  border-radius: 2px;
+  margin: 8px 8px 1px 8px;
+  border-bottom: 1px solid white;
+  padding-left: 8px;
+}
+#edit-section:hover {
+  background-color: #4752c4;
+  color: white;
+}
+#edit-section:active {
+  background-color: #3c46a6;
+  color: white;
+}
+#delete-section {
+  width: 174px;
+  height: 32px;
+  line-height: 32px;
+  border-radius: 2px;
+  margin: 0px 8px 8px 8px;
+  padding-left: 8px;
+  color: #d83c3f;
+}
+#delete-section:hover {
+  background-color: #d83c3f;
+  color: white;
+}
+#delete-section:active {
+  background-color: #b53739;
+  color: white;
 }
 #chat::-webkit-scrollbar {
   width: 8px;
