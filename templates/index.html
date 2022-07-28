@@ -1006,7 +1006,7 @@
         data: JSON.stringify({'space_id': current_space}),
         contentType: 'application/json;charset=UTF-8',
         success: function(rooms_and_sections) {
-          window.history.pushState('', '', '/' + current_space);
+          window.history.pushState('', '', '/sbhs/' + current_space);
           if (rooms_and_sections[3][0].admins[0] == user_id) {
             space_admin = true;
             var red_space_button = document.getElementsByClassName('red-space-button')[0];
