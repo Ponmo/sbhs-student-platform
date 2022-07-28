@@ -910,7 +910,7 @@
     $(document).on('click', '.form-space', function() {
       $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
       $(document.getElementById(current_space)).attr('style', '');
-      var current_space = this.getAttribute('data-id');
+      current_space = this.getAttribute('data-id');
       var clicked_space = this;
       setTimeout(function() {
         clicked_space.firstChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = "Joined";
