@@ -520,8 +520,11 @@ def sorted_rooms(data):
         order = 1
 
 @app.route('/sbhs/<space_id>')
-def direct_space(space_id):
-    return f"<h1>{space_id}</h1>"
+def space_invite(space_id):
+    if 'users_name' in session:
+        return render_template('index.html', name = session['users_name'], room = '1', picture = session['picture'], user_id = session['unique_id'])
+    else:
+        return redirect(url_for('render_login'))
 
 if __name__ == '__main__':
     socketio.run(app, debug=False)
