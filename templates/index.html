@@ -147,7 +147,10 @@
       </div>
     </div>
 
-    <div id="context-menu">Hello</div>
+    <ul id="context-menu">
+      <li id="edit-section">Edit Section</li> 
+      <li id="delete-section">Delete Section</li>
+    </ul>
     
   </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.min.js"></script>
@@ -166,6 +169,10 @@
     var space_admin = false;
     var user_id = '{{ user_id }}';
     var selected_user = '';
+
+    //if (window.location.href.partition('/sbhs/')[2]) {
+      alert(window.location.href.partition('/sbhs/')[2])
+    //}
 
     $("#regular-channels").sortable({
       axis: 'y',
@@ -961,7 +968,7 @@
     });
 
     $(document).on('click', function(e) {
-      ////&& profile_popup.has(e.target).length === 0) { Makes it so children do not remove 
+      //// If you input: "&& profile_popup.has(e.target).length === 0)"" it makes it so clicking on a child will not remove it
       // hide contextmenu on popup and viceversa
       var container = $("#space-settings-popup");
       var profile_popup = $("#profile-popup");
@@ -1092,7 +1099,6 @@
           $('#space-search').css('display', 'none');
         }
       });
-      alert(window.location.href);
     }
 
     $(document).on('click', '#profile', function() {
