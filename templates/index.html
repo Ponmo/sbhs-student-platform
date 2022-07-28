@@ -171,10 +171,8 @@
     var selected_user = '';
 
     if (window.location.href.indexOf('/sbhs/') != -1) {
-      alert(window.location.href.indexOf('/sbhs/'));
       current_space = window.location.href.substring(window.location.href.indexOf('/sbhs/') + 6);
-      alert(current_space);
-      //joinSpace();
+      joinSpace();
     }
 
     $("#regular-channels").sortable({
