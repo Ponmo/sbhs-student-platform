@@ -171,11 +171,6 @@
       var user_id = '{{ user_id }}';
       var selected_user = '';
 
-      if (window.location.href.indexOf('/sbhs/') != -1) {
-        current_space = window.location.href.substring(window.location.href.indexOf('/sbhs/') + 6).replace('#','');;
-        joinSpace();
-      }
-
       $("#regular-channels").sortable({
         axis: 'y',
         opacity: 0.7,
@@ -338,70 +333,74 @@
         }
       }
       
-      $(window).on("load", function() { // TODO: combine AJAX calls
-        $.ajax({
-          type: 'POST',
-          url: '/user_spaces',
-          dataType: "json",
-          success: function(user_space_list) {
-            user_space_list.forEach(function(item) { 
-              try {
-                var newNode = document.createElement('li'); 
-                newNode.className = 'space-wrapper';
-              
-                var newNodeChild = document.createElement('img'); 
-                newNodeChild.className = 'space pointer';
-                newNodeChild.id = item._id.$oid;
-                newNodeChild.setAttribute('data-name', item.name);
-                newNodeChild.src = item.picture;
-                newNode.appendChild(newNodeChild);
-              
-                newNodeChild = document.createElement('div');
-                newNodeChild.className = 'active-space';
-                newNode.appendChild(newNodeChild); 
-              
-                referenceNode = document.getElementById('space_align_helper'); 
-                referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling); 
-              }
-              catch(e) {
-              }
-            });
-          }
-        });
-        $.ajax({
-          type: 'POST',
-          url: '/list_spaces',
-          dataType: "json",
-          success: function(data) {
-            data[0].forEach(function(item) {
-              newNode = document.createElement('div');
-              newNode.className = 'form-space pointer';
-              newNode.setAttribute('data-id', item['_id']['$oid']);
-              newNodeChild = document.createElement('img');
-              newNodeChild.className = 'directory-space-img';
-              newNodeChild.src = item['picture'];
+
+      $.ajax({ //TODO: Combine AJAX calls
+        type: 'POST',
+        url: '/user_spaces',
+        dataType: "json",
+        success: function(user_space_list) {
+          user_space_list.forEach(function(item) { 
+            try {
+              var newNode = document.createElement('li'); 
+              newNode.className = 'space-wrapper';
+            
+              var newNodeChild = document.createElement('img'); 
+              newNodeChild.className = 'space pointer';
+              newNodeChild.id = item._id.$oid;
+              newNodeChild.setAttribute('data-name', item.name);
+              newNodeChild.src = item.picture;
               newNode.appendChild(newNodeChild);
+            
               newNodeChild = document.createElement('div');
-              newNodeChild.className = 'directory-space-title';
-              newNodeChild.textContent = item['name'];
-              newNode.appendChild(newNodeChild);
-              newNodeChild = document.createElement('div');
-              newNodeChild.className = 'directory-space-description';
-              newNodeChild.textContent = 'Description of Space'
-              newNode.appendChild(newNodeChild);
-              newNodeChild = document.createElement('div');
-              newNodeChild.className = 'directory-space-joined-status';
-              if(item['members'].some(row => row.includes(data[1]))){
-                newNodeChild.textContent = 'Joined';
+              newNodeChild.className = 'active-space';
+              newNode.appendChild(newNodeChild); 
+            
+              referenceNode = document.getElementById('space_align_helper'); 
+              referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling); 
+              
+              if (window.location.href.indexOf('/sbhs/') != -1) {
+                current_space = window.location.href.substring(window.location.href.indexOf('/sbhs/') + 6).replace('#','');;
+                joinSpace();
               }
-              else {
-                newNodeChild.textContent = 'Not Joined';
-              }
-              newNode.appendChild(newNodeChild);
-              document.getElementById('directory-space').append(newNode);
-            });
-          }
-        });
+            }
+            catch(e) {
+            }
+          });
+        }
+      });
+      $.ajax({
+        type: 'POST',
+        url: '/list_spaces',
+        dataType: "json",
+        success: function(data) {
+          data[0].forEach(function(item) {
+            newNode = document.createElement('div');
+            newNode.className = 'form-space pointer';
+            newNode.setAttribute('data-id', item['_id']['$oid']);
+            newNodeChild = document.createElement('img');
+            newNodeChild.className = 'directory-space-img';
+            newNodeChild.src = item['picture'];
+            newNode.appendChild(newNodeChild);
+            newNodeChild = document.createElement('div');
+            newNodeChild.className = 'directory-space-title';
+            newNodeChild.textContent = item['name'];
+            newNode.appendChild(newNodeChild);
+            newNodeChild = document.createElement('div');
+            newNodeChild.className = 'directory-space-description';
+            newNodeChild.textContent = 'Description of Space'
+            newNode.appendChild(newNodeChild);
+            newNodeChild = document.createElement('div');
+            newNodeChild.className = 'directory-space-joined-status';
+            if(item['members'].some(row => row.includes(data[1]))){
+              newNodeChild.textContent = 'Joined';
+            }
+            else {
+              newNodeChild.textContent = 'Not Joined';
+            }
+            newNode.appendChild(newNodeChild);
+            document.getElementById('directory-space').append(newNode);
+          });
+        }
       });
       
       $('#chat').scroll(function() { //$('#chat').scrollTop() + $('#chat').height();
