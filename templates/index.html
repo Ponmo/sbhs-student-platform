@@ -928,6 +928,7 @@
         contentType: 'application/json;charset=UTF-8',
         success: function(data) {
           if (!data['members'].some(row => row.includes(user_id))) {
+            alert('1');
             var newNode = document.createElement('li');
             newNode.className = 'space-wrapper';
             var newNodeChild = document.createElement('img');
@@ -946,6 +947,7 @@
             space();
           }
           else {
+            alert('2');
             $('#' + current_space).css('border-radius', '3px');
             $('#' + current_space).closest('.space-wrapper').find('.active-space').css('width', '39px');
             space();
