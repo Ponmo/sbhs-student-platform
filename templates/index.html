@@ -908,7 +908,9 @@
     });
 
     $(document).on('click', '.form-space', function() {
-      current_space = this.getAttribute('data-id');
+      $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
+      $(document.getElementById(current_space)).attr('style', '');
+      var current_space = this.getAttribute('data-id');
       var clicked_space = this;
       setTimeout(function() {
         clicked_space.firstChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = "Joined";
@@ -920,24 +922,27 @@
         data: JSON.stringify({'space_id': current_space}),
         contentType: 'application/json;charset=UTF-8',
         success: function(data) {
-          $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
-          $(document.getElementById(current_space)).attr('style', '');
           if ($('#' + current_space).length == 0) {
+
             var newNode = document.createElement('li');
             newNode.className = 'space-wrapper';
+              
             var newNodeChild = document.createElement('img');
             newNodeChild.className = 'space pointer';
             newNodeChild.id = data['_id']['$oid'];
             newNodeChild.style.borderRadius = '3px';
             newNodeChild.setAttribute('data-name', data['name']);
             newNodeChild.src = data['picture'];
-            newNode.appendChild(newNodeChild); 
+            newNode.appendChild(newNodeChild);
+              
             newNodeChild = document.createElement('div');
             newNodeChild.className = 'active-space';
             newNodeChild.style.width = '39px';
             newNode.appendChild(newNodeChild);
+              
             referenceNode = document.getElementById('space_align_helper');
             referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+
             space();
           }
           else {
