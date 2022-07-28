@@ -167,6 +167,30 @@
     var user_id = '{{ user_id }}';
     var selected_user = '';
 
+    $("#regular-channels").sortable({
+      axis: 'y',
+      opacity: 0.7,
+      scroll: false,
+      items: '.section-group',
+      distance: '3',
+      update: function() {
+        var rooms = document.querySelectorAll('.room');
+        var room_list = [];
+        for (let i = 0; i < rooms.length; i++) {
+          room_list.push(rooms[i].id);
+        }
+        var sections = document.querySelectorAll(".section");
+        var section_list = [];
+        for (let i = 0; i < sections.length; i++) {
+          section_list.push(sections[i].id);
+        }
+        socket.emit('sorted_channels', {
+          room_list: room_list,
+          section_list: section_list
+        });
+      }
+    });
+
     socket.on('sorted_channels', function (data) {
       data.section_list.forEach(function(section_id) {
         document.getElementById(section_id).parentElement.parentElement.appendChild(document.getElementById(section_id).parentElement);
@@ -682,17 +706,19 @@
       newNodeChild.className = 'room-group';
       newNode.appendChild(newNodeChild);
       document.getElementById('regular-channels').append(newNode);
-      $('.room-group').sortable({
-        connectWith: '.room-group',
-        axis: 'y',
-        items: '.room',
-        opacity: 0.7,
-        scroll: false,
-        distance: '3',
-        update: function() {
-          roomSort();
-        }
-      });
+      if (space_admin == true) {
+        $('.room-group').sortable({
+          connectWith: '.room-group',
+          axis: 'y',
+          items: '.room',
+          opacity: 0.7,
+          scroll: false,
+          distance: '3',
+          update: function() {
+            roomSort();
+          }
+        });
+      }
     });
 
     document.getElementById('create-space-form').onsubmit = function (e) {
@@ -1052,29 +1078,10 @@
                   roomSort();
                 }
               });
-              $("#regular-channels").sortable({
-                axis: 'y',
-                opacity: 0.7,
-                scroll: false,
-                items: '.section-group',
-                distance: '3',
-                update: function() {
-                  var rooms = document.querySelectorAll('.room');
-                  var room_list = [];
-                  for (let i = 0; i < rooms.length; i++) {
-                    room_list.push(rooms[i].id);
-                  }
-                  var sections = document.querySelectorAll(".section");
-                  var section_list = [];
-                  for (let i = 0; i < sections.length; i++) {
-                    section_list.push(sections[i].id);
-                  }
-                  socket.emit('sorted_channels', {
-                    room_list: room_list,
-                    section_list: section_list
-                  });
-                }
-              });
+              $('.regular-channels').sortable('enable');
+            }
+            else {
+              $('.regular-channels').sortable('disable');
             }
           });
           try { //get rid of try block after deleting all spaces without member list another method
