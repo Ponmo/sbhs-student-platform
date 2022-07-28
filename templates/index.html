@@ -172,6 +172,9 @@
 
     if (window.location.href.indexOf('/sbhs/') != -1) {
       alert(window.location.href.indexOf('/sbhs/'));
+      current_space = window.location.href.substring(window.location.href.indexOf('/sbhs/') + 1);
+      alert(current_space);
+      //joinSpace();
     }
 
     $("#regular-channels").sortable({
@@ -915,6 +918,10 @@
       setTimeout(function() {
         clicked_space.firstChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = "Joined";
       }, 500)
+      joinSpace();
+    });
+
+    function joinSpace() {
       $.ajax({
         type: "POST",
         url: '/join_space',
@@ -923,10 +930,8 @@
         contentType: 'application/json;charset=UTF-8',
         success: function(data) {
           if ($('#' + current_space).length == 0) {
-
             var newNode = document.createElement('li');
             newNode.className = 'space-wrapper';
-              
             var newNodeChild = document.createElement('img');
             newNodeChild.className = 'space pointer';
             newNodeChild.id = data['_id']['$oid'];
@@ -934,15 +939,12 @@
             newNodeChild.setAttribute('data-name', data['name']);
             newNodeChild.src = data['picture'];
             newNode.appendChild(newNodeChild);
-              
             newNodeChild = document.createElement('div');
             newNodeChild.className = 'active-space';
             newNodeChild.style.width = '39px';
             newNode.appendChild(newNodeChild);
-              
             referenceNode = document.getElementById('space_align_helper');
             referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-
             space();
           }
           else {
@@ -952,10 +954,6 @@
           }
         }
       });
-    });
-
-    function joinSpace(joined_space_id) {
-      
     }
 
     $(document).on('click', '#server-settings-button', function() {
