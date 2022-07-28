@@ -1080,11 +1080,10 @@
                   roomSort();
                 }
               });
-              $('.regular-channels').sortable('enable');
+              $('#regular-channels').sortable('enable');
             }
             else {
-              $('.room-group').sortable('disable');
-              $('.regular-channels').sortable('disable');
+              $('#regular-channels').sortable('disable');
             }
           });
           try { //get rid of try block after deleting all spaces without member list another method
