@@ -183,11 +183,19 @@ def get_google_provider_cfg():
 # Loads platform after login.
 
 @app.route('/sbhs')
-def render_main_page():
-    if 'users_name' in session:
-        return render_template('index.html', name = session['users_name'], room = '1', picture = session['picture'], user_id = session['unique_id'])
-    else:
+@app.route('/sbhs/<space_id>')
+def render_main_page(space_id = None):
+    if space_id:
+        if 'users_name' not in session:
+            session['invite'] = space_id
+            return redirect(url_for('render_login'))
+    elif 'invite' in session:
+        space_id = session['invite']
+        session.pop('invite')
+        return redirect('https://sbhs-platform.herokuapp.com/sbhs/' + space_id)
+    elif 'users_name' not in session:
         return redirect(url_for('render_login'))
+    return render_template('index.html', name = session['users_name'], room = '1', picture = session['picture'], user_id = session['unique_id'])
 
 # When logout button is clicked, clear session.
 
@@ -518,13 +526,6 @@ def sorted_rooms(data):
                 order += 1
                 socketio.emit('sorted_rooms', data, room = room)
         order = 1
-
-@app.route('/sbhs/<space_id>')
-def space_invite(space_id):
-    if 'users_name' in session:
-        return render_template('index.html', name = session['users_name'], room = '1', picture = session['picture'], user_id = session['unique_id'])
-    else:
-        return redirect(url_for('render_login'))
 
 if __name__ == '__main__':
     socketio.run(app, debug=False)
