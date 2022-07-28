@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <title>Login - Santa Barbara High School</title>
+  </head>
+  <body>
+    <div id="log-in-container">
+      <p id="log-in-header">Santa Barbara High School Platform</p>
+        <a id="log-in-link" href="/login">
+          <div id="log-in-button">
+          <img width="20px" id="google-logo" alt="Google" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png">
+            <p id="log-in-text">Continue with Google</p>
+          </div>
+        </a>
+      <p id="log-in-footer"> {{ login_error }} </p>
+    </div>
+<!--     <div id="like_button_container"></div>
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="{{ url_for('static', filename='like_button.js') }}"></script> -->
+    
+  </body>
+</html>
+<!-- Cat/dog/hamster gif on windowsill switch Error Message, Google Logo/Mascot Themed by art-->
