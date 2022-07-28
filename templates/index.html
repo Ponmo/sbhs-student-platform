@@ -170,11 +170,9 @@
     var user_id = '{{ user_id }}';
     var selected_user = '';
 
-    if (window.location.href.indexOf('/sbhs/') != -1) {
-      alert(window.location.href.indexOf('/sbhs/'));
-      current_space = window.location.href.substring(window.location.href.indexOf('/sbhs/') + 1);
+    if (window.location.href.split('/').length == 3) {
+      current_space = window.location.href.split('/')[2]
       alert(current_space);
-      //joinSpace();
     }
 
     $("#regular-channels").sortable({
