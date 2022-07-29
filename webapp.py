@@ -207,9 +207,9 @@ def render_main_page(space_id = None):
 
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():
-    if request.method == 'GET':
+    if request.method == 'POST':
         session['logged'] == False # Prevents browsers from using cached session data to log in.
-        return redirect('https://www.youtube.com/watch?v=MAG1LoaYVFI&ab_channel=quagmiretoiletgaming')
+        return Response(dumps({'success': 'true'}), mimetype='application/json')
 # Returns all space data from MongoDB.
 
 @app.route('/list_spaces', methods=['GET', 'POST'])

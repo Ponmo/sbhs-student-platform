@@ -308,10 +308,11 @@
 
       $(document).on('click', '#log-out', function () {
         $.ajax({
-          type: 'GET',
+          type: 'POST',
           url: '/logout',
-          success: function() {
-            alert('yay');
+          dataType: "json",
+          success: function(data) {
+            window.location.replace("http://www.w3schools.com");
           }
         });
       });
