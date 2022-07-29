@@ -308,7 +308,7 @@
 
       $(document).on('click', '#log-out', function () {
         $.ajax({
-          type: 'POST',
+          type: 'GET',
           url: '/logout',
           success: function() {
             alert('yay');
