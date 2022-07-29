@@ -308,7 +308,6 @@
 
       $(document).on('click', '#log-out', function () {
         $.get('/logout');
-        window.location.replace("https://sbhs-platform.herokuapp.com/");
       });
 
       $(document).on('click', '#leave-space', function() {
@@ -757,7 +756,7 @@
         $(this.parentNode.previousElementSibling).after('<form class="message_edit_input_form"><textarea class="message_edit" rows="1" placeholder="Remove message">' + message + '</textarea></form>');
         this.parentNode.previousElementSibling.firstChild.setAttribute("style", "height:" + (this.parentNode.previousElementSibling.firstChild.scrollHeight) + "px;overflow-y:hidden;");
       });
-
+//todo for tomorrow
       $(document).on('click', '.delete-space', function(){
         var space_id = this.
         $.ajax({
