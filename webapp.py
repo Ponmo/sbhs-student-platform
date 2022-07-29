@@ -332,7 +332,7 @@ def delete_section():
             #collection_rooms.delete_many({'section': request.json['section_id']})
             #for room in room_list:
             #    collection_messages.delete_many({'room': room['_id']['$oid']})
-            first_section = collection_sections.find_one({'space': request.json['space_id'], 'order': 1})['_id']['$oid']
+            first_section = str(collection_sections.find_one({'space': request.json['space_id'], 'order': 1})['_id'])
             order = collection_rooms.count_documents({'section': first_section}) + 1
             room_list = collection_rooms.find({'section': request.json['section_id']}).sort('order', 1)
             for room in room_list:
