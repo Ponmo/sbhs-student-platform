@@ -361,12 +361,12 @@
             }
             catch(e) {
             }
-            if (window.location.href.indexOf('/sbhs/') != -1) {
-              current_space = window.location.href.substring(window.location.href.indexOf('/sbhs/') + 6).replace('#','');;
-              document.querySelector('[data-id="' + current_space + '"]').firstChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = "Joined";
-              joinSpace();
-            }
           });
+          if (window.location.href.indexOf('/sbhs/') != -1) {
+            current_space = window.location.href.substring(window.location.href.indexOf('/sbhs/') + 6).replace('#','');;
+            document.querySelector('[data-id="' + current_space + '"]').firstChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = "Joined";
+            joinSpace();
+          }
         }
       });
       $.ajax({
@@ -928,8 +928,7 @@
           data: JSON.stringify({'space_id': current_space}),
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
-            if (!data['members'].some(row => row.includes(user_id))) {
-              alert('1');
+            if(!data['members'].some(row => row.includes(user_id))) {
               var newNode = document.createElement('li');
               newNode.className = 'space-wrapper';
               var newNodeChild = document.createElement('img');
@@ -948,7 +947,6 @@
               space();
             }
             else {
-              alert('2');
               $('#' + current_space).css('border-radius', '3px');
               $('#' + current_space).closest('.space-wrapper').find('.active-space').css('width', '39px');
               space();
