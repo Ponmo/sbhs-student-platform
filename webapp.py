@@ -208,8 +208,7 @@ def render_main_page(space_id = None):
 @app.route('/logout')
 def logout():
     session['logged'] == False # Prevents browsers from using cached session data to log in.
-    return session['logged']
-
+    return redirect('https://sbhs-platform.herokuapp.com/')
 # Returns all space data from MongoDB.
 
 @app.route('/list_spaces', methods=['GET', 'POST'])
