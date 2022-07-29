@@ -157,7 +157,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
   <script type="text/javascript" charset="utf-8">
     //Give small space to empty categories room-group 
-    $( document ).ready(function() {
+    $(document).ready(function() {
+      alert('repeat');
       var socket = io();
       var chat_history_skip = 0;
       var current_room = '';
@@ -359,10 +360,10 @@
               referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling); 
             }
             catch(e) {
-              alert(e);
             }
             if (window.location.href.indexOf('/sbhs/') != -1) {
               current_space = window.location.href.substring(window.location.href.indexOf('/sbhs/') + 6).replace('#','');;
+              document.querySelector('[data-id="' + current_space + '"]').firstChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = "Joined";
               joinSpace();
             }
           });
