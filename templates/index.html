@@ -171,6 +171,65 @@
       var user_id = '{{ user_id }}';
       var selected_user = '';
 
+      $.ajax({
+        type: 'POST',
+        url: '/list_spaces',
+        dataType: "json",
+        success: function(data) {
+          data[1].forEach(function(item) { 
+            try {
+              var newNode = document.createElement('li'); 
+              newNode.className = 'space-wrapper';
+              var newNodeChild = document.createElement('img'); 
+              newNodeChild.className = 'space pointer';
+              newNodeChild.id = item._id.$oid;
+              newNodeChild.setAttribute('data-name', item.name);
+              newNodeChild.src = item.picture;
+              newNode.appendChild(newNodeChild);
+              newNodeChild = document.createElement('div');
+              newNodeChild.className = 'active-space';
+              newNode.appendChild(newNodeChild); 
+              referenceNode = document.getElementById('space_align_helper'); 
+              referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling); 
+            }
+            catch(e) {
+            }
+          });
+          data[0].forEach(function(item) {
+            newNode = document.createElement('div');
+            newNode.className = 'form-space pointer';
+            newNode.setAttribute('data-id', item['_id']['$oid']);
+            newNodeChild = document.createElement('img');
+            newNodeChild.className = 'directory-space-img';
+            newNodeChild.src = item['picture'];
+            newNode.appendChild(newNodeChild);
+            newNodeChild = document.createElement('div');
+            newNodeChild.className = 'directory-space-title';
+            newNodeChild.textContent = item['name'];
+            newNode.appendChild(newNodeChild);
+            newNodeChild = document.createElement('div');
+            newNodeChild.className = 'directory-space-description';
+            newNodeChild.textContent = 'Description of Space'
+            newNode.appendChild(newNodeChild);
+            newNodeChild = document.createElement('div');
+            newNodeChild.className = 'directory-space-joined-status';
+            if(item['members'].some(row => row.includes(user_id))){
+              newNodeChild.textContent = 'Joined';
+            }
+            else {
+              newNodeChild.textContent = 'Not Joined';
+            }
+            newNode.appendChild(newNodeChild);
+            document.getElementById('directory-space').append(newNode);
+          });
+          if (window.location.href.indexOf('/sbhs/') != -1) {
+            current_space = window.location.href.substring(window.location.href.indexOf('/sbhs/') + 6).replace('#','');;
+            document.querySelector('[data-id="' + current_space + '"]').firstChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = "Joined";
+            joinSpace();
+          }
+        }
+      });
+
       $("#regular-channels").sortable({
         axis: 'y',
         opacity: 0.7,
@@ -332,100 +391,6 @@
           timeout = setTimeout(stoppedTyping, 5000);
         }
       }
-      
-
-      $.ajax({ //TODO: Combine AJAX calls, very important
-        type: 'POST',
-        url: '/user_spaces',
-        dataType: "json",
-        success: function(user_space_list) {
-          user_space_list.forEach(function(item) { 
-            try {
-              var newNode = document.createElement('li'); 
-              newNode.className = 'space-wrapper';
-            
-              var newNodeChild = document.createElement('img'); 
-              newNodeChild.className = 'space pointer';
-              newNodeChild.id = item._id.$oid;
-              newNodeChild.setAttribute('data-name', item.name);
-              newNodeChild.src = item.picture;
-              newNode.appendChild(newNodeChild);
-            
-              newNodeChild = document.createElement('div');
-              newNodeChild.className = 'active-space';
-              newNode.appendChild(newNodeChild); 
-            
-              referenceNode = document.getElementById('space_align_helper'); 
-              referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling); 
-            }
-            catch(e) {
-            }
-          });
-          if (window.location.href.indexOf('/sbhs/') != -1) {
-            current_space = window.location.href.substring(window.location.href.indexOf('/sbhs/') + 6).replace('#','');;
-            //document.querySelector('[data-id="' + current_space + '"]').firstChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = "Joined";
-            joinSpace();
-          }
-        }
-      });
-      $.ajax({
-        type: 'POST',
-        url: '/list_spaces',
-        dataType: "json",
-        success: function(data) {
-          data[1].forEach(function(item) { 
-            try {
-              var newNode = document.createElement('li'); 
-              newNode.className = 'space-wrapper';
-              var newNodeChild = document.createElement('img'); 
-              newNodeChild.className = 'space pointer';
-              newNodeChild.id = item._id.$oid;
-              newNodeChild.setAttribute('data-name', item.name);
-              newNodeChild.src = item.picture;
-              newNode.appendChild(newNodeChild);
-              newNodeChild = document.createElement('div');
-              newNodeChild.className = 'active-space';
-              newNode.appendChild(newNodeChild); 
-              referenceNode = document.getElementById('space_align_helper'); 
-              referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling); 
-            }
-            catch(e) {
-            }
-          });
-          data[0].forEach(function(item) {
-            newNode = document.createElement('div');
-            newNode.className = 'form-space pointer';
-            newNode.setAttribute('data-id', item['_id']['$oid']);
-            newNodeChild = document.createElement('img');
-            newNodeChild.className = 'directory-space-img';
-            newNodeChild.src = item['picture'];
-            newNode.appendChild(newNodeChild);
-            newNodeChild = document.createElement('div');
-            newNodeChild.className = 'directory-space-title';
-            newNodeChild.textContent = item['name'];
-            newNode.appendChild(newNodeChild);
-            newNodeChild = document.createElement('div');
-            newNodeChild.className = 'directory-space-description';
-            newNodeChild.textContent = 'Description of Space'
-            newNode.appendChild(newNodeChild);
-            newNodeChild = document.createElement('div');
-            newNodeChild.className = 'directory-space-joined-status';
-            if(item['members'].some(row => row.includes(user_id))){
-              newNodeChild.textContent = 'Joined';
-            }
-            else {
-              newNodeChild.textContent = 'Not Joined';
-            }
-            newNode.appendChild(newNodeChild);
-            document.getElementById('directory-space').append(newNode);
-          });
-          if (window.location.href.indexOf('/sbhs/') != -1) {
-            current_space = window.location.href.substring(window.location.href.indexOf('/sbhs/') + 6).replace('#','');;
-            document.querySelector('[data-id="' + current_space + '"]').firstChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = "Joined";
-            joinSpace();
-          }
-        }
-      });
       
       $('#chat').scroll(function() { //$('#chat').scrollTop() + $('#chat').height();
         if (Math.abs($('#chat').scrollTop()) == document.getElementById("chat").scrollHeight - document.getElementById("chat").offsetHeight) {  
@@ -952,7 +917,6 @@
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
             if(!data['members'].some(row => row.includes(user_id))) {
-              alert('1');
               var newNode = document.createElement('li');
               newNode.className = 'space-wrapper';
               var newNodeChild = document.createElement('img');
@@ -971,7 +935,6 @@
               space();
             }
             else {
-              alert('2')
               $('#' + current_space).css('border-radius', '3px');
               $('#' + current_space).closest('.space-wrapper').find('.active-space').css('width', '39px');
               space();
