@@ -208,10 +208,31 @@ def logout():
 @app.route('/list_spaces', methods=['GET', 'POST'])
 def list_spaces():
     if request.method == 'POST':
-        spaces_list = list(collection_spaces.find())
-        user_id = session['unique_id']
-        data = [spaces_list, user_id]
+        user_spaces = collection_users.find_one({"_id": session['unique_id']})['joined']
+        space_list = []
+        for space_item in user_spaces:
+            try:
+                space_list.append(collection_spaces.find_one({'_id': ObjectId(space_item)}))
+            except:
+                pass
+        all_spaces = list(collection_spaces.find())
+        data = [all_spaces, user_spaces]
         return Response(dumps(data), mimetype='application/json')
+
+# Returns user's joined spaces.
+
+@app.route('/user_spaces', methods=['GET', 'POST'])
+def user_spaces():
+    if request.method == 'POST':
+        user_spaces = collection_users.find_one({"_id": session['unique_id']})['joined']
+        space_list = []
+        for space_item in user_spaces:
+            try:
+                space_list.append(collection_spaces.find_one({'_id': ObjectId(space_item)}))
+            except:
+                pass
+        space_list = dumps(space_list)
+        return Response(space_list, mimetype='application/json')
 
 # Returns all room and section data of the clicked space from MongoDB.
 
@@ -330,21 +351,6 @@ def join_space():
             collection_spaces.find_one_and_update({"_id": ObjectId(request.json['space_id'])}, {'$push': {'members': [session['unique_id'], session['users_name']]}})
         space = dumps(collection_spaces.find_one({'_id': ObjectId(request.json['space_id'])}))
         return Response(space, mimetype='application/json')
-
-# Returns user's joined spaces.
-
-@app.route('/user_spaces', methods=['GET', 'POST'])
-def user_spaces():
-    if request.method == 'POST':
-        spaces = collection_users.find_one({"_id": session['unique_id']})['joined']
-        space_list = []
-        for space_item in spaces:
-            try:
-                space_list.append(collection_spaces.find_one({'_id': ObjectId(space_item)}))
-            except:
-                pass
-        space_list = dumps(space_list)
-        return Response(space_list, mimetype='application/json')
 
 # When user deletes a message, delete that message from MongoDB.
 # If the combine status of the next message is true, then

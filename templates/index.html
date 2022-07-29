@@ -373,6 +373,25 @@
         url: '/list_spaces',
         dataType: "json",
         success: function(data) {
+          data[1].forEach(function(item) { 
+            try {
+              var newNode = document.createElement('li'); 
+              newNode.className = 'space-wrapper';
+              var newNodeChild = document.createElement('img'); 
+              newNodeChild.className = 'space pointer';
+              newNodeChild.id = item._id.$oid;
+              newNodeChild.setAttribute('data-name', item.name);
+              newNodeChild.src = item.picture;
+              newNode.appendChild(newNodeChild);
+              newNodeChild = document.createElement('div');
+              newNodeChild.className = 'active-space';
+              newNode.appendChild(newNodeChild); 
+              referenceNode = document.getElementById('space_align_helper'); 
+              referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling); 
+            }
+            catch(e) {
+            }
+          });
           data[0].forEach(function(item) {
             newNode = document.createElement('div');
             newNode.className = 'form-space pointer';
@@ -391,7 +410,7 @@
             newNode.appendChild(newNodeChild);
             newNodeChild = document.createElement('div');
             newNodeChild.className = 'directory-space-joined-status';
-            if(item['members'].some(row => row.includes(data[1]))){
+            if(item['members'].some(row => row.includes(user_id))){
               newNodeChild.textContent = 'Joined';
             }
             else {
@@ -400,6 +419,11 @@
             newNode.appendChild(newNodeChild);
             document.getElementById('directory-space').append(newNode);
           });
+          if (window.location.href.indexOf('/sbhs/') != -1) {
+            current_space = window.location.href.substring(window.location.href.indexOf('/sbhs/') + 6).replace('#','');;
+            document.querySelector('[data-id="' + current_space + '"]').firstChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = "Joined";
+            joinSpace();
+          }
         }
       });
       
@@ -928,6 +952,7 @@
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
             if(!data['members'].some(row => row.includes(user_id))) {
+              alert('1');
               var newNode = document.createElement('li');
               newNode.className = 'space-wrapper';
               var newNodeChild = document.createElement('img');
@@ -946,6 +971,7 @@
               space();
             }
             else {
+              alert('2')
               $('#' + current_space).css('border-radius', '3px');
               $('#' + current_space).closest('.space-wrapper').find('.active-space').css('width', '39px');
               space();
