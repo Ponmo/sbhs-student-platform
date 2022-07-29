@@ -1183,7 +1183,7 @@
                 let tableData = document.createElement('td');
                 newNode = document.createElement('img');
                 newNode.setAttribute('src', data['joined'][i]);
-                newNode.className('joined-icons');
+                newNode.className = 'joined-icons';
                 tableData.appendChild(newNode);
                 document.getElementById('joined-table').appendChild(tableData);
               }
