@@ -543,6 +543,14 @@ def created_section(data):
 	for room in data['room_list']:
 		socketio.emit('created_section', data, room = room)
 
+# When a section is deleted, send that section data to all
+# users in the space.
+
+@socketio.on('deleted_section')
+def created_section(data):
+	for room in data['room_list']:
+		socketio.emit('deleted_section', data, room = room)
+
 # When a message is deleted, send that message data to all
 # users in the space.
 
