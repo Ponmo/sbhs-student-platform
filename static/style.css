@@ -756,7 +756,6 @@ img { /* make images and create button undraggable and unhighlitable*/
   height: 32px;
   line-height: 32px;
   border-radius: 2px;
-  border-bottom: 1px solid white;
   padding-left: 8px;
   margin-top: 2px;
 }
@@ -777,11 +776,11 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin-top: 2px;
   color: #d83c3f;
 }
-.red-entry {
+.red-entry:hover {
   background-color: #d83c3f;
   color: white;
 }
-.red-entry {
+.red-entry:active {
   background-color: #b53739;
   color: white;
 }
