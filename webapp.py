@@ -348,6 +348,12 @@ def create_space():
 # Returns space data.
 # TODO: Check if space still exists in MongoDB.
 
+@app.route('/delete_space', methods=['GET', 'POST'])
+def delete_space():
+    if request.method == 'POST':
+        collection_spaces.find_one({'_id': ObjectId(request.json['space_id'])})
+        collection_spaces.delete_one({'id': ObjectId(request.json['space_id'])})
+
 @app.route('/join_space', methods=['GET', 'POST'])
 def join_space():
     if request.method == 'POST':
@@ -495,6 +501,11 @@ def deleted_room(data):
     for room in data['room_list']:
     	socketio.emit('deleted_room', data, room = room)
 
+@socketio.on('deleted_space')
+def deleted_space(data):
+    for space in data['space_list']:
+        socketio.emit('deleted_space', data, space = space)
+
 # When a section is created, send that section data to all
 # users in the space.
 
@@ -520,12 +531,12 @@ def edited_message(data):
 
 # When sections are sorted, update the order in MongoDB.
 
-@socketio.on('sorted_channels')
-def sorted_channels(data):
+@socketio.on('sorted_sections')
+def sorted_sections(data):
     for section in data['section_list']:
         collection_sections.find_one_and_update({"_id": ObjectId(section)}, {'$set': {'order': data['section_list'].index(section) + 1}})
     for room in data['room_list']:
-        socketio.emit('sorted_channels', data, room = room)
+        socketio.emit('sorted_sections', data, room = room)
     
 # When rooms are sorted, update the order in MongoDB.
 
