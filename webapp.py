@@ -328,15 +328,15 @@ def delete_section():
     if request.method == 'POST':
         section_count = collection_sections.count_documents({'space': request.json['space_id']})
         if section_count > 1:
-            collection_sections.delete_one({'id': ObjectId(request.json['section_id'])})
-            room_list = collection_rooms.find({'section': request.json['section_id']})
-            collection_rooms.delete_many({'section': request.json['section_id']})
+            collection_sections.delete_one({'_id': ObjectId(request.json['section_id'])})
+            #collection_rooms.delete_many({'section': request.json['section_id']})
+            #for room in room_list:
+            #    collection_messages.delete_many({'room': room['_id']['$oid']})
+            first_section = collection_sections.find_one({'space': request.json['space_id'], 'order': 1})['_id']['$oid']
+            order = collection_rooms.count_documents({'section': first_section}) + 1
+            room_list = collection_rooms.find({'section': request.json['section_id']}).sort('order', 1)
             for room in room_list:
-                collection_messages.delete_many({'room': room['_id']['$oid']})
-            cursor = collection_rooms.find({'section': request.json['section_id']}).sort('order', 1)
-            order = 1
-            for document in cursor:
-                collection_rooms.update_one({'_id': document['_id']}, {'$set': {'order': order}})
+                collection_rooms.update_one({'_id': room['_id']}, {'$set': {'order': order, 'section': first_section}})
                 order += 1
             return Response(dumps({'success': 'true'}), mimetype='application/json')
         else:
