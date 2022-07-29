@@ -168,6 +168,7 @@ def callback():
     session['users_email'] = users_email
     session['picture'] = picture
     session['users_name'] = users_name
+    session['logged'] = True
     
     # Store user data in MongoDB if new user.
     
@@ -186,22 +187,23 @@ def get_google_provider_cfg():
 @app.route('/sbhs/<space_id>')
 def render_main_page(space_id = None):
     if space_id:
-        if 'users_name' not in session:
+        if session['logged'] == True:
             session['invite'] = space_id
             return redirect(url_for('render_login'))
     elif 'invite' in session:
         space_id = session['invite']
         session.pop('invite')
         return redirect('https://sbhs-platform.herokuapp.com/sbhs/' + space_id)
-    elif 'users_name' not in session:
+    if session['logged'] == False:
         return redirect(url_for('render_login'))
     return render_template('index.html', name = session['users_name'], room = '1', picture = session['picture'], user_id = session['unique_id'])
 
-# When logout button is clicked, clear session.
+# When logout button is clicked, destroy session.
 
 @app.route('/logout')
 def logout():
-    session.clear()
+    session['logged'] == False
+    session.destroy()
 
 # Returns all space data from MongoDB.
 
