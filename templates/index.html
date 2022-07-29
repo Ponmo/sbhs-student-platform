@@ -730,17 +730,14 @@
       });
 
       socket.on('deleted_section', function(data) {
-        alert('ge');
+        alert(data.selected_section);
         var deleted_section = document.getElementById(data.section_id);
         var first_section = document.querySelectorAll('.section li:not([id="' + data.section_id + '"])')[0];
+        alert(JSON.stringify(first_section));
         var rooms = deleted_section.nextElementSibling.children
         for (var i = 0; i < rooms.length; i++) {
           first_section.nextElementSibling.appendChild(rooms[i]);
         }
-
-        //deleted_section.nextElementSibling.children.forEach(function(room) {
-        //  first_section.appendChild(room);
-        //});
         deleted_section.remove();
       });
 
