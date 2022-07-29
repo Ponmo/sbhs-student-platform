@@ -731,8 +731,8 @@
 
       socket.on('deleted_section', function(data) {
         alert('ge');
-        deleted_section = document.getElementById(data.selected_section);
-        first_section = document.querySelectorAll('.section li:not([id="' + data.selected_section + '"])')[0];
+        deleted_section = document.getElementById(data.section_id);
+        first_section = document.querySelectorAll('.section li:not([id="' + data.section_id + '"])')[0];
         deleted_section.nextElementSibling.children.forEach(function(room) {
           first_section.appendChild(room);
         });
