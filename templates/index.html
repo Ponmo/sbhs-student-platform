@@ -709,11 +709,20 @@
       });
 
       $(document).on('click', '#delete-section', function () {
-        alert(roomList());
-        socket.emit({
-          section_id: selected_section,
-          space_id: current_space,
-          room_list: roomList()
+        $.ajax({
+          type: 'POST',
+          url: '/delete_section',
+          dataType: "json",
+          data: JSON.stringify({'section_id': selected_section, 'space_id': current_space}),
+          contentType: 'application/json;charset=UTF-8',
+          success: function(data) {
+            alert(JSON.stringify(data));
+            /*socket.emit({
+              section_id: selected_section,
+              room_list: roomList()
+            });*/
+
+          }
         });
       });
 
