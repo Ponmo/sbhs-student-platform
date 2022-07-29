@@ -205,10 +205,11 @@ def render_main_page(space_id = None):
 
 # When logout button is clicked, destroy session.
 
-@app.route('/logout')
+@app.route('/logout', methods=['GET', 'POST'])
 def logout():
-    session['logged'] == False # Prevents browsers from using cached session data to log in.
-    return redirect('https://www.youtube.com/watch?v=MAG1LoaYVFI&ab_channel=quagmiretoiletgaming')
+    if request.method == 'POST':
+        session['logged'] == False # Prevents browsers from using cached session data to log in.
+        return redirect('https://www.youtube.com/watch?v=MAG1LoaYVFI&ab_channel=quagmiretoiletgaming')
 # Returns all space data from MongoDB.
 
 @app.route('/list_spaces', methods=['GET', 'POST'])
