@@ -1,10 +1,11 @@
+from ast import Not
 from flask_socketio import SocketIO, emit, join_room, leave_room
 
 import json
 import os
 import re
 
-from flask import Flask, redirect, Markup, url_for, session, request, jsonify, Response, request
+from flask import Flask, flash, redirect, Markup, url_for, session, request, jsonify, Response, request
 from flask import render_template
 
 from oauthlib.oauth2 import WebApplicationClient
@@ -23,6 +24,9 @@ from pytz import timezone
 import smtplib, ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+
+#from flask_login import LoginManager
+#login_manager = LoginManager()
 
 GOOGLE_CLIENT_ID = os.environ['GOOGLE_CLIENT_ID']
 
@@ -46,6 +50,7 @@ collection_logs = db['Logs']
 
 app = Flask(__name__)
 app.secret_key = os.environ['SECRET_KEY']
+#login_manager.init_app(app)
 
 socketio = SocketIO(app, async_mode='gevent')
 
@@ -186,7 +191,8 @@ def get_google_provider_cfg():
 @app.route('/sbhs')
 @app.route('/sbhs/<space_id>')
 def render_main_page(space_id = None):
-    if space_id is None:
+    flash(session['logged'])
+    if space_id is not None:
         if 'logged' not in session or session['logged'] == False:
             session['invite'] = space_id
             return redirect(url_for('render_login'))
@@ -203,7 +209,7 @@ def render_main_page(space_id = None):
 @app.route('/logout')
 def logout():
     session['logged'] == False # Prevents browsers from using cached session data to log in.
-    session.destroy()
+    session.clear()
 
 # Returns all space data from MongoDB.
 
