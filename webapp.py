@@ -208,7 +208,7 @@ def render_main_page(space_id = None):
 @app.route('/logout')
 def logout():
     session['logged'] == False # Prevents browsers from using cached session data to log in.
-    session.clear()
+    return session['logged']
 
 # Returns all space data from MongoDB.
 
