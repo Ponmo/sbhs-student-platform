@@ -147,9 +147,14 @@
       </div>
     </div>
 
-    <ul id="context-menu">
+    <ul id="section-menu">
       <li id="edit-section" class="pointer">Edit Section</li> 
       <li id="delete-section" class="pointer">Delete Section</li>
+    </ul>
+
+    <ul id="room-menu">
+      <li id="edit-room" class="pointer">Edit Channel</li> 
+      <li id="delete-room" class="pointer">Delete Channel</li>
     </ul>
     
   </body>
@@ -167,6 +172,7 @@
       var current_space = '';
       var typing_list = [];
       var selected_section = '';
+      var selected_room = '';
       var space_admin = false;
       var user_id = '{{ user_id }}';
       var selected_user = '';
@@ -333,7 +339,6 @@
       
       // Collapse Sections
       $(document).on('click', '.section', function() {
-        alert(this.id);
         selected_section = this.id;
       });
       
@@ -710,6 +715,14 @@
         }
       });
 
+      $(document).on('click', '#delete-section', function () {
+        alert(roomList());
+        socket.emit({
+          section_id: selected_section,
+          room_list: roomList()
+        });
+      });
+
       document.getElementById('create-space-form').onsubmit = function (e) {
         e.preventDefault();
         let space_name = document.getElementById('space-name').value.trim();
@@ -857,6 +870,14 @@
         else {
           joinRoom(this.id);
         }
+      });
+
+      $(document).on('contextmenu', '.room', function (e) {
+        selected_room = this.id;
+        document.getElementById('context-menu').style.top = mouseY(event) + 'px';
+        document.getElementById('context-menu').style.left = mouseX(event) + 'px';
+        $(document.getElementById('context-menu')).show();
+        e.preventDefault();
       });
         
       function joinRoom(room_id) {
@@ -1208,6 +1229,16 @@
       $("#chat").on('mouseleave', '.message-container-combine', function(){
         $(this).find(".message-combine-time").css("visibility", "hidden");
       });
+
+      function roomList() {
+        var rooms = document.querySelectorAll('.room');
+        var room_list = [];
+        for (let i = 0; i < rooms.length; i++) {
+          room_list.push(rooms[i].id);
+        }
+        return room_list;
+      }
+
     });
   </script>
 </html>
