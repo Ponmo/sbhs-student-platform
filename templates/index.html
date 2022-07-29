@@ -243,18 +243,13 @@
         items: '.section-group',
         distance: '3',
         update: function() {
-          var rooms = document.querySelectorAll('.room');
-          var room_list = [];
-          for (let i = 0; i < rooms.length; i++) {
-            room_list.push(rooms[i].id);
-          }
           var sections = document.querySelectorAll(".section");
           var section_list = [];
           for (let i = 0; i < sections.length; i++) {
             section_list.push(sections[i].id);
           }
           socket.emit('sorted_channels', {
-            room_list: room_list,
+            room_list: roomList(),
             section_list: section_list
           });
         }
@@ -625,13 +620,9 @@
             data: JSON.stringify({'room_name': room_name, 'section_id': selected_section, 'space_id': current_space}),
             contentType: 'application/json;charset=UTF-8',
             success: function(room) {
-              var room_list = [];
-              document.querySelectorAll(".room").forEach(function(item) {
-                room_list.push(item.id);
-              });
               socket.emit('created_room', {
                 room_id: room['_id']['$oid'],
-                room_list: room_list,
+                room_list: roomList(),
                 name: room_name,
                 section_id: selected_section
               });
@@ -673,13 +664,9 @@
             data: JSON.stringify({'section_name': section_name, 'space_id': current_space}),
             contentType: 'application/json;charset=UTF-8',
             success: function(section) {
-              var room_list = [];
-              document.querySelectorAll(".room").forEach(function(item) {
-                room_list.push(item.id);
-              });
               socket.emit('created_section', {
                 section_id: section['_id']['$oid'],
-                room_list: room_list,
+                room_list: roomList(),
                 name: section_name,
               });
               document.getElementById("create-section").style.display = "none";
@@ -851,14 +838,9 @@
               contentType: 'application/json;charset=UTF-8',
               success: function(data) {
                 if (data['success'] == 'true') {
-                  var rooms = document.querySelectorAll('.room')
-                  var room_list = [];
-                  for (let i = 0; i < rooms.length; i++) {
-                    room_list.push(rooms[i].id);
-                  }
                   socket.emit('deleted_room', {
                     room: deleted_room,
-                    room_list: room_list
+                    room_list: roomList()
                   });
                 }
                 else {
@@ -1236,11 +1218,10 @@
       });
 
       function roomList() {
-        var rooms = document.querySelectorAll('.room');
         var room_list = [];
-        for (let i = 0; i < rooms.length; i++) {
-          room_list.push(rooms[i].id);
-        }
+        document.querySelectorAll(".room").forEach(function(item) {
+          room_list.push(item.id);
+        });
         return room_list;
       }
 
