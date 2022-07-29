@@ -191,17 +191,20 @@ def get_google_provider_cfg():
 @app.route('/sbhs')
 @app.route('/sbhs/<space_id>')
 def render_main_page(space_id = None):
-    flash(session['logged'])
     if space_id is not None:
         if 'logged' not in session or session['logged'] == False:
             session['invite'] = space_id
+            return "1"
             return redirect(url_for('render_login'))
     if 'invite' in session:
         space_id = session['invite']
         session.pop('invite')
+        return "2"
         return redirect('https://sbhs-platform.herokuapp.com/sbhs/' + space_id) #TypeError: can only concatenate str (not "NoneType") to str
     if 'logged' not in session or session['logged'] == False:
+        return "3"
         return redirect(url_for('render_login'))
+    return "4"
     return render_template('index.html', name = session['users_name'], room = '1', picture = session['picture'], user_id = session['unique_id'])
 
 # When logout button is clicked, destroy session.
