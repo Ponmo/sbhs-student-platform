@@ -734,8 +734,7 @@
         var deleted_section = document.getElementById(data.section_id);
         const first_section = document.querySelector('.section:not([id="' + data.section_id + '"])');//:not([id*="' + data.section_id + '"])');
         var rooms = deleted_section.nextElementSibling.children
-        for (var i = 0; i < rooms.length; i++) {
-          alert(i);
+        for (var i = 0; i <= rooms.length; i++) {
           first_section.nextElementSibling.appendChild(rooms[i]);
         }
         deleted_section.parentElement.remove();
