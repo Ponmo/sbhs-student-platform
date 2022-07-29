@@ -147,12 +147,12 @@
       </div>
     </div>
 
-    <ul id="section-menu">
+    <ul id="section-menu" class="context-menu">
       <li id="edit-section" class="pointer">Edit Section</li> 
       <li id="delete-section" class="pointer">Delete Section</li>
     </ul>
 
-    <ul id="room-menu">
+    <ul id="room-menu" class="context-menu">
       <li id="edit-room" class="pointer">Edit Channel</li> 
       <li id="delete-room" class="pointer">Delete Channel</li>
     </ul>
@@ -345,9 +345,9 @@
       // Contextmenu for Sections
       $(document).on('contextmenu', '.section', function (e) {
         selected_section = this.id;
-        document.getElementById('context-menu').style.top = mouseY(event) + 'px';
-        document.getElementById('context-menu').style.left = mouseX(event) + 'px';
-        $(document.getElementById('context-menu')).show();
+        document.getElementById('section-menu').style.top = mouseY(event) + 'px';
+        document.getElementById('section-menu').style.left = mouseX(event) + 'px';
+        $(document.getElementById('section-menu')).show();
         e.preventDefault();
       });
 
@@ -874,9 +874,9 @@
 
       $(document).on('contextmenu', '.room', function (e) {
         selected_room = this.id;
-        document.getElementById('context-menu').style.top = mouseY(event) + 'px';
-        document.getElementById('context-menu').style.left = mouseX(event) + 'px';
-        $(document.getElementById('context-menu')).show();
+        document.getElementById('room-menu').style.top = mouseY(event) + 'px';
+        document.getElementById('room-menu').style.left = mouseX(event) + 'px';
+        $(document.getElementById('room-menu')).show();
         e.preventDefault();
       });
         
@@ -981,11 +981,16 @@
         // hide contextmenu on popup and viceversa
         var container = $("#space-settings-popup");
         var profile_popup = $("#profile-popup");
-        var context_menu = $('#context-menu');
+        var section_menu = $('#section-menu');
+        var room_menu = $('#room-menu');
         // For container and context_menu, check if it exists as well.
-        if (!context_menu.is(e.target)) 
+        if (!room_menu.is(e.target)) 
         {
-          context_menu.hide();
+          room_menu.hide();
+        }
+        if (!section_menu.is(e.target)) 
+        {
+          section_menu.hide();
         }
         if (!container.is(e.target) && !$('#server-settings-button').is(e.target)) 
         {

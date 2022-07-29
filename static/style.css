@@ -727,7 +727,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   background-color: #fefefe;
   /*opacity border*/
 }
-#context-menu {
+.context-menu {
   position: absolute;
   display: none;
   z-index: 1000;
@@ -782,6 +782,40 @@ img { /* make images and create button undraggable and unhighlitable*/
   color: white;
 }
 #delete-section:active {
+  background-color: #b53739;
+  color: white;
+}
+#edit-room {
+  width: 174px;
+  height: 32px;
+  line-height: 32px;
+  border-radius: 2px;
+  margin: 8px 8px 1px 8px;
+  border-bottom: 1px solid white;
+  padding-left: 8px;
+}
+#edit-room:hover {
+  background-color: #4752c4;
+  color: white;
+}
+#edit-room:active {
+  background-color: #3c46a6;
+  color: white;
+}
+#delete-roon {
+  width: 174px;
+  height: 32px;
+  line-height: 32px;
+  border-radius: 2px;
+  margin: 0px 8px 8px 8px;
+  padding-left: 8px;
+  color: #d83c3f;
+}
+#delete-room:hover {
+  background-color: #d83c3f;
+  color: white;
+}
+#delete-room:active {
   background-color: #b53739;
   color: white;
 }
