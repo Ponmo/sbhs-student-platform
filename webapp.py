@@ -196,10 +196,10 @@ def render_main_page(space_id = None):
         if 'logged' not in session or session['logged'] == False:
             session['invite'] = space_id
             return redirect(url_for('render_login'))
-    elif 'invite' in session:
+    if 'invite' in session:
         space_id = session['invite']
         session.pop('invite')
-        return redirect('https://sbhs-platform.herokuapp.com/sbhs/' + space_id)
+        return redirect('https://sbhs-platform.herokuapp.com/sbhs/' + space_id) #TypeError: can only concatenate str (not "NoneType") to str
     if 'logged' not in session or session['logged'] == False:
         return redirect(url_for('render_login'))
     return render_template('index.html', name = session['users_name'], room = '1', picture = session['picture'], user_id = session['unique_id'])
