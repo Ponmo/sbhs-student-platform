@@ -307,7 +307,7 @@
       });
 
       $(document).on('click', '#log-out', function () {
-        $.get('/logout');
+        $.post('/logout');
       });
 
       $(document).on('click', '#leave-space', function() {
