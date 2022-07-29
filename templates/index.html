@@ -738,7 +738,7 @@
         for (var i = 0; i < rooms.length; i++) {
           first_section.nextElementSibling.appendChild(rooms[i]);
         }
-        deleted_section.remove();
+        deleted_section.parentElement.remove();
       });
 
       document.getElementById('create-space-form').onsubmit = function (e) {
