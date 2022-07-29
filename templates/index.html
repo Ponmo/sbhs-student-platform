@@ -731,12 +731,11 @@
 
       socket.on('deleted_section', function(data) {
         deleted_section = document.getElementById(data.selected_section);
-        room_list = deleted_section.nextElementSibling.children;
         first_section = document.querySelectorAll('.section li:not([id="' + data.selected_section + '"])')[0];
-        first_section.nextElementSibling.append(room_list);
-        //deleted_section.nextElementSibling.children.forEach(function(room) {
-        //  first_section.appendChild('')
-        //});
+        deleted_section.nextElementSibling.children.forEach(function(room) {
+          first_section.appendChild(room);
+        });
+        deleted_section.remove();
       });
 
       document.getElementById('create-space-form').onsubmit = function (e) {
