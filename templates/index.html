@@ -733,9 +733,14 @@
         alert('ge');
         deleted_section = document.getElementById(data.section_id);
         first_section = document.querySelectorAll('.section li:not([id="' + data.section_id + '"])')[0];
-        deleted_section.nextElementSibling.children.forEach(function(room) {
-          first_section.appendChild(room);
-        });
+        rooms = deleted_section.nextElementSibling.children
+        for (var i = 0; i < rooms.length; i++) {
+          first_section.appendChild(rooms[i]);
+        }
+
+        //deleted_section.nextElementSibling.children.forEach(function(room) {
+        //  first_section.appendChild(room);
+        //});
         deleted_section.remove();
       });
 
