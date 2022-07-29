@@ -332,43 +332,7 @@
           timeout = setTimeout(stoppedTyping, 5000);
         }
       }
-      
-
-      $.ajax({ //TODO: Combine AJAX calls, very important
-        type: 'POST',
-        url: '/user_spaces',
-        dataType: "json",
-        success: function(user_space_list) {
-          user_space_list.forEach(function(item) { 
-            try {
-              var newNode = document.createElement('li'); 
-              newNode.className = 'space-wrapper';
-            
-              var newNodeChild = document.createElement('img'); 
-              newNodeChild.className = 'space pointer';
-              newNodeChild.id = item._id.$oid;
-              newNodeChild.setAttribute('data-name', item.name);
-              newNodeChild.src = item.picture;
-              newNode.appendChild(newNodeChild);
-            
-              newNodeChild = document.createElement('div');
-              newNodeChild.className = 'active-space';
-              newNode.appendChild(newNodeChild); 
-            
-              referenceNode = document.getElementById('space_align_helper'); 
-              referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling); 
-            }
-            catch(e) {
-            }
-          });
-          if (window.location.href.indexOf('/sbhs/') != -1) {
-            current_space = window.location.href.substring(window.location.href.indexOf('/sbhs/') + 6).replace('#','');;
-            //document.querySelector('[data-id="' + current_space + '"]').firstChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = "Joined";
-            joinSpace();
-          }
-        }
-      });
-
+  
       $.ajax({
         type: 'POST',
         url: '/list_spaces',
