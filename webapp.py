@@ -323,10 +323,28 @@ def create_section():
 
 @app.route('/delete_section', methods=['GET', 'POST'])
 def delete_section():
-	if request.method == 'POST':
-		collection_sections.delete_one({'id': ObjectId(request.json['space_id'])})
-		section = dumps(section)
-		return Response(section, mimetype='application/json')
+    if request.method == 'POST':
+        section_count = collection_sections.count_documents({'space': request.json['space_id']})
+
+        if section_count > 1:
+            collection_sections.delete_one({'_id': ObjectId(request.json['room_id'])})
+            collection_messages.delete_many({'room': request.json['room_id']})
+            cursor = collection_rooms.find({'section': request.json['section_id']}).sort('order', 1)
+            order = 1
+            for document in cursor:
+                collection_rooms.update_one({'_id': document['_id']}, {'$set': {'order': order}})
+                order += 1
+            return Response(dumps({'success': 'true'}), mimetype='application/json')
+        else:
+            return Response(dumps({'success': 'false'}), mimetype='application/json')
+
+
+
+        
+        collection_sections.delete_one({'id': ObjectId(request.json['section_id'])})
+        #collection_rooms.delete_many({'room': request.json['room_id']})
+        section = dumps(section)
+        return Response(section, mimetype='application/json')
 
 # Adds the newly created space, default room, and default
 # section to MongoDB.
@@ -355,6 +373,7 @@ def create_space():
 # Returns space data.
 # TODO: Check if space still exists in MongoDB.
 
+#todo for tomorrow
 @app.route('/delete_space', methods=['GET', 'POST'])
 def delete_space():
     if request.method == 'POST':
@@ -508,6 +527,7 @@ def deleted_room(data):
     for room in data['room_list']:
     	socketio.emit('deleted_room', data, room = room)
 
+#todo for tomorrow
 @socketio.on('deleted_space')
 def deleted_space(data):
     for space in data['space_list']:
