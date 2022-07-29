@@ -177,7 +177,6 @@
         dataType: "json",
         success: function(data) {
           data[1].forEach(function(item) { 
-            alert(JSON.stringify(item));
             try {
               var newNode = document.createElement('li'); 
               newNode.className = 'space-wrapper';
@@ -197,7 +196,6 @@
             }
           });
           data[0].forEach(function(item) {
-            alert(JSON.stringify(item));
             newNode = document.createElement('div');
             newNode.className = 'form-space pointer';
             newNode.setAttribute('data-id', item['_id']['$oid']);
