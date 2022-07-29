@@ -716,7 +716,7 @@
           data: JSON.stringify({'section_id': selected_section, 'space_id': current_space}),
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
-            if (data['success'] == true) {
+            if (data['success'] == 'true') {
               socket.emit('deleted_section', {
                 section_id: selected_section,
                 room_list: roomList()
