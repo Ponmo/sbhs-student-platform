@@ -1179,12 +1179,12 @@
             success: function(data) {
               document.getElementById('profile-popup').innerHTML = '<ul id="profile-list"><li id="profile-picture-list"><img id="popup-picture" src=' + data['picture'] + ' alt="!"></li><li id="profile-name">' + data['name'] + '</li><li id="profile-email">' + data['email'] + '</li><table id="joined-table"></table>';
               //loop through all joined servers' icons and creates img elements to place in the table
-                for (let i = 0; i < data["joined"].length; i++) {
-                tableData = document.createElement('td')
+              for (let i = 0; i < data["joined"].length; i++) {
+                let tableData = document.createElement('td');
                 newNode = document.createElement('img');
                 newNode.setAttribute('src', data['joined'][i]);
-                newNode.className('joined-icons')
-                tableData.appendChild(newNode)
+                newNode.className('joined-icons');
+                tableData.appendChild(newNode);
                 document.getElementById('joined-table').appendChild(tableData);
               }
             }
