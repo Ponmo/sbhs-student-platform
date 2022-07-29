@@ -307,7 +307,13 @@
       });
 
       $(document).on('click', '#log-out', function () {
-        $.post('/logout');
+        $.ajax({
+          type: 'POST',
+          url: '/logout',
+          success: function() {
+            alert('yay');
+          }
+        });
       });
 
       $(document).on('click', '#leave-space', function() {
@@ -323,7 +329,7 @@
             $("#home-page").show();
             $("#" + current_space).parent().remove();
           }
-        })
+        });
       });
 
       // below psuedocode comments for saving unsent messages
