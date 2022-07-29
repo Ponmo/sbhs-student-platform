@@ -731,11 +731,11 @@ img { /* make images and create button undraggable and unhighlitable*/
   position: absolute;
   display: none;
   z-index: 1000;
-  width: 190px;
+  width: 200px;
   background-color: #17181b;
   list-style-type: none;
   list-style: none;
-  padding: 0px;
+  padding: 6px 8px 8px 8px;
   margin: 0px;
   color: #dcddde;
   font-size: 14px;
@@ -751,71 +751,37 @@ img { /* make images and create button undraggable and unhighlitable*/
   -ms-user-select: none;
   user-select: none;
 }
-#edit-section {
-  width: 174px;
+.blue-entry {
+  width: 184px;
   height: 32px;
   line-height: 32px;
   border-radius: 2px;
-  margin: 8px 8px 1px 8px;
   border-bottom: 1px solid white;
   padding-left: 8px;
+  margin-top: 2px;
 }
-#edit-section:hover {
+.blue-entry:hover {
   background-color: #4752c4;
   color: white;
 }
-#edit-section:active {
+.blue-entry:active {
   background-color: #3c46a6;
   color: white;
 }
-#delete-section {
-  width: 174px;
+.red-entry {
+  width: 184px;
   height: 32px;
   line-height: 32px;
   border-radius: 2px;
-  margin: 0px 8px 8px 8px;
   padding-left: 8px;
+  margin-top: 2px;
   color: #d83c3f;
 }
-#delete-section:hover {
+.red-entry {
   background-color: #d83c3f;
   color: white;
 }
-#delete-section:active {
-  background-color: #b53739;
-  color: white;
-}
-#edit-room {
-  width: 174px;
-  height: 32px;
-  line-height: 32px;
-  border-radius: 2px;
-  margin: 8px 8px 1px 8px;
-  border-bottom: 1px solid white;
-  padding-left: 8px;
-}
-#edit-room:hover {
-  background-color: #4752c4;
-  color: white;
-}
-#edit-room:active {
-  background-color: #3c46a6;
-  color: white;
-}
-#delete-room {
-  width: 174px;
-  height: 32px;
-  line-height: 32px;
-  border-radius: 2px;
-  margin: 0px 8px 8px 8px;
-  padding-left: 8px;
-  color: #d83c3f;
-}
-#delete-room:hover {
-  background-color: #d83c3f;
-  color: white;
-}
-#delete-room:active {
+.red-entry {
   background-color: #b53739;
   color: white;
 }

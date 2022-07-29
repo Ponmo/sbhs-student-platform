@@ -321,6 +321,13 @@ def create_section():
 		section = dumps(section)
 		return Response(section, mimetype='application/json')
 
+@app.route('/delete_section', methods=['GET', 'POST'])
+def delete_section():
+	if request.method == 'POST':
+		collection_sections.delete_one({'id': ObjectId(request.json['space_id'])})
+		section = dumps(section)
+		return Response(section, mimetype='application/json')
+
 # Adds the newly created space, default room, and default
 # section to MongoDB.
 # Returns the room and section data.

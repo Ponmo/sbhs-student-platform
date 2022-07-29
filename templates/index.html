@@ -148,13 +148,13 @@
     </div>
 
     <ul id="section-menu" class="context-menu">
-      <li id="edit-section" class="pointer">Edit Section</li> 
-      <li id="delete-section" class="pointer">Delete Section</li>
+      <li id="edit-section" class="blue-entry pointer">Edit Section</li> 
+      <li id="delete-section" class="red-entry pointer">Delete Section</li>
     </ul>
 
     <ul id="room-menu" class="context-menu">
-      <li id="edit-room" class="pointer">Edit Channel</li> 
-      <li id="delete-room" class="pointer">Delete Channel</li>
+      <li id="edit-room" class="blue-entry pointer">Edit Channel</li> 
+      <li id="delete-room" class="red-entry pointer">Delete Channel</li>
     </ul>
     
   </body>
@@ -248,14 +248,14 @@
           for (let i = 0; i < sections.length; i++) {
             section_list.push(sections[i].id);
           }
-          socket.emit('sorted_channels', {
+          socket.emit('sorted_sections', {
             room_list: roomList(),
             section_list: section_list
           });
         }
       });
 
-      socket.on('sorted_channels', function (data) {
+      socket.on('sorted_sections', function (data) {
         data.section_list.forEach(function(section_id) {
           document.getElementById(section_id).parentElement.parentElement.appendChild(document.getElementById(section_id).parentElement);
         });
@@ -757,6 +757,21 @@
         $(this.parentNode.previousElementSibling).after('<form class="message_edit_input_form"><textarea class="message_edit" rows="1" placeholder="Remove message">' + message + '</textarea></form>');
         this.parentNode.previousElementSibling.firstChild.setAttribute("style", "height:" + (this.parentNode.previousElementSibling.firstChild.scrollHeight) + "px;overflow-y:hidden;");
       });
+
+      $(document).on('click', '.delete-space', function(){
+        var space_id = this.
+        $.ajax({
+          type: 'POST',
+          url: '/delete_space',
+          dataType: 'json',
+          data: JSON.stringify({'space_id': space_id}),
+          contentType: 'application/json;charset=UTF-8',
+          success: function (delete_space){
+            alert(JSON.stringify(delete_space['success']));
+            socket.emit('deleted_space', {'space_id': space_id, 'space_id': current_space})
+          }
+        })
+      })
 
       $(document).on('click', '.delete-message', function() {
         var message_id = this.parentNode.parentNode.id;
