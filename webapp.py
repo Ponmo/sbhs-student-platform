@@ -325,10 +325,11 @@ def create_section():
 def delete_section():
     if request.method == 'POST':
         section_count = collection_sections.count_documents({'space': request.json['space_id']})
-
         if section_count > 1:
-            collection_sections.delete_one({'_id': ObjectId(request.json['room_id'])})
-            collection_messages.delete_many({'room': request.json['room_id']})
+            collection_sections.delete_one({'id': ObjectId(request.json['section_id'])})
+            room_list = collection_rooms.delete_many({'section': request.json['section_id']})
+            for room in room_list:
+                collection_messages.delete_many({'section'})
             cursor = collection_rooms.find({'section': request.json['section_id']}).sort('order', 1)
             order = 1
             for document in cursor:
@@ -337,11 +338,6 @@ def delete_section():
             return Response(dumps({'success': 'true'}), mimetype='application/json')
         else:
             return Response(dumps({'success': 'false'}), mimetype='application/json')
-
-
-
-        
-        collection_sections.delete_one({'id': ObjectId(request.json['section_id'])})
         #collection_rooms.delete_many({'room': request.json['room_id']})
         section = dumps(section)
         return Response(section, mimetype='application/json')
