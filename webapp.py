@@ -211,6 +211,7 @@ def logout():
         session['logged'] == False # Prevents browsers from using cached session data to log in.
         session.clear()
         return Response(dumps({'success': 'true'}), mimetype='application/json')
+        
 # Returns all space data from MongoDB.
 
 @app.route('/list_spaces', methods=['GET', 'POST'])
