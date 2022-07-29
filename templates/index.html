@@ -733,8 +733,8 @@
         alert(data.section_id);
         var deleted_section = document.getElementById(data.section_id);
         const first_section = document.querySelector('.section:not([id="' + data.section_id + '"])');//:not([id*="' + data.section_id + '"])');
-        alert(JSON.stringify(first_section));
         var rooms = deleted_section.nextElementSibling.children
+        alert(JSON.stringify(rooms));
         for (var i = 0; i < rooms.length; i++) {
           first_section.nextElementSibling.appendChild(rooms[i]);
         }
