@@ -329,6 +329,11 @@ def delete_section():
         section_count = collection_sections.count_documents({'space': request.json['space_id']})
         if section_count > 1:
             collection_sections.delete_one({'_id': ObjectId(request.json['section_id'])})
+            order = 1
+            section_list = collection_sections.find({'space': request.json['space_id']}).sort('order', 1)
+            for section in section_list:
+                collection_sections.update_one({'_id': section['id']}, {'$set': {'order': order}})
+                order += 1
             #collection_rooms.delete_many({'section': request.json['section_id']})
             #for room in room_list:
             #    collection_messages.delete_many({'room': room['_id']['$oid']})
