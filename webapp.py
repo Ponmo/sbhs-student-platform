@@ -186,7 +186,7 @@ def get_google_provider_cfg():
 @app.route('/sbhs')
 @app.route('/sbhs/<space_id>')
 def render_main_page(space_id = None):
-    if space_id:
+    if space_id is None:
         if 'logged' not in session or session['logged'] == False:
             session['invite'] = space_id
             return redirect(url_for('render_login'))
