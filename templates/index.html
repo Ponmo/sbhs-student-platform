@@ -158,7 +158,6 @@
   <script type="text/javascript" charset="utf-8">
     //Give small space to empty categories room-group 
     $(document).ready(function() {
-      alert('repeat');
       var socket = io();
       var chat_history_skip = 0;
       var current_room = '';
@@ -335,7 +334,7 @@
       }
       
 
-      $.ajax({ //TODO: Combine AJAX calls
+      $.ajax({ //TODO: Combine AJAX calls, very important
         type: 'POST',
         url: '/user_spaces',
         dataType: "json",
