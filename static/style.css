@@ -813,4 +813,11 @@ img { /* make images and create button undraggable and unhighlitable*/
 #spaces::-webkit-scrollbar {
   height: 0px;
 }
+.joined-icons {
+  padding: 2px;
+  padding-bottom: 0px;
+  height: 39px;
+  width: 57px;
+  border-radius: 5px;
+}
 /*Add User Select None Class*/

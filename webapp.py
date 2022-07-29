@@ -332,7 +332,7 @@ def delete_section():
             order = 1
             section_list = collection_sections.find({'space': request.json['space_id']}).sort('order', 1)
             for section in section_list:
-                collection_sections.update_one({'_id': section['id']}, {'$set': {'order': order}})
+                collection_sections.update_one({'_id': section['_id']}, {'$set': {'order': order}})
                 order += 1
             #collection_rooms.delete_many({'section': request.json['section_id']})
             #for room in room_list:
