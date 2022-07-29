@@ -731,11 +731,11 @@
 
       socket.on('deleted_section', function(data) {
         alert('ge');
-        deleted_section = document.getElementById(data.section_id);
-        first_section = document.querySelectorAll('.section li:not([id="' + data.section_id + '"])')[0];
-        rooms = deleted_section.nextElementSibling.children
+        var deleted_section = document.getElementById(data.section_id);
+        var first_section = document.querySelectorAll('.section li:not([id="' + data.section_id + '"])')[0];
+        var rooms = deleted_section.nextElementSibling.children
         for (var i = 0; i < rooms.length; i++) {
-          first_section.appendChild(rooms[i]);
+          first_section.nextElementSibling.appendChild(rooms[i]);
         }
 
         //deleted_section.nextElementSibling.children.forEach(function(room) {
