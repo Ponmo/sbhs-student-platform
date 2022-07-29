@@ -216,7 +216,7 @@ def list_spaces():
             except:
                 pass
         all_spaces = list(collection_spaces.find())
-        data = [all_spaces, user_spaces]
+        data = [all_spaces, space_list]
         return Response(dumps(data), mimetype='application/json')
 
 # Returns user's joined spaces.
