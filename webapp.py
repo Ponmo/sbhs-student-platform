@@ -323,6 +323,10 @@ def create_section():
 		section = dumps(section)
 		return Response(section, mimetype='application/json')
 
+# Deletes a section from MongoDB.
+# Updates the order and positioning of the other 
+# sections and rooms in the space.
+
 @app.route('/delete_section', methods=['GET', 'POST'])
 def delete_section():
     if request.method == 'POST':
@@ -334,9 +338,6 @@ def delete_section():
             for section in section_list:
                 collection_sections.update_one({'_id': section['_id']}, {'$set': {'order': order}})
                 order += 1
-            #collection_rooms.delete_many({'section': request.json['section_id']})
-            #for room in room_list:
-            #    collection_messages.delete_many({'room': room['_id']['$oid']})
             first_section = str(collection_sections.find_one({'space': request.json['space_id'], 'order': 1})['_id'])
             order = collection_rooms.count_documents({'section': first_section}) + 1
             room_list = collection_rooms.find({'section': request.json['section_id']}).sort('order', 1)
@@ -346,9 +347,6 @@ def delete_section():
             return Response(dumps({'success': 'true'}), mimetype='application/json')
         else:
             return Response(dumps({'success': 'false'}), mimetype='application/json')
-        #collection_rooms.delete_many({'room': request.json['room_id']})
-        section = dumps(section)
-        return Response(section, mimetype='application/json')
 
 # Adds the newly created space, default room, and default
 # section to MongoDB.
