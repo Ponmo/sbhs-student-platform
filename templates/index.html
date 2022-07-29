@@ -716,14 +716,27 @@
           data: JSON.stringify({'section_id': selected_section, 'space_id': current_space}),
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
-            alert(JSON.stringify(data));
-            /*socket.emit({
-              section_id: selected_section,
-              room_list: roomList()
-            });*/
-
+            if (data['success'] == true) {
+              socket.emit('deleted_section', {
+                section_id: selected_section,
+                room_list: roomList()
+              });
+            }
+            else {
+              alert('There must be at least one section.');
+            }
           }
         });
+      });
+
+      socket.on('deleted_section', function(data) {
+        deleted_section = document.getElementById(data.selected_section);
+        room_list = deleted_section.nextElementSibling.children;
+        first_section = document.querySelectorAll('.section li:not([id="' + data.selected_section + '"])')[0];
+        first_section.nextElementSibling.append(room_list);
+        //deleted_section.nextElementSibling.children.forEach(function(room) {
+        //  first_section.appendChild('')
+        //});
       });
 
       document.getElementById('create-space-form').onsubmit = function (e) {
