@@ -900,6 +900,10 @@
         }
       });
 
+      $(document).on('click', '.special-room', function(e) {
+        joinRoom(this.id, true);
+      });
+
       $(document).on('contextmenu', '.room', function (e) {
         selected_room = this.id;
         document.getElementById('room-menu').style.top = mouseY(event) + 'px';
