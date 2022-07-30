@@ -368,7 +368,7 @@ def create_space():
         joined = collection_users.find_one({"_id": session['unique_id']})['joined']
         joined.append(str(space_id))
         collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': joined}})
-        return Response(dumps({space_id: str(space_id)}), mimetype='application/json')
+        return Response(dumps({'space_id': str(space_id)}), mimetype='application/json')
 
 # Adds space to user's list of joined spaces in MongoDB.
 # Returns space data.
