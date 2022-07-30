@@ -908,7 +908,7 @@
         e.preventDefault();
       });
         
-      function joinRoom(room_id) {
+      function joinRoom(room_id, special = false) {
         if (current_room != room_id) {
           old_room = current_room;
           current_room = room_id;
@@ -920,8 +920,10 @@
           $(document.getElementById(old_room)).attr('style', '');
           document.getElementById('messages').textContent = '';
           document.getElementById('room-name-display').textContent = document.getElementById(current_room).getAttribute('data-name');
-          chat_history_skip = 0;
-          loadChatHistory();
+          if (!special) {
+            chat_history_skip = 0;
+            loadChatHistory();
+          }
           typing_display.textContent = '';
           typing_list = [];
           stoppedTyping();
@@ -1221,6 +1223,10 @@
           $('.member').addClass('pointer');
           selected_user = '';
         }
+      });
+
+      $(document).on('click', '.email', function() {
+        document.getElementById('messages').textContent = '';
       });
 
       var createSpaceModal = document.getElementById("create-space");
