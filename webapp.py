@@ -364,14 +364,11 @@ def create_space():
         section = {'_id': section_id, 'space': str(space_id), 'name': 'discussion', 'order': 1}
         collection_spaces.insert_one({'_id': space_id, 'name': request.json['space_name'], 'picture': request.json['space_image'], 'admins': [session['unique_id']], 'members': [[session['unique_id'], session['users_name']]]})
         collection_rooms.insert_many([room, special_rooms])
-        collection_sections.insert_one(section)
-        room_and_section = dumps([[room],[section]])
-        
+        collection_sections.insert_one(section)        
         joined = collection_users.find_one({"_id": session['unique_id']})['joined']
         joined.append(str(space_id))
         collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': joined}})
-        
-        return Response(room_and_section, mimetype='application/json')
+        return Response(dumps({space_id: str(space_id)}), mimetype='application/json')
 
 # Adds space to user's list of joined spaces in MongoDB.
 # Returns space data.

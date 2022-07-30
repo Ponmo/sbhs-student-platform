@@ -755,7 +755,7 @@
             dataType: "json",
             data: JSON.stringify({'space_name': space_name, 'space_image': space_image}),
             contentType: 'application/json;charset=UTF-8',
-            success: function(room_and_section) {
+            success: function(data) {
               document.getElementById("create-space").style.display = "none";
               $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
               $(document.getElementById(current_space)).attr('style', '');
@@ -763,7 +763,7 @@
               newNode.className = 'space-wrapper';
               var newNodeChild = document.createElement('img');
               newNodeChild.className = 'space pointer';
-              newNodeChild.id = room_and_section[0][0][0]['space'];;
+              newNodeChild.id = data.space_id;
               newNodeChild.setAttribute('data-name', space_name);
               newNodeChild.style.borderRadius = '3px';
               newNodeChild.src = space_image;
@@ -774,7 +774,7 @@
               newNode.appendChild(newNodeChild);
               referenceNode = document.getElementById('space_align_helper');
               referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-              current_space = room_and_section[0][0][0]['space'];
+              current_space = data.space_id;
               space();
             }
           });
