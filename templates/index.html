@@ -925,10 +925,14 @@
           document.getElementById('messages').textContent = '';
           document.getElementById('room-name-display').textContent = document.getElementById(current_room).getAttribute('data-name');
           if (!special) {
+            $('#message-input-form').show();
+            $('#email_input_form').hide();
             chat_history_skip = 0;
             loadChatHistory();
           }
           else {
+            $('#message-input-form').hide();
+            $('#email_input_form').show();
           }
           typing_display.textContent = '';
           typing_list = [];
