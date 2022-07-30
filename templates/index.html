@@ -1079,7 +1079,7 @@
             var newNode = document.createElement('li');
             newNode.className = 'email special-room pointer';
             newNode.textContent = 'Email';
-            newNode.id = '';
+            newNode.id = rooms_and_sections[0];
             document.getElementById('special-channels').append(newNode);
             rooms_and_sections[1].forEach(function(section) {
               newNode = document.createElement('ul');
@@ -1291,7 +1291,6 @@
       const scrollContainer = document.getElementById('spaces'); 
 
       scrollContainer.addEventListener("wheel", (evt) => {
-        evt.preventDefault();
         scrollContainer.scrollLeft += evt.deltaY;
       });
 
