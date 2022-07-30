@@ -1076,10 +1076,7 @@
             document.getElementById('special-channels').textContent = '';
             document.getElementById('regular-channels').textContent = '';
             document.getElementById('members').textContent = '';
-            var newNode = document.createElement('li');
-            newNode.className = 'email special-room pointer';
-            newNode.textContent = 'Email';
-            newNode.id = rooms_and_sections[0];
+        
             document.getElementById('special-channels').append(newNode);
             rooms_and_sections[1].forEach(function(section) {
               newNode = document.createElement('ul');
@@ -1096,7 +1093,7 @@
               newNode.append(newNodeChild);
               var newNodeChildContainer = document.createElement('ul');
               newNodeChildContainer.className = 'room-group';
-              rooms_and_sections[0].forEach(function(room) {
+              rooms_and_sections[0].forEach(function(room) {  //remove already used rooms from room_and_sections[0] to improve efficiency?
                 if (room['section'] == section['_id']['$oid']) {
                   newNodeChild = document.createElement('li');
                   newNodeChild.className = 'room pointer';
@@ -1288,9 +1285,11 @@
       }
 
       // Scrolling vertically on the spaces div
+      // Only for non-mobile devices.
       const scrollContainer = document.getElementById('spaces'); 
 
       scrollContainer.addEventListener("wheel", (evt) => {
+        evt.preventDefault();
         scrollContainer.scrollLeft += evt.deltaY;
       });
 
