@@ -763,7 +763,7 @@
               newNode.className = 'space-wrapper';
               var newNodeChild = document.createElement('img');
               newNodeChild.className = 'space pointer';
-              newNodeChild.id = room_and_section[0][0]['space'];;
+              newNodeChild.id = room_and_section[0][0][0]['space'];;
               newNodeChild.setAttribute('data-name', space_name);
               newNodeChild.style.borderRadius = '3px';
               newNodeChild.src = space_image;
@@ -774,7 +774,8 @@
               newNode.appendChild(newNodeChild);
               referenceNode = document.getElementById('space_align_helper');
               referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-              current_space = room_and_section[0][0]['space'];
+              document.getElementById('special-channels').appendChild(newNode);
+              current_space = room_and_section[0][0][0]['space'];
               space();
             }
           });
@@ -923,6 +924,9 @@
           if (!special) {
             chat_history_skip = 0;
             loadChatHistory();
+          }
+          else {
+            alert('Test');
           }
           typing_display.textContent = '';
           typing_list = [];
@@ -1074,7 +1078,8 @@
             document.getElementById('members').textContent = '';
             var newNode = document.createElement('li');
             newNode.className = 'email special-room pointer';
-            newNode.textContent = 'email';
+            newNode.textContent = 'Email';
+            newNode.id = '';
             document.getElementById('special-channels').append(newNode);
             rooms_and_sections[1].forEach(function(section) {
               newNode = document.createElement('ul');
@@ -1281,6 +1286,14 @@
         });
         return room_list;
       }
+
+      // Scrolling vertically on the spaces div
+      const scrollContainer = document.getElementById('spaces'); 
+
+      scrollContainer.addEventListener("wheel", (evt) => {
+        evt.preventDefault();
+        scrollContainer.scrollLeft += evt.deltaY;
+      });
 
     });
   </script>

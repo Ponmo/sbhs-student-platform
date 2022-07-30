@@ -659,7 +659,9 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin: 0;
   margin-left: 20px;
   list-style-type: none;
-  white-space: nowrap;
+  /*white-space: nowrap;
+  For mobile devices only!
+  */
 }
 #space_align_helper {
   display: inline-block;
