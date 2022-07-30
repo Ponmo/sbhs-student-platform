@@ -1120,6 +1120,7 @@
                   var newNode = document.createElement('li');
                   newNode.className = 'email special-room pointer';
                   newNode.textContent = 'Email';
+                  newNode.setAttribute('data-name', room['name'])
                   newNode.id = room['_id']['$oid'];
                   document.getElementById('special-channels').append(newNode);
                 }
