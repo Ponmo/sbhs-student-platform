@@ -1089,7 +1089,7 @@
               }
               else {
                 newNodeChild.innerHTML = '<div class="section-name">' + section['name'] + '</div>';
-              }//change 
+              }
               newNode.append(newNodeChild);
               var newNodeChildContainer = document.createElement('ul');
               newNodeChildContainer.className = 'room-group';
@@ -1102,7 +1102,7 @@
                   newNodeChild.setAttribute('data-name', room['name']);
                   if (space_admin == true) {
                     newNodeChild.innerHTML = room['name'] + '<img class="room-settings" src="/static/images/settings-white.png">';
-                  } //change = remove room settings
+                  }
                   else {
                     newNodeChild.innerHTML = room['name']
                   }
@@ -1111,6 +1111,16 @@
                 newNode.append(newNodeChildContainer);
                 document.getElementById('regular-channels').append(newNode);
               });
+              rooms_and_sections[0].forEach(function(room) {
+                if (room['section'] == 'special') {
+                  var newNode = document.createElement('li');
+                  newNode.className = 'email special-room pointer';
+                  newNode.textContent = 'Email';
+                  newNode.id = room['_id']['$oid'];
+                  document.getElementById('special-channels').append(newNode);
+                }
+              });
+
               if (space_admin == true) {
                 $('.room-group').sortable({
                   connectWith: '.room-group',
