@@ -537,8 +537,8 @@ def deleted_room(data):
 #todo for tomorrow
 @socketio.on('deleted_space')
 def deleted_space(data):
-    for space in data['space_list']:
-        socketio.emit('deleted_space', data, space = space)
+    for room in data['room_list']:
+        socketio.emit('deleted_space', data, room = room)
 
 # When a section is created, send that section data to all
 # users in the space.

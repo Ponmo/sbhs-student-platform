@@ -545,10 +545,11 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 .accepted_email {
   display: inline-block;
+  margin-bottom: 4px;
   border: 1px solid gray;
-  font-size: 11px;
+  font-size: 12px;
   padding: 2px 6px;
-  border-radius: 10px;
+  border-radius: 12px;
 }
 #email_to_input_span {
   overflow-x: hidden;
@@ -929,14 +930,14 @@ img { /* make images and create button undraggable and unhighlitable*/
   padding: 5px 0;
   
   /* Position the tooltip */
-  position: absolute;
+  /* position: absolute;
   z-index: 1;
   bottom: 100%;
   left: 50%;
   margin-left: -60px;
-}
-
-.tooltip:hover .tooltiptext {
-  visibility: visible;
 } */
+
+/* .tooltip:hover .tooltiptext {
+  visibility: visible;
+} */ 
 /*Add User Select None Class*/

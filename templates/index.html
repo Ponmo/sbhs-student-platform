@@ -820,7 +820,12 @@
         $(this.parentNode.previousElementSibling).after('<form class="message_edit_input_form"><textarea class="message_edit" rows="1" placeholder="Remove message">' + message + '</textarea></form>');
         this.parentNode.previousElementSibling.firstChild.setAttribute("style", "height:" + (this.parentNode.previousElementSibling.firstChild.scrollHeight) + "px;overflow-y:hidden;");
       });
-//todo for tomorrow
+//todo for tomorrow //delete from directory and footer. Direct to home page.
+
+      socket.on('deleted_space', function(data)){
+        var deleted_space = document.getElementById(data.space_id);
+        
+      }
 
       $(document).on('click', '#delete-space', function(){
         $.ajax({
@@ -831,7 +836,7 @@
           contentType: 'application/json;charset=UTF-8',
           success: function (delete_space){
             alert(JSON.stringify(delete_space['success']));
-            socket.emit('deleted_space', {'space_id': current_space})
+            socket.emit('deleted_space', {'room_list': roomList()})
           }
         })
       });
