@@ -1275,8 +1275,8 @@
                     let newNodeChild = document.createElement('img');
                     newNodeChild.setAttribute('src', data['joined'][i*4+j]);
                     newNodeChild.className = 'joined-icons tooltip';
-                    newNodeChild.innerHTML = '<span class="tooltiptext tooltip-top"></span>'
-                    document.getElementById("tooltiptext").innerHTML = data['joined_spaces_names'][i*4+j]
+                    newNodeChild.innerHTML = '<span class="tooltiptext tooltip-top"></span>';
+                    document.getElementById("tooltiptext").innerHTML = data['joined_spaces_names'][i*4+j];
                     tableData.appendChild(newNodeChild);
                     newNode.appendChild(tableData);
                   }

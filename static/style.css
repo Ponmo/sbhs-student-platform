@@ -526,7 +526,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   background: white;
   min-height: 40px;
   min-width: 84px;
-  padding-top: 4px;
+  padding-top: 8px;
 }
 #email_to {
   width: calc(100% - 20px);
