@@ -61,15 +61,17 @@ def send_email():
     try:
         #get email and password of email bot through heroku environment.
         smtp_server = 'smtp.gmail.com'
-        sender_email = 'ponmorw@gmail.com'#bot email
-        password = 'riodjf'#bot password
+        sender_email = 'sbhs.platform.test@gmail.com'#bot email
+        password = os.environ['EMAIL_ACCESS_PASSWORD']#bot password
         message = MIMEMultipart('alternative')
-        message['Subject'] = 'SBHS Parent Board Notification' #subject of automatic email
-        message['From'] = sender_email #email of bot
-        message['To'] = receiver_email #sends to this email
+        message['Subject'] = 'Test Email' #subject of automatic email
+        message['From'] =  'sbhs.platform.test@gmail.com' #email of bot
+        message['To'] = 'ponmorw@gmail.com' #sends to this email
         text = """\
+            Hi
         """ #basic text
         html = """\
+            <p style='color:blue'>Hi</p>
         """ #text version with html
         part1 = MIMEText(text, 'plain')
         part2 = MIMEText(html, 'html')
@@ -579,6 +581,7 @@ def sorted_sections(data):
 
 @socketio.on('sorted_rooms')
 def sorted_rooms(data):
+    send_email() #temporary
     order = 1
     for section in data['room_group_list']:
         if len(section) > 1:
