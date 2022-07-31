@@ -80,8 +80,9 @@
             <!--Recipients, Message, Date, Theme,
              Name of Sender (email), Name of the space*/-->
             <form id="email_input_form">
-              <label id="email_to_label">To:</label>
-              <textarea id="email_to_input" rows="1" placeholder=""></textarea>
+              <label id="email_to_label">To:
+                <textarea id="email_to_input" rows="1" placeholder=""></textarea>
+              </label>
               <!-- <label id="email_cc_label">To:</label>
               <textarea id="email_cc_input" rows="1" placeholder="Who are you sending it to?"></textarea>
               <label id="email_bcc_label">To:</label>
@@ -446,6 +447,20 @@
         }
         message_input.value = '';
         message_input.focus();
+      }
+
+      document.getElementById('email_input_form').onsubmit = function (e) {
+        e.preventDefault();
+        $.ajax({
+          type: 'POST',
+          url: '/send_email',
+          dataType: "json",
+          data: JSON.stringify({'to': document.getElementById('email_to_input').value, 'message': 'hi'}),
+          contentType: 'application/json;charset=UTF-8',
+          success: function(data) {
+
+          }
+        });
       }
 
       $(document).on('input', '.message_edit', function() {
