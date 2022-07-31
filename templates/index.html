@@ -1271,20 +1271,22 @@
                 newNode = document.createElement('tr');
                 for (let j = 0; j < 4; j++) {
                   if (data['joined'][i*4+j] != undefined) {
+                    let tableData = document.createElement('td');
+                    tableData.className = 'icons-wrapper pointer';
                     let toolTip = document.createElement('div');
                     toolTip.className = 'tooltip';
-                    let tableData = document.createElement('td');
-                    tableData.className = 'icons-wrapper';
                     let newNodeChild = document.createElement('img');
                     newNodeChild.setAttribute('src', data['joined'][i*4+j]);
                     newNodeChild.className = 'joined-icons';
+                    // append elements
                     newNode.appendChild(toolTip);
-                    toolTip.appendChild(tableData)
-                    tableData.appendChild(newNodeChild);
-                    let newNodeChildChild = document.createElement('span');
+                    tableData.appendChild(toolTip);
+                    toolTip.appendChild(newNodeChild)
+                    
+                    /*let newNodeChildChild = document.createElement('span');
                     newNodeChildChild.className = "tooltiptext tooltip-top";
                     newNodeChildChild.textContent = data['joined_spaces_names'][i*4+j];
-                    newNodeChild.appendChild(newNodeChildChild);
+                    toolTip.appendChild(newNodeChildChild);*/
                   }
                 }
                 document.getElementById("joined-table").append(newNode);
