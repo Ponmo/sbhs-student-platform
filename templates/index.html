@@ -1273,15 +1273,14 @@
                   if (data['joined'][i*4+j] != undefined) {
                     let tableData = document.createElement('td');
                     tableData.className = 'icons-wrapper pointer';
-                    let toolTip = document.createElement('div');
-                    toolTip.className = 'tooltip';
+                    /*let toolTip = document.createElement('div');
+                    toolTip.className = 'tooltip';*/
                     let newNodeChild = document.createElement('img');
                     newNodeChild.setAttribute('src', data['joined'][i*4+j]);
                     newNodeChild.className = 'joined-icons';
                     // append elements
                     newNode.appendChild(tableData);
-                    tableData.appendChild(toolTip);
-                    toolTip.appendChild(newNodeChild)
+                    tableData.appendChild(newNodeChild);
                     
                     /*let newNodeChildChild = document.createElement('span');
                     newNodeChildChild.className = "tooltiptext tooltip-top";
