@@ -95,7 +95,9 @@
               <textarea id="email_bcc_input" rows="1" placeholder="Who are you sending it to?"></textarea> -->
               <input id="email_subject_input" type="text" placeholder="Subject"></input>
               <textarea id="email_message_input" rows="1"></textarea>
-              <div id="email_options">Hello</div>
+              <div id="email_options">
+                <button type="submit" id="submit_email"><img class="send" src="/static/images/send.png" alt="Send"></button>
+              </div>
             </form>
             <form id="message_input_form">
               <!--see w3schools input attributes like max char, spam, etc. -->
@@ -1274,13 +1276,13 @@
                     tableData.className = 'icons-wrapper';
                     let newNodeChild = document.createElement('img');
                     newNodeChild.setAttribute('src', data['joined'][i*4+j]);
-                    if (data['joined_spaces_names'] != undefined) {
-                      newNodeChild.className = 'joined-icons tooltip';
-                      newNodeChild.innerHTML = '<span class="tooltiptext tooltip-top"></span>';
-                      document.getElementById("tooltiptext").innerHTML = data['joined_spaces_names'][i*4+j];
-                    }
+                    newNodeChild.className = 'joined-icons tooltip';
                     tableData.appendChild(newNodeChild);
                     newNode.appendChild(tableData);
+                    let newNodeChildChild = document.createElement('span');
+                    newNodeChildChild.className = "tooltiptext tooltip-top"
+                    newNodeChildChild.textContent = data['joined_spaces_names'][i*4+j];
+                    newNodeChild.appendChild(newNodeChildChild);
                   }
                 }
                 document.getElementById("joined-table").append(newNode);
