@@ -526,19 +526,35 @@ img { /* make images and create button undraggable and unhighlitable*/
   background: white;
   min-height: 40px;
   min-width: 84px;
+  padding-top: 4px;
 }
 #email_to_label {
+  width: calc(100% - 20px);
+  
+  display: flex;
+  align-items: center;
+  overflow-x: hidden;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-bottom: 1px solid black;
+  font-weight: normal;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 #email_to_input {
-  
   overflow-x: hidden;
   background: transparent;
+  width: 100%;
   border: none;
   resize: none;
+  outline: none;
+
 }
 #email_subject_input {
   width: calc(100% - 20px);
-  overflow-x: hidden;
   margin-left: 10px;
   margin-right: 10px;
   background: transparent;
@@ -558,6 +574,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   resize: none;
   outline: none;
 }
+
 
 #members {
   grid-column: 3;

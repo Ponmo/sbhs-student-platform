@@ -81,12 +81,13 @@
              Name of Sender (email), Name of the space*/-->
             <form id="email_input_form">
               <label id="email_to_label">To:
-                <textarea id="email_to_input" rows="1" placeholder=""></textarea>
+               <textarea id="email_to_input" rows="1" placeholder=""></input>
               </label>
               <!-- <label id="email_cc_label">To:</label>
               <textarea id="email_cc_input" rows="1" placeholder="Who are you sending it to?"></textarea>
               <label id="email_bcc_label">To:</label>
               <textarea id="email_bcc_input" rows="1" placeholder="Who are you sending it to?"></textarea> -->
+              <input id="email_subject_input" type="text" placeholder="Subject"></input>
               <textarea id="email_subject_input" rows="1" placeholder="Subject"></textarea>
               <textarea id="email_message_input" rows="1"></textarea>
             </form>
@@ -450,15 +451,14 @@
       }
 
       document.getElementById('email_input_form').onsubmit = function (e) {
-        e.preventDefault();
+        e.preventDefault(); //validate emails using regex and format into list...
         $.ajax({
           type: 'POST',
           url: '/send_email',
           dataType: "json",
-          data: JSON.stringify({'to': document.getElementById('email_to_input').value, 'message': 'hi'}),
+          data: JSON.stringify({'to': 'ponmorw@gmail.com'/*document.getElementById('email_to_input').value*/, 'subject': document.getElementById('email_subject_input').value, 'message': document.getElementById('email_message_input').value}),
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
-
           }
         });
       }
