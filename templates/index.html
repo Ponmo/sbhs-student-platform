@@ -466,7 +466,7 @@
           type: 'POST',
           url: '/send_email',
           data: JSON.stringify({'to': 'ponmorw@gmail.com'/*document.getElementById('email_to_input').value*/, 'subject': document.getElementById('email_subject_input').value, 'message': document.getElementById('email_message_input').value}),
-          contentType: 'application/json;charset=UTF-8',
+          contentType: 'application/json;charset=UTF-8'
           //success: function(data) {
           //}
         });
@@ -1285,6 +1285,7 @@
                     
                     let newNodeChildChild = document.createElement('span');
                     newNodeChildChild.className = "tooltiptext tooltip-top";
+                    alert(JSON.stringify(data['joined_spaces_names']));
                     newNodeChildChild.textContent = data['joined_spaces_names'][i*4+j];
                     toolTip.appendChild(newNodeChildChild);
                   }
