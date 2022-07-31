@@ -528,16 +528,17 @@ img { /* make images and create button undraggable and unhighlitable*/
   min-width: 84px;
   padding-top: 4px;
 }
-#email_to_label {
+#email_to {
   width: calc(100% - 20px);
-  
   display: flex;
   align-items: center;
   overflow-x: hidden;
   margin-left: 10px;
   margin-right: 10px;
   border-bottom: 1px solid black;
-  font-weight: normal;
+}
+#email_to_label {
+  height: 16px;
   -moz-user-select: -moz-none;
   -khtml-user-select: none;
   -webkit-user-select: none;
@@ -545,13 +546,13 @@ img { /* make images and create button undraggable and unhighlitable*/
   user-select: none;
 }
 #email_to_input {
+  width: 100%;
   overflow-x: hidden;
   background: transparent;
   width: 100%;
   border: none;
   resize: none;
   outline: none;
-
 }
 #email_subject_input {
   width: calc(100% - 20px);
