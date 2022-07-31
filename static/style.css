@@ -507,7 +507,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   background-color: transparent;
   border: none;
 }
-#send {
+.send {
   width: 26px;
   height: 26px;
 }
