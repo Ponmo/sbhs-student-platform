@@ -581,7 +581,6 @@ def sorted_sections(data):
 
 @socketio.on('sorted_rooms')
 def sorted_rooms(data):
-    send_email() #temporary
     order = 1
     for section in data['room_group_list']:
         if len(section) > 1:

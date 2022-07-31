@@ -1273,8 +1273,8 @@
                   if (data['joined'][i*4+j] != undefined) {
                     let tableData = document.createElement('td');
                     tableData.className = 'icons-wrapper pointer';
-                    /*let toolTip = document.createElement('div');
-                    toolTip.className = 'tooltip';*/
+                    let toolTip = document.createElement('div');
+                    toolTip.className = 'tooltip';
                     let newNodeChild = document.createElement('img');
                     newNodeChild.setAttribute('src', data['joined'][i*4+j]);
                     newNodeChild.className = 'joined-icons';
@@ -1282,10 +1282,10 @@
                     newNode.appendChild(tableData);
                     tableData.appendChild(newNodeChild);
                     
-                    /*let newNodeChildChild = document.createElement('span');
+                    let newNodeChildChild = document.createElement('span');
                     newNodeChildChild.className = "tooltiptext tooltip-top";
                     newNodeChildChild.textContent = data['joined_spaces_names'][i*4+j];
-                    toolTip.appendChild(newNodeChildChild);*/
+                    toolTip.appendChild(newNodeChildChild);
                   }
                 }
                 document.getElementById("joined-table").append(newNode);
