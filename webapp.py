@@ -81,9 +81,10 @@ def send_email():
             with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
                 server.login(sender_email, password) #logs into the bot email
                 #server.sendmail(sender_email, receiver_email, message.as_string()) #sends email
+            return Response(dumps({'success': 'true'}), mimetype='application/json')
         except:
-            Response(dumps({'success': 'false'}), mimetype='application/json')
-    Response(dumps({'success': 'false'}), mimetype='application/json')
+            return Response(dumps({'success': 'false'}), mimetype='application/json')
+    return Response(dumps({'success': 'false'}), mimetype='application/json')
 
 
 # Redirects users on http to https.
