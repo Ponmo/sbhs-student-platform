@@ -436,13 +436,15 @@ def member_profile():
     if request.method == 'POST':
         member = collection_users.find_one({'_id': request.json['user_id']})
         queried_spaces = []
+        queried_spaces_names = []
         for spaces in member['joined']:
             try: 
                 space = collection_spaces.find_one({'_id': ObjectId(spaces)})
-                queried_spaces.append(space["picture"])
+                queried_spaces.append(space['picture'])
+                queried_spaces_names.append(spaces['name'])
             except:
                 pass
-        user_data = {'name': member['name'], 'email': member['email'], 'picture': member['picture'], 'joined': queried_spaces}
+        user_data = {'name': member['name'], 'email': member['email'], 'picture': member['picture'], 'joined': queried_spaces, 'joined_spaces_names': queried_spaces_names}
         return Response(dumps(user_data), mimetype='application/json')
     else:
         return Response(dumps({'success': 'false'}), mimetype='application/json')
