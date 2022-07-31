@@ -85,8 +85,8 @@
                 <div id="email_to_list">
                   <span><label id="email_to_label" for="email_to_input">To: </label></span>
                   <span class="accepted_email">ponmonw@gmail.com</span> 
+                  <span id="email_to_input"><input id="email_to_input" type="text" placeholder=""></input></span>
                 </div>
-                <input id="email_to_input" type="text" placeholder=""></input>
                 <div id="suggested_emails"></div>
               </div>
               <!-- <label id="email_cc_label">To:</label>
@@ -1273,14 +1273,16 @@
                   if (data['joined'][i*4+j] != undefined) {
                     let tableData = document.createElement('td');
                     tableData.className = 'icons-wrapper pointer';
+                    
                     let toolTip = document.createElement('div');
                     toolTip.className = 'tooltip';
+
                     let newNodeChild = document.createElement('img');
                     newNodeChild.setAttribute('src', data['joined'][i*4+j]);
                     newNodeChild.className = 'joined-icons';
-                    // append elements
                     newNode.appendChild(tableData);
-                    tableData.appendChild(newNodeChild);
+                    tableData.appendChild(toolTip);
+                    toolTip.appendChild(newNodeChild);
                     
                     let newNodeChildChild = document.createElement('span');
                     newNodeChildChild.className = "tooltiptext tooltip-top";

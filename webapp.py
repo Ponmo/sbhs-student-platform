@@ -60,7 +60,6 @@ client = WebApplicationClient(GOOGLE_CLIENT_ID)
 def send_email():
     try:
         #get email and password of email bot through heroku environment.
-        smtp_server = 'smtp.gmail.com'
         sender_email = 'sbhs.platform.test@gmail.com'#bot email
         password = os.environ['EMAIL_ACCESS_PASSWORD']#bot password
         message = MIMEMultipart('alternative')
