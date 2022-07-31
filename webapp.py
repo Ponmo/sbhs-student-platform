@@ -381,7 +381,9 @@ def create_space():
 def delete_space():
     if request.method == 'POST':
         collection_spaces.find_one({'_id': ObjectId(request.json['space_id'])})
-        collection_spaces.delete_one({'id': ObjectId(request.json['space_id'])})
+        collection_spaces.delete_one({'_id': ObjectId(request.json['space_id'])})
+        return Response(dumps({'success': 'true'}), mimetype='application/json')
+    return Response(dumps({'success': 'false'}), mimetype='application/json')
 
 @app.route('/join_space', methods=['GET', 'POST'])
 def join_space():
