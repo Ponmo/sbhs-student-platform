@@ -527,7 +527,6 @@ img { /* make images and create button undraggable and unhighlitable*/
   min-height: 40px;
   min-width: 84px;
   padding-top: 4px;
-  
 }
 #email_to {
   width: calc(100% - 20px);
@@ -537,7 +536,11 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin-right: 10px;
   border-bottom: 1px solid black;
 }
+#email_to_list {
+  width: 100%;
+}
 #email_to_label {
+  display: inline-block;
   height: 16px;
   -moz-user-select: -moz-none;
   -khtml-user-select: none;
@@ -545,15 +548,12 @@ img { /* make images and create button undraggable and unhighlitable*/
   -ms-user-select: none;
   user-select: none;
 }
-#email_list {
-  
-}
 .accepted_email {
+  display: inline-block;
   border: 1px solid gray;
-  font-size: 12px;
+  font-size: 11px;
   padding: 2px 6px;
   border-radius: 10px;
-  vertical-align: top;
 }
 #email_to_input {
   width: 100%;

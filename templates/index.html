@@ -1271,11 +1271,12 @@
                 for (let j = 0; j < 4; j++) {
                   if (data['joined'][i*4+j] != undefined) {
                     let tableData = document.createElement('td');
-                    tableData.className = 'icons-wrapper tooltip';
+                    tableData.className = 'icons-wrapper';
                     let newNodeChild = document.createElement('img');
                     newNodeChild.setAttribute('src', data['joined'][i*4+j]);
-                    newNodeChild.className = 'joined-icons';
-                    newNodeChild.innerhtml = ''
+                    newNodeChild.className = 'joined-icons tooltip';
+                    newNodeChild.innerHTML = '<span class="tooltiptext tooltip-top"></span>'
+                    document.getElementById("tooltiptext").innerHTML = 
                     tableData.appendChild(newNodeChild);
                     newNode.appendChild(tableData);
                   }
