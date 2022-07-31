@@ -518,6 +518,47 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin-left: 29px;
   font-size: 12px;
 }
+#email_input_form {
+  z-index: 1; /* For more chrome versions; the hightlight focus on textarea top gets obscured by chat div*/
+  margin-right: 18px;
+  margin-left: 18px;
+  border-radius: 4px;
+  background: white;
+  min-height: 40px;
+  min-width: 84px;
+}
+#email_to_label {
+}
+#email_to_input {
+  
+  overflow-x: hidden;
+  background: transparent;
+  border: none;
+  resize: none;
+}
+#email_subject_input {
+  width: calc(100% - 20px);
+  overflow-x: hidden;
+  margin-left: 10px;
+  margin-right: 10px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid black;
+  resize: none;
+  outline: none;
+}
+#email_message_input {
+  width: calc(100% - 20px);
+  min-height: 200px;
+  overflow-x: hidden;
+  margin-left: 10px;
+  margin-right: 10px;
+  background: transparent;
+  border: none;
+  resize: none;
+  outline: none;
+}
+
 #members {
   grid-column: 3;
   z-index: 1; /* to make the send button not overlay the members div on small screen sizes can change once small version introduced */
