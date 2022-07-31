@@ -59,6 +59,7 @@
             <img class="pointer" id="server-settings-button" src="/static/images/settings-white.png">
             <div id="space-settings-popup">
               <div class="pointer" id="create-section-button">Create Section</div>
+              <div class="pointer" id="edit-space-button">Edit Space</div>
               <div class="pointer red-space-button"></div>
             </div>
           </div>
@@ -106,6 +107,9 @@
         </div>
       </div>
 
+      <div id="space-settings">
+        <div id="exit-space-settings">Temporary Exit</div>
+      </div>
 
       <div id="footer">
         <div id="profile">
@@ -826,7 +830,17 @@
             socket.emit('deleted_space', {'space_id': space_id, 'space_id': current_space})
           }
         })
-      })
+      });
+
+      $(document).on('click', '#edit-space-button', function() {
+        $('#space-settings').show();
+        $('#first-all').hide();
+      });
+
+      $(document).on('click', '#exit-space-settings', function() {
+        $('#space-settings').hide();
+        $('#first-all').show();
+      });
 
       $(document).on('click', '.delete-message', function() {
         var message_id = this.parentNode.parentNode.id;
