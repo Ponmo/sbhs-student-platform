@@ -1107,7 +1107,7 @@
               red_space_button.id = 'delete-space';
               red_space_button.textContent = 'Delete Space';
               $('#create-section-button').show();
-              $('#space-settings-button').show();
+              $('#edit-space-button').show();
             }
             else {
               space_admin = false;
@@ -1115,7 +1115,7 @@
               red_space_button.id = 'leave-space';
               red_space_button.textContent = 'Leave Space';
               $('#create-section-button').hide();
-              $('#space-settings-button').hide();
+              $('#edit-space-button').hide();
             }
             document.getElementById('messages').textContent = '';
             document.getElementById('header_text').textContent = document.getElementById(current_space).getAttribute('data-name');
