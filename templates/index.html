@@ -85,10 +85,10 @@
                 <div id="email_to_list">
                   <span><label id="email_to_label" for="email_to_input">To: </label></span>
                   <span class="accepted_email">ponmonw@gmail.com</span> 
-                  <span id="email_to_input"><input id="email_to_input" type="text" placeholder=""></input></span>
+                  <span id="email_to_input_span"><input id="email_to_input" type="text" placeholder=""></input></span>
                 </div>
-                <div id="suggested_emails"></div>
               </div>
+              <div id="suggested_emails"></div>
               <!-- <label id="email_cc_label">To:</label>
               <textarea id="email_cc_input" rows="1" placeholder="Who are you sending it to?"></textarea>
               <label id="email_bcc_label">To:</label>
@@ -1282,7 +1282,7 @@
                     newNodeChild.className = 'joined-icons';
                     newNode.appendChild(tableData);
                     tableData.appendChild(toolTip);
-                    toolTip.appendChild(newNodeChild);
+                    tableData.appendChild(newNodeChild);
                     
                     let newNodeChildChild = document.createElement('span');
                     newNodeChildChild.className = "tooltiptext tooltip-top";
