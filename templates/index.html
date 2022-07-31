@@ -332,7 +332,6 @@
           url: '/logout',
           dataType: "json",
           success: function(data) {
-            window.location.replace("http://www.w3schools.com");
           }
         });
       });
@@ -1272,20 +1271,20 @@
                 newNode = document.createElement('tr');
                 for (let j = 0; j < 4; j++) {
                   if (data['joined'][i*4+j] != undefined) {
-                    let tableData = document.createElement('td');
-                    tableData.className = 'icons-wrapper';
                     let toolTip = document.createElement('div');
                     toolTip.className = 'tooltip';
+                    let tableData = document.createElement('td');
+                    tableData.className = 'icons-wrapper';
                     let newNodeChild = document.createElement('img');
                     newNodeChild.setAttribute('src', data['joined'][i*4+j]);
                     newNodeChild.className = 'joined-icons';
-                    toolTip.appendChild(newNodeChild)
-                    tableData.appendChild(toolTip);
-                    newNode.appendChild(tableData);
+                    newNode.appendChild(toolTip);
+                    toolTip.appendChild(tableData)
+                    tableData.appendChild(newNode);
                     let newNodeChildChild = document.createElement('span');
                     newNodeChildChild.className = "tooltiptext tooltip-top";
                     newNodeChildChild.textContent = data['joined_spaces_names'][i*4+j];
-                    toolTip.appendChild(newNodeChildChild);
+                    newNodeChild.appendChild(newNodeChildChild);
                   }
                 }
                 document.getElementById("joined-table").append(newNode);
