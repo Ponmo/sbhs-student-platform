@@ -460,15 +460,13 @@
         message_input.focus();
       }
 
-      document.getElementById('email_to_input').oninput = function() {
-      }; 
       $('#email_to_input').keypress(function (e) {
         if(e.which === 13 && !e.shiftKey) {
           e.preventDefault(); 
           //focus next textarea
         }
         else if (e.which === 32) {
-          
+          document.getElementById('email_to_input').textContent;
         }
       });
 
@@ -835,8 +833,14 @@
 //todo for tomorrow //delete from directory and footer. Direct to home page.
 
       socket.on('deleted_space', function(data) {
-        document.getElementById(current_space);
-        document.querySelector('[data-id = current_space]');
+        document.getElementById(current_space).remove();
+        document.querySelector('.form-space[data-id = "' + current_space + '"]').remove();
+        current_space = '';
+        current_room = '';
+        $('.active-space').attr('style', '');
+        $('#home-page').css('display', 'block');
+        $('#first-all').css('display', 'none');
+        $('#space-search').css('display', 'none');
       });
 
       $(document).on('click', '#delete-space', function(){
