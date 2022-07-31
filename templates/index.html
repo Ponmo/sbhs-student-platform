@@ -1269,12 +1269,14 @@
               for (let i = 0; i < Math.ceil(data["joined"].length/4); i++) {
                 newNode = document.createElement('tr');
                 for (let j = 0; j < 4; j++) {
-                  let tableData = document.createElement('td');
-                  let newNodeChild = document.createElement('img');
-                  newNodeChild.setAttribute('src', data['joined'][i*4+j]);
-                  newNodeChild.className = 'joined-icons';
-                  tableData.appendChild(newNodeChild);
-                  newNode.appendChild(tableData);
+                  if (data['joined'][i*4+j] != undefined) {
+                    let tableData = document.createElement('td');
+                    let newNodeChild = document.createElement('img');
+                    newNodeChild.setAttribute('src', data['joined'][i*4+j]);
+                    newNodeChild.className = 'joined-icons';
+                    tableData.appendChild(newNodeChild);
+                    newNode.appendChild(tableData);
+                  }
                 }
                 document.getElementById("joined-table").append(newNode);
               }
