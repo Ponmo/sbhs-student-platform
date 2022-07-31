@@ -595,11 +595,12 @@ img { /* make images and create button undraggable and unhighlitable*/
   outline: none;
 }
 #email_options {
-  border: 1px solid black;
   width: 100%;
-  border-radius: 2px;
   height: 60px;
+  display: inline-block;
+  vertical-align: middle;
 }
+
 
 
 #members {
