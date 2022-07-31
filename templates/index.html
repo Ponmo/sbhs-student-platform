@@ -80,9 +80,12 @@
             <!--Recipients, Message, Date, Theme,
              Name of Sender (email), Name of the space*/-->
             <form id="email_input_form">
-              <label id="email_to_label">To:
-               <textarea id="email_to_input" rows="1" placeholder=""></textarea>
-              </label>
+              <div id="email_to">
+                <label id="email_to_label" for="email_to_input">To:</label>
+                <!--Div that includes all registered emails-->
+                <input id="email_to_input" type="text" placeholder=""></input>
+                <!--Absolute Div that has suggested emails-->
+              </div>
               <!-- <label id="email_cc_label">To:</label>
               <textarea id="email_cc_input" rows="1" placeholder="Who are you sending it to?"></textarea>
               <label id="email_bcc_label">To:</label>
