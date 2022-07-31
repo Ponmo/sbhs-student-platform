@@ -174,47 +174,42 @@ img { /* make images and create button undraggable and unhighlitable*/
   left: 10px;
   width: 250px;
   height: 260px;
+  padding: 6px 8px 8px 8px;
   background-color: #17181b;
 }
-#create-section-button {
-  margin: 8px auto 1px auto;
-  width: 230px;
+.blue-entry-two {
+  margin-top: 2px;
+  width: 234px;
   height: 32px;
   border-radius: 2px;
   line-height: 32px;
   padding-left: 8px;
-  border-bottom: 1px solid white;
 }
-#create-section-button:hover {
+.blue-entry-two:hover {
   background-color: #4752c4;
   color: white;
 }
-#create-section-button:active {
+.blue-entry-two:active {
   background-color: #3c46a6;
   color: white;
 }
+#edit-space-button {
+  border-bottom: 1px solid white;
+}
 .red-space-button {
-  margin: 1px auto;
-  width: 230px;
+  margin: 2px;
+  width: 234px;
   height: 32px;
   border-radius: 2px;
   line-height: 32px;
   padding-left: 8px;
   color: #d83c3f;
 }
-#delete-space:hover {
+.red-space-button:hover {
   background-color: #d83c3f;
   color: white;
 }
-#delete-space:active {
-  background-color: #b53739;
-  color: white;
-}
-#leave-space:hover {
-  background-color: #d83c3f;
-  color: white;
-}
-#leave-space:active {
+.red-space-button:active {
   background-color: #b53739;
   color: white;
 }
