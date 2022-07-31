@@ -83,9 +83,11 @@
             <form id="email_input_form">
               <div id="email_to">
                 <label id="email_to_label" for="email_to_input">To:</label>
-                <!--Div that includes all registered emails-->
+                <div id="email_list">
+                  <span class="accepted_email">ponmonw@gmail.com</span> 
+                </div>
                 <input id="email_to_input" type="text" placeholder=""></input>
-                <!--Absolute Div that has suggested emails-->
+                <div id="suggested_emails"></div>
               </div>
               <!-- <label id="email_cc_label">To:</label>
               <textarea id="email_cc_input" rows="1" placeholder="Who are you sending it to?"></textarea>
@@ -93,6 +95,7 @@
               <textarea id="email_bcc_input" rows="1" placeholder="Who are you sending it to?"></textarea> -->
               <input id="email_subject_input" type="text" placeholder="Subject"></input>
               <textarea id="email_message_input" rows="1"></textarea>
+              <div id="email_options">Hello</div>
             </form>
             <form id="message_input_form">
               <!--see w3schools input attributes like max char, spam, etc. -->
@@ -1247,13 +1250,6 @@
             $('.member').addClass('pointer');
           }
           selected_user = this.getAttribute('data-id');
-          let member = document.querySelector('[data-id="' + selected_user + '"]')
-          let newNode = document.createElement('div');
-          newNode.className = 'members-popup';
-          newNode.id = 'profile-popup';
-          member.appendChild(newNode);
-          member.className = 'member';
-          member.style.backgroundColor = '#3c3f45';
           $.ajax({
             type: "POST",
             url: '/open_member_profile',
@@ -1261,15 +1257,26 @@
             data: JSON.stringify({'user_id': selected_user}), 
             contentType: 'application/json;charset=UTF-8',
             success: function(data) {
+              let member = document.querySelector('[data-id="' + selected_user + '"]');
+              let newNode = document.createElement('div');
+              newNode.className = 'members-popup';
+              newNode.id = 'profile-popup';
+              member.appendChild(newNode);
+              member.className = 'member';
+              member.style.backgroundColor = '#3c3f45';
               document.getElementById('profile-popup').innerHTML = '<ul id="profile-list"><li id="profile-picture-list"><img id="popup-picture" src=' + data['picture'] + ' alt="!"></li><li id="profile-name">' + data['name'] + '</li><li id="profile-email">' + data['email'] + '</li><table id="joined-table"></table>';
               //loop through all joined servers' icons and creates img elements to place in the table
-              for (let i = 0; i < data["joined"].length; i++) {
-                let tableData = document.createElement('td');
-                newNode = document.createElement('img');
-                newNode.setAttribute('src', data['joined'][i]);
-                newNode.className = 'joined-icons';
-                tableData.appendChild(newNode);
-                document.getElementById('joined-table').appendChild(tableData);
+              for (let i = 0; i < data["joined"].length/4; i++) {
+                newNode = document.createElement('tr');
+                for (let j = 0; j < data["joined"].length; j++) {
+                  let tableData = document.createElement('td');
+                  let newNodeChild = document.createElement('img');
+                  newNodeChild.setAttribute('src', data['joined'][j]);
+                  newNodeChild.className = 'joined-icons';
+                  tableData.appendChild(newNodeChild);
+                  document.getElementById('joined-table').appendChild(tableData);
+                }
+                newNode
               }
             }
           });
