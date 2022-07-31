@@ -821,17 +821,17 @@
         this.parentNode.previousElementSibling.firstChild.setAttribute("style", "height:" + (this.parentNode.previousElementSibling.firstChild.scrollHeight) + "px;overflow-y:hidden;");
       });
 //todo for tomorrow
-      $(document).on('click', '.delete-space', function(){
-        var space_id = this.
+
+      $(document).on('click', '#delete-space', function(){
         $.ajax({
           type: 'POST',
           url: '/delete_space',
           dataType: 'json',
-          data: JSON.stringify({'space_id': space_id}),
+          data: JSON.stringify({'space_id': current_space}),
           contentType: 'application/json;charset=UTF-8',
           success: function (delete_space){
             alert(JSON.stringify(delete_space['success']));
-            socket.emit('deleted_space', {'space_id': space_id, 'space_id': current_space})
+            socket.emit('deleted_space', {'space_id': current_space})
           }
         })
       });
@@ -1276,6 +1276,7 @@
                     
                     let toolTip = document.createElement('div');
                     toolTip.className = 'tooltip';
+                    toolTip.textContent = "tooltip-checker";
 
                     let newNodeChild = document.createElement('img');
                     newNodeChild.setAttribute('src', data['joined'][i*4+j]);

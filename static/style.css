@@ -913,7 +913,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   padding-bottom: 10px;
   padding-right: 12px;
 }
-.tooltip {
+/* .tooltip {
   position: relative;
   display: inline-block;
   border-bottom: 1px dotted black;
@@ -938,5 +938,5 @@ img { /* make images and create button undraggable and unhighlitable*/
 
 .tooltip:hover .tooltiptext {
   visibility: visible;
-}
+} */
 /*Add User Select None Class*/
