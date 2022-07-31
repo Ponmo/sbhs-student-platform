@@ -56,32 +56,32 @@ socketio = SocketIO(app, async_mode='gevent')
 client = WebApplicationClient(GOOGLE_CLIENT_ID)
 
 
-#@app.route('/send_email')
-#def send_email():
-#    try:
-#        #get email and password of email bot through heroku environment.
-#        smtp_server = 'smtp.gmail.com'
-#        sender_email = #bot email
-#        password = #bot password
-#        message = MIMEMultipart('alternative')
-#        message['Subject'] = 'SBHS Parent Board Notification' #subject of automatic email
-#        message['From'] = sender_email #email of bot
-#        message['To'] = receiver_email #sends to this email
-#        text = """\
-#        """ #basic text
-#        html = """\
-#        """ #text version with html
-#        part1 = MIMEText(text, 'plain')
-#        part2 = MIMEText(html, 'html')
-#        message.attach(part1)
-#        message.attach(part2)
-#        context = ssl.create_default_context()
-#        with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
-#            server.login(sender_email, password) #logs into the bot email
-#            #server.sendmail(sender_email, receiver_email, message.as_string()) #sends email
-#    except:
-#        return
-#    return
+@app.route('/send_email')
+def send_email():
+    try:
+        #get email and password of email bot through heroku environment.
+        smtp_server = 'smtp.gmail.com'
+        sender_email = 'ponmorw@gmail.com'#bot email
+        password = 'riodjf'#bot password
+        message = MIMEMultipart('alternative')
+        message['Subject'] = 'SBHS Parent Board Notification' #subject of automatic email
+        message['From'] = sender_email #email of bot
+        message['To'] = receiver_email #sends to this email
+        text = """\
+        """ #basic text
+        html = """\
+        """ #text version with html
+        part1 = MIMEText(text, 'plain')
+        part2 = MIMEText(html, 'html')
+        message.attach(part1)
+        message.attach(part2)
+        context = ssl.create_default_context()
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
+            server.login(sender_email, password) #logs into the bot email
+            #server.sendmail(sender_email, receiver_email, message.as_string()) #sends email
+    except:
+        return
+    return
 
 
 # Redirects users on http to https.
