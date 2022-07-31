@@ -1,4 +1,3 @@
-from ast import Not
 from flask_socketio import SocketIO, emit, join_room, leave_room
 
 import json
