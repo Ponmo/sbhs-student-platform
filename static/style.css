@@ -527,11 +527,11 @@ img { /* make images and create button undraggable and unhighlitable*/
   min-height: 40px;
   min-width: 84px;
   padding-top: 4px;
+  
 }
 #email_to {
   width: calc(100% - 20px);
-  display: flex;
-  align-items: center;
+  position: relative;
   overflow-x: hidden;
   margin-left: 10px;
   margin-right: 10px;
@@ -545,6 +545,16 @@ img { /* make images and create button undraggable and unhighlitable*/
   -ms-user-select: none;
   user-select: none;
 }
+#email_list {
+  
+}
+.accepted_email {
+  border: 1px solid gray;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 10px;
+  vertical-align: top;
+}
 #email_to_input {
   width: 100%;
   overflow-x: hidden;
@@ -553,6 +563,14 @@ img { /* make images and create button undraggable and unhighlitable*/
   border: none;
   resize: none;
   outline: none;
+}
+#suggested_emails {
+  position: absolute;
+  display: none;
+  height: 20px;
+  width: 300px;
+  top: 22px;
+  background-color: black;
 }
 #email_subject_input {
   width: calc(100% - 20px);
@@ -565,6 +583,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   outline: none;
 }
 #email_message_input {
+  display: block;
   width: calc(100% - 20px);
   min-height: 200px;
   overflow-x: hidden;
@@ -574,6 +593,12 @@ img { /* make images and create button undraggable and unhighlitable*/
   border: none;
   resize: none;
   outline: none;
+}
+#email_options {
+  border: 1px solid black;
+  width: 100%;
+  border-radius: 2px;
+  height: 60px;
 }
 
 
