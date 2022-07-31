@@ -822,10 +822,10 @@
       });
 //todo for tomorrow //delete from directory and footer. Direct to home page.
 
-      socket.on('deleted_space', function(data)){
+      socket.on('deleted_space', function(data) {
         var deleted_space = document.getElementById(data.space_id);
         
-      }
+      });
 
       $(document).on('click', '#delete-space', function(){
         $.ajax({
