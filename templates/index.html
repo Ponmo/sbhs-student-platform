@@ -461,10 +461,9 @@
       }
 
       $('#email_to_input').keypress(function (e) {
-        /*if(e.which === 13 && !e.shiftKey) {
+        if(e.which === 13 && !e.shiftKey) {
           e.preventDefault(); 
-          //focus next textarea
-        }*/
+        }
         if (e.which === 32 || e.which === 9 || (e.which === 13 && !e.shiftKey)) {
           let email = document.getElementById('email_to_input').value.replace(/\s+/g, '');
           let regex = /\S+@\S+\.\S+/;
@@ -472,7 +471,7 @@
             let newNode = document.createElement('span');
             newNode.textContent = email;
             newNode.className = 'accepted_email';
-            document.getElementById('email_to_list').insertBefore(newNode, document.getElementById('email_to_input'));
+            document.getElementById('email_to_list').insertBefore(newNode, document.getElementById('email_to_input_span'));
             document.getElementById('email_to_input').value = '';
           }
         }
