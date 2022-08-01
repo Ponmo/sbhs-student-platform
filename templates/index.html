@@ -465,8 +465,7 @@
         }
         if (e.which === 32 || (e.which === 13 && !e.shiftKey)) {
           let email = document.getElementById('email_to_input').value.replace(/\s+/g, '');
-          let regex = /\S+@\S+\.\S+/;
-          if (regex.test(email)) {
+          if (/\S+@\S+\.\S+/.test(email)) {
             let newNode = document.createElement('span');
             newNode.textContent = email;
             newNode.className = 'accepted_email';
@@ -492,6 +491,9 @@
         document.querySelectorAll('.accepted_email').forEach(function (e) {
           recipient_list.push(e.textContent);
         });
+        if (/\S+@\S+\.\S+/.test(document.getElementById('email_to_input').value)) {
+          recipient_list.push(document.getElementById('email_to_input').value);
+        }
         $.ajax({
           type: 'POST',
           url: '/send_email',
