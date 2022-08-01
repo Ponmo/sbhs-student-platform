@@ -464,7 +464,7 @@
         if(e.which === 13 && !e.shiftKey) {
           e.preventDefault(); 
         }
-        if (e.which === 32 || e.which === 9 || (e.which === 13 && !e.shiftKey)) {
+        if (e.which === 32 || (e.which === 13 && !e.shiftKey)) {
           let email = document.getElementById('email_to_input').value.replace(/\s+/g, '');
           let regex = /\S+@\S+\.\S+/;
           if (regex.test(email)) {
