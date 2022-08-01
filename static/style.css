@@ -547,7 +547,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   -ms-user-select: none;
   user-select: none;
 }
-.accepted_email {
+.accepted_email_bubble {
   display: inline-block;
   border: 1px solid gray;
   font-size: 12px;
@@ -563,10 +563,10 @@ img { /* make images and create button undraggable and unhighlitable*/
   -ms-user-select: none;
   user-select: none;
 }
-.accepted_email:hover {
+.accepted_email_bubble:hover {
   background-color: lightgray;
 }
-.rejected_email {
+.rejected_email_bubble {
   display: inline-block;
   border: 1px solid FireBrick;
   font-size: 12px;
@@ -582,7 +582,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   -ms-user-select: none;
   user-select: none;
 }
-.rejected_email:hover {
+.rejected_email_bubble:hover {
   background-color: IndianRed;
 }
 #email_to_input_span {

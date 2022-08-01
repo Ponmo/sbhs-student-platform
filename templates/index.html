@@ -470,7 +470,7 @@
             newNode.textContent = email;
             newNode.className = 'accepted_email_bubble';
             let newNodeChild = document.createElement('span');
-            newNodeChild.class_name = 'accepted_email';
+            newNodeChild.className = 'accepted_email';
             newNode.appendChild(newNodeChild);
 
             //createElement('div').newNode.append()
@@ -483,7 +483,7 @@
             newNode.textContent = email;
             newNode.className = 'rejected_email_bubble';
             let newNodeChild = document.createElement('span');
-            newNodeChild.class_name = 'rejected_email';
+            newNodeChild.className = 'rejected_email';
             newNode.appendChild(newNodeChild);
             document.getElementById('email_to_list').insertBefore(newNode, document.getElementById('email_to_input_span'));
             document.getElementById('email_to_input').value = '';
