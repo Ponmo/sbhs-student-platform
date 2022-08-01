@@ -475,7 +475,7 @@
             document.getElementById('email_to_list').insertBefore(newNode, document.getElementById('email_to_input_span'));
             document.getElementById('email_to_input').value = '';
           }
-          else if (email != '' && email != ' ') {
+          else if (email != '') {
             let newNode = document.createElement('span');
             newNode.textContent = email;
             newNode.className = 'rejected_email'
