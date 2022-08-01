@@ -474,7 +474,13 @@
 
             //createElement('div').newNode.append()
 
-
+            document.getElementById('email_to_list').insertBefore(newNode, document.getElementById('email_to_input_span'));
+            document.getElementById('email_to_input').value = '';
+          }
+          else {
+            let newNode = document.createElement('span');
+            newNode.textContent = email;
+            newNode.className = 'rejected_email'
             document.getElementById('email_to_list').insertBefore(newNode, document.getElementById('email_to_input_span'));
             document.getElementById('email_to_input').value = '';
           }
@@ -487,8 +493,6 @@
         document.querySelectorAll('.accepted_email').forEach(function (e) {
           recipient_list.push(e.textContent);
         });
-        alert(JSON.stringify(recipient_list));
-        
         $.ajax({
           type: 'POST',
           url: '/send_email',
@@ -498,6 +502,9 @@
           success: function(data) {
           }
         });
+        $('.accepted_email').remove();
+        document.getElementById('email_subject_input').value = '';
+        document.getElementById('email_message_input').value = '';
       }
 
       $(document).on('input', '.message_edit', function() {
