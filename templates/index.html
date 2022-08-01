@@ -466,11 +466,11 @@
           //focus next textarea
         }*/
         if (e.which === 32 || e.which === 9 || (e.which === 13 && !e.shiftKey)) {
-          const email = document.getElementById('email_to_input').textContent.replace(/\s+/g, '');
+          let email = document.getElementById('email_to_input').textContent.replace(/\s+/g, '');
           if (email.test(/\S+@\S+\.\S+/)) {
-            let email_bubble = document.createElement('accepted_email');
-            email_bubble.textContent = email;
-            document.getElementById('email_to_list').insertBefore(email_bubble, document.getElementById('email_to_input'));
+            let newNode = document.createElement('accepted_email');
+            newNode.textContent = email;
+            document.getElementById('email_to_list').insertBefore(newNode, document.getElementById('email_to_input'));
             document.getElementById('email_to_input').textContent = '';
           }
         }
