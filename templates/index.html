@@ -482,7 +482,14 @@
       });
 
       document.getElementById('email_input_form').onsubmit = function (e) {
-        e.preventDefault(); //validate emails using regex and format into list...
+        e.preventDefault();
+        let recipient_list = [];
+        document.querySelectorAll('.accepted_email').forEach(function (e) {
+          alert('worked');
+          recipient_list.push(e.textContent);
+        });
+        alert(JSON.stringify(recipient_list));
+        
         $.ajax({
           type: 'POST',
           url: '/send_email',
