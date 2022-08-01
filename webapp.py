@@ -64,7 +64,7 @@ def send_email():
             password = os.environ['EMAIL_ACCESS_PASSWORD']
             message = MIMEMultipart('alternative')
             message['Subject'] = request.json['subject']
-            #message['From'] =  'sbhs.platform.test@gmail.com'
+            message['From'] =  'Platform Test'
             text = request.json['message']
             #html = """\
             #    <p style='color:blue'>Hi</p>
