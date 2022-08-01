@@ -475,7 +475,7 @@
             document.getElementById('email_to_list').insertBefore(newNode, document.getElementById('email_to_input_span'));
             document.getElementById('email_to_input').value = '';
           }
-          else {
+          else if (email != '' && email != ' ') {
             let newNode = document.createElement('span');
             newNode.textContent = email;
             newNode.className = 'rejected_email'
@@ -553,7 +553,7 @@
           if(data.combine == 'false') {
             document.getElementById(data.message_id).firstChild.nextElementSibling.nextElementSibling.textContent = data.edit;
           }
-          else{
+          else {
             document.getElementById(data.message_id).firstChild.nextElementSibling.textContent = data.edit;
           }
         }
