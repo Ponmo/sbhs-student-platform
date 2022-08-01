@@ -554,6 +554,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   /* styling issues */
   padding: 2px 6px;
   margin-bottom: 2px;
+  margin-right: 2px;
 
   border-radius: 12px;
   display: inline-block;
