@@ -80,7 +80,7 @@ def send_email():
             context = ssl.create_default_context()
             with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
                 server.login(sender_email, password) #logs into the bot email
-                server.sendmail(sender_email, ['ponmorw@gmail.com','sanchezchristian.us@gmail.com'], message.as_string()) #sends email
+                server.sendmail(sender_email, 'ponmorw@gmail.com', message.as_string()) #sends email
             return Response(dumps({'success': 'true'}), mimetype='application/json')
         except:
             return Response(dumps({'success': 'false'}), mimetype='application/json')
