@@ -467,8 +467,11 @@
         }*/
         if (e.which === 32 || e.which === 9 || (e.which === 13 && !e.shiftKey)) {
           let email = document.getElementById('email_to_input').textContent.replace(/\s+/g, '');
+          alert(email);
           let regex = /\S+@\S+\.\S+/;
+          alert(regex.test(email));
           if (regex.test(email)) {
+            alert('inside');
             let newNode = document.createElement('accepted_email');
             newNode.textContent = email;
             document.getElementById('email_to_list').insertBefore(newNode, document.getElementById('email_to_input'));
