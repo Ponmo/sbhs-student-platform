@@ -596,6 +596,8 @@ img { /* make images and create button undraggable and unhighlitable*/
   border-bottom: 1px solid black;
   resize: none;
   outline: none;
+  padding-top: 2px;
+  padding-bottom: 2px;
 }
 #email_message_input {
   display: block;
@@ -608,6 +610,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   border: none;
   resize: none;
   outline: none;
+  margin-top: 6px;
 }
 #email_options {
   width: 100%;
