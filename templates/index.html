@@ -466,9 +466,12 @@
         if (e.which === 32 || (e.which === 13 && !e.shiftKey)) {
           let email = document.getElementById('email_to_input').value.replace(/\s+/g, '');
           if (/\S+@\S+\.\S+/.test(email)) {
-            let newNode = document.createElement('span');
+            let newNode = document.createElement('div');
             newNode.textContent = email;
-            newNode.className = 'accepted_email';
+            newNode.className = 'accepted_email_bubble';
+            let newNodeChild = document.createElement('span');
+            newNodeChild.class_name = 'accepted_email';
+            newNode.appendChild(newNodeChild);
 
             //createElement('div').newNode.append()
 
@@ -476,9 +479,12 @@
             document.getElementById('email_to_input').value = '';
           }
           else if (email != '') {
-            let newNode = document.createElement('span');
+            let newNode = document.createElement('div');
             newNode.textContent = email;
-            newNode.className = 'rejected_email'
+            newNode.className = 'rejected_email_bubble';
+            let newNodeChild = document.createElement('span');
+            newNodeChild.class_name = 'rejected_email';
+            newNode.appendChild(newNodeChild);
             document.getElementById('email_to_list').insertBefore(newNode, document.getElementById('email_to_input_span'));
             document.getElementById('email_to_input').value = '';
           }
