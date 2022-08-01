@@ -60,27 +60,23 @@ client = WebApplicationClient(GOOGLE_CLIENT_ID)
 def send_email():
     if request.method == 'POST':
         try:
-            #get email and password of email bot through heroku environment.
-            sender_email = 'sbhs.platform.test@gmail.com'#bot email
-            password = os.environ['EMAIL_ACCESS_PASSWORD']#bot password
+            sender_email = 'sbhs.platform.test@gmail.com'
+            password = os.environ['EMAIL_ACCESS_PASSWORD']
             message = MIMEMultipart('alternative')
-            message['Subject'] = 'Test Email' #subject of automatic email
-            message['From'] =  'sbhs.platform.test@gmail.com' #email of bot
-            message['To'] = 'ponmorw@gmail.com' #sends to this email
-            text = """\
-                Hi
-            """ #basic text
-            html = """\
-                <p style='color:blue'>Hi</p>
-            """ #text version with html
+            message['Subject'] = request.json['subject']
+            #message['From'] =  'sbhs.platform.test@gmail.com'
+            text = request.json['message']
+            #html = """\
+            #    <p style='color:blue'>Hi</p>
+            #"""
             part1 = MIMEText(text, 'plain')
-            part2 = MIMEText(html, 'html')
+            #part2 = MIMEText(html, 'html')
             message.attach(part1)
-            message.attach(part2)
+            #message.attach(part2)
             context = ssl.create_default_context()
             with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
                 server.login(sender_email, password) #logs into the bot email
-                server.sendmail(sender_email, 'ponmorw@gmail.com', message.as_string()) #sends email
+                server.sendmail(sender_email, request.json['to'], message.as_string()) #sends email
             return Response(dumps({'success': 'true'}), mimetype='application/json')
         except:
             return Response(dumps({'success': 'false'}), mimetype='application/json')
