@@ -469,8 +469,9 @@
           let email = document.getElementById('email_to_input').value.replace(/\s+/g, '');
           let regex = /\S+@\S+\.\S+/;
           if (regex.test(email)) {
-            let newNode = document.createElement('accepted_email');
+            let newNode = document.createElement('span');
             newNode.textContent = email;
+            newNode.className = 'accepted_email';
             document.getElementById('email_to_list').insertBefore(newNode, document.getElementById('email_to_input'));
             document.getElementById('email_to_input').value = '';
           }
