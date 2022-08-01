@@ -461,13 +461,17 @@
       }
 
       $('#email_to_input').keypress(function (e) {
-        if(e.which === 13 && !e.shiftKey) {
+        /*if(e.which === 13 && !e.shiftKey) {
           e.preventDefault(); 
           //focus next textarea
-        }
-        else if (e.which === 32) {
-          if (document.getElementById('email_to_input').textContent.test(/\S+@\S+\.\S+/)) {
-            
+        }*/
+        if (e.which === 32 || e.which === 9 || (e.which === 13 && !e.shiftKey)) {
+          const email = document.getElementById('email_to_input').textContent.replace(/\s+/g, '');
+          if (email.test(/\S+@\S+\.\S+/)) {
+            let email_bubble = document.createElement('accepted_email');
+            email_bubble.textContent = email;
+            document.getElementById('email_to_list').insertBefore(email_bubble, document.getElementById('email_to_input'));
+            document.getElementById('email_to_input').textContent = '';
           }
         }
       });
