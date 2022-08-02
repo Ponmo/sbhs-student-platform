@@ -68,7 +68,7 @@ def send_email():
         recipients = request.json['to']
         recipients.append(session['users_email'])
         recipients = list(set(recipients))
-        text = (request.json['message'] + '<br>' +
+        text = (request.json['message'].replace('\n', '<br />') + '<br>' +
         '--------------------------------------<br>' +
         session['users_name'] + '<br>' + 
         session['users_email'] + '<br>' +
@@ -80,7 +80,7 @@ def send_email():
         with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
             server.login(sender_email, password)
             server.sendmail(sender_email, recipients, message.as_string())
-        collection_emails.insert_one({'name': session['users_name'], 'picture': session['picture'], 'room': request.json['room_id'], 'email': session['users_email'], 'datetime': datetime.now().isoformat() + 'Z', 'from': session['unique_id'], 'recipients': recipients, 'subject': request.json['subject'], 'message': text})
+        collection_emails.insert_one({'name': session['users_name'], 'picture': session['picture'], 'room': request.json['room_id'], 'email': session['users_email'], 'datetime': datetime.now().isoformat() + 'Z', 'from': session['unique_id'], 'recipients': recipients, 'subject': request.json['subject'], 'message': request.json['message']})
         return Response(dumps({'success': 'true'}), mimetype='application/json')
     return Response(dumps({'success': 'false'}), mimetype='application/json')
 
