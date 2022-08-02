@@ -1041,6 +1041,12 @@ img { /* make images and create button undraggable and unhighlitable*/
   #spaces {
     width: calc(100% - 72px);
   }
+  #open_channels {
+    display: inline-block;
+  }
+  #open_members {
+    display: inline-block;
+  }
   #home {
     display: none;
   }
