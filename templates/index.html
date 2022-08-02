@@ -1345,10 +1345,10 @@
               newMode.className = 'message-container';
               newMode.id = item._id.$oid;
               newMode.setAttribute('data-date', emailDate.format('M/D/YYYY'));
-              if(moment(messageDate).isSame(todayDate, 'day')) {
+              if(moment(emailDate).isSame(todayDate, 'day')) {
                 emailDate = 'at ' + emailDate.format('h:mm A');
               }
-              else if(moment(messageDate).isSame(yesterdayDate, 'day')) {
+              else if(moment(emailDate).isSame(yesterdayDate, 'day')) {
                 emailDate = 'Yesterday at ' + emailDate.format('h:mm A');
               }
               else {
