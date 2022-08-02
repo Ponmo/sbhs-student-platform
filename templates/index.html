@@ -970,32 +970,31 @@
         $('#space-search').css('display', 'none');
       });
       
+      $(document).on('click', '#delete-room', function(e) {
+        const deleted_room = selected_room;
+        const deleted_room_section = $('#' + selected_room).attr('data-section');
+        $.ajax({
+          type: "POST",
+          url: '/delete_room',
+          dataType: "json",
+          data: JSON.stringify({'room_id': deleted_room, 'space_id': current_space, 'section_id': deleted_room_section}),
+          contentType: 'application/json;charset=UTF-8',
+          success: function(data) {
+            if (data['success'] == 'true') {
+              socket.emit('deleted_room', {
+                room: deleted_room,
+                room_list: roomList()
+              });
+            }
+            else {
+              alert('Spaces must have at least one room');
+            }
+          }
+        });
+      });
+
       $(document).on('click', '.room', function(e) {
-        if (e.target.className == 'room-settings') {
-          const deleted_room = $(this).attr('id');
-          const deleted_room_section = $(this).attr('data-section');
-            $.ajax({
-              type: "POST",
-              url: '/delete_room',
-              dataType: "json",
-              data: JSON.stringify({'room_id': deleted_room, 'space_id': current_space, 'section_id': deleted_room_section}),
-              contentType: 'application/json;charset=UTF-8',
-              success: function(data) {
-                if (data['success'] == 'true') {
-                  socket.emit('deleted_room', {
-                    room: deleted_room,
-                    room_list: roomList()
-                  });
-                }
-                else {
-                  alert('Spaces must have at least one room');
-                }
-              }
-            });
-        }
-        else {
-          joinRoom(this.id);
-        }
+        joinRoom(this.id);
       });
 
       $(document).on('click', '.special-room', function(e) {
@@ -1428,5 +1427,8 @@
       });
 
     });
+
+
+    //applyTheme function
   </script>
 </html>
