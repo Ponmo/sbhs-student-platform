@@ -992,7 +992,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   #content { 
     display: grid;
     grid-template-rows: 48px calc(100vh - 98px);
-    grid-template-columns: 270px 100vw 0px;
+    grid-template-columns: 270px 100vw 220px;
     overflow-y: hidden;
     /*Remove?*/
     gap: 0px;
