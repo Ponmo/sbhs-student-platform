@@ -1019,4 +1019,10 @@ img { /* make images and create button undraggable and unhighlitable*/
   #spaces {
     width: calc(100% - 72px);
   }
+
+
+
+  #overlay {
+    z-index: 10;
+  }
 }
