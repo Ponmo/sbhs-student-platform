@@ -298,6 +298,44 @@
         }
       });
 
+      $(document).on('click', function(e) {
+        //// If you input: "&& profile_popup.has(e.target).length === 0)"" it makes it so clicking on a child will not remove it
+        // hide contextmenu on popup and viceversa
+        var container = $("#space-settings-popup");
+        var profile_popup = $("#profile-popup");
+        var section_menu = $('#section-menu');
+        var room_menu = $('#room-menu');
+        // For container and context_menu, check if it exists as well.
+        if (!room_menu.is(e.target)) 
+        {
+          room_menu.hide();
+        }
+        if (!section_menu.is(e.target)) 
+        {
+          section_menu.hide();
+        }
+        if (!container.is(e.target) && !$('#server-settings-button').is(e.target)) 
+        {
+          container.hide();
+          // TODO: Make this function function only when popups appear (use .off function?)
+          // https://stackoverflow.com/questions/67973984/getting-desired-event-target-when-listener-is-on-the-document
+        }
+        //alert(!$('.member').is(e.target));
+        if (!!document.getElementById("profile-popup") && !e.target.closest('.member')) {
+          profile_popup.remove();
+          selected_user = '';
+          $('.member').css('background-color', '');
+          $('.member').addClass('pointer');
+        }
+        /*if (!!document.getElementById("profile-popup") && (!$('.member').is(e.target) && !$('.member').is(e.target.parentNode) || (!profile_popup.is(e.target) && profile_popup.contains(e.target)))) { 
+          profile_popup.remove();
+          selected_user = '';
+          $('.member').css('background-color', '');
+          $('.member').addClass('pointer');
+          // Removes Profile Popups, Probably Optimize and Combine This With Above
+        }*/
+      });
+
       $(document).on('click', '#log-out', function () {
         $.ajax({
           type: 'POST',
@@ -306,6 +344,121 @@
           success: function(data) {
           }
         });
+      });
+
+      $(document).on('click', '#home', function() {
+        $('#' + current_space).attr('style', '');
+        current_space = '';
+        current_room = '';
+        $('.active-space').attr('style', '');
+        $('#home-page').css('display', 'block');
+        $('#first-all').css('display', 'none');
+        $('#space-search').css('display', 'none');
+      });
+
+      $(document).on('click', '#profile', function() {
+        $('#user-page').css('display', 'block');
+        $("#user-page").animate({opacity: '1'}, 100);
+        $.ajax({
+          type: "POST",
+          url: '/profile',
+          dataType: "json",
+          contentType: 'application/json;charset=UTF-8',
+          success: function(data){
+            alert(JSON.stringify(data));
+          }
+        })
+      });
+
+      $(document).on('click', '#close-user-page', function() {
+        $("#user-page").animate({opacity: '0'}, 100);
+        setTimeout(function() {
+          $('#user-page').css('display', 'none');
+        }, 100);
+      });
+
+      $(document).on('click', '.member', function(e) {
+        if (this.getAttribute('data-id') != selected_user) {
+          if (!!document.getElementById("profile-popup")) {
+            $('#profile-popup').remove();
+            $('.member').css('background-color', '');
+            $('.member').addClass('pointer');
+          }
+          selected_user = this.getAttribute('data-id');
+          $.ajax({
+            type: "POST",
+            url: '/open_member_profile',
+            dataType: "json",
+            data: JSON.stringify({'user_id': selected_user}), 
+            contentType: 'application/json;charset=UTF-8',
+            success: function(data) {
+              let member = document.querySelector('[data-id="' + selected_user + '"]');
+              let newNode = document.createElement('div');
+              newNode.className = 'members-popup';
+              newNode.id = 'profile-popup';
+              member.appendChild(newNode);
+              member.className = 'member';
+              member.style.backgroundColor = '#3c3f45';
+              document.getElementById('profile-popup').innerHTML = '<ul id="profile-list"><li id="profile-picture-list"><img id="popup-picture" src=' + data['picture'] + ' alt="!"></li><li id="profile-name">' + data['name'] + '</li><li id="profile-email">' + data['email'] + '</li><table id="joined-table"></table>';
+              //loop through all joined servers' icons and creates img elements to place in the table
+              for (let i = 0; i < Math.ceil(data["joined"].length/4); i++) {
+                newNode = document.createElement('tr');
+                for (let j = 0; j < 4; j++) {
+                  if (data['joined'][i*4+j] != undefined) {
+                    let tableData = document.createElement('td');
+                    tableData.className = 'icons-wrapper pointer';
+                    
+                    let toolTip = document.createElement('div');
+                    toolTip.className = 'tooltip';
+                    toolTip.textContent = "tooltip-checker";
+
+                    let newNodeChild = document.createElement('img');
+                    newNodeChild.setAttribute('src', data['joined'][i*4+j]);
+                    newNodeChild.className = 'joined-icons';
+                    newNode.appendChild(tableData);
+                    tableData.appendChild(toolTip);
+                    tableData.appendChild(newNodeChild);
+                    
+                    let newNodeChildChild = document.createElement('span');
+                    newNodeChildChild.className = "tooltiptext tooltip-top";
+                    newNodeChildChild.textContent = data['joined_spaces_names'][i*4+j];
+                    toolTip.appendChild(newNodeChildChild);
+                  }
+                }
+                document.getElementById("joined-table").append(newNode);
+              }
+            }
+          });
+        }
+        else if (!!document.getElementById("profile-popup") && $('.member').is(e.target) || $('.member').is(e.target.parentNode)) {
+          $('#profile-popup').remove();
+          $('.member').css('background-color', '');
+          $('.member').addClass('pointer');
+          selected_user = '';
+        }
+      });
+
+      $(document).on('click', '#space-search-button', function() {
+        $('#space-search').css('display', 'block');
+        $("#space-search").animate({opacity: '1'}, 100);
+      });
+        
+      $(document).on('click', '#close-space-search-button', function() {
+        $("#space-search").animate({opacity: '0'}, 100);
+        setTimeout(function() {
+          $('#space-search').css('display', 'none');
+        }, 100);
+      });
+
+      $(document).on('click', '.form-space', function() {
+        $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
+        $(document.getElementById(current_space)).attr('style', '');
+        current_space = this.getAttribute('data-id');
+        var clicked_space = this;
+        setTimeout(function() {
+          clicked_space.firstChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = "Joined";
+        }, 500)
+        joinSpace();
       });
 
       $('#chat').scroll(function() { //$('#chat').scrollTop() + $('#chat').height();
@@ -408,6 +561,35 @@
         document.getElementById('email_message_input').value = '';
       }
 
+      $(document).on('click', '.report-message', function() {
+        $.ajax({
+          type: "POST",
+          url: '/report_message',
+          dataType: "json",
+          data: JSON.stringify({'message_id': this.parentNode.parentNode.id}),
+          contentType: 'application/json;charset=UTF-8',
+          success: function(data) {
+            if (data['success'] == 'true') {
+              alert("Your report has been recieved.")
+            }
+            else if (data['success'] == 'many') {
+              alert("Message has already been reported.")
+            }
+            else {
+              alert("Your report failed.")
+            }
+          }
+        });
+      });
+
+      $(document).on('click', '.edit-message', function() {
+        var message_id = this.parentNode.parentNode.id;
+        var message = this.parentNode.previousElementSibling.textContent;
+        $(this.parentNode.previousElementSibling).hide();
+        $(this.parentNode.previousElementSibling).after('<form class="message_edit_input_form"><textarea class="message_edit" rows="1" placeholder="Remove message">' + message + '</textarea></form>');
+        this.parentNode.previousElementSibling.firstChild.setAttribute("style", "height:" + (this.parentNode.previousElementSibling.firstChild.scrollHeight) + "px;overflow-y:hidden;");
+      });
+
       $(document).on('input', '.message_edit', function() {
         this.style.height = "auto";
         this.style.height = (this.scrollHeight) + "px";
@@ -446,9 +628,129 @@
         $(this).remove();
       });
 
+      $(document).on('click', '.delete-message', function() {
+        var message_id = this.parentNode.parentNode.id;
+        $.ajax({
+          type: 'POST',
+          url: '/delete_message',
+          dataType: 'json',
+          data: JSON.stringify({'message_id': message_id}),
+          contentType: 'application/json;charset=UTF-8',
+          success: function (delete_message){
+            alert(JSON.stringify(delete_message['success']));
+            socket.emit('deleted_message', {'message_id': message_id, 'room_id': current_room});
+          }
+        })
+      });
+
+      $(document).on('click', '.room', function(e) {
+        joinRoom(this.id);
+      });
+
+      $(document).on('click', '.special-room', function(e) {
+        joinRoom(this.id, true);
+      });
+
+      $(document).on('click', '#delete-room', function(e) {
+        const deleted_room = selected_room;
+        const deleted_room_section = $('#' + selected_room).attr('data-section');
+        $.ajax({
+          type: "POST",
+          url: '/delete_room',
+          dataType: "json",
+          data: JSON.stringify({'room_id': deleted_room, 'space_id': current_space, 'section_id': deleted_room_section}),
+          contentType: 'application/json;charset=UTF-8',
+          success: function(data) {
+            if (data['success'] == 'true') {
+              socket.emit('deleted_room', {
+                room: deleted_room,
+                room_list: roomList()
+              });
+            }
+            else {
+              alert('Spaces must have at least one room');
+            }
+          }
+        });
+      });
+
+      $(document).on('contextmenu', '.room', function (e) {
+        selected_room = this.id;
+        document.getElementById('room-menu').style.top = mouseY(event) + 'px';
+        document.getElementById('room-menu').style.left = mouseX(event) + 'px';
+        $(document.getElementById('room-menu')).show();
+        e.preventDefault();
+      });
+
+      document.getElementById('create-room-form').onsubmit = function (e) {
+        e.preventDefault();
+        let room_name = document.getElementById('room-name').value.trim();
+        if (room_name.length) {
+          $.ajax({
+            type: 'POST',
+            url: '/create_room',
+            dataType: 'json',
+            data: JSON.stringify({'room_name': room_name, 'section_id': selected_section, 'space_id': current_space}),
+            contentType: 'application/json;charset=UTF-8',
+            success: function(room) {
+              socket.emit('created_room', {
+                room_id: room['_id']['$oid'],
+                room_list: roomList(),
+                name: room_name,
+                section_id: selected_section
+              });
+              document.getElementById("create-room").style.display = "none";
+            }
+          });
+        }
+      }
+
+      document.getElementById('create-section-form').onsubmit = function (e) {
+        e.preventDefault();
+        let section_name = document.getElementById('section-name').value.trim();
+        if (section_name.length) {
+          $.ajax({
+            type: 'POST',
+            url: '/create_section',
+            dataType: "json",
+            data: JSON.stringify({'section_name': section_name, 'space_id': current_space}),
+            contentType: 'application/json;charset=UTF-8',
+            success: function(section) {
+              socket.emit('created_section', {
+                section_id: section['_id']['$oid'],
+                room_list: roomList(),
+                name: section_name,
+              });
+              document.getElementById("create-section").style.display = "none";
+            }
+          });
+        }
+      }
+
       //Collapse section
       $(document).on('click', '.section', function() {
         selected_section = this.id;
+      });
+
+      $(document).on('click', '#delete-section', function () {
+        $.ajax({
+          type: 'POST',
+          url: '/delete_section',
+          dataType: "json",
+          data: JSON.stringify({'section_id': selected_section, 'space_id': current_space}),
+          contentType: 'application/json;charset=UTF-8',
+          success: function(data) {
+            if (data['success'] == 'true') {
+              socket.emit('deleted_section', {
+                section_id: selected_section,
+                room_list: roomList()
+              });
+            }
+            else {
+              alert('There must be at least one section.');
+            }
+          }
+        });
       });
 
       $(document).on('contextmenu', '.section', function (e) {
@@ -457,6 +759,78 @@
         document.getElementById('section-menu').style.left = mouseX(event) + 'px';
         $(document.getElementById('section-menu')).show();
         e.preventDefault();
+      });
+
+      $(document).on('click', '.space', function() {
+        if (current_space != this.id) {
+          $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
+          $(document.getElementById(current_space)).attr('style', '');
+          $(this).css('border-radius', '3px');
+          $(this).closest('.space-wrapper').find('.active-space').css({width: '39px', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
+          current_space = this.id;
+          space();
+        }
+      });
+
+      document.getElementById('create-space-form').onsubmit = function (e) {
+        e.preventDefault();
+        let space_name = document.getElementById('space-name').value.trim();
+        let space_image = document.getElementById('space-picture').value.trim();
+        if (!/\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(space_image)) {
+          space_image = '/static/images/Space.jpeg'
+        }
+        if (space_name.length) { 
+          $.ajax({
+            type: 'POST',
+            url: '/create_space',
+            dataType: "json",
+            data: JSON.stringify({'space_name': space_name, 'space_image': space_image}),
+            contentType: 'application/json;charset=UTF-8',
+            success: function(data) {
+              document.getElementById("create-space").style.display = "none";
+              $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
+              $(document.getElementById(current_space)).attr('style', '');
+              var newNode = document.createElement('li');
+              newNode.className = 'space-wrapper';
+              var newNodeChild = document.createElement('img');
+              newNodeChild.className = 'space pointer';
+              newNodeChild.id = data.space_id;
+              newNodeChild.setAttribute('data-name', space_name);
+              newNodeChild.style.borderRadius = '3px';
+              newNodeChild.src = space_image;
+              newNode.appendChild(newNodeChild);
+              newNodeChild = document.createElement('div');
+              newNodeChild.className = 'active-space';
+              newNodeChild.style.width = '39px'
+              newNode.appendChild(newNodeChild);
+              referenceNode = document.getElementById('space_align_helper');
+              referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+              current_space = data.space_id;
+              space();
+            }
+          });
+        }
+      }
+
+      $(document).on('click', '#server-settings-button', function() {
+        var container = document.getElementById('space-settings-popup');
+        if (container.style.display == 'block') {
+          container.style.display = 'none';
+          // document.addEventListener('click', removePopup(), {once: true});
+        }
+        else {
+          container.style.display = 'block';
+        }
+      });
+
+      $(document).on('click', '#edit-space-button', function() {
+        $('#space-settings').show();
+        $('#first-all').hide();
+      });
+
+      $(document).on('click', '#exit-space-settings', function() {
+        $('#space-settings').hide();
+        $('#first-all').show();
       });
 
       $(document).on('click', '#leave-space', function() {
@@ -475,6 +849,64 @@
         });
       });
 
+      $(document).on('click', '#delete-space', function(){
+        $.ajax({
+          type: 'POST',
+          url: '/delete_space',
+          dataType: 'json',
+          data: JSON.stringify({'space_id': current_space}),
+          contentType: 'application/json;charset=UTF-8',
+          success: function (delete_space){
+            socket.emit('deleted_space', {'room_list': roomList()})
+          }
+        })
+      });
+
+      var createSpaceModal = document.getElementById("create-space");
+      $(document).on('click', '#create-space-button', function() {
+        createSpaceModal.style.display = "block";
+      });
+      $(document).on('click', '#close-create-space', function() {
+        createSpaceModal.style.display = "none";
+      });
+
+      var createRoomModal = document.getElementById("create-room");
+      $(document).on('click', '.create-room-button', function() {
+        createRoomModal.style.display = "block";
+      });
+      $(document).on('click', '#close-create-room', function() {
+        createRoomModal.style.display = "none";
+      });
+
+      var createSectionModal = document.getElementById("create-section");
+      $(document).on('click', '#create-section-button', function() {
+        createSectionModal.style.display = "block";
+      });
+      $(document).on('click', '#close-create-section', function() {
+        createSectionModal.style.display = "none";
+      });
+
+      var spaceSettingsPopup = document.getElementById('space-settings-popup'); 
+      window.onclick = function(event) {
+        if (event.target == createRoomModal) {
+          createRoomModal.style.display = "none";
+        }
+        if (event.target == createSpaceModal) {
+          createSpaceModal.style.display = "none";
+        }
+        if (event.target == createSectionModal) {
+          createSectionModal.style.display = "none";
+        }
+        }
+
+      $("#chat").on('mouseenter', '.message-container-combine', function(){
+        $(this).find(".message-combine-time").css("visibility", "visible");
+      });
+
+      $("#chat").on('mouseleave', '.message-container-combine', function(){
+        $(this).find(".message-combine-time").css("visibility", "hidden");
+      });
+
       socket.on('sorted_sections', function (data) {
         data.section_list.forEach(function(section_id) {
           document.getElementById(section_id).parentElement.parentElement.appendChild(document.getElementById(section_id).parentElement);
@@ -488,11 +920,6 @@
           });
         });
       });
-
-      // below psuedocode comments for saving unsent messages
-      // list of messages being typed by user containing message (updated when user clicks on space or another room) and room id.
-      // ['2hu45iu2323', 'Hi I love apples and cakes they are cool', '34yubjub42', 'I love appels']
-      // Loop through this and check if joined room id is equal to any of these. If so, get index of that ID add one and make the message that message. Yep okay easy peasy lemon SQUEEEEZY.
 
       socket.on('edited_message', function(data) {
         try {
@@ -559,29 +986,6 @@
         }
       });
       
-      document.getElementById('create-room-form').onsubmit = function (e) {
-        e.preventDefault();
-        let room_name = document.getElementById('room-name').value.trim();
-        if (room_name.length) {
-          $.ajax({
-            type: 'POST',
-            url: '/create_room',
-            dataType: 'json',
-            data: JSON.stringify({'room_name': room_name, 'section_id': selected_section, 'space_id': current_space}),
-            contentType: 'application/json;charset=UTF-8',
-            success: function(room) {
-              socket.emit('created_room', {
-                room_id: room['_id']['$oid'],
-                room_list: roomList(),
-                name: room_name,
-                section_id: selected_section
-              });
-              document.getElementById("create-room").style.display = "none";
-            }
-          });
-        }
-      }
-      
       socket.on('created_room', function(data) {
         const newNode = document.createElement('li');
         newNode.id = data.room_id;
@@ -602,28 +1006,6 @@
           document.getElementById(data.section_id).nextElementSibling.appendChild(newNode);
         }
       });
-      
-      document.getElementById('create-section-form').onsubmit = function (e) {
-        e.preventDefault();
-        let section_name = document.getElementById('section-name').value.trim();
-        if (section_name.length) {
-          $.ajax({
-            type: 'POST',
-            url: '/create_section',
-            dataType: "json",
-            data: JSON.stringify({'section_name': section_name, 'space_id': current_space}),
-            contentType: 'application/json;charset=UTF-8',
-            success: function(section) {
-              socket.emit('created_section', {
-                section_id: section['_id']['$oid'],
-                room_list: roomList(),
-                name: section_name,
-              });
-              document.getElementById("create-section").style.display = "none";
-            }
-          });
-        }
-      }
       
       socket.on('created_section', function(data) {
         var newNode = document.createElement('ul');
@@ -652,27 +1034,6 @@
         }
       });
 
-      $(document).on('click', '#delete-section', function () {
-        $.ajax({
-          type: 'POST',
-          url: '/delete_section',
-          dataType: "json",
-          data: JSON.stringify({'section_id': selected_section, 'space_id': current_space}),
-          contentType: 'application/json;charset=UTF-8',
-          success: function(data) {
-            if (data['success'] == 'true') {
-              socket.emit('deleted_section', {
-                section_id: selected_section,
-                room_list: roomList()
-              });
-            }
-            else {
-              alert('There must be at least one section.');
-            }
-          }
-        });
-      });
-
       socket.on('deleted_section', function(data) {
         alert(data.section_id);
         var deleted_section = document.getElementById(data.section_id);
@@ -685,55 +1046,6 @@
         deleted_section.parentElement.remove();
       });
 
-      document.getElementById('create-space-form').onsubmit = function (e) {
-        e.preventDefault();
-        let space_name = document.getElementById('space-name').value.trim();
-        let space_image = document.getElementById('space-picture').value.trim();
-        if (!/\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(space_image)) {
-          space_image = '/static/images/Space.jpeg'
-        }
-        if (space_name.length) { 
-          $.ajax({
-            type: 'POST',
-            url: '/create_space',
-            dataType: "json",
-            data: JSON.stringify({'space_name': space_name, 'space_image': space_image}),
-            contentType: 'application/json;charset=UTF-8',
-            success: function(data) {
-              document.getElementById("create-space").style.display = "none";
-              $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
-              $(document.getElementById(current_space)).attr('style', '');
-              var newNode = document.createElement('li');
-              newNode.className = 'space-wrapper';
-              var newNodeChild = document.createElement('img');
-              newNodeChild.className = 'space pointer';
-              newNodeChild.id = data.space_id;
-              newNodeChild.setAttribute('data-name', space_name);
-              newNodeChild.style.borderRadius = '3px';
-              newNodeChild.src = space_image;
-              newNode.appendChild(newNodeChild);
-              newNodeChild = document.createElement('div');
-              newNodeChild.className = 'active-space';
-              newNodeChild.style.width = '39px'
-              newNode.appendChild(newNodeChild);
-              referenceNode = document.getElementById('space_align_helper');
-              referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-              current_space = data.space_id;
-              space();
-            }
-          });
-        }
-      }
-
-      $(document).on('click', '.edit-message', function() {
-        var message_id = this.parentNode.parentNode.id;
-        var message = this.parentNode.previousElementSibling.textContent;
-        $(this.parentNode.previousElementSibling).hide();
-        $(this.parentNode.previousElementSibling).after('<form class="message_edit_input_form"><textarea class="message_edit" rows="1" placeholder="Remove message">' + message + '</textarea></form>');
-        this.parentNode.previousElementSibling.firstChild.setAttribute("style", "height:" + (this.parentNode.previousElementSibling.firstChild.scrollHeight) + "px;overflow-y:hidden;");
-      });
-//todo for tomorrow //delete from directory and footer. Direct to home page.
-
       socket.on('deleted_space', function(data) {
         document.getElementById(current_space).parentNode.remove();
         document.querySelector('.form-space[data-id = "' + current_space + '"]').remove();
@@ -743,44 +1055,6 @@
         $('#home-page').css('display', 'block');
         $('#first-all').css('display', 'none');
         $('#space-search').css('display', 'none');
-      });
-
-      $(document).on('click', '#delete-space', function(){
-        $.ajax({
-          type: 'POST',
-          url: '/delete_space',
-          dataType: 'json',
-          data: JSON.stringify({'space_id': current_space}),
-          contentType: 'application/json;charset=UTF-8',
-          success: function (delete_space){
-            socket.emit('deleted_space', {'room_list': roomList()})
-          }
-        })
-      });
-
-      $(document).on('click', '#edit-space-button', function() {
-        $('#space-settings').show();
-        $('#first-all').hide();
-      });
-
-      $(document).on('click', '#exit-space-settings', function() {
-        $('#space-settings').hide();
-        $('#first-all').show();
-      });
-
-      $(document).on('click', '.delete-message', function() {
-        var message_id = this.parentNode.parentNode.id;
-        $.ajax({
-          type: 'POST',
-          url: '/delete_message',
-          dataType: 'json',
-          data: JSON.stringify({'message_id': message_id}),
-          contentType: 'application/json;charset=UTF-8',
-          success: function (delete_message){
-            alert(JSON.stringify(delete_message['success']));
-            socket.emit('deleted_message', {'message_id': message_id, 'room_id': current_room});
-          }
-        })
       });
 
       socket.on('deleted_message', function (data) {
@@ -814,208 +1088,6 @@
             alert(e);
           }
         });
-
-      $(document).on('click', '.space', function() {
-        if (current_space != this.id) {
-          $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
-          $(document.getElementById(current_space)).attr('style', '');
-          $(this).css('border-radius', '3px');
-          $(this).closest('.space-wrapper').find('.active-space').css({width: '39px', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
-          current_space = this.id;
-          space();
-        }
-      });
-      
-      $(document).on('click', '#home', function() {
-        $('#' + current_space).attr('style', '');
-        current_space = '';
-        current_room = '';
-        $('.active-space').attr('style', '');
-        $('#home-page').css('display', 'block');
-        $('#first-all').css('display', 'none');
-        $('#space-search').css('display', 'none');
-      });
-      
-      $(document).on('click', '#delete-room', function(e) {
-        const deleted_room = selected_room;
-        const deleted_room_section = $('#' + selected_room).attr('data-section');
-        $.ajax({
-          type: "POST",
-          url: '/delete_room',
-          dataType: "json",
-          data: JSON.stringify({'room_id': deleted_room, 'space_id': current_space, 'section_id': deleted_room_section}),
-          contentType: 'application/json;charset=UTF-8',
-          success: function(data) {
-            if (data['success'] == 'true') {
-              socket.emit('deleted_room', {
-                room: deleted_room,
-                room_list: roomList()
-              });
-            }
-            else {
-              alert('Spaces must have at least one room');
-            }
-          }
-        });
-      });
-
-      $(document).on('click', '.room', function(e) {
-        joinRoom(this.id);
-      });
-
-      $(document).on('click', '.special-room', function(e) {
-        joinRoom(this.id, true);
-      });
-
-      $(document).on('contextmenu', '.room', function (e) {
-        selected_room = this.id;
-        document.getElementById('room-menu').style.top = mouseY(event) + 'px';
-        document.getElementById('room-menu').style.left = mouseX(event) + 'px';
-        $(document.getElementById('room-menu')).show();
-        e.preventDefault();
-      });
-        
-      function joinRoom(room_id, special = false) {
-        if (current_room != room_id) {
-          old_room = current_room;
-          current_room = room_id;
-          socket.emit('join_room', {
-            room_id: current_room,
-            old_room: old_room
-          });
-          $(document.getElementById(current_room)).attr('style', 'background-color: #43474d !important');
-          $(document.getElementById(old_room)).attr('style', '');
-          document.getElementById('messages').textContent = '';
-          document.getElementById('room-name-display').textContent = document.getElementById(current_room).getAttribute('data-name');
-          if (special) {
-            $('#message_input_form').hide();
-            $('#email_input_form').show();
-          }
-          else {
-            $('#message_input_form').show();
-            $('#email_input_form').hide();
-            chat_history_skip = 0;
-            loadChatHistory();
-          }
-          typing_display.textContent = '';
-          typing_list = [];
-          stoppedTyping();
-        }
-      }
-
-      $(document).on('click', '#close-user-page', function() {
-        $("#user-page").animate({opacity: '0'}, 100);
-        setTimeout(function() {
-          $('#user-page').css('display', 'none');
-        }, 100);
-      });
-
-      $(document).on('click', '#space-search-button', function() {
-        $('#space-search').css('display', 'block');
-        $("#space-search").animate({opacity: '1'}, 100);
-      });
-        
-      $(document).on('click', '#close-space-search-button', function() {
-        $("#space-search").animate({opacity: '0'}, 100);
-        setTimeout(function() {
-          $('#space-search').css('display', 'none');
-        }, 100);
-      });
-
-      $(document).on('click', '.form-space', function() {
-        $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
-        $(document.getElementById(current_space)).attr('style', '');
-        current_space = this.getAttribute('data-id');
-        var clicked_space = this;
-        setTimeout(function() {
-          clicked_space.firstChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = "Joined";
-        }, 500)
-        joinSpace();
-      });
-
-      function joinSpace() {
-        $.ajax({
-          type: "POST",
-          url: '/join_space',
-          dataType: "json",
-          data: JSON.stringify({'space_id': current_space}),
-          contentType: 'application/json;charset=UTF-8',
-          success: function(data) {
-            if(!data['members'].some(row => row.includes(user_id))) {
-              var newNode = document.createElement('li');
-              newNode.className = 'space-wrapper';
-              var newNodeChild = document.createElement('img');
-              newNodeChild.className = 'space pointer';
-              newNodeChild.id = data['_id']['$oid'];
-              newNodeChild.style.borderRadius = '3px';
-              newNodeChild.setAttribute('data-name', data['name']);
-              newNodeChild.src = data['picture'];
-              newNode.appendChild(newNodeChild);
-              newNodeChild = document.createElement('div');
-              newNodeChild.className = 'active-space';
-              newNodeChild.style.width = '39px';
-              newNode.appendChild(newNodeChild);
-              referenceNode = document.getElementById('space_align_helper');
-              referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-              space();
-            }
-            else {
-              $('#' + current_space).css('border-radius', '3px');
-              $('#' + current_space).closest('.space-wrapper').find('.active-space').css('width', '39px');
-              space();
-            }
-          }
-        });
-      }
-
-      $(document).on('click', '#server-settings-button', function() {
-        var container = document.getElementById('space-settings-popup');
-        if (container.style.display == 'block') {
-          container.style.display = 'none';
-          // document.addEventListener('click', removePopup(), {once: true});
-        }
-        else {
-          container.style.display = 'block';
-        }
-      });
-
-      $(document).on('click', function(e) {
-        //// If you input: "&& profile_popup.has(e.target).length === 0)"" it makes it so clicking on a child will not remove it
-        // hide contextmenu on popup and viceversa
-        var container = $("#space-settings-popup");
-        var profile_popup = $("#profile-popup");
-        var section_menu = $('#section-menu');
-        var room_menu = $('#room-menu');
-        // For container and context_menu, check if it exists as well.
-        if (!room_menu.is(e.target)) 
-        {
-          room_menu.hide();
-        }
-        if (!section_menu.is(e.target)) 
-        {
-          section_menu.hide();
-        }
-        if (!container.is(e.target) && !$('#server-settings-button').is(e.target)) 
-        {
-          container.hide();
-          // TODO: Make this function function only when popups appear (use .off function?)
-          // https://stackoverflow.com/questions/67973984/getting-desired-event-target-when-listener-is-on-the-document
-        }
-        //alert(!$('.member').is(e.target));
-        if (!!document.getElementById("profile-popup") && !e.target.closest('.member')) {
-          profile_popup.remove();
-          selected_user = '';
-          $('.member').css('background-color', '');
-          $('.member').addClass('pointer');
-        }
-        /*if (!!document.getElementById("profile-popup") && (!$('.member').is(e.target) && !$('.member').is(e.target.parentNode) || (!profile_popup.is(e.target) && profile_popup.contains(e.target)))) { 
-          profile_popup.remove();
-          selected_user = '';
-          $('.member').css('background-color', '');
-          $('.member').addClass('pointer');
-          // Removes Profile Popups, Probably Optimize and Combine This With Above
-        }*/
-      });
 
       function space() {
         $.ajax({
@@ -1129,150 +1201,68 @@
         });
       }
 
-      $(document).on('click', '#profile', function() {
-        $('#user-page').css('display', 'block');
-        $("#user-page").animate({opacity: '1'}, 100);
+      function joinSpace() {
         $.ajax({
           type: "POST",
-          url: '/profile',
+          url: '/join_space',
           dataType: "json",
-          contentType: 'application/json;charset=UTF-8',
-          success: function(data){
-            alert(JSON.stringify(data));
-          }
-        })
-      });
-
-      $(document).on('click', '.report-message', function() {
-        $.ajax({
-          type: "POST",
-          url: '/report_message',
-          dataType: "json",
-          data: JSON.stringify({'message_id': this.parentNode.parentNode.id}),
+          data: JSON.stringify({'space_id': current_space}),
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
-            if (data['success'] == 'true') {
-              alert("Your report has been recieved.")
-            }
-            else if (data['success'] == 'many') {
-              alert("Message has already been reported.")
+            if(!data['members'].some(row => row.includes(user_id))) {
+              var newNode = document.createElement('li');
+              newNode.className = 'space-wrapper';
+              var newNodeChild = document.createElement('img');
+              newNodeChild.className = 'space pointer';
+              newNodeChild.id = data['_id']['$oid'];
+              newNodeChild.style.borderRadius = '3px';
+              newNodeChild.setAttribute('data-name', data['name']);
+              newNodeChild.src = data['picture'];
+              newNode.appendChild(newNodeChild);
+              newNodeChild = document.createElement('div');
+              newNodeChild.className = 'active-space';
+              newNodeChild.style.width = '39px';
+              newNode.appendChild(newNodeChild);
+              referenceNode = document.getElementById('space_align_helper');
+              referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+              space();
             }
             else {
-              alert("Your report failed.")
+              $('#' + current_space).css('border-radius', '3px');
+              $('#' + current_space).closest('.space-wrapper').find('.active-space').css('width', '39px');
+              space();
             }
           }
         });
-      });
+      }
 
-      $(document).on('click', '.member', function(e) {
-        if (this.getAttribute('data-id') != selected_user) {
-          if (!!document.getElementById("profile-popup")) {
-            $('#profile-popup').remove();
-            $('.member').css('background-color', '');
-            $('.member').addClass('pointer');
-          }
-          selected_user = this.getAttribute('data-id');
-          $.ajax({
-            type: "POST",
-            url: '/open_member_profile',
-            dataType: "json",
-            data: JSON.stringify({'user_id': selected_user}), 
-            contentType: 'application/json;charset=UTF-8',
-            success: function(data) {
-              let member = document.querySelector('[data-id="' + selected_user + '"]');
-              let newNode = document.createElement('div');
-              newNode.className = 'members-popup';
-              newNode.id = 'profile-popup';
-              member.appendChild(newNode);
-              member.className = 'member';
-              member.style.backgroundColor = '#3c3f45';
-              document.getElementById('profile-popup').innerHTML = '<ul id="profile-list"><li id="profile-picture-list"><img id="popup-picture" src=' + data['picture'] + ' alt="!"></li><li id="profile-name">' + data['name'] + '</li><li id="profile-email">' + data['email'] + '</li><table id="joined-table"></table>';
-              //loop through all joined servers' icons and creates img elements to place in the table
-              for (let i = 0; i < Math.ceil(data["joined"].length/4); i++) {
-                newNode = document.createElement('tr');
-                for (let j = 0; j < 4; j++) {
-                  if (data['joined'][i*4+j] != undefined) {
-                    let tableData = document.createElement('td');
-                    tableData.className = 'icons-wrapper pointer';
-                    
-                    let toolTip = document.createElement('div');
-                    toolTip.className = 'tooltip';
-                    toolTip.textContent = "tooltip-checker";
-
-                    let newNodeChild = document.createElement('img');
-                    newNodeChild.setAttribute('src', data['joined'][i*4+j]);
-                    newNodeChild.className = 'joined-icons';
-                    newNode.appendChild(tableData);
-                    tableData.appendChild(toolTip);
-                    tableData.appendChild(newNodeChild);
-                    
-                    let newNodeChildChild = document.createElement('span');
-                    newNodeChildChild.className = "tooltiptext tooltip-top";
-                    newNodeChildChild.textContent = data['joined_spaces_names'][i*4+j];
-                    toolTip.appendChild(newNodeChildChild);
-                  }
-                }
-                document.getElementById("joined-table").append(newNode);
-              }
-            }
+      function joinRoom(room_id, special = false) {
+        if (current_room != room_id) {
+          old_room = current_room;
+          current_room = room_id;
+          socket.emit('join_room', {
+            room_id: current_room,
+            old_room: old_room
           });
+          $(document.getElementById(current_room)).attr('style', 'background-color: #43474d !important');
+          $(document.getElementById(old_room)).attr('style', '');
+          document.getElementById('messages').textContent = '';
+          document.getElementById('room-name-display').textContent = document.getElementById(current_room).getAttribute('data-name');
+          if (special) {
+            $('#message_input_form').hide();
+            $('#email_input_form').show();
+          }
+          else {
+            $('#message_input_form').show();
+            $('#email_input_form').hide();
+            chat_history_skip = 0;
+            loadChatHistory();
+          }
+          typing_display.textContent = '';
+          typing_list = [];
+          stoppedTyping();
         }
-        else if (!!document.getElementById("profile-popup") && $('.member').is(e.target) || $('.member').is(e.target.parentNode)) {
-          $('#profile-popup').remove();
-          $('.member').css('background-color', '');
-          $('.member').addClass('pointer');
-          selected_user = '';
-        }
-      });
-
-      $(document).on('click', '.email', function() {
-        document.getElementById('messages').textContent = '';
-      });
-
-      var createSpaceModal = document.getElementById("create-space");
-      $(document).on('click', '#create-space-button', function() {
-        createSpaceModal.style.display = "block";
-      });
-      $(document).on('click', '#close-create-space', function() {
-        createSpaceModal.style.display = "none";
-      });
-
-      var createRoomModal = document.getElementById("create-room");
-      $(document).on('click', '.create-room-button', function() {
-        createRoomModal.style.display = "block";
-      });
-      $(document).on('click', '#close-create-room', function() {
-        createRoomModal.style.display = "none";
-      });
-
-      var createSectionModal = document.getElementById("create-section");
-      $(document).on('click', '#create-section-button', function() {
-        createSectionModal.style.display = "block";
-      });
-      $(document).on('click', '#close-create-section', function() {
-        createSectionModal.style.display = "none";
-      });
-
-      var spaceSettingsPopup = document.getElementById('space-settings-popup'); 
-      window.onclick = function(event) {
-        if (event.target == createRoomModal) {
-          createRoomModal.style.display = "none";
-        }
-        if (event.target == createSpaceModal) {
-          createSpaceModal.style.display = "none";
-        }
-        if (event.target == createSectionModal) {
-          createSectionModal.style.display = "none";
-        }
-        }
-
-      $("#chat").on('mouseenter', '.message-container-combine', function(){
-        $(this).find(".message-combine-time").css("visibility", "visible");
-      });
-
-      $("#chat").on('mouseleave', '.message-container-combine', function(){
-        $(this).find(".message-combine-time").css("visibility", "hidden");
-      });
+      }
 
       function loadChatHistory() {
         $.ajax({
@@ -1427,5 +1417,10 @@
     });
 
     //applyTheme function
+
+    // below psuedocode comments for saving unsent messages
+      // list of messages being typed by user containing message (updated when user clicks on space or another room) and room id.
+      // ['2hu45iu2323', 'Hi I love apples and cakes they are cool', '34yubjub42', 'I love appels']
+      // Loop through this and check if joined room id is equal to any of these. If so, get index of that ID add one and make the message that message. Yep okay easy peasy lemon SQUEEEEZY.
   </script>
 </html>
