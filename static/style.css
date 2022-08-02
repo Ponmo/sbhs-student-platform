@@ -523,9 +523,11 @@ img { /* make images and create button undraggable and unhighlitable*/
   min-width: 84px;
   padding-top: 8px;
 }
+#email_to_wrapper {
+  position: relative;
+}
 #email_to {
   width: calc(100% - 20px);
-  position: relative;
   overflow-x: hidden;
   margin-left: 10px;
   margin-right: 10px;
@@ -601,9 +603,12 @@ img { /* make images and create button undraggable and unhighlitable*/
   position: absolute;
   display: none;
   height: 20px;
-  width: 300px;
-  top: 22px;
-  background-color: black;
+  width: 260px;
+  left: 10px;
+  top: calc(100% - 4px);
+  border: 1px solid black;
+  border-radius: 4px;
+  background-color: white;
 }
 #email_subject_input {
   width: calc(100% - 20px);
