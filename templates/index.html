@@ -324,7 +324,7 @@
           // https://stackoverflow.com/questions/67973984/getting-desired-event-target-when-listener-is-on-the-document
         }
         //alert(!$('.member').is(e.target));
-        if (!!document.getElementById("profile-popup") && !e.target.closest('#profile-popup')) {
+        if (!e.target.closest('#profile-popup')) {
           profile_popup.remove();
           selected_user = '';
           $('.member').css('background-color', '');
