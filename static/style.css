@@ -128,7 +128,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 #content { /* make calc good on all browsers ; Make margin and padding 0 because of broswer differences ; */
   display: grid;
   grid-template-rows: 48px calc(100vh - 98px);
-  grid-template-columns: 270px minmax(290px, auto) 220px;
+  grid-template-columns: 270px minmax(498px, auto) 220px;
   height: 100vh;
   width: 100vw;
   overflow: hidden;
