@@ -960,6 +960,13 @@ img { /* make images and create button undraggable and unhighlitable*/
   padding-bottom: 10px;
   padding-right: 12px;
 }
+#overlay {
+  z-index: 10;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+}
 /* .tooltip {
   position: relative;
   display: inline-block;
@@ -1018,14 +1025,5 @@ img { /* make images and create button undraggable and unhighlitable*/
   }
   #spaces {
     width: calc(100% - 72px);
-  }
-
-
-
-  #overlay {
-    z-index: 10;
-    position: relative;
-    width: 100%;
-    height: 100%;
   }
 }
