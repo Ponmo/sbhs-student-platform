@@ -439,13 +439,13 @@
                   }
                 }
                 document.getElementById("joined-table").append(newNode);
-                if (member.getBoundingClientRect().top > $(window).height() / 2) {
-                  alert('w');
-                  document.getElementById('profile-popup').style.top = (member.getBoundingClientRect().top - document.getElementById('profile-popup').height + member.height) + 'px';
-                }
-                else {
-                  document.getElementById('profile-popup').style.top = member.getBoundingClientRect().top + 'px';
-                }
+              }
+              if (member.getBoundingClientRect().top > $(window).height() / 2) {
+                alert('w');
+                document.getElementById('profile-popup').style.top = (member.getBoundingClientRect().top - document.getElementById('profile-popup').height + member.height) + 'px';
+              }
+              else {
+                document.getElementById('profile-popup').style.top = member.getBoundingClientRect().top + 'px';
               }
             }
           });
