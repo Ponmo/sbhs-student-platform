@@ -405,11 +405,11 @@
               alert(member.getBoundingClientRect().top);
               alert($(window).height() / 2);
               if (member.getBoundingClientRect().top > $(window).height() / 2) {
-                newNode.style.top = member.getBoundingClientRect().top + 'px'
+                newNode.style.bottom = member.getBoundingClientRect().bottom + 'px'
                 //newNode.setAttribute('style', 'top:' + member.getBoundingClientRect().top);
               }
               else {
-                newNode.style.bottom = member.getBoundingClientRect().bottom + 'px'
+                newNode.style.top = member.getBoundingClientRect().top + 'px'
                 //newNode.setAttribute('style', 'bottom:' + member.getBoundingClientRect().bottom);
               }
               document.getElementById('overlay').appendChild(newNode);
