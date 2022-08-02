@@ -208,7 +208,7 @@ def render_main_page(space_id = None):
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():
     if request.method == 'POST':
-        session['logged'] == False # Prevents browsers from using cached session data to log in.
+        session['logged'] = False # Prevents browsers from using cached session data to log in.
         session.clear()
         return Response(dumps({'success': 'true'}), mimetype='application/json')
         
