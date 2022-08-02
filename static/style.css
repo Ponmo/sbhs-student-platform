@@ -778,7 +778,6 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 #spaces {
   width: calc(100% - 290px);
-  min-width: 200px;
   height: 50px;
   border-radius: 2px;
   overflow-y: hidden;
