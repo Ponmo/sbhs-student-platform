@@ -142,6 +142,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   grid-row: 1;
   background-color: #2f3136;
   border-bottom: 1px solid #232428; /* pseudo element for double border */
+  overflow: hidden;
   -moz-user-select: -moz-none;
   -khtml-user-select: none;
   -webkit-user-select: none;
