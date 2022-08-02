@@ -46,6 +46,7 @@ collection_sections = db['Sections']
 collection_reports = db['Reports']
 collection_deleted = db['Deleted Messages']
 collection_logs = db['Logs']
+collection_emails = db['Emails']
 
 app = Flask(__name__)
 app.secret_key = os.environ['SECRET_KEY']
@@ -65,18 +66,20 @@ def send_email():
             message = MIMEMultipart('alternative')
             message['Subject'] = request.json['subject']
             message['From'] =  'Platform Test'
-            text = request.json['message']
-            #html = """\
-            #    <p style='color:blue'>Hi</p>
-            #"""
-            part1 = MIMEText(text, 'plain')
-            #part2 = MIMEText(html, 'html')
-            message.attach(part1)
-            #message.attach(part2)
+            recipients = list(dict.fromkeys(request.json['to']))
+            text = (request.json['message'] + '\n' +
+            '----------------------------------\n' +
+            session['users_name'] + '\n' + 
+            session['users_email'] + '\n' +
+            '<a href="https://sbhs-platform.herokuapp.com/sbhs/' + request.json['space_id'] + '"></a>' + request.json['space_name'] + '\n' +
+            '----------------------------------\nDo not reply')
+            message.attach(MIMEText(text, 'html'))
             context = ssl.create_default_context()
             with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
-                server.login(sender_email, password) #logs into the bot email
-                server.sendmail(sender_email, request.json['to'], message.as_string()) #sends email
+                server.login(sender_email, password)
+                server.sendmail(sender_email, recipients, message.as_string())
+
+            collection_emails.insert_one({'from': session['unique_id'], 'recipients': recipients, 'subject': request.json['subject'], 'message': text})
             return Response(dumps({'success': 'true'}), mimetype='application/json')
         except:
             return Response(dumps({'success': 'false'}), mimetype='application/json')

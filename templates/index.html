@@ -720,10 +720,10 @@
         newNode.setAttribute('data-section', data.section_id);
         newNode.setAttribute('data-name', data.name);
         if (space_admin == true){
-        newNode.innerHTML = data.name + '<img class="room-settings" src="/static/images/settings-white.png">'; 
-      }//change room settings
+        newNode.innerHTML = data.name; //'<img class="room-settings" src="/static/images/settings-white.png">';
+      }
       else{
-        newNode.innerHTML = data.name
+        newNode.innerHTML = data.name;
       }
         const nodeList = document.querySelectorAll('li[data-section="' + data.section_id + '"]');
         if (nodeList.length != 0) {
