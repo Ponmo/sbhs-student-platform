@@ -67,7 +67,7 @@ def send_email():
             message['Subject'] = request.json['subject']
             message['From'] =  'Platform Test'
             recipients = list(dict.fromkeys('\\r\\n', '<br>', request.json['to']))
-            text = (re.sub(request.json['message']) + '<br>' +
+            text = (request.json['message'] + '<br>' +
             '--------------------------------------<br>' +
             session['users_name'] + '<br>' + 
             session['users_email'] + '<br>' +
