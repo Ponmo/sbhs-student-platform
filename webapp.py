@@ -60,33 +60,28 @@ client = WebApplicationClient(GOOGLE_CLIENT_ID)
 @app.route('/send_email', methods=['GET', 'POST'])
 def send_email():
     if request.method == 'POST':
-        #try:
-            
-            sender_email = 'sbhs.platform.test@gmail.com'
-            password = os.environ['EMAIL_ACCESS_PASSWORD']
-            message = MIMEMultipart('alternative')
-            message['Subject'] = request.json['subject']
-            message['From'] =  'Platform Test'
-            recipients = request.json['to']
-            recipients.append(session['users_email'])
-            recipients = list(set(recipients))
-            text = (request.json['message'] + '<br>' +
-            '--------------------------------------<br>' +
-            session['users_name'] + '<br>' + 
-            session['users_email'] + '<br>' +
-            '<a href="https://sbhs-platform.herokuapp.com/sbhs/' + request.json['space_id'] + '">' + request.json['space_name'] + '</a><br>' +
-            '--------------------------------------<br>' +
-            '<div style="color:lightgray;">do not reply</div>')
-            message.attach(MIMEText(text, 'html'))
-            context = ssl.create_default_context()
-            with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
-                server.login(sender_email, password)
-                server.sendmail(sender_email, recipients, message.as_string())
-
-            #collection_emails.insert_one({'from': session['unique_id'], 'recipients': recipients, 'subject': request.json['subject'], 'message': text})
-            return Response(dumps({'success': 'true'}), mimetype='application/json')
-        #except:
-            #return Response(dumps({'success': 'false'}), mimetype='application/json')
+        sender_email = 'sbhs.platform.test@gmail.com'
+        password = os.environ['EMAIL_ACCESS_PASSWORD']
+        message = MIMEMultipart('alternative')
+        message['Subject'] = request.json['subject']
+        message['From'] =  'Platform Test'
+        recipients = request.json['to']
+        recipients.append(session['users_email'])
+        recipients = list(set(recipients))
+        text = (request.json['message'] + '<br>' +
+        '--------------------------------------<br>' +
+        session['users_name'] + '<br>' + 
+        session['users_email'] + '<br>' +
+        '<a href="https://sbhs-platform.herokuapp.com/sbhs/' + request.json['space_id'] + '">' + request.json['space_name'] + '</a><br>' +
+        '--------------------------------------<br>' +
+        '<div style="color:lightgray;">do not reply</div>')
+        message.attach(MIMEText(text, 'html'))
+        context = ssl.create_default_context()
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
+            server.login(sender_email, password)
+            server.sendmail(sender_email, recipients, message.as_string())
+        #collection_emails.insert_one({'from': session['unique_id'], 'recipients': recipients, 'subject': request.json['subject'], 'message': text})
+        return Response(dumps({'success': 'true'}), mimetype='application/json')
     return Response(dumps({'success': 'false'}), mimetype='application/json')
 
 
