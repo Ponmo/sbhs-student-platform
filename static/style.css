@@ -217,22 +217,28 @@ img { /* make images and create button undraggable and unhighlitable*/
 #information {
   grid-column: 2 / 4;
   grid-row: 1;
-  /* justify-content: space-between; */
   background-color: hotpink;
-  /* display: flex;
-  align-items: center;
-  flex-direction: row-reverse; */
-  line-height: 30px;
   -moz-user-select: -moz-none;
   -khtml-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
+#left-info {
+  height: 48px;
+  line-height: 30px;
+  padding-left: 18px;
+}
+#right-info {
+  padding-right: 18px;
+  height: 48px;
+  line-height: 48px;
+  float: right;
+}
 #open_channels {
   display: inline-block;
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 25px;
 }
 #open_members {
   display: inline-block;
