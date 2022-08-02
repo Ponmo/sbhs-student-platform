@@ -364,8 +364,8 @@
       });
 
       $(document).on('click', '#open_channels', function() {
-        $('#content').css('grid-template-columns', '270px 278px 0px');
-        $('#content').css({grid-template-columns: '39px', WebkitTransition: 'width 0.1s ease-out', MozTransition: 'width 0.1s ease-out', MsTransition: 'width 0.1s ease-out', OTransition: 'width 0.1s ease-out', transition: 'width 0.1s ease-out'});
+        // $('#content').css('grid-template-columns', '270px 278px 0px');
+        $('#content').css({gridTemplateColumns: '270px 278px 220px', WebkitTransition: 'grid-template-columns 0.1s ease-out', MozTransition: 'grid-template-columns 0.1s ease-out', MsTransition: 'grid-template-columns 0.1s ease-out', OTransition: 'grid-template-columns 0.1s ease-out', transition: 'grid-template-columns 0.1s ease-out'});
 
         // $("#user-page").animate({opacity: '1'}, 100);
       });
