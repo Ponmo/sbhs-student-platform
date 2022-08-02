@@ -167,6 +167,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 #space-settings-popup {
   display: none;
   position: absolute;
+  pointer-events: initial;
   color: #dcddde;
   font-size: 14px;
   z-index: 10;
