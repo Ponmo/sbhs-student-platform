@@ -440,7 +440,7 @@
                 }
                 document.getElementById("joined-table").append(newNode);
                 if (member.getBoundingClientRect().top > $(window).height() / 2) {
-                  document.getElementById('profile-popup').style.top = member.getBoundingClientRect().top + 'px'
+                  document.getElementById('profile-popup').style.top = member.getBoundingClientRect().top - document.getElementById('profile-popup').height + member.height + 'px'
                 }
                 else {
                   document.getElementById('profile-popup').style.top = member.getBoundingClientRect().top + 'px'
