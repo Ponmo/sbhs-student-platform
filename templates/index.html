@@ -12,7 +12,7 @@
     <title>Santa Barbara High School</title>
   </head>
   <body>
-    
+
     <div id="overlay"></div>
 
     <!--Space Directory Page-->
@@ -325,6 +325,7 @@
         }
         //alert(!$('.member').is(e.target));
         if (!!document.getElementById("profile-popup") && !e.target.closest('.member')) {
+          alert('removedfrom');
           profile_popup.remove();
           selected_user = '';
           $('.member').css('background-color', '');
@@ -383,6 +384,7 @@
       $(document).on('click', '.member', function(e) {
         if (this.getAttribute('data-id') != selected_user) {
           if (!!document.getElementById("profile-popup")) {
+            alert('removedfrom mid');
             $('#profile-popup').remove();
             $('.member').css('background-color', '');
             $('.member').addClass('pointer');
@@ -439,6 +441,7 @@
           });
         }
         else if (!!document.getElementById("profile-popup") && $('.member').is(e.target) || $('.member').is(e.target.parentNode)) {
+          alert('removed from low');
           $('#profile-popup').remove();
           $('.member').css('background-color', '');
           $('.member').addClass('pointer');
