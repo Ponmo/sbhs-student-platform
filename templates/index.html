@@ -64,10 +64,10 @@
             </div>
           </div>
           <div id="information">
-            <img class="pointer" id="open_members" src="/static/images/person.png">
-            <img class="pointer" id="home" src="/static/images/home-white.png">
-            <p id="room-name-display"></p>
             <img class="pointer" id="open_channels" src="/static/images/hamburger.png">
+            <p id="room-name-display"></p>
+            <img class="pointer" id="home" src="/static/images/home-white.png">
+            <img class="pointer" id="open_members" src="/static/images/person.png">
           </div>
           <div id="channels">
             <ul id="special-channels"></ul>
@@ -399,6 +399,8 @@
               let newNode = document.createElement('div');
               newNode.className = 'members-popup';
               newNode.id = 'profile-popup';
+              if member.getBoundingClientRect().top > document.getElementById('')
+              newNode.style.top = member.getBoundingClientRect().top;
               document.getElementById('overlay').appendChild(newNode);
               member.className = 'member';
               member.style.backgroundColor = '#3c3f45';
