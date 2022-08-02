@@ -56,7 +56,6 @@ socketio = SocketIO(app, async_mode='gevent')
 
 client = WebApplicationClient(GOOGLE_CLIENT_ID)
 
-
 @app.route('/send_email', methods=['GET', 'POST'])
 def send_email():
     if request.method == 'POST':
@@ -174,6 +173,7 @@ def callback():
     session['picture'] = picture
     session['users_name'] = users_name
     session['logged'] = True
+    session['current_space'] = ''
     
     # Store user data in MongoDB if new user.
     
@@ -248,11 +248,8 @@ def user_spaces():
 @app.route('/space', methods=['GET', 'POST'])
 def render_space():
     if request.method == 'POST':
-        #results = {'processed': request.json['space_id']}
         rooms_and_sections = dumps([list(collection_rooms.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_sections.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_users.find({'joined': {'$in': [request.json['space_id']]}})), list(collection_spaces.find({'_id': ObjectId(request.json['space_id'])}))]) #find way to convert find_one 
-        #[[room, room, room],[section, section, section], space]#data structure
-        #list[2]
-        
+        session['current_space'] = request.json['space_id']
         return Response(rooms_and_sections, mimetype='application/json')
 
 # When user clicks leave space button, that space is removed
@@ -279,11 +276,13 @@ def chat_history():
         chat_history = dumps(list(collection_messages.find({'room': request.json['room_id']}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(100)))
         return Response(chat_history, mimetype='application/json')
 
-@app.route('/email_history', methods=['GET', 'POST']) #return only emails users can see
+@app.route('/email_history', methods=['GET', 'POST']) #return only emails users can see, and check if space admin
 def email_history():
     if request.method == 'POST':
-        email_history = dumps(list(collection_emails.find({'room': request.json['room_id']}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(100)))
-        return Response(email_history, mimetype='application/json')
+        email_history = collection_emails.find({'room': request.json['room_id']}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(100)
+        if session['users_email'] in email_history['recipients'] or space_admin():
+            email_history = dumps(list(collection_emails.find({'room': request.json['room_id']}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(100)))
+            return Response(email_history, mimetype='application/json')
 
 # Deletes the room and all of its messages in MongoDB. 
 
@@ -374,6 +373,7 @@ def create_space():
         joined = collection_users.find_one({"_id": session['unique_id']})['joined']
         joined.append(str(space_id))
         collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': joined}})
+        session['current_space'] = str(space_id)
         return Response(dumps({'space_id': str(space_id)}), mimetype='application/json')
 
 # Adds space to user's list of joined spaces in MongoDB.
@@ -386,6 +386,7 @@ def delete_space():
     if request.method == 'POST':
         collection_spaces.find_one({'_id': ObjectId(request.json['space_id'])})
         collection_spaces.delete_one({'_id': ObjectId(request.json['space_id'])})
+        session['current_space'] = ''
         return Response(dumps({'success': 'true'}), mimetype='application/json')
     return Response(dumps({'success': 'false'}), mimetype='application/json')
 
@@ -398,6 +399,7 @@ def join_space():
             collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': joined}})
             collection_spaces.find_one_and_update({"_id": ObjectId(request.json['space_id'])}, {'$push': {'members': [session['unique_id'], session['users_name']]}})
         space = dumps(collection_spaces.find_one({'_id': ObjectId(request.json['space_id'])}))
+        session['current_space'] = request.json['space_id']
         return Response(space, mimetype='application/json')
 
 # When user deletes a message, delete that message from MongoDB.
@@ -596,6 +598,11 @@ def sorted_rooms(data):
                 order += 1
                 socketio.emit('sorted_rooms', data, room = room)
         order = 1
+
+def space_admin():
+    if session['unique_id'] in collection_spaces.find_one({'_id': ObjectId(session['current_space'])})['admins']:
+        return True
+    return False
 
 if __name__ == '__main__':
     socketio.run(app, debug=False)
