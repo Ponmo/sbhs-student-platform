@@ -364,9 +364,8 @@
       });
 
       $(document).on('click', '#open_channels', function() {
-        $('#content').css('grid-template-columns', '');
-        grid-template-columns: 270px minmax(278px, auto) 220px;
-        $("#user-page").animate({opacity: '1'}, 100);
+        $('#content').css('grid-template-columns', '270px 278px 0px');
+        // $("#user-page").animate({opacity: '1'}, 100);
       });
 
       $(document).on('click', '#profile', function() {
