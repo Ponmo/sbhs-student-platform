@@ -693,7 +693,6 @@ img { /* make images and create button undraggable and unhighlitable*/
   position: absolute;
   color: #dcddde;
   font-size: 14px;
-  z-index: 10;
   border-radius: 5px;
   width: 300px;
   min-height: 100px;
@@ -725,10 +724,6 @@ img { /* make images and create button undraggable and unhighlitable*/
 #profile-joined {
   padding-top: 20px;
   padding-bottom: 40px;
-}
-.members-popup {
-  left: -315px;
-  top: 0;
 }
 .chats-popup {
 
