@@ -650,6 +650,8 @@ img { /* make images and create button undraggable and unhighlitable*/
   grid-row: 2;
   padding-top: 5px;
   background-color: #2f3136;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 .member {
   position: relative;
@@ -984,3 +986,15 @@ img { /* make images and create button undraggable and unhighlitable*/
   visibility: visible;
 } */ 
 /*Add User Select None Class*/
+
+/* Mobile Media Query */
+@media only screen and (max-width: 768px) {
+  #content { 
+    display: grid;
+    grid-template-rows: 48px calc(100vh - 98px);
+    grid-template-columns: 270px 100vw 0px;
+    overflow-y: hidden;
+    /*Remove?*/
+    gap: 0px;
+  }
+}

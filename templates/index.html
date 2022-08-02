@@ -184,6 +184,7 @@
   <script type="text/javascript" charset="utf-8">
     //Give small space to empty categories room-group 
     $(document).ready(function() {
+
       var socket = io();
       var chat_history_skip = 0;
       var current_room = '';
@@ -197,6 +198,46 @@
       var space_admin = false;
       var user_id = '{{ user_id }}';
       var selected_user = '';
+      
+      $("#regular-channels").sortable({
+        axis: 'y',
+        opacity: 0.7,
+        scroll: false,
+        items: '.section-group',
+        distance: '3',
+        update: function() {
+          var sections = document.querySelectorAll(".section");
+          var section_list = [];
+          for (let i = 0; i < sections.length; i++) {
+            section_list.push(sections[i].id);
+          }
+          socket.emit('sorted_sections', {
+            room_list: roomList(),
+            section_list: section_list
+          });
+        }
+      });
+
+      $('#spaces').sortable({
+        axis: 'x',
+        items: "> li",
+        opacity: 0.7,
+        scroll: false,
+        distance: '3',
+        update: function() {
+          var spaces = document.querySelectorAll('.space');
+          var space_list = [];
+          for (let i = 0; i < spaces.length; i++) {
+            space_list.push(spaces[i].id);
+          }
+          $.ajax({
+            type: 'POST',
+            url: '/sorted_spaces',
+            data: JSON.stringify({'space_list': space_list.reverse()}),
+            contentType: 'application/json;charset=UTF-8'
+          });
+        }
+      });
 
       $.ajax({
         type: 'POST',
@@ -257,76 +298,6 @@
         }
       });
 
-      $("#regular-channels").sortable({
-        axis: 'y',
-        opacity: 0.7,
-        scroll: false,
-        items: '.section-group',
-        distance: '3',
-        update: function() {
-          var sections = document.querySelectorAll(".section");
-          var section_list = [];
-          for (let i = 0; i < sections.length; i++) {
-            section_list.push(sections[i].id);
-          }
-          socket.emit('sorted_sections', {
-            room_list: roomList(),
-            section_list: section_list
-          });
-        }
-      });
-
-      socket.on('sorted_sections', function (data) {
-        data.section_list.forEach(function(section_id) {
-          document.getElementById(section_id).parentElement.parentElement.appendChild(document.getElementById(section_id).parentElement);
-        });
-      });
-
-      $('#spaces').sortable({
-        axis: 'x',
-        items: "> li",
-        opacity: 0.7,
-        scroll: false,
-        distance: '3',
-        update: function() {
-          var spaces = document.querySelectorAll('.space');
-          var space_list = [];
-          for (let i = 0; i < spaces.length; i++) {
-            space_list.push(spaces[i].id);
-          }
-          $.ajax({
-            type: 'POST',
-            url: '/sorted_spaces',
-            data: JSON.stringify({'space_list': space_list.reverse()}),
-            contentType: 'application/json;charset=UTF-8'
-          });
-        }
-      });
-
-      function roomSort() {
-        var room_group = document.querySelectorAll('.room-group');
-        var room_group_list = [];
-        for (let i = 0; i < room_group.length; i++) {
-          let rooms = room_group[i].querySelectorAll('.room');
-          let room_list = [room_group[i].previousElementSibling.id];
-          for (let j = 0; j < rooms.length; j++) {
-            room_list.push(rooms[j].id);
-          }
-          room_group_list.push(room_list);
-        }
-        socket.emit('sorted_rooms', {
-          room_group_list: room_group_list
-        });
-      }
-
-      socket.on('sorted_rooms', function (data) {
-        data.room_group_list.forEach(function(room_group) {
-          room_group.slice(1).forEach(function(room_id) {
-            document.getElementById(room_group[0]).nextElementSibling.appendChild(document.getElementById(room_id));
-          });
-        });
-      });
-
       $(document).on('click', '#log-out', function () {
         $.ajax({
           type: 'POST',
@@ -337,94 +308,12 @@
         });
       });
 
-      $(document).on('click', '#leave-space', function() {
-        document.querySelector('[data-id="' + current_space + '"]').firstChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = 'Not Joined';      
-        $.ajax({
-          type: 'POST',
-          url: '/leave_space',
-          dataType: "json",
-          data: JSON.stringify({'space-id': current_space}),
-          contentType: 'application/json;charset=UTF-8',
-          success: function(data) {
-            $("#first-all").hide();
-            $("#home-page").show();
-            $("#" + current_space).parent().remove();
-          }
-        });
-      });
-
-      // below psuedocode comments for saving unsent messages
-      // list of messages being typed by user containing message (updated when user clicks on space or another room) and room id.
-      // ['2hu45iu2323', 'Hi I love apples and cakes they are cool', '34yubjub42', 'I love appels']
-      // Loop through this and check if joined room id is equal to any of these. If so, get index of that ID add one and make the message that message. Yep okay easy peasy lemon SQUEEEEZY.
-      
-      // Collapse Sections
-      $(document).on('click', '.section', function() {
-        selected_section = this.id;
-      });
-      
-      // Contextmenu for Sections
-      $(document).on('contextmenu', '.section', function (e) {
-        selected_section = this.id;
-        document.getElementById('section-menu').style.top = mouseY(event) + 'px';
-        document.getElementById('section-menu').style.left = mouseX(event) + 'px';
-        $(document.getElementById('section-menu')).show();
-        e.preventDefault();
-      });
-
-    function mouseX(evt) {
-      if (evt.pageX) {
-        return evt.pageX;
-      } else if (evt.clientX) {
-        return evt.clientX + (document.documentElement.scrollLeft ?
-          document.documentElement.scrollLeft :
-          document.body.scrollLeft);
-      } else {
-        return null;
-      }
-    }
-
-    function mouseY(evt) {
-      if (evt.pageY) {
-        return evt.pageY;
-      } else if (evt.clientY) {
-        return evt.clientY + (document.documentElement.scrollTop ?
-          document.documentElement.scrollTop :
-          document.body.scrollTop);
-      } else {
-        return null;
-      }
-    }
-
-      function stoppedTyping() {
-        typing = false;
-        socket.emit('stopped_typing', {
-          name: "{{ name }}",
-          room_id: current_room
-        });
-      }
-
-      function isTyping() {
-        if (typing == false) {
-          typing = true;
-          socket.emit('is_typing', {
-            name: "{{ name }}",
-            room_id: current_room
-          });
-          timeout = setTimeout(stoppedTyping, 5000);
-        }
-        else {
-          clearTimeout(timeout);
-          timeout = setTimeout(stoppedTyping, 5000);
-        }
-      }
-      
       $('#chat').scroll(function() { //$('#chat').scrollTop() + $('#chat').height();
         if (Math.abs($('#chat').scrollTop()) == document.getElementById("chat").scrollHeight - document.getElementById("chat").offsetHeight) {  
           loadChatHistory();
         }
       });
-      
+
       let message_input = document.getElementById("message_input");
       message_input.oninput = function() {
         message_input.style.height = "";
@@ -557,6 +446,54 @@
         $(this).remove();
       });
 
+      //Collapse section
+      $(document).on('click', '.section', function() {
+        selected_section = this.id;
+      });
+
+      $(document).on('contextmenu', '.section', function (e) {
+        selected_section = this.id;
+        document.getElementById('section-menu').style.top = mouseY(event) + 'px';
+        document.getElementById('section-menu').style.left = mouseX(event) + 'px';
+        $(document.getElementById('section-menu')).show();
+        e.preventDefault();
+      });
+
+      $(document).on('click', '#leave-space', function() {
+        document.querySelector('[data-id="' + current_space + '"]').firstChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = 'Not Joined';      
+        $.ajax({
+          type: 'POST',
+          url: '/leave_space',
+          dataType: "json",
+          data: JSON.stringify({'space-id': current_space}),
+          contentType: 'application/json;charset=UTF-8',
+          success: function(data) {
+            $("#first-all").hide();
+            $("#home-page").show();
+            $("#" + current_space).parent().remove();
+          }
+        });
+      });
+
+      socket.on('sorted_sections', function (data) {
+        data.section_list.forEach(function(section_id) {
+          document.getElementById(section_id).parentElement.parentElement.appendChild(document.getElementById(section_id).parentElement);
+        });
+      });
+
+      socket.on('sorted_rooms', function (data) {
+        data.room_group_list.forEach(function(room_group) {
+          room_group.slice(1).forEach(function(room_id) {
+            document.getElementById(room_group[0]).nextElementSibling.appendChild(document.getElementById(room_id));
+          });
+        });
+      });
+
+      // below psuedocode comments for saving unsent messages
+      // list of messages being typed by user containing message (updated when user clicks on space or another room) and room id.
+      // ['2hu45iu2323', 'Hi I love apples and cakes they are cool', '34yubjub42', 'I love appels']
+      // Loop through this and check if joined room id is equal to any of these. If so, get index of that ID add one and make the message that message. Yep okay easy peasy lemon SQUEEEEZY.
+
       socket.on('edited_message', function(data) {
         try {
           if(data.combine == 'false') {
@@ -621,77 +558,6 @@
           joinRoom($('#regular-channels').find('.room')[0].id);
         }
       });
-
-      let typing_display = document.getElementById('typing_display');
-      function changeTypingDisplay() {
-        if (typing_list.length == 0) {
-          typing_display.textContent = '';
-        }
-        else if (typing_list.length == 1) {
-          typing_display.innerHTML = '<b>' + typing_list[0] + '</b> is typing...';
-        }
-        else if (typing_list.length == 2) {
-          typing_display.innerHTML = '<b>' + typing_list[0] + '</b> and <b>' + typing_list[1] + '</b> are typing...';
-        }
-        else if (typing_list.length == 3) {
-          typing_display.innerHTML = '<b>' + typing_list[0] + '</b>, <b>' + typing_list[1] + '</b>, and <b>' + typing_list[2] + '</b> are typing...';
-        }
-        else {
-          typing_display.innerHTML = '<b>' + typing_list[0] + '</b>, <b>' + typing_list[1] + '</b>, <b>' + typing_list[2] + '</b>, and' + String(typing_list.length - 3) + ' others are typing...';
-        }
-      }
-      
-      function loadChatHistory() {
-        $.ajax({
-          type: 'POST',
-          url: '/chat_history',
-          dataType: "json",
-          data: JSON.stringify({'i': String(chat_history_skip), 'room_id': current_room}),
-          contentType: 'application/json;charset=UTF-8',
-          success: function(chat_history) {
-            chat_history_skip += 100;
-            var todayDate = moment();
-            var yesterdayDate = moment().subtract(1, 'day');
-            var timeDisplayMode = 0;
-            chat_history.forEach(function(item) {
-              var messageDate = moment(item.datetime);
-              const newMode = document.createElement('div');
-              if (item.combine == 'false') {
-                newMode.className = 'message-container';
-                newMode.id = item._id.$oid;
-                newMode.setAttribute('data-date', messageDate.format('M/D/YYYY'));
-                if(moment(messageDate).isSame(todayDate, 'day')) {
-                  messageDate = 'at ' + messageDate.format('h:mm A');
-                }
-                else if(moment(messageDate).isSame(yesterdayDate, 'day')) {
-                  messageDate = 'Yesterday at ' + messageDate.format('h:mm A');
-                }
-                else {
-                    messageDate = 'on ' + messageDate.format('M/D/YYYY');
-                }
-                if (space_admin == true || item.user_id == user_id) {
-                  newMode.innerHTML = '<img class="profile-picture pointer" src="' + item.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + item.name + ' </b></span><span class="datetime">' + messageDate + '</span></p><p class="message">' + item.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>';
-                } //change 
-                else{
-                  newMode.innerHTML = '<img class="profile-picture pointer" src="' + item.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + item.name + ' </b></span><span class="datetime">' + messageDate + '</span></p><p class="message">' + item.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"></div>';
-                }
-              }
-              else {
-                newMode.className = 'message-container-combine';
-                newMode.id = item._id.$oid;
-                newMode.setAttribute('data-date', messageDate.format('M/D/YYYY'));
-                if (space_admin == true || item.user_id == user_id) {
-                  newMode.innerHTML = '<p class="message-combine-time">' + messageDate.format('h:mm A') + '</p><p class="message-combine">' + item.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>'; 
-                } 
-                else {
-                  newMode.innerHTML = '<p class="message-combine-time">' + messageDate.format('h:mm A') + '</p><p class="message-combine">' + item.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"></div>';
-                }
-              }
-              document.getElementById('messages').prepend(newMode);
-            });
-          } 
-        });
-      }
       
       document.getElementById('create-room-form').onsubmit = function (e) {
         e.preventDefault();
@@ -1408,6 +1274,74 @@
         $(this).find(".message-combine-time").css("visibility", "hidden");
       });
 
+      function loadChatHistory() {
+        $.ajax({
+          type: 'POST',
+          url: '/chat_history',
+          dataType: "json",
+          data: JSON.stringify({'i': String(chat_history_skip), 'room_id': current_room}),
+          contentType: 'application/json;charset=UTF-8',
+          success: function(chat_history) {
+            chat_history_skip += 100;
+            var todayDate = moment();
+            var yesterdayDate = moment().subtract(1, 'day');
+            var timeDisplayMode = 0;
+            chat_history.forEach(function(item) {
+              var messageDate = moment(item.datetime);
+              const newMode = document.createElement('div');
+              if (item.combine == 'false') {
+                newMode.className = 'message-container';
+                newMode.id = item._id.$oid;
+                newMode.setAttribute('data-date', messageDate.format('M/D/YYYY'));
+                if(moment(messageDate).isSame(todayDate, 'day')) {
+                  messageDate = 'at ' + messageDate.format('h:mm A');
+                }
+                else if(moment(messageDate).isSame(yesterdayDate, 'day')) {
+                  messageDate = 'Yesterday at ' + messageDate.format('h:mm A');
+                }
+                else {
+                    messageDate = 'on ' + messageDate.format('M/D/YYYY');
+                }
+                if (space_admin == true || item.user_id == user_id) {
+                  newMode.innerHTML = '<img class="profile-picture pointer" src="' + item.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + item.name + ' </b></span><span class="datetime">' + messageDate + '</span></p><p class="message">' + item.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>';
+                } //change 
+                else{
+                  newMode.innerHTML = '<img class="profile-picture pointer" src="' + item.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + item.name + ' </b></span><span class="datetime">' + messageDate + '</span></p><p class="message">' + item.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"></div>';
+                }
+              }
+              else {
+                newMode.className = 'message-container-combine';
+                newMode.id = item._id.$oid;
+                newMode.setAttribute('data-date', messageDate.format('M/D/YYYY'));
+                if (space_admin == true || item.user_id == user_id) {
+                  newMode.innerHTML = '<p class="message-combine-time">' + messageDate.format('h:mm A') + '</p><p class="message-combine">' + item.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>'; 
+                } 
+                else {
+                  newMode.innerHTML = '<p class="message-combine-time">' + messageDate.format('h:mm A') + '</p><p class="message-combine">' + item.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"></div>';
+                }
+              }
+              document.getElementById('messages').prepend(newMode);
+            });
+          } 
+        });
+      }
+
+      function roomSort() {
+        var room_group = document.querySelectorAll('.room-group');
+        var room_group_list = [];
+        for (let i = 0; i < room_group.length; i++) {
+          let rooms = room_group[i].querySelectorAll('.room');
+          let room_list = [room_group[i].previousElementSibling.id];
+          for (let j = 0; j < rooms.length; j++) {
+            room_list.push(rooms[j].id);
+          }
+          room_group_list.push(room_list);
+        }
+        socket.emit('sorted_rooms', {
+          room_group_list: room_group_list
+        });
+      }
+
       function roomList() {
         var room_list = [];
         document.querySelectorAll(".room").forEach(function(item) {
@@ -1420,14 +1354,77 @@
       // Only for non-mobile devices.
       // Contextmenu 
       const scrollContainer = document.getElementById('spaces'); 
-
       scrollContainer.addEventListener("wheel", (evt) => {
         evt.preventDefault();
         scrollContainer.scrollLeft += evt.deltaY;
       });
 
-    });
+      function mouseX(evt) {
+        if (evt.pageX) {
+          return evt.pageX;
+        } else if (evt.clientX) {
+          return evt.clientX + (document.documentElement.scrollLeft ?
+            document.documentElement.scrollLeft :
+            document.body.scrollLeft);
+        } else {
+          return null;
+        }
+      }
 
+      function mouseY(evt) {
+        if (evt.pageY) {
+          return evt.pageY;
+        } else if (evt.clientY) {
+          return evt.clientY + (document.documentElement.scrollTop ?
+            document.documentElement.scrollTop :
+            document.body.scrollTop);
+        } else {
+          return null;
+        }
+      }
+
+      let typing_display = document.getElementById('typing_display');
+      function changeTypingDisplay() {
+        if (typing_list.length == 0) {
+          typing_display.textContent = '';
+        }
+        else if (typing_list.length == 1) {
+          typing_display.innerHTML = '<b>' + typing_list[0] + '</b> is typing...';
+        }
+        else if (typing_list.length == 2) {
+          typing_display.innerHTML = '<b>' + typing_list[0] + '</b> and <b>' + typing_list[1] + '</b> are typing...';
+        }
+        else if (typing_list.length == 3) {
+          typing_display.innerHTML = '<b>' + typing_list[0] + '</b>, <b>' + typing_list[1] + '</b>, and <b>' + typing_list[2] + '</b> are typing...';
+        }
+        else {
+          typing_display.innerHTML = '<b>' + typing_list[0] + '</b>, <b>' + typing_list[1] + '</b>, <b>' + typing_list[2] + '</b>, and' + String(typing_list.length - 3) + ' others are typing...';
+        }
+      }
+
+      function stoppedTyping() {
+        typing = false;
+        socket.emit('stopped_typing', {
+          name: "{{ name }}",
+          room_id: current_room
+        });
+      }
+
+      function isTyping() {
+        if (typing == false) {
+          typing = true;
+          socket.emit('is_typing', {
+            name: "{{ name }}",
+            room_id: current_room
+          });
+          timeout = setTimeout(stoppedTyping, 5000);
+        }
+        else {
+          clearTimeout(timeout);
+          timeout = setTimeout(stoppedTyping, 5000);
+        }
+      }
+    });
 
     //applyTheme function
   </script>
