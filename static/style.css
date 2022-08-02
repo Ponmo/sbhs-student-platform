@@ -736,7 +736,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 #profile {
   display: grid;
   align-items: center;
-  grid-template-columns: 40px auto 30px;
+  grid-template-columns: 40px 180px 30px;
   width: 270px;
   padding-left: 20px;
 }
@@ -777,7 +777,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin-bottom: 0px;
 }
 #spaces {
-  width: calc(100% -270px);
+  width: calc(100% - 270px);
   min-width: 200px;
   height: 50px;
   border-radius: 2px;
