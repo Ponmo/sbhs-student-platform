@@ -1344,17 +1344,17 @@
               const newMode = document.createElement('div');
               newMode.className = 'message-container';
               newMode.id = item._id.$oid;
-              newMode.setAttribute('data-date', messageDate.format('M/D/YYYY'));
+              newMode.setAttribute('data-date', emailDate.format('M/D/YYYY'));
               if(moment(messageDate).isSame(todayDate, 'day')) {
-                messageDate = 'at ' + messageDate.format('h:mm A');
+                emailDate = 'at ' + emailDate.format('h:mm A');
               }
               else if(moment(messageDate).isSame(yesterdayDate, 'day')) {
-                messageDate = 'Yesterday at ' + messageDate.format('h:mm A');
+                emailDate = 'Yesterday at ' + emailDate.format('h:mm A');
               }
               else {
-                  messageDate = 'on ' + messageDate.format('M/D/YYYY');
+                emailDate = 'on ' + emailDate.format('M/D/YYYY');
               }
-                newMode.innerHTML = '<img class="profile-picture pointer" src="' + item.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + item.name + ' </b></span><span class="datetime">' + messageDate + '</span></p><p class="message">' + item.message + '</p>';
+                newMode.innerHTML = '<img class="profile-picture pointer" src="' + item.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + item.name + ' </b></span><span class="datetime">' + emailDate + '</span></p><p class="message">' + item.message + '</p>';
             });
           }
         });
