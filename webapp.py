@@ -279,6 +279,12 @@ def chat_history():
         chat_history = dumps(list(collection_messages.find({'room': request.json['room_id']}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(100)))
         return Response(chat_history, mimetype='application/json')
 
+@app.route('/email_history', methods=['GET', 'POST']) #return only emails users can see
+def email_history():
+    if request.method == 'POST':
+        email_history = dumps(list(collection_emails.find({'room': request.json['room_id']}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(100)))
+        return Response(email_history, mimetype='application/json')
+
 # Deletes the room and all of its messages in MongoDB. 
 
 @app.route('/delete_room', methods=['GET', 'POST'])

@@ -64,7 +64,9 @@
             </div>
           </div>
           <div id="information">
+            <img class="pointer" id="close-space-search-button" src="/static/images/back.png">
             <img class="pointer" id="home" src="/static/images/home-white.png">
+            <img class="pointer" id="close-space-search-button" src="/static/images/back.png">
             <p id="room-name-display"></p>
           </div>
           <div id="channels">
@@ -1333,7 +1335,27 @@
           data: JSON.stringify({'i': String(chat_history_skip), 'room_id': current_room}),
           contentType: 'application/json;charset=UTF-8',
           success: function(email_history) {
-            alert(JSON.stringify(email_history));
+            chat_history_skip += 100;
+            var todayDate = moment();
+            var yesterdayDate = moment().subtract(1, 'day');
+            var timeDisplayMode = 0;
+            email_history.forEach(function(item) {
+              var emailDate = moment(item.datetime);
+              const newMode = document.createElement('div');
+              newMode.className = 'message-container';
+              newMode.id = item._id.$oid;
+              newMode.setAttribute('data-date', messageDate.format('M/D/YYYY'));
+              if(moment(messageDate).isSame(todayDate, 'day')) {
+                messageDate = 'at ' + messageDate.format('h:mm A');
+              }
+              else if(moment(messageDate).isSame(yesterdayDate, 'day')) {
+                messageDate = 'Yesterday at ' + messageDate.format('h:mm A');
+              }
+              else {
+                  messageDate = 'on ' + messageDate.format('M/D/YYYY');
+              }
+                newMode.innerHTML = '<img class="profile-picture pointer" src="' + item.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + item.name + ' </b></span><span class="datetime">' + messageDate + '</span></p><p class="message">' + item.message + '</p>';
+            });
           }
         });
       }

@@ -1000,4 +1000,23 @@ img { /* make images and create button undraggable and unhighlitable*/
     /*Remove?*/
     gap: 0px;
   }
+  #profile {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 52px 0px 0px;
+    width: 52px;
+    padding-left: 20px;
+  }
+  #username {
+    display: none;
+  }
+  #student_id {
+    display: none;
+  }
+  #settings {
+    display: none;
+  }
+  #spaces {
+    width: calc(100% - 72px);
+  }
 }
