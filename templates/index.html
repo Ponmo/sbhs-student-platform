@@ -448,7 +448,7 @@
               if (member.getBoundingClientRect().top < $(window).height() / 2) {
                 document.getElementById('profile-popup').style.top = member.getBoundingClientRect().top + 'px';
               }
-              else if (member.getBoundingClientRect().top + member.offsetHeight - 6 > document.getElementById('footer').getBoundingClientRect().top) {
+              else if (member.getBoundingClientRect().top + member.offsetHeight + 6 > document.getElementById('footer').getBoundingClientRect().top) {
                 document.getElementById('profile-popup').style.top = (document.getElementById('footer').getBoundingClientRect().top - 6 - document.getElementById('profile-popup').offsetHeight) + 'px';
               }
               else {
