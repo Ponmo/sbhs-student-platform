@@ -471,7 +471,8 @@
       message_input.oninput = function() {
         message_input.style.height = "";
         message_input.style.height = Math.min(message_input.scrollHeight, 300) + "px";
-      }; 
+      }
+      
       $(message_input).keypress(function (e) {
         if(e.which === 13 && !e.shiftKey) {
           e.preventDefault();
@@ -866,6 +867,7 @@
       $(document).on('click', '#create-space-button', function() {
         createSpaceModal.style.display = "block";
       });
+
       $(document).on('click', '#close-create-space', function() {
         createSpaceModal.style.display = "none";
       });
@@ -874,6 +876,7 @@
       $(document).on('click', '.create-room-button', function() {
         createRoomModal.style.display = "block";
       });
+
       $(document).on('click', '#close-create-room', function() {
         createRoomModal.style.display = "none";
       });
@@ -882,6 +885,7 @@
       $(document).on('click', '#create-section-button', function() {
         createSectionModal.style.display = "block";
       });
+      
       $(document).on('click', '#close-create-section', function() {
         createSectionModal.style.display = "none";
       });
