@@ -777,7 +777,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin-bottom: 0px;
 }
 #spaces {
-  width: calc(100% - 290px);
+  width: calc(100% -270px);
   min-width: 200px;
   height: 50px;
   border-radius: 2px;
