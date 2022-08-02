@@ -402,11 +402,15 @@
               let member = document.querySelector('[data-id="' + selected_user + '"]');
               let newNode = document.createElement('div');
               newNode.id = 'profile-popup';
+              alert(member.getBoundingClientRect().top);
+              alert($(window).height() / 2);
               if (member.getBoundingClientRect().top > $(window).height() / 2) {
-                newNode.setAttribute('style', 'top:' + member.getBoundingClientRect().top);
+                newNode.style.top = member.getBoundingClientRect().top + 'px'
+                //newNode.setAttribute('style', 'top:' + member.getBoundingClientRect().top);
               }
               else {
-                newNode.setAttribute('style', 'bottom:' + member.getBoundingClientRect().bottom);
+                newNode.style.bottom = member.getBoundingClientRect().bottom + 'px'
+                //newNode.setAttribute('style', 'bottom:' + member.getBoundingClientRect().bottom);
               }
               document.getElementById('overlay').appendChild(newNode);
               member.className = 'member';
