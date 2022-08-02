@@ -363,6 +363,12 @@
         $('#space-search').css('display', 'none');
       });
 
+      $(document).on('click', '#open_channels', function() {
+        $('#content').css('grid-template-columns', '');
+        grid-template-columns: 270px minmax(278px, auto) 220px;
+        $("#user-page").animate({opacity: '1'}, 100);
+      });
+
       $(document).on('click', '#profile', function() {
         $('#user-page').css('display', 'block');
         $("#user-page").animate({opacity: '1'}, 100);
@@ -402,7 +408,7 @@
               let member = document.querySelector('[data-id="' + selected_user + '"]');
               let newNode = document.createElement('div');
               newNode.id = 'profile-popup';
-              alert(member.getBoundingClientRect().top);
+              alert(member.getBoundingClientRect().bottom);
               alert($(window).height() / 2);
               if (member.getBoundingClientRect().top > $(window).height() / 2) {
                 alert('here1');
