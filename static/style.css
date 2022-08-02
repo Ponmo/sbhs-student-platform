@@ -694,9 +694,11 @@ img { /* make images and create button undraggable and unhighlitable*/
   color: #dcddde;
   font-size: 14px;
   border-radius: 5px;
+  right: 235px;
   width: 300px;
   min-height: 100px;
   background-color: #17181b;
+  pointer-events: initial;
   overflow-x: hidden;
 }
 #profile-list {
