@@ -67,7 +67,7 @@ def send_email():
             message = MIMEMultipart('alternative')
             message['Subject'] = request.json['subject']
             message['From'] =  'Platform Test'
-            recipients = request.json['to']
+            recipients = list(set(request.json['to']))
             text = (request.json['message'] + '<br>' +
             '--------------------------------------<br>' +
             session['users_name'] + '<br>' + 
