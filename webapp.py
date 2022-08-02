@@ -280,9 +280,11 @@ def chat_history():
 def email_history():
     if request.method == 'POST':
         email_history = collection_emails.find({'room': request.json['room_id']}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(100)
-        if session['users_email'] in email_history['recipients'] or space_admin():
-            email_history = dumps(list(collection_emails.find({'room': request.json['room_id']}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(100)))
-            return Response(email_history, mimetype='application/json')
+        email_list = []
+        for email in email_history:
+            if session['users_email'] in email['recipients'] or space_admin():
+                email_list.append(email)
+        return Response(dumps(email_list), mimetype='application/json')
 
 # Deletes the room and all of its messages in MongoDB. 
 
