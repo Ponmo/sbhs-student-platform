@@ -676,11 +676,13 @@
       });
 
       $(document).on('contextmenu', '.room', function (e) {
-        selected_room = this.id;
-        document.getElementById('room-menu').style.top = mouseY(event) + 'px';
-        document.getElementById('room-menu').style.left = mouseX(event) + 'px';
-        $(document.getElementById('room-menu')).show();
-        e.preventDefault();
+        if (space_admin == true) {
+          selected_room = this.id;
+          document.getElementById('room-menu').style.top = mouseY(event) + 'px';
+          document.getElementById('room-menu').style.left = mouseX(event) + 'px';
+          $(document.getElementById('room-menu')).show();
+          e.preventDefault();
+        }
       });
 
       document.getElementById('create-room-form').onsubmit = function (e) {
@@ -755,11 +757,13 @@
       });
 
       $(document).on('contextmenu', '.section', function (e) {
-        selected_section = this.id;
-        document.getElementById('section-menu').style.top = mouseY(event) + 'px';
-        document.getElementById('section-menu').style.left = mouseX(event) + 'px';
-        $(document.getElementById('section-menu')).show();
-        e.preventDefault();
+        if (space_admin == true) {
+          selected_section = this.id;
+          document.getElementById('section-menu').style.top = mouseY(event) + 'px';
+          document.getElementById('section-menu').style.left = mouseX(event) + 'px';
+          $(document.getElementById('section-menu')).show();
+          e.preventDefault();
+        }
       });
 
       $(document).on('click', '.space', function() {
