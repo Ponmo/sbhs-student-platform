@@ -365,7 +365,7 @@
 
       $(document).on('click', '#open_channels', function() {
         // $('#content').css('grid-template-columns', '270px 278px 0px');
-        $('#content').css({gridTemplateColumns: '270px 278px 220px', WebkitTransition: 'grid-template-columns 1s ease-out', MozTransition: 'grid-template-columns 1s ease-out', MsTransition: 'grid-template-columns 1s ease-out', OTransition: 'grid-template-columns 1s ease-out', transition: 'grid-template-columns 1s ease-out'});
+        $('#content').css({gridTemplateColumns: '27px minmax(278px, auto) 0px;', WebkitTransition: 'grid-template-columns 1s ease-out', MozTransition: 'grid-template-columns 1s ease-out', MsTransition: 'grid-template-columns 1s ease-out', OTransition: 'grid-template-columns 1s ease-out', transition: 'grid-template-columns 1s ease-out'});
 
         // $("#user-page").animate({opacity: '1'}, 100);
       });
@@ -440,10 +440,10 @@
                 }
                 document.getElementById("joined-table").append(newNode);
                 if (member.getBoundingClientRect().top > $(window).height() / 2) {
-                  document.getElementById('profile-popup').style.top = member.getBoundingClientRect().top - document.getElementById('profile-popup').height + member.height + 'px'
+                  document.getElementById('profile-popup').style.top = (member.getBoundingClientRect().top - document.getElementById('profile-popup').height + member.height) + 'px';
                 }
                 else {
-                  document.getElementById('profile-popup').style.top = member.getBoundingClientRect().top + 'px'
+                  document.getElementById('profile-popup').style.top = member.getBoundingClientRect().top + 'px';
                 }
               }
             }
