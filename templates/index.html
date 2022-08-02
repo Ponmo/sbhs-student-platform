@@ -104,7 +104,7 @@
               <!--see w3schools input attributes like max char, spam, etc. -->
               <textarea id="message_input" rows="1" placeholder="Enter message"></textarea>
 <!--             <input type="text" id="message_input" placeholder="Enter message"> -->
-              <button type="submit" id="submit"><img id="send" src="/static/images/send.png" alt="Send"></button>
+              <button type="submit" id="submit"><img class="send" src="/static/images/send.png" alt="Send"></button>
             </form>
             <span id="typing_display"></span>
           </div>
@@ -1419,12 +1419,13 @@
 
       // Scrolling vertically on the spaces div
       // Only for non-mobile devices.
-      // const scrollContainer = document.getElementById('spaces'); 
+      // Contextmenu 
+      const scrollContainer = document.getElementById('spaces'); 
 
-      // scrollContainer.addEventListener("wheel", (evt) => {
-      //   evt.preventDefault();
-      //   scrollContainer.scrollLeft += evt.deltaY;
-      // });
+      scrollContainer.addEventListener("wheel", (evt) => {
+        evt.preventDefault();
+        scrollContainer.scrollLeft += evt.deltaY;
+      });
 
     });
   </script>
