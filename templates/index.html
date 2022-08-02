@@ -383,7 +383,6 @@
       $(document).on('click', '.member', function(e) {
         if (this.getAttribute('data-id') != selected_user) {
           if (!!document.getElementById("profile-popup")) {
-            alert('removedfrom mid');
             $('#profile-popup').remove();
             $('.member').css('background-color', '');
             $('.member').addClass('pointer');
@@ -400,10 +399,10 @@
               let newNode = document.createElement('div');
               newNode.id = 'profile-popup';
               if (member.getBoundingClientRect().top > $(window).height() / 2) {
-                newNode.style.top = member.getBoundingClientRect().top;
+                newNode.setAttribute('style', 'top:' + member.getBoundingClientRect().top);
               }
               else {
-                newNode.style.bottom = member.getBoundingClientRect().bottom;
+                newNode.setAttribute('style', 'bottom:' + member.getBoundingClientRect().bottom);
               }
               document.getElementById('overlay').appendChild(newNode);
               member.className = 'member';
@@ -440,7 +439,6 @@
           });
         }
         else if (!!document.getElementById("profile-popup") && $('.member').is(e.target) || $('.member').is(e.target.parentNode)) {
-          alert('removed from low');
           $('#profile-popup').remove();
           $('.member').css('background-color', '');
           $('.member').addClass('pointer');
