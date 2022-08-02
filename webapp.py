@@ -68,11 +68,12 @@ def send_email():
             message['From'] =  'Platform Test'
             recipients = list(dict.fromkeys(request.json['to']))
             text = (request.json['message'] + '<br>' +
-            '----------------------------------<br>' +
+            '--------------------------------------<br>' +
             session['users_name'] + '<br>' + 
-            '<p style="color:inherit;text-decoration:none;"' + session['users_email'] + '<br>' +
+            '<p style="color:inherit;text-decoration:none;">' + session['users_email'] + '</p><br>' +
             '<a href="https://sbhs-platform.herokuapp.com/sbhs/' + request.json['space_id'] + '">' + request.json['space_name'] + '</a><br>' +
-            '----------------------------------<br>Do not reply')
+            '--------------------------------------<br>' +
+            'Do not reply')
             message.attach(MIMEText(text, 'html'))
             context = ssl.create_default_context()
             with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
