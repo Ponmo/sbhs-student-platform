@@ -1354,7 +1354,7 @@
               else {
                 emailDate = 'on ' + emailDate.format('M/D/YYYY');
               }
-              newMode.innerHTML = '<img class="profile-picture pointer" src="' + item.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + item.name + ' </b></span><span class="datetime">' + emailDate + '</span></p><p class="message">' + item.message + '</p>';
+              newMode.innerHTML = '<img class="profile-picture pointer" src="' + item.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + item.name + ' </b></span><span class="datetime">' + emailDate + '</span><span class="recipient-list">to ' + item.recipients.toString() + '</span></p><p class="message">' + item.message + '</p>';
               document.getElementById('messages').prepend(newMode);
             });
           }
@@ -1462,6 +1462,8 @@
     });
 
     //applyTheme function
+
+    //Don't use innerHTML, replace later.
 
     // below psuedocode comments for saving unsent messages
       // list of messages being typed by user containing message (updated when user clicks on space or another room) and room id.
