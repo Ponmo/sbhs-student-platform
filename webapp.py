@@ -70,7 +70,7 @@ def send_email():
             text = (request.json['message'] + '<br>' +
             '----------------------------------<br>' +
             session['users_name'] + '<br>' + 
-            session['users_email'] + '<br>' +
+            '<p style="color:inherit;text-decoration:none;"' + session['users_email'] + '<br>' +
             '<a href="https://sbhs-platform.herokuapp.com/sbhs/' + request.json['space_id'] + '">' + request.json['space_name'] + '</a><br>' +
             '----------------------------------<br>Do not reply')
             message.attach(MIMEText(text, 'html'))
