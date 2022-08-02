@@ -217,16 +217,24 @@ img { /* make images and create button undraggable and unhighlitable*/
 #information {
   grid-column: 2 / 4;
   grid-row: 1;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   background-color: hotpink;
-  display: flex;
+  /* display: flex;
   align-items: center;
-  flex-direction: row-reverse;
+  flex-direction: row-reverse; */
   -moz-user-select: -moz-none;
   -khtml-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+#open_channels {
+  width: 30px;
+  height: 30px;
+}
+#open_members {
+  width: 30px;
+  height: 30px;
 }
 #room-name-display {
   margin-left: 18px;
