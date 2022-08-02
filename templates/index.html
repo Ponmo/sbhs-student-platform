@@ -1354,7 +1354,7 @@
               else {
                 emailDate = 'on ' + emailDate.format('M/D/YYYY');
               }
-              newMode.innerHTML = '<img class="profile-picture pointer" src="' + item.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + item.name + ' </b></span><span class="datetime">' + emailDate + '</span><span class="recipient-list">to ' + item.recipients.toString() + '</span></p><div class="email-container"><p class="email-subject">' + item.subject + '</p><p>' + item.message + '</p></div>';
+              newMode.innerHTML = '<img class="profile-picture pointer" src="' + item.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + item.name + ' </b></span><span class="datetime">' + emailDate + '</span><span class="recipient-list">to ' + JSON.stringify(item.recipients.join(', ')) + '</span></p><div class="email-container"><p class="email-subject">' + item.subject + '</p><p>' + item.message + '</p></div>';
               document.getElementById('messages').prepend(newMode);
             });
           }
