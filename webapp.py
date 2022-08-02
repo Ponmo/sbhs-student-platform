@@ -60,7 +60,8 @@ client = WebApplicationClient(GOOGLE_CLIENT_ID)
 @app.route('/send_email', methods=['GET', 'POST'])
 def send_email():
     if request.method == 'POST':
-        try:
+        #try:
+            
             sender_email = 'sbhs.platform.test@gmail.com'
             password = os.environ['EMAIL_ACCESS_PASSWORD']
             message = MIMEMultipart('alternative')
@@ -79,12 +80,11 @@ def send_email():
             with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
                 server.login(sender_email, password)
                 server.sendmail(sender_email, recipients, message.as_string())
-                return message.as_string()
 
             #collection_emails.insert_one({'from': session['unique_id'], 'recipients': recipients, 'subject': request.json['subject'], 'message': text})
             return Response(dumps({'success': 'true'}), mimetype='application/json')
-        except:
-            return Response(dumps({'success': 'false'}), mimetype='application/json')
+        #except:
+            #return Response(dumps({'success': 'false'}), mimetype='application/json')
     return Response(dumps({'success': 'false'}), mimetype='application/json')
 
 
