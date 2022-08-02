@@ -73,7 +73,7 @@ def send_email():
             session['users_email'] + '<br>' +
             '<a href="https://sbhs-platform.herokuapp.com/sbhs/' + request.json['space_id'] + '">' + request.json['space_name'] + '</a><br>' +
             '--------------------------------------<br>' +
-            'Do not reply')
+            '<div style="color:lightgray;">do not reply</div>')
             message.attach(MIMEText(text, 'html'))
             context = ssl.create_default_context()
             with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
