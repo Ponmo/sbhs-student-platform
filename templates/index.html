@@ -638,7 +638,6 @@
           data: JSON.stringify({'message_id': message_id}),
           contentType: 'application/json;charset=UTF-8',
           success: function (delete_message){
-            alert(JSON.stringify(delete_message['success']));
             socket.emit('deleted_message', {'message_id': message_id, 'room_id': current_room});
           }
         })
@@ -1259,6 +1258,8 @@
           if (special) {
             $('#message_input_form').hide();
             $('#email_input_form').show();
+            chat_history_skip = 0;
+            loadEmailHistory();
           }
           else {
             $('#message_input_form').show();
@@ -1321,6 +1322,19 @@
               document.getElementById('messages').prepend(newMode);
             });
           } 
+        });
+      }
+
+      function loadEmailHistory() {
+        $.ajax({
+          type: 'POST',
+          url: '/email_history',
+          dataType: "json",
+          data: JSON.stringify({'i': String(chat_history_skip), 'room_id': current_room}),
+          contentType: 'application/json;charset=UTF-8',
+          success: function(email_history) {
+            alert(JSON.stringify(email_history));
+          }
         });
       }
 
