@@ -368,14 +368,15 @@
       });
 
       $(document).on('click', '#open_channels', function() {
-        $('#header').animate({"margin-right":"-270px"}, 100);
-        $('#channels').animate({"margin-right":"-270px"}, 100);
-        $('#chats').animate({"margin-left":"270px"}, 100);
-        $('#information').animate({"margin-left":"270px"}, 100);
+        $('#header').animate({"margin-right":"-270px"}, 60);
+        $('#channels').animate({"margin-right":"-270px"}, 60);
+        $('#chats').animate({"margin-left":"270px"}, 60);
+        $('#information').animate({"margin-left":"270px"}, 60);
       });
 
       $(document).on('click', '#open_members', function() {
-        $('#members').animate({"margin-left":"-220px"}, 100);
+        $('#members').animate({"margin-left":"-220px"}, 60);
+        $('#content').css('grid-template-columns', '0px 100vw 0px');
         // $('#information').animate({"margin-right":"-270px"}, 100); Channels need to have grid change
       });
 
@@ -569,9 +570,11 @@
             document.getElementById('email_to_list').insertBefore(newNode, document.getElementById('email_to_input_span'));
             document.getElementById('email_to_input').value = '';
           } else {
-            document.getElementById("email_to_input").value.toUpperCase();
+            const filter = document.getElementById("email_to_input").value.toUpperCase();
             document.querySelectorAll('.suggested_email').forEach(function(suggested_email) {
-              
+              if(suggested_email.textContent.indexOf(filter) > -1) {
+                suggested_ema
+              }
             });
           }
         }
