@@ -100,7 +100,6 @@
                 <div id="suggested_emails">
                   <span class="suggested_email pointer">Everyone</span>
                 </div>
-
               </div>
               <!-- <label id="email_cc_label">To:</label>
               <textarea id="email_cc_input" rows="1" placeholder="Who are you sending it to?"></textarea>
@@ -369,26 +368,15 @@
       });
 
       $(document).on('click', '#open_channels', function() {
-        // $('#content').css('grid-template-columns', '270px minmax(278px, auto) 0px');
-        // $('#header').css('margin-right', '-270px');
-        // $('#channels').css('margin-right', '-270px');
-        // $('#chats').css('margin-left', '270px');
-        // $('#information').css('margin-left', '270px');
         $('#header').animate({"margin-right":"-270px"}, 100);
         $('#channels').animate({"margin-right":"-270px"}, 100);
         $('#chats').animate({"margin-left":"270px"}, 100);
         $('#information').animate({"margin-left":"270px"}, 100);
-
-        // $('#header').css({marginRight: '-270px;', WebkitTransition: 'margin-right 0.1s ease-out', MozTransition: 'margin-right 0.1s ease-out', MsTransition: 'margin-right 0.1s ease-out', OTransition: 'margin-right 0.1s ease-out', transition: 'margin-right 0.1s ease-out'});
-        // $('#channels').css({marginRight: '-270px;', WebkitTransition: 'margin-right 0.1s ease-out', MozTransition: 'margin-right 0.1s ease-out', MsTransition: 'margin-right 0.1s ease-out', OTransition: 'margin-right 0.1s ease-out', transition: 'margin-right 0.1s ease-out'});
-        // $('#chats').css({marginLeft: '270px;', WebkitTransition: 'margin-left 0.1s ease-out', MozTransition: 'margin-left 0.1s ease-out', MsTransition: 'margin-left 0.1s ease-out', OTransition: 'margin-left 0.1s ease-out', transition: 'margin-left 0.1s ease-out'});
-        // $('#information').css({marginLeft: '270px;', WebkitTransition: 'margin-left 0.1s ease-out', MozTransition: 'margin-left 0.1s ease-out', MsTransition: 'margin-left 0.1s ease-out', OTransition: 'margin-left 0.1s ease-out', transition: 'margin-left 0.1s ease-out'});
-
-        // $("#user-page").animate({opacity: '1'}, 100);
       });
 
       $(document).on('click', '#open_members', function() {
-        $('#content').css('grid-template-columns', '0px auto 220px');
+        $('#members').animate({"margin-left":"-220px"}, 100);
+        // $('#information').animate({"margin-right":"-270px"}, 100); Channels need to have grid change
       });
 
       $(document).on('click', '#profile', function() {
@@ -580,6 +568,11 @@
             newNode.appendChild(newNodeChild);
             document.getElementById('email_to_list').insertBefore(newNode, document.getElementById('email_to_input_span'));
             document.getElementById('email_to_input').value = '';
+          } else {
+            document.getElementById("email_to_input").value.toUpperCase();
+            document.querySelectorAll('.suggested_email').forEach(function(suggested_email) {
+              
+            });
           }
         }
       });
