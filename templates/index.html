@@ -399,8 +399,20 @@
       //   $('#information').animate({"margin-left":"-220px"}, 30);
       //   $('#information').animate({"margin-right":"220px"}, 30);
       // });
-      $("body").on("swiperight", function(){
-        alert("Your report has been recieved.")
+      let touchstartX = 0;
+      let touchendX = 0;
+      function checkDirection() {
+        if (touchendX < touchstartX) alert('swiped left!');
+        if (touchendX > touchstartX) alert('swiped right!');
+      }
+
+      document.addEventListener('touchstart', e => {
+        touchstartX = e.changedTouches[0].screenX;
+      });
+
+      document.addEventListener('touchend', e => {
+        touchendX = e.changedTouches[0].screenX;
+        checkDirection();
       });
 
 
