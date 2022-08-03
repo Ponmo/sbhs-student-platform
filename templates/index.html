@@ -541,6 +541,7 @@
 
       $('#email_to_input').blur(function (e) {
         if (!e.target.closest('#suggested_emails')) {
+          alert('e');
           document.getElementById('suggested_emails').style.display = 'none';
         }
       });
