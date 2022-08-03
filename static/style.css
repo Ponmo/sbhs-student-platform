@@ -1,4 +1,8 @@
 /* Will not work with all broswers; Make blur animation on overscroll, or attach footer to grid */
+html {
+  overflow: hidden;
+  height: 100%;
+}
 body {
   overscroll-behavior-y: none;
 }
