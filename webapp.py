@@ -458,7 +458,7 @@ def member_profile():
         for spaces in member['joined']:
             try: 
                 space = collection_spaces.find_one({'_id': ObjectId(spaces)})
-                queried_spaces.append([space['picture'], space['_id']['$oid']])
+                queried_spaces.append([space['picture'], spaces])
                 names_list.append(space['name'])
             except:
                 pass
