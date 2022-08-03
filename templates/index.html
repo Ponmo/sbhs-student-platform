@@ -570,15 +570,21 @@
             document.getElementById('email_to_input').value = '';
           }
         }
-        const filter = document.getElementById("email_to_input").value.toUpperCase();
-        document.querySelectorAll('.suggested_email').forEach(function(suggested_email) {
-          if(suggested_email.textContent.indexOf(filter) > -1) {
-            suggested_email.style.display = 'block';
-          }
-          else {
-            suggested_email.style.display = 'none';
-          }
-        });
+        if (document.getElementById('email_to_input').value != '') {
+          document.getElementById('suggested_emails').style.display = 'block';
+          const filter = document.getElementById("email_to_input").value.toUpperCase();
+          document.querySelectorAll('.suggested_email').forEach(function(suggested_email) {
+            if(suggested_email.textContent.indexOf(filter) > -1) {
+              suggested_email.style.display = 'block';
+            }
+            else {
+              suggested_email.style.display = 'none';
+            }
+          });
+        }
+        else {
+          document.getElementById('suggested_emails').style.display = 'none';
+        }
       });
 
       $(document).on('click', '.delete-email-icon', function() {
