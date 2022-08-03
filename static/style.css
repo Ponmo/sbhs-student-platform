@@ -219,6 +219,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   grid-column: 2 / 4;
   grid-row: 1;
   background-color: hotpink;
+  overflow: hidden;
   -moz-user-select: -moz-none;
   -khtml-user-select: none;
   -webkit-user-select: none;
@@ -227,7 +228,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 #left-info {
   height: 48px;
-  line-height: 30px;
+  line-height: 48px;
   padding-left: 18px;
 }
 #right-info {
@@ -250,7 +251,6 @@ img { /* make images and create button undraggable and unhighlitable*/
   display: inline-block;
   margin-left: 18px;
   color: white;
-  margin-top: 8px;
 }
 #home {
   display: inline-block;
