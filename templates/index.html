@@ -98,7 +98,7 @@
                   </div>
                 </div>
                 <div id="suggested_emails">
-                  <span class="suggested_email pointer">Everyone</span>
+                  <div class="suggested_email pointer">Everyone</div>
                 </div>
               </div>
               <!-- <label id="email_cc_label">To:</label>
@@ -1247,7 +1247,7 @@
                 newNode.innerHTML = '<img class="profile-picture" src="' + member['picture'] + '" alt="!"><span class="member-name">' + member['name'] + '</span>';
                 document.getElementById('members').append(newNode);
 
-                newNode = document.createElement('span');
+                newNode = document.createElement('div');
                 newNode.className = 'suggested_email pointer';
                 newNode.innerHTML = '<img class="profile-picture" src="' + member['picture'] + '">' + member['name'] + ' (' + member['email'] + ')'
                 document.getElementById('suggested_emails').append(newNode);
