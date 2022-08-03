@@ -1389,7 +1389,7 @@
               else {
                 emailDate = 'on ' + emailDate.format('M/D/YYYY');
               }
-              newMode.innerHTML = '<img class="profile-picture pointer" src="' + item.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + item.name + ' </b></span><span class="datetime">' + emailDate + '</span></p><div class="email-container-container"><span class="recipient-list">to ' + item.recipients.join(', ') + '</span><div class="email-container"><p class="email-subject">' + item.subject + '</p><p class="email-message">' + item.message + '</p></div></div>';
+              newMode.innerHTML = '<img class="profile-picture pointer" src="' + item.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + item.name + ' </b></span><span class="datetime">' + emailDate + '</span></p><div class="email-container-container"><div class="recipient-list">to ' + item.recipients.join(', ') + '</div><div class="email-container"><p class="email-subject">' + item.subject + '</p><p class="email-message">' + item.message + '</p></div></div>';
               document.getElementById('messages').prepend(newMode);
             });
           }
