@@ -98,7 +98,7 @@
                   </div>
                 </div>
                 <div id="suggested_emails">
-                  <div class="suggested_email pointer">Everyone</div>
+                  <div class="suggested_email suggested_email_everyone pointer">Everyone</div>
                 </div>
               </div>
               <!-- <label id="email_cc_label">To:</label>
@@ -1218,7 +1218,7 @@
             document.getElementById('header_text').textContent = document.getElementById(current_space).getAttribute('data-name');
             document.getElementById('special-channels').textContent = '';
             document.getElementById('regular-channels').textContent = '';
-            document.getElementById('suggested_emails').textContent = '';
+            $('.suggested_email_individual').remove();
             document.getElementById('members').textContent = '';
             rooms_and_sections[1].forEach(function(section) {
               newNode = document.createElement('ul');
@@ -1282,7 +1282,6 @@
             else {
               $('#regular-channels').sortable('disable');
             }
-
             try { //get rid of try block after deleting all spaces without member list another method
               rooms_and_sections[2].forEach(function(member) {
                 newNode = document.createElement('div');
@@ -1292,7 +1291,7 @@
                 document.getElementById('members').append(newNode);
 
                 newNode = document.createElement('div');
-                newNode.className = 'suggested_email pointer';
+                newNode.className = 'suggested_email suggested_email_individual pointer';
                 newNode.setAttribute('data-email', member['email']);
                 newNode.innerHTML = '<img class="profile-picture" src="' + member['picture'] + '">' + member['name'] + ' (' + member['email'] + ')'
                 document.getElementById('suggested_emails').append(newNode);
