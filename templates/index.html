@@ -539,6 +539,16 @@
         message_input.focus();
       }
 
+      $('#email_to_input').focusout(function (e) {
+        suggested_email.style.display = 'none';
+      });
+
+      $('#email_to_input').focusout(function (e) {
+        if (document.getElementById('email_to_input')) {
+        suggested_email.style.display = 'block';
+        }
+      });
+
       $('#email_to_input').keypress(function (e) {
         if(e.which === 13 && !e.shiftKey) {
           e.preventDefault(); 
