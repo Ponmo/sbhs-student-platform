@@ -622,7 +622,6 @@ img { /* make images and create button undraggable and unhighlitable*/
 #suggested_emails {
   position: absolute;
   display: none;
-  height: 20px;
   width: 260px;
   left: 10px;
   top: calc(100% - 4px);
