@@ -540,7 +540,9 @@
       }
 
       $('#email_to_input').blur(function (e) {
-        document.getElementById('suggested_emails').style.display = 'none';
+        if (!e.target.closest('#suggested_emails')) {
+          document.getElementById('suggested_emails').style.display = 'none';
+        }
       });
 
       $('#email_to_input').focusin(function (e) {
