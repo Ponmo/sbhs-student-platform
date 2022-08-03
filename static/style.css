@@ -999,6 +999,12 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin-top: 3px;
 
 }
+.recipient-list {
+  font-size: 10px;
+  overflow-wrap: break-word;
+  overflow: hidden;
+  opacity: 0.9;
+}
 .email-subject {
   margin: 0px;
   padding-left: 3px;
