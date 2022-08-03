@@ -518,7 +518,13 @@
         }
     })(document);
     //EXAMPLE OF USE
-    function swipeRight() {
+    // document.body.addEventListener('fc', h, false); // 0-50ms vs 500ms with normal click
+    // document.body.addEventListener('swl', h, false);
+    document.body.addEventListener('swr', swipeRight(), false);
+    // document.body.addEventListener('swu', h, false);
+    // document.body.addEventListener('swd', h, false);
+}
+function swipeRight() {
       alert("hello There");
         if (mobile_column != 0) {
           if (mobile_column == 1) {
@@ -540,12 +546,6 @@
           }
         }
       }
-    // document.body.addEventListener('fc', h, false); // 0-50ms vs 500ms with normal click
-    // document.body.addEventListener('swl', h, false);
-    document.body.addEventListener('swr', swipeRight(), false);
-    // document.body.addEventListener('swu', h, false);
-    // document.body.addEventListener('swd', h, false);
-}
 
       $(document).on('click', '#profile', function() {
         $('#user-page').css('display', 'block');
