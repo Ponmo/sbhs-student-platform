@@ -412,7 +412,7 @@
       let touchstartX = 0;
       let touchendX = 0;
       function checkDirection() {
-        if ((touchstartX - touchendX) > 20  && (mobile_column == 1 || mobile_column == 0)) {
+        if ((touchstartX - touchendX) > 50  && (mobile_column != 2)) {
           mobile_column = 2;
           $('#members').animate({"margin-left":"-220px"}, 30);
           $('#chats').animate({"margin-left":"-220px"}, 30);
@@ -421,14 +421,23 @@
           $('#information').animate({"margin-right":"220px"}, 30);
         }
         
-        if ((touchendX - touchstartX) > 20 && (mobile_column == 1 || mobile_column == 2)) {
-          mobile_column = 0;
-          $('#header').animate({"margin-right":"-270px"}, 30);
-          $('#channels').animate({"margin-right":"-270px"}, 30);
-          $('#chats').animate({"margin-left":"270px"}, 30);
-          $('#information').animate({"margin-left":"270px"}, 30);
-          $('#chats').animate({"margin-right":"-270px"}, 30);
-          $('#information').animate({"margin-right":"-270px"}, 30);
+        if ((touchendX - touchstartX) > 50 && (mobile_column != 0)) {
+          if (mobile_column == 1) {
+            $('#header').animate({"margin-right":"-270px"}, 30);
+            $('#channels').animate({"margin-right":"-270px"}, 30);
+            $('#chats').animate({"margin-left":"270px"}, 30);
+            $('#information').animate({"margin-left":"270px"}, 30);
+            $('#chats').animate({"margin-right":"-270px"}, 30);
+            $('#information').animate({"margin-right":"-270px"}, 30);
+          }
+          else if (mobile_column == 2) {
+            $('#header').animate({"margin-right":"0px"}, 30);
+            $('#channels').animate({"margin-right":"0px"}, 30);
+            $('#chats').animate({"margin-left":"0px"}, 30);
+            $('#information').animate({"margin-left":"0px"}, 30);
+            $('#chats').animate({"margin-right":"0px"}, 30);
+            $('#information').animate({"margin-right":"0px"}, 30);
+          }
         }
       }
 
