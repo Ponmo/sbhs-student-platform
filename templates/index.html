@@ -376,7 +376,7 @@
 
       $(document).on('click', '#open_members', function() {
         $('#members').animate({"margin-left":"-220px"}, 50);
-        $('#members').animate({"margin-left":"-220px"}, 50);
+        $('#chats').animate({"margin-right":"220px"}, 50);
         // $('#information').animate({"margin-right":"-270px"}, 100); Channels need to have grid change
       });
 
@@ -576,6 +576,7 @@
           var hide = true;
           const filter = document.getElementById("email_to_input").value.toUpperCase();
           document.querySelectorAll('.suggested_email').forEach(function(suggested_email) {
+            alert(suggested_email.textContent);
             if(suggested_email.textContent.indexOf(filter) > -1) {
               suggested_email.style.display = 'block';
               hide = false;
