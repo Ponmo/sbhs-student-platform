@@ -372,8 +372,8 @@
       });
 
       $(document).on('click', '#open_channels', function() {
-        mobile_column = 0;
         if (mobile_column == 1) {
+          mobile_column = 0;
           $('#header').animate({"margin-right":"-270px"}, 30);
           $('#channels').animate({"margin-right":"-270px"}, 30);
           $('#chats').animate({"margin-left":"270px"}, 30);
@@ -385,8 +385,8 @@
 
       
       $(document).on('click', '#open_members', function() {
-        mobile_column = 2;
         if (mobile_column == 1) {
+          mobile_column = 2;
           $('#members').animate({"margin-left":"-220px"}, 30);
           $('#chats').animate({"margin-left":"-220px"}, 30);
           $('#chats').animate({"margin-right":"220px"}, 30);
@@ -408,6 +408,7 @@
       // });
 
       /* Does not work for laptops or computers, need to check compatibility with wider-screen tablets */
+      /* Can create general functions for animating members and channels div in combo with buttons*/
       let touchstartX = 0;
       let touchendX = 0;
       function checkDirection() {
