@@ -576,6 +576,7 @@
 
       document.getElementById('suggested_emails').onkeydown = function(e) {
         if (e.key === 'Backspace' || e.key === 'Delete') {
+          alert(e.key);
           filterSuggestedEmails();
         }
       };
