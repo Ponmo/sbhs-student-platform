@@ -576,8 +576,7 @@
           var hide = true;
           const filter = document.getElementById("email_to_input").value.toUpperCase();
           document.querySelectorAll('.suggested_email').forEach(function(suggested_email) {
-            alert(suggested_email.textContent);
-            if(suggested_email.textContent.indexOf(filter) > -1) {
+            if(suggested_email.textContent.toUpperCase().indexOf(filter) > -1) {
               suggested_email.style.display = 'block';
               hide = false;
             }
