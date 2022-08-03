@@ -545,31 +545,36 @@
           // document.body.addEventListener('swd', h, false);
           alert("Hello");
           document.body.addEventListener('swl', swipeLeft(), false);
-          document.body.addEventListener('swr', swipeRight(), false);
-          function swipeRight() {
-        alert("swipeRight");
-        if (mobile_column != 0) {
-          if (mobile_column == 1) {
-            mobile_column = 0;
-            $('#header').animate({"margin-right":"-270px"}, 30);
-            $('#channels').animate({"margin-right":"-270px"}, 30);
-            $('#chats').animate({"margin-left":"270px"}, 30);
-            $('#information').animate({"margin-left":"270px"}, 30);
-            $('#chats').animate({"margin-right":"-270px"}, 30);
-            $('#information').animate({"margin-right":"-270px"}, 30);
-          }
-          else if (mobile_column == 2) {
-            mobile_column = 1;
-            $('#members').animate({"margin-left":"0px"}, 30);
-            $('#chats').animate({"margin-left":"0px"}, 30);
-            $('#chats').animate({"margin-right":"0px"}, 30);
-            $('#information').animate({"margin-left":"0px"}, 30);
-            $('#information').animate({"margin-right":"0px"}, 30);
-          }
-        }
-      }
+          document.body.addEventListener('swr', deleteli, false);
 
         }
+
+        var deleteli=function(e){
+          alert("YESSS");
+        }
+
+      //   function swipeRight() {
+      //   alert("swipeRight");
+      //   if (mobile_column != 0) {
+      //     if (mobile_column == 1) {
+      //       mobile_column = 0;
+      //       $('#header').animate({"margin-right":"-270px"}, 30);
+      //       $('#channels').animate({"margin-right":"-270px"}, 30);
+      //       $('#chats').animate({"margin-left":"270px"}, 30);
+      //       $('#information').animate({"margin-left":"270px"}, 30);
+      //       $('#chats').animate({"margin-right":"-270px"}, 30);
+      //       $('#information').animate({"margin-right":"-270px"}, 30);
+      //     }
+      //     else if (mobile_column == 2) {
+      //       mobile_column = 1;
+      //       $('#members').animate({"margin-left":"0px"}, 30);
+      //       $('#chats').animate({"margin-left":"0px"}, 30);
+      //       $('#chats').animate({"margin-right":"0px"}, 30);
+      //       $('#information').animate({"margin-left":"0px"}, 30);
+      //       $('#information').animate({"margin-right":"0px"}, 30);
+      //     }
+      //   }
+      // }
 
       
       $(document).on('click', '#close-user-page', function() {
