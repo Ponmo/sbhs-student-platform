@@ -98,7 +98,7 @@
                   </div>
                 </div>
                 <table id="suggested_emails">
-                  <tr class="suggested_email">Everyone</tr>
+                  <tr class="suggested_email pointer">Everyone</tr>
                 </table>
 
               </div>
@@ -373,6 +373,7 @@
         $('#header').css('margin-right', '-270px');
         $('#channels').css('margin-right', '-270px');
         $('#chats').css('margin-left', '270px');
+        $('#information').css('margin-left', '270px');
         // $('#content').css({gridTemplateColumns: '270px minmax(278px, auto) 0px;', WebkitTransition: 'grid-template-columns 1s ease-out', MozTransition: 'grid-template-columns 1s ease-out', MsTransition: 'grid-template-columns 1s ease-out', OTransition: 'grid-template-columns 1s ease-out', transition: 'grid-template-columns 1s ease-out'});
 
         // $("#user-page").animate({opacity: '1'}, 100);
@@ -1238,6 +1239,11 @@
                 newNode.setAttribute('data-id', member['_id']);
                 newNode.innerHTML = '<img class="profile-picture" src=' + member['picture'] + ' alt="!"><span class="member-name">' + member['name'] + '</span>';
                 document.getElementById('members').append(newNode);
+
+                newNode = document.createElement('tr');
+                newNode.className = 'suggested_email pointer';
+                newNode.textContent = member['name'] + ' (' + member['email'] + ')'
+
               });
             }
             catch(error) {
