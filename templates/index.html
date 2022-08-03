@@ -480,6 +480,7 @@
 
       window.onload = function() {
         (function(d) {
+          alert("func");
             var
                 ce = function(e, n) {
                     var a = document.createEvent("CustomEvent");
@@ -542,11 +543,13 @@
           // document.body.addEventListener('swr', h, false);
           // document.body.addEventListener('swu', h, false);
           // document.body.addEventListener('swd', h, false);
+          alert("Hello");
           document.body.addEventListener('swl', swipeLeft(), false);
           document.body.addEventListener('swr', swipeRight(), false);
         }
 
       function swipeRight() {
+        alert("swipeRight");
         if (mobile_column != 0) {
           if (mobile_column == 1) {
             mobile_column = 0;
