@@ -537,7 +537,7 @@
         message_input.focus();
       }
 
-      $('#email_to_input').keypress(function (e) {
+      $('#email_to_input').keyup(function (e) {
         if(e.which === 13 && !e.shiftKey) {
           e.preventDefault(); 
         }
@@ -574,12 +574,6 @@
         }
         filterSuggestedEmails();
       });
-
-      document.getElementById('email_to_input').onkeydown = function(e) {
-        if (e.key === 'Backspace' || e.key === 'Delete') {
-          filterSuggestedEmails();
-        }
-      };
 
       $(document).on('click', '.delete-email-icon', function() {
         this.parentNode.remove();
