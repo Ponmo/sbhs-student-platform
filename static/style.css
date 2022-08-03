@@ -1021,6 +1021,11 @@ img { /* make images and create button undraggable and unhighlitable*/
   padding-left: 3px;
   white-space: pre-wrap;
 }
+.directory-space-joined-status {
+  color: white;
+  margin-left: 18px;
+  margin-right: 18px;
+}
 /* .tooltip {
   position: relative;
   display: inline-block;
