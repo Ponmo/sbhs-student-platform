@@ -1,3 +1,7 @@
+/* Will not work with all broswers; Make blur animation on overscroll, or attach footer to grid */
+body {
+  overscroll-behavior-y: none;
+}
 /* flex and width: 100% - 290px*/
 img { /* make images and create button undraggable and unhighlitable*/
   -webkit-user-drag: none;
