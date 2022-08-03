@@ -540,12 +540,12 @@
       }
 
       $('#email_to_input').focusout(function (e) {
-        suggested_email.style.display = 'none';
+        document.getElementById('suggested_emails').style.display = 'none';
       });
 
       $('#email_to_input').focusout(function (e) {
         if (document.getElementById('email_to_input')) {
-        suggested_email.style.display = 'block';
+          document.getElementById('suggested_emails').style.display = 'block';
         }
       });
 
