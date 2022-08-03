@@ -981,11 +981,11 @@ img { /* make images and create button undraggable and unhighlitable*/
   width: 100%;
   pointer-events: none;
 }
-.delete_email_icon {
+.delete-email-icon {
   width: 9px;
   height: 7px;
   top: -2px;
-  padding-left: 2px;
+  padding-left: 3px;
 }
 /* .tooltip {
   position: relative;

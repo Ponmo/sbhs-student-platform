@@ -546,7 +546,7 @@
             newNodeChild.textContent = email;
             newNode.appendChild(newNodeChild);
             newNodeChild = document.createElement('img');
-            newNodeChild.className = 'delete_email_icon'
+            newNodeChild.className = 'delete-email-icon'
             newNodeChild.src = '/static/images/X.png';
             newNode.appendChild(newNodeChild);
             document.getElementById('email_to_list').insertBefore(newNode, document.getElementById('email_to_input_span'));
@@ -560,13 +560,17 @@
             newNodeChild.textContent = email;
             newNode.appendChild(newNodeChild);
             newNodeChild = document.createElement('img');
-            newNodeChild.className = 'delete_email_icon'
+            newNodeChild.className = 'delete-email-icon'
             newNodeChild.src = '/static/images/X.png';
             newNode.appendChild(newNodeChild);
             document.getElementById('email_to_list').insertBefore(newNode, document.getElementById('email_to_input_span'));
             document.getElementById('email_to_input').value = '';
           }
         }
+      });
+
+      $(document).on('click', '.delete-email-icon', function() {
+        this.parentNode.remove();
       });
 
       document.getElementById('email_input_form').onsubmit = function (e) {
