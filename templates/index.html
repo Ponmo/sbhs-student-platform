@@ -368,15 +368,14 @@
       });
 
       $(document).on('click', '#open_channels', function() {
-        $('#header').animate({"margin-right":"-270px"}, 60);
-        $('#channels').animate({"margin-right":"-270px"}, 60);
-        $('#chats').animate({"margin-left":"270px"}, 60);
-        $('#information').animate({"margin-left":"270px"}, 60);
+        $('#header').animate({"margin-right":"-270px"}, 50);
+        $('#channels').animate({"margin-right":"-270px"}, 50);
+        $('#chats').animate({"margin-left":"270px"}, 50);
+        $('#information').animate({"margin-left":"270px"}, 50);
       });
 
       $(document).on('click', '#open_members', function() {
-        $('#members').animate({"margin-left":"-220px"}, 60);
-        $('#content').css('grid-template-columns', '0px 500px 0px');
+        $('#members').animate({"margin-left":"-220px"}, 50);
         // $('#information').animate({"margin-right":"-270px"}, 100); Channels need to have grid change
       });
 
@@ -569,18 +568,17 @@
             newNode.appendChild(newNodeChild);
             document.getElementById('email_to_list').insertBefore(newNode, document.getElementById('email_to_input_span'));
             document.getElementById('email_to_input').value = '';
-          } else {
-            const filter = document.getElementById("email_to_input").value.toUpperCase();
-            document.querySelectorAll('.suggested_email').forEach(function(suggested_email) {
-              if(suggested_email.textContent.indexOf(filter) > -1) {
-                suggested_email.style.display = 'block';
-              }
-              else {
-                suggested_email.style.display = 'none';
-              }
-            });
           }
         }
+        const filter = document.getElementById("email_to_input").value.toUpperCase();
+        document.querySelectorAll('.suggested_email').forEach(function(suggested_email) {
+          if(suggested_email.textContent.indexOf(filter) > -1) {
+            suggested_email.style.display = 'block';
+          }
+          else {
+            suggested_email.style.display = 'none';
+          }
+        });
       });
 
       $(document).on('click', '.delete-email-icon', function() {
