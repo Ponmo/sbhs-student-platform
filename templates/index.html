@@ -303,7 +303,7 @@
           });
           if (window.location.href.indexOf('/sbhs/') != -1) {
             current_space = window.location.href.substring(window.location.href.indexOf('/sbhs/') + 6).replace('#','');;
-            document.querySelector('[data-id="' + current_space + '"]').firstChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = "Joined";
+            document.querySelector('.form-space [data-id="' + current_space + '"]').firstChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = "Joined";
             joinSpace();
           }
         }
@@ -511,7 +511,7 @@
               for (let i = 0; i < Math.ceil(data["joined"].length/4); i++) {
                 newNode = document.createElement('tr');
                 for (let j = 0; j < 4; j++) {
-                  if (data['joined'][i*4+j] != undefined) {
+                  if (data['joined'][i*4+j][0] != undefined) {
                     let tableData = document.createElement('td');
                     tableData.className = 'icons-wrapper pointer';
                     
@@ -555,9 +555,9 @@
         }
       });
 
-      $(document).on('click', 'joined-icons', function() {
+      //$(document).on('click', 'joined-icons', function() {
 
-      });
+      //});
 
       $(document).on('click', '#space-search-button', function() {
         $('#space-search').css('display', 'block');
@@ -1002,7 +1002,7 @@
       });
 
       $(document).on('click', '#leave-space', function() {
-        document.querySelector('[data-id="' + current_space + '"]').firstChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = 'Not Joined';      
+        document.querySelector('.form-space [data-id="' + current_space + '"]').firstChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = 'Not Joined';      
         $.ajax({
           type: 'POST',
           url: '/leave_space',
@@ -1223,7 +1223,7 @@
         $('#home-page').css('display', 'block');
         $('#first-all').css('display', 'none');
         $('#space-search').css('display', 'none');
-        document.querySelector('[data-id="' + current_space + '"]').remove();
+        document.querySelector('.form-space [data-id="' + current_space + '"]').remove();
         current_space = '';
         current_room = '';
       });
