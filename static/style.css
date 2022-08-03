@@ -623,8 +623,8 @@ img { /* make images and create button undraggable and unhighlitable*/
   position: absolute;
   display: none;
   width: 260px;
-  left: 10px;
-  top: calc(100% - 6px);
+  left: 7px;
+  top: calc(100% - 1px);
   border: 1px solid black;
   border-radius: 4px;
   background-color: white;
