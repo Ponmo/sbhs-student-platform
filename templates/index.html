@@ -518,12 +518,30 @@
         }
     })(document);
     //EXAMPLE OF USE
-    var h = function(e) {
-        console.log(e.type, e)
-    };
+    function swipeRight() {
+        if ((touchendX - touchstartX) > 50 && (mobile_column != 0)) {
+          if (mobile_column == 1) {
+            mobile_column = 0;
+            $('#header').animate({"margin-right":"-270px"}, 30);
+            $('#channels').animate({"margin-right":"-270px"}, 30);
+            $('#chats').animate({"margin-left":"270px"}, 30);
+            $('#information').animate({"margin-left":"270px"}, 30);
+            $('#chats').animate({"margin-right":"-270px"}, 30);
+            $('#information').animate({"margin-right":"-270px"}, 30);
+          }
+          else if (mobile_column == 2) {
+            mobile_column = 1;
+            $('#members').animate({"margin-left":"0px"}, 30);
+            $('#chats').animate({"margin-left":"0px"}, 30);
+            $('#chats').animate({"margin-right":"0px"}, 30);
+            $('#information').animate({"margin-left":"0px"}, 30);
+            $('#information').animate({"margin-right":"0px"}, 30);
+          }
+        }
+      }
     document.body.addEventListener('fc', h, false); // 0-50ms vs 500ms with normal click
     document.body.addEventListener('swl', h, false);
-    document.body.addEventListener('swr', h, false);
+    document.body.addEventListener('swr', swipeRight(), false);
     document.body.addEventListener('swu', h, false);
     document.body.addEventListener('swd', h, false);
 }
@@ -1331,6 +1349,7 @@
 
       socket.on('sent_email', function (data) {
         chat_history_skip = 0;
+        
         loadEmailHistory();
       });
 
