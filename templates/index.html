@@ -98,7 +98,7 @@
                   </div>
                 </div>
                 <table id="suggested_emails">
-                  <tr class="suggested_email pointer">Everyone</tr>
+                  <td class="suggested_email pointer">Everyone</td>
                 </table>
 
               </div>
@@ -1240,7 +1240,7 @@
                 newNode.innerHTML = '<img class="profile-picture" src="' + member['picture'] + '" alt="!"><span class="member-name">' + member['name'] + '</span>';
                 document.getElementById('members').append(newNode);
 
-                newNode = document.createElement('tr');
+                newNode = document.createElement('td');
                 newNode.className = 'suggested_email pointer';
                 newNode.innerHTML = '<img class="profile-picture" src="' + + member['picture'] + '" alt="!">' + member['name'] + ' (' + member['email'] + ')'
                 document.getElementById('suggested_emails').append(newNode);
