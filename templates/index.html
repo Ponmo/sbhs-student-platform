@@ -609,6 +609,7 @@
           emailAccepted(this.getAttribute('data-email'));
         }
         document.getElementById('email_to_input').value = '';
+        document.getElementById('suggested_emails').style.display = 'none';
       });
 
       document.getElementById('email_input_form').onsubmit = function (e) {
