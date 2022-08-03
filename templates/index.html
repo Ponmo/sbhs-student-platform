@@ -399,10 +399,8 @@
       //   $('#information').animate({"margin-left":"-220px"}, 30);
       //   $('#information').animate({"margin-right":"220px"}, 30);
       // });
-      $(document).on("pagecreate","#content",function(){
-        $("p").on("swiperight",function(){
-          alert("Your report has been recieved.")
-        });
+      $("body").on("swiperight", function(){
+        alert("Your report has been recieved.")
       });
 
 
