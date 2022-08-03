@@ -987,6 +987,27 @@ img { /* make images and create button undraggable and unhighlitable*/
   top: -2px;
   padding-left: 3px;
 }
+.email-container {
+  background-color: white;
+  color: black;
+  border-radius: 3px;
+  padding-top: 2px;
+  padding-right: 5px;
+  padding-left: 5px;
+  padding-bottom: 2px;
+  margin-bottom: 3px;
+}
+.email-subject {
+  margin: 0px;
+  padding-left: 3px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid black;
+}
+.email-message {
+  margin: 0px;
+  padding-top: 2px;
+  padding-left: 3px;
+}
 /* .tooltip {
   position: relative;
   display: inline-block;
