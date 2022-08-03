@@ -208,6 +208,7 @@
       var space_admin = false;
       var user_id = '{{ user_id }}';
       var selected_user = '';
+      var mobile_column = 1;
       
       $("#regular-channels").sortable({
         axis: 'y',
@@ -404,7 +405,7 @@
       let touchstartX = 0;
       let touchendX = 0;
       function checkDirection() {
-        if (touchendX < touchstartX) {
+        if (touchendX < touchstartX && mobile_column == 1) {
           $('#members').animate({"margin-left":"-220px"}, 30);
           $('#chats').animate({"margin-left":"-220px"}, 30);
           $('#chats').animate({"margin-right":"220px"}, 30);
@@ -1481,7 +1482,7 @@
               else {
                 emailDate = 'on ' + emailDate.format('M/D/YYYY');
               }
-              newMode.innerHTML = '<img class="profile-picture pointer" src="' + item.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + item.name + ' </b></span><span class="datetime">' + emailDate + '</span></p><div class="email-container-container"><div class="recipient-list">to ' + item.recipients.join(', ') + '</div><div class="email-container"><p class="email-subject">' + item.subject + '</p><p class="email-message">' + item.message + '</p></div></div>';
+              newMode.innerHTML = '<img class="profile-picture pointer" src="' + item.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + item.name + ' </b></span><span class="datetime">' + emailDate + '</span></p><div class="email-container-container"><div class="recipient-list">to ' + item.recipients.join(', ') + '</div><img class="expand-email-recipients" src="/static/images/expand.png"><div class="email-container"><p class="email-subject">' + item.subject + '</p><p class="email-message">' + item.message + '</p></div></div>';
               document.getElementById('messages').prepend(newMode);
             });
           }
