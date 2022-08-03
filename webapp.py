@@ -65,6 +65,10 @@ def send_email():
         message['Subject'] = request.json['subject']
         message['From'] =  'Platform Test'
         recipients = request.json['to']
+        if 'Everyone' in recipients:
+            everyone = collection_users.find({'joined': session['current_space']})
+            for recipient in everyone:
+                recipients.append(recipient['email'])
         recipients.append(session['users_email'])
         recipients = list(set(recipients))
         text = (request.json['message'].replace('\n', '<br />') + '<br>' +
