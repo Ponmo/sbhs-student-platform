@@ -542,6 +542,7 @@
           document.body.addEventListener('swr', h, false);
           document.body.addEventListener('swu', h, false);
           document.body.addEventListener('swd', h, false);
+          YOURELEMENT.addEventListener('swr',YOURSWIPERIGHTFUNCTION,false);
         }
 
       $(document).on('click', '#close-user-page', function() {
@@ -622,6 +623,7 @@
       });
 
       $(document).on('click', '.joined-icons', function() {
+        $('#profile-popup').remove();
         current_space = this.getAttribute('data-id');
         joinSpace();
       });
