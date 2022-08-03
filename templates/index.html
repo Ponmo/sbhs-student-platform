@@ -409,6 +409,7 @@
 
       /* Does not work for laptops or computers, need to check compatibility with wider-screen tablets */
       /* Can create general functions for animating members and channels div in combo with buttons*/
+      /* Set Chat width to whatever it is before to prevent glitch, and set a background div to members to prevent white glitch? */
       let touchstartX = 0;
       let touchendX = 0;
       function checkDirection() {
@@ -519,8 +520,9 @@
                     toolTip.textContent = "tooltip-checker";
 
                     let newNodeChild = document.createElement('img');
-                    newNodeChild.setAttribute('src', data['joined'][i*4+j]);
+                    newNodeChild.setAttribute('src', data['joined'][i*4+j][0]);
                     newNodeChild.className = 'joined-icons';
+                    newNodeChild.setAttribute('data-id', data['joined'][i*4+j][1]);
                     newNode.appendChild(tableData);
                     tableData.appendChild(toolTip);
                     tableData.appendChild(newNodeChild);
@@ -551,6 +553,10 @@
           $('.member').addClass('pointer');
           selected_user = '';
         }
+      });
+
+      $(document).on('click', 'joined-icons', function() {
+
       });
 
       $(document).on('click', '#space-search-button', function() {
