@@ -391,7 +391,7 @@
       });
 
       /* Make it only for mobile devices */
-      $(document).on('swiperight', '#information', function(event) {
+      $(document).on('swipeleft', '#chats', function(event) {
         $('#members').animate({"margin-left":"-220px"}, 30);
         $('#chats').animate({"margin-left":"-220px"}, 30);
         $('#chats').animate({"margin-right":"220px"}, 30);
@@ -1218,6 +1218,7 @@
             document.getElementById('header_text').textContent = document.getElementById(current_space).getAttribute('data-name');
             document.getElementById('special-channels').textContent = '';
             document.getElementById('regular-channels').textContent = '';
+            document.getElementById('suggested_emails').textContent = '';
             document.getElementById('members').textContent = '';
             rooms_and_sections[1].forEach(function(section) {
               newNode = document.createElement('ul');
