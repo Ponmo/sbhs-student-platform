@@ -546,9 +546,7 @@
           alert("Hello");
           document.body.addEventListener('swl', swipeLeft(), false);
           document.body.addEventListener('swr', swipeRight(), false);
-        }
-
-      function swipeRight() {
+          function swipeRight() {
         alert("swipeRight");
         if (mobile_column != 0) {
           if (mobile_column == 1) {
@@ -571,6 +569,9 @@
         }
       }
 
+        }
+
+      
       $(document).on('click', '#close-user-page', function() {
         $("#user-page").animate({opacity: '0'}, 100);
         setTimeout(function() {
