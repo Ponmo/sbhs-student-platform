@@ -559,18 +559,7 @@
         if (e.which === 32 || (e.which === 13 && !e.shiftKey)) {
           let email = document.getElementById('email_to_input').value.replace(/\s+/g, '');
           if (/\S+@\S+\.\S+/.test(email)) {
-            let newNode = document.createElement('div');
-            newNode.className = 'accepted_email_bubble';
-            let newNodeChild = document.createElement('span');
-            newNodeChild.className = 'accepted_email';
-            newNodeChild.textContent = email;
-            newNode.appendChild(newNodeChild);
-            newNodeChild = document.createElement('img');
-            newNodeChild.className = 'delete-email-icon'
-            newNodeChild.src = '/static/images/X.png';
-            newNode.appendChild(newNodeChild);
-            document.getElementById('email_to_list').insertBefore(newNode, document.getElementById('email_to_input_span'));
-            document.getElementById('email_to_input').value = '';
+            emailAccepted(email);
           }
           else if (email != '') {
             let newNode = document.createElement('div');
@@ -584,8 +573,8 @@
             newNodeChild.src = '/static/images/X.png';
             newNode.appendChild(newNodeChild);
             document.getElementById('email_to_list').insertBefore(newNode, document.getElementById('email_to_input_span'));
-            document.getElementById('email_to_input').value = '';
           }
+          document.getElementById('email_to_input').value = '';
         }
         if (document.getElementById('email_to_input').value != '') {
           document.getElementById('suggested_emails').style.display = 'block';
@@ -611,6 +600,16 @@
 
       $(document).on('click', '.delete-email-icon', function() {
         this.parentNode.remove();
+      });
+
+      $(document).on('click', '.suggested_email', function() {
+        if (this.textContent == 'Everyone') {
+          emailAccepted('Everyone');
+        }
+        else {
+          emailAccepted(this.getAttribute('data-email'));
+        }
+        document.getElementById('email_to_input').value = '';
       });
 
       document.getElementById('email_input_form').onsubmit = function (e) {
@@ -1277,6 +1276,7 @@
 
                 newNode = document.createElement('div');
                 newNode.className = 'suggested_email pointer';
+                newNode.setAttribute('data-email', member['email']);
                 newNode.innerHTML = '<img class="profile-picture" src="' + member['picture'] + '">' + member['name'] + ' (' + member['email'] + ')'
                 document.getElementById('suggested_emails').append(newNode);
               });
@@ -1543,6 +1543,21 @@
           timeout = setTimeout(stoppedTyping, 5000);
         }
       }
+
+      function emailAccepted(email) {
+        let newNode = document.createElement('div');
+        newNode.className = 'accepted_email_bubble';
+        let newNodeChild = document.createElement('span');
+        newNodeChild.className = 'accepted_email';
+        newNodeChild.textContent = email;
+        newNode.appendChild(newNodeChild);
+        newNodeChild = document.createElement('img');
+        newNodeChild.className = 'delete-email-icon'
+        newNodeChild.src = '/static/images/X.png';
+        newNode.appendChild(newNodeChild);
+        document.getElementById('email_to_list').insertBefore(newNode, document.getElementById('email_to_input_span'));
+      }
+
     });
 
     //applyTheme function
