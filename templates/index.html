@@ -519,6 +519,7 @@
     })(document);
     //EXAMPLE OF USE
     function swipeRight() {
+      alert("hello There");
         if ((touchendX - touchstartX) > 50 && (mobile_column != 0)) {
           if (mobile_column == 1) {
             mobile_column = 0;
@@ -1349,7 +1350,7 @@
 
       socket.on('sent_email', function (data) {
         chat_history_skip = 0;
-        
+        document.getElementById('messages').textContent = '';
         loadEmailHistory();
       });
 
