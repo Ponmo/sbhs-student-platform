@@ -337,6 +337,9 @@
           $('.member').css('background-color', '');
           $('.member').addClass('pointer');
         }
+        if (!!document.getElementById("suggested_emails") && !e.target.closest('#suggested_emails')) {
+          document.getElementById("suggested_emails").style.display = 'none';
+        }
         /*if (!!document.getElementById("profile-popup") && (!$('.member').is(e.target) && !$('.member').is(e.target.parentNode) || (!profile_popup.is(e.target) && profile_popup.contains(e.target)))) { 
           profile_popup.remove();
           selected_user = '';
@@ -538,13 +541,6 @@
         message_input.value = '';
         message_input.focus();
       }
-
-      $('#email_to_input').blur(function (e) {
-        if (!e.target.closest('#suggested_emails')) {
-          alert(JSON.stringify(e.target));
-          document.getElementById('suggested_emails').style.display = 'none';
-        }
-      });
 
       $('#email_to_input').focusin(function (e) {
         if (document.getElementById('email_to_input')) {
