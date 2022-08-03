@@ -571,10 +571,13 @@
             document.getElementById('email_to_input').value = '';
           }
         }
+        filterSuggestedEmails();
       });
 
       document.getElementById('suggested_emails').onkeydown = function(e) {
-        if (e.key === 'Bac')
+        if (e.key === 'Backspace' || e.key === 'Delete') {
+          filterSuggestedEmails();
+        }
       };
 
       $(document).on('click', '.delete-email-icon', function() {
