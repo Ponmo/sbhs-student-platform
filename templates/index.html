@@ -520,7 +520,7 @@
     //EXAMPLE OF USE
     function swipeRight() {
       alert("hello There");
-        if ((touchendX - touchstartX) > 50 && (mobile_column != 0)) {
+        if (mobile_column != 0) {
           if (mobile_column == 1) {
             mobile_column = 0;
             $('#header').animate({"margin-right":"-270px"}, 30);
