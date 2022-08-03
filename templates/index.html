@@ -411,122 +411,30 @@
       /* Does not work for laptops or computers, need to check compatibility with wider-screen tablets */
       /* Can create general functions for animating members and channels div in combo with buttons*/
       /* Set Chat width to whatever it is before to prevent glitch, and set a background div to members to prevent white glitch? */
-      // let touchstartX = 0;
-      // let touchendX = 0;
-      // function checkDirection() {
-      //   if ((touchstartX - touchendX) > 50  && (mobile_column != 2)) {
-      //     if (mobile_column == 1) {
-      //       mobile_column = 2;
-      //       $('#members').animate({"margin-left":"-220px"}, 30);
-      //       $('#chats').animate({"margin-left":"-220px"}, 30);
-      //       $('#chats').animate({"margin-right":"220px"}, 30);
-      //       $('#information').animate({"margin-left":"-220px"}, 30);
-      //       $('#information').animate({"margin-right":"220px"}, 30);
-      //     }
-      //     else if (mobile_column == 0) {
-      //       mobile_column = 1;
-      //       $('#header').animate({"margin-right":"0px"}, 30);
-      //       $('#channels').animate({"margin-right":"0px"}, 30);
-      //       $('#chats').animate({"margin-left":"0px"}, 30);
-      //       $('#information').animate({"margin-left":"0px"}, 30);
-      //       $('#chats').animate({"margin-right":"0px"}, 30);
-      //       $('#information').animate({"margin-right":"0px"}, 30);
-      //     }
-      //   }
-        
-      //   if ((touchendX - touchstartX) > 50 && (mobile_column != 0)) {
-      //     if (mobile_column == 1) {
-      //       mobile_column = 0;
-      //       $('#header').animate({"margin-right":"-270px"}, 30);
-      //       $('#channels').animate({"margin-right":"-270px"}, 30);
-      //       $('#chats').animate({"margin-left":"270px"}, 30);
-      //       $('#information').animate({"margin-left":"270px"}, 30);
-      //       $('#chats').animate({"margin-right":"-270px"}, 30);
-      //       $('#information').animate({"margin-right":"-270px"}, 30);
-      //     }
-      //     else if (mobile_column == 2) {
-      //       mobile_column = 1;
-      //       $('#members').animate({"margin-left":"0px"}, 30);
-      //       $('#chats').animate({"margin-left":"0px"}, 30);
-      //       $('#chats').animate({"margin-right":"0px"}, 30);
-      //       $('#information').animate({"margin-left":"0px"}, 30);
-      //       $('#information').animate({"margin-right":"0px"}, 30);
-      //     }
-      //   }
-      // }
-
-      // document.addEventListener('touchstart', e => {
-      //   // touchstartX = e.changedTouches[0].screenX;
-      // });
-
-      // document.addEventListener('touchend', e => {
-      //   // touchendX = e.changedTouches[0].screenX;
-      //   // checkDirection();
-      // });
-      window.onload = function() {(
-        function(d) {
-          var ce = function(e, n) {
-            var a = document.createEvent("CustomEvent");
-            a.initCustomEvent(n, true, true, e.target);
-            e.target.dispatchEvent(a);
-            a = null;
-            return false
-          },
-            nm = true,
-            sp = {
-                x: 0,
-                y: 0
-            },
-            ep = {
-                x: 0,
-                y: 0
-            },
-            touch = {
-                touchstart: function(e) {
-                    sp = {
-                        x: e.touches[0].pageX,
-                        y: e.touches[0].pageY
-                    }
-                },
-                touchmove: function(e) {
-                    nm = false;
-                    ep = {
-                        x: e.touches[0].pageX,
-                        y: e.touches[0].pageY
-                    }
-                },
-                touchend: function(e) {
-                    if (nm) {
-                        ce(e, 'fc')
-                    } else {
-                        var x = ep.x - sp.x,
-                            xr = Math.abs(x),
-                            y = ep.y - sp.y,
-                            yr = Math.abs(y);
-                        if (Math.max(xr, yr) > 20) {
-                            ce(e, (xr > yr ? (x < 0 ? 'swl' : 'swr') : (y < 0 ? 'swu' : 'swd')))
-                        }
-                    };
-                    nm = true
-                },
-                touchcancel: function(e) {
-                    nm = false
-                }
-            };
-        for (var a in touch) {
-            d.addEventListener(a, touch[a], false);
+      let touchstartX = 0;
+      let touchendX = 0;
+      function checkDirection() {
+        if ((touchstartX - touchendX) > 50  && (mobile_column != 2)) {
+          if (mobile_column == 1) {
+            mobile_column = 2;
+            $('#members').animate({"margin-left":"-220px"}, 30);
+            $('#chats').animate({"margin-left":"-220px"}, 30);
+            $('#chats').animate({"margin-right":"220px"}, 30);
+            $('#information').animate({"margin-left":"-220px"}, 30);
+            $('#information').animate({"margin-right":"220px"}, 30);
+          }
+          else if (mobile_column == 0) {
+            mobile_column = 1;
+            $('#header').animate({"margin-right":"0px"}, 30);
+            $('#channels').animate({"margin-right":"0px"}, 30);
+            $('#chats').animate({"margin-left":"0px"}, 30);
+            $('#information').animate({"margin-left":"0px"}, 30);
+            $('#chats').animate({"margin-right":"0px"}, 30);
+            $('#information').animate({"margin-right":"0px"}, 30);
+          }
         }
-    })(document);
-    //EXAMPLE OF USE
-    // document.body.addEventListener('fc', h, false); // 0-50ms vs 500ms with normal click
-    // document.body.addEventListener('swl', h, false);
-    document.body.addEventListener('swr', swipeRight(), false);
-    // document.body.addEventListener('swu', h, false);
-    // document.body.addEventListener('swd', h, false);
-}
-function swipeRight() {
-      alert("hello There");
-        if (mobile_column != 0) {
+        
+        if ((touchendX - touchstartX) > 50 && (mobile_column != 0)) {
           if (mobile_column == 1) {
             mobile_column = 0;
             $('#header').animate({"margin-right":"-270px"}, 30);
@@ -546,6 +454,102 @@ function swipeRight() {
           }
         }
       }
+
+      document.addEventListener('touchstart', e => {
+        // touchstartX = e.changedTouches[0].screenX;
+      });
+
+      document.addEventListener('touchend', e => {
+        // touchendX = e.changedTouches[0].screenX;
+        // checkDirection();
+      });
+
+
+
+
+//       window.onload = function() {(
+//         function(d) {
+//           var ce = function(e, n) {
+//             var a = document.createEvent("CustomEvent");
+//             a.initCustomEvent(n, true, true, e.target);
+//             e.target.dispatchEvent(a);
+//             a = null;
+//             return false
+//           },
+//             nm = true,
+//             sp = {
+//                 x: 0,
+//                 y: 0
+//             },
+//             ep = {
+//                 x: 0,
+//                 y: 0
+//             },
+//             touch = {
+//                 touchstart: function(e) {
+//                     sp = {
+//                         x: e.touches[0].pageX,
+//                         y: e.touches[0].pageY
+//                     }
+//                 },
+//                 touchmove: function(e) {
+//                     nm = false;
+//                     ep = {
+//                         x: e.touches[0].pageX,
+//                         y: e.touches[0].pageY
+//                     }
+//                 },
+//                 touchend: function(e) {
+//                     if (nm) {
+//                         ce(e, 'fc')
+//                     } else {
+//                         var x = ep.x - sp.x,
+//                             xr = Math.abs(x),
+//                             y = ep.y - sp.y,
+//                             yr = Math.abs(y);
+//                         if (Math.max(xr, yr) > 20) {
+//                             ce(e, (xr > yr ? (x < 0 ? 'swl' : 'swr') : (y < 0 ? 'swu' : 'swd')))
+//                         }
+//                     };
+//                     nm = true
+//                 },
+//                 touchcancel: function(e) {
+//                     nm = false
+//                 }
+//             };
+//         for (var a in touch) {
+//             d.addEventListener(a, touch[a], false);
+//         }
+//     })(document);
+//     //EXAMPLE OF USE
+//     // document.body.addEventListener('fc', h, false); // 0-50ms vs 500ms with normal click
+//     // document.body.addEventListener('swl', h, false);
+//     document.body.addEventListener('swr', swipeRight(), false);
+//     // document.body.addEventListener('swu', h, false);
+//     // document.body.addEventListener('swd', h, false);
+// }
+// function swipeRight() {
+//       alert("hello There");
+//         if (mobile_column != 0) {
+//           if (mobile_column == 1) {
+//             mobile_column = 0;
+//             $('#header').animate({"margin-right":"-270px"}, 30);
+//             $('#channels').animate({"margin-right":"-270px"}, 30);
+//             $('#chats').animate({"margin-left":"270px"}, 30);
+//             $('#information').animate({"margin-left":"270px"}, 30);
+//             $('#chats').animate({"margin-right":"-270px"}, 30);
+//             $('#information').animate({"margin-right":"-270px"}, 30);
+//           }
+//           else if (mobile_column == 2) {
+//             mobile_column = 1;
+//             $('#members').animate({"margin-left":"0px"}, 30);
+//             $('#chats').animate({"margin-left":"0px"}, 30);
+//             $('#chats').animate({"margin-right":"0px"}, 30);
+//             $('#information').animate({"margin-left":"0px"}, 30);
+//             $('#information').animate({"margin-right":"0px"}, 30);
+//           }
+//         }
+//       }
 
       $(document).on('click', '#profile', function() {
         $('#user-page').css('display', 'block');
