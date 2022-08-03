@@ -1240,6 +1240,7 @@
               });
               rooms_and_sections[0].forEach(function(room) {
                 if (room['section'] == 'special') {
+                  alert(JSON.stringify(room));
                   var newNode = document.createElement('li');
                   newNode.className = 'email special-room pointer';
                   newNode.textContent = 'Email';
