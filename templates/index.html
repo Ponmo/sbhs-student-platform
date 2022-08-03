@@ -1098,13 +1098,13 @@
 
       socket.on('deleted_space', function(data) {
         document.getElementById(current_space).parentNode.remove();
-        document.querySelector('.form-space[data-id="' + current_space + '"]').remove();
         current_space = '';
         current_room = '';
         $('.active-space').attr('style', '');
         $('#home-page').css('display', 'block');
         $('#first-all').css('display', 'none');
         $('#space-search').css('display', 'none');
+        document.querySelector('.form-space[data-id="' + current_space + '"]').remove();
       });
 
       socket.on('deleted_message', function (data) {
@@ -1276,6 +1276,8 @@
               referenceNode = document.getElementById('space_align_helper');
               referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
               space();
+              socket.emit('joined_space', {
+              });
             }
             else {
               $('#' + current_space).css('border-radius', '3px');
