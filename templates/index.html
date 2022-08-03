@@ -537,12 +537,13 @@
         var h = function(e) {
             console.log(e.type, e)
         };
-          document.body.addEventListener('fc', h, false); // 0-50ms vs 500ms with normal click
-          document.body.addEventListener('swl', h, false);
-          document.body.addEventListener('swr', h, false);
-          document.body.addEventListener('swu', h, false);
-          document.body.addEventListener('swd', h, false);
-          YOURELEMENT.addEventListener('swr',YOURSWIPERIGHTFUNCTION,false);
+          // document.body.addEventListener('fc', h, false); // 0-50ms vs 500ms with normal click
+          // document.body.addEventListener('swl', h, false);
+          // document.body.addEventListener('swr', h, false);
+          // document.body.addEventListener('swu', h, false);
+          // document.body.addEventListener('swd', h, false);
+          document.body.addEventListener('swl', swipeLeft(),false);
+          document.body.addEventListener('swr', swipeRight(),false);
         }
 
       $(document).on('click', '#close-user-page', function() {
@@ -624,6 +625,7 @@
 
       $(document).on('click', '.joined-icons', function() {
         $('#profile-popup').remove();
+        selected_user = '';
         current_space = this.getAttribute('data-id');
         joinSpace();
       });
