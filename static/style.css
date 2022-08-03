@@ -662,8 +662,6 @@ img { /* make images and create button undraggable and unhighlitable*/
   vertical-align: middle;
 }
 
-
-
 #members {
   grid-column: 3;
   z-index: 1; /* to make the send button not overlay the members div on small screen sizes can change once small version introduced */
@@ -982,6 +980,12 @@ img { /* make images and create button undraggable and unhighlitable*/
   height: 100%;
   width: 100%;
   pointer-events: none;
+}
+.delete_email_icon {
+  width: 9px;
+  height: 7px;
+  top: -2px;
+  padding-left: 2px;
 }
 /* .tooltip {
   position: relative;
