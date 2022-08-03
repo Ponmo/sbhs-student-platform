@@ -303,7 +303,7 @@
           });
           if (window.location.href.indexOf('/sbhs/') != -1) {
             current_space = window.location.href.substring(window.location.href.indexOf('/sbhs/') + 6).replace('#','');;
-            document.querySelector('.form-space [data-id="' + current_space + '"]').firstChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = "Joined";
+            document.querySelector('.form-space[data-id="' + current_space + '"]').firstChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = "Joined";
             joinSpace();
           }
         }
@@ -1002,7 +1002,7 @@
       });
 
       $(document).on('click', '#leave-space', function() {
-        document.querySelector('.form-space [data-id="' + current_space + '"]').firstChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = 'Not Joined';      
+        document.querySelector('.form-space[data-id="' + current_space + '"]').firstChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = 'Not Joined';      
         $.ajax({
           type: 'POST',
           url: '/leave_space',
@@ -1223,7 +1223,7 @@
         $('#home-page').css('display', 'block');
         $('#first-all').css('display', 'none');
         $('#space-search').css('display', 'none');
-        document.querySelector('.form-space [data-id="' + current_space + '"]').remove();
+        document.querySelector('.form-space[data-id="' + current_space + '"]').remove();
         current_space = '';
         current_room = '';
       });
