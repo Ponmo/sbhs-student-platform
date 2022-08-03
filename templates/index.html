@@ -545,9 +545,10 @@
             newNodeChild.className = 'accepted_email';
             newNodeChild.textContent = email;
             newNode.appendChild(newNodeChild);
-
-            //createElement('div').newNode.append()
-
+            newNodeChild = document.createElement('img');
+            newNodeChild.className = 'delete_email_icon'
+            newNodeChild.href = '/static/images/X.png';
+            newNode.appendChild(newNodeChild);
             document.getElementById('email_to_list').insertBefore(newNode, document.getElementById('email_to_input_span'));
             document.getElementById('email_to_input').value = '';
           }
