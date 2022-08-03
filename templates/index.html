@@ -1140,7 +1140,7 @@
         $('#home-page').css('display', 'block');
         $('#first-all').css('display', 'none');
         $('#space-search').css('display', 'none');
-        document.querySelector('.form-space[data-id="' + current_space + '"]').remove();
+        document.querySelector('[data-id="' + current_space + '"]').remove();
       });
 
       socket.on('deleted_message', function (data) {
