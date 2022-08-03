@@ -1134,13 +1134,13 @@
 
       socket.on('deleted_space', function(data) {
         document.getElementById(current_space).parentNode.remove();
-        current_space = '';
-        current_room = '';
         $('.active-space').attr('style', '');
         $('#home-page').css('display', 'block');
         $('#first-all').css('display', 'none');
         $('#space-search').css('display', 'none');
         document.querySelector('[data-id="' + current_space + '"]').remove();
+        current_space = '';
+        current_room = '';
       });
 
       socket.on('deleted_message', function (data) {
