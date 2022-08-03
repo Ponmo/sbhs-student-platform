@@ -372,22 +372,28 @@
       });
 
       $(document).on('click', '#open_channels', function() {
-        $('#header').animate({"margin-right":"-270px"}, 30);
-        $('#channels').animate({"margin-right":"-270px"}, 30);
-        $('#chats').animate({"margin-left":"270px"}, 30);
-        $('#information').animate({"margin-left":"270px"}, 30);
-        $('#chats').animate({"margin-right":"-270px"}, 30);
-        $('#information').animate({"margin-right":"-270px"}, 30);
+        mobile_column = 0;
+        if (mobile_column == 1) {
+          $('#header').animate({"margin-right":"-270px"}, 30);
+          $('#channels').animate({"margin-right":"-270px"}, 30);
+          $('#chats').animate({"margin-left":"270px"}, 30);
+          $('#information').animate({"margin-left":"270px"}, 30);
+          $('#chats').animate({"margin-right":"-270px"}, 30);
+          $('#information').animate({"margin-right":"-270px"}, 30);
+        }
       });
 
       
       $(document).on('click', '#open_members', function() {
-        $('#members').animate({"margin-left":"-220px"}, 30);
-        $('#chats').animate({"margin-left":"-220px"}, 30);
-        $('#chats').animate({"margin-right":"220px"}, 30);
-        /* Maybe not needed (Lag?): */
-        $('#information').animate({"margin-left":"-220px"}, 30);
-        $('#information').animate({"margin-right":"220px"}, 30);
+        mobile_column = 2;
+        if (mobile_column == 1) {
+          $('#members').animate({"margin-left":"-220px"}, 30);
+          $('#chats').animate({"margin-left":"-220px"}, 30);
+          $('#chats').animate({"margin-right":"220px"}, 30);
+          /* Maybe not needed (Lag?): */
+          $('#information').animate({"margin-left":"-220px"}, 30);
+          $('#information').animate({"margin-right":"220px"}, 30);
+        }
         // $('#information').animate({"margin-right":"-270px"}, 100); Channels need to have grid change
       });
 
@@ -406,6 +412,7 @@
       let touchendX = 0;
       function checkDirection() {
         if (touchendX < touchstartX && mobile_column == 1) {
+          mobile_column = 2;
           $('#members').animate({"margin-left":"-220px"}, 30);
           $('#chats').animate({"margin-left":"-220px"}, 30);
           $('#chats').animate({"margin-right":"220px"}, 30);
@@ -1482,7 +1489,7 @@
               else {
                 emailDate = 'on ' + emailDate.format('M/D/YYYY');
               }
-              newMode.innerHTML = '<img class="profile-picture pointer" src="' + item.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + item.name + ' </b></span><span class="datetime">' + emailDate + '</span></p><div class="email-container-container"><div class="recipient-list">to ' + item.recipients.join(', ') + '</div><img class="expand-email-recipients" src="/static/images/expand.png"><div class="email-container"><p class="email-subject">' + item.subject + '</p><p class="email-message">' + item.message + '</p></div></div>';
+              newMode.innerHTML = '<img class="profile-picture pointer" src="' + item.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + item.name + ' </b></span><span class="datetime">' + emailDate + '</span></p><div class="email-container-container"><div class="recipient-list">to ' + item.recipients.join(', ') + '</div><img class="expand-recipient-list" src="/static/images/expand.png"><div class="email-container"><p class="email-subject">' + item.subject + '</p><p class="email-message">' + item.message + '</p></div></div>';
               document.getElementById('messages').prepend(newMode);
             });
           }
