@@ -371,20 +371,21 @@
       });
 
       $(document).on('click', '#open_channels', function() {
-        $('#header').animate({"margin-right":"-270px"}, 50);
-        $('#channels').animate({"margin-right":"-270px"}, 50);
-        $('#chats').animate({"margin-left":"270px"}, 50);
-        $('#information').animate({"margin-left":"270px"}, 50);
-        $('#chats').animate({"margin-right":"-270px"}, 50);
-        $('#information').animate({"margin-right":"-270px"}, 50);
+        $('#header').animate({"margin-right":"-270px"}, 30);
+        $('#channels').animate({"margin-right":"-270px"}, 30);
+        $('#chats').animate({"margin-left":"270px"}, 30);
+        $('#information').animate({"margin-left":"270px"}, 30);
+        $('#chats').animate({"margin-right":"-270px"}, 30);
+        $('#information').animate({"margin-right":"-270px"}, 30);
       });
 
       $(document).on('click', '#open_members', function() {
-        $('#members').animate({"margin-left":"-220px"}, 50);
-        $('#chats').animate({"margin-left":"-220px"}, 50);
-        $('#chats').animate({"margin-right":"220px"}, 50);
-        $('#information').animate({"margin-left":"-220px"}, 50);
-        $('#information').animate({"margin-right":"220px"}, 50);
+        $('#members').animate({"margin-left":"-220px"}, 30);
+        $('#chats').animate({"margin-left":"-220px"}, 30);
+        $('#chats').animate({"margin-right":"220px"}, 30);
+        /* Maybe not needed (Lag?): */
+        $('#information').animate({"margin-left":"-220px"}, 30);
+        $('#information').animate({"margin-right":"220px"}, 30);
         // $('#information').animate({"margin-right":"-270px"}, 100); Channels need to have grid change
       });
 
