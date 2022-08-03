@@ -399,10 +399,19 @@
       //   $('#information').animate({"margin-left":"-220px"}, 30);
       //   $('#information').animate({"margin-right":"220px"}, 30);
       // });
+
+      /* Does not work for laptops or computers, need to check compatibility with wider-screen tablets */
       let touchstartX = 0;
       let touchendX = 0;
       function checkDirection() {
-        if (touchendX < touchstartX) alert('swiped left!');
+        if (touchendX < touchstartX) {
+          $('#members').animate({"margin-left":"-220px"}, 30);
+          $('#chats').animate({"margin-left":"-220px"}, 30);
+          $('#chats').animate({"margin-right":"220px"}, 30);
+          $('#information').animate({"margin-left":"-220px"}, 30);
+          $('#information').animate({"margin-right":"220px"}, 30);
+        }
+        
         if (touchendX > touchstartX) alert('swiped right!');
       }
 
