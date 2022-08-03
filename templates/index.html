@@ -463,16 +463,15 @@
       //   // touchendX = e.changedTouches[0].screenX;
       //   // checkDirection();
       // });
-      window.onload = function() {
-    (function(d) {
-        var
-            ce = function(e, n) {
-                var a = document.createEvent("CustomEvent");
-                a.initCustomEvent(n, true, true, e.target);
-                e.target.dispatchEvent(a);
-                a = null;
-                return false
-            },
+      window.onload = function() {(
+        function(d) {
+          var ce = function(e, n) {
+            var a = document.createEvent("CustomEvent");
+            a.initCustomEvent(n, true, true, e.target);
+            e.target.dispatchEvent(a);
+            a = null;
+            return false
+          },
             nm = true,
             sp = {
                 x: 0,
@@ -784,7 +783,9 @@
             data: JSON.stringify({'to': recipient_list, 'subject': document.getElementById('email_subject_input').value, 'message': document.getElementById('email_message_input').value/*.replace(new RegExp('\r?\n','g'), '<br>')*/, 'space_id': current_space, 'space_name': document.getElementById('header_text').textContent, 'room_id': current_room}),
             contentType: 'application/json;charset=UTF-8',
             success: function(data) {
-              alert(JSON.stringify(data));
+              socket.emit('sent_email', {
+                room_id: current_room
+              })
             }
           });
           $('.accepted_email_bubble').remove();
@@ -1323,11 +1324,15 @@
           else {
             document.getElementById(data['message_id']).remove();
           }
+        } catch(e) {
+          alert(e);
+        }
+      });
 
-          } catch(e) {
-            alert(e);
-          }
-        });
+      socket.on('sent_email', function (data) {
+        chat_history_skip = 0;
+        loadEmailHistory();
+      });
 
       function space() {
         $.ajax({
