@@ -391,7 +391,8 @@
       });
 
       /* Make it only for mobile devices */
-      $(document).on('swipeleft', '#chats', function(event) {
+      $(document).on('swipeleft', 'html', function(event) {
+        alert("Your report has been recieved.")
         $('#members').animate({"margin-left":"-220px"}, 30);
         $('#chats').animate({"margin-left":"-220px"}, 30);
         $('#chats').animate({"margin-right":"220px"}, 30);
