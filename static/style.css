@@ -1041,6 +1041,9 @@ img { /* make images and create button undraggable and unhighlitable*/
   width: 10px;
   height: 10px;
 }
+.tooltip {
+  pointer-events: none; /*needs this*/
+}
 /* .tooltip {
   position: relative;
   display: inline-block;
