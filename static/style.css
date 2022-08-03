@@ -624,7 +624,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   display: none;
   width: 260px;
   left: 10px;
-  top: calc(100% - 4px);
+  top: calc(100% - 6px);
   border: 1px solid black;
   border-radius: 4px;
   background-color: white;
