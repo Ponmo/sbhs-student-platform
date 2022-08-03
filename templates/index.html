@@ -391,7 +391,7 @@
       });
 
       /* Make it only for mobile devices */
-      $(document).on('swiperight', 'body', function(event) {
+      $(document).on('swiperight', '#information', function(event) {
         $('#members').animate({"margin-left":"-220px"}, 30);
         $('#chats').animate({"margin-left":"-220px"}, 30);
         $('#chats').animate({"margin-right":"220px"}, 30);
