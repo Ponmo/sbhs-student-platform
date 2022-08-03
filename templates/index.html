@@ -539,11 +539,11 @@
         message_input.focus();
       }
 
-      $('#email_to_input').focusout(function (e) {
+      $('#email_to_input').blur(function (e) {
         document.getElementById('suggested_emails').style.display = 'none';
       });
 
-      $('#email_to_input').focusout(function (e) {
+      $('#email_to_input').focusin(function (e) {
         if (document.getElementById('email_to_input')) {
           document.getElementById('suggested_emails').style.display = 'block';
         }
