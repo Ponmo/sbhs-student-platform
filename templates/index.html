@@ -573,7 +573,10 @@
             const filter = document.getElementById("email_to_input").value.toUpperCase();
             document.querySelectorAll('.suggested_email').forEach(function(suggested_email) {
               if(suggested_email.textContent.indexOf(filter) > -1) {
-                suggested_ema
+                suggested_email.style.display = 'block';
+              }
+              else {
+                suggested_email.style.display = 'none';
               }
             });
           }
