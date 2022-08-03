@@ -546,9 +546,6 @@
       });
 
       $('#email_to_input').keyup(function (e) {
-        if(e.which === 13 && !e.shiftKey) {
-          e.preventDefault(); 
-        }
         if (e.which === 32 || (e.which === 13 && !e.shiftKey)) {
           let email = document.getElementById('email_to_input').value.replace(/\s+/g, '');
           if (/\S+@\S+\.\S+/.test(email)) {
