@@ -1020,6 +1020,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin: 0px;
   padding-top: 2px;
   padding-left: 3px;
+  white-space: pre-wrap;
 }
 /* .tooltip {
   position: relative;
