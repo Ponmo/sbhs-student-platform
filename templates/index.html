@@ -508,10 +508,10 @@
               member.style.backgroundColor = '#3c3f45';
               document.getElementById('profile-popup').innerHTML = '<ul id="profile-list"><li id="profile-picture-list"><img id="popup-picture" src=' + data['picture'] + ' alt="!"></li><li id="profile-name">' + data['name'] + '</li><li id="profile-email">' + data['email'] + '</li><table id="joined-table"></table>';
               //loop through all joined servers' icons and creates img elements to place in the table
-              for (let i = 0; i < Math.ceil(data["joined"].length/4); i++) {
+              for (let i = 0; i < Math.ceil(data['joined'].length/4); i++) {
                 newNode = document.createElement('tr');
                 for (let j = 0; j < 4; j++) {
-                  if (data['joined'][i*4+j][0] != undefined) {
+                  if (data['joined'][i*4+j] != undefined) {
                     let tableData = document.createElement('td');
                     tableData.className = 'icons-wrapper pointer';
                     
