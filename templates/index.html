@@ -389,7 +389,9 @@
         $('#information').animate({"margin-right":"220px"}, 30);
         // $('#information').animate({"margin-right":"-270px"}, 100); Channels need to have grid change
       });
-      $(document).on('swiperight', '#chats', function() {
+
+      /* Make it only for mobile devices */
+      $(document).on('swiperight', 'body', function(event) {
         $('#members').animate({"margin-left":"-220px"}, 30);
         $('#chats').animate({"margin-left":"-220px"}, 30);
         $('#chats').animate({"margin-right":"220px"}, 30);
@@ -555,7 +557,7 @@
       }
 
       $('#email_to_input').focusin(function (e) {
-        if (document.getElementById('email_to_input')) {
+        if (document.getElementById('email_to_input').value != '') {
           document.getElementById('suggested_emails').style.display = 'block';
         }
       });
