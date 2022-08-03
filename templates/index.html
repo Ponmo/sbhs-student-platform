@@ -370,11 +370,14 @@
 
       $(document).on('click', '#open_channels', function() {
         // $('#content').css('grid-template-columns', '270px minmax(278px, auto) 0px');
-        $('#header').css('margin-right', '-270px');
-        $('#channels').css('margin-right', '-270px');
-        $('#chats').css('margin-left', '270px');
-        $('#information').css('margin-left', '270px');
-        // $('#content').css({gridTemplateColumns: '270px minmax(278px, auto) 0px;', WebkitTransition: 'grid-template-columns 1s ease-out', MozTransition: 'grid-template-columns 1s ease-out', MsTransition: 'grid-template-columns 1s ease-out', OTransition: 'grid-template-columns 1s ease-out', transition: 'grid-template-columns 1s ease-out'});
+        // $('#header').css('margin-right', '-270px');
+        // $('#channels').css('margin-right', '-270px');
+        // $('#chats').css('margin-left', '270px');
+        // $('#information').css('margin-left', '270px');
+        $('#header').css({marginRight: '-270px;', WebkitTransition: 'margin-right 0.1s ease-out', MozTransition: 'margin-right 0.1s ease-out', MsTransition: 'margin-right 0.1s ease-out', OTransition: 'margin-right 0.1s ease-out', transition: 'margin-right 0.1s ease-out'});
+        $('#channels').css({marginRight: '-270px;', WebkitTransition: 'margin-right 0.1s ease-out', MozTransition: 'margin-right 0.1s ease-out', MsTransition: 'margin-right 0.1s ease-out', OTransition: 'margin-right 0.1s ease-out', transition: 'margin-right 0.1s ease-out'});
+        $('#chats').css({marginLeft: '270px;', WebkitTransition: 'margin-left 0.1s ease-out', MozTransition: 'margin-left 0.1s ease-out', MsTransition: 'margin-left 0.1s ease-out', OTransition: 'margin-left 0.1s ease-out', transition: 'margin-left 0.1s ease-out'});
+        $('#information').css({marginLeft: '270px;', WebkitTransition: 'margin-left 0.1s ease-out', MozTransition: 'margin-left 0.1s ease-out', MsTransition: 'margin-left 0.1s ease-out', OTransition: 'margin-left 0.1s ease-out', transition: 'margin-left 0.1s ease-out'});
 
         // $("#user-page").animate({opacity: '1'}, 100);
       });
