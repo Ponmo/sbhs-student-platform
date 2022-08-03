@@ -404,7 +404,7 @@
       let touchstartX = 0;
       let touchendX = 0;
       function checkDirection() {
-        if ((touchstartX - touchendX) > 50  && (mobile_column != 2)) {
+        if ((touchstartX - touchendX) > 80  && (mobile_column != 2)) {
           if (mobile_column == 1) {
             mobile_column = 2;
             $('#members').animate({"margin-left":"-220px"}, 30);
@@ -424,7 +424,7 @@
           }
         }
         
-        if ((touchendX - touchstartX) > 50 && (mobile_column != 0)) {
+        if ((touchendX - touchstartX) > 80 && (mobile_column != 0)) {
           if (mobile_column == 1) {
             mobile_column = 0;
             $('#header').animate({"margin-right":"-270px"}, 30);
