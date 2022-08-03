@@ -337,7 +337,7 @@
           $('.member').css('background-color', '');
           $('.member').addClass('pointer');
         }
-        if (!!document.getElementById("suggested_emails") && !e.target.closest('#suggested_emails')) {
+        if (!!document.getElementById("suggested_emails") && !e.target.closest('#suggested_emails') && !e.target.closest('#email_to_input')) {
           document.getElementById("suggested_emails").style.display = 'none';
         }
         /*if (!!document.getElementById("profile-popup") && (!$('.member').is(e.target) && !$('.member').is(e.target.parentNode) || (!profile_popup.is(e.target) && profile_popup.contains(e.target)))) { 
