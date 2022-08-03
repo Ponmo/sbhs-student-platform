@@ -97,9 +97,9 @@
                     <span id="email_to_input_span"><input id="email_to_input" type="text" placeholder=""></input></span>
                   </div>
                 </div>
-                <table id="suggested_emails">
-                  <td class="suggested_email pointer">Everyone</td>
-                </table>
+                <div id="suggested_emails">
+                  <span class="suggested_email pointer">Everyone</span>
+                </div>
 
               </div>
               <!-- <label id="email_cc_label">To:</label>
@@ -374,10 +374,15 @@
         // $('#channels').css('margin-right', '-270px');
         // $('#chats').css('margin-left', '270px');
         // $('#information').css('margin-left', '270px');
-        $('#header').css({marginRight: '-270px;', WebkitTransition: 'margin-right 0.1s ease-out', MozTransition: 'margin-right 0.1s ease-out', MsTransition: 'margin-right 0.1s ease-out', OTransition: 'margin-right 0.1s ease-out', transition: 'margin-right 0.1s ease-out'});
-        $('#channels').css({marginRight: '-270px;', WebkitTransition: 'margin-right 0.1s ease-out', MozTransition: 'margin-right 0.1s ease-out', MsTransition: 'margin-right 0.1s ease-out', OTransition: 'margin-right 0.1s ease-out', transition: 'margin-right 0.1s ease-out'});
-        $('#chats').css({marginLeft: '270px;', WebkitTransition: 'margin-left 0.1s ease-out', MozTransition: 'margin-left 0.1s ease-out', MsTransition: 'margin-left 0.1s ease-out', OTransition: 'margin-left 0.1s ease-out', transition: 'margin-left 0.1s ease-out'});
-        $('#information').css({marginLeft: '270px;', WebkitTransition: 'margin-left 0.1s ease-out', MozTransition: 'margin-left 0.1s ease-out', MsTransition: 'margin-left 0.1s ease-out', OTransition: 'margin-left 0.1s ease-out', transition: 'margin-left 0.1s ease-out'});
+        $('#header').animate({"margin-right":"-270px"}, 100);
+        $('#channels').animate({"margin-right":"-270px"}, 100);
+        $('#chats').animate({"margin-left":"270px"}, 100);
+        $('#information').animate({"margin-left":"270px"}, 100);
+
+        // $('#header').css({marginRight: '-270px;', WebkitTransition: 'margin-right 0.1s ease-out', MozTransition: 'margin-right 0.1s ease-out', MsTransition: 'margin-right 0.1s ease-out', OTransition: 'margin-right 0.1s ease-out', transition: 'margin-right 0.1s ease-out'});
+        // $('#channels').css({marginRight: '-270px;', WebkitTransition: 'margin-right 0.1s ease-out', MozTransition: 'margin-right 0.1s ease-out', MsTransition: 'margin-right 0.1s ease-out', OTransition: 'margin-right 0.1s ease-out', transition: 'margin-right 0.1s ease-out'});
+        // $('#chats').css({marginLeft: '270px;', WebkitTransition: 'margin-left 0.1s ease-out', MozTransition: 'margin-left 0.1s ease-out', MsTransition: 'margin-left 0.1s ease-out', OTransition: 'margin-left 0.1s ease-out', transition: 'margin-left 0.1s ease-out'});
+        // $('#information').css({marginLeft: '270px;', WebkitTransition: 'margin-left 0.1s ease-out', MozTransition: 'margin-left 0.1s ease-out', MsTransition: 'margin-left 0.1s ease-out', OTransition: 'margin-left 0.1s ease-out', transition: 'margin-left 0.1s ease-out'});
 
         // $("#user-page").animate({opacity: '1'}, 100);
       });
