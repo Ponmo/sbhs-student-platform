@@ -379,6 +379,7 @@
         $('#information').animate({"margin-right":"-270px"}, 30);
       });
 
+      
       $(document).on('click', '#open_members', function() {
         $('#members').animate({"margin-left":"-220px"}, 30);
         $('#chats').animate({"margin-left":"-220px"}, 30);
@@ -388,6 +389,14 @@
         $('#information').animate({"margin-right":"220px"}, 30);
         // $('#information').animate({"margin-right":"-270px"}, 100); Channels need to have grid change
       });
+      $(document).on('swiperight', '#chats', function() {
+        $('#members').animate({"margin-left":"-220px"}, 30);
+        $('#chats').animate({"margin-left":"-220px"}, 30);
+        $('#chats').animate({"margin-right":"220px"}, 30);
+        $('#information').animate({"margin-left":"-220px"}, 30);
+        $('#information').animate({"margin-right":"220px"}, 30);
+      });
+
 
       $(document).on('click', '#profile', function() {
         $('#user-page').css('display', 'block');
