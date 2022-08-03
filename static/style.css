@@ -1089,4 +1089,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   #home {
     display: none;
   }
+  #information {
+    grid-column: 2;
+  }
 }
