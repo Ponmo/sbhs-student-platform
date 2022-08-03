@@ -411,7 +411,7 @@
       let touchstartX = 0;
       let touchendX = 0;
       function checkDirection() {
-        if (touchendX < touchstartX && mobile_column == 1) {
+        if (touchendX < touchstartX && (mobile_column == 1 || mobile_column == 0)) {
           mobile_column = 2;
           $('#members').animate({"margin-left":"-220px"}, 30);
           $('#chats').animate({"margin-left":"-220px"}, 30);
