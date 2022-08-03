@@ -372,7 +372,7 @@
         // $('#content').css('grid-template-columns', '270px minmax(278px, auto) 0px');
         $('#header').css('margin-right', '-270px');
         $('#channels').css('margin-right', '-270px');
-        $('#chats').css('margin-right', '270px');
+        $('#chats').css('margin-left', '270px');
         // $('#content').css({gridTemplateColumns: '270px minmax(278px, auto) 0px;', WebkitTransition: 'grid-template-columns 1s ease-out', MozTransition: 'grid-template-columns 1s ease-out', MsTransition: 'grid-template-columns 1s ease-out', OTransition: 'grid-template-columns 1s ease-out', transition: 'grid-template-columns 1s ease-out'});
 
         // $("#user-page").animate({opacity: '1'}, 100);
@@ -1098,7 +1098,7 @@
 
       socket.on('deleted_space', function(data) {
         document.getElementById(current_space).parentNode.remove();
-        document.querySelector('.form-space[data-id = "' + current_space + '"]').remove();
+        document.querySelector('.form-space[data-id="' + current_space + '"]').remove();
         current_space = '';
         current_room = '';
         $('.active-space').attr('style', '');
@@ -1251,7 +1251,7 @@
         });
       }
 
-      function joinSpace() {
+      function joinSpace() { //Use Socket.io to add to members
         $.ajax({
           type: "POST",
           url: '/join_space',
