@@ -1238,36 +1238,37 @@
                 newNode.append(newNodeChildContainer);
                 document.getElementById('regular-channels').append(newNode);
               });
-              rooms_and_sections[0].forEach(function(room) {
-                if (room['section'] == 'special') {
-                  alert(JSON.stringify(room));
-                  var newNode = document.createElement('li');
-                  newNode.className = 'email special-room pointer';
-                  newNode.textContent = 'Email';
-                  newNode.setAttribute('data-name', room['name'])
-                  newNode.id = room['_id']['$oid'];
-                  document.getElementById('special-channels').append(newNode);
-                }
-              });
-
-              if (space_admin == true) {
-                $('.room-group').sortable({
-                  connectWith: '.room-group',
-                  axis: 'y',
-                  items: '.room',
-                  opacity: 0.7,
-                  scroll: false,
-                  distance: '3',
-                  update: function() {
-                    roomSort();
-                  }
-                });
-                $('#regular-channels').sortable('enable');
-              }
-              else {
-                $('#regular-channels').sortable('disable');
+            });
+            rooms_and_sections[0].forEach(function(room) {
+              if (room['section'] == 'special') {
+                alert(JSON.stringify(room));
+                var newNode = document.createElement('li');
+                newNode.className = 'email special-room pointer';
+                newNode.textContent = 'Email';
+                newNode.setAttribute('data-name', room['name'])
+                newNode.id = room['_id']['$oid'];
+                document.getElementById('special-channels').append(newNode);
               }
             });
+
+            if (space_admin == true) {
+              $('.room-group').sortable({
+                connectWith: '.room-group',
+                axis: 'y',
+                items: '.room',
+                opacity: 0.7,
+                scroll: false,
+                distance: '3',
+                update: function() {
+                  roomSort();
+                }
+              });
+              $('#regular-channels').sortable('enable');
+            }
+            else {
+              $('#regular-channels').sortable('disable');
+            }
+
             try { //get rid of try block after deleting all spaces without member list another method
               rooms_and_sections[2].forEach(function(member) {
                 newNode = document.createElement('div');
