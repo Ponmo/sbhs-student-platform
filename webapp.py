@@ -606,6 +606,10 @@ def sorted_rooms(data):
                 socketio.emit('sorted_rooms', data, room = room)
         order = 1
 
+@socketio.on('sent_email')
+def sent_email(data):
+    socketio.emit('sent_email', data, room = data['room_id'])
+
 def space_admin():
     if session['unique_id'] in collection_spaces.find_one({'_id': ObjectId(session['current_space'])})['admins']:
         return True
