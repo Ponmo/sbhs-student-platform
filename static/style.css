@@ -1098,7 +1098,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   #information {
     grid-column: 2;
   }
-  #mobile-touch-overlay {
+  #mobile_touch_overlay {
     position: absolute;
     z-index: 100000;
     height: calc(100vh - 50px);
