@@ -595,7 +595,7 @@
         $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
         $(document.getElementById(current_space)).attr('style', '');
         current_space = this.getAttribute('data-id');
-        var clicked_space = this;
+        let clicked_space = this;
         setTimeout(function() {
           clicked_space.firstChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = "Joined";
         }, 500)
@@ -681,7 +681,7 @@
         }
         if (document.getElementById('email_to_input').value != '') {
           document.getElementById('suggested_emails').style.display = 'block';
-          var hide = true;
+          let hide = true;
           const filter = document.getElementById("email_to_input").value.toUpperCase();
           document.querySelectorAll('.suggested_email').forEach(function(suggested_email) {
             //alert(suggested_email.textContent.toUpperCase());
@@ -770,8 +770,8 @@
       });
 
       $(document).on('click', '.edit-message', function() {
-        var message_id = this.parentNode.parentNode.id;
-        var message = this.parentNode.previousElementSibling.textContent;
+        let message_id = this.parentNode.parentNode.id;
+        let message = this.parentNode.previousElementSibling.textContent;
         $(this.parentNode.previousElementSibling).hide();
         $(this.parentNode.previousElementSibling).after('<form class="message_edit_input_form"><textarea class="message_edit" rows="1" placeholder="Remove message">' + message + '</textarea></form>');
         this.parentNode.previousElementSibling.firstChild.setAttribute("style", "height:" + (this.parentNode.previousElementSibling.firstChild.scrollHeight) + "px;overflow-y:hidden;");
@@ -816,7 +816,7 @@
       });
 
       $(document).on('click', '.delete-message', function() {
-        var message_id = this.parentNode.parentNode.id;
+        let message_id = this.parentNode.parentNode.id;
         $.ajax({
           type: 'POST',
           url: '/delete_message',
@@ -980,9 +980,9 @@
               document.getElementById("create-space").style.display = "none";
               $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
               $(document.getElementById(current_space)).attr('style', '');
-              var newNode = document.createElement('li');
+              let newNode = document.createElement('li');
               newNode.className = 'space-wrapper';
-              var newNodeChild = document.createElement('img');
+              let newNodeChild = document.createElement('img');
               newNodeChild.className = 'space pointer';
               newNodeChild.id = data.space_id;
               newNodeChild.setAttribute('data-name', space_name);
@@ -1003,7 +1003,7 @@
       }
 
       $(document).on('click', '#server-settings-button', function() {
-        var container = document.getElementById('space-settings-popup');
+        let container = document.getElementById('space-settings-popup');
         if (container.style.display == 'block') {
           container.style.display = 'none';
           // document.addEventListener('click', removePopup(), {once: true});
@@ -1052,7 +1052,7 @@
         })
       });
 
-      var createSpaceModal = document.getElementById("create-space");
+      let createSpaceModal = document.getElementById("create-space");
       $(document).on('click', '#create-space-button', function() {
         createSpaceModal.style.display = "block";
       });
@@ -1061,7 +1061,7 @@
         createSpaceModal.style.display = "none";
       });
 
-      var createRoomModal = document.getElementById("create-room");
+      let createRoomModal = document.getElementById("create-room");
       $(document).on('click', '.create-room-button', function() {
         createRoomModal.style.display = "block";
       });
@@ -1070,7 +1070,7 @@
         createRoomModal.style.display = "none";
       });
 
-      var createSectionModal = document.getElementById("create-section");
+      let createSectionModal = document.getElementById("create-section");
       $(document).on('click', '#create-section-button', function() {
         createSectionModal.style.display = "block";
       });
@@ -1079,7 +1079,7 @@
         createSectionModal.style.display = "none";
       });
 
-      var spaceSettingsPopup = document.getElementById('space-settings-popup'); 
+      let spaceSettingsPopup = document.getElementById('space-settings-popup'); 
       window.onclick = function(event) {
         if (event.target == createRoomModal) {
           createRoomModal.style.display = "none";
@@ -1129,7 +1129,7 @@
 
       socket.on('recieve_message', function (data) {
         const newMode = document.createElement('div');
-        var messageMoment = moment(data.datetime).local().format('h:mm A');
+        let messageMoment = moment(data.datetime).local().format('h:mm A');
         if (data.combine == 'false') {
           newMode.className = 'message-container';
           newMode.id = data.message_id;
@@ -1201,9 +1201,9 @@
       });
       
       socket.on('created_section', function(data) {
-        var newNode = document.createElement('ul');
+        let newNode = document.createElement('ul');
         newNode.className = 'section-group';
-        var newNodeChild = document.createElement('li');
+        let newNodeChild = document.createElement('li');
         newNodeChild.className = 'section pointer';
         newNodeChild.id = data.section_id;
         newNodeChild.innerHTML = '<div class="section-name">' + data.name + '</div><div class="create-room-button" type="button">+</div>'
@@ -1229,11 +1229,11 @@
 
       socket.on('deleted_section', function(data) {
         alert(data.section_id);
-        var deleted_section = document.getElementById(data.section_id);
+        let deleted_section = document.getElementById(data.section_id);
         const first_section = document.querySelector('.section:not([id="' + data.section_id + '"])');//:not([id*="' + data.section_id + '"])');
-        var rooms = deleted_section.nextElementSibling.children
+        let rooms = deleted_section.nextElementSibling.children
         const room_length = rooms.length;
-        for (var i = 0; i < room_length; i++) {
+        for (let i = 0; i < room_length; i++) {
           first_section.nextElementSibling.appendChild(rooms[0]);
         }
         deleted_section.parentElement.remove();
@@ -1252,20 +1252,20 @@
 
       socket.on('deleted_message', function (data) {
         try {
-          var class_name = document.getElementById(data['message_id']).className;
+          let class_name = document.getElementById(data['message_id']).className;
           if ($('#' + data['message_id']).next().length != 0) {
             if (class_name == "message-container" && document.getElementById(data['message_id']).nextElementSibling.className == "message-container-combine") {
-              var new_message_text = document.getElementById(data['message_id']).nextElementSibling.firstChild.nextElementSibling.textContent;
+              let new_message_text = document.getElementById(data['message_id']).nextElementSibling.firstChild.nextElementSibling.textContent;
               document.getElementById(data['message_id']).firstChild.nextElementSibling.nextElementSibling.textContent = new_message_text;
               if (document.getElementById(data['message_id']).firstChild.nextElementSibling.nextElementSibling.textContent.includes('Yesterday')) {
-                var new_message_time = document.getElementById(data['message_id']).nextElementSibling.firstChild.textContent; 
+                let new_message_time = document.getElementById(data['message_id']).nextElementSibling.firstChild.textContent; 
                 document.getElementById(data['message_id']).firstChild.nextElementSibling.firstChild.nextElementSibling.textContent = 'Yesterday at ' + new_message_time;
               } else if (document.getElementById(data['message_id']).firstChild.nextElementSibling.textContent.includes('/')){
-                var new_message_date = document.getElementById(data['message_id']).nextElementSibling.getAttribute("data-date");
+                let new_message_date = document.getElementById(data['message_id']).nextElementSibling.getAttribute("data-date");
                 document.getElementById(data['message_id']).firstChild.nextElementSibling.firstChild.nextElementSibling.textContent = new_message_date;
               }
               else {
-                var new_message_time = document.getElementById(data['message_id']).nextElementSibling.firstChild.textContent; 
+                let new_message_time = document.getElementById(data['message_id']).nextElementSibling.firstChild.textContent; 
                 document.getElementById(data['message_id']).firstChild.nextElementSibling.firstChild.nextElementSibling.textContent = 'at ' + new_message_time;
               }
               document.getElementById(data['message_id']).nextElementSibling.remove();
@@ -1288,7 +1288,7 @@
       });
 
       socket.on('joined_space', function (data) {
-        var newNode = document.createElement('div');
+        let newNode = document.createElement('div');
         newNode.className = 'member pointer';
         newNode.setAttribute('data-id', member['_id']);
         newNode.innerHTML = '<img class="profile-picture" src="' + member['picture'] + '" alt="!"><span class="member-name">' + member['name'] + '</span>';
@@ -1312,7 +1312,7 @@
             window.history.pushState('', '', '/sbhs/' + current_space);
             if (rooms_and_sections[3][0].admins[0] == user_id) {
               space_admin = true;
-              var red_space_button = document.getElementsByClassName('red-space-button')[0];
+              let red_space_button = document.getElementsByClassName('red-space-button')[0];
               red_space_button.id = 'delete-space';
               red_space_button.textContent = 'Delete Space';
               $('#create-section-button').show();
@@ -1320,7 +1320,7 @@
             }
             else {
               space_admin = false;
-              var red_space_button = document.getElementsByClassName('red-space-button')[0];
+              let red_space_button = document.getElementsByClassName('red-space-button')[0];
               red_space_button.id = 'leave-space';
               red_space_button.textContent = 'Leave Space';
               $('#create-section-button').hide();
@@ -1335,7 +1335,7 @@
             rooms_and_sections[1].forEach(function(section) {
               newNode = document.createElement('ul');
               newNode.className = 'section-group'
-              var newNodeChild = document.createElement('li');
+              let newNodeChild = document.createElement('li');
               newNodeChild.className = 'section pointer';
               newNodeChild.id = section['_id']['$oid'];
               if (space_admin == true) {
@@ -1345,7 +1345,7 @@
                 newNodeChild.innerHTML = '<div class="section-name">' + section['name'] + '</div>';
               }
               newNode.append(newNodeChild);
-              var newNodeChildContainer = document.createElement('ul');
+              let newNodeChildContainer = document.createElement('ul');
               newNodeChildContainer.className = 'room-group';
               rooms_and_sections[0].forEach(function(room) {  //remove already used rooms from room_and_sections[0] to improve efficiency?
                 if (room['section'] == section['_id']['$oid']) {
@@ -1368,7 +1368,7 @@
             });
             rooms_and_sections[0].forEach(function(room) {
               if (room['section'] == 'special') {
-                var newNode = document.createElement('li');
+                let newNode = document.createElement('li');
                 newNode.className = 'email special-room pointer';
                 newNode.textContent = 'Email';
                 newNode.setAttribute('data-name', room['name'])
@@ -1433,9 +1433,9 @@
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
             if(!data['members'].some(row => row.includes(user_id))) {
-              var newNode = document.createElement('li');
+              let newNode = document.createElement('li');
               newNode.className = 'space-wrapper';
-              var newNodeChild = document.createElement('img');
+              let newNodeChild = document.createElement('img');
               newNodeChild.className = 'space pointer';
               newNodeChild.id = data['_id']['$oid'];
               newNodeChild.style.borderRadius = '3px';
@@ -1502,11 +1502,11 @@
               document.getElementById('messages').textContent = '';
             }
             chat_history_skip += 100;
-            var todayDate = moment();
-            var yesterdayDate = moment().subtract(1, 'day');
-            var timeDisplayMode = 0;
+            let todayDate = moment();
+            let yesterdayDate = moment().subtract(1, 'day');
+            let timeDisplayMode = 0;
             chat_history.forEach(function(item) {
-              var messageDate = moment(item.datetime);
+              let messageDate = moment(item.datetime);
               const newMode = document.createElement('div');
               if (item.combine == 'false') {
                 newMode.className = 'message-container';
@@ -1554,11 +1554,11 @@
           contentType: 'application/json;charset=UTF-8',
           success: function(email_history) {
             chat_history_skip += 100;
-            var todayDate = moment();
-            var yesterdayDate = moment().subtract(1, 'day');
-            var timeDisplayMode = 0;
+            let todayDate = moment();
+            let yesterdayDate = moment().subtract(1, 'day');
+            let timeDisplayMode = 0;
             email_history.forEach(function(item) {
-              var emailDate = moment(item.datetime);
+              let emailDate = moment(item.datetime);
               const newMode = document.createElement('div');
               newMode.className = 'message-container';
               newMode.id = item._id.$oid;
@@ -1580,8 +1580,8 @@
       }
 
       function roomSort() {
-        var room_group = document.querySelectorAll('.room-group');
-        var room_group_list = [];
+        let room_group = document.querySelectorAll('.room-group');
+        let room_group_list = [];
         for (let i = 0; i < room_group.length; i++) {
           let rooms = room_group[i].querySelectorAll('.room');
           let room_list = [room_group[i].previousElementSibling.id];
@@ -1596,7 +1596,7 @@
       }
 
       function roomList() {
-        var room_list = [];
+        let room_list = [];
         document.querySelectorAll(".room").forEach(function(item) {
           room_list.push(item.id);
         });
