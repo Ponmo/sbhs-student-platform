@@ -220,8 +220,8 @@
         items: '.section-group',
         distance: '3',
         update: function() {
-          var sections = document.querySelectorAll(".section");
-          var section_list = [];
+          let sections = document.querySelectorAll(".section");
+          let section_list = [];
           for (let i = 0; i < sections.length; i++) {
             section_list.push(sections[i].id);
           }
@@ -239,8 +239,8 @@
         scroll: false,
         distance: '3',
         update: function() {
-          var spaces = document.querySelectorAll('.space');
-          var space_list = [];
+          let spaces = document.querySelectorAll('.space');
+          let space_list = [];
           for (let i = 0; i < spaces.length; i++) {
             space_list.push(spaces[i].id);
           }
@@ -260,9 +260,9 @@
         success: function(data) {
           data[1].forEach(function(item) { 
             try {
-              var newNode = document.createElement('li'); 
+              let newNode = document.createElement('li'); 
               newNode.className = 'space-wrapper';
-              var newNodeChild = document.createElement('img'); 
+              let newNodeChild = document.createElement('img'); 
               newNodeChild.className = 'space pointer';
               newNodeChild.id = item._id.$oid;
               newNodeChild.setAttribute('data-name', item.name);
@@ -316,10 +316,10 @@
       $(document).on('click', function(e) {
         //// If you input: "&& profile_popup.has(e.target).length === 0)"" it makes it so clicking on a child will not remove it
         // hide contextmenu on popup and viceversa
-        var container = $("#space-settings-popup");
-        var profile_popup = $("#profile-popup");
-        var section_menu = $('#section-menu');
-        var room_menu = $('#room-menu');
+        let container = $("#space-settings-popup");
+        let profile_popup = $("#profile-popup");
+        let section_menu = $('#section-menu');
+        let room_menu = $('#room-menu');
         // For container and context_menu, check if it exists as well.
         if (!room_menu.is(e.target)) 
         {
@@ -378,12 +378,12 @@
       $(document).on('click', '#open_channels', function() {
         if (mobile_column == 1) {
           mobile_column = 0;
-          $('#header').animate({"margin-right":"-270px"}, 30);
-          $('#channels').animate({"margin-right":"-270px"}, 30);
-          $('#chats').animate({"margin-left":"270px"}, 30);
-          $('#information').animate({"margin-left":"270px"}, 30);
-          $('#chats').animate({"margin-right":"-270px"}, 30);
-          $('#information').animate({"margin-right":"-270px"}, 30);
+          $('#header').animate({"margin-right":"-270px"}, 50);
+          $('#channels').animate({"margin-right":"-270px"}, 50);
+          $('#chats').animate({"margin-left":"270px"}, 50);
+          $('#information').animate({"margin-left":"270px"}, 50);
+          $('#chats').animate({"margin-right":"-270px"}, 50);
+          $('#information').animate({"margin-right":"-270px"}, 50);
         }
       });
 
@@ -391,12 +391,12 @@
       $(document).on('click', '#open_members', function() {
         if (mobile_column == 1) {
           mobile_column = 2;
-          $('#members').animate({"margin-left":"-220px"}, 30);
-          $('#chats').animate({"margin-left":"-220px"}, 30);
-          $('#chats').animate({"margin-right":"220px"}, 30);
+          $('#members').animate({"margin-left":"-220px"}, 50);
+          $('#chats').animate({"margin-left":"-220px"}, 50);
+          $('#chats').animate({"margin-right":"220px"}, 50);
           /* Maybe not needed (Lag?): */
-          $('#information').animate({"margin-left":"-220px"}, 30);
-          $('#information').animate({"margin-right":"220px"}, 30);
+          $('#information').animate({"margin-left":"-220px"}, 50);
+          $('#information').animate({"margin-right":"220px"}, 50);
         }
       });
 
@@ -412,20 +412,20 @@
         if ((touchstartX - touchendX) > 80  && (mobile_column != 2)) {
           if (mobile_column == 1) {
             mobile_column = 2;
-            $('#members').animate({"margin-left":"-220px"}, 40);
-            $('#chats').animate({"margin-left":"-220px"}, 40);
-            $('#chats').animate({"margin-right":"220px"}, 40);
-            $('#information').animate({"margin-left":"-220px"}, 40);
-            $('#information').animate({"margin-right":"220px"}, 40);
+            $('#members').animate({"margin-left":"-220px"}, 50);
+            $('#chats').animate({"margin-left":"-220px"}, 50);
+            $('#chats').animate({"margin-right":"220px"}, 50);
+            $('#information').animate({"margin-left":"-220px"}, 50);
+            $('#information').animate({"margin-right":"220px"}, 50);
           }
           else if (mobile_column == 0) {
             mobile_column = 1;
-            $('#header').animate({"margin-right":"0px"}, 40);
-            $('#channels').animate({"margin-right":"0px"}, 40);
-            $('#chats').animate({"margin-left":"0px"}, 40);
-            $('#information').animate({"margin-left":"0px"}, 40);
-            $('#chats').animate({"margin-right":"0px"}, 40);
-            $('#information').animate({"margin-right":"0px"}, 40);
+            $('#header').animate({"margin-right":"0px"}, 50);
+            $('#channels').animate({"margin-right":"0px"}, 50);
+            $('#chats').animate({"margin-left":"0px"}, 50);
+            $('#information').animate({"margin-left":"0px"}, 50);
+            $('#chats').animate({"margin-right":"0px"}, 50);
+            $('#information').animate({"margin-right":"0px"}, 50);
           }
         }
         
