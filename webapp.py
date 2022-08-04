@@ -534,8 +534,8 @@ def send_message(data):
 
 @socketio.on('created_room')
 def created_room(data):
-    #for room in data['room_list']: #plug list
-    socketio.emit('created_room', data, namespace='/' + session['current_space'])#, room = room)
+    for room in data['room_list']: #plug list
+        socketio.emit('created_room', data, room = room)
 
 # When a room is deleted, send that room data to all
 # users in the space.
