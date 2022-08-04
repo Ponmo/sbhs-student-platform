@@ -209,6 +209,7 @@
       var user_id = '{{ user_id }}';
       var selected_user = '';
       var mobile_column = 1;
+      var mobile = ($(window).width <= 768);
       
       $("#regular-channels").sortable({
         axis: 'y',
@@ -468,6 +469,26 @@
         })
       });
 
+      $(window).resize(function() {
+        if ($(window).width() > 768 && mobile) {
+          mobile_column = 1;
+          $('#header').animate({"margin-right":"0px"}, 30);
+          $('#channels').animate({"margin-right":"0px"}, 30);
+          $('#chats').animate({"margin-left":"0px"}, 30);
+          $('#information').animate({"margin-left":"0px"}, 30);
+          $('#chats').animate({"margin-right":"0px"}, 30);
+          $('#information').animate({"margin-right":"0px"}, 30);
+          $('#members').animate({"margin-left":"0px"}, 30);
+          $('#chats').animate({"margin-left":"0px"}, 30);
+          $('#chats').animate({"margin-right":"0px"}, 30);
+          $('#information').animate({"margin-left":"0px"}, 30);
+          $('#information').animate({"margin-right":"0px"}, 30);
+          mobile = false;
+        }
+        else {
+          mobile = true;
+        }
+      });
       
       $(document).on('click', '#close-user-page', function() {
         $("#user-page").animate({opacity: '0'}, 100);
