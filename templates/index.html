@@ -1268,6 +1268,7 @@
                 let new_message_time = document.getElementById(data['message_id']).nextElementSibling.firstChild.textContent; 
                 document.getElementById(data['message_id']).firstChild.nextElementSibling.firstChild.nextElementSibling.textContent = 'at ' + new_message_time;
               }
+              document.getElementById(data['message_id']).id  = document.getElementById(data['message_id']).nextElementSibling.id 
               document.getElementById(data['message_id']).nextElementSibling.remove();
             } else {
               document.getElementById(data['message_id']).remove();
