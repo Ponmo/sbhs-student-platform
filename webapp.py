@@ -534,8 +534,6 @@ def send_message(data):
 
 @socketio.on('created_room')
 def created_room(data):
-    socketio.emit('created_room', data, room = '2948uihe9349')
-    
     #for room in data['room_list']: #plug list
     socketio.emit('created_room', data)#, room = room)
 
