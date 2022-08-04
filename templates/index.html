@@ -209,6 +209,7 @@
       var space_admin = false;
       var user_id = '{{ user_id }}';
       var selected_user = '';
+      var add_to_members = false;
       var mobile_column = 1;
       var mobile = ($(window).width <= 768);
       
@@ -1361,8 +1362,12 @@
                 document.getElementById('special-channels').append(newNode);
               }
             });
-
-            if (space_admin == true) {
+            if (add_to_members) {
+              socket.emit('joined_space', {
+                room_list: roomList()
+              });
+            }
+            if (space_admin) {
               $('.room-group').sortable({
                 connectWith: '.room-group',
                 axis: 'y',
@@ -1379,21 +1384,21 @@
             else {
               $('#regular-channels').sortable('disable');
             }
-            try { //get rid of try block after deleting all spaces without member list another method
-              rooms_and_sections[2].forEach(function(member) {
-                newNode = document.createElement('div');
-                newNode.className = 'member pointer';
-                newNode.setAttribute('data-id', member['_id']);
-                newNode.innerHTML = '<img class="profile-picture" src="' + member['picture'] + '" alt="!"><span class="member-name">' + member['name'] + '</span>';
-                document.getElementById('members').append(newNode);
+            //try { //get rid of try block after deleting all spaces without member list another method
+            rooms_and_sections[2].forEach(function(member) {
+              newNode = document.createElement('div');
+              newNode.className = 'member pointer';
+              newNode.setAttribute('data-id', member['_id']);
+              newNode.innerHTML = '<img class="profile-picture" src="' + member['picture'] + '" alt="!"><span class="member-name">' + member['name'] + '</span>';
+              document.getElementById('members').append(newNode);
 
-                newNode = document.createElement('div');
-                newNode.className = 'suggested_email suggested_email_individual pointer';
-                newNode.setAttribute('data-email', member['email']);
-                newNode.innerHTML = '<img class="profile-picture" src="' + member['picture'] + '">' + member['name'] + ' (' + member['email'] + ')'
-                document.getElementById('suggested_emails').append(newNode);
-              });
-            }
+              newNode = document.createElement('div');
+              newNode.className = 'suggested_email suggested_email_individual pointer';
+              newNode.setAttribute('data-email', member['email']);
+              newNode.innerHTML = '<img class="profile-picture" src="' + member['picture'] + '">' + member['name'] + ' (' + member['email'] + ')'
+              document.getElementById('suggested_emails').append(newNode);
+            });
+            //}
             catch(error) {
               console.error(error);
             }
@@ -1429,10 +1434,8 @@
               newNode.appendChild(newNodeChild);
               referenceNode = document.getElementById('space_align_helper');
               referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+              add_to_members = true;
               space();
-              socket.emit('joined_space', {
-
-              });
             }
             else {
               $('#' + current_space).css('border-radius', '3px');
