@@ -1291,14 +1291,14 @@
         alert('2');
         let newNode = document.createElement('div');
         newNode.className = 'member pointer';
-        newNode.setAttribute('data-id', member['_id']);
-        newNode.innerHTML = '<img class="profile-picture" src="' + member['picture'] + '" alt="!"><span class="member-name">' + member['name'] + '</span>';
+        newNode.setAttribute('data-id', data['_id']);
+        newNode.innerHTML = '<img class="profile-picture" src="' + data['picture'] + '" alt="!"><span class="member-name">' + data['name'] + '</span>';
         document.getElementById('members').append(newNode);
 
         newNode = document.createElement('div');
         newNode.className = 'suggested_email suggested_email_individual pointer';
-        newNode.setAttribute('data-email', member['email']);
-        newNode.innerHTML = '<img class="profile-picture" src="' + member['picture'] + '">' + member['name'] + ' (' + member['email'] + ')'
+        newNode.setAttribute('data-email', data['email']);
+        newNode.innerHTML = '<img class="profile-picture" src="' + data['picture'] + '">' + data['name'] + ' (' + data['email'] + ')'
         document.getElementById('suggested_emails').append(newNode);
       });
 
