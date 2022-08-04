@@ -403,10 +403,11 @@
       /* Can create general functions for animating members and channels div in combo with buttons*/
       /* Set Chat width to whatever it is before to prevent glitch, and set a background div to members to prevent white glitch? */
       /* IMPORTANT TODO: if statement (for touchscreen with widths bigger than 768) that prevents desktop or swipe*/
+      /* If width of device is greater than height (ipads), then landscape orient it */
       let touchstartX = 0;
       let touchendX = 0;
       function checkDirection() {
-        if ((touchstartX - touchendX) > 80  && (mobile_column != 2)) {
+        if ((touchstartX - touchendX) > 80  && (mobile_column != 2) && mobile) {
           if (mobile_column == 1) {
             mobile_column = 2;
             $('#members').animate({"margin-left":"-220px"}, 30);
@@ -426,7 +427,7 @@
           }
         }
         
-        if ((touchendX - touchstartX) > 80 && (mobile_column != 0)) {
+        if ((touchendX - touchstartX) > 80 && (mobile_column != 0) && mobile) {
           if (mobile_column == 1) {
             mobile_column = 0;
             $('#header').animate({"margin-right":"-270px"}, 30);
@@ -624,11 +625,6 @@
       });
       
       document.getElementById('message_input_form').onsubmit = function (e) {
-        alert(yourWsObject.readyState === WebSocket.OPEN);
-        //if(socket.readyState === socket.OPEN)
-        //{
-
-        //}
         e.preventDefault();
         let message = message_input.value.trim();
         document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight; 
