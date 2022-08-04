@@ -121,6 +121,20 @@
           </div>
           <div id="members">
           </div>
+          <div id="footer">
+            <div id="profile">
+              <!-- load exclamation mark icon if not showing -->
+              <img src={{ picture }} alt="pfp" class="profile-picture pointer">
+              <p id="username" class="pointer">{{ name }}</p>
+              <p id="student_id" class="pointer">Santa Barbara High School</p>
+              <img class="pointer" id="settings" src="/static/images/settings-white.png">
+            </div>
+            <ul id="spaces">
+              <span id="space_align_helper"></span>
+                <button type="button" id="create-space-button"><img src="/static/images/ppicons-plus.svg" alt="create" style="width:25px;height:25px;"></button>
+                <button type="button" id="space-search-button"><img src="/static/images/temporary-search.png" alt="create" style="width:25px;height:25px;"></button>
+            </ul>
+          </div>
         </div>
       </div>
 
@@ -128,21 +142,6 @@
         <div id="exit-space-settings">Temporary Exit</div>
       </div>
 
-      <div id="footer">
-        <div id="profile">
-          <!-- load exclamation mark icon if not showing -->
-          <img src={{ picture }} alt="pfp" class="profile-picture pointer">
-          <p id="username" class="pointer">{{ name }}</p>
-          <p id="student_id" class="pointer">Santa Barbara High School</p>
-          <img class="pointer" id="settings" src="/static/images/settings-white.png">
-        </div>
-        <ul id="spaces">
-          <span id="space_align_helper"></span>
-            <button type="button" id="create-space-button"><img src="/static/images/ppicons-plus.svg" alt="create" style="width:25px;height:25px;"></button>
-            <button type="button" id="space-search-button"><img src="/static/images/temporary-search.png" alt="create" style="width:25px;height:25px;"></button>
-          </div>
-        </ul>
-      </div>
 
     <div id="create-space" class="modal">
       <div class="modal-content">
