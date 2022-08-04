@@ -472,17 +472,17 @@
       $(window).resize(function() {
         if ($(window).width() > 768 && mobile) {
           mobile_column = 1;
-          $('#header').animate({"margin-right":"0px"}, 30);
-          $('#channels').animate({"margin-right":"0px"}, 30);
-          $('#chats').animate({"margin-left":"0px"}, 30);
-          $('#information').animate({"margin-left":"0px"}, 30);
-          $('#chats').animate({"margin-right":"0px"}, 30);
-          $('#information').animate({"margin-right":"0px"}, 30);
-          $('#members').animate({"margin-left":"0px"}, 30);
-          $('#chats').animate({"margin-left":"0px"}, 30);
-          $('#chats').animate({"margin-right":"0px"}, 30);
-          $('#information').animate({"margin-left":"0px"}, 30);
-          $('#information').animate({"margin-right":"0px"}, 30);
+          $('#header').css("margin-right", "0px");
+          $('#channels').css("margin-right", "0px");
+          $('#chats').css("margin-left", "0px");
+          $('#information').css("margin-left", "0px");
+          $('#chats').css("margin-right", "0px");
+          $('#information').css("margin-right", "0px");
+          $('#members').css("margin-left", "0px");
+          $('#chats').css("margin-left", "0px");
+          $('#chats').css("margin-right", "0px");
+          $('#information').css("margin-left", "0px");
+          $('#information').css("margin-right", "0px");
           mobile = false;
         }
         else {
