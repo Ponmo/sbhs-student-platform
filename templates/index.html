@@ -1288,9 +1288,17 @@
       });
 
       socket.on('joined_space', function (data) {
-        chat_history_skip = 0;
-        document.getElementById('messages').textContent = '';
-        loadEmailHistory();
+        var newNode = document.createElement('div');
+        newNode.className = 'member pointer';
+        newNode.setAttribute('data-id', member['_id']);
+        newNode.innerHTML = '<img class="profile-picture" src="' + member['picture'] + '" alt="!"><span class="member-name">' + member['name'] + '</span>';
+        document.getElementById('members').append(newNode);
+
+        newNode = document.createElement('div');
+        newNode.className = 'suggested_email suggested_email_individual pointer';
+        newNode.setAttribute('data-email', member['email']);
+        newNode.innerHTML = '<img class="profile-picture" src="' + member['picture'] + '">' + member['name'] + ' (' + member['email'] + ')'
+        document.getElementById('suggested_emails').append(newNode);
       });
 
       function space() {
