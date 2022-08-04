@@ -536,8 +536,8 @@ def send_message(data):
 def created_room(data):
     socketio.emit('created_room', data, room = '2948uihe9349')
     
-    for room in data['room_list']: #plug list
-    	socketio.emit('created_room', data, room = room)
+    #for room in data['room_list']: #plug list
+    socketio.emit('created_room', data)#, room = room)
 
 # When a room is deleted, send that room data to all
 # users in the space.
@@ -609,6 +609,10 @@ def sorted_rooms(data):
 @socketio.on('sent_email')
 def sent_email(data):
     socketio.emit('sent_email', data, room = data['room_id'])
+
+@socketio.on('joined_space')
+def joined_space(data):
+    socketio.emit('joined_space', data, room = data['room_id'])
 
 def space_admin():
     if session['unique_id'] in collection_spaces.find_one({'_id': ObjectId(session['current_space'])})['admins']:

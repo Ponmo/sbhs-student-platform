@@ -2,10 +2,10 @@
 html {
   overflow: hidden;
   height: 100%;
+  padding-bottom: calc(1em + env(safe-area-inset-bottom));
 }
 body {
   overscroll-behavior-y: none;
-  padding-bottom: env(safe-area-inset-bottom, 40px);
 }
 /* flex and width: 100% - 290px*/
 img { /* make images and create button undraggable and unhighlitable*/
