@@ -402,7 +402,7 @@
       /* Does not work for laptops or computers, need to check compatibility with wider-screen tablets */
       /* Can create general functions for animating members and channels div in combo with buttons*/
       /* Set Chat width to whatever it is before to prevent glitch, and set a background div to members to prevent white glitch? */
-      /* IMPORTANTif statement to */
+      /* IMPORTANT TODO: if statement (for touchscreen with widths bigger than 768) that prevents desktop or swipe*/
       let touchstartX = 0;
       let touchendX = 0;
       function checkDirection() {
@@ -624,7 +624,7 @@
       });
       
       document.getElementById('message_input_form').onsubmit = function (e) {
-        alert(socket.readyState);
+        alert(yourWsObject.readyState === WebSocket.OPEN);
         //if(socket.readyState === socket.OPEN)
         //{
 
