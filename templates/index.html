@@ -1287,6 +1287,12 @@
         loadEmailHistory();
       });
 
+      socket.on('joined_space', function (data) {
+        chat_history_skip = 0;
+        document.getElementById('messages').textContent = '';
+        loadEmailHistory();
+      });
+
       function space() {
         $.ajax({
           type: "POST",
@@ -1399,9 +1405,9 @@
               document.getElementById('suggested_emails').append(newNode);
             });
             //}
-            catch(error) {
-              console.error(error);
-            }
+            //catch(error) {
+             // console.error(error);
+            //}
             joinRoom(document.querySelector('.room').id);
             $('#home-page').css('display', 'none');
             $('#first-all').css('display', 'block');
