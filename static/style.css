@@ -748,7 +748,9 @@ img { /* make images and create button undraggable and unhighlitable*/
   display: none;
 }
 #footer {
-  /* position: fixed; */
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-bottom: constant(safe-area-inset-bottom);
+  position: fixed;
   display: flex;
   align-items: center;
   bottom: 0;
