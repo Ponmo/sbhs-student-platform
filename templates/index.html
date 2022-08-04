@@ -1288,6 +1288,7 @@
       });
 
       socket.on('joined_space', function (data) {
+        alert('2');
         let newNode = document.createElement('div');
         newNode.className = 'member pointer';
         newNode.setAttribute('data-id', member['_id']);
@@ -1376,11 +1377,6 @@
                 document.getElementById('special-channels').append(newNode);
               }
             });
-            if (add_to_members) {
-              socket.emit('joined_space', {
-                room_list: roomList()
-              });
-            }
             if (space_admin) {
               $('.room-group').sortable({
                 connectWith: '.room-group',
@@ -1412,10 +1408,13 @@
               newNode.innerHTML = '<img class="profile-picture" src="' + member['picture'] + '">' + member['name'] + ' (' + member['email'] + ')'
               document.getElementById('suggested_emails').append(newNode);
             });
-            //}
-            //catch(error) {
-             // console.error(error);
-            //}
+            if (add_to_members) {
+              alert('1');
+              socket.emit('joined_space', {
+                room_list: roomList()
+              });
+              add_to_members = false;
+            }
             joinRoom(document.querySelector('.room').id);
             $('#home-page').css('display', 'none');
             $('#first-all').css('display', 'block');
