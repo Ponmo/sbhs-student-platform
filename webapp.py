@@ -610,7 +610,9 @@ def sent_email(data):
 
 @socketio.on('joined_space')
 def joined_space(data):
-    socketio.emit('joined_space', data, room = data['room_id'])
+    user = collection_users.find_one({'_id': session['unique_id']})
+    for room in data['room_list']:
+        socketio.emit('joined_space', user, room = room)# include_self=False)
 
 def space_admin():
     if session['unique_id'] in collection_spaces.find_one({'_id': ObjectId(session['current_space'])})['admins']:
