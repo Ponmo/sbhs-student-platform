@@ -1048,32 +1048,10 @@ img { /* make images and create button undraggable and unhighlitable*/
 .tooltip {
   pointer-events: none; /*needs this*/
 }
-/* .tooltip {
-  position: relative;
-  display: inline-block;
-  border-bottom: 1px dotted black;
+#mobile_overlay {
+  display: none;
 }
 
-.tooltip .tooltiptext {
-  visibility: hidden;
-  width: 120px;
-  background-color: rgb(255, 0, 0);
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-  
-  /* Position the tooltip */
-  /* position: absolute;
-  z-index: 1;
-  bottom: 100%;
-  left: 50%;
-  margin-left: -60px;
-} */
-
-/* .tooltip:hover .tooltiptext {
-  visibility: visible;
-} */ 
 /*Add User Select None Class*/
 
 /* Mobile Media Query */
@@ -1119,5 +1097,15 @@ img { /* make images and create button undraggable and unhighlitable*/
   }
   #information {
     grid-column: 2;
+  }
+  #mobile-touch-overlay {
+    position: absolute;
+    display: block;
+    z-index: 100000;
+    width: calc(100vw - 220px);
+    height: calc(100vh - 50px);
+    background-color: black;
+    opacity: 0.5;
+    left: 270px;
   }
 }
