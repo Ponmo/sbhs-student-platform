@@ -821,7 +821,7 @@
           type: 'POST',
           url: '/delete_message',
           dataType: 'json',
-          data: JSON.stringify({'message_id': message_id}),
+          data: JSON.stringify({'message_id': message_id, 'room_id': current_room}),
           contentType: 'application/json;charset=UTF-8',
           success: function (delete_message){
             socket.emit('deleted_message', {'message_id': message_id, 'room_id': current_room});

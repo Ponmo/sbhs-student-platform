@@ -5,6 +5,7 @@ html {
 }
 body {
   overscroll-behavior-y: none;
+  scroll-boundary-behavior: none;
 }
 /* flex and width: 100% - 290px*/
 img { /* make images and create button undraggable and unhighlitable*/
