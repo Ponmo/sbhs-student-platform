@@ -2,7 +2,6 @@
 html {
   overflow: hidden;
   height: 100%;
-  padding-bottom: calc(1em + env(safe-area-inset-bottom));
 }
 body {
   overscroll-behavior-y: none;
@@ -138,7 +137,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   display: grid;
   /* grid-template-rows: 48px calc(100vh - 98px); */
   grid-template-rows: 48px calc(100% - 98px) 50px;
-  
+  padding-bottom: calc(1em + env(safe-area-inset-bottom));
   grid-template-columns: 270px minmax(278px, auto) 220px;
   height: 100vh;
   width: 100vw;
