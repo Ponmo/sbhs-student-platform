@@ -1048,7 +1048,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 .tooltip {
   pointer-events: none; /*needs this*/
 }
-#mobile_overlay {
+#mobile_touch_overlay {
   display: none;
 }
 
@@ -1100,12 +1100,9 @@ img { /* make images and create button undraggable and unhighlitable*/
   }
   #mobile-touch-overlay {
     position: absolute;
-    display: block;
     z-index: 100000;
-    width: calc(100vw - 220px);
     height: calc(100vh - 50px);
     background-color: black;
     opacity: 0.5;
-    left: 270px;
   }
 }

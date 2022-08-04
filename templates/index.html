@@ -62,7 +62,7 @@
 
     <!--Spaces Page-->
       <div id="first-all">
-        <div id="mobile_overlay" class="pointer"></div>
+        <div id="mobile_touch_overlay" class="pointer"></div>
         <div id="content">
           <div id="header">
             <span id="header_text"></span>
@@ -418,6 +418,9 @@
             $('#chats').animate({"margin-right":"220px"}, 50);
             $('#information').animate({"margin-left":"-220px"}, 50);
             $('#information').animate({"margin-right":"220px"}, 50);
+            $('#mobile_touch_overlay').css("display", "block");
+            $('#mobile_touch_overlay').css("left", "0px");
+            $('#mobile_touch_overlay').css("width", "calc(100vw - 220px)");
           }
           else if (mobile_column == 0) {
             mobile_column = 1;
@@ -427,6 +430,7 @@
             $('#information').animate({"margin-left":"0px"}, 50);
             $('#chats').animate({"margin-right":"0px"}, 50);
             $('#information').animate({"margin-right":"0px"}, 50);
+            $('#mobile_touch_overlay').css("display", "none");
           }
         }
         
@@ -439,6 +443,9 @@
             $('#information').animate({"margin-left":"270px"}, 40);
             $('#chats').animate({"margin-right":"-270px"}, 40);
             $('#information').animate({"margin-right":"-270px"}, 40);
+            $('#mobile_touch_overlay').css("display", "block");
+            $('#mobile_touch_overlay').css("left", "270px");
+            $('#mobile_touch_overlay').css("width", "calc(100vw - 270px)");
           }
           else if (mobile_column == 2) {
             mobile_column = 1;
@@ -447,6 +454,7 @@
             $('#chats').animate({"margin-right":"0px"}, 40);
             $('#information').animate({"margin-left":"0px"}, 40);
             $('#information').animate({"margin-right":"0px"}, 40);
+            $('#mobile_touch_overlay').css("display", "none");
           }
         }
       }
@@ -489,6 +497,9 @@
           $('#chats').css("margin-right", "0px");
           $('#information').css("margin-left", "0px");
           $('#information').css("margin-right", "0px");
+          $('#mobile_touch_overlay').css("display", "none");
+          $('#mobile_touch_overlay').css("left", "0px");
+          $('#mobile_touch_overlay').css("width", "0px");
           mobile = false;
         }
         else {
@@ -496,6 +507,28 @@
         }
       });
       
+      $(document).on('click', '#mobile_touch_overlay', function() {
+        if (mobile_column == 0) {
+            mobile_column = 1;
+            $('#header').animate({"margin-right":"0px"}, 50);
+            $('#channels').animate({"margin-right":"0px"}, 50);
+            $('#chats').animate({"margin-left":"0px"}, 50);
+            $('#information').animate({"margin-left":"0px"}, 50);
+            $('#chats').animate({"margin-right":"0px"}, 50);
+            $('#information').animate({"margin-right":"0px"}, 50);
+            $('#mobile_touch_overlay').css("display", "none");
+          }
+        else if (mobile_column == 2) {
+          mobile_column = 1;
+            $('#members').animate({"margin-left":"0px"}, 40);
+            $('#chats').animate({"margin-left":"0px"}, 40);
+            $('#chats').animate({"margin-right":"0px"}, 40);
+            $('#information').animate({"margin-left":"0px"}, 40);
+            $('#information').animate({"margin-right":"0px"}, 40);
+            $('#mobile_touch_overlay').css("display", "none");
+        }
+      });
+
       $(document).on('click', '#close-user-page', function() {
         $("#user-page").animate({opacity: '0'}, 100);
         setTimeout(function() {
