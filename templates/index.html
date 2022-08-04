@@ -369,7 +369,11 @@
         current_room = '';
         $('.active-space').attr('style', '');
         $('#home-page').css('display', 'block');
-        $('#first-all').css('display', 'none');
+        $('#header').css('display', 'none');
+        $('#information').css('display', 'none');
+        $('#channels').css('display', 'none');
+        $('#chats').css('display', 'none');
+        $('#members').css('display', 'none');
         $('#space-search').css('display', 'none');
       });
 
@@ -1013,12 +1017,20 @@
 
       $(document).on('click', '#edit-space-button', function() {
         $('#space-settings').show();
-        $('#first-all').hide();
+        $('#header').hide();
+        $('#information').hide();
+        $('#channels').hide();
+        $('#chats').hide();
+        $('#members').hide();
       });
 
       $(document).on('click', '#exit-space-settings', function() {
         $('#space-settings').hide();
-        $('#first-all').show();
+        $('#header').show();
+        $('#information').show();
+        $('#channels').show();
+        $('#chats').show();
+        $('#members').show();
       });
 
       $(document).on('click', '#leave-space', function() {
@@ -1030,7 +1042,11 @@
           data: JSON.stringify({'space-id': current_space}),
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
-            $("#first-all").hide();
+            $('#header').hide();
+            $('#information').hide();
+            $('#channels').hide();
+            $('#chats').hide();
+            $('#members').hide();
             $("#home-page").show();
             $("#" + current_space).parent().remove();
           }
@@ -1241,7 +1257,11 @@
         document.getElementById(current_space).parentNode.remove();
         $('.active-space').attr('style', '');
         $('#home-page').css('display', 'block');
-        $('#first-all').css('display', 'none');
+        $('#header').css('display', 'none');
+        $('#information').css('display', 'none');
+        $('#channels').css('display', 'none');
+        $('#chats').css('display', 'none');
+        $('#members').css('display', 'none');
         $('#space-search').css('display', 'none');
         document.querySelector('.form-space[data-id="' + current_space + '"]').remove();
         current_space = '';
@@ -1398,7 +1418,11 @@
             }
             joinRoom(document.querySelector('.room').id);
             $('#home-page').css('display', 'none');
-            $('#first-all').css('display', 'block');
+            $('#header').css('display', 'block');
+            $('#information').css('display', 'block');
+            $('#channels').css('display', 'block');
+            $('#chats').css('display', 'block');
+            $('#members').css('display', 'block');
             $('#space-search').css('display', 'none');
           }
         });
