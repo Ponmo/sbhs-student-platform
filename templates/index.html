@@ -1178,7 +1178,6 @@
       });
       
       socket.on('created_room', function(data) {
-        alert('creatwed');
         const newNode = document.createElement('li');
         newNode.id = data.room_id;
         newNode.className = 'room pointer';
