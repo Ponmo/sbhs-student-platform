@@ -402,6 +402,7 @@
       /* Does not work for laptops or computers, need to check compatibility with wider-screen tablets */
       /* Can create general functions for animating members and channels div in combo with buttons*/
       /* Set Chat width to whatever it is before to prevent glitch, and set a background div to members to prevent white glitch? */
+      /* IMPORTANTif statement to */
       let touchstartX = 0;
       let touchendX = 0;
       function checkDirection() {
@@ -469,6 +470,7 @@
         })
       });
 
+      // Switch back to Desktop version if on Desktop
       $(window).resize(function() {
         if ($(window).width() > 768 && mobile) {
           mobile_column = 1;
@@ -622,6 +624,11 @@
       });
       
       document.getElementById('message_input_form').onsubmit = function (e) {
+        alert(socket.readyState);
+        //if(socket.readyState === socket.OPEN)
+        //{
+
+        //}
         e.preventDefault();
         let message = message_input.value.trim();
         document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight; 
