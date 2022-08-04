@@ -524,9 +524,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   resize: none;
 }
 #submit {
-  position: relative;
-  top: 100%;
-  transform: translateY(-100%);
+  width: 39px; 
   float: right;
   width: 39px;
   height: 39px;
