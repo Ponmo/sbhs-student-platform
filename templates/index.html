@@ -1409,7 +1409,7 @@
               document.getElementById('suggested_emails').append(newNode);
             });
             if (add_to_members) {
-              alert('1');
+              alert(JSON.stringify(roomList()));
               socket.emit('joined_space', {
                 room_list: roomList()
               });
