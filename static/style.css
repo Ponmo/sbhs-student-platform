@@ -136,7 +136,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 #content { /* make calc good on all browsers ; Make margin and padding 0 because of broswer differences ; */
   display: grid;
   /* grid-template-rows: 48px calc(100vh - 98px); */
-  grid-template-rows: 48px calc(100vh - 98px) 50px;
+  grid-template-rows: 48px calc(100vh - 98px - (env(safe-area-inset-bottom))) 50px;
   grid-template-columns: 270px minmax(278px, auto) 220px;
   height: 100vh;
   width: 100vw;
