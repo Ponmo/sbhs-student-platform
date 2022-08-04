@@ -534,6 +534,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   border: none;
 }
 .send {
+  margin-right: 18px;
   width: 26px;
   height: 26px;
 }
@@ -749,7 +750,6 @@ img { /* make images and create button undraggable and unhighlitable*/
   display: none;
 }
 #footer {
-  padding: env(safe-area-inset-bottom);
   /* position: fixed; */
   display: flex;
   align-items: center;
