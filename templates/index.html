@@ -55,8 +55,7 @@
 
     <!--Home Page-->
     <div id="home-page">
-      <img id="sbhs" src="/static/images/sbhs.png">
-    	<h1 id="sbhs-title">Santa Barbara High School Platform</h1>
+      <div id="feed"></div>
     </div>
 
 
@@ -444,10 +443,10 @@
         if ((touchendX - touchstartX) > 80 && (mobile_column != 0)) {
           if (mobile_column == 1) {
             mobile_column = 0;
-            $('#header').animate({"margin-right":"-270px"}, 40);
-            $('#channels').animate({"margin-right":"-270px"}, 40);
             $('#chats').animate({"margin-left":"270px"}, 40);
             $('#information').animate({"margin-left":"270px"}, 40);
+            $('#header').animate({"margin-right":"-270px"}, 40);
+            $('#channels').animate({"margin-right":"-270px"}, 40);
             $('#chats').animate({"margin-right":"-270px"}, 40);
             $('#information').animate({"margin-right":"-270px"}, 40);
             $('#mobile_touch_overlay').css("display", "block");
@@ -456,11 +455,11 @@
           }
           else if (mobile_column == 2) {
             mobile_column = 1;
-            $('#members').animate({"margin-left":"0px"}, 40);
-            $('#chats').animate({"margin-left":"0px"}, 40);
             $('#chats').animate({"margin-right":"0px"}, 40);
-            $('#information').animate({"margin-left":"0px"}, 40);
             $('#information').animate({"margin-right":"0px"}, 40);
+            $('#chats').animate({"margin-left":"0px"}, 40);
+            $('#information').animate({"margin-left":"0px"}, 40);
+            $('#members').animate({"margin-left":"0px"}, 40);
             $('#mobile_touch_overlay').css("display", "none");
           }
         }
