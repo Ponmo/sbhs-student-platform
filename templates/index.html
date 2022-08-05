@@ -416,7 +416,7 @@
       let touchstartX = 0;
       let touchendX = 0;
       function checkDirection() {
-        if ((touchstartX - touchendX) > 80  && (mobile_column != 2)) {
+        if ((touchstartX - touchendX) > 80  && (mobile_column != 2) && mobile) {
           if (mobile_column == 1) {
             mobile_column = 2;
             $('#members').animate({"margin-left":"-220px"}, 50);
@@ -428,7 +428,7 @@
             $('#mobile_touch_overlay').css("left", "0px");
             $('#mobile_touch_overlay').css("width", "calc(100vw - 220px)");
           }
-          else if (mobile_column == 0) {
+          else if (mobile_column == 0 && mobile) {
             mobile_column = 1;
             $('#header').animate({"margin-right":"0px"}, 50);
             $('#channels').animate({"margin-right":"0px"}, 50);
@@ -440,7 +440,7 @@
           }
         }
         
-        if ((touchendX - touchstartX) > 80 && (mobile_column != 0)) {
+        if ((touchendX - touchstartX) > 80 && (mobile_column != 0) && mobile) {
           if (mobile_column == 1) {
             mobile_column = 0;
             $('#chats').animate({"margin-left":"270px"}, 50);
@@ -453,7 +453,7 @@
             $('#mobile_touch_overlay').css("left", "270px");
             $('#mobile_touch_overlay').css("width", "calc(100vw - 270px)");
           }
-          else if (mobile_column == 2) {
+          else if (mobile_column == 2 && mobile) {
             mobile_column = 1;
             $('#chats').animate({"margin-right":"-110px"}, 25);
             $('#information').animate({"margin-right":"-110px"}, 25);
