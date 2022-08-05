@@ -395,8 +395,9 @@
         if (mobile_column == 1) {
           mobile_column = 0;
           const element = document.querySelector('#footer');
-          const style = getComputedStyle(element);
-          console.log(style);
+          console.log(element.style.paddingBottom)
+          // const style = getComputedStyle(element);
+          // console.log(style);
           $('#header').animate({"margin-right":"-270px"}, 50);
           $('#channels').animate({"margin-right":"-270px"}, 50);
           $('#chats').animate({"margin-left":"270px"}, 50);
