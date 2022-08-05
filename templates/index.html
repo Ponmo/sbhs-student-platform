@@ -455,9 +455,8 @@
           }
           else if (mobile_column == 2) {
             mobile_column = 1;
-            $('#chats').css("margin-right", "-440px");
-            $('#information').css("margin-right", "-440px");
-            alert("hello");
+            $('#chats').css("margin-right", "-220px");
+            $('#information').css("margin-right", "-220px");
             $('#members').animate({"margin-left":"0px"}, 50);
             $('#chats').animate({"margin-left":"0px"}, 50);
             $('#information').animate({"margin-left":"0px"}, 50);
@@ -860,6 +859,7 @@
 
       $(document).on('click', '.delete-message', function() {
         let message_id = this.parentNode.parentNode.id;
+        $(this)..
         $.ajax({
           type: 'POST',
           url: '/delete_message',
