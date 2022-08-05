@@ -1,7 +1,7 @@
 
 :root {
   --env: env(safe-area-inset-bottom);
-  
+  --env2: constant(safe-area-inset-bottom);
 }
 /* Will not work with all broswers; Make blur animation on overscroll, or attach footer to grid */
 html {
