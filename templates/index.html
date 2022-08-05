@@ -385,6 +385,10 @@
           $('#information').animate({"margin-left":"270px"}, 50);
           $('#chats').animate({"margin-right":"-270px"}, 50);
           $('#information').animate({"margin-right":"-270px"}, 50);
+          $('#mobile_touch_overlay').css("display", "block");
+          $('#mobile_touch_overlay').css("left", "270px");
+          $('#mobile_touch_overlay').css("width", "calc(100vw - 270px)");
+
         }
       });
 
@@ -398,6 +402,9 @@
           /* Maybe not needed (Lag?): */
           $('#information').animate({"margin-left":"-220px"}, 50);
           $('#information').animate({"margin-right":"220px"}, 50);
+          $('#mobile_touch_overlay').css("display", "block");
+          $('#mobile_touch_overlay').css("left", "0px");
+          $('#mobile_touch_overlay').css("width", "calc(100vw - 220px)");
         }
       });
 
