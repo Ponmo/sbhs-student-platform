@@ -418,12 +418,12 @@ def join_space():
 def delete_message():
     if request.method == 'POST':
         deleted_message = collection_messages.find_one({'_id': ObjectId(request.json['message_id'])})
-        deleted_email = collection_messages.find({'room': request.json['room_id'], 'email': deleted_message['email']}).sort('_id', pymongo.DESCENDING)
+        deleted_email = collection_messages.find({'room': request.json['room_id'], 'email': deleted_message['email']}).sort('_id', pymongo.ASCENDING)
         document_list = list(deleted_email)
         message_index = document_list.index(deleted_message)
         if message_index != 0:
-            if document_list[message_index+1]["combine"] == "true":
-                collection_messages.find_one_and_update({'_id': ObjectId(document_list[message_index+1]['_id'])}, {'$set': {'combine': 'false'}}) 
+            if document_list[message_index-1]["combine"] == "true":
+                collection_messages.find_one_and_update({'_id': ObjectId(document_list[message_index-1]['_id'])}, {'$set': {'combine': 'false'}}) 
         #collection_deleted.insert_one({'name': session['users_email'], 'datetime': datetime.now().isoformat() + 'Z', 'deleted_message_content': deleted_message}) Used to add to logs once deleted.
         collection_messages.delete_one({"_id": ObjectId(request.json['message_id'])})
         return Response(dumps({'success': message_index}), mimetype='application/json')
