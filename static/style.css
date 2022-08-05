@@ -36,6 +36,10 @@ img { /* make images and create button undraggable and unhighlitable*/
   display: block;
   height: calc(100vh - 50px);
 }
+.home-grid {
+  display: grid;
+  column-gap: 10px;
+}
 #special-announcements {
   background-color: aqua;
   height: 100%;
