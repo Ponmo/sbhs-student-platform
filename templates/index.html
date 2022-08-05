@@ -861,6 +861,7 @@
       });
 
       $(document).on('click', '.delete-message', function() {
+        $(this).hide();
         let message_id = this.parentNode.parentNode.id;
         $.ajax({
           type: 'POST',
