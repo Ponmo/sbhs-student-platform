@@ -228,7 +228,9 @@
       //   }
       // };
 
-
+      // Safari Mobile and iPhone X bottom inset env
+      $('#content').css('grid-template-rows', '48px calc(100vh - 98px - ' + window.getComputedStyle(document.querySelector('#footer')).paddingBottom);
+      
       $("#regular-channels").sortable({
         axis: 'y',
         opacity: 0.7,
@@ -394,11 +396,6 @@
       $(document).on('click', '#open_channels', function() {
         if (mobile_column == 1) {
           mobile_column = 0;
-          const element = document.querySelector('#footer');
-          console.log(element.style.paddingBottom);
-          console.log(window.getComputedStyle(document.querySelector('#footer')).paddingBottom);
-          // const style = getComputedStyle(element);
-          // console.log(style);
           $('#header').animate({"margin-right":"-270px"}, 50);
           $('#channels').animate({"margin-right":"-270px"}, 50);
           $('#chats').animate({"margin-left":"270px"}, 50);
