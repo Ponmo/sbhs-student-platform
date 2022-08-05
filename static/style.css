@@ -5,6 +5,8 @@ html {
 }
 body {
   overscroll-behavior-y: none;
+  /* For safari-mobile */
+  background-color: #36393e;
 }
 /* flex and width: 100% - 290px*/
 img { /* make images and create button undraggable and unhighlitable*/
@@ -23,7 +25,9 @@ img { /* make images and create button undraggable and unhighlitable*/
   cursor: pointer;
 }
 #first-all {
-  height: calc(100vh - 50px - env(safe-area-inset-bottom));
+  height: calc(100vh - 50px);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-bottom: constant(safe-area-inset-bottom);
   overflow: hidden;
   display: none;
 }
@@ -150,22 +154,29 @@ img { /* make images and create button undraggable and unhighlitable*/
   float: right;
 }
 
-#content { /* make calc good on all browsers ; Make margin and padding 0 because of broswer differences ; */
+#content { 
   display: grid;
-  /* grid-template-rows: 48px calc(100vh - 98px); */
+  height: 100%;
+  width: 100vw;
+  overflow: hidden;
+  gap: 0px;
+}
+/* #content {  make calc good on all browsers ; Make margin and padding 0 because of broswer differences ; 
+  display: grid;
   grid-template-rows: 48px calc(100vh - 98px - env(safe-area-inset-bottom));
   grid-template-columns: 270px minmax(278px, auto) 220px;
   height: 100vh;
   width: 100vw;
   overflow: hidden;
-  /*Remove?*/
+  Remove?
   gap: 0px;
-}
-
+} */
 #header {
   position: relative;
   grid-column: 1;
   grid-row: 1;
+  height: 48px;
+  width: 270px;
   background-color: #2f3136;
   border-bottom: 1px solid #232428; /* pseudo element for double border */
   overflow: hidden;
@@ -244,8 +255,9 @@ img { /* make images and create button undraggable and unhighlitable*/
 #information {
   grid-column: 2 / 4;
   grid-row: 1;
+  width: auto;
+  height: 48px;
   background-color: hotpink;
-  border-bottom: 1px solid #232428;
   overflow: hidden;
   -moz-user-select: -moz-none;
   -khtml-user-select: none;
@@ -289,6 +301,8 @@ img { /* make images and create button undraggable and unhighlitable*/
 #channels {
   grid-column: 1;
   grid-row: 2;
+  width: 270px;
+  height: auto;
   border-top: 1px solid #2b2d32; /*remove once double border*/
   background-color: #2f3136;
   -moz-user-select: -moz-none;
@@ -297,7 +311,6 @@ img { /* make images and create button undraggable and unhighlitable*/
   -ms-user-select: none;
   user-select: none;
   overflow-y: scroll;
-  overflow-x: hidden;
 }
 #special-channels {
   list-style-type: none;
@@ -382,7 +395,11 @@ img { /* make images and create button undraggable and unhighlitable*/
   flex-direction: column;
   grid-column: 2;
   grid-row: 2;
+  height: 100%;;
+  min-width: 278px;
+  max-width: auto;
   background-color: #36393e;
+  overflow-y: scroll;
 }
 #chat {
   flex: 1;
@@ -692,6 +709,8 @@ img { /* make images and create button undraggable and unhighlitable*/
   grid-column: 3;
   z-index: 1; /* to make the send button not overlay the members div on small screen sizes can change once small version introduced */
   grid-row: 2;
+  height: auto;
+  width: 220px;
   padding-top: 5px;
   background-color: #2f3136;
   overflow-x: hidden;
