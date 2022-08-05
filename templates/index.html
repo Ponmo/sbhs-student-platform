@@ -219,9 +219,11 @@
       var ua = window.navigator.userAgent;
       var iOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i);
       var webkit = !!ua.match(/WebKit/i);
-      var iOSSafari = iOS && webkit && !ua.match(/CriOS/i) && !ua.match(/OPiOS/i) && !ua.match(/EdgiOS/i) && !ua.match(xiOS);
+      var iOSSafari = iOS && webkit && !ua.match(/CriOS/i) && !ua.match(/OPiOS/i) && !ua.match(/EdgiOS/i) && !ua.match(/xiOS/);
       window.onload = function() {
-        $('#content').css('height', 'grid-template-rows: 48px calc(100vh - 148px)');
+        if (iOSSafari) {
+          $('#content').css('height', 'grid-template-rows: 48px calc(100vh - 148px)');
+        }
       };
 
 
