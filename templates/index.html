@@ -640,11 +640,10 @@
       $(document).on('click', '.form-space', function() {
         $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
         $(document.getElementById(current_space)).attr('style', '');
+        $("#space-search").animate({opacity: '0'}, 100);
+        $("#space-search").css('pointer-events', 'none');
         current_space = this.getAttribute('data-id');
         let clicked_space = this;
-        setTimeout(function() {
-          clicked_space.firstChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = "Joined";
-        }, 500)
         joinSpace();
       });
 
@@ -863,7 +862,6 @@
 
       $(document).on('click', '.delete-message', function() {
         let message_id = this.parentNode.parentNode.id;
-        $(this).css('pointer-events', 'none');
         $.ajax({
           type: 'POST',
           url: '/delete_message',
@@ -1468,6 +1466,7 @@
             $('#home-page').css('display', 'none');
             $('#first-all').css('display', 'block');
             $('#space-search').css('display', 'none');
+            $("#space-search").css('pointer-events', 'initial');
           }
         });
       }
