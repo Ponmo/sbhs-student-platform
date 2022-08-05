@@ -32,14 +32,8 @@ img { /* make images and create button undraggable and unhighlitable*/
   display: block;
   height: calc(100vh - 50px);
 }
-#sbhs {
-  height: 100px;
-  margin-left: 20px;
-  display: inline-block;
-}
-#sbhs-title {
-  display: inline-block;
-  line-height: 90px;
+#feed {
+  background-color: teal
 }
 #user-page {
   background-color: white;
