@@ -617,6 +617,8 @@
       });
 
       $(document).on('click', '.joined-icons', function() {
+        $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
+        $(document.getElementById(current_space)).attr('style', '');
         $('#profile-popup').remove();
         selected_user = '';
         current_space = this.getAttribute('data-id');
@@ -1498,6 +1500,7 @@
               space();
             }
             else {
+              current_room = '';
               $('#' + current_space).css('border-radius', '3px');
               $('#' + current_space).closest('.space-wrapper').find('.active-space').css('width', '39px');
               space();
