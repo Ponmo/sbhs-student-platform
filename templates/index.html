@@ -62,6 +62,7 @@
 
 
     <!--Spaces Page-->
+    <div id="mobile-safari-wrapper">
       <div id="first-all">
         <div id="mobile_touch_overlay" class="pointer"></div>
         <div id="content">
@@ -126,6 +127,7 @@
           </div>
         </div>
       </div>
+    </div>
 
       <div id="footer">
         <div id="profile">
@@ -216,15 +218,15 @@
       var mobile = ($(window).width <= 768);
       
       // Check if it's Safari Mobile
-      var ua = window.navigator.userAgent;
-      var iOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i);
-      var webkit = !!ua.match(/WebKit/i);
-      var iOSSafari = iOS && webkit && !ua.match(/CriOS/i) && !ua.match(/OPiOS/i) && !ua.match(/EdgiOS/i) && !ua.match(/xiOS/);
-      window.onload = function() {
-        if (iOSSafari) {
-          $('#content').css('height', 'grid-template-rows: 48px calc(100vh - 148px)');
-        }
-      };
+      // var ua = window.navigator.userAgent;
+      // var iOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i);
+      // var webkit = !!ua.match(/WebKit/i);
+      // var iOSSafari = iOS && webkit && !ua.match(/CriOS/i) && !ua.match(/OPiOS/i) && !ua.match(/EdgiOS/i) && !ua.match(/xiOS/);
+      // window.onload = function() {
+      //   if (iOSSafari) {
+      //     $('#content').css('height', 'grid-template-rows: 48px calc(100vh - 148px)');
+      //   }
+      // };
 
 
       $("#regular-channels").sortable({
