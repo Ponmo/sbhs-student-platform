@@ -102,13 +102,14 @@ def send_email():
 
 
 # Redirects users on http to https.
+# Does not work with Heroku deployments
 
-@app.before_request
-def before_request():
-    if not request.is_secure:
-        url = request.url.replace('http://', 'https://', 1)
-        code = 301
-        return redirect(url, code=code)
+#@app.before_request
+#def before_request():
+#    if not request.is_secure:
+#        url = request.url.replace('http://', 'https://', 1)
+#        code = 301
+#        return redirect(url, code=code)
 
 # Loads login page.
 # If login fails, load page again with error message.
