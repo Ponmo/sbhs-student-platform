@@ -1466,7 +1466,7 @@
             $('#home-page').css('display', 'none');
             $('#first-all').css('display', 'block');
             $('#space-search').css('display', 'none');
-            $("#space-search").css('pointer-events', 'initial');
+            $('#space-search').css('pointer-events', 'initial');
           }
         });
       }
@@ -1512,6 +1512,10 @@
         if (current_room != room_id) {
           old_room = current_room;
           current_room = room_id;
+          socket.emit('join_room', {
+            room_id: current_room,
+            old_room: old_room
+          });
           $(document.getElementById(current_room)).attr('style', 'background-color: #43474d !important');
           $(document.getElementById(old_room)).attr('style', '');
           document.getElementById('messages').textContent = '';
