@@ -462,6 +462,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 .message_edit {
   resize: none;
+  color: black;
   width: 100%;
   overflow-wrap: break-word;
   overflow: hidden;
