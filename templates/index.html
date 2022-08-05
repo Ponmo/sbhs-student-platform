@@ -396,6 +396,7 @@
           mobile_column = 0;
           const element = document.querySelector('#footer');
           console.log(element.style.paddingBottom)
+          window.getComputedStyle(document.querySelector('#footer')).paddingBottom
           // const style = getComputedStyle(element);
           // console.log(style);
           $('#header').animate({"margin-right":"-270px"}, 50);
