@@ -4,8 +4,7 @@ html {
 }
 body {
   overscroll-behavior-y: none;
-  overflow: hidden;
-  /* For safari-mobile */
+    /* For safari-mobile */
 }
 /* flex and width: 100% - 290px*/
 img { /* make images and create button undraggable and unhighlitable*/
