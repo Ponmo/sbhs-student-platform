@@ -4,6 +4,7 @@ html {
   height: 100%;
 }
 body {
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
   overscroll-behavior-y: none;
   /* For safari-mobile */
 }
@@ -24,8 +25,6 @@ img { /* make images and create button undraggable and unhighlitable*/
   cursor: pointer;
 }
 #first-all {
-  padding: env(safe-area-inset-top);
-  padding: constant(safe-area-inset-top);
   height: calc(100vh - 50px);
   overflow: hidden;
   display: none;
