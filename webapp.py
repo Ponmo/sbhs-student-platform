@@ -117,7 +117,7 @@ def send_email():
 
 @app.route('/') 
 def render_login():
-    if not request.is_secure:
+    if 'http://' in request.url:
         url = request.url.replace('http://', 'https://', 1)
         code = 301
         return redirect(url, code=code)
