@@ -3,7 +3,6 @@ html {
   height: 100%;
 }
 body {
-  margin-bottom:50px;
   overscroll-behavior-y: none;
   /* For safari-mobile */
 }
