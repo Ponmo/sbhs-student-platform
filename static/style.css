@@ -24,8 +24,8 @@ img { /* make images and create button undraggable and unhighlitable*/
   cursor: pointer;
 }
 #first-all {
-  padding-top: env(safe-area-inset-top);
-  padding-top: constant(safe-area-inset-top);
+  padding: env(safe-area-inset-top);
+  padding: constant(safe-area-inset-top);
   height: calc(100vh - 50px);
   overflow: hidden;
   display: none;

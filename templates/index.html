@@ -509,6 +509,9 @@
 
       // Switch back to Desktop version if on Desktop
       $(window).resize(function() {
+
+        // $('#content').css('grid-template-rows', '48px calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px - 48px)');
+        // $('#footer').css('top', document.getElementById('footer').getBoundingClientRect().top + 'px');
         if ($(window).width() > 768) {
           mobile_column = 1;
           $('#header').css("margin-right", "0px");
