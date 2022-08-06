@@ -20,8 +20,8 @@ img { /* make images and create button undraggable and unhighlitable*/
   cursor: pointer;
 }
 #first-all {
-  height: calc(100vh - 50px);
-  overflow: hidden;
+  /* height: calc(100vh - 50px);
+  overflow: hidden; */
   display: none;
 }
 #home-page {
