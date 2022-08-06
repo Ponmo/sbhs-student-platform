@@ -229,7 +229,7 @@
       // Safari Mobile and iPhone X bottom inset env
       $('#content').css('grid-template-rows', '48px calc(100vh - 98px - ' + window.getComputedStyle(document.querySelector('#footer')).paddingBottom + ')');
       
-      alert(window.getComputedStyle(document.querySelector('#footer')).paddingBottom);
+      alert(document.getElementById('footer').getBoundingClientRect().top);
 
       $("#regular-channels").sortable({
         axis: 'y',
