@@ -230,6 +230,8 @@
       $('#content').css('grid-template-rows', '48px calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px - 48px)');
       $('#footer').css('top', document.getElementById('footer').getBoundingClientRect().top + 'px');
 
+      alert($('body').css('padding-top', document.body.getBoundingClientRect().paddingTop));
+
       $("#regular-channels").sortable({
         axis: 'y',
         opacity: 0.7,
