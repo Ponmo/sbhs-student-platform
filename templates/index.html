@@ -695,7 +695,6 @@
       });
       
       document.getElementById('message_input_form').onsubmit = function (e) {
-        $('#footer').css('top', document.getElementById('footer').getBoundingClientRect().top + 'px');
         e.preventDefault();
         let message = message_input.value.trim();
         document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight; 
