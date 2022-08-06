@@ -1,10 +1,7 @@
 /* Will not work with all broswers; Make blur animation on overscroll, or attach footer to grid */
-html {
-  height: 100vh;
-}
 body {
   /* Maybe make it overscroll-behavior-y: none to allow returning to previous page */
-  overscroll-behavior: none;
+  overscroll-behavior-y: none;
 }
 /* flex and width: 100% - 290px*/
 img { /* make images and create button undraggable and unhighlitable*/
