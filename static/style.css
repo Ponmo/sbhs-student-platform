@@ -4,7 +4,6 @@ html {
 }
 body {
   overscroll-behavior-y: none;
-  margin-bottom: 20px;
   /* For safari-mobile */
 }
 /* flex and width: 100% - 290px*/
@@ -166,7 +165,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   display: grid;
   grid-template-rows: 48px calc(100vh - 98px);
   grid-template-columns: 270px minmax(278px, auto) 220px;
-  height: 100vh;
+  /*height: 100vh;*/
   width: 100vw;
   overflow: hidden;
   /* Remove? */
