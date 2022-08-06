@@ -3,8 +3,8 @@ html {
   height: 100vh;
 }
 body {
-  overscroll-behavior-y: none;
-    /* For safari-mobile */
+  /* Maybe make it overscroll-behavior-y: none to allow returning to previous page */
+  overscroll-behavior: none;
 }
 /* flex and width: 100% - 290px*/
 img { /* make images and create button undraggable and unhighlitable*/
@@ -24,7 +24,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 #first-all {
   height: calc(100vh - 50px);
-  overflow: hidden;
+  /* overflow: hidden; */
   display: none;
 }
 #home-page {
@@ -773,8 +773,8 @@ img { /* make images and create button undraggable and unhighlitable*/
   display: none;
 }
 #footer {
-  padding-bottom: env(safe-area-inset-bottom);
-  padding-bottom: constant(safe-area-inset-bottom);
+  /* padding-bottom: env(safe-area-inset-bottom);
+  padding-bottom: constant(safe-area-inset-bottom); */
   position: fixed;
   display: flex;
   align-items: center;
