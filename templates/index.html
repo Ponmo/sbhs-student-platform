@@ -229,7 +229,7 @@
       // Safari Mobile and iPhone X bottom inset env
       $('#content').css('grid-template-rows', '48px calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px - 48px)');
       //$('#first-all').css('top,)
-      $('#footer').css('top', document.getElementById('footer').getBoundingClientRect().top + 'px');
+      //$('#footer').css('top', document.getElementById('footer').getBoundingClientRect().top + 'px');
 
       $("#regular-channels").sortable({
         axis: 'y',
@@ -513,7 +513,7 @@
       $(window).resize(function() {
 
         $('#content').css('grid-template-rows', '48px calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px - 48px)');
-        $('#footer').css('top', document.getElementById('footer').getBoundingClientRect().top + 'px');
+        //$('#footer').css('top', document.getElementById('footer').getBoundingClientRect().top + 'px');
         if ($(window).width() > 768) {
           mobile_column = 1;
           $('#header').css("margin-right", "0px");
