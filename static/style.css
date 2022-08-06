@@ -4,6 +4,7 @@ html {
 }
 body {
   overscroll-behavior-y: none;
+  margin-bottom: 20px;
   /* For safari-mobile */
 }
 /* flex and width: 100% - 290px*/
