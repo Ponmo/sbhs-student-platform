@@ -434,7 +434,7 @@ def join_space():
 def delete_message():
     if request.method == 'POST':
         deleted_message = collection_messages.find_one({'_id': ObjectId(request.json['message_id'])})
-        deleted_email = collection_messages.find({'room': request.json['room_id'], 'email': deleted_message['email']}).sort('_id', pymongo.ASCENDING)
+        deleted_email = collection_messages.find({'room': request.json['room_id'], 'email': deleted_message['email']}).sort('_id', pymongo.DESCENDING)
         document_list = list(deleted_email)
         message_index = document_list.index(deleted_message)
         if message_index != 0:
