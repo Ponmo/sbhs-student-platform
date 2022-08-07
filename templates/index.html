@@ -514,26 +514,28 @@
             $('#mobile_touch_overlay').css("display", "none");
       }
 
+
+
       document.getElementById('chats').addEventListener('touchstart', e => {
-          touchstartX = e.changedTouches[0].screenX;
-          touchstartY = e.changedTouches[0].screenY;
+        swipeStart(e);
       });
 
       document.getElementById('chats').addEventListener('touchend', e => {
-          touchendX = e.changedTouches[0].screenX;
-          touchendY = e.changedTouches[0].screenY;
-          checkDirection();
+          swipeEnd(e);
       });
       document.getElementById('channels').addEventListener('touchstart', e => {
-          touchstartX = e.changedTouches[0].screenX;
-          touchstartY = e.changedTouches[0].screenY;
+        swipeStart(e);
       });
-
       document.getElementById('channels').addEventListener('touchend', e => {
-          touchendX = e.changedTouches[0].screenX;
-          touchendY = e.changedTouches[0].screenY;
-          checkDirection();
+          swipeEnd(e);
       });
+      document.getElementById('members').addEventListener('touchstart', e => {
+        swipeStart(e);
+      });
+      document.getElementById('members').addEventListener('touchend', e => {
+          swipeEnd(e);
+      });
+      
 
       $(document).on('click', '#profile', function() {
         $('#user-page').css('display', 'block');
@@ -730,7 +732,6 @@
         newNode.style.opacity = 0.5;
         let messageMoment = moment();
         const latestMessage = $('#messages').children().not('.temporary-message').last();
-        alert(messageMoment.diff(latestMessage.data('datetime')));
         if (latestMessage.data('user') == user_id && moment(messageMoment.diff(latestMessage.data('datetime'))) < 180) {
           newNode.className = 'message-container-combine temporary-message';
           newNode.innerHTML = '<p class="message-combine-time">' + messageMoment.format('h:mm A') + '</p><p class="message-combine">' + message + '</p>';
@@ -1812,6 +1813,15 @@
         requests.forEach(function (request) {
           request.abort();
         });
+      }
+      function swipeStart(e) {
+        touchstartX = e.changedTouches[0].screenX;
+        touchstartY = e.changedTouches[0].screenY;
+      }
+      function swipeEnd(e) {
+        touchendX = e.changedTouches[0].screenX;
+        touchendY = e.changedTouches[0].screenY;
+        checkDirection();
       }
 
     });
