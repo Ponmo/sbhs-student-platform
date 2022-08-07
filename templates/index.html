@@ -514,12 +514,12 @@
             $('#mobile_touch_overlay').css("display", "none");
       }
 
-      document.addEventListener('touchstart', e => {
+      document.body.addEventListener('touchstart', e => {
           touchstartX = e.changedTouches[0].screenX;
           touchstartY = e.changedTouches[0].screenY;
       });
 
-      document.addEventListener('touchend', e => {
+      document.body.addEventListener('touchend', e => {
           touchendX = e.changedTouches[0].screenX;
           touchendY = e.changedTouches[0].screenY;
           checkDirection();
