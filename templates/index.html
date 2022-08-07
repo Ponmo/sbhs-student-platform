@@ -514,12 +514,12 @@
             $('#mobile_touch_overlay').css("display", "none");
       }
 
-      document.getElementById("content").addEventListener('touchstart', e => {
+      document.getElementById('content').addEventListener('touchstart', e => {
           touchstartX = e.changedTouches[0].screenX;
           touchstartY = e.changedTouches[0].screenY;
       });
 
-      document.getElementById("content").addEventListener('touchend', e => {
+      document.getElementById('content').addEventListener('touchend', e => {
           touchendX = e.changedTouches[0].screenX;
           touchendY = e.changedTouches[0].screenY;
           var elem = document.elementFromPoint(changedTouch.clientX, changedTouch.clientY);
@@ -1228,7 +1228,7 @@
 
       socket.on('receive_message', function (data) {
         const newMode = document.createElement('div');
-        newMode.setAttribute('data-datetime', data.datetime.format());
+        newMode.setAttribute('data-datetime', moment(data.datetime).format());
         let messageMoment = moment(data.datetime).local().format('h:mm A');
         if (data.combine == 'false') {
           newMode.className = 'message-container';
