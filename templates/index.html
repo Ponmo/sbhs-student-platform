@@ -737,7 +737,7 @@
         newNode.style.opacity = 0.5;
         let messageMoment = moment().local().format('h:mm A');
         alert($('div#messages div').not('.temporary-message').last().attr('data-user'));
-        if ($('div#messages div').not('.temporary-message').last().attr('data-user') != user_id) {
+        if ($('#messages :not(".temporary-message"):last').attr('data-user') != user_id) {
           newNode.className = 'message-container temporary-message';
           messageMoment = 'at ' + messageMoment;
           newNode.innerHTML = '<img class="profile-picture pointer" src="' + user_picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + user_name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message">' + message + '</p>';
