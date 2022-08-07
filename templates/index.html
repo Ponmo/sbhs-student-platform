@@ -514,12 +514,12 @@
             $('#mobile_touch_overlay').css("display", "none");
       }
 
-      document.getElementById('first-all').addEventListener('touchstart', e => {
+      document.addEventListener('touchstart', e => {
           touchstartX = e.changedTouches[0].screenX;
           touchstartY = e.changedTouches[0].screenY;
       });
 
-      document.getElementById('first-all').addEventListener('touchend', e => {
+      document.addEventListener('touchend', e => {
           touchendX = e.changedTouches[0].screenX;
           touchendY = e.changedTouches[0].screenY;
           var elem = document.elementFromPoint(changedTouch.clientX, changedTouch.clientY);
@@ -720,17 +720,16 @@
 
         const newNode = document.createElement('div');
         newNode.style.opacity = 0.5;
-        let messageMoment = moment().format('h:mm A');
+        let messageMoment = moment();
         const latestMessage = $('#messages').children().not('.temporary-message').last();
         if (latestMessage.data('user') != user_id) {
           newNode.className = 'message-container temporary-message';
-          messageMoment = 'at ' + messageMoment;
+          messageMoment = 'at ' + messageMoment.format('h:mm A');;
           newNode.innerHTML = '<img class="profile-picture pointer" src="' + user_picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + user_name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message">' + message + '</p>';
         }
-        else {
-          // if ((latestMessage.attr('class') == 'message-container-combine' && ) || (latestMessage.attr('class') == 'message-container' &&))
+        else if (moment(latestMessage.data('datetime')).diff(messageMoment) > ) {
           newNode.className = 'message-container-combine temporary-message';
-          newNode.innerHTML = '<p class="message-combine-time">' + messageMoment + '</p><p class="message-combine">' + message + '</p>';
+          newNode.innerHTML = '<p class="message-combine-time">' + messageMoment.format('h:mm A'); + '</p><p class="message-combine">' + message + '</p>';
         }
         document.getElementById('messages').append(newNode);
 
