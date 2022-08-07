@@ -450,7 +450,7 @@
 
       function showMembers() {
         mobile_column = 2;
-
+        $('#members_header').animate({"margin-left":"-220px"}, 50);
         $('#members').animate({"margin-left":"-220px"}, 50);
           $('#chats').animate({"margin-left":"-220px"}, 50);
           $('#chats').animate({"margin-right":"220px"}, 50);
@@ -466,6 +466,7 @@
             $('#chats').animate({"margin-right":"-110px"}, 25);
             $('#information').animate({"margin-right":"-110px"}, 25);
             $('#members').animate({"margin-left":"0px"}, 50);
+            $('#members_header').animate({"margin-left":"0px"}, 50);
             $('#chats').animate({"margin-left":"0px"}, 50);
             $('#information').animate({"margin-left":"0px"}, 50);
             $('#chats').animate({"margin-right":"0px"}, 20);
@@ -553,6 +554,7 @@
           $('#chats').css("margin-right", "0px");
           $('#information').css("margin-right", "0px");
           $('#members').css("margin-left", "0px");
+          $('#members_header').css("margin-left", "0px");
           $('#chats').css("margin-left", "0px");
           $('#chats').css("margin-right", "0px");
           $('#information').css("margin-left", "0px");
@@ -733,6 +735,7 @@
         const newNode = document.createElement('div');
         newNode.style.opacity = 0.5;
         let messageMoment = moment().local().format('h:mm A');
+        alert($('#messages div:not(".temporary-message"):last').attr('data-user'));
         if ($('#messages div:not(".temporary-message"):last').attr('data-user') != user_id) {
           newNode.className = 'message-container temporary-message';
           messageMoment = 'at ' + messageMoment;
