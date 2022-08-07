@@ -515,14 +515,17 @@
       }
 
       document.addEventListener('touchstart', e => {
-        touchstartX = e.changedTouches[0].screenX;
-        touchstartY = e.changedTouches[0].screenY;
+          touchstartX = e.changedTouches[0].screenX;
+          touchstartY = e.changedTouches[0].screenY;
       });
 
       document.addEventListener('touchend', e => {
-        touchendX = e.changedTouches[0].screenX;
-        touchendY = e.changedTouches[0].screenY;
-        checkDirection();
+        if (e.target != document.getElementById("footer")) {
+          touchendX = e.changedTouches[0].screenX;
+          touchendY = e.changedTouches[0].screenY;
+          checkDirection();
+          alert(e);
+        }
       });
 
       $(document).on('click', '#profile', function() {
@@ -718,7 +721,8 @@
 
         const newNode = document.createElement('div');
         newNode.style.opacity = 0.5;
-        let messageMoment = moment().local().format('h:mm A');
+        let messageMoment = moment().format('h:mm A');
+        // if las
         if ($('#messages').children().not('.temporary-message').last().data('user') != user_id) {
           newNode.className = 'message-container temporary-message';
           messageMoment = 'at ' + messageMoment;
