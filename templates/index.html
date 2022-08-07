@@ -571,25 +571,10 @@
       
       $(document).on('click', '#mobile_touch_overlay', function() {
         if (mobile_column == 0) {
-            mobile_column = 1;
-            $('#header').animate({"margin-right":"0px"}, 50);
-            $('#channels').animate({"margin-right":"0px"}, 50);
-            $('#chats').animate({"margin-left":"0px"}, 50);
-            $('#information').animate({"margin-left":"0px"}, 50);
-            $('#chats').animate({"margin-right":"0px"}, 50);
-            $('#information').animate({"margin-right":"0px"}, 50);
-            $('#mobile_touch_overlay').css("display", "none");
+          hideChannels();
           }
         else if (mobile_column == 2) {
-          mobile_column = 1;
-            $('#chats').css("margin-right", "-220px");
-            $('#information').css("margin-right", "-220px");
-            $('#members').animate({"margin-left":"0px"}, 50);
-            $('#chats').animate({"margin-left":"0px"}, 50);
-            $('#information').animate({"margin-left":"0px"}, 50);
-            $('#chats').animate({"margin-right":"0px"}, 50);
-            $('#information').animate({"margin-right":"0px"}, 50);
-            $('#mobile_touch_overlay').css("display", "none");
+          hideMembers();
         }
       });
 
