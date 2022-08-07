@@ -400,6 +400,8 @@
         $('#space-search').css('display', 'none');
       });
 
+      
+
       $(document).on('click', '#open_channels', function() {
         if (mobile_column == 1) {
           mobile_column = 0;
@@ -451,7 +453,7 @@
       let touchstartY = 0;
       let touchendY = 0;
       function checkDirection() {
-        if (((touchstartX - touchendX) > 80) && ((touchstartY - touchendY) ) && (mobile_column != 2)) {
+        if (((touchstartX - touchendX) > 80) && (Math.abs(touchstartY - touchendY) < 30) && (mobile_column != 2)) {
           if (mobile_column == 1) {
             mobile_column = 2;
             $('#members').animate({"margin-left":"-220px"}, 50);
@@ -475,7 +477,7 @@
           }
         }
         
-        if ((touchendX - touchstartX) > 80 && (mobile_column != 0)) {
+        if (((touchendX - touchstartX) > 80) && (Math.abs(touchstartY - touchendY) < 30) && (mobile_column != 0)) {
           if (mobile_column == 1) {
             mobile_column = 0;
             $('#chats').animate({"margin-left":"270px"}, 50);
@@ -512,25 +514,6 @@
         touchendY = e.changedTouches[0].screenY;
         checkDirection();
       });
-
-      // var timeoutId = 0;
-
-      // $('.message-container').on('mousedown', function() {
-      //     timeoutId = setTimeout(myFunction, 500);
-      //     this.firstChild.nextElementSibling.nextElementSibling.nextElementSibling.css("display", "block");
-      //     alert("hello5");
-      // }).on('mouseup mouseleave', function() {
-      //     clearTimeout(timeoutId);
-      //     alert("hell4o");
-      // });
-      // $('.message-container-combine').on('mousedown', function() {
-      //     timeoutId = setTimeout(myFunction, 500);
-      //     this.firstChild.nextElementSibling.nextElementSibling.css("display", "block");
-      //     alert("hell2o");
-      // }).on('mouseup mouseleave', function() {
-      //     clearTimeout(timeoutId);
-      //     alert("hello");
-      // });
 
 
       $(document).on('click', '#profile', function() {
@@ -738,31 +721,31 @@
         stoppedTyping();
         clearTimeout(timeout);
 
-        // const newMode = document.createElement('div');
+        // const newNode = document.createElement('div');
         // let messageMoment = moment(data.datetime).local().format('h:mm A');
         // if (data.combine == 'false') {
-        //   newMode.className = 'message-container';
-        //   newMode.id = data.message_id;
+        //   newNode.className = 'message-container';
+        //   newNode.id = data.message_id;
         //   messageMoment = 'at ' + messageMoment;
         //   // TODO: Give pfp image default fallback image
         //   if (space_admin == true || data.user_id == user_id) {
-        //     newMode.innerHTML = '<img class="profile-picture pointer" src="' + data.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + data.name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message">' + data.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>'; 
+        //     newNode.innerHTML = '<img class="profile-picture pointer" src="' + data.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + data.name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message">' + data.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>'; 
         //   }//change message should not have edit or delete button
         //   else {
-        //     newMode.innerHTML = '<img class="profile-picture pointer" src="' + data.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + data.name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message">' + data.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"></div>';
+        //     newNode.innerHTML = '<img class="profile-picture pointer" src="' + data.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + data.name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message">' + data.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"></div>';
         //   }
         // }
         // else {
-        //   newMode.className = 'message-container-combine';
-        //   newMode.id = data.message_id;
+        //   newNode.className = 'message-container-combine';
+        //   newNode.id = data.message_id;
         //   if (space_admin == true || data.user_id == user_id){
-        //   newMode.innerHTML = '<p class="message-combine-time">' + messageMoment + '</p><p class="message-combine">' + data.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>';
+        //   newNode.innerHTML = '<p class="message-combine-time">' + messageMoment + '</p><p class="message-combine">' + data.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>';
         //   } //change message should not have edit or delete button
         //   else{
-        //     newMode.innerHTML = '<p class="message-combine-time">' + messageMoment + '</p><p class="message-combine">' + data.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"></div>';
+        //     newNode.innerHTML = '<p class="message-combine-time">' + messageMoment + '</p><p class="message-combine">' + data.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"></div>';
         //   }
         // }
-        // document.getElementById('messages').append(newMode);
+        // document.getElementById('messages').append(newNode);
 
         if (message.length) {
           socket.emit('send_message', {
