@@ -502,22 +502,18 @@
         checkDirection();
       });
 
-      var onlongtouch; 
-      var timer;
-      var touchduration = 500; //length of time we want the user to touch before we do something
+      var timeoutId = 0;
 
-      touchstart() {
-          timer = setTimeout(onlongtouch, touchduration); 
-      }
-      touchend() {
-          //stops short touches from firing the event
-          if (timer)
-              clearTimeout(timer); // clearTimeout, not cleartimeout..
-      }
-
-      onlongtouch = function() { 
-        
-      };
+      $('.message-container').on('mousedown', function() {
+          timeoutId = setTimeout(myFunction, 500);
+      }).on('mouseup mouseleave', function() {
+          clearTimeout(timeoutId);
+      });
+      $('.message-container-combine').on('mousedown', function() {
+          timeoutId = setTimeout(myFunction, 500);
+      }).on('mouseup mouseleave', function() {
+          clearTimeout(timeoutId);
+      });
 
 
       $(document).on('click', '#profile', function() {
