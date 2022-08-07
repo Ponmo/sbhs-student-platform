@@ -722,14 +722,14 @@
         newNode.style.opacity = 0.5;
         let messageMoment = moment();
         const latestMessage = $('#messages').children().not('.temporary-message').last();
-        if (latestMessage.data('user') != user_id) {
+        if (latestMessage.data('user') == user_id && moment(latestMessage.data('datetime')).diff(messageMoment) < 180) {
+          newNode.className = 'message-container-combine temporary-message';
+          newNode.innerHTML = '<p class="message-combine-time">' + messageMoment.format('h:mm A'); + '</p><p class="message-combine">' + message + '</p>';
+        }
+        else {
           newNode.className = 'message-container temporary-message';
           messageMoment = 'at ' + messageMoment.format('h:mm A');;
           newNode.innerHTML = '<img class="profile-picture pointer" src="' + user_picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + user_name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message">' + message + '</p>';
-        }
-        else if (moment(latestMessage.data('datetime')).diff(messageMoment) > ) {
-          newNode.className = 'message-container-combine temporary-message';
-          newNode.innerHTML = '<p class="message-combine-time">' + messageMoment.format('h:mm A'); + '</p><p class="message-combine">' + message + '</p>';
         }
         document.getElementById('messages').append(newNode);
 
