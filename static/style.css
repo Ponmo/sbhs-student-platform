@@ -697,9 +697,11 @@ img { /* make images and create button undraggable and unhighlitable*/
   vertical-align: middle;
 }
 #members_header {
+  display: none;
   grid-column: 3;
   grid-row: 1;
-  background-color: purple;
+  background-color: #2f3136;
+  border-bottom: 1px solid #232428;
 }
 #members {
   grid-column: 3;
