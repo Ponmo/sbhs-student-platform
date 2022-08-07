@@ -851,7 +851,7 @@
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
             if (data['success'] == 'true') {
-              alert("Your report has been recieved.")
+              alert("Your report has been received.")
             }
             else if (data['success'] == 'many') {
               alert("Message has already been reported.")
@@ -1221,7 +1221,7 @@
         }
       });
 
-      socket.on('recieve_message', function (data) {
+      socket.on('receive_message', function (data) {
         const newMode = document.createElement('div');
         let messageMoment = moment(data.datetime).local().format('h:mm A');
         if (data.combine == 'false') {

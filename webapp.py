@@ -543,7 +543,7 @@ def send_message(data):
         data['combine'] = 'false'
     data['message_id'] = str(ObjectId())
     collection_messages.insert_one({'_id': ObjectId(data['message_id']), 'name': data['name'], 'picture': session['picture'], 'room': data['room_id'], 'datetime': utc_dt, 'message': data['message'], 'combine': data['combine'], 'email': session['users_email'], 'user_id': session['unique_id']})
-    socketio.emit('recieve_message', data, room = data['room_id'])
+    socketio.emit('receive_message', data, room = data['room_id'])
     
 # When a room is created, send that room data to all
 # users in the space.
