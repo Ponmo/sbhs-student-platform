@@ -404,9 +404,9 @@
         if (mobile_column == 1) {
           mobile_column = 0;
           $('#chats').css("margin-left", "270px");
-          $('#chats').css("margin-right", "270px");
-          $('#chats').css("margin-right", "270px");
-          $('#chats').css("margin-right", "270px");
+          $('#chats').css("margin-right", "-270px");
+          $('#information').css("margin-left", "270px");
+          $('#information').css("margin-right", "-270px");
 
           $('#header').animate({"margin-right":"-270px"}, 50);
           $('#channels').animate({"margin-right":"-270px"}, 50);
@@ -1277,6 +1277,7 @@
             newMode.innerHTML = '<p class="message-combine-time">' + messageMoment + '</p><p class="message-combine">' + data.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"></div>';
           }
         }
+        newNode.setAttribute('data-user', data.user_id);
         document.getElementById('messages').append(newMode);
       });
       
@@ -1641,6 +1642,7 @@
                 newMode.className = 'message-container';
                 newMode.id = item._id.$oid;
                 newMode.setAttribute('data-date', messageDate.format('M/D/YYYY'));
+                newNode.setAttribute('data-user', data.user_id);
                 //newMode.setAttribute('data-user', )
                 if(moment(messageDate).isSame(todayDate, 'day')) {
                   messageDate = 'at ' + messageDate.format('h:mm A');
@@ -1662,6 +1664,8 @@
                 newMode.className = 'message-container-combine';
                 newMode.id = item._id.$oid;
                 newMode.setAttribute('data-date', messageDate.format('M/D/YYYY'));
+                newNode.setAttribute('data-user', data.user_id);
+
                 if (space_admin == true || item.user_id == user_id) {
                   newMode.innerHTML = '<p class="message-combine-time">' + messageDate.format('h:mm A') + '</p><p class="message-combine">' + item.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>'; 
                 } 
