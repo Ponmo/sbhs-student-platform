@@ -514,16 +514,28 @@
             $('#mobile_touch_overlay').css("display", "none");
       }
 
-      document.addEventListener('touchstart', e => {
-        touchstartX = e.changedTouches[0].screenX;
-        touchstartY = e.changedTouches[0].screenY;
-      });
+      // document.addEventListener('touchstart', e => {
+      //   touchstartX = e.changedTouches[0].screenX;
+      //   touchstartY = e.changedTouches[0].screenY;
+      // });
 
-      document.addEventListener('touchend', e => {
-        touchendX = e.changedTouches[0].screenX;
-        touchendY = e.changedTouches[0].screenY;
-        checkDirection();
-      });
+      // document.addEventListener('touchend', e => {
+      //   touchendX = e.changedTouches[0].screenX;
+      //   touchendY = e.changedTouches[0].screenY;
+      //   checkDirection();
+      // });
+      var gesuredZone = document.getElementById('content');
+
+gesuredZone.addEventListener('touchstart', function(event) {
+    touchstartX = event.screenX;
+    touchstartY = event.screenY;
+}, false);
+
+gesuredZone.addEventListener('touchend', function(event) {
+    touchendX = event.screenX;
+    touchendY = event.screenY;
+    checkDirection();
+}, false); 
 
 
       $(document).on('click', '#profile', function() {
