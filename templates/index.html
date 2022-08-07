@@ -408,27 +408,22 @@
       });
 
       
-
+      /* Does not work for laptops or computers, need to check compatibility with wider-screen tablets */
+      /* Can create general functions for animating members and channels div in combo with buttons*/
+      /* Set Chat width to whatever it is before to prevent glitch, and set a background div to members to prevent white glitch? */
+      /* IMPORTANT TODO: if statement (for touchscreen with widths bigger than 768) that prevents desktop or swipe AND disable swipe when not on content page*/
+      
+      /* If width of device is greater than height (ipads), then landscape orient it and disable swiping (add && mobile to if statements*/
       $(document).on('click', '#open_channels', function() {
         if (mobile_column == 1) {
           showChannels();
         }
       });
-
-      
       $(document).on('click', '#open_members', function() {
         if (mobile_column == 1) {
           showMembers();
         }
       });
-
-
-      /* Does not work for laptops or computers, need to check compatibility with wider-screen tablets */
-      /* Can create general functions for animating members and channels div in combo with buttons*/
-      /* Set Chat width to whatever it is before to prevent glitch, and set a background div to members to prevent white glitch? */
-      /* IMPORTANT TODO: if statement (for touchscreen with widths bigger than 768) that prevents desktop or swipe AND disable swipe when not on content page*/
-
-      /* If width of device is greater than height (ipads), then landscape orient it and disable swiping (add && mobile to if statements*/
       let touchstartX = 0;
       let touchendX = 0;
       let touchstartY = 0;
