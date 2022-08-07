@@ -448,6 +448,8 @@
       /* If width of device is greater than height (ipads), then landscape orient it and disable swiping (add && mobile to if statements*/
       let touchstartX = 0;
       let touchendX = 0;
+      let touchstartY = 0;
+      let touchendY = 0;
       function checkDirection() {
         if ((touchstartX - touchendX) > 80  && (mobile_column != 2)) {
           if (mobile_column == 1) {
@@ -502,9 +504,11 @@
 
       document.addEventListener('touchstart', e => {
         touchstartX = e.changedTouches[0].screenX;
+        touchstartY = e.changedTouches[0].screenY;
       });
 
       document.addEventListener('touchend', e => {
+        touchendX = e.changedTouches[0].screenX;
         touchendX = e.changedTouches[0].screenX;
         checkDirection();
       });
@@ -1654,9 +1658,11 @@
                 else{
                   newMode.innerHTML = '<img class="profile-picture pointer" src="' + item.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + item.name + ' </b></span><span class="datetime">' + messageDate + '</span></p><p class="message">' + item.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"></div>';
                 }
+                newMode.setAttribute('data-date', messageDate.format('M/D/YYYY'));
               }
               else {
                 newMode.className = 'message-container-combine';
+                newMode.setAttribute('data-date', messageDate.format('M/D/YYYY'));
                 if (space_admin == true || item.user_id == user_id) {
                   newMode.innerHTML = '<p class="message-combine-time">' + messageDate.format('h:mm A') + '</p><p class="message-combine">' + item.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>'; 
                 } 
@@ -1665,7 +1671,6 @@
                 }
               }
               newMode.id = item._id.$oid;
-              newMode.setAttribute('data-date', messageDate.format('M/D/YYYY'));
               newMode.setAttribute('data-user', item.user_id);
               document.getElementById('messages').prepend(newMode);
             });
