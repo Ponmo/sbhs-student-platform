@@ -403,12 +403,19 @@
       $(document).on('click', '#open_channels', function() {
         if (mobile_column == 1) {
           mobile_column = 0;
+          $('#chats').css("margin-left", "270px");
+          $('#chats').css("margin-right", "270px");
+          $('#chats').css("margin-right", "270px");
+          $('#chats').css("margin-right", "270px");
+
           $('#header').animate({"margin-right":"-270px"}, 50);
           $('#channels').animate({"margin-right":"-270px"}, 50);
-          $('#chats').animate({"margin-left":"270px"}, 50);
-          $('#information').animate({"margin-left":"270px"}, 50);
-          $('#chats').animate({"margin-right":"-270px"}, 50);
-          $('#information').animate({"margin-right":"-270px"}, 50);
+
+          // $('#chats').animate({"margin-left":"270px"}, 50);
+          // $('#information').animate({"margin-left":"270px"}, 50);
+          // $('#chats').animate({"margin-right":"-270px"}, 50);
+          // $('#information').animate({"margin-right":"-270px"}, 50);
+          
           $('#mobile_touch_overlay').css("display", "block");
           $('#mobile_touch_overlay').css("left", "270px");
           $('#mobile_touch_overlay').css("width", "calc(100vw - 270px)");
@@ -726,12 +733,36 @@
         document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight; 
         stoppedTyping();
         clearTimeout(timeout);
+
+        // const newMode = document.createElement('div');
+        // let messageMoment = moment(data.datetime).local().format('h:mm A');
+        // if (data.combine == 'false') {
+        //   newMode.className = 'message-container';
+        //   newMode.id = data.message_id;
+        //   messageMoment = 'at ' + messageMoment;
+        //   // TODO: Give pfp image default fallback image
+        //   if (space_admin == true || data.user_id == user_id) {
+        //     newMode.innerHTML = '<img class="profile-picture pointer" src="' + data.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + data.name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message">' + data.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>'; 
+        //   }//change message should not have edit or delete button
+        //   else {
+        //     newMode.innerHTML = '<img class="profile-picture pointer" src="' + data.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + data.name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message">' + data.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"></div>';
+        //   }
+        // }
+        // else {
+        //   newMode.className = 'message-container-combine';
+        //   newMode.id = data.message_id;
+        //   if (space_admin == true || data.user_id == user_id){
+        //   newMode.innerHTML = '<p class="message-combine-time">' + messageMoment + '</p><p class="message-combine">' + data.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>';
+        //   } //change message should not have edit or delete button
+        //   else{
+        //     newMode.innerHTML = '<p class="message-combine-time">' + messageMoment + '</p><p class="message-combine">' + data.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"></div>';
+        //   }
+        // }
+        // document.getElementById('messages').append(newMode);
+
         if (message.length) {
           socket.emit('send_message', {
-            name: "{{ name }}",
             room_id: current_room,
-            user_id: user_id,
-            picture: "{{ picture }}",
             message: message
           });
         }
@@ -1610,6 +1641,7 @@
                 newMode.className = 'message-container';
                 newMode.id = item._id.$oid;
                 newMode.setAttribute('data-date', messageDate.format('M/D/YYYY'));
+                //newMode.setAttribute('data-user', )
                 if(moment(messageDate).isSame(todayDate, 'day')) {
                   messageDate = 'at ' + messageDate.format('h:mm A');
                 }

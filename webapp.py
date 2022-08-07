@@ -532,17 +532,20 @@ def send_message(data):
     utc_dt = datetime.now().isoformat() + 'Z'
     data['datetime'] = utc_dt
     data['message'] = re.sub('\\\n\\n\\\n+', '\\n\\n', data['message'])
+    data['message_id'] = str(ObjectId())
+    data['user_id'] = session['unique_id']
+    data['picture'] = session['picture']
+    data['name'] = session['users_name']
     latest_message = collection_messages.find_one({'room': data['room_id']}, sort=[( '_id', pymongo.DESCENDING )])
     try:
         duration = datetime.now() - datetime.fromisoformat(latest_message.get('datetime').replace('Z', ''))
-        if latest_message.get('name') == session['users_name'] and latest_message.get('picture') == session['picture'] and duration.total_seconds() < 180:
+        if latest_message.get('name') == session['users_name'] and latest_message.get('picture') == session['picture'] and duration.total_seconds() < 180: #deprecate
             data['combine'] = 'true'
         else:
             data['combine'] = 'false'
     except:
         data['combine'] = 'false'
-    data['message_id'] = str(ObjectId())
-    collection_messages.insert_one({'_id': ObjectId(data['message_id']), 'name': data['name'], 'picture': session['picture'], 'room': data['room_id'], 'datetime': utc_dt, 'message': data['message'], 'combine': data['combine'], 'email': session['users_email'], 'user_id': session['unique_id']})
+    collection_messages.insert_one({'_id': ObjectId(data['message_id']), 'name': data['name'], 'user_id': data['user_id'], 'picture': data['picture'], 'room': data['room_id'], 'datetime': utc_dt, 'message': data['message'], 'combine': data['combine'], 'email': session['users_email']})
     socketio.emit('receive_message', data, room = data['room_id'])
     
 # When a room is created, send that room data to all
