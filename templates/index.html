@@ -128,14 +128,14 @@
           <!-- can get rid of once mobile app created -->
           <div id="channels_bottom"></div>
           <div id="chats_bottom"></div>
-          <div id="membera_bottom"></div>
+          <div id="members_bottom"></div>
         </div>
       </div>
 
       <div id="footer">
         <div id="profile">
           <!-- load exclamation mark icon if not showing -->
-          <img src={{ picture }} alt="pfp" class="profile-picture pointer">
+          <img src={{ user_picture }} alt="pfp" class="profile-picture pointer">
           <p id="username" class="pointer">{{ name }}</p>
           <p id="student_id" class="pointer">Santa Barbara High School</p>
           <img class="pointer" id="settings" src="/static/images/settings-white.png">
@@ -215,6 +215,8 @@
       var selected_room = '';
       var space_admin = false;
       var user_id = '{{ user_id }}';
+      var user_picture = '{{ user_picture }}';
+      var user_name = '{{ user_name }}';
       var selected_user = '';
       var add_to_members = false;
       var mobile_column = 1;
@@ -726,31 +728,19 @@
         stoppedTyping();
         clearTimeout(timeout);
 
-        // const newNode = document.createElement('div');
-        // let messageMoment = moment().local().format('h:mm A');
-        // if (document.getElementById('messages').lastElementChild.getAttribute('data-user') == user_id) {
-        //   newNode.className = 'message-container temporary-message';
-        //   newNode.id = data.message_id;
-        //   messageMoment = 'at ' + messageMoment;
-        //   // TODO: Give pfp image default fallback image
-        //   if (space_admin == true || data.user_id == user_id) {
-        //     newNode.innerHTML = '<img class="profile-picture pointer" src="' + data.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + data.name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message">' + data.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>'; 
-        //   }//change message should not have edit or delete button
-        //   else {
-        //     newNode.innerHTML = '<img class="profile-picture pointer" src="' + data.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + data.name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message">' + data.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"></div>';
-        //   }
-        // }
-        // else {
-        //   newNode.className = 'message-container-combine temporary-message';
-        //   newNode.id = data.message_id;
-        //   if (space_admin == true || data.user_id == user_id){
-        //   newNode.innerHTML = '<p class="message-combine-time">' + messageMoment + '</p><p class="message-combine">' + data.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>';
-        //   } //change message should not have edit or delete button
-        //   else{
-        //     newNode.innerHTML = '<p class="message-combine-time">' + messageMoment + '</p><p class="message-combine">' + data.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"></div>';
-        //   }
-        // }
-        // document.getElementById('messages').append(newNode);
+        const newNode = document.createElement('div');
+        newNode.style.opacity = 0.5;
+        let messageMoment = moment().local().format('h:mm A');
+        if (document.getElementById('messages').lastElementChild.getAttribute('data-user') != user_id) {
+          newNode.className = 'message-container temporary-message';
+          messageMoment = 'at ' + messageMoment;
+          newNode.innerHTML = '<img class="profile-picture pointer" src="' + user_picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + user_name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message">' + message + '</p>';
+        }
+        else {
+          newNode.className = 'message-container-combine temporary-message';
+          newNode.innerHTML = '<p class="message-combine-time">' + messageMoment + '</p><p class="message-combine">' + message + '</p>';
+        }
+        document.getElementById('messages').append(newNode);
 
         if (message.length) {
           socket.emit('send_message', {
@@ -1269,11 +1259,12 @@
         }
         newMode.id = data.message_id;
         newMode.setAttribute('data-user', data.user_id);
+        $('.temporary-message').remove();
         document.getElementById('messages').append(newMode);
       });
       
       socket.on('is_typing', function (data) {
-        if (!typing_list.includes(data.name) && data.name != "{{ name }}") {
+        if (!typing_list.includes(data.name) && data.name != user_name) {
           typing_list.push(data.name);
         }
         changeTypingDisplay();
@@ -1780,7 +1771,7 @@
       function stoppedTyping() {
         typing = false;
         socket.emit('stopped_typing', {
-          name: "{{ name }}",
+          name: user_name,
           room_id: current_room
         });
       }
@@ -1789,7 +1780,7 @@
         if (typing == false) {
           typing = true;
           socket.emit('is_typing', {
-            name: "{{ name }}",
+            name: user_name,
             room_id: current_room
           });
           timeout = setTimeout(stoppedTyping, 5000);

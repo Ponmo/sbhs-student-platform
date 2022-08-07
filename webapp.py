@@ -222,7 +222,7 @@ def render_main_page(space_id = None):
         return redirect('https://sbhs-platform.herokuapp.com/sbhs/' + space_id) #TypeError: can only concatenate str (not "NoneType") to str
     if 'logged' not in session or session['logged'] == False:
        return redirect(url_for('render_login'))
-    return render_template('index.html', name = session['users_name'], room = '1', picture = session['picture'], user_id = session['unique_id'])
+    return render_template('index.html', user_name = session['users_name'], room = '1', user_picture = session['picture'], user_id = session['unique_id'])
 
 # When logout button is clicked, destroy session.
 
