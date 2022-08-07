@@ -1640,10 +1640,6 @@
               const newMode = document.createElement('div');
               if (item.combine == 'false') {
                 newMode.className = 'message-container';
-                newMode.id = item._id.$oid;
-                newMode.setAttribute('data-date', messageDate.format('M/D/YYYY'));
-                newNode.setAttribute('data-user', data.user_id);
-                //newMode.setAttribute('data-user', )
                 if(moment(messageDate).isSame(todayDate, 'day')) {
                   messageDate = 'at ' + messageDate.format('h:mm A');
                 }
@@ -1662,10 +1658,6 @@
               }
               else {
                 newMode.className = 'message-container-combine';
-                newMode.id = item._id.$oid;
-                newMode.setAttribute('data-date', messageDate.format('M/D/YYYY'));
-                newNode.setAttribute('data-user', data.user_id);
-
                 if (space_admin == true || item.user_id == user_id) {
                   newMode.innerHTML = '<p class="message-combine-time">' + messageDate.format('h:mm A') + '</p><p class="message-combine">' + item.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>'; 
                 } 
@@ -1673,6 +1665,9 @@
                   newMode.innerHTML = '<p class="message-combine-time">' + messageDate.format('h:mm A') + '</p><p class="message-combine">' + item.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"></div>';
                 }
               }
+              newMode.id = item._id.$oid;
+              newMode.setAttribute('data-date', messageDate.format('M/D/YYYY'));
+              newMode.setAttribute('data-user', data.user_id);
               document.getElementById('messages').prepend(newMode);
             });
           } 
