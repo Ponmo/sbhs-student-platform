@@ -524,7 +524,7 @@
           touchendX = e.changedTouches[0].screenX;
           touchendY = e.changedTouches[0].screenY;
           checkDirection();
-          alert(e.target);
+          alert(JSON.stringify(e.target));
         }
       });
 
@@ -722,13 +722,13 @@
         const newNode = document.createElement('div');
         newNode.style.opacity = 0.5;
         let messageMoment = moment().format('h:mm A');
-        // if las
         if ($('#messages').children().not('.temporary-message').last().data('user') != user_id) {
           newNode.className = 'message-container temporary-message';
           messageMoment = 'at ' + messageMoment;
           newNode.innerHTML = '<img class="profile-picture pointer" src="' + user_picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + user_name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message">' + message + '</p>';
         }
         else {
+          // if ($('#messages').children().not('.temporary-message').last().class != user_id)
           newNode.className = 'message-container-combine temporary-message';
           newNode.innerHTML = '<p class="message-combine-time">' + messageMoment + '</p><p class="message-combine">' + message + '</p>';
         }
