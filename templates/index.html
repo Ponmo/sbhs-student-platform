@@ -524,6 +524,16 @@
           touchendY = e.changedTouches[0].screenY;
           checkDirection();
       });
+      document.getElementById('channels').addEventListener('touchstart', e => {
+          touchstartX = e.changedTouches[0].screenX;
+          touchstartY = e.changedTouches[0].screenY;
+      });
+
+      document.getElementById('channels').addEventListener('touchend', e => {
+          touchendX = e.changedTouches[0].screenX;
+          touchendY = e.changedTouches[0].screenY;
+          checkDirection();
+      });
 
       $(document).on('click', '#profile', function() {
         $('#user-page').css('display', 'block');
