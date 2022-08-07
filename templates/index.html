@@ -514,12 +514,12 @@
             $('#mobile_touch_overlay').css("display", "none");
       }
 
-      document.body.addEventListener('touchstart', e => {
+      document.getElementById('chats').addEventListener('touchstart', e => {
           touchstartX = e.changedTouches[0].screenX;
           touchstartY = e.changedTouches[0].screenY;
       });
 
-      document.body.addEventListener('touchend', e => {
+      document.getElementById('chats').addEventListener('touchend', e => {
           touchendX = e.changedTouches[0].screenX;
           touchendY = e.changedTouches[0].screenY;
           checkDirection();
