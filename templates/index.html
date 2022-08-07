@@ -435,16 +435,7 @@
       
       $(document).on('click', '#open_members', function() {
         if (mobile_column == 1) {
-          mobile_column = 2;
-          $('#members').animate({"margin-left":"-220px"}, 50);
-          $('#chats').animate({"margin-left":"-220px"}, 50);
-          $('#chats').animate({"margin-right":"220px"}, 50);
-          /* Maybe not needed (Lag?): */
-          $('#information').animate({"margin-left":"-220px"}, 50);
-          $('#information').animate({"margin-right":"220px"}, 50);
-          $('#mobile_touch_overlay').css("display", "block");
-          $('#mobile_touch_overlay').css("left", "0px");
-          $('#mobile_touch_overlay').css("width", "calc(100vw - 220px)");
+          showMembers();
         }
       });
 
@@ -509,6 +500,31 @@
             $('#mobile_touch_overlay').css("display", "none");
           }
         }
+      }
+
+      function showMembers() {
+        mobile_column = 2;
+          $('#members').animate({"margin-left":"-220px"}, 50);
+          $('#chats').animate({"margin-left":"-220px"}, 50);
+          $('#chats').animate({"margin-right":"220px"}, 50);
+          /* Maybe not needed (Lag?): */
+          $('#information').animate({"margin-left":"-220px"}, 50);
+          $('#information').animate({"margin-right":"220px"}, 50);
+          $('#mobile_touch_overlay').css("display", "block");
+          $('#mobile_touch_overlay').css("left", "0px");
+          $('#mobile_touch_overlay').css("width", "calc(100vw - 220px)");
+      }
+      function hideMembers() {
+
+      }
+      function showChannels() {
+
+      }
+      function hideChannels() {
+        
+      } 
+      function leaveContent() {
+        // if Mobile, revert all when going to home page or space search page
       }
 
       document.addEventListener('touchstart', e => {
@@ -731,7 +747,7 @@
         const newNode = document.createElement('div');
         newNode.style.opacity = 0.5;
         let messageMoment = moment().local().format('h:mm A');
-        if (document.getElementById('messages').lastElementChild.getAttribute('data-user') != user_id) {
+        if ($('#message :not(".temporary"):last').attr('data-user') != user_id) {
           newNode.className = 'message-container temporary-message';
           messageMoment = 'at ' + messageMoment;
           newNode.innerHTML = '<img class="profile-picture pointer" src="' + user_picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + user_name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message">' + message + '</p>';
