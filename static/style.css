@@ -696,7 +696,11 @@ img { /* make images and create button undraggable and unhighlitable*/
   display: inline-block;
   vertical-align: middle;
 }
-
+#members_header {
+  grid-column: 3;
+  grid-row: 1;
+  background-color: purple;
+}
 #members {
   grid-column: 3;
   z-index: 1; /* to make the send button not overlay the members div on small screen sizes can change once small version introduced */
