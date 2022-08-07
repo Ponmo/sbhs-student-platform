@@ -389,6 +389,9 @@ img { /* make images and create button undraggable and unhighlitable*/
   max-width: auto;
   background-color: #36393e;
 }
+#chats::after { 
+  background-color: #36393e; 
+}
 #chat {
   flex: 1;
   display: flex;
