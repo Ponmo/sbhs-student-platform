@@ -1666,7 +1666,7 @@
               }
               newMode.id = item._id.$oid;
               newMode.setAttribute('data-date', messageDate.format('M/D/YYYY'));
-              newMode.setAttribute('data-user', data.user_id);
+              newMode.setAttribute('data-user', item.user_id);
               document.getElementById('messages').prepend(newMode);
             });
           } 
