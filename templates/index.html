@@ -451,7 +451,7 @@
       let touchstartY = 0;
       let touchendY = 0;
       function checkDirection() {
-        if ((touchstartX - touchendX) > 80  && (mobile_column != 2)) {
+        if (((touchstartX - touchendX) > 80) && ((touchstartY - touchendY) ) && (mobile_column != 2)) {
           if (mobile_column == 1) {
             mobile_column = 2;
             $('#members').animate({"margin-left":"-220px"}, 50);
@@ -509,7 +509,7 @@
 
       document.addEventListener('touchend', e => {
         touchendX = e.changedTouches[0].screenX;
-        touchendX = e.changedTouches[0].screenX;
+        touchendY = e.changedTouches[0].screenY;
         checkDirection();
       });
 
@@ -1643,6 +1643,7 @@
               const newMode = document.createElement('div');
               if (item.combine == 'false') {
                 newMode.className = 'message-container';
+                newMode.setAttribute('data-date', messageDate.format('M/D/YYYY'));
                 if(moment(messageDate).isSame(todayDate, 'day')) {
                   messageDate = 'at ' + messageDate.format('h:mm A');
                 }
@@ -1658,7 +1659,6 @@
                 else{
                   newMode.innerHTML = '<img class="profile-picture pointer" src="' + item.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + item.name + ' </b></span><span class="datetime">' + messageDate + '</span></p><p class="message">' + item.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"></div>';
                 }
-                newMode.setAttribute('data-date', messageDate.format('M/D/YYYY'));
               }
               else {
                 newMode.className = 'message-container-combine';
