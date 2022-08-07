@@ -508,11 +508,13 @@
           timeoutId = setTimeout(myFunction, 500);
       }).on('mouseup mouseleave', function() {
           clearTimeout(timeoutId);
+          this.firstChild.nextElementSibling.nextElementSibling.nextElementSibling.css("display", "block");
       });
       $('.message-container-combine').on('mousedown', function() {
           timeoutId = setTimeout(myFunction, 500);
       }).on('mouseup mouseleave', function() {
           clearTimeout(timeoutId);
+          this.firstChild.nextElementSibling.nextElementSibling.css("display", "block");
       });
 
 
