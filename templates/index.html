@@ -214,6 +214,7 @@
       var add_to_members = false;
       var mobile_column = 1;
       var mobile = ($(window).width <= 768);
+      var requests = [];
       
       //Check if it's Safari Mobile
       var ua = window.navigator.userAgent;
@@ -378,6 +379,7 @@
       });
 
       $(document).on('click', '#log-out', function () {
+        
         $.ajax({
           type: 'POST',
           url: '/logout',
@@ -499,6 +501,24 @@
         touchendX = e.changedTouches[0].screenX;
         checkDirection();
       });
+
+      var onlongtouch; 
+      var timer;
+      var touchduration = 500; //length of time we want the user to touch before we do something
+
+      touchstart() {
+          timer = setTimeout(onlongtouch, touchduration); 
+      }
+      touchend() {
+          //stops short touches from firing the event
+          if (timer)
+              clearTimeout(timer); // clearTimeout, not cleartimeout..
+      }
+
+      onlongtouch = function() { 
+        
+      };
+
 
       $(document).on('click', '#profile', function() {
         $('#user-page').css('display', 'block');
@@ -1566,7 +1586,8 @@
       }
 
       function loadChatHistory() {
-        $.ajax({
+        abortRequests();
+        requests.push($.ajax({
           type: 'POST',
           url: '/chat_history',
           dataType: "json",
@@ -1617,11 +1638,12 @@
               document.getElementById('messages').prepend(newMode);
             });
           } 
-        });
+        }));
       }
 
       function loadEmailHistory() {
-        $.ajax({
+        abortRequests();
+        requests.push($.ajax({
           type: 'POST',
           url: '/email_history',
           dataType: "json",
@@ -1651,7 +1673,7 @@
               document.getElementById('messages').prepend(newMode);
             });
           }
-        });
+        }));
       }
 
       function roomSort() {
@@ -1765,6 +1787,12 @@
         newNodeChild.src = '/static/images/X.png';
         newNode.appendChild(newNodeChild);
         document.getElementById('email_to_list').insertBefore(newNode, document.getElementById('email_to_input_span'));
+      }
+
+      function abortRequests() {
+        requests.forEach(function (request) {
+          request.abort()
+        });
       }
 
     });
