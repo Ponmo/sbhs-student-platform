@@ -412,7 +412,7 @@
       /* Can create general functions for animating members and channels div in combo with buttons*/
       /* Set Chat width to whatever it is before to prevent glitch, and set a background div to members to prevent white glitch? */
       /* IMPORTANT TODO: if statement (for touchscreen with widths bigger than 768) that prevents desktop or swipe AND disable swipe when not on content page*/
-      
+
       /* If width of device is greater than height (ipads), then landscape orient it and disable swiping (add && mobile to if statements*/
       $(document).on('click', '#open_channels', function() {
         if (mobile_column == 1) {
@@ -450,6 +450,7 @@
 
       function showMembers() {
         mobile_column = 2;
+
         $('#members').animate({"margin-left":"-220px"}, 50);
           $('#chats').animate({"margin-left":"-220px"}, 50);
           $('#chats').animate({"margin-right":"220px"}, 50);
@@ -732,7 +733,7 @@
         const newNode = document.createElement('div');
         newNode.style.opacity = 0.5;
         let messageMoment = moment().local().format('h:mm A');
-        if ($('#messages :not(".temporary-message"):last').attr('data-user') != user_id) {
+        if ($('#messages div:not(".temporary-message"):last').attr('data-user') != user_id) {
           newNode.className = 'message-container temporary-message';
           messageMoment = 'at ' + messageMoment;
           newNode.innerHTML = '<img class="profile-picture pointer" src="' + user_picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + user_name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message">' + message + '</p>';

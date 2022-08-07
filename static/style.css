@@ -1131,4 +1131,7 @@ img { /* make images and create button undraggable and unhighlitable*/
     background-color: black;
     opacity: 0.5;
   }
+  #members_header {
+    display: block;
+  }
 }
