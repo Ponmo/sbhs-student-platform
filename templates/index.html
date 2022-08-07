@@ -506,14 +506,18 @@
 
       $('.message-container').on('mousedown', function() {
           timeoutId = setTimeout(myFunction, 500);
+          alert("hello5");
       }).on('mouseup mouseleave', function() {
           clearTimeout(timeoutId);
+          alert("hell4o");
           this.firstChild.nextElementSibling.nextElementSibling.nextElementSibling.css("display", "block");
       });
       $('.message-container-combine').on('mousedown', function() {
           timeoutId = setTimeout(myFunction, 500);
+          alert("hell2o");
       }).on('mouseup mouseleave', function() {
           clearTimeout(timeoutId);
+          alert("hello");
           this.firstChild.nextElementSibling.nextElementSibling.css("display", "block");
       });
 

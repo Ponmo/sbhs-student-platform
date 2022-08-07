@@ -518,11 +518,13 @@ img { /* make images and create button undraggable and unhighlitable*/
   height: 16px;
   margin-left: 4px;
 }
-.message-container:hover .message-options {
-  display: block;
-}
-.message-container-combine:hover .message-options {
-  display: block;
+@media only screen and (min-width: 769px) {
+  .message-container:hover .message-options {
+    display: block;
+  }
+  .message-container-combine:hover .message-options {
+    display: block;
+  }
 }
 #message_input_form {
   z-index: 1; /* For more chrome versions; the hightlight focus on textarea top gets obscured by chat div*/
