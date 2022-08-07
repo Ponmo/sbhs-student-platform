@@ -514,18 +514,17 @@
             $('#mobile_touch_overlay').css("display", "none");
       }
 
-      document.addEventListener('touchstart', e => {
+      document.getElementById("content").addEventListener('touchstart', e => {
           touchstartX = e.changedTouches[0].screenX;
           touchstartY = e.changedTouches[0].screenY;
       });
 
-      document.addEventListener('touchend', e => {
-        if (e.target != document.getElementById("footer")) {
+      document.getElementById("content").addEventListener('touchend', e => {
           touchendX = e.changedTouches[0].screenX;
           touchendY = e.changedTouches[0].screenY;
+          var elem = document.elementFromPoint(changedTouch.clientX, changedTouch.clientY);
+          alert(elem);
           checkDirection();
-          alert(JSON.stringify(e.target));
-        }
       });
 
       $(document).on('click', '#profile', function() {
@@ -722,13 +721,14 @@
         const newNode = document.createElement('div');
         newNode.style.opacity = 0.5;
         let messageMoment = moment().format('h:mm A');
-        if ($('#messages').children().not('.temporary-message').last().data('user') != user_id) {
+        const latestMessage = $('#messages').children().not('.temporary-message').last();
+        if (latestMessage.data('user') != user_id) {
           newNode.className = 'message-container temporary-message';
           messageMoment = 'at ' + messageMoment;
           newNode.innerHTML = '<img class="profile-picture pointer" src="' + user_picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + user_name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message">' + message + '</p>';
         }
         else {
-          // if ($('#messages').children().not('.temporary-message').last().class != user_id)
+          // if ((latestMessage.attr('class') == 'message-container-combine' && ) || (latestMessage.attr('class') == 'message-container' &&))
           newNode.className = 'message-container-combine temporary-message';
           newNode.innerHTML = '<p class="message-combine-time">' + messageMoment + '</p><p class="message-combine">' + message + '</p>';
         }
@@ -1228,6 +1228,7 @@
 
       socket.on('receive_message', function (data) {
         const newMode = document.createElement('div');
+        newMode.setAttribute('data-datetime', data.datetime.format());
         let messageMoment = moment(data.datetime).local().format('h:mm A');
         if (data.combine == 'false') {
           newMode.className = 'message-container';
@@ -1615,6 +1616,7 @@
               if (item.combine == 'false') {
                 newMode.className = 'message-container';
                 newMode.setAttribute('data-date', messageDate.format('M/D/YYYY'));
+                newMode.setAttribute('data-datetime', messageDate.format());
                 if(moment(messageDate).isSame(todayDate, 'day')) {
                   messageDate = 'at ' + messageDate.format('h:mm A');
                 }
@@ -1634,6 +1636,7 @@
               else {
                 newMode.className = 'message-container-combine';
                 newMode.setAttribute('data-date', messageDate.format('M/D/YYYY'));
+                newMode.setAttribute('data-datetime', messageDate.format());
                 if (space_admin == true || item.user_id == user_id) {
                   newMode.innerHTML = '<p class="message-combine-time">' + messageDate.format('h:mm A') + '</p><p class="message-combine">' + item.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>'; 
                 } 
