@@ -1079,6 +1079,9 @@ img { /* make images and create button undraggable and unhighlitable*/
 #mobile_touch_overlay {
   display: none;
 }
+#administrator-page {
+  display: none;
+}
 
 /*Add User Select None Class*/
 
