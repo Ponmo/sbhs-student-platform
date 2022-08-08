@@ -765,12 +765,13 @@
         document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight; 
         stoppedTyping();
         clearTimeout(timeout);
+        // iw40
         if (message.length) {
           const newNode = document.createElement('div');
           newNode.style.opacity = 0.5;
           let messageMoment = moment();
           const latestMessage = $('#messages').children().not('.temporary-message').last();
-          if (latestMessage.data('user') == user_id && moment(messageMoment.diff(latestMessage.data('datetime'))) < 180) {
+          if (latestMessage.data('user') == user_id && messageMoment.diff(moment(latestMessage.data('datetime'))) < 180) {
             newNode.className = 'message-container-combine temporary-message';
             newNode.innerHTML = '<p class="message-combine-time">' + messageMoment.format('h:mm A') + '</p><p class="message-combine">' + message + '</p>';
           }
