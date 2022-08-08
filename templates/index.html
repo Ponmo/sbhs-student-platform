@@ -55,14 +55,18 @@
 
     <!--Home Page-->
     <div id="home-page">
-      <div id="server-settings-button">TEMP. SERVER SETTINGS</div>
+      <div class="main-header">
+        <div id="server-settings-button">TEMP. SERVER SETTINGS</div>
+      </div>
       <!--<div id="special-announcements" class="home-grid"></div>
       <div id="feed" class="home-grid"></div>
       <div id="direct-messaging" class="home-grid"></div>-->
     </div>
 
     <div id="administrator-page">
-      <div id="exit-server-settings">TEMP. EXIT</div>
+      <div class="main-header">
+        <div id="exit-server-settings">TEMP. EXIT</div>
+      </div>
     </div>
 
     <!--Spaces Page-->
@@ -477,6 +481,8 @@
           $('#information').animate({"margin-right":"220px"}, 50);
           $('#mobile_touch_overlay').css("display", "block");
           $('#mobile_touch_overlay').css("left", "0px");
+          $('#mobile_touch_overlay').css("width", "calc(100vw - 220px)");
+
           $('#mobile_touch_overlay').css("width", "calc(100vw - 220px)");
       }
       function hideMembers() {
