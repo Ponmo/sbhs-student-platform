@@ -268,6 +268,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   grid-column: 2 / 4;
   grid-row: 1;
   background-color: hotpink;
+  border-bottom: 1px solid #232428;
   overflow: hidden;
   -moz-user-select: -moz-none;
   -khtml-user-select: none;
