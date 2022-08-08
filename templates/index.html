@@ -766,6 +766,8 @@
       
       document.getElementById('message_input_form').onsubmit = function (e) {
         e.preventDefault();
+        message_input.setAttribute("style", "");
+        message_input.value = ""; 
         let message = message_input.value.trim();
         document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight; 
         stoppedTyping();
