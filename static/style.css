@@ -35,6 +35,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   overflow: hidden;
   display: block;
   height: calc(100vh - 50px);
+  background-color: white;
 }
 .home-grid {
   display: grid;
