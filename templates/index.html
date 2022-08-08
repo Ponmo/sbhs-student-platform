@@ -462,8 +462,8 @@
       let touchstartY = 0;
       let touchendY = 0;
       function checkDirection() {
-        if (((touchstartX - touchendX) > 80) && (Math.abs(touchstartY - touchendY) < 30) && (mobile_column != 2)) {
-          if (mobile_column == 1) {
+        if (((touchstartX - touchendX) > 80) && (Math.abs(touchstartY - touchendY) < 30) && (mobile_column != 2) && mobile) {
+          if (mobile_column == 1 ) {
             showMembers();
           }
           else if (mobile_column == 0) {
@@ -471,7 +471,7 @@
           }
         }
         
-        if (((touchendX - touchstartX) > 80) && (Math.abs(touchstartY - touchendY) < 30) && (mobile_column != 0)) {
+        if (((touchendX - touchstartX) > 80) && (Math.abs(touchstartY - touchendY) < 30) && (mobile_column != 0) && mobile) {
           if (mobile_column == 1) {
             showChannels();
           }
