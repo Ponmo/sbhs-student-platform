@@ -545,36 +545,37 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 
 #message_input_form {
+  position: relative;
   z-index: 1; /* For more chrome versions; the hightlight focus on textarea top gets obscured by chat div*/
   margin-right: 18px;
   margin-left: 18px;
   border-radius: 4px;
   background: white;
-  min-height: 39px;
+  min-height: 40px;
   min-width: 84px;
 }
 #message_input { /* different highlight on click */
-  width: calc(100% - 39px);
+  width: 100%;
   min-width: 43px;
   overflow-x: hidden;
   float: left;
   padding-left: 10px;
-  padding-top: 9px;
+  padding-top: 10px;
+  padding-right: 40px;
   padding-bottom: 10px;
   background: transparent;
   border: none;
   resize: none;
 }
 #submit {
-  float: right;
-
-  width: 39px; 
-  height: 39px;
+  position: absolute;
+  right: 0px;
+  width: 40px; 
+  height: 40px;
   background-color: transparent;
   border: none;
 }
 .send {
-  margin-right: 18px;
   width: 26px;
   height: 26px;
 }
