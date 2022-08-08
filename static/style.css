@@ -799,7 +799,6 @@ img { /* make images and create button undraggable and unhighlitable*/
 
 }
 #space-settings-button {
-  display: none;
   height: 14px;
   float: right;
   margin-top: 16px;
