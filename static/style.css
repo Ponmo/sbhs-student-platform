@@ -552,8 +552,6 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 #submit {
   width: 39px; 
-  float: right;
-  width: 39px;
   height: 39px;
   background-color: transparent;
   border: none;
