@@ -158,6 +158,7 @@
           <p id="student_id" class="pointer">Santa Barbara High School</p>
           <img class="pointer" id="settings" src="/static/images/settings-white.png">
         </div>
+
         <ul id="spaces">
           <span id="space_align_helper"></span>
             <button type="button" id="create-space-button"><img src="/static/images/ppicons-plus.svg" alt="create" style="width:25px;height:25px;"></button>
@@ -462,7 +463,7 @@
       let touchstartY = 0;
       let touchendY = 0;
       function checkDirection() {
-        if (((touchstartX - touchendX) > 80) && (Math.abs(touchstartY - touchendY) < 30) && (mobile_column != 2) && mobile) {
+        if (((touchstartX - touchendX) > 40) && (Math.abs(touchstartY - touchendY) < 20) && (mobile_column != 2) && mobile) {
           if (mobile_column == 1 ) {
             showMembers();
           }
@@ -471,7 +472,7 @@
           }
         }
         
-        if (((touchendX - touchstartX) > 80) && (Math.abs(touchstartY - touchendY) < 30) && (mobile_column != 0) && mobile) {
+        if (((touchendX - touchstartX) > 40) && (Math.abs(touchstartY - touchendY) < 20) && (mobile_column != 0) && mobile) {
           if (mobile_column == 1) {
             showChannels();
           }
