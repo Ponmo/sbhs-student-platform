@@ -569,15 +569,15 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 #submit {
   position: absolute;
-  right: 0px;
+  right: 40px;
   width: 40px; 
   height: 40px;
   background-color: transparent;
   border: none;
 }
 .send {
-  width: 40px;
-  height: 40px;
+  width: 26px;
+  height: 26px;
 }
 #typing_display {
   height: 20px;
