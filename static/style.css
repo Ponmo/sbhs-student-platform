@@ -576,6 +576,9 @@ img { /* make images and create button undraggable and unhighlitable*/
   border: none;
 }
 .send {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   width: 26px;
   height: 26px;
 }
@@ -1192,6 +1195,5 @@ img { /* make images and create button undraggable and unhighlitable*/
     background-color: #2f3136;
   }
   #submit {
-    right: 14px;
   }
 }
