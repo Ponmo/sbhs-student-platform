@@ -8,6 +8,7 @@ body {
   touch-action: none;
   -webkit-overflow-scrolling: none;
   overflow: hidden;
+  background-color: #36393e;
 }
 /* flex and width: 100% - 290px*/
 img { /* make images and create button undraggable and unhighlitable*/
