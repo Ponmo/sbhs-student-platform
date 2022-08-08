@@ -238,7 +238,8 @@
       var selected_user = '';
       var add_to_members = false;
       var mobile_column = 1;
-      var mobile = ($(window).width <= 768);
+      var mobile = ($(window).width() <= 768);
+      alert(mobile);
       var requests = [];
       
       //Check if it's Safari Mobile
@@ -447,8 +448,7 @@
 
       /* If width of device is greater than height (ipads), then landscape orient it and disable swiping (add && mobile to if statements*/
       $(document).on('click', '#open_channels', function() {
-        alert(mobile);
-        if (mobile_column == 1 && mobile) {
+        if (mobile_column == 1) {
           showChannels();
         }
       });
