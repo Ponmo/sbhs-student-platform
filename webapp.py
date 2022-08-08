@@ -638,5 +638,5 @@ def space_admin():
         return True
     return False
 
-if __name__ == '__main__':
-    socketio.run(app, debug=False)
+#if __name__ == '__main__':
+#    socketio.run(app, debug=False)
