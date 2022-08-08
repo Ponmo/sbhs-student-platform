@@ -576,6 +576,8 @@ img { /* make images and create button undraggable and unhighlitable*/
   border: none;
 }
 .send {
+  width: 50%;
+  margin: 0 auto;
   width: 26px;
   height: 26px;
 }
