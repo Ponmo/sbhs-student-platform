@@ -193,12 +193,10 @@ img { /* make images and create button undraggable and unhighlitable*/
   width: 100vw;
 }
 #server-settings-button {
+  line-height: 48px;
+  display: inline-block;
   float: right;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  margin-right: 12px;
-  margin-top: 15px;
+  margin-right: 24px;
 }
 #exit-server-settings {
   line-height: 48px;
@@ -1112,7 +1110,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 .main-header {
   padding-left: 24px;
-  background-color: teal;
+  background-color: hotpink;
   border-bottom: 1px solid black;
   font-size: 18px;
   font-weight: bold;
