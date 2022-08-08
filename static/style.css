@@ -1087,7 +1087,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 @media only screen and (max-width: 768px) {
   #content { /* make calc good on all browsers ; Make margin and padding 0 because of broswer differences ; */
     grid-template-columns: 0px minmax(278px, auto) 0px;
-    grid-template-rows: 48px calc(100vh - 98px) 100px;
+    grid-template-rows: 48px calc(100vh - 98px) 600px;
   }
   #profile {
     display: grid;

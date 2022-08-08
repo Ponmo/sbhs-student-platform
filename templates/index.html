@@ -418,6 +418,13 @@
         $('#space-search').css('display', 'none');
         $('#administrator-page').css('display', 'block');
       });
+
+      $(document).on('click', '#exit-server-settings', function() {
+        $('#home-page').css('display', 'block');
+        $('#first-all').css('display', 'none');
+        $('#space-search').css('display', 'none');
+        $('#administrator-page').css('display', 'none');
+      });
       
       /* Does not work for laptops or computers, need to check compatibility with wider-screen tablets */
       /* Can create general functions for animating members and channels div in combo with buttons*/
