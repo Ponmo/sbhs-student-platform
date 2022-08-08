@@ -416,6 +416,7 @@
       });
 
       $(document).on('click', '#home', function() {
+        leaveContent();
         window.history.pushState('', '', '/sbhs');
         $('#' + current_space).attr('style', '');
         current_space = '';
@@ -611,22 +612,7 @@
         // $('#content').css('grid-template-rows', '48px calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px - 48px)');
         //$('#footer').css('top', document.getElementById('footer').getBoundingClientRect().top + 'px');
         if ($(window).width() > 768) {
-          mobile_column = 1;
-          $('#header').css("margin-right", "0px");
-          $('#channels').css("margin-right", "0px");
-          $('#chats').css("margin-left", "0px");
-          $('#information').css("margin-left", "0px");
-          $('#chats').css("margin-right", "0px");
-          $('#information').css("margin-right", "0px");
-          $('#members').css("margin-left", "0px");
-          $('#members_header').css("margin-left", "0px");
-          $('#chats').css("margin-left", "0px");
-          $('#chats').css("margin-right", "0px");
-          $('#information').css("margin-left", "0px");
-          $('#information').css("margin-right", "0px");
-          $('#mobile_touch_overlay').css("display", "none");
-          $('#mobile_touch_overlay').css("left", "0px");
-          $('#mobile_touch_overlay').css("width", "0px");
+          leaveContent();
           mobile = false;
         }
         else {

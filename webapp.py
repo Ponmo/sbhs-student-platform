@@ -303,7 +303,7 @@ def email_history():
         email_history = collection_emails.find({'room': request.json['room_id']}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(100)
         email_list = []
         for email in email_history:
-            if session['users_email'] in email['recipients'] or space_admin():
+            if session['users_email'] in email['recipients'] or 'Everyone' in email['recipients'] or space_admin():
                 email_list.append(email)
         return Response(dumps(email_list), mimetype='application/json')
 
