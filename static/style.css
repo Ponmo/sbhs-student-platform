@@ -1195,5 +1195,6 @@ img { /* make images and create button undraggable and unhighlitable*/
     background-color: #2f3136;
   }
   #submit {
+    right: 6px;
   }
 }
