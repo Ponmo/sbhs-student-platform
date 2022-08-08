@@ -190,9 +190,17 @@ img { /* make images and create button undraggable and unhighlitable*/
   color: #ffffff;
 }
 .main-header {
-  height: 48px;
+  height: 30px;
   width: 100vw;
+  white-space: nowrap;
+  padding-left: 24px;
+  background-color: hotpink;
+  border-bottom: 1px solid black;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
 }
+
 #server-settings-button {
   line-height: 48px;
   display: inline-block;
@@ -1109,14 +1117,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 #admin-settings {
     display: inline-block;
 }
-.main-header {
-  padding-left: 24px;
-  background-color: hotpink;
-  border-bottom: 1px solid black;
-  font-size: 18px;
-  font-weight: bold;
-  color: white;
-}
+
 /*Add User Select None Class*/
 
 /* Mobile Media Query */
