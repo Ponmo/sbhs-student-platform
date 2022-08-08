@@ -756,8 +756,6 @@
         if(e.which === 13 && !e.shiftKey) {
           e.preventDefault();
           $(document.getElementById('message_input_form')).submit();
-          message_input.setAttribute("style", "");
-          message_input.value = ""; //put placeholder message (message is loading but is faded out to account for lag time or disconnected if wanted)
         }
         else {
           isTyping();
@@ -766,8 +764,6 @@
       
       document.getElementById('message_input_form').onsubmit = function (e) {
         e.preventDefault();
-        message_input.setAttribute("style", "");
-        message_input.value = ""; 
         let message = message_input.value.trim();
         document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight; 
         stoppedTyping();
@@ -792,7 +788,8 @@
             message: message
           });
         }
-        message_input.value = '';
+        message_input.setAttribute("style", "");
+        message_input.value = ""; //put placeholder message (message is loading but is faded out to account for lag time or disconnected if wanted)
         message_input.focus();
       }
 
