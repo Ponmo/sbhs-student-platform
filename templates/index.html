@@ -416,7 +416,6 @@
       });
 
       $(document).on('click', '#home', function() {
-        leaveContent();
         window.history.pushState('', '', '/sbhs');
         $('#' + current_space).attr('style', '');
         current_space = '';
@@ -716,7 +715,6 @@
       });
 
       $(document).on('click', '#space-search-button', function() {
-        leaveContent();
         $('#space-search').css('display', 'block');
         $("#space-search").animate({opacity: '1'}, 100);
       });
