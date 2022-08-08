@@ -472,21 +472,21 @@
 
       function showMembers() {
         mobile_column = 2;
+        $('#chats').css("margin-left", "-220px");
+          $('#chats').css("margin-right", "220px");
+          $('#information').css("margin-left", "-220px");
+          $('#information').css("margin-right", "220px");
+
         $('#members_header').animate({"margin-left":"-220px"}, 50);
         $('#members').animate({"margin-left":"-220px"}, 50);
-          $('#chats').animate({"margin-left":"-220px"}, 50);
-          $('#chats').animate({"margin-right":"220px"}, 50);
           /* Maybe not needed (Lag?): */
-          $('#information').animate({"margin-left":"-220px"}, 50);
-          $('#information').animate({"margin-right":"220px"}, 50);
           $('#mobile_touch_overlay').css("display", "block");
           $('#mobile_touch_overlay').css("left", "0px");
-          $('#mobile_touch_overlay').css("width", "calc(100vw - 220px)");
-
           $('#mobile_touch_overlay').css("width", "calc(100vw - 220px)");
       }
       function hideMembers() {
         mobile_column = 1;
+        
             $('#chats').animate({"margin-right":"-110px"}, 25);
             $('#information').animate({"margin-right":"-110px"}, 25);
             $('#members').animate({"margin-left":"0px"}, 50);
@@ -499,18 +499,16 @@
       }
       function showChannels() {
         mobile_column = 0;
-          $('#chats').css("margin-left", "270px");
-          $('#chats').css("margin-right", "-270px");
-          $('#information').css("margin-left", "270px");
-          $('#information').css("margin-right", "-270px");
+          // $('#chats').css("margin-left", "270px");
+          // $('#chats').css("margin-right", "-270px");
+          // $('#information').css("margin-left", "270px");
+          // $('#information').css("margin-right", "-270px");
 
           $('#header').animate({"margin-right":"-270px"}, 50);
           $('#channels').animate({"margin-right":"-270px"}, 50);
 
-          // $('#chats').animate({"margin-left":"270px"}, 50);
-          // $('#information').animate({"margin-left":"270px"}, 50);
-          // $('#chats').animate({"margin-right":"-270px"}, 50);
-          // $('#information').animate({"margin-right":"-270px"}, 50);
+          $('#chats').animate({"margin":"0px -270px 0px 270px"}, 50);
+          $('#information').animate({"margin":"0px -270px 0x 270px"}, 50);
           
           $('#mobile_touch_overlay').css("display", "block");
           $('#mobile_touch_overlay').css("left", "270px");
@@ -518,12 +516,11 @@
       }
       function hideChannels() {
         mobile_column = 1;
+
             $('#header').animate({"margin-right":"0px"}, 50);
             $('#channels').animate({"margin-right":"0px"}, 50);
-            $('#chats').animate({"margin-left":"0px"}, 50);
-            $('#chats').animate({"margin-right":"0px"}, 40);
-            $('#information').animate({"margin-left":"0px"}, 50);
-            $('#information').animate({"margin-right":"0px"}, 50);
+            $('#chats').animate({"margin":"0px 0px 0px 0px"}, 50);
+            $('#information').animate({"margin":"0px"}, 50);
             $('#mobile_touch_overlay').css("display", "none");
       } 
       function leaveContent() {
@@ -531,10 +528,8 @@
         mobile_column = 1;
         $('#header').animate({"margin-right":"0px"}, 50);
             $('#channels').animate({"margin-right":"0px"}, 50);
-            $('#chats').animate({"margin-left":"0px"}, 50);
-            $('#chats').animate({"margin-right":"0px"}, 40);
-            $('#information').animate({"margin-left":"0px"}, 50);
-            $('#information').animate({"margin-right":"0px"}, 50);
+            $('#chats').animate({"margin":"0px"}, 50);
+            $('#information').animate({"margin":"0px"}, 50);
             $('#mobile_touch_overlay').css("display", "none");
       }
 
