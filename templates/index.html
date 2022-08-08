@@ -732,24 +732,22 @@
         let message = message_input.value.trim();
         document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight; 
         stoppedTyping();
-        clearTimeout(timeout);
-
-        const newNode = document.createElement('div');
-        newNode.style.opacity = 0.5;
-        let messageMoment = moment();
-        const latestMessage = $('#messages').children().not('.temporary-message').last();
-        if (latestMessage.data('user') == user_id && moment(messageMoment.diff(latestMessage.data('datetime'))) < 180) {
-          newNode.className = 'message-container-combine temporary-message';
-          newNode.innerHTML = '<p class="message-combine-time">' + messageMoment.format('h:mm A') + '</p><p class="message-combine">' + message + '</p>';
-        }
-        else {
-          newNode.className = 'message-container temporary-message';
-          messageMoment = 'at ' + messageMoment.format('h:mm A');
-          newNode.innerHTML = '<img class="profile-picture pointer" src="' + user_picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + user_name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message">' + message + '</p>';
-        }
-        document.getElementById('messages').append(newNode);
-
+        clearTimeout(timeout);iw4o
         if (message.length) {
+          const newNode = document.createElement('div');
+          newNode.style.opacity = 0.5;
+          let messageMoment = moment();
+          const latestMessage = $('#messages').children().not('.temporary-message').last();
+          if (latestMessage.data('user') == user_id && moment(messageMoment.diff(latestMessage.data('datetime'))) < 180) {
+            newNode.className = 'message-container-combine temporary-message';
+            newNode.innerHTML = '<p class="message-combine-time">' + messageMoment.format('h:mm A') + '</p><p class="message-combine">' + message + '</p>';
+          }
+          else {
+            newNode.className = 'message-container temporary-message';
+            messageMoment = 'at ' + messageMoment.format('h:mm A');
+            newNode.innerHTML = '<img class="profile-picture pointer" src="' + user_picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + user_name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message">' + message + '</p>';
+          }
+          document.getElementById('messages').append(newNode);
           socket.emit('send_message', {
             room_id: current_room,
             message: message

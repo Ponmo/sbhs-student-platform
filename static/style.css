@@ -551,6 +551,8 @@ img { /* make images and create button undraggable and unhighlitable*/
   resize: none;
 }
 #submit {
+  position: absolute;
+
   width: 39px; 
   height: 39px;
   background-color: transparent;
@@ -1132,5 +1134,16 @@ img { /* make images and create button undraggable and unhighlitable*/
   }
   #members_header {
     display: block;
+  }
+  #channels_bottom {
+    grid-column: 1;
+    grid-row: 2;
+    background-color: #2f3136;
+  }
+  #chats_bottom {
+
+  }
+  #members_bottom {
+
   }
 }
