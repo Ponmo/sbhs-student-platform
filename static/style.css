@@ -201,12 +201,10 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin-top: 15px;
 }
 #exit-server-settings {
+  line-height: 48px;
+  display: inline-block;
   float: right;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  margin-right: 12px;
-  margin-top: 15px;
+  margin-right: 24px;
 }
 #space-settings-popup {
   display: none;
@@ -1097,21 +1095,28 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 #administrator-page {
   display: none;
+  height: calc(100vh - 50px);
+  background-color: white;
 }
 #admin-users {
-
+  line-height: 48px;
+  display: inline-block;
+      margin-left: 24px;
 }
 #admin-logs {
-
+  display: inline-block;
+      margin-left: 24px;
 }
 #admin-settings {
-
-}
-#exit-server-settings {
-  
+    display: inline-block;
 }
 .main-header {
-
+  padding-left: 24px;
+  background-color: teal;
+  border-bottom: 1px solid black;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
 }
 /*Add User Select None Class*/
 
