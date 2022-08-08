@@ -1098,7 +1098,21 @@ img { /* make images and create button undraggable and unhighlitable*/
 #administrator-page {
   display: none;
 }
+#admin-users {
 
+}
+#admin-logs {
+
+}
+#admin-settings {
+
+}
+#exit-server-settings {
+  
+}
+.main-header {
+
+}
 /*Add User Select None Class*/
 
 /* Mobile Media Query */
