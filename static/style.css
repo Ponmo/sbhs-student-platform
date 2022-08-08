@@ -1,3 +1,6 @@
+html {
+  background-color
+}
 /* Will not work with all broswers; Make blur animation on overscroll, or attach footer to grid */
 body {
   /* Maybe make it overscroll-behavior-y: none to allow returning to previous page */
@@ -184,7 +187,19 @@ img { /* make images and create button undraggable and unhighlitable*/
   font-weight: bold;
   color: #ffffff;
 }
+.main-header {
+  height: 48px;
+  width: 100vw;
+}
 #server-settings-button {
+  float: right;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin-right: 12px;
+  margin-top: 15px;
+}
+#exit-server-settings {
   float: right;
   width: 14px;
   height: 14px;
