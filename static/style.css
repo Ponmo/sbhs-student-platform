@@ -703,6 +703,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   grid-row: 2;
   padding-top: 5px;
   background-color: #2f3136;
+  border-bottom: 1px solid #232428;
   overflow-x: hidden;
   overflow-y: scroll;
   white-space: nowrap; 

@@ -62,6 +62,7 @@
     </div>
 
     <div id="administrator-page">
+      <div id="exit-server-settings">TEMP. EXIT</div>
     </div>
 
     <!--Spaces Page-->
@@ -410,6 +411,13 @@
         $('#space-search').css('display', 'none');
       });
 
+      $(document).on('click', '#server-settings-button', function() {
+        $('.active-space').attr('style', '');
+        $('#home-page').css('display', 'none');
+        $('#first-all').css('display', 'none');
+        $('#space-search').css('display', 'none');
+        $('#administrator-page').css('display', 'block');
+      });
       
       /* Does not work for laptops or computers, need to check compatibility with wider-screen tablets */
       /* Can create general functions for animating members and channels div in combo with buttons*/
