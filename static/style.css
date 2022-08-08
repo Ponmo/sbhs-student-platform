@@ -559,7 +559,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   resize: none;
 }
 #submit {
-  position: absolute;
+  float: right;
 
   width: 39px; 
   height: 39px;
