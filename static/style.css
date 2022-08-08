@@ -556,7 +556,8 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 #message_input { /* different highlight on click */
   width: 100%;
-  min-width: 40px;
+  min-width: 43px;
+  float: left;
   overflow-x: hidden;
   padding-left: 10px;
   padding-top: 10px;
