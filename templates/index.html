@@ -406,6 +406,7 @@
       });
 
       $(document).on('click', '#home', function() {
+        window.history.pushState('', '', '/sbhs');
         $('#' + current_space).attr('style', '');
         current_space = '';
         current_room = '';
