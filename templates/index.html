@@ -1624,6 +1624,7 @@
           $(document.getElementById(old_room)).attr('style', '');
           document.getElementById('messages').textContent = '';
           document.getElementById('room-name-display').textContent = document.getElementById(current_room).getAttribute('data-name');
+          document.getElementById('members_header').textContent = document.getElementById(current_room).getAttribute('data-name');
           if (special) {
             $('#message_input_form').hide();
             $('#email_input_form').show();
