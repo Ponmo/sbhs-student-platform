@@ -1118,7 +1118,10 @@ img { /* make images and create button undraggable and unhighlitable*/
 #admin-settings {
     display: inline-block;
 }
-
+.feed {
+  width: 100vw;
+  overflow-y: scroll;
+}
 /*Add User Select None Class*/
 
 /* Mobile Media Query */
