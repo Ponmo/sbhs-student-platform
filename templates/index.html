@@ -493,14 +493,17 @@
       function hideMembers() {
         mobile_column = 1;
         
-            $('#chats').animate({"margin-right":"-110px"}, 25);
-            $('#information').animate({"margin-right":"-110px"}, 25);
+
+            // $('#chats').animate({"margin-right":"-110px"}, 25);
+            // $('#information').animate({"margin-right":"-110px"}, 25);
             $('#members').animate({"margin-left":"0px"}, 50);
             $('#members_header').animate({"margin-left":"0px"}, 50);
-            $('#chats').animate({"margin-left":"0px"}, 50);
-            $('#information').animate({"margin-left":"0px"}, 50);
-            $('#chats').animate({"margin-right":"0px"}, 20);
-            $('#information').animate({"margin-right":"0px"}, 20);
+            $('#chats').animate({"margin":"0px 0px 0px 0px"}, 50);
+            $('#information').animate({"margin":"0px 0px 0x 0px"}, 50);
+            // $('#chats').animate({"margin-left":"0px"}, 50);
+            // $('#information').animate({"margin-left":"0px"}, 50);
+            // $('#chats').animate({"margin-right":"0px"}, 20);
+            // $('#information').animate({"margin-right":"0px"}, 20);
             $('#mobile_touch_overlay').css("display", "none");
       }
       function showChannels() {
