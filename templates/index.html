@@ -1554,7 +1554,7 @@
             document.getElementById('members').textContent = '';
             rooms_and_sections[1].forEach(function(section) {
               newNode = document.createElement('ul');
-              newNode.className = 'section-group'
+              newNode.className = 'section-group';
               let newNodeChild = document.createElement('li');
               newNodeChild.className = 'section pointer';
               newNodeChild.id = section['_id']['$oid'];
