@@ -71,7 +71,12 @@
         <div id="admin-users" class="pointer">Users</div>
         <div id="exit-server-settings" class="pointer">TEMP. EXIT</div>
       </div>
-      <table class="admin-table" id="admin-settings-table">
+      <div class="admin-table" id="admin-settings-table">
+        <div id="admin-settings-table-row1">
+          
+        </div>
+      </div>
+      <!--<table class="admin-table" id="admin-settings-table">
         <thead>
           <tr>
             <td></td>
@@ -104,7 +109,7 @@
         </thead>
         <tbody id="admin-users-body">
         </tbody>
-      </table>
+      </table>-->
     </div>
 
     <!--Spaces Page-->
@@ -728,15 +733,13 @@
       });
 
       $(document).on('click', '.section', function() {
-        if (this.nextElementSibling.style.display === "block") {
-          for (let i = 0; i < this.nextElementSibling.children.length; i++) {
-            this.nextElementSibling.children.style.display = "none"
-          }
+        if (this.nextElementSibling.style.display === "none") {
+          document.getElementById(current_room).style.display = "block"
+          this.nextElementSibling.style.display = "block"
         }
         else {
-          for (let i = 0; i < this.nextElementSibling.children.length; i++) {
-            this.nextElementSibling.children.style.display = "block"
-          }
+          document.getElementById(current_room).style.display = "block"
+          this.nextElementSibling.style.display = "none"
         }
       });
       $(document).on('click', '.member', function(e) {
