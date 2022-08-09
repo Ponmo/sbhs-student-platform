@@ -4,6 +4,7 @@ html {
 /* Will not work with all broswers; Make blur animation on overscroll, or attach footer to grid */
 body {
   /* Maybe make it overscroll-behavior-y: none to allow returning to previous page */
+  position: fixed;
   overscroll-behavior: none;
   touch-action: none;
   -webkit-overflow-scrolling: none;

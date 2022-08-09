@@ -277,6 +277,10 @@
         $('#content').css('grid-template-rows', '48px calc(100vh - 98px - 66px)');
         alert('The Safari browser on iPhone is not well supported. If you are using Safari, please press "Hide Toolbar" under the "aA" menu or use a different browser.');
       }
+      window.addEventListener("scroll", (e) => {
+  e.preventDefault();
+  window.scrollTo(0, 0);
+});
 
       // Safari Mobile and iPhone X bottom inset env
 
@@ -1417,7 +1421,7 @@
         let newNodeChild = document.createElement('li');
         newNodeChild.className = 'section pointer';
         newNodeChild.id = data.section_id;
-        newNodeChild.innerHTML = '<div class="section-name"><span><img class="collapse-icon" src="/static/images/expand.png"></img></span>' + data.name + '</div><div class="create-room-button" type="button">+</div>'
+        newNodeChild.innerHTML =z '<div class="section-name"><span><img class="collapse-icon" src="/static/images/expand.png"></img></span>' + data.name + '</div><div class="create-room-button" type="button">+</div>'
         newNode.appendChild(newNodeChild);
         newNodeChild = document.createElement('ul');
         newNodeChild.className = 'room-group';
