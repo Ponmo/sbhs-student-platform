@@ -447,6 +447,7 @@ def delete_message():
                 collection_messages.find_one_and_update({'_id': ObjectId(document_list[message_index-1]['_id'])}, {'$set': {'combine': 'false'}}) 
         #collection_deleted.insert_one({'name': session['users_email'], 'datetime': datetime.now().isoformat() + 'Z', 'deleted_message_content': deleted_message}) Used to add to logs once deleted.
         collection_messages.delete_one({"_id": ObjectId(request.json['message_id'])})
+        collection_logs.insert_one({'name': session['users_name'], 'user_id': session['unique_id'], 'email': session['users_email'], 'action': 'deleted message', 'by': deleted_message['name'], 'in': session['current_space_name'], 'details': deleted_message, 'datetime': datetime.now().isoformat() + 'Z'})
         return Response(dumps({'success': message_index}), mimetype='application/json')
     else:
         return Response(dumps({'success': 'false'}), mimetype='application/json')
