@@ -719,6 +719,9 @@ img { /* make images and create button undraggable and unhighlitable*/
   display: none;
   grid-column: 3;
   grid-row: 1;
+  color: #d7d9da;
+  padding-left: 18px;
+  line-height: 48px;
   background-color: #2f3136;
   border-bottom: 1px solid #232428;
 }
