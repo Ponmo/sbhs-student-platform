@@ -487,6 +487,7 @@
             data.forEach(function (item) {
               let newNode = document.createElement('tr');
               newNode.innerHTML = '<tr><td>' + item.name + '<br>' + item.email + '</td><td>' + item.action + '</td><td>' + item.by + '<br>' + item.by_email + '</td><td>' + item.in + '</td><td>' + moment(item.datetime).format('MMM Do YYYY, h:mm[]a') + '</td><td><img class="expand-log pointer"  src="/static/images/expand.png"></td></tr>';
+              newNode.innerHTML += '<tr>' + JSON.stringify(item.details) + '</tr>';
               adminLogs.appendChild(newNode);
             });
           }
@@ -726,8 +727,10 @@
 
       $(document).on('click', '.section', function() { 
         if (this.nextElementSibling.style.display === "block") {
-            if (document.querySelectorAll(".room").)
-          if 
+          this.nextElementSibling.style.display = "none";
+          if (document.querySelectorAll(".room").getAttribute("id") === current_room) {
+            
+          }
         }
       });
       $(document).on('click', '.member', function(e) {
