@@ -300,13 +300,16 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin-left: 18px;
   color: white;
 }
-#home {
-  display: inline-block;
+.home {
   width: 30px;
   height: 30px;
   border-radius: 50%;
+  display: inline-block;
+}
+#home_button {
   margin-right: 12px;
 }
+
 #channels {
   grid-column: 1;
   grid-row: 2;
@@ -1177,8 +1180,11 @@ img { /* make images and create button undraggable and unhighlitable*/
   #open_members {
     display: inline-block;
   }
-  #home {
+  #home_button {
     display: none;
+  }
+  #home_button_mobile {
+    display: block;
   }
   #information {
     grid-column: 2;

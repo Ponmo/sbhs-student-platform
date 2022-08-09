@@ -459,7 +459,10 @@
           url: '/server_logs',
           contentType: 'application/json;charset=UTF-8',
           success: function(data){
-            alert(JSON.stringify(data));
+            data.forEach(function (item) {
+              let newNode = document.createElement('tr');
+              newNode.innerHTML = '<tr><td>' + item.name + item.user_id + '</td><td>' + item.action + '</td><td>' + item.by + '</td><td>' + item.datetime + '</td><td>' + item.in + '</td><td>' + '⬇️' + '</td></tr>';
+            });
           }
         });
       });
@@ -1423,7 +1426,6 @@
       });
 
       socket.on('deleted_section', function(data) {
-        alert(data.section_id);
         let deleted_section = document.getElementById(data.section_id);
         const first_section = document.querySelector('.section:not([id="' + data.section_id + '"])');//:not([id*="' + data.section_id + '"])');
         let rooms = deleted_section.nextElementSibling.children
@@ -1609,7 +1611,6 @@
               document.getElementById('suggested_emails').append(newNode);
             });
             if (add_to_members) {
-              alert(JSON.stringify(roomList()));
               socket.emit('joined_space', {
                 room_list: roomList()
               });
