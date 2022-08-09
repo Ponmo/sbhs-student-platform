@@ -15,7 +15,7 @@
   <body>
 
     <div id="overlay">
-      <div class="secondLayer" id="space-settings-popup">
+      <div id="space-settings-popup">
         <div class="pointer blue-entry-two" id="create-section-button">Create Section</div>
         <div class="pointer blue-entry-two" id="edit-space-button">Edit Space</div>
         <div class="pointer red-space-button"></div>
@@ -727,18 +727,13 @@
       $(document).on('click', '.section', function() { 
         if (this.nextElementSibling.style.display === "block") {
           this.nextElementSibling.style.display = "none"
-          if (document.querySelectorAll(current_room)) {
-            document.getElementById(current_room).style.display= "block"
-          }
-        } 
-        else {
-          this.nextElementSibling.style.display = "none";
+          if 
         }
       });
       $(document).on('click', '.member', function(e) {
         if (this.getAttribute('data-id') != selected_user) {
           if (!!document.getElementById("profile-popup")) {
-            $('#profile-popup').remove();
+            hideSecondLayer();
             $('.member').css('background-color', '');
             $('.member').addClass('pointer');
           }
@@ -1105,13 +1100,7 @@
       });
 
       $(document).on('contextmenu', '.room', function (e) {
-        let container = $("#space-settings-popup");
-        let profile_popup = $("#profile-popup");
-        let section_menu = $('#section-menu');
-        let room_menu = $('#room-menu');
-        section_menu.hide();
-        container.hide();
-        profile_popup.hide();
+        hideSecondLayer();
         if (space_admin == true) {
           selected_room = this.id;
           document.getElementById('room-menu').style.top = mouseY(event) + 'px';
@@ -1193,7 +1182,7 @@
       });
 
       $(document).on('contextmenu', '.section', function (e) {
-        room_menu.hide();
+        hideSecondLayer();
         if (space_admin == true) {
           selected_section = this.id;
           document.getElementById('section-menu').style.top = mouseY(event) + 'px';
@@ -1969,6 +1958,17 @@
         touchendX = e.changedTouches[0].screenX;
         touchendY = e.changedTouches[0].screenY;
         checkDirection();
+      }
+
+      function hideSecondLayer() {
+        let container = $("#space-settings-popup");
+        let profile_popup = $("#profile-popup");
+        let section_menu = $('#section-menu');
+        let room_menu = $('#room-menu');
+        container.hide();
+        profile_popup.hide();
+        section_menu.hide();
+        room_menu.hide();
       }
 
     });
