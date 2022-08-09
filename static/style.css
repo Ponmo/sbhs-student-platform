@@ -1155,6 +1155,10 @@ img { /* make images and create button undraggable and unhighlitable*/
   width: 8px;
   margin-right: 5px;
 }
+.expand-log {
+  height: 15px;
+  width: 15px;
+}
 /*Add User Select None Class*/
 
 /* Mobile Media Query */
