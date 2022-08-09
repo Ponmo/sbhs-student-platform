@@ -272,7 +272,7 @@ def render_space():
     if request.method == 'POST':
         rooms_and_sections = dumps([list(collection_rooms.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_sections.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_users.find({'joined': {'$in': [request.json['space_id']]}})), list(collection_spaces.find({'_id': ObjectId(request.json['space_id'])}))]) #find way to convert find_one 
         session['current_space'] = request.json['space_id']
-        session['current_space_name'] = collection_spaces.find({'_id': ObjectId(request.json['space_id'])})['name']
+        session['current_space_name'] = collection_spaces.find_one({'_id': ObjectId(request.json['space_id'])})['name']
         return Response(rooms_and_sections, mimetype='application/json')
 
 # When user clicks leave space button, that space is removed
