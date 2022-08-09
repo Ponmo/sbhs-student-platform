@@ -503,7 +503,7 @@ def sorted_spaces():
         return Response(dumps({'success': 'false'}), mimetype='application/json')
 
 @app.route('/server_logs', methods=['GET', 'POST'])
-def sorted_spaces():
+def server_logs():
     if request.method == 'POST':
         logs = dumps(list(collection_logs.find().sort('_id', pymongo.DESCENDING).skip(0).limit(100)))
         return Response(logs, mimetype='application/json')
