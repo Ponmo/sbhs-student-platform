@@ -35,7 +35,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   overflow: hidden;
   display: block;
   height: calc(100vh - 50px);
-  background-color: #161617;
+  background-color: white;
 }
 .home-grid {
   display: grid;
@@ -194,9 +194,8 @@ img { /* make images and create button undraggable and unhighlitable*/
   width: 100vw;
   white-space: nowrap;
   padding-left: 24px;
-  background-color: black;
   font-size: 14px;
-  color: white;
+  color: black;
 }
 
 
@@ -723,6 +722,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin-top: 40px;
   overflow-y: scroll;
   overflow-x: scroll;
+  display: none;
 }
 #members_header {
   display: none;
