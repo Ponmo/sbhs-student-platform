@@ -71,12 +71,28 @@
         <div id="admin-users" class="pointer">Users</div>
         <div id="exit-server-settings" class="pointer">TEMP. EXIT</div>
       </div>
-      <table id ="logs">
+      <table id="admin-table admin-settings-table">
         <tr>
           <td></td>
         </tr>
       </table>
-      <div class="feed"></div>
+      <table id="admin-table admin-logs-table">
+        <tr>
+          <td>User</td>
+          <td>Action</td>
+          <td>By</td>
+          <td>In</td>
+          <td>Datetime</td>
+          <td>Details<td>
+        </tr>
+      </table>
+      <table id="admin-table admin-users-table">
+        <tr>
+          <td>User</td>
+          <td>Email</td>
+          <td>Status</td>
+        </tr>
+      </table>
     </div>
 
     <!--Spaces Page-->
@@ -434,6 +450,42 @@
         $('#first-all').css('display', 'none');
         $('#space-search').css('display', 'none');
         $('#administrator-page').css('display', 'block');
+        $('#admin-logs-table').css('display', 'block');
+        $('#admin-users-table').css('display', 'none');
+        $('#admin-settings-table').css('display', 'none');
+      });
+
+      $(document).on('click', '#admin-logs', function() {
+        $('.active-space').attr('style', '');
+        $('#home-page').css('display', 'none');
+        $('#first-all').css('display', 'none');
+        $('#space-search').css('display', 'none');
+        $('#administrator-page').css('display', 'block');
+        $('#admin-logs-table').css('display', 'block');
+        $('#admin-users-table').css('display', 'none');
+        $('#admin-settings-table').css('display', 'none');
+      });
+
+      $(document).on('click', '#admin-users', function() {
+        $('.active-space').attr('style', '');
+        $('#home-page').css('display', 'none');
+        $('#first-all').css('display', 'none');
+        $('#space-search').css('display', 'none');
+        $('#administrator-page').css('display', 'block');
+        $('#admin-logs-table').css('display', 'none');
+        $('#admin-users-table').css('display', 'block');
+        $('#admin-settings-table').css('display', 'none');
+      });
+
+      $(document).on('click', '#admin-settings', function() {
+        $('.active-space').attr('style', '');
+        $('#home-page').css('display', 'none');
+        $('#first-all').css('display', 'none');
+        $('#space-search').css('display', 'none');
+        $('#administrator-page').css('display', 'block');
+        $('#admin-logs-table').css('display', 'none');
+        $('#admin-users-table').css('display', 'none');
+        $('#admin-settings-table').css('display', 'block');
       });
 
       $(document).on('click', '#exit-server-settings', function() {
