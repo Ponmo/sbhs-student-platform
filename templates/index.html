@@ -78,20 +78,24 @@
       </table>
       <table class="admin-table" id="admin-logs-table">
         <tr>
-          <td>User</td>
-          <td>Action</td>
-          <td>By</td>
-          <td>In</td>
-          <td>Datetime</td>
-          <td>Details<td>
+          <th>User</th>
+          <th>Action</th>
+          <th>By</th>
+          <th>In</th>
+          <th>Datetime</th>
+          <th>Details<th>
         </tr>
+        <tbody id="admin-logs-body">
+        </tbody>
       </table>
       <table class="admin-table" id="admin-users-table">
         <tr>
-          <td>User</td>
-          <td>Email</td>
-          <td>Status</td>
+          <th>User</th>
+          <th>Email</th>
+          <th>Status</th>
         </tr>
+        <tbody id="admin-users-body">
+        </tbody>
       </table>
     </div>
 
@@ -175,7 +179,7 @@
           <img class="pointer" id="settings" src="/static/images/settings-white.png">
         </div>
 
-        <img class="pointer home" id="home_mobile_button" src="/static/images/home-white.png">
+        <img class="pointer home" id="home_button_mobile" src="/static/images/home-white.png">
 
         <ul id="spaces">
           <span id="space_align_helper"></span>
@@ -464,6 +468,7 @@
             data.forEach(function (item) {
               let newNode = document.createElement('tr');
               newNode.innerHTML = '<tr><td>' + item.name + item.user_id + '</td><td>' + item.action + '</td><td>' + item.by + '</td><td>' + item.datetime + '</td><td>' + item.in + '</td><td>' + '⬇️' + '</td></tr>';
+              document.getElementById('admin-logs-body').appendChild(n);
             });
           }
         });
