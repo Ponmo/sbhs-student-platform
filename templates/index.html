@@ -726,14 +726,13 @@
 
       $(document).on('click', '.section', function() { 
         if (this.nextElementSibling.style.display === "block") {
-          this.nextElementSibling.style.display = "none"
+            if (document.querySelectorAll(".room").)
           if 
         }
       });
       $(document).on('click', '.member', function(e) {
         if (this.getAttribute('data-id') != selected_user) {
           if (!!document.getElementById("profile-popup")) {
-            hideSecondLayer();
             $('.member').css('background-color', '');
             $('.member').addClass('pointer');
           }
