@@ -35,7 +35,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   overflow: hidden;
   display: block;
   height: calc(100vh - 50px);
-  background-color: white;
+  background-color: #161617;
 }
 .home-grid {
   display: grid;
@@ -194,12 +194,11 @@ img { /* make images and create button undraggable and unhighlitable*/
   width: 100vw;
   white-space: nowrap;
   padding-left: 24px;
-  background-color: hotpink;
-  border-bottom: 1px solid black;
+  background-color: black;
   font-size: 14px;
-  font-weight: bold;
   color: white;
 }
+
 
 #server-settings-button {
   line-height: 48px;
