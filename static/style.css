@@ -724,6 +724,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   width: 90vw;
   min-height: 400px;
   background-color: #3c3f45;
+  color: white;
   border: 1px solid black;
   margin: 0 auto;
   margin-top: 40px;
