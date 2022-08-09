@@ -1,5 +1,9 @@
 html {
   background-color: #36393e;
+  overscroll-behavior: none;
+  touch-action: none;
+  -webkit-overflow-scrolling: none;
+  overflow: hidden;
 }
 /* Will not work with all broswers; Make blur animation on overscroll, or attach footer to grid */
 body {
@@ -1187,6 +1191,9 @@ img { /* make images and create button undraggable and unhighlitable*/
   }
   #home_button_mobile {
     display: block;
+    margin-left: 24px;
+    width: 40px;
+    height: 40px;
   }
   #information {
     grid-column: 2;
