@@ -274,7 +274,8 @@
       var webkit = !!ua.match(/WebKit/i);
       var iOSSafari = iOS && webkit && !ua.match(/CriOS/i) && !ua.match(/OPiOS/i) && !ua.match(/EdgiOS/i) && !ua.match(/xiOS/);
       if (iOSSafari) {
-        $('#content').css('grid-template-rows', '48px calc(100vh - 98px - 66px)');
+        // $('#content').css('grid-template-rows', '48px calc(100vh - 98px - 66px)');
+        $('#content').css('grid-template-rows', '48px calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px - 48px)');
         $('#mobile_touch_overlay').css('height', 'calc(100vh - 50px - 66px)');
         window.addEventListener("scroll", (e) => {
           e.preventDefault();
@@ -679,7 +680,7 @@
       // Switch back to Desktop version if on Desktop
       $(window).resize(function() {
 
-        // $('#content').css('grid-template-rows', '48px calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px - 48px)');
+        $('#content').css('grid-template-rows', '48px calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px - 48px)');
         //$('#footer').css('top', document.getElementById('footer').getBoundingClientRect().top + 'px');
         if ($(window).width() > 768) {
           leaveContent();
@@ -706,6 +707,7 @@
         }, 100);
       });
 
+      $(document).on('click', 'section')
       $(document).on('click', '.member', function(e) {
         if (this.getAttribute('data-id') != selected_user) {
           if (!!document.getElementById("profile-popup")) {
