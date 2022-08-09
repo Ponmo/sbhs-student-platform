@@ -1417,7 +1417,7 @@
         let newNodeChild = document.createElement('li');
         newNodeChild.className = 'section pointer';
         newNodeChild.id = data.section_id;
-        newNodeChild.innerHTML = '<img class="collapse-icon" src="/static/images/expand.png"></img><div class="section-name">' + data.name + '</div><div class="create-room-button" type="button">+</div>'
+        newNodeChild.innerHTML = '<div class="section-name"><span><img class="collapse-icon" src="/static/images/expand.png"></img></span>' + data.name + '</div><div class="create-room-button" type="button">+</div>'
         newNode.appendChild(newNodeChild);
         newNodeChild = document.createElement('ul');
         newNodeChild.className = 'room-group';
