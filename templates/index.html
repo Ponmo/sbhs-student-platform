@@ -709,9 +709,9 @@
       });
 
       $(document).on('click', 'section', function() {
-        var rooms = document.getElementsByClassName('room-group').children
+        let rooms = document.getElementsByClassName('room-group').children
         for (let i = 0; i < rooms.length; i++) {
-          if i.
+          if i.getAttribute('data-section') = this.getAttribute('id')
         }
       });
       $(document).on('click', '.member', function(e) {
