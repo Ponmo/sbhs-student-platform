@@ -734,12 +734,12 @@
 
       $(document).on('click', '.section', function() {
         if (this.nextElementSibling.style.display === "none") {
-          document.getElementById(current_room).style.display = "block"
           this.nextElementSibling.style.display = "block"
+          document.getElementById(current_room).style.display = "block"
         }
         else {
-          document.getElementById(current_room).style.display = "block"
           this.nextElementSibling.style.display = "none"
+          document.getElementById(current_room).style.display = "block"
         }
       });
       $(document).on('click', '.member', function(e) {
