@@ -745,6 +745,7 @@
       $(document).on('click', '.member', function(e) {
         if (this.getAttribute('data-id') != selected_user) {
           if (!!document.getElementById("profile-popup")) {
+            $('#profile-popup').remove();
             $('.member').css('background-color', '');
             $('.member').addClass('pointer');
           }
@@ -756,7 +757,7 @@
             data: JSON.stringify({'user_id': selected_user}), 
             contentType: 'application/json;charset=UTF-8',
             success: function(data) {
-              let member = document.querySelector('[data-id="' + selected_user + '"]');
+              let member = document.querySelector('.member[data-id="' + selected_user + '"]');
               let newNode = document.createElement('div');
               newNode.id = 'profile-popup';
               document.getElementById('overlay').appendChild(newNode);
