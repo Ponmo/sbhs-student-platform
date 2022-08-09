@@ -1559,10 +1559,10 @@
               newNodeChild.className = 'section pointer';
               newNodeChild.id = section['_id']['$oid'];
               if (space_admin == true) {
-                newNodeChild.innerHTML = '<div class="section-name">' + section['name'] + '</div><div class="create-room-button" type="button">+</div>';
+                newNodeChild.innerHTML = '<div class="section-name"><span><img class="collapse-icon" src="/static/images/expand.png"></img></span>' + section['name'] + '</div><div class="create-room-button" type="button">+</div>';
               }
               else {
-                newNodeChild.innerHTML = '<div class="section-name">' + section['name'] + '</div>';
+                newNodeChild.innerHTML = '<div class="section-name"><span><img class="collapse-icon" src="/static/images/expand.png"></img></span>' + section['name'] + '</div>';
               }
               newNode.append(newNodeChild);
               let newNodeChildContainer = document.createElement('ul');
