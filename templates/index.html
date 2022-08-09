@@ -72,9 +72,13 @@
         <div id="exit-server-settings" class="pointer">TEMP. EXIT</div>
       </div>
       <table class="admin-table" id="admin-settings-table">
-        <tr>
-          <td></td>
-        </tr>
+        <thead>
+          <tr>
+            <td></td>
+          </tr>
+        </thead>
+        <tbody id="admin-settings-body">
+        </tbody>
       </table>
       <table class="admin-table" id="admin-logs-table">
         <thead>
@@ -395,6 +399,7 @@
         }
       });
 
+
       $(document).on('click', function(e) {
         //// If you input: "&& profile_popup.has(e.target).length === 0)"" it makes it so clicking on a child will not remove it
         // hide contextmenu on popup and viceversa
@@ -469,7 +474,9 @@
         $('#admin-logs-table').css('display', 'block');
         $('#admin-users-table').css('display', 'none');
         $('#admin-settings-table').css('display', 'none');
-        $
+        $('#admin-logs-body').empty();
+        $('#admin-users-body').empty();
+        $('#admin-settings-body').empty();
 
         $.ajax({
           type: "POST",
@@ -495,6 +502,9 @@
         $('#admin-logs-table').css('display', 'none');
         $('#admin-users-table').css('display', 'block');
         $('#admin-settings-table').css('display', 'none');
+        $('#admin-logs-body').empty();
+        $('#admin-users-body').empty();
+        $('#admin-settings-body').empty();
       });
 
       $(document).on('click', '#admin-settings', function() {
@@ -506,6 +516,9 @@
         $('#admin-logs-table').css('display', 'none');
         $('#admin-users-table').css('display', 'none');
         $('#admin-settings-table').css('display', 'block');
+        $('#admin-logs-body').empty();
+        $('#admin-users-body').empty();
+        $('#admin-settings-body').empty();
       });
 
       $(document).on('click', '#exit-server-settings', function() {
@@ -513,6 +526,9 @@
         $('#first-all').css('display', 'none');
         $('#space-search').css('display', 'none');
         $('#administrator-page').css('display', 'none');
+        $('#admin-logs-body').empty();
+        $('#admin-users-body').empty();
+        $('#admin-settings-body').empty();
       });
       
       /* Does not work for laptops or computers, need to check compatibility with wider-screen tablets */
@@ -709,9 +725,14 @@
       });
 
       $(document).on('click', '.section', function() { 
-        if (this.nextElementSibling.style.display === "none") {
-          this.nextElementSibling.style.display = "block";
-        } 
+        if (this.nextElementSibling.style.display === "block") {
+          if (document.querySelectorAll(current_room)) {
+            
+          }
+          else {
+            this.nextElementSibling.style.display = "none"
+          }   
+        } current_room
         else {
           this.nextElementSibling.style.display = "none";
         }
@@ -1086,6 +1107,13 @@
       });
 
       $(document).on('contextmenu', '.room', function (e) {
+        let container = $("#space-settings-popup");
+        let profile_popup = $("#profile-popup");
+        let section_menu = $('#section-menu');
+        let room_menu = $('#room-menu');
+        section_menu.hide();
+        container.hide();
+        profile_popup.hide();
         if (space_admin == true) {
           selected_room = this.id;
           document.getElementById('room-menu').style.top = mouseY(event) + 'px';
@@ -1167,6 +1195,7 @@
       });
 
       $(document).on('contextmenu', '.section', function (e) {
+        room_menu.hide();
         if (space_admin == true) {
           selected_section = this.id;
           document.getElementById('section-menu').style.top = mouseY(event) + 'px';
