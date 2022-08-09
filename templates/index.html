@@ -473,7 +473,7 @@
             let adminLogs = document.getElementById('admin-logs-body');
             data.forEach(function (item) {
               let newNode = document.createElement('tr');
-              newNode.innerHTML = '<tr><td>' + item.name + item.email + '</td><td>' + item.action + '</td><td>' + item.by + '</td><td>' + item.datetime + '</td><td>' + item.in + '</td><td>' + '⬇️' + '</td></tr>';
+              newNode.innerHTML = '<tr><td>' + item.name + item.email + '</td><td>' + item.action + '</td><td>' + item.by + '</td><td>' + item.in + '</td><td>' + item.datetime + '</td><td>' + '⬇️' + '</td></tr>';
               adminLogs.appendChild(newNode);
             });
           }
