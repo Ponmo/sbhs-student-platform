@@ -1149,6 +1149,11 @@ img { /* make images and create button undraggable and unhighlitable*/
   width: 100vw;
   overflow-y: scroll;
 }
+.collapse-icon {
+  height: 8px;
+  width: 8px;
+  margin-right: 5px;
+}
 /*Add User Select None Class*/
 
 /* Mobile Media Query */
