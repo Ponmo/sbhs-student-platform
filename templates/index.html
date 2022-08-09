@@ -83,12 +83,12 @@
       <table class="admin-table" id="admin-logs-table">
         <thead>
           <tr>
-            <th id="admin-logs-table-row1">User</th>
-            <th id="admin-logs-table-action">Action</th>
-            <th id="admin-logs-table-by">By</th>
-            <th id="admin-logs-table-in">Space</th>
-            <th id="admin-logs-table-datetime">Datetime</th>
-            <th id="admin-logs-table-details">Details<th>
+            <th id="admin-logs-table-column1">User</th>
+            <th id="admin-logs-table-column2">Action</th>
+            <th id="admin-logs-table-column3">By</th>
+            <th id="admin-logs-table-column4">Space</th>
+            <th id="admin-logs-table-column5">Datetime</th>
+            <th id="admin-logs-table-column6">Details<th>
           </tr>
         </thead>
         <tbody id="admin-logs-body">
@@ -486,8 +486,9 @@
             let adminLogs = document.getElementById('admin-logs-body');
             data.forEach(function (item) {
               let newNode = document.createElement('tr');
-              newNode.innerHTML = '<tr><td>' + item.name + '<br>' + item.email + '</td><td>' + item.action + '</td><td>' + item.by + '<br>' + item.by_email + '</td><td>' + item.in + '</td><td>' + moment(item.datetime).format('MMM Do YYYY, h:mm[]a') + '</td><td><img class="expand-log pointer"  src="/static/images/expand.png"></td></tr>';
-              newNode.innerHTML += '<tr><td>' + JSON.stringify(item.details) + '</td></tr>';
+              newNode.innerHTML = '<td>' + item.name + '<br>' + item.email + '</td><td>' + item.action + '</td><td>' + item.by + '<br>' + item.by_email + '</td><td>' + item.in + '</td><td>' + moment(item.datetime).format('MMM Do YYYY, h:mm[]a') + '</td><td><img class="expand-log pointer"  src="/static/images/expand.png"></td>';
+              adminLogs.appendChild(newNode);
+              newNode.innerHTML == '<tr><td>' + JSON.stringify(item.details) + '</td></tr>';
               adminLogs.appendChild(newNode);
             });
           }
