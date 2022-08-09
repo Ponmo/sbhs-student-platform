@@ -679,9 +679,10 @@
 
       // Switch back to Desktop version if on Desktop
       $(window).resize(function() {
-
-        $('#content').css('grid-template-rows', '48px calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px - 48px)');
-        //$('#footer').css('top', document.getElementById('footer').getBoundingClientRect().top + 'px');
+        if (iOSSafari) {
+          $('#content').css('grid-template-rows', '48px calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px - 48px)');
+        }
+          //$('#footer').css('top', document.getElementById('footer').getBoundingClientRect().top + 'px');
         if ($(window).width() > 768) {
           leaveContent();
           mobile = false;
@@ -707,7 +708,12 @@
         }, 100);
       });
 
-      $(document).on('click', 'section')
+      $(document).on('click', 'section', function() {
+        var 
+        for (let i = 0; i < ; i++) {
+          section_list.push(sections[i].id);
+        }
+      });
       $(document).on('click', '.member', function(e) {
         if (this.getAttribute('data-id') != selected_user) {
           if (!!document.getElementById("profile-popup")) {
