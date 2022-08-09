@@ -275,6 +275,7 @@
       var iOSSafari = iOS && webkit && !ua.match(/CriOS/i) && !ua.match(/OPiOS/i) && !ua.match(/EdgiOS/i) && !ua.match(/xiOS/);
       if (iOSSafari) {
         $('#content').css('grid-template-rows', '48px calc(100vh - 98px - 66px)');
+        $('#mobile_touch_overlay').css('height', 'calc(100vh - 50px - 66px)');
         window.addEventListener("scroll", (e) => {
           e.preventDefault();
           window.scrollTo(0, 0);
@@ -698,7 +699,11 @@
         }
       });
 
-      $(document).on('click', )
+      $(document).on('click', '.section', function(){
+        if (this.getAttribute('data-id') )
+
+      });
+      
       $(document).on('click', '#close-user-page', function() {
         $("#user-page").animate({opacity: '0'}, 100);
         setTimeout(function() {
