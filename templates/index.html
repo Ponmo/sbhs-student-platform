@@ -453,6 +453,15 @@
         $('#admin-logs-table').css('display', 'block');
         $('#admin-users-table').css('display', 'none');
         $('#admin-settings-table').css('display', 'none');
+
+        $.ajax({
+          type: "POST",
+          url: '/server_logs',
+          contentType: 'application/json;charset=UTF-8',
+          success: function(data){
+            alert(JSON.stringify(data));
+          }
+        });
       });
 
       $(document).on('click', '#admin-users', function() {
@@ -642,7 +651,7 @@
           success: function(data){
             alert(JSON.stringify(data));
           }
-        })
+        });
       });
 
       // Switch back to Desktop version if on Desktop
@@ -1914,6 +1923,8 @@
     //Don't use innerHTML, replace later.
 
     //broadcast to everyone when a space is created.
+
+    //use get request when post is not needed
 
     // below psuedocode comments for saving unsent messages
       // list of messages being typed by user containing message (updated when user clicks on space or another room) and room id.
