@@ -715,6 +715,15 @@ img { /* make images and create button undraggable and unhighlitable*/
   display: inline-block;
   vertical-align: middle;
 }
+#logs {
+  width: 90%;
+  min-height: 400px;
+  border: 1px solid black;
+  margin: 0 auto;
+  margin-top: 40px;
+  overflow-y: scroll;
+  overflow-x: scroll;
+}
 #members_header {
   display: none;
   grid-column: 3;
