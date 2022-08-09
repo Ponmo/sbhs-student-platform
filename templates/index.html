@@ -83,7 +83,7 @@
       <table class="admin-table" id="admin-logs-table">
         <thead>
           <tr>
-            <th id="admin-logs-table-user">User</th>
+            <th id="admin-logs-table-row1">User</th>
             <th id="admin-logs-table-action">Action</th>
             <th id="admin-logs-table-by">By</th>
             <th id="admin-logs-table-in">Space</th>
@@ -728,7 +728,7 @@
       $(document).on('click', '.section', function() { 
         if (this.nextElementSibling.style.display === "block") {
           this.nextElementSibling.style.display = "none";
-          document.querySelectorAll(".room").getElementById(current_room).style.display = "block";
+          document.querySelectorAll(current_room).style.display = "block";
         }
         else {
           this.nextElementSibling.style.display = "block";
