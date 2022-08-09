@@ -309,7 +309,9 @@ img { /* make images and create button undraggable and unhighlitable*/
 #home_button {
   margin-right: 12px;
 }
-
+#home_button_mobile {
+  display: none;
+}
 #channels {
   grid-column: 1;
   grid-row: 2;
