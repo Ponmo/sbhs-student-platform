@@ -79,12 +79,12 @@
       <table class="admin-table" id="admin-logs-table">
         <thead>
           <tr>
-            <th>User</th>
-            <th>Action</th>
-            <th>By</th>
-            <th>In</th>
-            <th>Datetime</th>
-            <th>Details<th>
+            <th id="admin-logs-table-user">User</th>
+            <th id="admin-logs-table-action">Action</th>
+            <th id="admin-logs-table-by">By</th>
+            <th id="admin-logs-table-in">In</th>
+            <th id="admin-logs-table-datetime">Datetime</th>
+            <th id="admin-logs-table-details">Details<th>
           </tr>
         </thead>
         <tbody id="admin-logs-body">
@@ -281,7 +281,6 @@
           e.preventDefault();
           window.scrollTo(0, 0);
         });
-        alert('The Safari browser on iPhone is not well supported. If you are using Safari, please press "Hide Toolbar" under the "aA" menu or use a different browser.');
       }
 
       // Safari Mobile and iPhone X bottom inset env
@@ -710,7 +709,7 @@
       });
 
       $(document).on('click', '.section', function() {
-        var rooms = document.getElementsByClassName('room-group').children;
+        le rooms = document.getElementsByClassName('room-group').children;
         alert(rooms)
         /*for (let i = 0; i < rooms.length; i++) {
           if (rooms.getAttribute('data-section') = this.getAttribute('id')) {
