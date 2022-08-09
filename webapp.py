@@ -380,7 +380,7 @@ def delete_section():
 # section to MongoDB.
 # Returns the room and section data.
 
-@app.route('/create_space', methods=['GET', 'POST'])
+@app.route('/create_space', methods=['GET', 'POST']) #Check if space with name already exists...
 def create_space():
     if request.method == 'POST':
         space_id = ObjectId()
@@ -455,7 +455,7 @@ def report_message():
     if request.method == 'POST':
         reported_message = collection_messages.find_one({'_id': ObjectId(request.json['message_id'])})
         if collection_logs.count_documents({'details': reported_message}) == 0:
-            collection_logs.insert_one({'name': session['users_name'], 'user_id': session['unique_id'], 'email': session['users_email'], 'action': 'reported message by', 'by': reported_message['name'], 'in': session['current_space'], 'datetime': datetime.now().isoformat() + 'Z'})
+            collection_logs.insert_one({'name': session['users_name'], 'user_id': session['unique_id'], 'email': session['users_email'], 'action': 'reported message', 'by': reported_message['name'], 'in': session['current_space'], 'details': reported_message, 'datetime': datetime.now().isoformat() + 'Z'})
             return Response(dumps({'success': 'true'}), mimetype='application/json')
         else:
             return Response(dumps({'success': 'many'}), mimetype='application/json')
