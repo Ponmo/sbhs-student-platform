@@ -679,7 +679,7 @@
       // Switch back to Desktop version if on Desktop
       $(window).resize(function() {
         if (iOSSafari) {
-          $('#mobile_touch_overlay').css('height', 'calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px - 48px)');
+          $('#mobile_touch_overlay').css('height', 'calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px)');
           $('#content').css('grid-template-rows', '48px calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px - 48px)');
         }
           //$('#footer').css('top', document.getElementById('footer').getBoundingClientRect().top + 'px');
@@ -709,7 +709,8 @@
       });
 
       $(document).on('click', '.section', function() {
-        alert(document.getElementsByClassName('room-group').children.getAttribute('data-section'));
+        this.
+        alert(document.getElementsByClassName('room-group').children);
         /*for (let i = 0; i < rooms.length; i++) {
           if (rooms.getAttribute('data-section') = this.getAttribute('id')) {
             if (rooms.style.display === "none") {
