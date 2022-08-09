@@ -488,7 +488,8 @@
               let newNode = document.createElement('tr');
               newNode.innerHTML = '<td>' + item.name + '<br>' + item.email + '</td><td>' + item.action + '</td><td>' + item.by + '<br>' + item.by_email + '</td><td>' + item.in + '</td><td>' + moment(item.datetime).format('MMM Do YYYY, h:mm[]a') + '</td><td><img class="expand-log pointer"  src="/static/images/expand.png"></td>';
               adminLogs.appendChild(newNode);
-              newNode.innerHTML = '<tr><td>' + JSON.stringify(item.details) + '</td></tr>';
+              newNode = document.createElement('tr');
+              newNode.innerHTML = '<td>' + JSON.stringify(item.details) + '</td>';
               adminLogs.appendChild(newNode);
             });
           }
@@ -726,10 +727,10 @@
         }, 100);
       });
 
-      $(document).on('click', '.section', function() { 
+      $(document).on('click', '.section', function() {
         if (this.nextElementSibling.style.display === "block") {
-          this.nextElementSibling.style.display = "none";
-          document.getElementById(current_room).style.display = "block";
+          for (let i = 0; i < this.nextElementSibling.children.length; i++) {
+          }
         }
         else {
           this.nextElementSibling.style.display = "block";
