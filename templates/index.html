@@ -276,7 +276,7 @@
       if (iOSSafari) {
         // $('#content').css('grid-template-rows', '48px calc(100vh - 98px - 66px)');
         $('#content').css('grid-template-rows', '48px calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px - 48px)');
-        $('#mobile_touch_overlay').css('height', 'calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px)');
+        $('#mobile_touch_overlay').css('height', 'calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px + 50px)');
         window.addEventListener("scroll", (e) => {
           e.preventDefault();
           window.scrollTo(0, 0);
