@@ -195,6 +195,7 @@ def callback():
     session['users_name'] = users_name
     session['logged'] = True
     session['current_space'] = ''
+    session['current_space_name'] = ''
     
     # Store user data in MongoDB if new user.
     
@@ -271,6 +272,7 @@ def render_space():
     if request.method == 'POST':
         rooms_and_sections = dumps([list(collection_rooms.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_sections.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_users.find({'joined': {'$in': [request.json['space_id']]}})), list(collection_spaces.find({'_id': ObjectId(request.json['space_id'])}))]) #find way to convert find_one 
         session['current_space'] = request.json['space_id']
+        session['current_space_name'] = collection_spaces.find({'_id': ObjectId(request.json['space_id'])})['name']
         return Response(rooms_and_sections, mimetype='application/json')
 
 # When user clicks leave space button, that space is removed
@@ -397,6 +399,7 @@ def create_space():
         joined.append(str(space_id))
         collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': joined}})
         session['current_space'] = str(space_id)
+        session['current_space_name'] = request.json['space_name']
         return Response(dumps({'space_id': str(space_id)}), mimetype='application/json')
 
 # Adds space to user's list of joined spaces in MongoDB.
@@ -410,6 +413,7 @@ def delete_space():
         collection_spaces.find_one({'_id': ObjectId(request.json['space_id'])})
         collection_spaces.delete_one({'_id': ObjectId(request.json['space_id'])})
         session['current_space'] = ''
+        session['current_space_name'] = ''
         return Response(dumps({'success': 'true'}), mimetype='application/json')
     return Response(dumps({'success': 'false'}), mimetype='application/json')
 
@@ -423,6 +427,7 @@ def join_space():
             collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': joined}})
             collection_spaces.find_one_and_update({"_id": ObjectId(request.json['space_id'])}, {'$push': {'members': [session['unique_id'], session['users_name']]}})
         session['current_space'] = request.json['space_id']
+        session['current_space_name'] = collection_spaces.find_one({'_id': ObjectId(request.json['space_id'])})['name']
         return Response(space, mimetype='application/json')
 
 # When user deletes a message, delete that message from MongoDB.
@@ -455,7 +460,7 @@ def report_message():
     if request.method == 'POST':
         reported_message = collection_messages.find_one({'_id': ObjectId(request.json['message_id'])})
         if collection_logs.count_documents({'details': reported_message}) == 0:
-            collection_logs.insert_one({'name': session['users_name'], 'user_id': session['unique_id'], 'email': session['users_email'], 'action': 'reported message', 'by': reported_message['name'], 'in': session['current_space'], 'details': reported_message, 'datetime': datetime.now().isoformat() + 'Z'})
+            collection_logs.insert_one({'name': session['users_name'], 'user_id': session['unique_id'], 'email': session['users_email'], 'action': 'reported message', 'by': reported_message['name'], 'in': session['current_space_name'], 'details': reported_message, 'datetime': datetime.now().isoformat() + 'Z'})
             return Response(dumps({'success': 'true'}), mimetype='application/json')
         else:
             return Response(dumps({'success': 'many'}), mimetype='application/json')
