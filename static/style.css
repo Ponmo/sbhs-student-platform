@@ -720,9 +720,10 @@ img { /* make images and create button undraggable and unhighlitable*/
   display: inline-block;
   vertical-align: middle;
 }
-#admin-table {
+.admin-table {
   width: 90%;
   min-height: 400px;
+  background-color: #3c3f45;
   border: 1px solid black;
   margin: 0 auto;
   margin-top: 40px;
