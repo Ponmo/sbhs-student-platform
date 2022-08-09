@@ -274,6 +274,7 @@
       var webkit = !!ua.match(/WebKit/i);
       var iOSSafari = iOS && webkit && !ua.match(/CriOS/i) && !ua.match(/OPiOS/i) && !ua.match(/EdgiOS/i) && !ua.match(/xiOS/);
       if (iOSSafari) {
+        $('#content').css('grid-template-rows', '48px calc(100vh - 98px - 44px)');
         alert('The Safari browser on iPhone is not well supported. If you are using Safari, please press "Hide Toolbar" under the "aA" menu or use a different browser.');
       }
 
@@ -472,7 +473,7 @@
             let adminLogs = document.getElementById('admin-logs-body');
             data.forEach(function (item) {
               let newNode = document.createElement('tr');
-              newNode.innerHTML = '<tr><td>' + item.name + item.user_id + '</td><td>' + item.action + '</td><td>' + item.by + '</td><td>' + item.datetime + '</td><td>' + item.in + '</td><td>' + '⬇️' + '</td></tr>';
+              newNode.innerHTML = '<tr><td>' + item.name + item.email + '</td><td>' + item.action + '</td><td>' + item.by + '</td><td>' + item.datetime + '</td><td>' + item.in + '</td><td>' + '⬇️' + '</td></tr>';
               adminLogs.appendChild(newNode);
             });
           }
