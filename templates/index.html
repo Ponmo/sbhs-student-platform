@@ -465,10 +465,11 @@
           url: '/server_logs',
           contentType: 'application/json;charset=UTF-8',
           success: function(data){
+            let adminLogs = document.getElementById('admin-logs-body');
             data.forEach(function (item) {
               let newNode = document.createElement('tr');
               newNode.innerHTML = '<tr><td>' + item.name + item.user_id + '</td><td>' + item.action + '</td><td>' + item.by + '</td><td>' + item.datetime + '</td><td>' + item.in + '</td><td>' + '⬇️' + '</td></tr>';
-              document.getElementById('admin-logs-body').appendChild(n);
+              adminLogs.appendChild(newNode);
             });
           }
         });
