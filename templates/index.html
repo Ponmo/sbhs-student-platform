@@ -488,7 +488,7 @@
               let newNode = document.createElement('tr');
               newNode.innerHTML = '<td>' + item.name + '<br>' + item.email + '</td><td>' + item.action + '</td><td>' + item.by + '<br>' + item.by_email + '</td><td>' + item.in + '</td><td>' + moment(item.datetime).format('MMM Do YYYY, h:mm[]a') + '</td><td><img class="expand-log pointer"  src="/static/images/expand.png"></td>';
               adminLogs.appendChild(newNode);
-              newNode.innerHTML == '<tr><td>' + JSON.stringify(item.details) + '</td></tr>';
+              newNode.innerHTML = '<tr><td>' + JSON.stringify(item.details) + '</td></tr>';
               adminLogs.appendChild(newNode);
             });
           }
