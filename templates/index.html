@@ -709,7 +709,7 @@
       });
 
       $(document).on('click', '.section', function() {
-        alert(document.getElementsByClassName('room-group').children)
+        alert(document.getElementsByClassName('room-group').children.getAttribute('data-section'));
         /*for (let i = 0; i < rooms.length; i++) {
           if (rooms.getAttribute('data-section') = this.getAttribute('id')) {
             if (rooms.style.display === "none") {
