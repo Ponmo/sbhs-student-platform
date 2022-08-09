@@ -444,18 +444,7 @@
         $('#space-search').css('display', 'none');
       });
 
-      $(document).on('click', '#server-settings-button', function() {
-        $('.active-space').attr('style', '');
-        $('#home-page').css('display', 'none');
-        $('#first-all').css('display', 'none');
-        $('#space-search').css('display', 'none');
-        $('#administrator-page').css('display', 'block');
-        $('#admin-logs-table').css('display', 'block');
-        $('#admin-users-table').css('display', 'none');
-        $('#admin-settings-table').css('display', 'none');
-      });
-
-      $(document).on('click', '#admin-logs', function() {
+      $(document).on('click', '#server-settings-button, #admin-logs', function() {
         $('.active-space').attr('style', '');
         $('#home-page').css('display', 'none');
         $('#first-all').css('display', 'none');
