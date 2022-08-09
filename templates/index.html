@@ -15,7 +15,7 @@
   <body>
 
     <div id="overlay">
-      <div id="space-settings-popup">
+      <div class="secondLayer" id="space-settings-popup">
         <div class="pointer blue-entry-two" id="create-section-button">Create Section</div>
         <div class="pointer blue-entry-two" id="edit-space-button">Edit Space</div>
         <div class="pointer red-space-button"></div>
@@ -726,13 +726,11 @@
 
       $(document).on('click', '.section', function() { 
         if (this.nextElementSibling.style.display === "block") {
+          this.nextElementSibling.style.display = "none"
           if (document.querySelectorAll(current_room)) {
-            
+            document.getElementById(current_room).style.display= "block"
           }
-          else {
-            this.nextElementSibling.style.display = "none"
-          }   
-        } current_room
+        } 
         else {
           this.nextElementSibling.style.display = "none";
         }
