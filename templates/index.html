@@ -1737,6 +1737,7 @@
       function joinRoom(room_id, special = false) {
         if (current_room != room_id) {
           old_room = current_room;
+          $(document.getElementById(old_room)).attr('style', '');
           if (old_room != "" && document.getElementById(old_room).parentElement.previousElementSibling.classList.contains("collapsed")) {
             document.getElementById(old_room).style.display = "none";
           }
@@ -1746,7 +1747,6 @@
             old_room: old_room
           });
           $(document.getElementById(current_room)).attr('style', 'background-color: #43474d !important');
-          $(document.getElementById(old_room)).attr('style', '');
           document.getElementById('messages').textContent = '';
           document.getElementById('room-name-display').textContent = document.getElementById(current_room).getAttribute('data-name');
           document.getElementById('members_header').textContent = document.getElementById(current_room).getAttribute('data-name');
