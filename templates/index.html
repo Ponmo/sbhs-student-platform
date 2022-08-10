@@ -733,17 +733,15 @@
       });
 
       $(document).on('click', '.section', function() {
-        if (this.nextElementSibling.style.display === "none") {
           for (let i = 0; i < this.nextElementSibling.children.length; i++) {
-            this.nextElementSibling.children.style.display = "block"
+            if (this.nextElementSibling.children[i].style.display === "none") {
+              this.nextElementSibling.children[i].style.display = "block";
+            }
+            else {
+              this.nextElementSibling.children[i].style.display = "none";
+            }
           }
-          document.getElementById(current_room).style.display = "block"
-        }
-        else {
-          for (let i = 0; i < this.nextElementSibling.children.length; i++) {
-            this.nextElementSibling.children.style.display = "none"
-          }
-          document.getElementById(current_room).style.display = "block"
+          document.getElementById(current_room).style.display = "block";
         }
       });
       $(document).on('click', '.member', function(e) {
