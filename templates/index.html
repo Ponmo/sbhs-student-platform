@@ -1376,16 +1376,12 @@
       });
 
       socket.on('edited_message', function(data) {
-        try {
           if(data.combine == 'false') {
             document.getElementById(data.message_id).firstChild.nextElementSibling.nextElementSibling.textContent = data.edit;
           }
           else {
             document.getElementById(data.message_id).firstChild.nextElementSibling.textContent = data.edit;
           }
-        }
-        catch(e) {
-        }
       });
 
       socket.on('receive_message', function (data) {
