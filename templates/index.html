@@ -260,7 +260,6 @@
       var socket = io();
       var chat_history_skip = 0;
       var current_room = '';
-      var old_room = '';
       var typing = false;
       var timeout = null;
       var current_space = '';
@@ -1736,9 +1735,9 @@
 
       function joinRoom(room_id, special = false) {
         if (current_room != room_id) {
-          old_room = current_room;
+          const old_room = current_room;
           $(document.getElementById(old_room)).attr('style', '');
-          if (old_room != "" && document.getElementById(old_room).parentElement.previousElementSibling.classList.contains("collapsed")) {
+          if (old_room != "" && document.getElementById(old_room) && document.getElementById(old_room).parentElement.previousElementSibling.classList.contains("collapsed")) {
             document.getElementById(old_room).style.display = "none";
           }
           current_room = room_id;
