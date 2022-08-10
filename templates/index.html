@@ -71,12 +71,12 @@
         <div id="admin-users" class="pointer">Users</div>
         <div id="exit-server-settings" class="pointer">TEMP. EXIT</div>
       </div>
-      <div class="admin-table" id="admin-settings-table">
+      <!--<div class="admin-table" id="admin-settings-table">
         <div id="admin-settings-table-row1">
           
         </div>
-      </div>
-      <!--<table class="admin-table" id="admin-settings-table">
+      </div>-->
+      <table class="admin-table" id="admin-settings-table">
         <thead>
           <tr>
             <td></td>
@@ -109,7 +109,7 @@
         </thead>
         <tbody id="admin-users-body">
         </tbody>
-      </table>-->
+      </table>
     </div>
 
     <!--Spaces Page-->
@@ -494,7 +494,7 @@
               newNode.innerHTML = '<td>' + item.name + '<br>' + item.email + '</td><td>' + item.action + '</td><td>' + item.by + '<br>' + item.by_email + '</td><td>' + item.in + '</td><td>' + moment(item.datetime).format('MMM Do YYYY, h:mm[]a') + '</td><td><img class="expand-log pointer"  src="/static/images/expand.png"></td>';
               adminLogs.appendChild(newNode);
               newNode = document.createElement('tr');
-              newNode.innerHTML = '<td>' + JSON.stringify(item.details) + '</td>';
+              newNode.innerHTML = '<td style="column-span:all">' + JSON.stringify(item.details) + '</td>';
               adminLogs.appendChild(newNode);
             });
           }
