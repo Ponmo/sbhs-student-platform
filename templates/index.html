@@ -1737,9 +1737,8 @@
       function joinRoom(room_id, special = false) {
         if (current_room != room_id) {
           old_room = current_room;
-          alert(old_room);
           if (old_room != "" && document.getElementById(old_room).parentElement.previousElementSibling.classList.contains("collapsed")) {
-            old_room.style.display = "none";
+            document.getElementById(old_room).style.display = "none";
           }
           current_room = room_id;
           socket.emit('join_room', {
