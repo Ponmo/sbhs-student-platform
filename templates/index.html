@@ -731,33 +731,25 @@
         }, 100);
       });
 
-      $(document).on('click', '.section', function() {
+      $(document).on('click', '.section', function(e) {
         selected_section = this.id;
-        /*this.querySelectorAll('.room:not([id="' + current_room + '"])').forEach(function (item) {
-          if (item.style.display === "none") {
-            item.style.display = "block";
+        if (e.target.className != 'create-room-button') {
+          let children = this.nextElementSibling.children;
+          if (this.className.includes("collapsed")) {
+            this.classList.remove("collapsed");
+            for (let i = 0; i < children.length; i++) {
+              children[i].style.display = "block";
+            }
+            document.getElementById(current_room).style.display = "block";
           }
           else {
-            item.style.display = "none";
+            this.classList.add('collapsed');
+            for (let i = 0; i < children.length; i++) {
+              children[i].style.display = "none";
+            }
+            document.getElementById(current_room).style.display = "block";
           }
-        });
-        document.getElementById(current_room).style.display = "block";*/
-        let children = this.nextElementSibling.children;
-        if (this.className.includes("collapsed")) {
-          this.classList.remove("collapsed");
-          for (let i = 0; i < children.length; i++) {
-            children[i].style.display = "block";
-          }
-          document.getElementById(current_room).style.display = "block";
         }
-        else {
-          this.classList.add('collapsed');
-          for (let i = 0; i < children.length; i++) {
-            children[i].style.display = "none";
-          }
-          document.getElementById(current_room).style.display = "block";
-        }
-        
       });
       
       $(document).on('click', '.member', function(e) {
