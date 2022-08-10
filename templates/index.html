@@ -736,6 +736,7 @@
         if (e.target.className != 'create-room-button') {
           let children = this.nextElementSibling.children;
           if (this.className.includes("collapsed")) {
+            this.firstElementChild.firstElementChild.firstElementChild.css('transform', 'rotate(90deg)');
             this.classList.remove("collapsed");
             for (let i = 0; i < children.length; i++) {
               children[i].style.display = "block";
@@ -743,6 +744,7 @@
             document.getElementById(current_room).style.display = "block";
           }
           else {
+            this.firstElementChild.firstElementChild.firstElementChild.css('transform', 'rotate(0deg)');
             this.classList.add('collapsed');
             for (let i = 0; i < children.length; i++) {
               children[i].style.display = "none";
@@ -750,6 +752,7 @@
             document.getElementById(current_room).style.display = "block";
           }
         }
+
       });
       
       $(document).on('click', '.member', function(e) {
