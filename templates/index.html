@@ -202,7 +202,14 @@
       </div>
 
       <div id="space-settings">
-        <div id="exit-space-settings">Temporary Exit</div>
+        <div id="space-settings-select">
+          
+        </div>
+
+        <div id="exit-space-settings">
+          <img class="pointer" id="close-space-settings-button" src="/static/images/back.png">
+        </div>
+
       </div>
 
 
@@ -1376,12 +1383,12 @@
       });
 
       socket.on('edited_message', function(data) {
-          if(data.combine == 'false') {
-            document.getElementById(data.message_id).firstChild.nextElementSibling.nextElementSibling.textContent = data.edit;
-          }
-          else {
-            document.getElementById(data.message_id).firstChild.nextElementSibling.textContent = data.edit;
-          }
+        if(data.combine == 'false') {
+          document.getElementById(data.message_id).firstChild.nextElementSibling.nextElementSibling.textContent = data.edit;
+        }
+        else {
+          document.getElementById(data.message_id).firstChild.nextElementSibling.textContent = data.edit;
+        }
       });
 
       socket.on('receive_message', function (data) {
