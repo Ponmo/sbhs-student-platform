@@ -438,7 +438,13 @@ img { /* make images and create button undraggable and unhighlitable*/
 .message-container:hover {
   background-color: #32353a;
 }
-
+.message-container-logs {
+  display: grid;
+  color: #d7d9da;
+  background-color: #32353a;
+  padding: 10px;
+  grid-template-columns: 52px auto;
+}
 .message-title {
   overflow-wrap: break-word;
   overflow: hidden;
