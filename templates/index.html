@@ -503,13 +503,14 @@
               newNode.innerHTML = '<td>' + item.name + '<br>' + item.email + '</td><td>' + item.action + '</td><td>' + item.by + '<br>' + item.by_email + '</td><td>' + item.in + '</td><td>' + moment(item.datetime).format('MMM Do YYYY, h:mm[]a') + '</td><td><img class="expand-log pointer"  src="/static/images/expand.png"></td>';
               adminLogs.appendChild(newNode);
               newNode = document.createElement('tr');
-
-              const newNodeChild = document.createElement('div');
+              let newNodeChild = document.createElement('td');
+              newNode.appendChild(newNodeChild);
+              newNodeChild = document.createElement('div');
               let messageMoment = moment(item.details.datetime).local().format('MMM Do YYYY, h:mm[]a');
               newNodeChild.className = 'message-container';
               messageMoment = 'at ' + messageMoment;
               newNodeChild.innerHTML = '<img class="profile-picture pointer" src="' + item.details.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + item.details.name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message">' + item.details.message + '</p>';
-              newNode.append(newNodeChild);
+              newNode.firstElementChild.append(newNodeChild);
               adminLogs.appendChild(newNode);
             });
           }
