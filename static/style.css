@@ -740,7 +740,17 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 .admin-table td, .admin-table th {
   padding-left: 20px;
-  padding-top: 20px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+.admin-table th {
+  position: sticky;
+  top: 0px;
+  background: black;
+  z-index: 1;
+}
+.admin-table tr {
+  border-bottom: 1px solid #32353a;
 }
 #members_header {
   display: none;
