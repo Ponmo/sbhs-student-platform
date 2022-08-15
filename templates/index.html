@@ -506,6 +506,7 @@
               let newNodeChild = document.createElement('td');
               newNodeChild.colSpan = 6;
               newNodeChild.width = '100%';
+              newNodeChild.style.display = 'none';
               newNode.appendChild(newNodeChild);
               newNodeChild = document.createElement('div');
               let messageMoment = moment(item.details.datetime).local().format('MMM Do YYYY, h:mm[]a');
@@ -545,6 +546,10 @@
         $('#admin-logs-body').empty();
         $('#admin-users-body').empty();
         $('#admin-settings-body').empty();
+      });
+
+      $(document).on('click', '.expand-log', function() {
+        this.parentElement.parentElement.nextElementSibling.style.display = 'none' == this.parentElement.parentElement.nextElementSibling.style.display ? 'initial' : 'none';
       });
 
       $(document).on('click', '#exit-server-settings', function() {
