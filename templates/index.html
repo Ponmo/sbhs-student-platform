@@ -504,6 +504,7 @@
               adminLogs.appendChild(newNode);
               newNode = document.createElement('tr');
               let newNodeChild = document.createElement('td');
+              newNodeChild.colSpan = 6;
               newNode.appendChild(newNodeChild);
               newNodeChild = document.createElement('div');
               let messageMoment = moment(item.details.datetime).local().format('MMM Do YYYY, h:mm[]a');
