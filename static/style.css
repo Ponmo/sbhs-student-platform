@@ -728,7 +728,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 .admin-table {
   width: 90vw;
-  min-height: 400px;
+  height: 75vh;
   background-color: #3c3f45;
   color: white;
   border: 1px solid black;
