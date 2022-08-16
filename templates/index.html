@@ -491,7 +491,7 @@
         $('#admin-logs-body').empty();
         $('#admin-users-body').empty();
         $('#admin-settings-body').empty();
-        chat_history_skip = 0;
+        chat_history_skip = 1;
         loadLogHistory();
       });
 
@@ -506,7 +506,7 @@
           success: function(data) {
             alert(chat_history_skip);
             let adminLogs = document.getElementById('admin-logs-body');
-            if (chat_history_skip == 0) {
+            if (chat_history_skip == 1) {
               adminLogs.textContent = '';
             }
             chat_history_skip += 20;
@@ -1586,7 +1586,7 @@
       });
 
       socket.on('sent_email', function (data) {
-        chat_history_skip = 0;
+        chat_history_skip = 1;
         document.getElementById('messages').textContent = '';
         loadEmailHistory();
       });
@@ -1786,13 +1786,13 @@
           if (special) {
             $('#message_input_form').hide();
             $('#email_input_form').show();
-            chat_history_skip = 0;
+            chat_history_skip = 1;
             loadEmailHistory();
           }
           else {
             $('#message_input_form').show();
             $('#email_input_form').hide();
-            chat_history_skip = 0;
+            chat_history_skip = 1;
             loadChatHistory();
           }
           typing_display.textContent = '';
@@ -1810,7 +1810,7 @@
           data: JSON.stringify({'i': String(chat_history_skip), 'room_id': current_room}),
           contentType: 'application/json;charset=UTF-8',
           success: function(chat_history) {
-            if (chat_history_skip == 0) {
+            if (chat_history_skip == 1) {
               document.getElementById('messages').textContent = '';
             }
             chat_history_skip += 20;
