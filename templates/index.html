@@ -88,9 +88,6 @@
       <table class="admin-table" id="admin-logs-table">
         <thead>
           <tr>
-            <td width="100%" colspan="6"></td>
-          </tr>
-          <tr>
             <th id="admin-logs-table-column1">User</th>
             <th id="admin-logs-table-column2">Action</th>
             <th id="admin-logs-table-column3">By</th>
@@ -506,7 +503,7 @@
               newNode.innerHTML = '<td>' + item.name + '<br>' + item.email + '</td><td>' + item.action + '</td><td>' + item.by + '<br>' + item.by_email + '</td><td>' + item.in + '</td><td>' + moment(item.datetime).format('MMM Do YYYY, h:mm[]a') + '</td><td><img class="expand-log pointer"  src="/static/images/expand.png"></td>';
               adminLogs.appendChild(newNode);
               newNode = document.createElement('tr');
-              newNode.style.display = 'none';
+              newNode.style.visibility = 'hidden';
               let newNodeChild = document.createElement('td');
               newNodeChild.colSpan = 6;
               newNodeChild.width = '100%';
