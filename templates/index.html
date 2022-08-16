@@ -268,7 +268,7 @@
     $(document).ready(function() {
       
       var socket = io();
-      var chat_history_skip = 1;
+      var chat_history_skip = 0;
       var current_room = '';
       var typing = false;
       var timeout = null;
@@ -491,7 +491,7 @@
         $('#admin-logs-body').empty();
         $('#admin-users-body').empty();
         $('#admin-settings-body').empty();
-        chat_history_skip = 1;
+        chat_history_skip = 0;
         loadLogHistory();
       });
 
@@ -506,10 +506,10 @@
           success: function(data) {
             alert(chat_history_skip);
             let adminLogs = document.getElementById('admin-logs-body');
-            if (chat_history_skip == 1) {
+            if (chat_history_skip == 0) {
               adminLogs.textContent = '';
             }
-            chat_history_skip += 20;
+            chat_history_skip += 100;
             data.forEach(function (item) {
               let newNode = document.createElement('tr');
               newNode.innerHTML = '<td>' + item.name + '<br>' + item.email + '</td><td>' + item.action + '</td><td>' + item.by + '<br>' + item.by_email + '</td><td>' + item.in + '</td><td>' + moment(item.datetime).format('MMM Do YYYY, h:mm[]a') + '</td><td><img class="expand-log pointer"  src="/static/images/expand.png"></td>';
@@ -1586,7 +1586,7 @@
       });
 
       socket.on('sent_email', function (data) {
-        chat_history_skip = 1;
+        chat_history_skip = 0;
         document.getElementById('messages').textContent = '';
         loadEmailHistory();
       });
@@ -1786,13 +1786,13 @@
           if (special) {
             $('#message_input_form').hide();
             $('#email_input_form').show();
-            chat_history_skip = 1;
+            chat_history_skip = 0;
             loadEmailHistory();
           }
           else {
             $('#message_input_form').show();
             $('#email_input_form').hide();
-            chat_history_skip = 1;
+            chat_history_skip = 0;
             loadChatHistory();
           }
           typing_display.textContent = '';
@@ -1810,10 +1810,10 @@
           data: JSON.stringify({'i': String(chat_history_skip), 'room_id': current_room}),
           contentType: 'application/json;charset=UTF-8',
           success: function(chat_history) {
-            if (chat_history_skip == 1) {
+            if (chat_history_skip == 0) {
               document.getElementById('messages').textContent = '';
             }
-            chat_history_skip += 20;
+            chat_history_skip += 100;
             let todayDate = moment();
             let yesterdayDate = moment().subtract(1, 'day');
             let timeDisplayMode = 0;
@@ -1868,7 +1868,7 @@
           data: JSON.stringify({'i': String(chat_history_skip), 'room_id': current_room}),
           contentType: 'application/json;charset=UTF-8',
           success: function(email_history) {
-            chat_history_skip += 20;
+            chat_history_skip += 100;
             let todayDate = moment();
             let yesterdayDate = moment().subtract(1, 'day');
             let timeDisplayMode = 0;

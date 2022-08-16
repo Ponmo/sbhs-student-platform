@@ -296,13 +296,13 @@ def leave_space():
 @app.route('/chat_history', methods=['GET', 'POST'])
 def chat_history():
     if request.method == 'POST':
-        chat_history = dumps(list(collection_messages.find({'room': request.json['room_id']}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i']) - 1).limit(100)))
+        chat_history = dumps(list(collection_messages.find({'room': request.json['room_id']}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(100)))
         return Response(chat_history, mimetype='application/json')
 
 @app.route('/email_history', methods=['GET', 'POST']) #return only emails users can see, and check if space admin
 def email_history():
     if request.method == 'POST':
-        email_history = collection_emails.find({'room': request.json['room_id']}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i']) - 1).limit(100)
+        email_history = collection_emails.find({'room': request.json['room_id']}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(100)
         email_list = []
         for email in email_history:
             if session['users_email'] in email['recipients'] or 'Everyone' in email['recipients'] or space_admin():
@@ -511,7 +511,7 @@ def sorted_spaces():
 @app.route('/server_logs', methods=['GET', 'POST'])
 def server_logs():
     if request.method == 'POST':
-        logs = dumps(list(collection_logs.find().sort('_id', pymongo.DESCENDING).skip(int(request.json['i']) - 1).limit(100)))
+        logs = dumps(list(collection_logs.find().sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(100)))
         return Response(logs, mimetype='application/json')
 
 # When a room is clicked, make user join room
