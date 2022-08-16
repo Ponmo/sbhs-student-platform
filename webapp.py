@@ -511,8 +511,9 @@ def sorted_spaces():
 @app.route('/server_logs', methods=['GET', 'POST'])
 def server_logs():
     if request.method == 'POST':
-        logs = dumps(list(collection_logs.find().sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(25)))
-        return Response(logs, mimetype='application/json')
+        logs = list(collection_logs.find().sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(25))
+        aasfd = logs.index(request.json['last_loaded'])
+        return Response(dumps(logs), mimetype='application/json')
 
 # When a room is clicked, make user join room
 # and leave old room.

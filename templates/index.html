@@ -502,7 +502,7 @@
           type: "POST",
           url: '/server_logs',
           dataType: "json",
-          data: JSON.stringify({'i': String(chat_history_skip)}),
+          data: JSON.stringify({'i': String(chat_history_skip), 'last_loaded': last_loaded}),
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
             if (data.length != 0) {
@@ -529,6 +529,7 @@
                 newNode.firstElementChild.append(newNodeChild);
                 adminLogs.appendChild(newNode);
               });
+              last_loaded = JSON.stringify(data[data.length - 1]);
             }
           }
         }));
