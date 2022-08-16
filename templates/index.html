@@ -553,6 +553,12 @@
         //this.parentElement.parentElement.nextElementSibling.style.display = 'none' == this.parentElement.parentElement.nextElementSibling.style.display ? 'initial' : 'none';
       });
 
+      $('#admin-logs-table').scroll(function() { //$('#chat').scrollTop() + $('#chat').height();
+        if (Math.abs($('#admin-logs-table').scrollTop()) == document.getElementById("#admin-logs-table").scrollHeight) {  
+          alert('w');
+        }
+      });
+
       $(document).on('click', '#exit-server-settings', function() {
         $('#home-page').css('display', 'block');
         $('#first-all').css('display', 'none');
