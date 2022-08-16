@@ -505,7 +505,7 @@
           success: function(data) {
             let adminLogs = document.getElementById('admin-logs-body');
             if (chat_history_skip == 0) {
-              $(adminLogs).clear();
+              adminLogs.textContent = '';
             }
             chat_history_skip += 100;
             data.forEach(function (item) {
