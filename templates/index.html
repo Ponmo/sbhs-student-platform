@@ -529,8 +529,8 @@
                 newNode.firstElementChild.append(newNodeChild);
                 adminLogs.appendChild(newNode);
               });
-              last_loaded = JSON.stringify(data[data.length - 1]);
-              alert(last_loaded);
+              last_loaded = data[data.length - 1];
+              alert(JSON.stringify(last_loaded));
             }
           }
         }));
