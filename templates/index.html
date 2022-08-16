@@ -503,6 +503,7 @@
           data: JSON.stringify({'i': String(chat_history_skip)}),
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
+            alert(chat_history_skip);
             let adminLogs = document.getElementById('admin-logs-body');
             if (chat_history_skip == 0) {
               adminLogs.textContent = '';
