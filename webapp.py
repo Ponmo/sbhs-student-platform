@@ -518,7 +518,7 @@ def server_logs():
                 break
             else:
                 start = index
-        if start != len(logs) - 1:
+        if start != 24:
             del logs[:start]
         return Response(dumps([logs, start]), mimetype='application/json')
 
