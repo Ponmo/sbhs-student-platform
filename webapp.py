@@ -519,7 +519,7 @@ def server_logs():
             else:
                 index = 0
         
-        logs = logs[index:]
+        logs = logs[index - 1:]
 
         return Response(dumps(logs), mimetype='application/json')
 
