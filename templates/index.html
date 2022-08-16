@@ -509,7 +509,7 @@
             if (chat_history_skip == 0) {
               adminLogs.textContent = '';
             }
-            chat_history_skip += 100;
+            chat_history_skip += 25;
             data.forEach(function (item) {
               let newNode = document.createElement('tr');
               newNode.innerHTML = '<td>' + item.name + '<br>' + item.email + '</td><td>' + item.action + '</td><td>' + item.by + '<br>' + item.by_email + '</td><td>' + item.in + '</td><td>' + moment(item.datetime).format('MMM Do YYYY, h:mm[]a') + '</td><td><img class="expand-log pointer"  src="/static/images/expand.png"></td>';
@@ -1813,7 +1813,7 @@
             if (chat_history_skip == 0) {
               document.getElementById('messages').textContent = '';
             }
-            chat_history_skip += 100;
+            chat_history_skip += 25;
             let todayDate = moment();
             let yesterdayDate = moment().subtract(1, 'day');
             let timeDisplayMode = 0;
@@ -1868,7 +1868,7 @@
           data: JSON.stringify({'i': String(chat_history_skip), 'room_id': current_room}),
           contentType: 'application/json;charset=UTF-8',
           success: function(email_history) {
-            chat_history_skip += 100;
+            chat_history_skip += 25;
             let todayDate = moment();
             let yesterdayDate = moment().subtract(1, 'day');
             let timeDisplayMode = 0;
