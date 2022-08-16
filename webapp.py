@@ -512,7 +512,11 @@ def sorted_spaces():
 def server_logs():
     if request.method == 'POST':
         logs = list(collection_logs.find().sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(25))
-        aasfd = logs.index(request.json['last_loaded'])
+        
+        try:
+            logs = logs[logs.index(request.json['last_loaded']) + 1:]
+        except:
+            pass
         return Response(dumps(logs), mimetype='application/json')
 
 # When a room is clicked, make user join room
