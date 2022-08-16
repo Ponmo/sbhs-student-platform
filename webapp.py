@@ -515,7 +515,7 @@ def server_logs():
         index = 0
         for index, item in enumerate(logs):
             if str(item['_id']) == request.json['last_loaded']:
-                break
+                return "Hi"
             else:
                 index = 0
         if index != 0:
