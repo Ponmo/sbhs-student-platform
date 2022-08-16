@@ -508,6 +508,7 @@
           success: function(data) {
             alert(JSON.stringify(data[0]));
             alert(JSON.stringify(data[1]));
+            console.log(JSON.stringify(data[0]));
             if (data[0].length != 0) {
               let adminLogs = document.getElementById('admin-logs-body');
               if (chat_history_skip == 0) {
