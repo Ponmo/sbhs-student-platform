@@ -520,7 +520,7 @@ def server_logs():
                 start = index
         if start != len(logs) - 1:
             del logs[:start]
-        return Response(dumps(logs), mimetype='application/json')
+        return Response(dumps([logs, start]), mimetype='application/json')
 
 # When a room is clicked, make user join room
 # and leave old room.

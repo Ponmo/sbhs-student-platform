@@ -506,14 +506,14 @@
           data: JSON.stringify({'i': String(chat_history_skip), 'last_loaded': last_loaded}),
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
-            alert(JSON.stringify(data));
-            if (data.length != 0) {
+            alert(JSON.stringify(data[0]));
+            if (data[0].length != 0) {
               let adminLogs = document.getElementById('admin-logs-body');
               if (chat_history_skip == 0) {
                 adminLogs.textContent = '';
               }
               chat_history_skip += 25;
-              data.forEach(function (item) {
+              data[0].forEach(function (item) {
                 let newNode = document.createElement('tr');
                 newNode.innerHTML = '<td>' + item.name + '<br>' + item.email + '</td><td>' + item.action + '</td><td>' + item.by + '<br>' + item.by_email + '</td><td>' + item.in + '</td><td>' + moment(item.datetime).format('MMM Do YYYY, h:mm[]a') + '</td><td><img class="expand-log pointer"  src="/static/images/expand.png"></td>';
                 adminLogs.appendChild(newNode);
@@ -531,8 +531,7 @@
                 newNode.firstElementChild.append(newNodeChild);
                 adminLogs.appendChild(newNode);
               });
-              last_loaded = data[data.length - 1]._id.$oid;
-              alert(JSON.stringify(last_loaded));
+              last_loaded = data[0][data.length - 1]._id.$oid;
             }
           }
         }));
