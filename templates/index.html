@@ -491,35 +491,8 @@
         $('#admin-logs-body').empty();
         $('#admin-users-body').empty();
         $('#admin-settings-body').empty();
-
         chat_history_skip = 0;
-
-        $.ajax({
-          type: "POST",
-          url: '/server_logs',
-          contentType: 'application/json;charset=UTF-8',
-          success: function(data){
-            let adminLogs = document.getElementById('admin-logs-body');
-            data.forEach(function (item) {
-              let newNode = document.createElement('tr');
-              newNode.innerHTML = '<td>' + item.name + '<br>' + item.email + '</td><td>' + item.action + '</td><td>' + item.by + '<br>' + item.by_email + '</td><td>' + item.in + '</td><td>' + moment(item.datetime).format('MMM Do YYYY, h:mm[]a') + '</td><td><img class="expand-log pointer"  src="/static/images/expand.png"></td>';
-              adminLogs.appendChild(newNode);
-              newNode = document.createElement('tr');
-              newNode.style.display = 'none';
-              let newNodeChild = document.createElement('td');
-              newNodeChild.colSpan = 6;
-              newNodeChild.width = '100%';
-              newNode.appendChild(newNodeChild);
-              newNodeChild = document.createElement('div');
-              let messageMoment = moment(item.details.datetime).local().format('MMM Do YYYY, h:mm[]a');
-              newNodeChild.className = 'message-container-logs';
-              messageMoment = 'on ' + messageMoment;
-              newNodeChild.innerHTML = '<img class="profile-picture pointer" src="' + item.details.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + item.details.name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message">' + item.details.message + '</p>';
-              newNode.firstElementChild.append(newNodeChild);
-              adminLogs.appendChild(newNode);
-            });
-          }
-        });
+        loadLogHistory();
       });
 
       function loadLogHistory() {
@@ -587,11 +560,11 @@
 
       $(document).on('click', '.expand-log', function() {
         $(this.parentElement.parentElement.nextElementSibling).toggle();
-        //this.parentElement.parentElement.nextElementSibling.style.display = 'none' == this.parentElement.parentElement.nextElementSibling.style.display ? 'initial' : 'none';
       });
 
       $('#admin-logs-table').scroll(function() { //$('#chat').scrollTop() + $('#chat').height();
         if (document.getElementById("admin-logs-table").scrollHeight - $("#admin-logs-table").scrollTop() - $("#admin-logs-table").outerHeight() < 1) {
+          loadLogHistory();
         }
       });
 
