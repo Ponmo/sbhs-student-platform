@@ -529,7 +529,7 @@
                 newNode.firstElementChild.append(newNodeChild);
                 adminLogs.appendChild(newNode);
               });
-              last_loaded = data[data.length - 1];
+              last_loaded = data[data.length - 1]._id.$oid;
               alert(JSON.stringify(last_loaded));
             }
           }
