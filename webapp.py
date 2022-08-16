@@ -519,7 +519,7 @@ def server_logs():
             else:
                 index = 0
         if index != 0:
-            del logs[:index]
+            del logs[:index + 1]
         return Response(dumps(logs), mimetype='application/json')
 
 # When a room is clicked, make user join room
