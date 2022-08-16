@@ -496,7 +496,8 @@
       });
 
       function loadLogHistory() {
-        $.ajax({
+        abortRequests();
+        requests.push($.ajax({
           type: "POST",
           url: '/server_logs',
           dataType: "json",
@@ -528,7 +529,7 @@
               adminLogs.appendChild(newNode);
             });
           }
-        });
+        }));
       }
 
       $(document).on('click', '#admin-users', function() {
