@@ -518,8 +518,8 @@ def server_logs():
                 break
             else:
                 start = index
-        if start != 0:
-            del logs[:start + 1]
+        if start != len(logs) - 1:
+            del logs[:start]
         return Response(dumps(logs), mimetype='application/json')
 
 # When a room is clicked, make user join room
