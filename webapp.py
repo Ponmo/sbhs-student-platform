@@ -513,14 +513,17 @@ def server_logs():
     if request.method == 'POST':
         logs = list(collection_logs.find().sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(25))
         start = 0
+        info = []
         for index, item in enumerate(logs):
+            info.append(str(item['_id']))
+            info.append(request.json['last_loaded'])
             if str(item['_id']) == request.json['last_loaded']:
                 break
             else:
                 start = index
         if start != 24:
             del logs[:start - 1]
-        return Response(dumps([logs, start]), mimetype='application/json')
+        return Response(dumps([logs, info]), mimetype='application/json')
 
 # When a room is clicked, make user join room
 # and leave old room.
