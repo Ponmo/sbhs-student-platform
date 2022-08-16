@@ -514,8 +514,6 @@ def server_logs():
         logs = list(collection_logs.find().sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(25))
         start = 0
         for index, item in enumerate(logs):
-            info.append(str(item['_id']))
-            info.append(request.json['last_loaded'])
             if str(item['_id']) == request.json['last_loaded']:
                 break
             else:
