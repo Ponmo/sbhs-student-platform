@@ -512,6 +512,7 @@ def sorted_spaces():
 def server_logs():
     if request.method == 'POST':
         logs = list(collection_logs.find().sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(25))
+        index = 0
         for index, item in enumerate(logs):
             if str(item['_id']) == request.json['last_loaded']:
                 break
