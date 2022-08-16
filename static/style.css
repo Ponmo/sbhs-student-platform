@@ -442,7 +442,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   display: grid;
   color: #d7d9da;
   background-color: #32353a;
-  padding: 10px;
+  padding: 5px;
   grid-template-columns: 52px auto;
 }
 .message-title {
