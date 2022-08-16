@@ -517,7 +517,7 @@ def server_logs():
             start = index
             if str(item['_id']) == request.json['last_loaded']:
                 break
-        del logs[0:start + 1]
+        del logs[0:len(logs)]
         return Response(dumps([logs, start]), mimetype='application/json')
 
 # When a room is clicked, make user join room
