@@ -554,7 +554,7 @@
       });
 
       $('#admin-logs-table').scroll(function() { //$('#chat').scrollTop() + $('#chat').height();
-        if (Math.abs($('#admin-logs-table').scrollTop()) == document.getElementById("#admin-logs-table").scrollHeight) {  
+        if (document.getElementById("#admin-logs-table").scrollHeight - $("#admin-logs-table").scrollTop() == $("#admin-logs-table").innerHeight()) {  
           alert('w');
         }
       });
