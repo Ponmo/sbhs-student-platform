@@ -503,10 +503,10 @@
               newNode.innerHTML = '<td>' + item.name + '<br>' + item.email + '</td><td>' + item.action + '</td><td>' + item.by + '<br>' + item.by_email + '</td><td>' + item.in + '</td><td>' + moment(item.datetime).format('MMM Do YYYY, h:mm[]a') + '</td><td><img class="expand-log pointer"  src="/static/images/expand.png"></td>';
               adminLogs.appendChild(newNode);
               newNode = document.createElement('tr');
+              newNode.style.display = 'none';
               let newNodeChild = document.createElement('td');
               newNodeChild.colSpan = 6;
               newNodeChild.width = '100%';
-              newNodeChild.style.display = 'none';
               newNode.appendChild(newNodeChild);
               newNodeChild = document.createElement('div');
               let messageMoment = moment(item.details.datetime).local().format('MMM Do YYYY, h:mm[]a');
