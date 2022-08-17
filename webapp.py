@@ -513,8 +513,11 @@ def server_logs():
     if request.method == 'POST':
         logs = list(collection_logs.find().sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(25))
         start = 0
+        daa = []
         for index, item in enumerate(logs):
             start = index
+            daa.append(str(item['_id']))
+            daa.append(request.json['last_loaded'])
             if str(item['_id']) == request.json['last_loaded']:
                 break
         if start + 1 != len(logs):
