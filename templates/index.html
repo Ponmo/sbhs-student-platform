@@ -513,11 +513,11 @@
               if (chat_history_skip == 0) {
                 adminLogs.textContent = '';
               }
-              alert(data[0].map(function(e) { return e._id.$oid; }).indexOf(last_loaded));
-              if (data[0].map(function(e) { return e._id.$oid; }).indexOf(last_loaded) != -1) {
+              const skip = data[0].map(function(e) { return e._id.$oid; }).indexOf(last_loaded);
+              if (skip != -1) {
                 alert('worked');
-                chat_history_skip += data[0].indexOf(last_loaded) + 1;
-                data[0].splice[0, data[0].indexOf(last_loaded) + 1];
+                chat_history_skip += skip + 1;
+                data[0].splice[0, skip + 1];
               }
               chat_history_skip += 25;
               data[0].forEach(function (item) {
