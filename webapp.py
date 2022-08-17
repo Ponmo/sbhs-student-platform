@@ -517,11 +517,11 @@ def server_logs():
         for index, item in enumerate(logs):
             start = index
             daa.append(str(item['_id']))
-            daa.append(request.json['last_loaded'])
-            if str(item['_id']) == request.json['last_loaded']:
+            if str(item['_id']) == str(request.json['last_loaded']):
                 break
         if start + 1 != len(logs):
-            del logs[0 : start + 1]
+            del logs[-start:]
+        daa.append(request.json['last_loaded'])
         return Response(dumps([logs, daa]), mimetype='application/json')
 
 # When a room is clicked, make user join room
