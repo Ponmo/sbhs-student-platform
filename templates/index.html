@@ -533,7 +533,7 @@
                 newNode.firstElementChild.append(newNodeChild);
                 adminLogs.appendChild(newNode);
               });
-              last_loaded = data[0][0]._id.$oid;
+              last_loaded = data[0][data.length]._id.$oid;
             }
           }
         }));
