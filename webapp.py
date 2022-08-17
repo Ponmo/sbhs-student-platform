@@ -512,7 +512,6 @@ def sorted_spaces():
 def server_logs():
     if request.method == 'POST':
         logs = list(collection_logs.find().sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(25))
-        daa = []
         #for index, item in enumerate(logs):
         #    start = index
         #    daa.append(str(item['_id']))
@@ -521,7 +520,7 @@ def server_logs():
         #if start + 1 != len(logs):
         #    del logs[-start:]
         #daa.append(request.json['last_loaded'])
-        return Response(dumps([logs, daa]), mimetype='application/json')
+        return Response(dumps(logs), mimetype='application/json')
 
 # When a room is clicked, make user join room
 # and leave old room.
