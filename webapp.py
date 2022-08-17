@@ -514,14 +514,14 @@ def server_logs():
         logs = list(collection_logs.find().sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(25))
         start = 0
         daa = []
-        for index, item in enumerate(logs):
-            start = index
-            daa.append(str(item['_id']))
-            if str(item['_id']) == str(request.json['last_loaded']):
-                break
-        if start + 1 != len(logs):
-            del logs[-start:]
-        daa.append(request.json['last_loaded'])
+        #for index, item in enumerate(logs):
+        #    start = index
+        #    daa.append(str(item['_id']))
+        #    if str(item['_id']) == str(request.json['last_loaded']):
+        #        break
+        #if start + 1 != len(logs):
+        #    del logs[-start:]
+        #daa.append(request.json['last_loaded'])
         return Response(dumps([logs, daa]), mimetype='application/json')
 
 # When a room is clicked, make user join room
