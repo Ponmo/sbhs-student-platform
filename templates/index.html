@@ -516,7 +516,7 @@
               if (skip != -1) {
                 alert(skip);
                 chat_history_skip += skip + 1;
-                data.splice[data.length - 1 - skip, skip + 1];
+                alert(JSON.stringify(data.splice[data.length - 1 - skip, skip + 1]));
               }
               chat_history_skip += 25;
               data.forEach(function (item) {
