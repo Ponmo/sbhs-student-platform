@@ -1215,6 +1215,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 .expand-log {
   height: 15px;
   width: 15px;
+  transform: rotate(90deg);
 }
 /*Add User Select None Class*/
 
