@@ -93,7 +93,7 @@
             <th width="19%">By</th>
             <th width="19%">Space</th>
             <th width="19%">Datetime</th>
-            <th width="5%">Details<th>
+            <th width="5%">Details</th>
           </tr>
         </thead>
         <tbody id="admin-logs-body">
@@ -526,9 +526,8 @@
                 newNode.style.display = 'none';
                 newNode.style.backgroundColor = '#32353a';
                 let newNodeChild = document.createElement('td');
-                newNodeChild.colSpan = 7;
+                newNodeChild.colSpan = 6;
                 newNodeChild.width = '100%';
-                newNodeChild.style.paddingRight = '20px';
                 newNode.appendChild(newNodeChild);
                 newNodeChild = document.createElement('div');
                 let messageMoment = moment(item.details.datetime).local().format('MMM Do YYYY, h:mm[]a');
