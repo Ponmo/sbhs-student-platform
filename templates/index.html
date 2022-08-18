@@ -509,7 +509,7 @@
             if (data.length != 0) {
               let adminLogs = document.getElementById('admin-logs-body');
               if (chat_history_skip == 0) {
-                adminLogs.textContent = '';
+                adminLogs.textContent = ''; //probably don't need?
               }
               const skip = data.map(function(e) { return e._id.$oid; }).indexOf(last_loaded);
               if (skip != -1) {
@@ -555,6 +555,21 @@
         $('#admin-logs-body').empty();
         $('#admin-users-body').empty();
         $('#admin-settings-body').empty();
+
+        abortRequests();
+        requests.push($.ajax({
+          type: "POST",
+          url: '/server_users',
+          contentType: 'application/json;charset=UTF-8',
+          success: function(data) {
+            let adminUsers = document.getElementById('admin-users-body');
+            data.forEach(function (item) {
+              let newNode = document.createElement('tr');
+              newNode.className = 'admin-users-table-row';
+              newNode.innerHTML = '<td><img class="popup-picture" src="' + item.picture + '">' + item.name + '</td><td>' + item.email + '</td><td>' + 'item.status' + '</td>';
+            });
+          }
+        }));
       });
 
       $(document).on('click', '#admin-settings', function() {
@@ -699,7 +714,7 @@
         // if Mobile, revert all when going to home page or space search page
         mobile_column = 1;
 
-            $('#header').css("margin-right", "0px");
+          $('#header').css("margin-right", "0px");
           $('#channels').css("margin-right", "0px");
           $('#chats').css("margin-left", "0px");
           $('#information').css("margin-left", "0px");
