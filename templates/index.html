@@ -562,13 +562,13 @@
             data.forEach(function (item) {
               let formNode = '';
               if (item.status == 'user') {
-                formNode = '<form class="change-user-status-form"><select><option selected="selected" value="user">user</option><option value="admin">admin</option><option value="owner">owner</option></select></form>;'
+                formNode = '<form class="change-user-status-form"><select><option selected="selected" value="user">user</option><option value="admin">admin</option><option value="owner">owner</option></select></form>';
               } 
               else if (item.status == 'admin') {
-                formNode = '<form class="change-user-status-form"><select><option value="user">user</option><option selected="selected" value="admin">admin</option><option value="owner">owner</option></select></form>;'
+                formNode = '<form class="change-user-status-form"><select><option value="user">user</option><option selected="selected" value="admin">admin</option><option value="owner">owner</option></select></form>';
               }
               else {
-                formNode = '<form class="change-user-status-form"><select><option value="user">user</option><option value="admin">admin</option><option selected="selected" value="owner">owner</option></select></form>;'
+                formNode = '<form class="change-user-status-form"><select><option value="user">user</option><option value="admin">admin</option><option selected="selected" value="owner">owner</option></select></form>';
               }
               let newNode = document.createElement('tr');
               newNode.className = 'admin-users-table-row';
