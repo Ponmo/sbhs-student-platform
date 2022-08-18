@@ -562,7 +562,7 @@
             data.forEach(function (item) {
               let newNode = document.createElement('tr');
               newNode.className = 'admin-users-table-row';
-              newNode.innerHTML = '<td><img class="popup-picture" src="' + item.picture + '">' + item.name + '</td><td>' + item.email + '</td><td>' + 'item.status' + '</td>';
+              newNode.innerHTML = '<td><img class="profile-picture" src="' + item.picture + '"> ' + item.name + '</td><td>' + item.email + '</td><td>' + 'item.status' + '</td>';
               document.getElementById('admin-users-body').appendChild(newNode);
             });
           }
