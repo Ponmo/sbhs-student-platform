@@ -560,9 +560,19 @@
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
             data.forEach(function (item) {
+              let formNode = '';
+              if (item.status == 'user') {
+                formNode = '<form class="change-user-status-form"><select><option selected="selected" value="user">user</option><option value="admin">admin</option><option value="owner">owner</option></select></form>;'
+              } 
+              else if (item.status == 'admin') {
+                formNode = '<form class="change-user-status-form"><select><option value="user">user</option><option selected="selected" value="admin">admin</option><option value="owner">owner</option></select></form>;'
+              }
+              else {
+                formNode = '<form class="change-user-status-form"><select><option value="user">user</option><option value="admin">admin</option><option selected="selected" value="owner">owner</option></select></form>;'
+              }
               let newNode = document.createElement('tr');
               newNode.className = 'admin-users-table-row';
-              newNode.innerHTML = '<td><img class="profile-picture" src="' + item.picture + '"> ' + item.name + '</td><td>' + item.email + '</td><td>' + item.status + '</td>';
+              newNode.innerHTML = '<td><img class="profile-picture" src="' + item.picture + '"> ' + item.name + '</td><td>' + item.email + '</td><td>' + formNode + '</td>';
               document.getElementById('admin-users-body').appendChild(newNode);
             });
           }
