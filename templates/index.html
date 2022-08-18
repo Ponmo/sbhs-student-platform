@@ -519,6 +519,7 @@
               chat_history_skip += 25;
               data.forEach(function (item) {
                 let newNode = document.createElement('tr');
+                newNode.className = 'admin-logs-table-row';
                 newNode.innerHTML = '<td>' + item.name + '<br>' + item.email + '</td><td>' + item.action + '</td><td>' + item.by + '<br>' + item.by_email + '</td><td>' + item.in + '</td><td>' + moment(item.datetime).format('MMM Do YYYY, h:mm[]a') + '</td><td><img class="expand-log pointer"  src="/static/images/expand.png"></td>';
                 adminLogs.appendChild(newNode);
                 newNode = document.createElement('tr');
@@ -569,13 +570,14 @@
         $('#admin-settings-body').empty();
       });
 
-      $(document).on('click', '.expand-log', function() {
-        $(this.parentElement.parentElement.nextElementSibling).toggle();
-        if ($(this.parentElement.parentElement.nextElementSibling).is(':visible')) {
+      $(document).on('click', '.admin-logs-table-row', function() {
+        $(this.nextElementSibling).toggle();
+        if ($(this.nextElementSibling).is(':visible')) {
           $(this).css('transform', 'rotate(0deg)');
+          $(this).children().last().firstChild().css('transform', 'rotate(0deg)');
         } 
         else {
-          $(this).css('transform', 'rotate(90deg)');
+          $(this).children().last().firstChild().css('transform', 'rotate(90deg)');
         }
       });
 
