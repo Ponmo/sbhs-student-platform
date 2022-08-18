@@ -514,8 +514,8 @@ def server_logs():
         logs = dumps(list(collection_logs.find().sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(25)))
         return Response(logs, mimetype='application/json')
 
-@app.route('/server_logs', methods=['GET', 'POST'])
-def server_logs():
+@app.route('/server_users', methods=['GET', 'POST'])
+def server_users():
     if request.method == 'POST':
         users = dumps(list(collection_users.find().sort('_id', pymongo.DESCENDING)))
         return Response(users, mimetype='application/json')
