@@ -526,8 +526,9 @@
                 newNode.style.display = 'none';
                 newNode.style.backgroundColor = '#32353a';
                 let newNodeChild = document.createElement('td');
-                newNodeChild.colSpan = 6;
+                newNodeChild.colSpan = 7;
                 newNodeChild.width = '100%';
+                newNodeChild.style.paddingRight = '20px';
                 newNode.appendChild(newNodeChild);
                 newNodeChild = document.createElement('div');
                 let messageMoment = moment(item.details.datetime).local().format('MMM Do YYYY, h:mm[]a');
