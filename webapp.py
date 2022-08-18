@@ -200,7 +200,7 @@ def callback():
     # Store user data in MongoDB if new user.
     
     if not collection_users.count_documents({ '_id': unique_id}, limit = 1):
-        collection_users.insert_one({'_id': unique_id, 'name': users_name, 'email': users_email, 'picture': picture, 'joined': []}) #check if profile picture the same !
+        collection_users.insert_one({'_id': unique_id, 'name': users_name, 'email': users_email, 'picture': picture, 'joined': [], 'status': 'user'}) #check if profile picture the same !
     return redirect(url_for('render_main_page'))
 
 # Handle errors to Google API call.
