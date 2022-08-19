@@ -351,13 +351,15 @@ def delete_room():
 
 @app.route('/create_room', methods=['GET', 'POST'])
 def create_room():
-	if request.method == 'POST' and (space_admin() or session['admin']):
-		room_id = ObjectId()
-		room_list = list(collection_rooms.find({'space': session['current_space'], 'section': request.json['section_id']}))
-		room = {'_id': room_id, 'space': session['current_space'], 'section': request.json['section_id'], 'name': request.json['room_name'], 'order': len(room_list) + 1}
-		collection_rooms.insert_one(room)
-		room = dumps(room)
-		return Response(room, mimetype='application/json')
+    if request.method == 'POST' and (space_admin() or session['admin']):
+        room_id = ObjectId()
+        room_list = list(collection_rooms.find({'space': session['current_space'], 'section': request.json['section_id']}))
+        room = {'_id': room_id, 'space': session['current_space'], 'section': request.json['section_id'], 'name': request.json['room_name'], 'order': len(room_list) + 1}
+        collection_rooms.insert_one(room)
+        room = dumps(room)
+        for item in request.json['room_list']:
+            socketio.emit('created_room', request.json, room = item)
+        return Response(room, mimetype='application/json')
 
 # Adds the newly created section to MongoDB.
 # Returns the section data.
