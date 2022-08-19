@@ -613,9 +613,8 @@ def deleted_room(data):
 
 @socketio.on('deleted_space')
 def deleted_space():
-    if space_owner() or session['admin']:
-        for room in room_list():
-            socketio.emit('deleted_space', room = room)
+    for room in room_list():
+        socketio.emit('deleted_space', room = room)
     session['current_space'] = ''
 
 # When a section is created, send that section data to all
