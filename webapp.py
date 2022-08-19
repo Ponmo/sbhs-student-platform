@@ -405,7 +405,7 @@ def delete_section():
 @app.route('/create_space', methods=['GET', 'POST']) #Check if space with name already exists...
 def create_space():
     user = collection_users.find_one({"_id": session['unique_id']})
-    if request.method == 'POST' and user['owns'] <= 3:
+    if request.method == 'POST' and user['owns'] < 3:
         space_id = ObjectId()
         room_id = ObjectId()
         email_room_id = ObjectId()
