@@ -31,4 +31,4 @@ pytz==2022.1
 flask-socketio==5.2.0
 gevent==21.12.0
 gevent-websocket==0.10.1
-flask-session==0.0.4
+flask-session==0.4.0
