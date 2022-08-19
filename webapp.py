@@ -687,7 +687,7 @@ def sent_email(data):
         socketio.emit('sent_email', data, room = data['room_id'])
 
 @socketio.on('joined_space')
-def joined_space(data):
+def joined_space():
     user = collection_users.find_one({'_id': session['unique_id']})
     for room in room_list():
         emit('joined_space', user, room = room, include_self=False)
