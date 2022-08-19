@@ -1657,18 +1657,19 @@
       });
 
       socket.on('joined_space', function (data) {
-        alert('2');
-        let newNode = document.createElement('div');
-        newNode.className = 'member pointer';
-        newNode.setAttribute('data-id', data['_id']);
-        newNode.innerHTML = '<img class="profile-picture" src="' + data['picture'] + '" alt="!"><span class="member-name">' + data['name'] + '</span>';
-        document.getElementById('members').append(newNode);
+        if (!document.querySelector('.member[data-id="' + data['_id'] + '"]')) {
+          let newNode = document.createElement('div');
+          newNode.className = 'member pointer';
+          newNode.setAttribute('data-id', data['_id']);
+          newNode.innerHTML = '<img class="profile-picture" src="' + data['picture'] + '" alt="!"><span class="member-name">' + data['name'] + '</span>';
+          document.getElementById('members').append(newNode);
 
-        newNode = document.createElement('div');
-        newNode.className = 'suggested_email suggested_email_individual pointer';
-        newNode.setAttribute('data-email', data['email']);
-        newNode.innerHTML = '<img class="profile-picture" src="' + data['picture'] + '">' + data['name'] + ' (' + data['email'] + ')'
-        document.getElementById('suggested_emails').append(newNode);
+          newNode = document.createElement('div');
+          newNode.className = 'suggested_email suggested_email_individual pointer';
+          newNode.setAttribute('data-email', data['email']);
+          newNode.innerHTML = '<img class="profile-picture" src="' + data['picture'] + '">' + data['name'] + ' (' + data['email'] + ')'
+          document.getElementById('suggested_emails').append(newNode);
+        }
       });
 
       function space() {

@@ -649,8 +649,9 @@ def deleted_message(data):
 
 @socketio.on('edited_message')
 def edited_message(data):
-    collection_messages.find_one_and_update({"_id": ObjectId(data['message_id'])}, {'$set': {'message': data['edit']}})
-    socketio.emit('edited_message', data, room = data['room_id'])
+    if space_admin() or session['admin'] or session['unique_id'] == collection_messages.find_one({'_id': ObjectId(data['message_id'])})['user_id']:
+        collection_messages.find_one_and_update({"_id": ObjectId(data['message_id'])}, {'$set': {'message': data['edit']}})
+        socketio.emit('edited_message', data, room = data['room_id'])
 
 # When sections are sorted, update the order in MongoDB.
 
@@ -663,11 +664,15 @@ def sorted_sections(data):
             socketio.emit('sorted_sections', data, room = room)
     
 # When rooms are sorted, update the order in MongoDB.
-##
 
 @socketio.on('sorted_rooms')
 def sorted_rooms(data):
     if space_admin() or session['admin']:
+        for section in data['room_group_list']:
+            if len(section) > 1:
+                for room in section[1:]:
+                    if not valid_room(room):
+                        return
         order = 1
         for section in data['room_group_list']:
             if len(section) > 1:
@@ -679,10 +684,10 @@ def sorted_rooms(data):
 
 @socketio.on('sent_email')
 def sent_email(data):
-    if space_admin() or session['admin']:
+    if valid_room(data['room_id']) and (space_admin() or session['admin']):
         socketio.emit('sent_email', data, room = data['room_id'])
 
-@socketio.on('joined_space')
+@socketio.on('joined_space')##
 def joined_space(data):
     user = collection_users.find_one({'_id': session['unique_id']})
     for room in room_list():
@@ -710,7 +715,6 @@ def room_list():
     return room_ids
 
 def valid_room(room_id):
-    room_list = collection_rooms.find({'space': session['current_space']})
     if session['current_space'] == collection_rooms.find_one({'_id': ObjectId(room_id)})['space']:
         return True
     return False
@@ -718,5 +722,3 @@ def valid_room(room_id):
 
 #if __name__ == '__main__':
 #    socketio.run(app, debug=False)
-
-#put socket emitters inside app routes
