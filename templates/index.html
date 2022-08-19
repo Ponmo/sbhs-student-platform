@@ -623,7 +623,6 @@
 
       $(document).on('submit', '.change-user-status-form', function(e) {
         e.preventDefault();
-        alert(this.firstElementChild.value);
         this.firstElementChild.nextElementSibling.style.display = 'none';
         this.firstElementChild.setAttribute('data-current', this.firstElementChild.value)
       });
