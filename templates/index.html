@@ -621,6 +621,11 @@
         }
       });
 
+      $(document).on('submit', '.change-user-status-form', function(e) {
+        e.preventDefault();
+        alert(this.firstElementChild.value);
+        this.firstElementChild.nextElementSibling.style.display = 'none';
+      });
 
       $(document).on('click', '#exit-server-settings', function() {
         $('#home-page').css('display', 'block');
