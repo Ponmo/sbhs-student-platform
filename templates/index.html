@@ -608,7 +608,7 @@
         }
       });
 
-      $('#admin-table-wrapper').scroll(function() { //$('#chat').scrollTop() + $('#chat').height();
+      $('#admin-logs-table').scroll(function() { //$('#chat').scrollTop() + $('#chat').height();
       alert($('#admin-logs-table').is(':visible'));
         if ($('#admin-logs-table').is(':visible') && document.getElementById("admin-table-wrapper").scrollHeight - $("#admin-table-wrapper").scrollTop() - $("#admin-table-wrapper").outerHeight() < 1) {
           loadLogHistory();
