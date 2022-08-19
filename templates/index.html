@@ -1414,7 +1414,8 @@
           type: 'POST',
           url: '/delete_space',
           contentType: 'application/json;charset=UTF-8',
-          success: function (delete_space){
+          success: function (delete_space) {
+            alert('wes');
             socket.emit('deleted_space', {'room_list': roomList()})
           }
         })
@@ -1606,6 +1607,7 @@
       });
 
       socket.on('deleted_space', function(data) {
+        alert('we2s');
         document.getElementById(current_space).parentNode.remove();
         $('.active-space').attr('style', '');
         $('#home-page').css('display', 'block');
