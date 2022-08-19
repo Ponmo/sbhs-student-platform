@@ -1682,12 +1682,16 @@
             window.history.pushState('', '', '/sbhs/' + current_space);
             if (rooms_and_sections[3][0].admins[0] == user_id) { //Accounts for only one space admin, which is owner, admin.
               space_admin = true;
+              $('#delete-space').show();
+              $('#leave-space').hide();
               $('#create-section-button').show();
               $('#edit-space-button').show();
               $("#email_input_form :input").prop("disabled", false);
             }
             else {
               space_admin = false;
+              $('#delete-space').hide();
+              $('#leave-space').show();
               $('#create-section-button').hide();
               $('#edit-space-button').hide();
               $("#email_input_form :input").prop("disabled", true);
