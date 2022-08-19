@@ -277,7 +277,7 @@ def user_spaces():
 
 @app.route('/space', methods=['GET', 'POST'])
 def render_space():
-    if request.method == 'POST' and space_member():
+    if request.method == 'POST':
         space = collection_spaces.find_one({'_id': ObjectId(request.json['space_id'])})
         rooms_and_sections = dumps([list(collection_rooms.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_sections.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_users.find({'joined': {'$in': [request.json['space_id']]}})), list(collection_spaces.find({'_id': ObjectId(request.json['space_id'])}))])
         if session['unique_id'] in space['admins'] or session['admin']: #use current_space instead of request.json in any query
@@ -699,3 +699,5 @@ def space_member():
 
 #if __name__ == '__main__':
 #    socketio.run(app, debug=False)
+
+#put socket emitters inside app routes
