@@ -431,8 +431,8 @@ def delete_space():
     if request.method == 'POST' and (space_owner() or session['admin']):
         space = collection_spaces.find_one({'_id': ObjectId(session['current_space'])})
         collection_spaces.delete_one({'_id': ObjectId(session['current_space'])})
-        collection_users.find_one_and_update({"_id": session['unique_id']}, {'$inc': {'owns': -1}})
-        
+        if space_owner():
+            collection_users.find_one_and_update({"_id": session['unique_id']}, {'$inc': {'owns': -1}})
         for member in space['members']:
             joined = collection_users.find_one({"_id": member[0]})['joined']
             joined.remove(session['current_space'])
