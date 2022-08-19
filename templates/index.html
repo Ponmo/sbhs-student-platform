@@ -280,6 +280,7 @@
       var selected_section = '';
       var selected_room = '';
       var space_admin = false;
+      var admin = false;
       var user_id = '{{ user_id }}';
       var user_picture = '{{ user_picture }}';
       var user_name = '{{ user_name }}';
@@ -360,6 +361,10 @@
         url: '/list_spaces',
         dataType: "json",
         success: function(data) {
+          if (data[2] == true) {
+            admin = true;
+            alert('yay');
+          }
           data[1].forEach(function(item) { 
             try {
               let newNode = document.createElement('li'); 
