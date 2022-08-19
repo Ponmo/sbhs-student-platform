@@ -429,7 +429,6 @@ def delete_space():
     if request.method == 'POST' and (space_owner() or session['admin']):
         collection_spaces.find_one({'_id': ObjectId(session['current_space'])})
         collection_spaces.delete_one({'_id': ObjectId(session['current_space'])})
-        session['current_space'] = ''
         session['current_space_name'] = ''
         return Response(dumps({'success': 'true'}), mimetype='application/json')
     return Response(dumps({'success': 'false'}), mimetype='application/json')
@@ -613,9 +612,11 @@ def deleted_room(data):
             socketio.emit('deleted_room', data, room = room)
 
 @socketio.on('deleted_space')
-def deleted_space(data):
-    for room in room_list():
-        socketio.emit('deleted_space', data, room = room)
+def deleted_space():
+    if space_owner() or session['admin']:
+        for room in room_list():
+            socketio.emit('deleted_space', room = room)
+    session['current_space'] = ''
 
 # When a section is created, send that section data to all
 # users in the space.

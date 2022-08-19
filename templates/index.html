@@ -410,7 +410,6 @@
           if (window.location.href.indexOf('/sbhs/') != -1) {
             current_space = window.location.href.substring(window.location.href.indexOf('/sbhs/') + 6).replace('#','');;
             document.querySelector('.form-space[data-id="' + current_space + '"]').firstChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = "Joined";
-  
             joinSpace();
           }
         }
@@ -1416,7 +1415,7 @@
           contentType: 'application/json;charset=UTF-8',
           success: function (delete_space) {
             alert('wes');
-            socket.emit('deleted_space', {'room_list': roomList()})
+            socket.emit('deleted_space')
           }
         })
       });
