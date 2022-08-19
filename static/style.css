@@ -1221,6 +1221,11 @@ img { /* make images and create button undraggable and unhighlitable*/
 .change-user-status-form {
   color: black;
 }
+.user-status-select-submit {
+  display: none;
+  height: 10px;
+  width: 10px;
+}
 /*Add User Select None Class*/
 
 /* Mobile Media Query */
