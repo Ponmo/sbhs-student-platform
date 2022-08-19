@@ -182,8 +182,8 @@ def callback():
         users_email = userinfo_response.json()['email']
         picture = userinfo_response.json()['picture']
         users_name = userinfo_response.json()['name']
-        #if not users_email.endswith('@my.sbunified.org') and not users_email.endswith('@sbunified.org'):
-            #return redirect(url_for('render_login', error = "Please use your SBUnified school email"))
+        ##if not users_email.endswith('@my.sbunified.org') and not users_email.endswith('@sbunified.org'):
+            ##return redirect(url_for('render_login', error = "Please use your SBUnified school email"))
     else:
         return redirect(url_for('render_login', error = "Email not available or verified"))
     
@@ -277,7 +277,7 @@ def user_spaces():
 
 @app.route('/space', methods=['GET', 'POST'])
 def render_space():
-    if request.method == 'POST':
+    if request.method == 'POST' and space_member():
         space = collection_spaces.find_one({'_id': ObjectId(request.json['space_id'])})
         rooms_and_sections = dumps([list(collection_rooms.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_sections.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_users.find({'joined': {'$in': [request.json['space_id']]}})), list(collection_spaces.find({'_id': ObjectId(request.json['space_id'])}))])
         if session['unique_id'] in space['admins'] or session['admin']: #use current_space instead of request.json in any query
@@ -314,7 +314,7 @@ def leave_space():
 
 @app.route('/chat_history', methods=['GET', 'POST'])
 def chat_history():
-    if request.method == 'POST':
+    if request.method == 'POST' and space_member():
         chat_history = dumps(list(collection_messages.find({'room': request.json['room_id']}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(25)))
         return Response(chat_history, mimetype='application/json')
 
@@ -423,7 +423,6 @@ def create_space():
 # Returns space data.
 # TODO: Check if space still exists in MongoDB.
 
-#todo for tomorrow
 @app.route('/delete_space', methods=['GET', 'POST'])
 def delete_space():
     if request.method == 'POST' and (space_owner() or session['admin']):
@@ -455,18 +454,18 @@ def join_space():
 def delete_message():
     if request.method == 'POST':
         deleted_message = collection_messages.find_one({'_id': ObjectId(request.json['message_id'])})
-        deleted_email = collection_messages.find({'room': request.json['room_id'], 'email': deleted_message['email']}).sort('_id', pymongo.DESCENDING)
-        document_list = list(deleted_email)
-        message_index = document_list.index(deleted_message)
-        if message_index != 0:
-            if document_list[message_index-1]["combine"] == "true" and document_list[message_index]["combine"] == "false":
-                collection_messages.find_one_and_update({'_id': ObjectId(document_list[message_index-1]['_id'])}, {'$set': {'combine': 'false'}}) 
-        #collection_deleted.insert_one({'name': session['users_email'], 'datetime': datetime.now().isoformat() + 'Z', 'deleted_message_content': deleted_message}) Used to add to logs once deleted.
-        collection_messages.delete_one({"_id": ObjectId(request.json['message_id'])})
-        collection_logs.insert_one({'name': session['users_name'], 'user_id': session['unique_id'], 'email': session['users_email'], 'action': 'deleted message', 'by': deleted_message['name'], 'by_email': deleted_message['email'], 'in': session['current_space_name'], 'details': deleted_message, 'datetime': datetime.now().isoformat() + 'Z'})
-        return Response(dumps({'success': message_index}), mimetype='application/json')
-    else:
-        return Response(dumps({'success': 'false'}), mimetype='application/json')
+        if deleted_message['user_id'] == session['unique_id'] or space_admin() or session['admin']:
+            deleted_email = collection_messages.find({'room': request.json['room_id'], 'email': deleted_message['email']}).sort('_id', pymongo.DESCENDING)
+            document_list = list(deleted_email)
+            message_index = document_list.index(deleted_message)
+            if message_index != 0:
+                if document_list[message_index-1]["combine"] == "true" and document_list[message_index]["combine"] == "false":
+                    collection_messages.find_one_and_update({'_id': ObjectId(document_list[message_index-1]['_id'])}, {'$set': {'combine': 'false'}}) 
+            #collection_deleted.insert_one({'name': session['users_email'], 'datetime': datetime.now().isoformat() + 'Z', 'deleted_message_content': deleted_message}) Used to add to logs once deleted.
+            collection_messages.delete_one({"_id": ObjectId(request.json['message_id'])})
+            collection_logs.insert_one({'name': session['users_name'], 'user_id': session['unique_id'], 'email': session['users_email'], 'action': 'deleted message', 'by': deleted_message['name'], 'by_email': deleted_message['email'], 'in': session['current_space_name'], 'details': deleted_message, 'datetime': datetime.now().isoformat() + 'Z'})
+            return Response(dumps({'success': message_index}), mimetype='application/json')
+    return Response(dumps({'success': 'false'}), mimetype='application/json')
 
 # When a user reports a message, add a report with
 # relevant information to MongoDB.
@@ -474,7 +473,7 @@ def delete_message():
 
 @app.route('/report_message', methods=['GET', 'POST'])
 def report_message():
-    if request.method == 'POST':
+    if request.method == 'POST' and space_member():
         reported_message = collection_messages.find_one({'_id': ObjectId(request.json['message_id'])})
         if collection_logs.count_documents({'details': reported_message}) == 0:
             collection_logs.insert_one({'name': session['users_name'], 'user_id': session['unique_id'], 'email': session['users_email'], 'action': 'reported message', 'by': reported_message['name'], 'by_email': reported_message['email'], 'in': session['current_space_name'], 'details': reported_message, 'datetime': datetime.now().isoformat() + 'Z'})
@@ -549,11 +548,12 @@ def change_user_status():
 
 @socketio.on('join_room')
 def change_room(data):
-    try: 
-        leave_room(data['old_room'])
-    except:
-        pass
-    join_room(data['room_id'])
+    if space_member():
+        try: 
+            leave_room(data['old_room'])
+        except:
+            pass
+        join_room(data['room_id'])
 
 # When user starts typing, notify all users in that room.
 
@@ -569,72 +569,78 @@ def stopped_typing(data):
 
 # When a message is sent, verify and store it in MongoDB.
 # Send the message data to all users in that room.
+# TODO: Prevent malicious messages being sent to wrong rooms.
 
 @socketio.on('send_message')
 def send_message(data):
-    utc_dt = datetime.now().isoformat() + 'Z'
-    data['datetime'] = utc_dt
-    data['message'] = re.sub('\\\n\\n\\\n+', '\\n\\n', data['message'])
-    data['message_id'] = str(ObjectId())
-    data['user_id'] = session['unique_id']
-    data['picture'] = session['picture']
-    data['name'] = session['users_name']
-    latest_message = collection_messages.find_one({'room': data['room_id']}, sort=[( '_id', pymongo.DESCENDING )])
-    try:
-        duration = datetime.now() - datetime.fromisoformat(latest_message.get('datetime').replace('Z', ''))
-        if latest_message.get('name') == session['users_name'] and latest_message.get('picture') == session['picture'] and duration.total_seconds() < 180: #deprecate
-            data['combine'] = 'true'
-        else:
+    if space_member():
+        utc_dt = datetime.now().isoformat() + 'Z'
+        data['datetime'] = utc_dt
+        data['message'] = re.sub('\\\n\\n\\\n+', '\\n\\n', data['message'])
+        data['message_id'] = str(ObjectId())
+        data['user_id'] = session['unique_id']
+        data['picture'] = session['picture']
+        data['name'] = session['users_name']
+        latest_message = collection_messages.find_one({'room': data['room_id']}, sort=[( '_id', pymongo.DESCENDING )])
+        try:
+            duration = datetime.now() - datetime.fromisoformat(latest_message.get('datetime').replace('Z', ''))
+            if latest_message.get('name') == session['users_name'] and latest_message.get('picture') == session['picture'] and duration.total_seconds() < 180: #deprecate
+                data['combine'] = 'true'
+            else:
+                data['combine'] = 'false'
+        except:
             data['combine'] = 'false'
-    except:
-        data['combine'] = 'false'
-    collection_messages.insert_one({'_id': ObjectId(data['message_id']), 'name': data['name'], 'user_id': data['user_id'], 'picture': data['picture'], 'room': data['room_id'], 'datetime': utc_dt, 'message': data['message'], 'combine': data['combine'], 'email': session['users_email']})
-    socketio.emit('receive_message', data, room = data['room_id'])
+        collection_messages.insert_one({'_id': ObjectId(data['message_id']), 'name': data['name'], 'user_id': data['user_id'], 'picture': data['picture'], 'room': data['room_id'], 'datetime': utc_dt, 'message': data['message'], 'combine': data['combine'], 'email': session['users_email']})
+        socketio.emit('receive_message', data, room = data['room_id'])
     
 # When a room is created, send that room data to all
 # users in the space.
 
 @socketio.on('created_room')
 def created_room(data):
-    for room in data['room_list']: #plug list
-        socketio.emit('created_room', data, room = room)
+    if space_admin() or session['admin']:
+        for room in data['room_list']: #plug list
+            socketio.emit('created_room', data, room = room)
 
 # When a room is deleted, send that room data to all
 # users in the space.
 
 @socketio.on('deleted_room')
 def deleted_room(data):
-    for room in data['room_list']:
-    	socketio.emit('deleted_room', data, room = room)
+    if space_admin() or session['admin']:
+        for room in data['room_list']:
+            socketio.emit('deleted_room', data, room = room)
 
-#todo for tomorrow
 @socketio.on('deleted_space')
 def deleted_space(data):
-    for room in data['room_list']:
-        socketio.emit('deleted_space', data, room = room)
+    if space_owner() or session['admin']:
+        for room in data['room_list']:
+            socketio.emit('deleted_space', data, room = room)
 
 # When a section is created, send that section data to all
 # users in the space.
 
 @socketio.on('created_section')
 def created_section(data):
-	for room in data['room_list']:
-		socketio.emit('created_section', data, room = room)
+    if space_admin() or session['admin']:
+        for room in data['room_list']:
+            socketio.emit('created_section', data, room = room)
 
 # When a section is deleted, send that section data to all
 # users in the space.
 
 @socketio.on('deleted_section')
 def created_section(data):
-	for room in data['room_list']:
-		socketio.emit('deleted_section', data, room = room)
+    if space_admin() or session['admin']:
+        for room in data['room_list']:
+            socketio.emit('deleted_section', data, room = room)
 
 # When a message is deleted, send that message data to all
 # users in the space.
 
 @socketio.on('deleted_message')
 def deleted_message(data):
-    socketio.emit('deleted_message', data, room = data['room_id'])
+        socketio.emit('deleted_message', data, room = data['room_id'])
 
 # When a message is edited, update the message in MongoDB and
 # send the message data to all users in that room.
