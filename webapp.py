@@ -1,3 +1,4 @@
+from tkinter import FALSE
 from flask_socketio import SocketIO, emit, join_room, leave_room
 
 import json
@@ -187,8 +188,19 @@ def callback():
     else:
         return redirect(url_for('render_login', error = "Email not available or verified"))
     
-    # Store user data in session
-    
+    if not collection_users.count_documents({ '_id': unique_id}, limit = 1):
+        collection_users.insert_one({'_id': unique_id, 'name': users_name, 'email': users_email, 'picture': picture, 'joined': [], 'status': 'user'}) #check if profile picture the same !
+    else:
+        user_status = collection_users.find_one({ '_id': unique_id})['status']
+        if user_status == 'banned':
+            session['logged'] = False
+            session.clear()
+            return redirect(url_for('render_login', error = "This account has been banned"))
+        elif user_status == 'admin':
+            session['admin'] == True
+        else:
+            session['admin'] == False
+
     session['unique_id'] = unique_id
     session['users_email'] = users_email
     session['picture'] = picture
@@ -197,10 +209,6 @@ def callback():
     session['current_space'] = ''
     session['current_space_name'] = ''
     
-    # Store user data in MongoDB if new user.
-    
-    if not collection_users.count_documents({ '_id': unique_id}, limit = 1):
-        collection_users.insert_one({'_id': unique_id, 'name': users_name, 'email': users_email, 'picture': picture, 'joined': [], 'status': 'user'}) #check if profile picture the same !
     return redirect(url_for('render_main_page'))
 
 # Handle errors to Google API call.
