@@ -5,6 +5,7 @@ import os
 import re
 
 from flask import Flask, flash, redirect, Markup, url_for, session, request, jsonify, Response, request, Request
+from flask_session import Session
 from flask import render_template
 
 from oauthlib.oauth2 import WebApplicationClient
@@ -63,9 +64,11 @@ class ProxiedRequest(Request):
 
 app = Flask(__name__)
 app.secret_key = os.environ['SECRET_KEY']
+app.config['SESSION_TYPE'] = 'filesystem'
 app.request_class = ProxiedRequest
+Session(app)
 
-socketio = SocketIO(app, async_mode='gevent')
+socketio = SocketIO(app, async_mode='gevent', manage_session = False)
 
 client = WebApplicationClient(GOOGLE_CLIENT_ID)
 
