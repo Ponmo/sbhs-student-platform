@@ -196,9 +196,9 @@ def callback():
             session.clear()
             return redirect(url_for('render_login', error = "This account has been banned"))
         elif user_status == 'admin':
-            session['admin'] == True
+            session['admin'] = True
         else:
-            session['admin'] == False
+            session['admin'] = False
 
     session['unique_id'] = unique_id
     session['users_email'] = users_email
