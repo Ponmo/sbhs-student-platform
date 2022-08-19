@@ -736,9 +736,9 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin-top: 40px;
   overflow-y: scroll;
   overflow-x: scroll;
-  display: none;
 }
 .admin-table {
+  display: none;
 }
 .admin-table td, .admin-table th {
   padding-left: 16px;
