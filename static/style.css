@@ -739,6 +739,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 .admin-table {
   display: none;
+  width: 100%;
 }
 .admin-table td, .admin-table th {
   padding-left: 16px;
