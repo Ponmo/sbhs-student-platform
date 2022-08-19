@@ -545,7 +545,7 @@ def change_user_status():
 
 @socketio.on('join_room')
 def change_room(data):
-    if space_member():
+    if space_member() and valid_room(data['room_id']):
         try: 
             leave_room(data['old_room'])
         except:
@@ -556,21 +556,22 @@ def change_room(data):
 
 @socketio.on('is_typing')
 def is_typing(data):
-	socketio.emit('is_typing', data, room = data['room_id'])
+    if space_member() and valid_room(data['room_id']):
+	    socketio.emit('is_typing', data, room = data['room_id'])
 
 # When user stops typing, notify all users in that room.
 
 @socketio.on('stopped_typing')
 def stopped_typing(data):
-	socketio.emit('stopped_typing', data, room = data['room_id'])
+    if space_member() and valid_room(data['room_id']):
+	    socketio.emit('stopped_typing', data, room = data['room_id'])
 
 # When a message is sent, verify and store it in MongoDB.
 # Send the message data to all users in that room.
-# TODO: Prevent malicious messages being sent to wrong rooms.
 
 @socketio.on('send_message')
 def send_message(data):
-    if space_member():
+    if space_member() and valid_room(data['room_id']):
         utc_dt = datetime.now().isoformat() + 'Z'
         data['datetime'] = utc_dt
         data['message'] = re.sub('\\\n\\n\\\n+', '\\n\\n', data['message'])
@@ -637,6 +638,7 @@ def created_section(data):
 
 @socketio.on('deleted_message')
 def deleted_message(data):
+    if space_admin() or session['admin'] or session['unique_id'] == collection_messages.find_one({'_id': ObjectId(data['message_id'])})['user_id']:
         socketio.emit('deleted_message', data, room = data['room_id'])
 
 # When a message is edited, update the message in MongoDB and
@@ -651,27 +653,31 @@ def edited_message(data):
 
 @socketio.on('sorted_sections')
 def sorted_sections(data):
-    for section in data['section_list']:
-        collection_sections.find_one_and_update({"_id": ObjectId(section)}, {'$set': {'order': data['section_list'].index(section) + 1}})
-    for room in room_list():
-        socketio.emit('sorted_sections', data, room = room)
+    if space_admin() or session['admin']:
+        for section in data['section_list']:
+            collection_sections.find_one_and_update({"_id": ObjectId(section)}, {'$set': {'order': data['section_list'].index(section) + 1}})
+        for room in room_list():
+            socketio.emit('sorted_sections', data, room = room)
     
 # When rooms are sorted, update the order in MongoDB.
+##
 
 @socketio.on('sorted_rooms')
 def sorted_rooms(data):
-    order = 1
-    for section in data['room_group_list']:
-        if len(section) > 1:
-            for room in section[1:]:
-                collection_rooms.find_one_and_update({"_id": ObjectId(room)}, {'$set': {'order': order, 'section': section[0]}})
-                order += 1
-                socketio.emit('sorted_rooms', data, room = room)
+    if space_admin() or session['admin']:
         order = 1
+        for section in data['room_group_list']:
+            if len(section) > 1:
+                for room in section[1:]:
+                    collection_rooms.find_one_and_update({"_id": ObjectId(room)}, {'$set': {'order': order, 'section': section[0]}})
+                    order += 1
+                    socketio.emit('sorted_rooms', data, room = room)
+            order = 1
 
 @socketio.on('sent_email')
 def sent_email(data):
-    socketio.emit('sent_email', data, room = data['room_id'])
+    if space_admin() or session['admin']:
+        socketio.emit('sent_email', data, room = data['room_id'])
 
 @socketio.on('joined_space')
 def joined_space(data):
@@ -695,10 +701,17 @@ def space_member():
     return False
 
 def room_list():
-    room_list = []
+    room_ids = []
     for room in list(collection_rooms.find({'space': session['current_space']})):
-        room_list.append(str(room['_id']))
-    return room_list
+        room_ids.append(str(room['_id']))
+    return room_ids
+
+def valid_room(room_id):
+    room_list = collection_rooms.find({'space': session['current_space']})
+    if session['current_space'] == collection_rooms.find_one({'_id': ObjectId(room_id)})['space']:
+        return True
+    return False
+
 
 #if __name__ == '__main__':
 #    socketio.run(app, debug=False)
