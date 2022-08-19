@@ -1254,7 +1254,7 @@
             type: 'POST',
             url: '/create_room',
             dataType: 'json',
-            data: JSON.stringify({'room_name': room_name, 'section_id': selected_section, 'room_id': room['_id']['$oid'], 'room_list': roomList(),}),
+            data: JSON.stringify({'room_name': room_name, 'section_id': selected_section, 'room_id': room['_id']['$oid'], 'room_list': roomList()}),
             contentType: 'application/json;charset=UTF-8',
             success: function(data) {
               //socket.emit('created_room', {
