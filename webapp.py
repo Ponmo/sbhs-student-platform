@@ -285,7 +285,7 @@ def render_space():
             session['space_admin'] = True
             session['current_space_name'] = space['name']
             return Response(rooms_and_sections, mimetype='application/json')
-        elif session['unique_id'] in space['members']:
+        elif any(session['unique_id'] in item for item in space['members']):
             session['current_space'] = request.json['space_id'] #?: Instead of space_admin(), we can check user status here and set session['space_admin'] == True
             session['space_admin'] = False
             session['current_space_name'] = space['name']
@@ -693,7 +693,7 @@ def space_owner():
     return False
 
 def space_member():
-    if session['unique_id'] in collection_spaces.find_one({'_id': ObjectId(session['current_space'])})['members']:
+    if any(session['unique_id'] in item for item in collection_spaces.find_one({'_id': ObjectId(session['current_space'])})['members']):
         return True
     return False
 
