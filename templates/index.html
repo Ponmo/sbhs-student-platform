@@ -1348,26 +1348,31 @@
             data: JSON.stringify({'space_name': space_name, 'space_image': space_image}),
             contentType: 'application/json;charset=UTF-8',
             success: function(data) {
-              document.getElementById("create-space").style.display = "none";
-              $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
-              $(document.getElementById(current_space)).attr('style', '');
-              let newNode = document.createElement('li');
-              newNode.className = 'space-wrapper';
-              let newNodeChild = document.createElement('img');
-              newNodeChild.className = 'space pointer';
-              newNodeChild.id = data.space_id;
-              newNodeChild.setAttribute('data-name', space_name);
-              newNodeChild.style.borderRadius = '3px';
-              newNodeChild.src = space_image;
-              newNode.appendChild(newNodeChild);
-              newNodeChild = document.createElement('div');
-              newNodeChild.className = 'active-space';
-              newNodeChild.style.width = '39px'
-              newNode.appendChild(newNodeChild);
-              referenceNode = document.getElementById('space_align_helper');
-              referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-              current_space = data.space_id;
-              space();
+              if ('success' in data) {
+                alert('You may only create up to 3 spaces.');
+              }
+              else {
+                document.getElementById("create-space").style.display = "none";
+                $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
+                $(document.getElementById(current_space)).attr('style', '');
+                let newNode = document.createElement('li');
+                newNode.className = 'space-wrapper';
+                let newNodeChild = document.createElement('img');
+                newNodeChild.className = 'space pointer';
+                newNodeChild.id = data.space_id;
+                newNodeChild.setAttribute('data-name', space_name);
+                newNodeChild.style.borderRadius = '3px';
+                newNodeChild.src = space_image;
+                newNode.appendChild(newNodeChild);
+                newNodeChild = document.createElement('div');
+                newNodeChild.className = 'active-space';
+                newNodeChild.style.width = '39px'
+                newNode.appendChild(newNodeChild);
+                referenceNode = document.getElementById('space_align_helper');
+                referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+                current_space = data.space_id;
+                space();
+              }
             }
           });
         }
