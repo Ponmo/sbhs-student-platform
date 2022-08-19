@@ -562,13 +562,13 @@
             data.forEach(function (item) {
               let formNode = '';
               if (item.status == 'user') {
-                formNode = '<form class="change-user-status-form"><select data-current="user" class="user-status-select" data><option data- selected="selected" value="user">user</option><option value="admin">admin</option><option value="banned">banned</option></select><input type="submit" value="✓"></form>';
+                formNode = '<form class="change-user-status-form"><select data-current="user" class="user-status-select" data><option data- selected="selected" value="user">user</option><option value="admin">admin</option><option value="banned">banned</option></select><input style="display:none" type="submit" value="✓"></form>';
               } 
               else if (item.status == 'admin') {
-                formNode = '<form class="change-user-status-form"><select data-current="admin" class="user-status-select"><option value="user">user</option><option selected="selected" value="admin">admin</option><option value="banned">banned</option></select><input type="submit" value="✓"></form>';
+                formNode = '<form class="change-user-status-form"><select data-current="admin" class="user-status-select"><option value="user">user</option><option selected="selected" value="admin">admin</option><option value="banned">banned</option></select><input style="display:none" type="submit" value="✓"></form>';
               }
               else if (item.status == 'banned') {
-                formNode = '<form class="change-user-status-form"><select data-current="banned" class="user-status-select"><option value="user">user</option><option selected="selected" value="admin">admin</option><option value="banned">banned</option></select><input type="submit" value="✓"></form>';
+                formNode = '<form class="change-user-status-form"><select data-current="banned" class="user-status-select"><option value="user">user</option><option selected="selected" value="admin">admin</option><option value="banned">banned</option></select><input style="display:none" type="submit" value="✓"></form>';
               }
               else {
                 formNode = 'owner';
@@ -614,10 +614,10 @@
 
       $(document).on('change', '.user-status-select', function() {
         if (this.getAttribute('data-current') != this.value) {
-          alert('yay');
+          this.nextElementSibling.style.display = 'block';
         }
         else {
-          alert('nay');
+          this.nextElementSibling.style.display = 'none';
         }
       });
 
