@@ -436,7 +436,6 @@ def delete_space():
             joined = collection_users.find_one({"_id": member[0]})['joined']
             joined.remove(session['current_space'])
             collection_users.update_one({"_id": member[0]}, {"$set": {"joined": joined}})
-
         session['current_space_name'] = ''
         return Response(dumps({'success': 'true'}), mimetype='application/json')
     return Response(dumps({'success': 'false'}), mimetype='application/json')
