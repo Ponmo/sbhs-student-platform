@@ -596,7 +596,7 @@ def send_message(data):
 @socketio.on('created_room')
 def created_room(data):
     if space_admin() or session['admin']:
-        for room in room_list(): #plug list
+        for room in room_list():
             socketio.emit('created_room', data, room = room)
 
 # When a room is deleted, send that room data to all
@@ -696,8 +696,8 @@ def space_member():
 
 def room_list():
     room_list = []
-    for room in list(collection_rooms.find({'space': session['current_space']}).sort('order', 1)):
-        room_list.append(room['_id']['$oid'])
+    for room in list(collection_rooms.find({'space': session['current_space']})):
+        room_list.append(str(room['_id']))
     return room_list
 
 #if __name__ == '__main__':
