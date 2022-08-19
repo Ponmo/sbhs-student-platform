@@ -1296,7 +1296,7 @@
           type: 'POST',
           url: '/delete_section',
           dataType: "json",
-          data: JSON.stringify({'section_id': selected_section, 'space_id': current_space}),
+          data: JSON.stringify({'section_id': selected_section}),
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
             if (data['success'] == 'true') {
@@ -1413,8 +1413,6 @@
         $.ajax({
           type: 'POST',
           url: '/delete_space',
-          dataType: 'json',
-          data: JSON.stringify({'space_id': current_space}),
           contentType: 'application/json;charset=UTF-8',
           success: function (delete_space){
             socket.emit('deleted_space', {'room_list': roomList()})
