@@ -1,4 +1,3 @@
-from tkinter import FALSE
 from flask_socketio import SocketIO, emit, join_room, leave_room
 
 import json
