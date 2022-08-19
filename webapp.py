@@ -418,7 +418,7 @@ def create_space():
         collection_sections.insert_one(section)        
         joined = user['joined']
         joined.append(str(space_id))
-        collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': joined}})
+        collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': joined, 'owns': user['owns'] + 1}})
         return Response(dumps({'space_id': str(space_id)}), mimetype='application/json')
     return Response(dumps({'success': 'false'}), mimetype='application/json')
 
@@ -431,6 +431,12 @@ def delete_space():
     if request.method == 'POST' and (space_owner() or session['admin']):
         collection_spaces.find_one({'_id': ObjectId(session['current_space'])})
         collection_spaces.delete_one({'_id': ObjectId(session['current_space'])})
+        collection_users.find_one_and_update({"_id": session['unique_id']}, {'$inc': {'owns': -1}})
+        
+        joined = collection_users.find_one({"_id": session['unique_id']})['joined']
+        joined.remove(session['current_space'])
+        collection_users.update_one({"_id": session['unique_id']}, {"$set": {"joined": joined}})
+
         session['current_space_name'] = ''
         return Response(dumps({'success': 'true'}), mimetype='application/json')
     return Response(dumps({'success': 'false'}), mimetype='application/json')
