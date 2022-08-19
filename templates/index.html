@@ -363,7 +363,6 @@
         success: function(data) {
           if (data[2] == 'True') {
             admin = true;
-            alert('yay');
           }
           data[1].forEach(function(item) { 
             try {
@@ -1239,7 +1238,7 @@
 
       $(document).on('contextmenu', '.room', function (e) {
         hideSecondLayer();
-        if (space_admin == true) {
+        if (space_admin || admin) {
           selected_room = this.id;
           document.getElementById('room-menu').style.top = mouseY(event) + 'px';
           document.getElementById('room-menu').style.left = mouseX(event) + 'px';
@@ -1313,7 +1312,7 @@
 
       $(document).on('contextmenu', '.section', function (e) {
         hideSecondLayer();
-        if (space_admin == true) {
+        if (space_admin || admin) {
           selected_section = this.id;
           document.getElementById('section-menu').style.top = mouseY(event) + 'px';
           document.getElementById('section-menu').style.left = mouseX(event) + 'px';
@@ -1499,7 +1498,7 @@
           newMode.className = 'message-container';
           messageMoment = 'at ' + messageMoment;
           // TODO: Give pfp image default fallback image
-          if (space_admin == true || data.user_id == user_id) {
+          if (space_admin || admin || data.user_id == user_id) {
             newMode.innerHTML = '<img class="profile-picture pointer" src="' + data.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + data.name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message">' + data.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>'; 
           }
           else {
@@ -1508,7 +1507,7 @@
         }
         else {
           newMode.className = 'message-container-combine';
-          if (space_admin == true || data.user_id == user_id){
+          if (space_admin || admin || data.user_id == user_id){
           newMode.innerHTML = '<p class="message-combine-time">' + messageMoment + '</p><p class="message-combine">' + data.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>';
           }
           else{
@@ -1551,7 +1550,7 @@
         newNode.className = 'room pointer';
         newNode.setAttribute('data-section', data.section_id);
         newNode.setAttribute('data-name', data.name);
-        if (space_admin == true){
+        if (space_admin || admin){
         newNode.innerHTML = data.name;
       }
       else{
@@ -1578,7 +1577,7 @@
         newNodeChild.className = 'room-group';
         newNode.appendChild(newNodeChild);
         document.getElementById('regular-channels').append(newNode);
-        if (space_admin == true) {
+        if (space_admin || admin) {
           $('.room-group').sortable({
             connectWith: '.room-group',
             axis: 'y',
@@ -1710,7 +1709,7 @@
               let newNodeChild = document.createElement('li');
               newNodeChild.className = 'section pointer';
               newNodeChild.id = section['_id']['$oid'];
-              if (space_admin == true) {
+              if (space_admin || admin) {
                 newNodeChild.innerHTML = '<div class="section-name"><span><img class="collapse-icon" src="/static/images/expand.png"></img></span>' + section['name'] + '</div><div class="create-room-button" type="button">+</div>';
               }
               else {
@@ -1726,7 +1725,7 @@
                   newNodeChild.id = room['_id']['$oid'];
                   newNodeChild.setAttribute('data-section', room['section']);
                   newNodeChild.setAttribute('data-name', room['name']);
-                  if (space_admin == true) {
+                  if (space_admin || admin) {
                     newNodeChild.innerHTML = room['name'];
                   }
                   else {
@@ -1748,7 +1747,7 @@
                 document.getElementById('special-channels').append(newNode);
               }
             });
-            if (space_admin) {
+            if (space_admin || admin) {
               $('.room-group').sortable({
                 connectWith: '.room-group',
                 axis: 'y',
@@ -1896,7 +1895,7 @@
                 else {
                     messageDate = 'on ' + messageDate.format('M/D/YYYY');
                 }
-                if (space_admin == true || item.user_id == user_id) {
+                if (space_admin || admin || item.user_id == user_id) {
                   newMode.innerHTML = '<img class="profile-picture pointer" src="' + item.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + item.name + ' </b></span><span class="datetime">' + messageDate + '</span></p><p class="message">' + item.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>';
                 }
                 else{
@@ -1907,7 +1906,7 @@
                 newMode.className = 'message-container-combine';
                 newMode.setAttribute('data-date', messageDate.format('M/D/YYYY'));
                 newMode.setAttribute('data-datetime', messageDate.format());
-                if (space_admin == true || item.user_id == user_id) {
+                if (space_admin || admin || item.user_id == user_id) {
                   newMode.innerHTML = '<p class="message-combine-time">' + messageDate.format('h:mm A') + '</p><p class="message-combine">' + item.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>'; 
                 } 
                 else {
