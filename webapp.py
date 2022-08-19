@@ -332,8 +332,8 @@ def email_history():
 @app.route('/delete_room', methods=['GET', 'POST'])
 def delete_room():
 	if request.method == 'POST' and (space_admin() or session['admin']):
-		room_count = collection_rooms.count_documents({'space': session['current_space']})
-		if room_count > 2:
+		room_count = collection_rooms.count_documents({'space': session['current_space'], 'section': 'special'}) - collection_rooms.count_documents({'space': session['current_space']})
+		if room_count > 1:
 			collection_rooms.delete_one({'_id': ObjectId(request.json['room_id'])})
 			collection_messages.delete_many({'room': request.json['room_id']})
 			cursor = collection_rooms.find({'section': request.json['section_id']}).sort('order', 1)
