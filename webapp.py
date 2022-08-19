@@ -240,7 +240,7 @@ def render_main_page(space_id = None):
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():
     if request.method == 'POST':
-        session['logged'] = False # Prevents browsers from using cached session data to log in.
+        session['logged'] = False # Prevents browsers from using cached session data to log in. NOTE: We use server-side sessions now
         session.clear()
         return Response(dumps({'success': 'true'}), mimetype='application/json')
         
@@ -687,7 +687,7 @@ def sent_email(data):
     if valid_room(data['room_id']) and (space_admin() or session['admin']):
         socketio.emit('sent_email', data, room = data['room_id'])
 
-@socketio.on('joined_space')##
+@socketio.on('joined_space')
 def joined_space(data):
     user = collection_users.find_one({'_id': session['unique_id']})
     for room in room_list():
@@ -718,7 +718,6 @@ def valid_room(room_id):
     if session['current_space'] == collection_rooms.find_one({'_id': ObjectId(room_id)})['space']:
         return True
     return False
-
 
 #if __name__ == '__main__':
 #    socketio.run(app, debug=False)
