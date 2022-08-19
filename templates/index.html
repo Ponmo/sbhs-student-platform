@@ -18,7 +18,8 @@
       <div id="space-settings-popup">
         <div class="pointer blue-entry-two" id="create-section-button">Create Section</div>
         <div class="pointer blue-entry-two" id="edit-space-button">Edit Space</div>
-        <div class="pointer red-space-button"></div>
+        <div class="pointer red-space-button" id="delete-space">Delete Space</div>
+        <div class="pointer red-space-button" id="leave-space">Leave Space</div>
       </div>
     </div>
 
@@ -1679,20 +1680,14 @@
           contentType: 'application/json;charset=UTF-8',
           success: function(rooms_and_sections) {
             window.history.pushState('', '', '/sbhs/' + current_space);
-            if (rooms_and_sections[3][0].admins[0] == user_id || admin) { //Accounts for only one space admin, which is owner.
+            if (rooms_and_sections[3][0].admins[0] == user_id) { //Accounts for only one space admin, which is owner, admin.
               space_admin = true;
-              let red_space_button = document.getElementsByClassName('red-space-button')[0];
-              red_space_button.id = 'delete-space';
-              red_space_button.textContent = 'Delete Space';
               $('#create-section-button').show();
               $('#edit-space-button').show();
               $("#email_input_form :input").prop("disabled", false);
             }
             else {
               space_admin = false;
-              let red_space_button = document.getElementsByClassName('red-space-button')[0];
-              red_space_button.id = 'leave-space';
-              red_space_button.textContent = 'Leave Space';
               $('#create-section-button').hide();
               $('#edit-space-button').hide();
               $("#email_input_form :input").prop("disabled", true);
