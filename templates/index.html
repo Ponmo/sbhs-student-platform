@@ -573,7 +573,7 @@
                 formNode = '<form class="change-user-status-form"><select data-current="banned" class="user-status-select"><option selected="selected" value="banned">banned</option><option value="user">user</option><option value="admin">admin</option></select> <input class="user-status-select-submit" type="submit" value="✓"></form>';
               }
               else {
-                formNode = 'owner';
+                formNode = '<select class="user-status-select" disabled><option value="owner">owner</option></select>';
               }
               let newNode = document.createElement('tr');
               newNode.className = 'admin-users-table-row';
