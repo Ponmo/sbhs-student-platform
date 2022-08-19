@@ -1107,7 +1107,7 @@
             type: 'POST',
             url: '/send_email',
             dataType: 'json',
-            data: JSON.stringify({'to': recipient_list, 'subject': document.getElementById('email_subject_input').value, 'message': document.getElementById('email_message_input').value/*.replace(new RegExp('\r?\n','g'), '<br>')*/, 'space_id': current_space, 'space_name': document.getElementById('header_text').textContent, 'room_id': current_room}),
+            data: JSON.stringify({'to': recipient_list, 'subject': document.getElementById('email_subject_input').value, 'message': document.getElementById('email_message_input').value, 'room_id': current_room}),
             contentType: 'application/json;charset=UTF-8',
             success: function(data) {
               socket.emit('sent_email', {
@@ -1219,7 +1219,7 @@
           type: "POST",
           url: '/delete_room',
           dataType: "json",
-          data: JSON.stringify({'room_id': deleted_room, 'space_id': current_space, 'section_id': deleted_room_section}),
+          data: JSON.stringify({'room_id': deleted_room, 'section_id': deleted_room_section}),
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
             if (data['success'] == 'true') {
@@ -1254,7 +1254,7 @@
             type: 'POST',
             url: '/create_room',
             dataType: 'json',
-            data: JSON.stringify({'room_name': room_name, 'section_id': selected_section, 'space_id': current_space}),
+            data: JSON.stringify({'room_name': room_name, 'section_id': selected_section}),
             contentType: 'application/json;charset=UTF-8',
             success: function(room) {
               socket.emit('created_room', {
@@ -1277,7 +1277,7 @@
             type: 'POST',
             url: '/create_section',
             dataType: "json",
-            data: JSON.stringify({'section_name': section_name, 'space_id': current_space}),
+            data: JSON.stringify({'section_name': section_name}),
             contentType: 'application/json;charset=UTF-8',
             success: function(section) {
               socket.emit('created_section', {
@@ -1400,8 +1400,6 @@
         $.ajax({
           type: 'POST',
           url: '/leave_space',
-          dataType: "json",
-          data: JSON.stringify({'space-id': current_space}),
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
             $('#first-all').css('display', 'none');

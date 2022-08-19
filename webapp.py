@@ -72,7 +72,7 @@ client = WebApplicationClient(GOOGLE_CLIENT_ID)
 
 @app.route('/send_email', methods=['GET', 'POST'])
 def send_email():
-    if request.method == 'POST':
+    if request.method == 'POST' and (space_admin() or session['admin']):
         sender_email = 'sbhs.platform.test@gmail.com'
         password = os.environ['EMAIL_ACCESS_PASSWORD']
         message = MIMEMultipart('alternative')
@@ -90,7 +90,7 @@ def send_email():
         '--------------------------------------<br>' +
         session['users_name'] + '<br>' + 
         session['users_email'] + '<br>' +
-        '<a href="https://sbhs-platform.herokuapp.com/sbhs/' + request.json['space_id'] + '">' + request.json['space_name'] + '</a><br>' +
+        '<a href="https://sbhs-platform.herokuapp.com/sbhs/' + session['current_space'] + '">' + session['current_space_name'] + '</a><br>' +
         '--------------------------------------<br>' +
         '<div style="color:lightgray;">do not reply</div>')
         message.attach(MIMEText(text, 'html'))
@@ -208,6 +208,7 @@ def callback():
     session['logged'] = True
     session['current_space'] = ''
     session['current_space_name'] = ''
+    session['space_admin'] = False
     
     return redirect(url_for('render_main_page'))
 
@@ -221,14 +222,14 @@ def get_google_provider_cfg():
 @app.route('/sbhs')
 @app.route('/sbhs/<space_id>')
 def render_main_page(space_id = None):
-    if space_id is not None:
+    if space_id != None:
         if 'logged' not in session or session['logged'] == False:
             session['invite'] = space_id
             return redirect(url_for('render_login'))
     if 'invite' in session:
         space_id = session['invite']
         session.pop('invite')
-        return redirect('https://sbhs-platform.herokuapp.com/sbhs/' + space_id) #TypeError: can only concatenate str (not "NoneType") to str
+        return redirect('https://sbhs-platform.herokuapp.com/sbhs/' + space_id)
     if 'logged' not in session or session['logged'] == False:
        return redirect(url_for('render_login'))
     return render_template('index.html', user_name = session['users_name'], room = '1', user_picture = session['picture'], user_id = session['unique_id'])
@@ -278,10 +279,18 @@ def user_spaces():
 @app.route('/space', methods=['GET', 'POST'])
 def render_space():
     if request.method == 'POST':
-        rooms_and_sections = dumps([list(collection_rooms.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_sections.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_users.find({'joined': {'$in': [request.json['space_id']]}})), list(collection_spaces.find({'_id': ObjectId(request.json['space_id'])}))]) #find way to convert find_one 
-        session['current_space'] = request.json['space_id']
-        session['current_space_name'] = collection_spaces.find_one({'_id': ObjectId(request.json['space_id'])})['name']
-        return Response(rooms_and_sections, mimetype='application/json')
+        space = collection_spaces.find({'_id': ObjectId(request.json['space_id'])})
+        rooms_and_sections = dumps([list(collection_rooms.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_sections.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_users.find({'joined': {'$in': [request.json['space_id']]}})), list(collection_spaces.find({'_id': ObjectId(request.json['space_id'])}))])
+        if session['unique_id'] in space['admins'] or session['admin']: #use current_space instead of request.json in any query
+            session['current_space'] = request.json['space_id']
+            session['space_admin'] = True
+            session['current_space_name'] = space['name']
+            return Response(rooms_and_sections, mimetype='application/json')
+        elif session['unique_id'] in space['members']:
+            session['current_space'] = request.json['space_id'] #?: Instead of space_admin(), we can check user status here and set session['space_admin'] == True
+            session['space_admin'] = False
+            session['current_space_name'] = space['name']
+            return Response(rooms_and_sections, mimetype='application/json')
 
 # When user clicks leave space button, that space is removed
 # from their list of joined spaces in MongoDB.
@@ -289,12 +298,15 @@ def render_space():
 
 @app.route('/leave_space', methods=['GET', 'POST'])
 def leave_space():
-    if request.method == 'POST':
+    if request.method == 'POST' and not space_owner():
         joined = collection_users.find_one({"_id": session['unique_id']})['joined']
-        joined.remove(request.json['space-id'])
+        joined.remove(session['current_space'])
         collection_users.update_one({"_id": session['unique_id']}, {"$set": {"joined": joined}})
-        collection_spaces.update_one({"_id": ObjectId(request.json['space-id'])}, { "$pull": {"members": [session['unique_id'], session['users_name']]}})
+        collection_spaces.update_one({"_id": ObjectId(session['current_space'])}, { "$pull": {"members": [session['unique_id'], session['users_name']]}})
         joined = dumps(joined)
+        session['current_space'] = ''
+        session['space_admin'] = False
+        session['current_space_name'] = ''
         return Response(joined, mimetype='application/json')
 
 # Returns selected range of messages of the loaded room.
@@ -313,7 +325,7 @@ def email_history():
         email_history = collection_emails.find({'room': request.json['room_id']}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(25)
         email_list = []
         for email in email_history:
-            if session['users_email'] in email['recipients'] or 'Everyone' in email['recipients'] or space_admin():
+            if session['users_email'] in email['recipients'] or 'Everyone' in email['recipients'] or space_admin() or session['admin']:
                 email_list.append(email)
         return Response(dumps(email_list), mimetype='application/json')
 
@@ -321,8 +333,8 @@ def email_history():
 
 @app.route('/delete_room', methods=['GET', 'POST'])
 def delete_room():
-	if request.method == 'POST':
-		room_count = collection_rooms.count_documents({'space': request.json['space_id']})
+	if request.method == 'POST' and (space_admin() or session['admin']):
+		room_count = collection_rooms.count_documents({'space': session['current_space']})
 		if room_count > 1:
 			collection_rooms.delete_one({'_id': ObjectId(request.json['room_id'])})
 			collection_messages.delete_many({'room': request.json['room_id']})
@@ -340,10 +352,10 @@ def delete_room():
 
 @app.route('/create_room', methods=['GET', 'POST'])
 def create_room():
-	if request.method == 'POST':
+	if request.method == 'POST' and (space_admin() or session['admin']):
 		room_id = ObjectId()
-		room_list = list(collection_rooms.find({'space': request.json['space_id'], 'section': request.json['section_id']}))
-		room = {'_id': room_id, 'space': request.json['space_id'], 'section': request.json['section_id'], 'name': request.json['room_name'], 'order': len(room_list) + 1}
+		room_list = list(collection_rooms.find({'space': session['current_space'], 'section': request.json['section_id']}))
+		room = {'_id': room_id, 'space': session['current_space'], 'section': request.json['section_id'], 'name': request.json['room_name'], 'order': len(room_list) + 1}
 		collection_rooms.insert_one(room)
 		room = dumps(room)
 		return Response(room, mimetype='application/json')
@@ -353,10 +365,10 @@ def create_room():
 
 @app.route('/create_section', methods=['GET', 'POST'])
 def create_section():
-	if request.method == 'POST':
+	if request.method == 'POST' and (space_admin() or session['admin']):
 		section_id = ObjectId()
-		section_list = list(collection_sections.find({'space': request.json['space_id']}))
-		section = {'_id': section_id, 'space': request.json['space_id'], 'name': request.json['section_name'], 'order': len(section_list) + 1}
+		section_list = list(collection_sections.find({'space': session['current_space']}))
+		section = {'_id': section_id, 'space': session['current_space'], 'name': request.json['section_name'], 'order': len(section_list) + 1}
 		collection_sections.insert_one(section)
 		section = dumps(section)
 		return Response(section, mimetype='application/json')
@@ -367,16 +379,16 @@ def create_section():
 
 @app.route('/delete_section', methods=['GET', 'POST'])
 def delete_section():
-    if request.method == 'POST':
-        section_count = collection_sections.count_documents({'space': request.json['space_id']})
+    if request.method == 'POST' and (space_admin() or session['admin']):
+        section_count = collection_sections.count_documents({'space': session['current_space']})
         if section_count > 1:
             collection_sections.delete_one({'_id': ObjectId(request.json['section_id'])})
             order = 1
-            section_list = collection_sections.find({'space': request.json['space_id']}).sort('order', 1)
+            section_list = collection_sections.find({'space': session['current_space']}).sort('order', 1)
             for section in section_list:
                 collection_sections.update_one({'_id': section['_id']}, {'$set': {'order': order}})
                 order += 1
-            first_section = str(collection_sections.find_one({'space': request.json['space_id'], 'order': 1})['_id'])
+            first_section = str(collection_sections.find_one({'space': session['current_space'], 'order': 1})['_id'])
             order = collection_rooms.count_documents({'section': first_section}) + 1
             room_list = collection_rooms.find({'section': request.json['section_id']}).sort('order', 1)
             for room in room_list:
@@ -406,8 +418,6 @@ def create_space():
         joined = collection_users.find_one({"_id": session['unique_id']})['joined']
         joined.append(str(space_id))
         collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': joined}})
-        session['current_space'] = str(space_id)
-        session['current_space_name'] = request.json['space_name']
         return Response(dumps({'space_id': str(space_id)}), mimetype='application/json')
 
 # Adds space to user's list of joined spaces in MongoDB.
@@ -417,11 +427,12 @@ def create_space():
 #todo for tomorrow
 @app.route('/delete_space', methods=['GET', 'POST'])
 def delete_space():
-    if request.method == 'POST':
-        collection_spaces.find_one({'_id': ObjectId(request.json['space_id'])})
-        collection_spaces.delete_one({'_id': ObjectId(request.json['space_id'])})
+    if request.method == 'POST' and (space_owner() or session['admin']):
+        collection_spaces.find_one({'_id': ObjectId(session['current_space'])})
+        collection_spaces.delete_one({'_id': ObjectId(session['current_space'])})
         session['current_space'] = ''
         session['current_space_name'] = ''
+        session['space_admin'] = False
         return Response(dumps({'success': 'true'}), mimetype='application/json')
     return Response(dumps({'success': 'false'}), mimetype='application/json')
 
@@ -434,8 +445,6 @@ def join_space():
             joined.append(request.json['space_id'])
             collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': joined}})
             collection_spaces.find_one_and_update({"_id": ObjectId(request.json['space_id'])}, {'$push': {'members': [session['unique_id'], session['users_name']]}})
-        session['current_space'] = request.json['space_id']
-        session['current_space_name'] = collection_spaces.find_one({'_id': ObjectId(request.json['space_id'])})['name']
         return Response(space, mimetype='application/json')
 
 # When user deletes a message, delete that message from MongoDB.
@@ -443,7 +452,7 @@ def join_space():
 # change the combine status of it to false.
 # TODO: Add deleted message to the report collection in MongoDB.
 
-@app.route('/delete_message', methods=['GET', 'POST'])
+@app.route('/delete_message', methods=['GET', 'POST']) #space admin and message in space
 def delete_message():
     if request.method == 'POST':
         deleted_message = collection_messages.find_one({'_id': ObjectId(request.json['message_id'])})
@@ -670,6 +679,16 @@ def joined_space(data):
 
 def space_admin():
     if session['unique_id'] in collection_spaces.find_one({'_id': ObjectId(session['current_space'])})['admins']:
+        return True
+    return False
+
+def space_owner():
+    if session['unique_id'] == collection_spaces.find_one({'_id': ObjectId(session['current_space'])})['admins'][0]:
+        return True
+    return False
+
+def space_member():
+    if session['unique_id'] == collection_spaces.find_one({'_id': ObjectId(session['current_space'])})['members']:
         return True
     return False
 
