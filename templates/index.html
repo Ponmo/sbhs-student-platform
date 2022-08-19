@@ -1679,7 +1679,7 @@
           contentType: 'application/json;charset=UTF-8',
           success: function(rooms_and_sections) {
             window.history.pushState('', '', '/sbhs/' + current_space);
-            if (rooms_and_sections[3][0].admins[0] == user_id) {
+            if (rooms_and_sections[3][0].admins[0] == user_id || admin) { //Accounts for only one space admin, which is owner.
               space_admin = true;
               let red_space_button = document.getElementsByClassName('red-space-button')[0];
               red_space_button.id = 'delete-space';
