@@ -207,7 +207,6 @@ def callback():
     session['logged'] = True
     session['current_space'] = ''
     session['current_space_name'] = ''
-    session['space_admin'] = False
     
     return redirect(url_for('render_main_page'))
 
@@ -280,14 +279,12 @@ def render_space():
     if request.method == 'POST':
         space = collection_spaces.find_one({'_id': ObjectId(request.json['space_id'])})
         rooms_and_sections = dumps([list(collection_rooms.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_sections.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_users.find({'joined': {'$in': [request.json['space_id']]}})), list(collection_spaces.find({'_id': ObjectId(request.json['space_id'])}))])
-        if session['unique_id'] in space['admins'] or session['admin']: #use current_space instead of request.json in any query
+        if session['unique_id'] in space['admins'] or session['admin']:
             session['current_space'] = request.json['space_id']
-            session['space_admin'] = True
             session['current_space_name'] = space['name']
             return Response(rooms_and_sections, mimetype='application/json')
         elif not any(session['unique_id'] in item for item in space['members']):
-            session['current_space'] = request.json['space_id'] #?: Instead of space_admin(), we can check user status here and set session['space_admin'] == True
-            session['space_admin'] = False
+            session['current_space'] = request.json['space_id']
             session['current_space_name'] = space['name']
             return Response(rooms_and_sections, mimetype='application/json')
 
@@ -304,7 +301,6 @@ def leave_space():
         collection_spaces.update_one({"_id": ObjectId(session['current_space'])}, { "$pull": {"members": [session['unique_id'], session['users_name']]}})
         joined = dumps(joined)
         session['current_space'] = ''
-        session['space_admin'] = False
         session['current_space_name'] = ''
         return Response(joined, mimetype='application/json')
 
@@ -358,6 +354,8 @@ def create_room():
 		collection_rooms.insert_one(room)
 		room = dumps(room)
 		return Response(room, mimetype='application/json')
+
+    
 
 # Adds the newly created section to MongoDB.
 # Returns the section data.
@@ -430,7 +428,6 @@ def delete_space():
         collection_spaces.delete_one({'_id': ObjectId(session['current_space'])})
         session['current_space'] = ''
         session['current_space_name'] = ''
-        session['space_admin'] = False
         return Response(dumps({'success': 'true'}), mimetype='application/json')
     return Response(dumps({'success': 'false'}), mimetype='application/json')
 
@@ -599,7 +596,7 @@ def send_message(data):
 @socketio.on('created_room')
 def created_room(data):
     if space_admin() or session['admin']:
-        for room in data['room_list']: #plug list
+        for room in room_list(): #plug list
             socketio.emit('created_room', data, room = room)
 
 # When a room is deleted, send that room data to all
@@ -696,6 +693,12 @@ def space_member():
     if any(session['unique_id'] in item for item in collection_spaces.find_one({'_id': ObjectId(session['current_space'])})['members']):
         return True
     return False
+
+def room_list():
+    room_list = []
+    for room in list(collection_rooms.find({'space': session['current_space']}).sort('order', 1)):
+        room_list.append(room['_id']['$oid'])
+    return room_list
 
 #if __name__ == '__main__':
 #    socketio.run(app, debug=False)
