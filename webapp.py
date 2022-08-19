@@ -687,7 +687,7 @@ def space_owner():
     return False
 
 def space_member():
-    if session['unique_id'] == collection_spaces.find_one({'_id': ObjectId(session['current_space'])})['members']:
+    if session['unique_id'] in collection_spaces.find_one({'_id': ObjectId(session['current_space'])})['members']:
         return True
     return False
 
