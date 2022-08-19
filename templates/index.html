@@ -577,6 +577,7 @@
               }
               let newNode = document.createElement('tr');
               newNode.className = 'admin-users-table-row';
+              newNode.setAttribute('data-id', item._id);
               newNode.innerHTML = '<td><img class="profile-picture" src="' + item.picture + '"> ' + item.name + '</td><td>' + item.email + '</td><td>' + formNode + '</td>';
               document.getElementById('admin-users-body').appendChild(newNode);
             });
@@ -627,6 +628,16 @@
         e.preventDefault();
         this.firstElementChild.nextElementSibling.style.display = 'none';
         this.firstElementChild.setAttribute('data-current', this.firstElementChild.value)
+        $.ajax({
+          type: "POST",
+          url: '/change_user_status',
+          dataType: "json",
+          data: JSON.stringify({'user_id': this.parentElement.parentElement.getAttribute('data-id'), 'status': this.firstElementChild.value}), 
+          contentType: 'application/json;charset=UTF-8',
+          success: function(data) {
+            alert(JSON.stringify(data));
+          }
+        });
       });
 
       $(document).on('click', '#exit-server-settings', function() {

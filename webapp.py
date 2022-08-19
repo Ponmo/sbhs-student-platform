@@ -520,6 +520,14 @@ def server_users():
         users = dumps(list(collection_users.find().sort('_id', pymongo.DESCENDING)))
         return Response(users, mimetype='application/json')
 
+@app.route('/change_user_status', methods=['GET', 'POST'])
+def change_user_status():
+    if request.method == 'POST':
+        if request.json['status'] in {'banned', 'user', 'admin'}:
+            collection_users.find_one_and_update({"_id": request.json['user_id']}, {'$set': {'status': request.json['status']}})
+            return Response(dumps({'success': 'true'}), mimetype='application/json')
+    return Response(dumps({'success': 'false'}), mimetype='application/json')
+
 # When a room is clicked, make user join room
 # and leave old room.
 
