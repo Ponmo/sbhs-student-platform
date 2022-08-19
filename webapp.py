@@ -429,13 +429,14 @@ def create_space():
 @app.route('/delete_space', methods=['GET', 'POST'])
 def delete_space():
     if request.method == 'POST' and (space_owner() or session['admin']):
-        collection_spaces.find_one({'_id': ObjectId(session['current_space'])})
+        space = collection_spaces.find_one({'_id': ObjectId(session['current_space'])})
         collection_spaces.delete_one({'_id': ObjectId(session['current_space'])})
         collection_users.find_one_and_update({"_id": session['unique_id']}, {'$inc': {'owns': -1}})
         
-        joined = collection_users.find_one({"_id": session['unique_id']})['joined']
-        joined.remove(session['current_space'])
-        collection_users.update_one({"_id": session['unique_id']}, {"$set": {"joined": joined}})
+        for member in space['members']:
+            joined = collection_users.find_one({"_id": member[0]})['joined']
+            joined.remove(session['current_space'])
+            collection_users.update_one({"_id": member[0]}, {"$set": {"joined": joined}})
 
         session['current_space_name'] = ''
         return Response(dumps({'success': 'true'}), mimetype='application/json')
