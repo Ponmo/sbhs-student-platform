@@ -605,13 +605,13 @@ def created_room(data):
 @socketio.on('deleted_room')
 def deleted_room(data):
     if space_admin() or session['admin']:
-        for room in data['room_list']:
+        for room in room_list():
             socketio.emit('deleted_room', data, room = room)
 
 @socketio.on('deleted_space')
 def deleted_space(data):
     if space_owner() or session['admin']:
-        for room in data['room_list']:
+        for room in room_list():
             socketio.emit('deleted_space', data, room = room)
 
 # When a section is created, send that section data to all
@@ -620,7 +620,7 @@ def deleted_space(data):
 @socketio.on('created_section')
 def created_section(data):
     if space_admin() or session['admin']:
-        for room in data['room_list']:
+        for room in room_list():
             socketio.emit('created_section', data, room = room)
 
 # When a section is deleted, send that section data to all
@@ -629,7 +629,7 @@ def created_section(data):
 @socketio.on('deleted_section')
 def created_section(data):
     if space_admin() or session['admin']:
-        for room in data['room_list']:
+        for room in room_list():
             socketio.emit('deleted_section', data, room = room)
 
 # When a message is deleted, send that message data to all
@@ -653,7 +653,7 @@ def edited_message(data):
 def sorted_sections(data):
     for section in data['section_list']:
         collection_sections.find_one_and_update({"_id": ObjectId(section)}, {'$set': {'order': data['section_list'].index(section) + 1}})
-    for room in data['room_list']:
+    for room in room_list():
         socketio.emit('sorted_sections', data, room = room)
     
 # When rooms are sorted, update the order in MongoDB.
@@ -676,7 +676,7 @@ def sent_email(data):
 @socketio.on('joined_space')
 def joined_space(data):
     user = collection_users.find_one({'_id': session['unique_id']})
-    for room in data['room_list']:
+    for room in room_list():
         emit('joined_space', user, room = room, include_self=False)
 
 def space_admin():
