@@ -76,7 +76,7 @@
           
         </div>
       </div>-->
-      <div class="admin-table-wrapper">
+      <div id="admin-table-wrapper">
         <table class="admin-table" id="admin-settings-table">
           <thead>
             <tr>
@@ -609,7 +609,7 @@
       });
 
       $('#admin-table-wrapper').scroll(function() { //$('#chat').scrollTop() + $('#chat').height();
-      alert($('#admin-logs-table').is(':visible'));
+        alert('k');
         if ($('#admin-logs-table').is(':visible') && document.getElementById("admin-table-wrapper").scrollHeight - $("#admin-table-wrapper").scrollTop() - $("#admin-table-wrapper").outerHeight() < 1) {
           loadLogHistory();
         }
