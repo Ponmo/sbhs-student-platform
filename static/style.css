@@ -42,6 +42,12 @@ img { /* make images and create button undraggable and unhighlitable*/
   display: grid;
   column-gap: 10px;
 }
+#logo {
+  position: absolute;
+  padding-top: 20px;
+  padding-left: 20px;
+  height: 150px;
+}
 #special-announcements {
   background-color: aqua;
   height: 100%;
