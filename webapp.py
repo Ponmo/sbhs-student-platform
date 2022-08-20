@@ -286,7 +286,7 @@ def render_space():
             session['current_space'] = request.json['space_id']
             session['current_space_name'] = space['name']
             return Response(rooms_and_sections, mimetype='application/json')
-        elif not any(session['unique_id'] in item for item in space['members']):
+        elif any(session['unique_id'] in item for item in space['members']):
             session['current_space'] = request.json['space_id']
             session['current_space_name'] = space['name']
             return Response(rooms_and_sections, mimetype='application/json')
