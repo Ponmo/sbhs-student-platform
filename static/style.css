@@ -871,6 +871,25 @@ img { /* make images and create button undraggable and unhighlitable*/
   float: left;
   min-width: 200px;
 }
+#space-settings-column {
+  width: 200px;
+  margin-top: 40px;
+  height: 100%;
+  float: right;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.space-settings-selection {
+  background-color: #43474D;
+  width: 190px;
+  height: 32px;
+  border-radius: 4px;
+  color: #ffffff;
+  line-height: 32px;
+  padding-left: 6px;
+  margin-top: 2px;
+}
 
 #space-settings-expand {
   display: inline-block;
