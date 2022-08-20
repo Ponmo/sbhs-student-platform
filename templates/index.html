@@ -208,18 +208,23 @@
           <div class="space-settings-selection" id="space-settings-general">Space Settings</div> 
         </div>
         <div id="space-settings-expand">
-          <p class="space-settings-header">Space Name</p>
           <form id="edit-space-name">
-            <label for="space-name">Space Name</label><br>
+            <label for="space-name" class="space-settings-header">Space Name</label><br>
             <input type="text" id="space-name"><br>
-            <!--Accept Files, Sanitize Files, Compress Files-->
-            <label for="space-picture">Space Picture (currently only accepts links):</label><br>
-            <input type="text" id="space-picture"><br>
             <input type="submit" value="Submit">
           </form>
-          <p class="space-settings-header">Server Picture</p>
-          <p class="space-settings-header">Invite Only</p>
-          <p class="space-settings-header">Theme</p>
+          <form id="edit-space-picture">
+            <label for="space-picture">Space Picture</label><br>
+            <input type="text" id="space-picture"><br>
+          </form>
+          <form id="toggle-space-invite">
+
+          </form>
+          <div id="theme-selection">
+            <div class="theme" id="dark-mode"></div>
+            <div class="theme" id="ultra-dark-mode"></div>
+            <div class="theme" id="light-mode"></div>
+          </div>
           <p class="space-settings-header">Members</p>
         </div>
 
