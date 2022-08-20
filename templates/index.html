@@ -1128,12 +1128,12 @@
 
       $(document).on('click', '.expand-recipient-list', function() {
         if (this.getAttribute('data-expanded') == 'false') {
-          $(this).css('transform', 'rotate(0deg)');
+          $(this).css('transform', 'rotate(180deg)');
           this.setAttribute('data-expanded', 'true');
-          this.previousElementSibling.style.whiteSpace = '';
+          this.previousElementSibling.style.whiteSpace = 'initial';
         }
         else {
-          $(this).css('transform', 'rotate(180deg)');
+          $(this).css('transform', 'rotate(0deg)');
           this.setAttribute('data-expanded', 'false');
           this.previousElementSibling.style.whiteSpace = 'nowrap';
         }
