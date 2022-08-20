@@ -1,5 +1,6 @@
 body {
-  background-image: url('static/images/login-bg.png');
+  background-image: url('/static/images/login-bg.png');
+  background-size: cover;
 }
 #log-in-container {
   margin: 0 auto;
