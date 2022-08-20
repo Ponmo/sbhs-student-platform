@@ -878,6 +878,11 @@ img { /* make images and create button undraggable and unhighlitable*/
   float: right;
   overflow-y: scroll;
   overflow-x: hidden;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .space-settings-selection {
