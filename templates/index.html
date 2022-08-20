@@ -1126,6 +1126,19 @@
         }
       }
 
+      $(document).on('click', '.expand-recipient-list', function() {
+        if (this.getAttribute('data-expanded') == 'false') {
+          $(this).css('transform', 'rotate(0deg)');
+          this.setAttribute('data-expanded', 'true');
+          this.previousElementSibling.style.whiteSpace = '';
+        }
+        else {
+          $(this).css('transform', 'rotate(180deg)');
+          this.setAttribute('data-expanded', 'false');
+          this.previousElementSibling.style.whiteSpace = 'nowrap';
+        }
+      });
+
       $(document).on('click', '.report-message', function() {
         $.ajax({
           type: "POST",
@@ -1968,7 +1981,7 @@
               else {
                 emailDate = 'on ' + emailDate.format('M/D/YYYY');
               }
-              newMode.innerHTML = '<img class="profile-picture pointer" src="' + item.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + item.name + ' </b></span><span class="datetime">' + emailDate + '</span></p><div class="email-container-container"><div class="recipient-list">to ' + item.recipients.join(', ') + '</div><img class="expand-recipient-list pointer" src="/static/images/expand.png"><div class="email-container"><p class="email-subject">' + item.subject + '</p><p class="email-message">' + item.message + '</p></div></div>';
+              newMode.innerHTML = '<img class="profile-picture pointer" src="' + item.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + item.name + ' </b></span><span class="datetime">' + emailDate + '</span></p><div class="email-container-container"><div class="recipient-list">to ' + item.recipients.join(', ') + '</div><img class="expand-recipient-list pointer" data-expanded="false" src="/static/images/expand.png"><div class="email-container"><p class="email-subject">' + item.subject + '</p><p class="email-message">' + item.message + '</p></div></div>';
               document.getElementById('messages').prepend(newMode);
             });
           }
