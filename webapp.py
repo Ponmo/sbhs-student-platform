@@ -531,19 +531,19 @@ def sorted_spaces():
 
 @app.route('/server_logs', methods=['GET', 'POST'])
 def server_logs():
-    if request.method == 'POST':
+    if request.method == 'POST' and session['admin']:
         logs = dumps(list(collection_logs.find().sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(50)))
         return Response(logs, mimetype='application/json')
 
 @app.route('/server_users', methods=['GET', 'POST'])
 def server_users():
-    if request.method == 'POST':
+    if request.method == 'POST' and session['admin']:
         users = dumps(list(collection_users.find().sort('_id', pymongo.DESCENDING)))
         return Response(users, mimetype='application/json')
 
 @app.route('/change_user_status', methods=['GET', 'POST'])
 def change_user_status():
-    if request.method == 'POST':
+    if request.method == 'POST' and session['admin']:
         if request.json['status'] in {'banned', 'user', 'admin'}:
             collection_users.find_one_and_update({"_id": request.json['user_id']}, {'$set': {'status': request.json['status']}})
             return Response(dumps({'success': 'true'}), mimetype='application/json')
