@@ -733,8 +733,8 @@ img { /* make images and create button undraggable and unhighlitable*/
   vertical-align: middle;
 }
 #admin-table-wrapper {
-  width: 70vw;
-  height: 75vh;
+  width: 90vw;
+  height: 70vh;
   background-color: #3c3f45;
   color: white;
   border: 1px solid black;
