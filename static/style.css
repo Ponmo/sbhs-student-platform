@@ -205,6 +205,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   display: inline-block;
   float: right;
   margin-right: 24px;
+  display: none;
 }
 #exit-server-settings {
   line-height: 48px;
