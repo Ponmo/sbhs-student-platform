@@ -1,12 +1,16 @@
 body {
   background-image: url('/static/images/login-bg.png');
-  background-size: cover;
+    background-size: cover;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 #log-in-container {
   margin: 0 auto;
   margin-top: 80px;
   width: 400px;
   height: 200px;
+  background-color: white;
   text-align: center;
   box-shadow: 0 4px 7px -2px gray;
   /* Gradient for Each Month's Theme? + Opacity 0.50 */
