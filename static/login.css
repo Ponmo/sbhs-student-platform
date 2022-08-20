@@ -1,3 +1,6 @@
+body {
+  background-image: url('static/images/login-bg.png');
+}
 #log-in-container {
   margin: 0 auto;
   margin-top: 80px;
