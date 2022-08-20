@@ -739,7 +739,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   color: white;
   border: 1px solid black;
   margin: 0 auto;
-  margin-top: 40px;
+  margin-top: 20px;
   overflow-y: scroll;
   overflow-x: scroll;
 }
