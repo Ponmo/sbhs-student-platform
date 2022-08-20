@@ -67,20 +67,15 @@
     </div>
 
     <div id="administrator-page">
-      <div class="main-header"></div>
+      <div class="main-header">
+        <div id="admin-settings" class="pointer">Settings</div>
+        <div id="admin-logs" class="pointer">Logs</div>
+        <div id="admin-users" class="pointer">Users</div>
+        <div id="exit-server-settings" class="pointer">TEMP. EXIT</div>
+      </div>
       <div id='admin-search'>
         <textarea id="admin-search-bar" placeholder="Search..."></textarea>
       </div>
-      <div id="admin-settings" class="pointer">Settings</div>
-      <div id="admin-logs" class="pointer">Logs</div>
-      <div id="admin-users" class="pointer">Users</div>
-      <div id="exit-server-settings" class="pointer">TEMP. EXIT</div>
-    </div>
-      <!--<div class="admin-table" id="admin-settings-table">
-        <div id="admin-settings-table-row1">
-          
-        </div>
-      </div>-->
       <div id="admin-table-wrapper">
         <table class="admin-table" id="admin-settings-table">
           <thead>
@@ -213,7 +208,15 @@
           <div class="space-settings-selection" id="space-settings-general">Space Settings</div> 
         </div>
         <div id="space-settings-expand">
-          <p class="space-settings-header">Server Name</p>
+          <p class="space-settings-header">Space Name</p>
+          <form id="edit-space-name">
+            <label for="space-name">Space Name</label><br>
+            <input type="text" id="space-name"><br>
+            <!--Accept Files, Sanitize Files, Compress Files-->
+            <label for="space-picture">Space Picture (currently only accepts links):</label><br>
+            <input type="text" id="space-picture"><br>
+            <input type="submit" value="Submit">
+          </form>
           <p class="space-settings-header">Server Picture</p>
           <p class="space-settings-header">Invite Only</p>
           <p class="space-settings-header">Theme</p>
