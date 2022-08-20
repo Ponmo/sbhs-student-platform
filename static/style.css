@@ -1180,7 +1180,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 .expand-recipient-list {
   position: absolute;
   right: 35px;
-  top: 20px;
+  top: 25px;
   width: 10px;
   height: 10px;
 }
