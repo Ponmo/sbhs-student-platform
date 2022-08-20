@@ -552,8 +552,13 @@
               chat_history_skip += 50;
               data.forEach(function (item) {
                 let newNode = document.createElement('tr');
-                if (item.)
-                newNode.className = 'admin-logs-table-row pointer';
+                if (item.action == 'deleted message') {
+                  newNode.className = 'admin-logs-table-row admin-logs-deleted-message pointer';
+                }
+                else if ((item.action == 'reported message')) {
+                  newNode.className = 'admin-logs-table-row admin-logs-reported-message pointer';
+                }
+                newNode.className = 'admin-logs-table-row admin-logs-reported-message pointer';
                 newNode.innerHTML = '<td>' + item.name + '<br>' + item.email + '</td><td>' + item.action + '</td><td>' + item.by + '<br>' + item.by_email + '</td><td>' + item.in + '</td><td>' + moment(item.datetime).format('MMM Do YYYY, h:mm[]a') + '</td><td><img class="expand-log"  src="/static/images/expand.png"></td>';
                 adminLogs.appendChild(newNode);
                 newNode = document.createElement('tr');
