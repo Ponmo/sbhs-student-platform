@@ -1261,6 +1261,31 @@ img { /* make images and create button undraggable and unhighlitable*/
   width: 20px;
   color: orangered;
 }
+#admin-search {
+  height: 30px;
+  width: 90vw;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+#admin-search-bar {
+  width: 100%;
+  height: 100%;
+  resize: none;
+  line-height: 22px;
+  padding-left: 8px;
+  padding-right: 8px;
+  border-radius: 5px;
+  border: 2px solid black;
+  outline-width: 0;
+  white-space: nowrap;
+  overflow-x: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+#admin-search-bar::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
 /*Add User Select None Class*/
 
 /* Mobile Media Query */
