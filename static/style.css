@@ -1286,6 +1286,11 @@ img { /* make images and create button undraggable and unhighlitable*/
   width: 0;
   height: 0;
 }
+#admin-filters {
+  width: 90vw;
+  margin: 0 auto;
+  margin-top: 10px;
+}
 /*Add User Select None Class*/
 
 /* Mobile Media Query */
