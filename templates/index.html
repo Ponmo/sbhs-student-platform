@@ -595,8 +595,9 @@
           }
         }));
       }
-      $('#deleted-message-filter').is(':checked')
+
       $("#deleted-message-filter").click(function() {
+        alert(document.getElementById('deleted-message-filter').checked);
         if (document.getElementById('deleted-message-filter').checked){
           $(".admin-logs-deleted-message").show();
         } else {
@@ -604,6 +605,7 @@
         }
       });
       $("#reported-message-filter").click(function() {
+        alert(document.getElementById('reported-message-filter').checked);
         if (document.getElementById('reported-message-filter').checked) {
           $(".admin-logs-reported-message").show();
         } else {
