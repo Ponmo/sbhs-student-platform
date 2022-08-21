@@ -552,7 +552,7 @@
                 data.splice(0, skip + 1);
               }
               chat_history_skip += 1000;
-              newFragment = document.createDocumentFragment();
+              const newFragment = document.createDocumentFragment();
               data.forEach(function (item) {
                 let newNode = document.createElement('tr');
                 if (item.action == 'deleted message') {
@@ -680,6 +680,7 @@
           url: '/server_users',
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
+            const newFragment = document.createDocumentFragment();
             data.forEach(function (item) {
               let formNode = '';
               if (item.status == 'user') {
@@ -697,9 +698,23 @@
               let newNode = document.createElement('tr');
               newNode.className = 'admin-users-table-row';
               newNode.setAttribute('data-id', item._id);
-              newNode.innerHTML = '<td><img class="profile-picture" src="' + item.picture + '"> ' + item.name + '</td><td>' + item.email + '</td><td>' + formNode + '</td>';
-              document.getElementById('admin-users-body').appendChild(newNode);
+              let newNodeChild = document.createElement('td');
+              let newNodeChildChild = document.createElement('img');
+              newNodeChildChild.className = 'profile-picture';
+              newNodeChildChild.src = item.picture;
+              newNodeChild.appendChild(newNodeChildChild);
+              newNodeChild.appendChild(document.createTextNode(item.name))
+              newNode.appendChild(newNewChild);
+              newNodeChild = document.createElement('td');
+              newNodeChild.textContent = item.email;
+              newNode.appendChild(newNodeChild);
+              newNodeChild = document.createElement('td');
+              newNodeChild.innerHTML = formNode;
+              newNode.appendChild(newNodeChild);
+              newFragment.appendChild(newNode);
+              //newNode.innerHTML = '<td><img class="profile-picture" src="' + item.picture + '"> ' + item.name + '</td><td>' + item.email + '</td><td>' + formNode + '</td>';
             });
+            document.getElementById('admin-users-body').appendChild(newFragment);
           }
         }));
       });
