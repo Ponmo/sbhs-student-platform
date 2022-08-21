@@ -585,7 +585,6 @@
                 newNode.firstElementChild.append(newNodeChild);
                 adminLogs.appendChild(newNode);
               });
-              last_loaded = data[data.length - 1]._id.$oid;
               if (document.getElementById('reported-message-filter').checked == true) {
                 $(".admin-logs-reported-message").show();
               } else {
