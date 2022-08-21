@@ -734,12 +734,19 @@
         });
       });
 
+      $('#admin-search-bar').keydown(function (e) {
+        if (e.keyCode == 13 && !e.shiftKey) {
+          e.preventDefault();
+        }
+      });
+
       $('#admin-search-bar').keyup(function (e) {
         const filter = document.getElementById("admin-search-bar").value.toUpperCase();
         if (filter != '') {
           if (document.getElementById('admin-users-table').style.display != 'none') {
             document.querySelectorAll('.admin-users-table-row').forEach(function(entry) {
-              if(entry.firstElementChild.firstElementChild.nextSibling.textContent.toUpperCase().indexOf(filter) > -1 || entry.firstElementChild.nextElementSibling.textContent.toUpperCase().indexOf(filter) > -1) {
+              //if(entry.firstElementChild.firstElementChild.nextSibling.textContent.toUpperCase().indexOf(filter) > -1 || entry.firstElementChild.nextElementSibling.textContent.toUpperCase().indexOf(filter) > -1) {
+              if(entry.textContent.toUpperCase().indexOf(filter) > -1) {
                 $(entry).show();
               }
               else {
