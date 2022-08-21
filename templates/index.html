@@ -598,30 +598,31 @@
                 $(".admin-logs-deleted-message").hide();
                 $(".admin-logs-deleted-message-details").hide();
               }
-              if (isOverflown(document.getElementById('admin-table-wrapper'))) {
-                loadLogHistory();
-              }
             }
           }
         }));
       }
 
       $("#deleted-message-filter").click(function() {
-        alert(document.getElementById('deleted-message-filter').checked);
         if (document.getElementById('deleted-message-filter').checked == true) {
           $(".admin-logs-deleted-message").show();
         } else {
           $(".admin-logs-deleted-message").hide();
           $(".admin-logs-deleted-message-details").hide();
         }
+        if (isOverflown(document.getElementById('admin-table-wrapper'))) {
+          loadLogHistory();
+        }
       });
       $("#reported-message-filter").click(function() {
-        alert(document.getElementById('reported-message-filter').checked);
         if (document.getElementById('reported-message-filter').checked == true) {
           $(".admin-logs-reported-message").show();
         } else {
           $(".admin-logs-reported-message").hide();
           $(".admin-logs-reported-message-details").hide();
+        }
+        if (isOverflown(document.getElementById('admin-table-wrapper'))) {
+          loadLogHistory();
         }
       });
 
