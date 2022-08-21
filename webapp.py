@@ -780,9 +780,9 @@ def joined_space():
         emit('joined_space', user, room = room, include_self=False)
 
 def session_expired():
-    if not session.get('logged'):
-        return True
-    return False
+    #if not session.get('logged'):
+    return True
+    #return False
 
 def space_admin():
     if session['unique_id'] in collection_spaces.find_one({'_id': ObjectId(session['current_space'])})['admins']:
