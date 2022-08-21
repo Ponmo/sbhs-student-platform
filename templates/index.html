@@ -621,10 +621,11 @@
                 newNodeChildChildChildChild = document.createElement('span');
                 newNodeChildChildChildChild.className = 'datetime';
                 newNodeChildChildChildChild.textContent = messageMoment;
-                newNodeChildChild.appendChild(newNodeChildChildChildChild);
-                newNodeChild.appendChild(newNodeChildChild);
-                newNodeChildChild = document.createElement('p');
-                newNodeChildChild.textContent = item.details.message;
+                newNodeChildChildChild.appendChild(newNodeChildChildChildChild);
+                newNodeChildChild.appendChild(newNodeChildChildChild);
+                newNodeChildChildChild = document.createElement('p');
+                newNodeChildChildChild.textContent = item.details.message;
+                newNodeChildChild.appendChild(newNodeChildChildChild);
                 newNodeChild.appendChild(newNodeChildChild);
                 //newNodeChild.innerHTML = '<img class="profile-picture pointer" src="' + item.details.picture + '"><p class="message-title"><span class="name pointer"><b>' + item.details.name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message">' + item.details.message + '</p>';
                 newNode.append(newNodeChild);
