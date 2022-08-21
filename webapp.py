@@ -353,7 +353,7 @@ def delete_room():
     if session_expired():
         return 'expired', 200
     if request.method == 'POST' and (space_admin() or session['admin']):
-        room_count = collection_rooms.count_documents({'space': session['current_space'], 'section': 'special'}) - collection_rooms.count_documents({'space': session['current_space']})
+        room_count = collection_rooms.count_documents({'space': session['current_space']}) - collection_rooms.count_documents({'space': session['current_space'], 'section': 'special'})
         if room_count > 1:
             collection_rooms.delete_one({'_id': ObjectId(request.json['room_id'])})
             collection_messages.delete_many({'room': request.json['room_id']})
