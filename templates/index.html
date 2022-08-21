@@ -687,7 +687,7 @@
         $(this.nextElementSibling).toggle();
         if ($(this.nextElementSibling).is(':visible')) {
           $(this).find('.expand-log').animate(
-            { deg: -90 },
+            { deg: 0 },
             {
               duration: 80,
               step: function(now) {
@@ -698,7 +698,7 @@
         }
         else {
           $(this).find('.expand-log').animate(
-            { deg: 0 },
+            { deg: -90 },
             {
               duration: 80,
               step: function(now) {
