@@ -628,7 +628,7 @@
                 newNodeChildChild.textContent = item.details.message;
                 newNodeChild.appendChild(newNodeChildChild);
                 //newNodeChild.innerHTML = '<img class="profile-picture pointer" src="' + item.details.picture + '"><p class="message-title"><span class="name pointer"><b>' + item.details.name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message">' + item.details.message + '</p>';
-                newNode.firstElementChild.append(newNodeChild);
+                newNode.append(newNodeChild);
                 adminLogs.appendChild(newNode);
               });
               if (document.getElementById('reported-message-filter').checked == true) {
