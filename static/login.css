@@ -1,4 +1,4 @@
-body::after {
+#login-bg {
   background: url('/static/images/login-bg.png');
   content: "";
   position: absolute;
