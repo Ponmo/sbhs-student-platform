@@ -2256,6 +2256,13 @@
         section_menu.hide();
         room_menu.hide();
       }
+
+      $(document).ajaxError(function myErrorHandler(event, xhr, ajaxOptions, thrownError) {
+        var contentType = xhr.getResponseHeader("Content-Type");
+        if (xhr.status === 200 && contentType.toLowerCase().indexOf("text/html") >= 0) {
+          window.location.reload();
+        }
+      });
     });
 
 
