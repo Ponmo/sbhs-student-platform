@@ -687,9 +687,27 @@
         $(this.nextElementSibling).toggle();
         if ($(this.nextElementSibling).is(':visible')) {
           //$(this).find('.expand-log').css('transform', 'rotate(0deg)');
+          $(this.find('.expand-log').animate(
+            { deg: -90 },
+            {
+              duration: 1200,
+              step: function(now) {
+                $(this).css({ transform: 'rotate(' + now + 'deg)' });
+              }
+            }
+          ));
         }
         else {
           //$(this).find('.expand-log').css('transform', 'rotate(-90deg)');
+          $(this.find('.expand-log').animate(
+            { deg: -90 },
+            {
+              duration: 1200,
+              step: function(now) {
+                $(this).css({ transform: 'rotate(' + now + 'deg)' });
+              }
+            }
+          ));
         }
       });
 
@@ -734,6 +752,9 @@
               user.style.display = 'none';
             }
           });
+        }
+        else {
+          
         }
       });
 
