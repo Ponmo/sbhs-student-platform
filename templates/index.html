@@ -740,20 +740,31 @@
       $('#admin-search-bar').keyup(function (e) {
         const filter = document.getElementById("admin-search-bar").value.toUpperCase();
         if (filter != '') {
-          document.querySelectorAll('.admin-users-table-row').forEach(function(user) {
-            if(user.firstElementChild.firstElementChild.nextSibling.textContent.toUpperCase().indexOf(filter) > -1 || user.firstElementChild.nextElementSibling.textContent.toUpperCase().indexOf(filter) > -1) {
-              $(user).show();
-            }
-            else {
-              $(user).hide();
-            }
-          });
+          if (document.getElementById('admin-users-table').style.display != 'none') {
+            document.querySelectorAll('.admin-users-table-row').forEach(function(entry) {
+              if(entry.firstElementChild.firstElementChild.nextSibling.textContent.toUpperCase().indexOf(filter) > -1 || entry.firstElementChild.nextElementSibling.textContent.toUpperCase().indexOf(filter) > -1) {
+                $(entry).show();
+              }
+              else {
+                $(entry).hide();
+              }
+            });
+          }
+          else if (document.getElementById('admin-logs-table').style.display != 'none') {
+            document.querySelectorAll('.admin-logs-table-row').forEach(function(entry) {
+              if(entry.textContent.toUpperCase().indexOf(filter) > -1) {
+                $(entry).show();
+              }
+              else {
+                $(entry).hide();
+              }
+            });
+          }
         }
         else {
           $('.admin-users-table-row').show();
         }
       });
-
 
       $(document).on('click', '#exit-server-settings', function() {
         $('#home-page').css('display', 'block');
@@ -1189,8 +1200,6 @@
           let hide = true;
           const filter = document.getElementById("email_to_input").value.toUpperCase();
           document.querySelectorAll('.suggested_email').forEach(function(suggested_email) {
-            //alert(suggested_email.textContent.toUpperCase());
-            //alert(filter);
             if(suggested_email.textContent.toUpperCase().indexOf(filter) > -1) {
               suggested_email.style.display = 'block';
               hide = false;
