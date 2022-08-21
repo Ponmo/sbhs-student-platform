@@ -703,7 +703,7 @@
               newNodeChildChild.className = 'profile-picture';
               newNodeChildChild.src = item.picture;
               newNodeChild.appendChild(newNodeChildChild);
-              newNodeChild.appendChild(document.createTextNode(item.name))
+              newNodeChild.appendChild(document.createTextNode(' ' + item.name))
               newNode.appendChild(newNodeChild);
               newNodeChild = document.createElement('td');
               newNodeChild.textContent = item.email;
