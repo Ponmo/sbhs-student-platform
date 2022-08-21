@@ -689,7 +689,7 @@
           $(this).find('.expand-log').animate(
             { deg: -90 },
             {
-              duration: 100,
+              duration: 80,
               step: function(now) {
                 $(this).css({ transform: 'rotate(' + now + 'deg)' });
               }
@@ -700,7 +700,7 @@
           $(this).find('.expand-log').animate(
             { deg: 0 },
             {
-              duration: 100,
+              duration: 80,
               step: function(now) {
                 $(this).css({ transform: 'rotate(' + now + 'deg)' });
               }
@@ -967,7 +967,7 @@
             $(this.firstElementChild.firstElementChild.firstElementChild).animate(
               { deg: -90 },
               {
-                duration: 100,
+                duration: 80,
                 step: function(now) {
                   $(this).css({ transform: 'rotate(' + now + 'deg)' });
                 }
@@ -983,7 +983,7 @@
             $(this.firstElementChild.firstElementChild.firstElementChild).animate(
               { deg: 0 },
               {
-                duration: 100,
+                duration: 80,
                 step: function(now) {
                   $(this).css({ transform: 'rotate(' + now + 'deg)' });
                 }
@@ -2257,6 +2257,8 @@
     //broadcast to everyone when a space is created.
 
     //use get request when post is not needed
+
+    //preload images
 
     // below psuedocode comments for saving unsent messages
       // list of messages being typed by user containing message (updated when user clicks on space or another room) and room id.
