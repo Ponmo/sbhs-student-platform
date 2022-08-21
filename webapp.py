@@ -742,9 +742,8 @@ def joined_space():
         emit('joined_space', user, room = room, include_self=False)
 
 def check_session():
-    if 'logged' not in session:
-        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
-    return True
+    #if 'logged' not in session:
+    return redirect(url_for('render_login', error = "Your session expired, please log in again"))
 
 def space_admin():
     if session['unique_id'] in collection_spaces.find_one({'_id': ObjectId(session['current_space'])})['admins']:
