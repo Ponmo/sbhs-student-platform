@@ -546,13 +546,13 @@
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
             if (data.length != 0) {
-              let adminLogs = document.getElementById('admin-logs-body');
               const skip = data.map(function(e) { return e._id.$oid; }).indexOf(last_loaded);
               if (skip != -1) {
                 chat_history_skip += skip + 1;
                 data.splice(0, skip + 1);
               }
               chat_history_skip += 1000;
+              newFragment = document.createDocumentFragment();
               data.forEach(function (item) {
                 let newNode = document.createElement('tr');
                 if (item.action == 'deleted message') {
@@ -561,7 +561,6 @@
                 else if (item.action == 'reported message') {
                   newNode.className = 'admin-logs-table-row admin-logs-reported-message pointer';
                 }
-
                 let newNodeChild = document.createElement('td');
                 newNodeChild.style.whiteSpace = 'pre';
                 newNodeChild.textContent = item.name + '\r\n' + item.email;
@@ -587,7 +586,7 @@
                   newNodeChild.innerHTML = '<img class="expand-log expand-log-reported-message"  src="/static/images/expand.png">';
                 }
                 newNode.appendChild(newNodeChild);
-                adminLogs.appendChild(newNode);
+                newFragment.appendChild(newNode);
 
 
                 newNode = document.createElement('tr');
@@ -606,9 +605,9 @@
                 newNodeChild.width = '100%';
 
                 let newNodeChildChild = document.createElement('div');
-                let messageMoment = moment(item.details.datetime).local().format('MMM Do YYYY, h:mm[]a');
                 newNodeChildChild.className = 'message-container-logs';
-                messageMoment = 'on ' + messageMoment;
+
+                let messageMoment = 'on' + moment(item.details.datetime).local().format('MMM Do YYYY, h:mm[]a');
                 let newNodeChildChildChild = document.createElement('img');
                 newNodeChildChildChild.src = item.details.picture;
                 newNodeChildChildChild.className = 'profile-picture pointer';
@@ -618,7 +617,7 @@
                 let newNodeChildChildChildChild = document.createElement('span');
                 newNodeChildChildChildChild.style.fontWeight = 'bold';
                 newNodeChildChildChildChild.textContent = item.details.name;
-                newNodeChildChild.appendChild(newNodeChildChildChildChild);
+                newNodeChildChildChild.appendChild(newNodeChildChildChildChild);
                 newNodeChildChildChildChild = document.createElement('span');
                 newNodeChildChildChildChild.className = 'datetime';
                 newNodeChildChildChildChild.textContent = messageMoment;
@@ -629,8 +628,9 @@
                 newNodeChild.appendChild(newNodeChildChild);
                 //newNodeChild.innerHTML = '<img class="profile-picture pointer" src="' + item.details.picture + '"><p class="message-title"><span class="name pointer"><b>' + item.details.name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message">' + item.details.message + '</p>';
                 newNode.append(newNodeChild);
-                adminLogs.appendChild(newNode);
+                newFragment.appendChild(newNode);
               });
+              document.getElementById('admin-logs-body').appendChild(newFragment);
               if (document.getElementById('reported-message-filter').checked == true) {
                 $(".admin-logs-reported-message").show();
               } else {
