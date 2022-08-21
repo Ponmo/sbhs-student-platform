@@ -751,8 +751,8 @@
             });
           }
           else if (document.getElementById('admin-logs-table').style.display != 'none') {
-            $('admin-logs-reported-message-details').hide();
-            $('admin-logs-deleted-message-details').hide();
+            $('.admin-logs-reported-message-details').hide();
+            $('.admin-logs-deleted-message-details').hide();
             document.querySelectorAll('.admin-logs-table-row').forEach(function(entry) {
               if(entry.textContent.toUpperCase().indexOf(filter) > -1) {
                 $(entry).show();
