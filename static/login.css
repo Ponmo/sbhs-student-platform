@@ -1,10 +1,15 @@
-body {
-  background-image: url('/static/images/login-bg.png');
+body::after {
+  background: url('/static/images/login-bg.png');
+  content: "";
+  position: absolute;
   background-size: cover;
-  height: 100vh;
   background-repeat: no-repeat;
   background-position: center;
-  opacity: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: -1;   
 }
 #log-in-container {
   margin: 0 auto;
