@@ -210,7 +210,8 @@ def render_main_page(space_id = None):
 
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():
-    check_session()
+    if session_expired():
+        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
     if request.method == 'POST':
         session['logged'] = False # Prevents browsers from using cached session data to log in. NOTE: We use server-side sessions now
         session.clear()
@@ -220,7 +221,8 @@ def logout():
 
 @app.route('/list_spaces', methods=['GET', 'POST'])
 def list_spaces():
-    check_session()
+    if session_expired():
+        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
     if request.method == 'POST':
         user_spaces = collection_users.find_one({"_id": session['unique_id']})['joined']
         space_list = []
@@ -237,7 +239,8 @@ def list_spaces():
 
 @app.route('/user_spaces', methods=['GET', 'POST'])
 def user_spaces():
-    check_session()
+    if session_expired():
+        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
     if request.method == 'POST':
         user_spaces = collection_users.find_one({"_id": session['unique_id']})['joined']
         space_list = []
@@ -253,7 +256,8 @@ def user_spaces():
 
 @app.route('/space', methods=['GET', 'POST'])
 def render_space():
-    check_session()
+    if session_expired():
+        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
     if request.method == 'POST':
         space = collection_spaces.find_one({'_id': ObjectId(request.json['space_id'])})
         rooms_and_sections = dumps([list(collection_rooms.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_sections.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_users.find({'joined': {'$in': [request.json['space_id']]}})), list(collection_spaces.find({'_id': ObjectId(request.json['space_id'])}))])
@@ -272,7 +276,8 @@ def render_space():
 
 @app.route('/leave_space', methods=['GET', 'POST'])
 def leave_space():
-    check_session()
+    if session_expired():
+        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
     if request.method == 'POST' and not space_owner():
         joined = collection_users.find_one({"_id": session['unique_id']})['joined']
         joined.remove(session['current_space'])
@@ -289,14 +294,16 @@ def leave_space():
 
 @app.route('/chat_history', methods=['GET', 'POST'])
 def chat_history():
-    check_session()
+    if session_expired():
+        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
     if request.method == 'POST' and space_member():
         chat_history = dumps(list(collection_messages.find({'room': request.json['room_id']}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(50)))
         return Response(chat_history, mimetype='application/json')
 
 @app.route('/email_history', methods=['GET', 'POST']) #return only emails users can see, and check if space admin
 def email_history():
-    check_session()
+    if session_expired():
+        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
     if request.method == 'POST':
         email_history = collection_emails.find({'room': request.json['room_id']}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(50)
         email_list = []
@@ -307,7 +314,8 @@ def email_history():
 
 @app.route('/send_email', methods=['GET', 'POST'])
 def send_email():
-    check_session()
+    if session_expired():
+        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
     if request.method == 'POST' and (space_admin() or session['admin']):
         sender_email = 'sbhs.platform.test@gmail.com'
         password = os.environ['EMAIL_ACCESS_PASSWORD']
@@ -342,7 +350,8 @@ def send_email():
 
 @app.route('/delete_room', methods=['GET', 'POST'])
 def delete_room():
-    check_session()
+    if session_expired():
+        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
     if request.method == 'POST' and (space_admin() or session['admin']):
         room_count = collection_rooms.count_documents({'space': session['current_space'], 'section': 'special'}) - collection_rooms.count_documents({'space': session['current_space']})
         if room_count > 1:
@@ -362,7 +371,8 @@ def delete_room():
 
 @app.route('/create_room', methods=['GET', 'POST'])
 def create_room():
-    check_session()
+    if session_expired():
+        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
     if request.method == 'POST' and (space_admin() or session['admin']):
         room_id = ObjectId()
         room_list = list(collection_rooms.find({'space': session['current_space'], 'section': request.json['section_id']}))
@@ -376,7 +386,8 @@ def create_room():
 
 @app.route('/create_section', methods=['GET', 'POST'])
 def create_section():
-    check_session()
+    if session_expired():
+        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
     if request.method == 'POST' and (space_admin() or session['admin']):
         section_id = ObjectId()
         section_list = list(collection_sections.find({'space': session['current_space']}))
@@ -391,7 +402,8 @@ def create_section():
 
 @app.route('/delete_section', methods=['GET', 'POST'])
 def delete_section():
-    check_session()
+    if session_expired():
+        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
     if request.method == 'POST' and (space_admin() or session['admin']):
         section_count = collection_sections.count_documents({'space': session['current_space']})
         if section_count > 1:
@@ -417,7 +429,8 @@ def delete_section():
 
 @app.route('/create_space', methods=['GET', 'POST']) #Check if space with name already exists...
 def create_space():
-    check_session()
+    if session_expired():
+        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
     user = collection_users.find_one({"_id": session['unique_id']})
     if request.method == 'POST' and user['owns'] < 3:
         space_id = ObjectId()
@@ -445,7 +458,8 @@ def create_space():
 
 @app.route('/delete_space', methods=['GET', 'POST'])
 def delete_space():
-    check_session()
+    if session_expired():
+        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
     if request.method == 'POST' and (space_owner() or session['admin']):
         space = collection_spaces.find_one({'_id': ObjectId(session['current_space'])})
         collection_spaces.delete_one({'_id': ObjectId(session['current_space'])})
@@ -460,7 +474,8 @@ def delete_space():
 
 @app.route('/join_space', methods=['GET', 'POST'])
 def join_space():
-    check_session()
+    if session_expired():
+        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
     if request.method == 'POST':
         joined = collection_users.find_one({"_id": session['unique_id']})['joined']
         space = dumps(collection_spaces.find_one({'_id': ObjectId(request.json['space_id'])}))
@@ -477,7 +492,8 @@ def join_space():
 
 @app.route('/delete_message', methods=['GET', 'POST']) #space admin and message in space
 def delete_message():
-    check_session()
+    if session_expired():
+        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
     if request.method == 'POST':
         deleted_message = collection_messages.find_one({'_id': ObjectId(request.json['message_id'])})
         if deleted_message['user_id'] == session['unique_id'] or space_admin() or session['admin']:
@@ -499,7 +515,8 @@ def delete_message():
 
 @app.route('/report_message', methods=['GET', 'POST'])
 def report_message():
-    check_session()
+    if session_expired():
+        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
     if request.method == 'POST' and space_member():
         reported_message = collection_messages.find_one({'_id': ObjectId(request.json['message_id'])})
         if collection_logs.count_documents({'details': reported_message}) == 0:
@@ -515,7 +532,8 @@ def report_message():
 
 @app.route('/open_member_profile', methods=['GET', 'POST'])
 def member_profile():
-    check_session()
+    if session_expired():
+        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
     if request.method == 'POST':
         member = collection_users.find_one({'_id': request.json['user_id']})
         queried_spaces = []
@@ -537,7 +555,8 @@ def member_profile():
 
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
-    check_session()
+    if session_expired():
+        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
     if request.method == 'POST':
         data = collection_users.find_one({'_id': session['unique_id']})
         return Response(dumps(data), mimetype='application/json')
@@ -546,7 +565,8 @@ def profile():
 
 @app.route('/sorted_spaces', methods=['GET', 'POST'])
 def sorted_spaces():
-    check_session()
+    if session_expired():
+        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
     if request.method == 'POST':
         collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': request.json['space_list']}})
         return Response(dumps({'success': 'true'}), mimetype='application/json')
@@ -555,21 +575,24 @@ def sorted_spaces():
 
 @app.route('/server_logs', methods=['GET', 'POST'])
 def server_logs():
-    check_session()
+    if session_expired():
+        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
     if request.method == 'POST' and session['admin']:
         logs = dumps(list(collection_logs.find().sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(1000)))
         return Response(logs, mimetype='application/json')
 
 @app.route('/server_users', methods=['GET', 'POST'])
 def server_users():
-    check_session()
+    if session_expired():
+        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
     if request.method == 'POST' and session['admin']:
         users = dumps(list(collection_users.find().sort('_id', pymongo.DESCENDING)))
         return Response(users, mimetype='application/json')
 
 @app.route('/change_user_status', methods=['GET', 'POST'])
 def change_user_status():
-    check_session()
+    if session_expired():
+        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
     if request.method == 'POST' and session['admin']:
         if request.json['status'] in {'banned', 'user', 'admin'}:
             collection_users.find_one_and_update({"_id": request.json['user_id']}, {'$set': {'status': request.json['status']}})
@@ -581,7 +604,8 @@ def change_user_status():
 
 @socketio.on('join_room')
 def change_room(data):
-    check_session()
+    if session_expired():
+        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
     if space_member() and valid_room(data['room_id']):
         try: 
             leave_room(data['old_room'])
@@ -593,7 +617,8 @@ def change_room(data):
 
 @socketio.on('is_typing')
 def is_typing(data):
-    check_session()
+    if session_expired():
+        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
     if space_member() and valid_room(data['room_id']):
 	    socketio.emit('is_typing', data, room = data['room_id'])
 
@@ -601,7 +626,8 @@ def is_typing(data):
 
 @socketio.on('stopped_typing')
 def stopped_typing(data):
-    check_session()
+    if session_expired():
+        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
     if space_member() and valid_room(data['room_id']):
 	    socketio.emit('stopped_typing', data, room = data['room_id'])
 
@@ -610,7 +636,8 @@ def stopped_typing(data):
 
 @socketio.on('send_message')
 def send_message(data):
-    check_session()
+    if session_expired():
+        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
     if space_member() and valid_room(data['room_id']):
         utc_dt = datetime.now().isoformat() + 'Z'
         data['datetime'] = utc_dt
@@ -636,7 +663,8 @@ def send_message(data):
 
 @socketio.on('created_room')
 def created_room(data):
-    check_session()
+    if session_expired():
+        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
     if space_admin() or session['admin']:
         for room in room_list():
             socketio.emit('created_room', data, room = room)
@@ -646,14 +674,16 @@ def created_room(data):
 
 @socketio.on('deleted_room')
 def deleted_room(data):
-    check_session()
+    if session_expired():
+        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
     if space_admin() or session['admin']:
         for room in room_list():
             socketio.emit('deleted_room', data, room = room)
 
 @socketio.on('deleted_space')
 def deleted_space():
-    check_session()
+    if session_expired():
+        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
     for room in room_list():
         socketio.emit('deleted_space', room = room)
     session['current_space'] = ''
@@ -663,7 +693,8 @@ def deleted_space():
 
 @socketio.on('created_section')
 def created_section(data):
-    check_session()
+    if session_expired():
+        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
     if space_admin() or session['admin']:
         for room in room_list():
             socketio.emit('created_section', data, room = room)
@@ -673,7 +704,8 @@ def created_section(data):
 
 @socketio.on('deleted_section')
 def created_section(data):
-    check_session()
+    if session_expired():
+        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
     if space_admin() or session['admin']:
         for room in room_list():
             socketio.emit('deleted_section', data, room = room)
@@ -683,7 +715,8 @@ def created_section(data):
 
 @socketio.on('deleted_message')
 def deleted_message(data):
-    check_session()
+    if session_expired():
+        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
     if space_admin() or session['admin'] or session['unique_id'] == collection_messages.find_one({'_id': ObjectId(data['message_id'])})['user_id']:
         socketio.emit('deleted_message', data, room = data['room_id'])
 
@@ -692,7 +725,8 @@ def deleted_message(data):
 
 @socketio.on('edited_message')
 def edited_message(data):
-    check_session()
+    if session_expired():
+        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
     if space_admin() or session['admin'] or session['unique_id'] == collection_messages.find_one({'_id': ObjectId(data['message_id'])})['user_id']:
         collection_messages.find_one_and_update({"_id": ObjectId(data['message_id'])}, {'$set': {'message': data['edit']}})
         socketio.emit('edited_message', data, room = data['room_id'])
@@ -701,7 +735,8 @@ def edited_message(data):
 
 @socketio.on('sorted_sections')
 def sorted_sections(data):
-    check_session()
+    if session_expired():
+        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
     if space_admin() or session['admin']:
         for section in data['section_list']:
             collection_sections.find_one_and_update({"_id": ObjectId(section)}, {'$set': {'order': data['section_list'].index(section) + 1}})
@@ -712,7 +747,8 @@ def sorted_sections(data):
 
 @socketio.on('sorted_rooms')
 def sorted_rooms(data):
-    check_session()
+    if session_expired():
+        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
     if space_admin() or session['admin']:
         for section in data['room_group_list']:
             if len(section) > 1:
@@ -730,20 +766,23 @@ def sorted_rooms(data):
 
 @socketio.on('sent_email')
 def sent_email(data):
-    check_session()
+    if session_expired():
+        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
     if valid_room(data['room_id']) and (space_admin() or session['admin']):
         socketio.emit('sent_email', data, room = data['room_id'])
 
 @socketio.on('joined_space')
 def joined_space():
-    check_session()
+    if session_expired():
+        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
     user = collection_users.find_one({'_id': session['unique_id']})
     for room in room_list():
         emit('joined_space', user, room = room, include_self=False)
 
-def check_session():
+def session_expired():
     if not session.get('logged'):
-        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
+        return True
+    return False
 
 def space_admin():
     if session['unique_id'] in collection_spaces.find_one({'_id': ObjectId(session['current_space'])})['admins']:
