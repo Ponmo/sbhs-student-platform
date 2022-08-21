@@ -1732,7 +1732,7 @@
           else{
             newNode.innerHTML = '<p class="message-combine-time"> ' + messageMoment + '</p><p class="message-combine"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"></div>';
           }
-          newNode.firstElementChild.nextElementSibling = data.message;
+          newNode.firstElementChild.nextElementSibling.textContent = data.message;
         }
         newNode.id = data.message_id;
         newNode.setAttribute('data-user', data.user_id);
