@@ -690,7 +690,7 @@
           $(this).find('.expand-log').animate(
             { deg: -90 },
             {
-              duration: 120,
+              duration: 240,
               step: function(now) {
                 $(this).css({ transform: 'rotate(' + now + 'deg)' });
               }
@@ -702,7 +702,7 @@
           $(this).find('.expand-log').animate(
             { deg: 0 },
             {
-              duration: 120,
+              duration: 240,
               step: function(now) {
                 $(this).css({ transform: 'rotate(' + now + 'deg)' });
               }
@@ -745,7 +745,7 @@
         const filter = document.getElementById("admin-search-bar").value.toUpperCase();
         if (filter != '') {
           document.querySelectorAll('.admin-users-table-row').forEach(function(user) {
-            if(user.firstElementChild.firstElementChild.nextSibling.toUpperCase().indexOf(filter) > -1 || user.firstElementChild.nextElementSibling.toUpperCase().indexOf(filter) > -1) {
+            if(user.firstElementChild.firstElementChild.nextSibling.textContent.toUpperCase().indexOf(filter) > -1 || user.firstElementChild.nextElementSibling.textContent.toUpperCase().indexOf(filter) > -1) {
               $(user).show();
             }
             else {
