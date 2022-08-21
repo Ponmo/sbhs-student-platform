@@ -74,7 +74,7 @@ client = WebApplicationClient(GOOGLE_CLIENT_ID)
 
 @app.before_first_request
 def make_session_permanent():
-    app.permanent_session_lifetime = timedelta(seconds=10)
+    app.permanent_session_lifetime = timedelta(days=1)
 
 # Redirects users on http to https.
 # Does not work with Heroku deployments
@@ -442,7 +442,7 @@ def create_space():
         section = {'_id': section_id, 'space': str(space_id), 'name': 'discussion', 'order': 1}
         image = request.json['space_image']
         try:
-            if (not requests.head(image).headers["content-type"] in ("image/png", "image/jpeg", "image/jpg", "image/gif", "image/avif", "image/webp", "image/svg") or int(requests.get(image, stream = True).headers['Content-length']) > 6000000):
+            if not requests.head(image).headers["content-type"] in ("image/png", "image/jpeg", "image/jpg", "image/gif", "image/avif", "image/webp", "image/svg") or int(requests.get(image, stream = True).headers['Content-length']) > 6000000:
                 image = '/static/images/Space.jpeg'
         except:
             pass
