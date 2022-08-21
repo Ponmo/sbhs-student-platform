@@ -68,47 +68,18 @@ app.config['SESSION_TYPE'] = 'filesystem'
 app.request_class = ProxiedRequest
 Session(app)
 
-@app.before_first_request
-def make_session_permanent():
-    app.permanent_session_lifetime = timedelta(seconds=10)
-
 socketio = SocketIO(app, async_mode='gevent', manage_session = False)
 
 client = WebApplicationClient(GOOGLE_CLIENT_ID)
 
-@app.route('/send_email', methods=['GET', 'POST'])
-def send_email():
-    if request.method == 'POST' and (space_admin() or session['admin']):
-        sender_email = 'sbhs.platform.test@gmail.com'
-        password = os.environ['EMAIL_ACCESS_PASSWORD']
-        message = MIMEMultipart('alternative')
-        message['Subject'] = request.json['subject']
-        message['From'] =  'Platform Test'
-        recipients = request.json['to']
-        stored_recipients = list(set(recipients))
-        if 'Everyone' in recipients:
-            everyone = collection_users.find({'joined': session['current_space']})
-            for recipient in everyone:
-                recipients.append(recipient['email'])
-        recipients.append(session['users_email'])
-        recipients = list(set(recipients))
-        text = (request.json['message'].replace('\n', '<br />') + '<br>' +
-        '--------------------------------------<br>' +
-        session['users_name'] + '<br>' + 
-        session['users_email'] + '<br>' +
-        '<a href="https://sbhs-platform.herokuapp.com/sbhs/' + session['current_space'] + '">' + session['current_space_name'] + '</a><br>' +
-        '--------------------------------------<br>' +
-        '<div style="color:lightgray;">do not reply</div>')
-        message.attach(MIMEText(text, 'html'))
-        context = ssl.create_default_context()
-        with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
-            server.login(sender_email, password)
-            server.sendmail(sender_email, recipients, message.as_string())
-        collection_emails.insert_one({'name': session['users_name'], 'picture': session['picture'], 'room': request.json['room_id'], 'email': session['users_email'], 'datetime': datetime.now().isoformat() + 'Z', 'from': session['unique_id'], 'recipients': stored_recipients, 'subject': request.json['subject'], 'message': request.json['message']})
-        return Response(dumps({'success': 'true'}), mimetype='application/json')
-    return Response(dumps({'success': 'false'}), mimetype='application/json')
+@app.before_first_request
+def make_session_permanent():
+    app.permanent_session_lifetime = timedelta(seconds=10)
 
-
+@app.before_request
+def check_session():
+    if not session.get('unique_id'):
+        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
 # Redirects users on http to https.
 # Does not work with Heroku deployments
 
@@ -330,6 +301,38 @@ def email_history():
             if session['users_email'] in email['recipients'] or 'Everyone' in email['recipients'] or space_admin() or session['admin']:
                 email_list.append(email)
         return Response(dumps(email_list), mimetype='application/json')
+
+@app.route('/send_email', methods=['GET', 'POST'])
+def send_email():
+    if request.method == 'POST' and (space_admin() or session['admin']):
+        sender_email = 'sbhs.platform.test@gmail.com'
+        password = os.environ['EMAIL_ACCESS_PASSWORD']
+        message = MIMEMultipart('alternative')
+        message['Subject'] = request.json['subject']
+        message['From'] =  'Platform Test'
+        recipients = request.json['to']
+        stored_recipients = list(set(recipients))
+        if 'Everyone' in recipients:
+            everyone = collection_users.find({'joined': session['current_space']})
+            for recipient in everyone:
+                recipients.append(recipient['email'])
+        recipients.append(session['users_email'])
+        recipients = list(set(recipients))
+        text = (request.json['message'].replace('\n', '<br />') + '<br>' +
+        '--------------------------------------<br>' +
+        session['users_name'] + '<br>' + 
+        session['users_email'] + '<br>' +
+        '<a href="https://sbhs-platform.herokuapp.com/sbhs/' + session['current_space'] + '">' + session['current_space_name'] + '</a><br>' +
+        '--------------------------------------<br>' +
+        '<div style="color:lightgray;">do not reply</div>')
+        message.attach(MIMEText(text, 'html'))
+        context = ssl.create_default_context()
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
+            server.login(sender_email, password)
+            server.sendmail(sender_email, recipients, message.as_string())
+        collection_emails.insert_one({'name': session['users_name'], 'picture': session['picture'], 'room': request.json['room_id'], 'email': session['users_email'], 'datetime': datetime.now().isoformat() + 'Z', 'from': session['unique_id'], 'recipients': stored_recipients, 'subject': request.json['subject'], 'message': request.json['message']})
+        return Response(dumps({'success': 'true'}), mimetype='application/json')
+    return Response(dumps({'success': 'false'}), mimetype='application/json')
 
 # Deletes the room and all of its messages in MongoDB. 
 
