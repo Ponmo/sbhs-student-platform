@@ -1263,6 +1263,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   height: 8px;
   width: 8px;
   margin-right: 5px;
+  transform: rotate(0deg);
 }
 .expand-log {
   height: 15px;
