@@ -570,6 +570,7 @@
                 newNodeChild.textContent = item.action;
                 newNode.appendChild(newNodeChild);
                 newNodeChild = document.createElement('td');
+                newNodeChild.style.whiteSpace = 'pre';
                 newNodeChild.textContent = item.by + '\r\n' + item.by_email;
                 newNode.appendChild(newNodeChild);
                 newNodeChild = document.createElement('td');
@@ -579,10 +580,13 @@
                 newNodeChild.textContent = moment(item.datetime).format('MMM Do YYYY, h:mm[]a');
                 newNode.appendChild(newNodeChild);
                 newNodeChild = document.createElement('td');
-                newNodeChild.innerHTML = '<img class="expand-log"  src="/static/images/expand.png">';
+                if (item.action == 'deleted message') {
+                  newNodeChild.innerHTML = '<img class="expand-log expand-log-deleted-message"  src="/static/images/expand.png">';
+                }
+                else if (item.action == 'reported message') {
+                  newNodeChild.innerHTML = '<img class="expand-log expand-log-reported-message"  src="/static/images/expand.png">';
+                }
                 newNode.appendChild(newNodeChild);
-
-                //newNode.innerHTML = '<td>' + item.name + '<br>' + item.email + '</td><td>' + item.action + '</td><td>' + item.by + '<br>' + item.by_email + '</td><td>' + item.in + '</td><td>' + moment(item.datetime).format('MMM Do YYYY, h:mm[]a') + '</td><td><img class="expand-log"  src="/static/images/expand.png"></td>';
                 adminLogs.appendChild(newNode);
                 newNode = document.createElement('tr');
                 if (item.action == 'deleted message') {
@@ -601,7 +605,25 @@
                 let messageMoment = moment(item.details.datetime).local().format('MMM Do YYYY, h:mm[]a');
                 newNodeChild.className = 'message-container-logs';
                 messageMoment = 'on ' + messageMoment;
-                newNodeChild.innerHTML = '<img class="profile-picture pointer" src="' + item.details.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + item.details.name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message">' + item.details.message + '</p>';
+                let newNodeChildChild = document.createElement('img');
+                newNodeChildChild.src = item.details.picture;
+                newNodeChildChild.className = 'profile-picture pointer';
+                newNodeChild.appendChild(newNodeChildChild);
+                newNodeChildChild = document.createElement('p');
+                newNodeChildChild.className = 'message-title';
+                let newNodeChildChildChild = document.createElement('span');
+                newNodeChildChildChild.style.fontWeight = 'bold';
+                newNodeChildChildChild.textContent = item.details.name;
+                newNodeChild.appendChild(newNodeChildChildChild);
+                newNodeChildChildChild = document.createElement('span');
+                newNodeChildChildChild.className = 'datetime';
+                newNodeChildChildChild.textContent = messageMoment;
+                newNodeChild.appendChild(newNodeChildChildChild);
+                newNode.appendChild(newNodeChild);
+                newNodeChild = document.createElement('p');
+                newNodeChild.textContent = item.details.message;
+                newNode.appendChild(newNodeChild);
+                //newNodeChild.innerHTML = '<img class="profile-picture pointer" src="' + item.details.picture + '"><p class="message-title"><span class="name pointer"><b>' + item.details.name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message">' + item.details.message + '</p>';
                 newNode.firstElementChild.append(newNodeChild);
                 adminLogs.appendChild(newNode);
               });
