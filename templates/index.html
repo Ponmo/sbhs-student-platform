@@ -597,6 +597,7 @@
                 $(".admin-logs-deleted-message").hide();
                 $(".admin-logs-deleted-message-details").hide();
               }
+              last_loaded = data[data.length - 1]._id.$oid;
             }
           }
         }));
@@ -609,9 +610,6 @@
           $(".admin-logs-deleted-message").hide();
           $(".admin-logs-deleted-message-details").hide();
         }
-        if (!isOverflown(document.getElementById('admin-table-wrapper'))) {
-          loadLogHistory();
-        }
       });
       $("#reported-message-filter").click(function() {
         if (document.getElementById('reported-message-filter').checked == true) {
@@ -619,9 +617,6 @@
         } else {
           $(".admin-logs-reported-message").hide();
           $(".admin-logs-reported-message-details").hide();
-        }
-        if (!isOverflown(document.getElementById('admin-table-wrapper'))) {
-          loadLogHistory();
         }
       });
 
@@ -2251,10 +2246,6 @@
         room_menu.hide();
       }
     });
-
-    function isOverflown(element) {
-      return element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth;
-    }
 
 
     //applyTheme function
