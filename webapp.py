@@ -446,6 +446,7 @@ def create_space():
                 image = '/static/images/Space.jpeg'
         except:
             image = '/static/images/Space.jpeg'
+        image = '/static/images/Space.jpeg'
         collection_spaces.insert_one({'_id': space_id, 'name': request.json['space_name'], 'picture': image, 'admins': [session['unique_id']], 'members': [[session['unique_id'], session['users_name']]]})
         collection_rooms.insert_many([room, special_rooms])
         collection_sections.insert_one(section)        
