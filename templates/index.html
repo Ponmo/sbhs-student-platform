@@ -2157,9 +2157,9 @@
                 }
                 newNode.firstElementChild.nextElementSibling.textContent = item.message;
               }
-              newMode.id = item._id.$oid;
-              newMode.setAttribute('data-user', item.user_id);
-              document.getElementById('messages').prepend(newMode);
+              newNode.id = item._id.$oid;
+              newNode.setAttribute('data-user', item.user_id);
+              document.getElementById('messages').prepend(newNode);
             });
           } 
         }));
