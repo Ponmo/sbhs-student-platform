@@ -76,10 +76,6 @@ client = WebApplicationClient(GOOGLE_CLIENT_ID)
 def make_session_permanent():
     app.permanent_session_lifetime = timedelta(seconds=10)
 
-@app.before_request
-def check_session():
-    if not session.get('unique_id'):
-        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
 # Redirects users on http to https.
 # Does not work with Heroku deployments
 
@@ -708,6 +704,11 @@ def joined_space():
     user = collection_users.find_one({'_id': session['unique_id']})
     for room in room_list():
         emit('joined_space', user, room = room, include_self=False)
+
+@app.before_request
+def session_expired():
+    if 'logged' not in session and request.endpoint != 'render_login':
+        return redirect(url_for('render_login', error = "Your session expired, please log in again"))
 
 def space_admin():
     if session['unique_id'] in collection_spaces.find_one({'_id': ObjectId(session['current_space'])})['admins']:
