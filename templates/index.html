@@ -1491,9 +1491,6 @@
         e.preventDefault();
         let space_name = document.getElementById('space-name').value.trim();
         let space_image = document.getElementById('space-picture').value.trim();
-        if (!/\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(space_image)) {
-          space_image = '/static/images/Space.jpeg'
-        }
         if (space_name.length) { 
           $.ajax({
             type: 'POST',

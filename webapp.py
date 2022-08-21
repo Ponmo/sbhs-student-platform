@@ -413,7 +413,10 @@ def create_space():
         room = {'_id': room_id, 'space': str(space_id), 'section': str(section_id), 'name': 'general', 'order': 1}
         special_rooms = {'_id': email_room_id, 'space': str(space_id), 'section': 'special', 'name': 'Email', 'order': 1}
         section = {'_id': section_id, 'space': str(space_id), 'name': 'discussion', 'order': 1}
-        collection_spaces.insert_one({'_id': space_id, 'name': request.json['space_name'], 'picture': request.json['space_image'], 'admins': [session['unique_id']], 'members': [[session['unique_id'], session['users_name']]]})
+        image = request.json['space_image']
+        if (requests.get(image, stream = True).headers['Content-length'] > 6000000 or not requests.head(image).headers["content-type"] in ("image/png", "image/jpeg", "image/jpg", "image/gif", "image/avif", "image/webp", "image/svg")):
+            image = '/static/images/Space.jpeg'
+        collection_spaces.insert_one({'_id': space_id, 'name': request.json['space_name'], 'picture': image, 'admins': [session['unique_id']], 'members': [[session['unique_id'], session['users_name']]]})
         collection_rooms.insert_many([room, special_rooms])
         collection_sections.insert_one(section)        
         joined = user['joined']
