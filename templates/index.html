@@ -2118,14 +2118,13 @@
             chat_history_skip += 50;
             let todayDate = moment();
             let yesterdayDate = moment().subtract(1, 'day');
-            let timeDisplayMode = 0;
             chat_history.forEach(function(item) {
               let messageDate = moment(item.datetime);
-              const newMode = document.createElement('div');
+              const newNode = document.createElement('div');
               if (item.combine == 'false') {
-                newMode.className = 'message-container';
-                newMode.setAttribute('data-date', messageDate.format('M/D/YYYY'));
-                newMode.setAttribute('data-datetime', messageDate.format());
+                newNode.className = 'message-container';
+                newNode.setAttribute('data-date', messageDate.format('M/D/YYYY'));
+                newNode.setAttribute('data-datetime', messageDate.format());
                 if(moment(messageDate).isSame(todayDate, 'day')) {
                   messageDate = 'at ' + messageDate.format('h:mm A');
                 }
@@ -2136,22 +2135,27 @@
                     messageDate = 'on ' + messageDate.format('M/D/YYYY');
                 }
                 if (space_admin || admin || item.user_id == user_id) {
-                  newMode.innerHTML = '<img class="profile-picture pointer" src="' + item.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + item.name + ' </b></span><span class="datetime">' + messageDate + '</span></p><p class="message">' + item.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>';
+                  newNode.innerHTML = '<img class="profile-picture pointer" alt="!"><p class="message-title"><span class="name pointer"></span><span class="datetime"> ' + messageDate + '</span></p><p class="message"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>';
                 }
-                else{
-                  newMode.innerHTML = '<img class="profile-picture pointer" src="' + item.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + item.name + ' </b></span><span class="datetime">' + messageDate + '</span></p><p class="message">' + item.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"></div>';
+                else {
+                  newNode.innerHTML = '<img class="profile-picture pointer" alt="!"><p class="message-title"><span class="name pointer"></span><span class="datetime"> ' + messageDate + '</span></p><p class="message"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"></div>';
                 }
+                newNode.firstElementChild.src = item.picture;
+                newNode.firstElementChild.nextElementSibling.firstElementChild.textContent = item.name;
+                newNode.firstElementChild.nextElementSibling.firstElementChild.style.fontWeight = 'bold';
+                newNode.firstElementChild.nextElementSibling.nextElementSibling.textContent = item.message;
               }
               else {
-                newMode.className = 'message-container-combine';
-                newMode.setAttribute('data-date', messageDate.format('M/D/YYYY'));
-                newMode.setAttribute('data-datetime', messageDate.format());
+                newNode.className = 'message-container-combine';
+                newNode.setAttribute('data-date', messageDate.format('M/D/YYYY'));
+                newNode.setAttribute('data-datetime', messageDate.format());
                 if (space_admin || admin || item.user_id == user_id) {
-                  newMode.innerHTML = '<p class="message-combine-time">' + messageDate.format('h:mm A') + '</p><p class="message-combine">' + item.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>'; 
+                  newNode.innerHTML = '<p class="message-combine-time">' + messageDate.format('h:mm A') + '</p><p class="message-combine"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>'; 
                 } 
                 else {
-                  newMode.innerHTML = '<p class="message-combine-time">' + messageDate.format('h:mm A') + '</p><p class="message-combine">' + item.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"></div>';
+                  newNode.innerHTML = '<p class="message-combine-time">' + messageDate.format('h:mm A') + '</p><p class="message-combine"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"></div>';
                 }
+                newNode.firstElementChild.nextElementSibling.textContent = item.message;
               }
               newMode.id = item._id.$oid;
               newMode.setAttribute('data-user', item.user_id);
@@ -2173,13 +2177,12 @@
             chat_history_skip += 50;
             let todayDate = moment();
             let yesterdayDate = moment().subtract(1, 'day');
-            let timeDisplayMode = 0;
             email_history.forEach(function(item) {
               let emailDate = moment(item.datetime);
-              const newMode = document.createElement('div');
-              newMode.className = 'message-container';
-              newMode.id = item._id.$oid;
-              newMode.setAttribute('data-date', emailDate.format('M/D/YYYY'));
+              const newNode = document.createElement('div');
+              newNode.className = 'message-container';
+              newNode.id = item._id.$oid;
+              newNode.setAttribute('data-date', emailDate.format('M/D/YYYY'));
               if(moment(emailDate).isSame(todayDate, 'day')) {
                 emailDate = 'at ' + emailDate.format('h:mm A');
               }
@@ -2189,8 +2192,14 @@
               else {
                 emailDate = 'on ' + emailDate.format('M/D/YYYY');
               }
-              newMode.innerHTML = '<img class="profile-picture pointer" src="' + item.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + item.name + ' </b></span><span class="datetime">' + emailDate + '</span></p><div class="email-container-container"><div class="recipient-list">to ' + item.recipients.join(', ') + '</div><img class="expand-recipient-list pointer" data-expanded="false" src="/static/images/expand.png"><div class="email-container"><p class="email-subject">' + item.subject + '</p><p class="email-message">' + item.message + '</p></div></div>';
-              document.getElementById('messages').prepend(newMode);
+              newNode.innerHTML = '<img class="profile-picture pointer" alt="!"><p class="message-title"><span class="name pointer"></span><span class="datetime"> ' + emailDate + '</span></p><div class="email-container-container"><div class="recipient-list"></div><img class="expand-recipient-list pointer" data-expanded="false" src="/static/images/expand.png"><div class="email-container"><p class="email-subject"></p><p class="email-message"></p></div></div>';
+              newNode.firstElementChild.src = item.picture;
+              newNode.firstElementChild.nextElementSibling.firstElementChild.textContent = item.name;
+              newNode.firstElementChild.nextElementSibling.firstElementChild.style.fontWeight = 'bold';
+              newNode.querySelector('.recipient-list').textContent = 'to ' + item.recipients.join(', ')
+              newNode.querySelector('.email-subject').textContent = item.subject;
+              newNode.querySelector('.email-message').textContent = item.message;
+              document.getElementById('messages').prepend(newNode);
             });
           }
         }));
@@ -2251,16 +2260,25 @@
           typing_display.textContent = '';
         }
         else if (typing_list.length == 1) {
-          typing_display.innerHTML = '<b>' + typing_list[0] + '</b> is typing...';
+          typing_display.innerHTML = '<b></b> is typing...';
+          typing_display.firstElementChild.textContent = typing_list[0];
         }
         else if (typing_list.length == 2) {
-          typing_display.innerHTML = '<b>' + typing_list[0] + '</b> and <b>' + typing_list[1] + '</b> are typing...';
+          typing_display.innerHTML = '<b></b> and <b></b> are typing...';
+          typing_display.firstElementChild.textContent = typing_list[0];
+          typing_display.firstElementChild.nextElementChild.textContent = typing_list[1];
         }
         else if (typing_list.length == 3) {
-          typing_display.innerHTML = '<b>' + typing_list[0] + '</b>, <b>' + typing_list[1] + '</b>, and <b>' + typing_list[2] + '</b> are typing...';
+          typing_display.innerHTML = '<b></b>, <b></b>, and <b></b> are typing...';
+          typing_display.firstElementChild.textContent = typing_list[0];
+          typing_display.firstElementChild.nextElementChild.textContent = typing_list[1];
+          typing_display.firstElementChild.nextElementChild.nextElementChild.textContent = typing_list[2];
         }
         else {
-          typing_display.innerHTML = '<b>' + typing_list[0] + '</b>, <b>' + typing_list[1] + '</b>, <b>' + typing_list[2] + '</b>, and' + String(typing_list.length - 3) + ' others are typing...';
+          typing_display.innerHTML = '<b></b>, <b></b>, <b></b>, and' + String(typing_list.length - 3) + ' others are typing...';
+          typing_display.firstElementChild.textContent = typing_list[0];
+          typing_display.firstElementChild.nextElementChild.textContent = typing_list[1];
+          typing_display.firstElementChild.nextElementChild.nextElementChild.textContent = typing_list[2];
         }
       }
 
