@@ -565,6 +565,12 @@
                 newNode.innerHTML = '<td>' + item.name + '<br>' + item.email + '</td><td>' + item.action + '</td><td>' + item.by + '<br>' + item.by_email + '</td><td>' + item.in + '</td><td>' + moment(item.datetime).format('MMM Do YYYY, h:mm[]a') + '</td><td><img class="expand-log"  src="/static/images/expand.png"></td>';
                 adminLogs.appendChild(newNode);
                 newNode = document.createElement('tr');
+                if (item.action == 'deleted message') {
+                  newNode.className = 'admin-logs-deleted-message-details';
+                }
+                else if (item.action == 'reported message') {
+                  newNode.className = 'admin-logs-reported-message-details';
+                }
                 newNode.style.display = 'none';
                 newNode.style.backgroundColor = '#32353a';
                 let newNodeChild = document.createElement('td');
@@ -584,11 +590,13 @@
                 $(".admin-logs-reported-message").show();
               } else {
                 $(".admin-logs-reported-message").hide();
+                $(".admin-logs-reported-message-details").hide();
               }
               if (document.getElementById('deleted-message-filter').checked == true){
                 $(".admin-logs-deleted-message").show();
               } else {
                 $(".admin-logs-deleted-message").hide();
+                $(".admin-logs-deleted-message-details").hide();
               }
             }
           }
@@ -601,6 +609,7 @@
           $(".admin-logs-deleted-message").show();
         } else {
           $(".admin-logs-deleted-message").hide();
+          $(".admin-logs-deleted-message-details").hide();
         }
       });
       $("#reported-message-filter").click(function() {
@@ -609,6 +618,7 @@
           $(".admin-logs-reported-message").show();
         } else {
           $(".admin-logs-reported-message").hide();
+          $(".admin-logs-reported-message-details").hide();
         }
       });
 
@@ -713,9 +723,8 @@
         });
       });
 
-
       $('#admin-search-bar').keyup(function (e) {
-        if (document.getElementById('email_to_input').value != '') {
+        if (document.getElementById('admin-search-bar').value != '') {
           document.getElementById('suggested_emails').style.display = 'block';
           let hide = true;
           const filter = document.getElementById("email_to_input").value.toUpperCase();
