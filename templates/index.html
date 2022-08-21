@@ -1089,8 +1089,10 @@
               document.getElementById('overlay').appendChild(newNode);
               member.className = 'member';
               member.style.backgroundColor = '#3c3f45';
-              document.getElementById('profile-popup').innerHTML = '<ul id="profile-list"><li id="profile-picture-list"><img id="popup-picture" src=' + data['picture'] + ' alt="!"></li><li id="profile-name">' + data['name'] + '</li><li id="profile-email">' + data['email'] + '</li><table id="joined-table"></table>';
-              //loop through all joined servers' icons and creates img elements to place in the table
+              document.getElementById('profile-popup').innerHTML = '<ul id="profile-list"><li id="profile-picture-list"><img id="popup-picture" alt="!"></li><li id="profile-name"></li><li id="profile-email"></li><table id="joined-table"></table>';
+              document.getElementById('popup-picture').src = data['picture'];
+              document.getElementById('profile-name').textContent = data['name'];
+              document.getElementById('profile-email').textContent = data['email'];
               for (let i = 0; i < Math.ceil(data['joined'].length/4); i++) {
                 newNode = document.createElement('tr');
                 for (let j = 0; j < 4; j++) {
@@ -1703,34 +1705,38 @@
       });
 
       socket.on('receive_message', function (data) {
-        const newMode = document.createElement('div');
+        const newNode = document.createElement('div');
         chat_history_skip += 1;
-        newMode.setAttribute('data-datetime', moment(data.datetime).format());
+        newNode.setAttribute('data-datetime', moment(data.datetime).format());
         let messageMoment = moment(data.datetime).local().format('h:mm A');
         if (data.combine == 'false') {
-          newMode.className = 'message-container';
+          newNode.className = 'message-container';
           messageMoment = 'at ' + messageMoment;
           // TODO: Give pfp image default fallback image
           if (space_admin || admin || data.user_id == user_id) {
-            newMode.innerHTML = '<img class="profile-picture pointer" src="' + data.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + data.name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message">' + data.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>'; 
+            newNode.innerHTML = '<img class="profile-picture pointer" src="' + data.picture + '" alt="!"><p class="message-title"><span class="name pointer"></span><span class="datetime"> ' + messageMoment + '</span></p><p class="message"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>'; 
+            newNode.firstElementChild.src = data.picture;
+            newNode.firstElementChild.nextElementSibling.firstElementChild.textContent = data.name;
+            newNode.firstElementChild.nextElementSibling.firstElementChild.style.fontWeight = 'bold';
+            newNode.firstElementChild.nextElementSibling.nextElementSibling.textContent = data.message;
           }
           else {
-            newMode.innerHTML = '<img class="profile-picture pointer" src="' + data.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + data.name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message">' + data.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"></div>';
+            newNode.innerHTML = '<img class="profile-picture pointer" src="' + data.picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + data.name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message">' + data.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"></div>';
           }
         }
         else {
-          newMode.className = 'message-container-combine';
+          newNode.className = 'message-container-combine';
           if (space_admin || admin || data.user_id == user_id){
-          newMode.innerHTML = '<p class="message-combine-time">' + messageMoment + '</p><p class="message-combine">' + data.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>';
+            newNode.innerHTML = '<p class="message-combine-time">' + messageMoment + '</p><p class="message-combine">' + data.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>';
           }
           else{
-            newMode.innerHTML = '<p class="message-combine-time">' + messageMoment + '</p><p class="message-combine">' + data.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"></div>';
+            newNode.innerHTML = '<p class="message-combine-time">' + messageMoment + '</p><p class="message-combine">' + data.message + '</p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"></div>';
           }
         }
-        newMode.id = data.message_id;
-        newMode.setAttribute('data-user', data.user_id);
+        newNode.id = data.message_id;
+        newNode.setAttribute('data-user', data.user_id);
         $('.temporary-message').remove();
-        document.getElementById('messages').append(newMode);
+        document.getElementById('messages').append(newNode);
       });
       
       socket.on('is_typing', function (data) {
