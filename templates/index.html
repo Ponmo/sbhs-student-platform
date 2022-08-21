@@ -610,7 +610,7 @@
           $(".admin-logs-deleted-message").hide();
           $(".admin-logs-deleted-message-details").hide();
         }
-        if (isOverflown(document.getElementById('admin-table-wrapper'))) {
+        if (!isOverflown(document.getElementById('admin-table-wrapper'))) {
           loadLogHistory();
         }
       });
@@ -621,7 +621,7 @@
           $(".admin-logs-reported-message").hide();
           $(".admin-logs-reported-message-details").hide();
         }
-        if (isOverflown(document.getElementById('admin-table-wrapper'))) {
+        if (!isOverflown(document.getElementById('admin-table-wrapper'))) {
           loadLogHistory();
         }
       });
