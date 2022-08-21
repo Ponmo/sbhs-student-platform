@@ -80,8 +80,8 @@
         <form>
           <input type="checkbox" class="admin-log-filters" id="deleted-message-filter" name="deleted-message-filter" checked>
           <label for="deleted-message-filter">Deleted messages</label>
-        <input type="checkbox" class="admin-log-filters" id="reported-message-filter" name="reported-message-filter" checked>
-        <label for="reported-message-filter">Reported messages</label>
+          <input type="checkbox" class="admin-log-filters" id="reported-message-filter" name="reported-message-filter" checked>
+          <label for="reported-message-filter">Reported messages</label>
         </form>
       </div>
       <div id="admin-table-wrapper">
@@ -595,15 +595,15 @@
           }
         }));
       }
-      
-      $(".deleted-message-filter").click(function() {
+      $('#deleted-message-filter').is(':checked')
+      $("#deleted-message-filter").click(function() {
         if (document.getElementById('deleted-message-filter').checked){
           $(".admin-logs-deleted-message").show();
         } else {
           $(".admin-logs-deleted-message").hide();
         }
       });
-      $(".reported-message-filter").click(function() {
+      $("#reported-message-filter").click(function() {
         if (document.getElementById('reported-message-filter').checked) {
           $(".admin-logs-reported-message").show();
         } else {
@@ -711,6 +711,13 @@
           }
         });
       });
+
+
+      $('#admin-search-bar').keyup(function (e) {
+        let searchValue = document.getElementById('admin-search-bar').value;
+        
+      });
+
 
       $(document).on('click', '#exit-server-settings', function() {
         $('#home-page').css('display', 'block');
