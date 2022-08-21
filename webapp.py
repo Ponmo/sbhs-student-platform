@@ -442,11 +442,11 @@ def create_space():
         section = {'_id': section_id, 'space': str(space_id), 'name': 'discussion', 'order': 1}
         space_image = request.json['space_image']
         try:
-            if not requests.head(image).headers["content-type"] in ("image/png", "image/jpeg", "image/jpg", "image/gif", "image/avif", "image/webp", "image/svg") or int(requests.get(image, stream = True).headers['Content-length']) > 6000000:
+            if not requests.head(space_image).headers["content-type"] in ("image/png", "image/jpeg", "image/jpg", "image/gif", "image/avif", "image/webp", "image/svg") or int(requests.get(space_image, stream = True).headers['Content-length']) > 6000000:
                 space_image = '/static/images/Space.jpeg'
         except:
             space_image = '/static/images/Space.jpeg'
-        space_image = '/static/images/Space.jpeg'
+        request.json['space_image'] = space_image
         collection_spaces.insert_one({'_id': space_id, 'name': request.json['space_name'], 'picture': space_image, 'admins': [session['unique_id']], 'members': [[session['unique_id'], session['users_name']]]})
         collection_rooms.insert_many([room, special_rooms])
         collection_sections.insert_one(section)        

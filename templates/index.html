@@ -1513,7 +1513,7 @@
                 newNodeChild.id = data.space_id;
                 newNodeChild.setAttribute('data-name', space_name);
                 newNodeChild.style.borderRadius = '3px';
-                newNodeChild.src = space_image;
+                newNodeChild.src = data.space_image;
                 newNode.appendChild(newNodeChild);
                 newNodeChild = document.createElement('div');
                 newNodeChild.className = 'active-space';
@@ -2255,6 +2255,12 @@
         profile_popup.hide();
         section_menu.hide();
         room_menu.hide();
+      }
+
+      async function checkImage(url){
+        const res = await fetch(url);
+        const buff = await res.blob();
+        return buff.type.startsWith('image/')
       }
 
       $(document).ajaxError(function myErrorHandler(event, xhr, ajaxOptions, thrownError) {
