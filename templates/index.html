@@ -689,7 +689,7 @@
           $(this).find('.expand-log').css('transform', 'rotate(0deg)');
         } 
         else {
-          $(this).find('.expand-log').css('transform', 'rotate(2700deg)');
+          $(this).find('.expand-log').css('transform', 'rotate(-270deg)');
         }
       });
 
@@ -724,10 +724,8 @@
       });
 
       $('#admin-search-bar').keyup(function (e) {
-        if (document.getElementById('admin-search-bar').value != '') {
-          document.getElementById('suggested_emails').style.display = 'block';
-          let hide = true;
-          const filter = document.getElementById("email_to_input").value.toUpperCase();
+        const filter = document.getElementById("admin-search-bar").value.toUpperCase();
+        if (filter != '') {
           document.querySelectorAll('.suggested_email').forEach(function(suggested_email) {
             //alert(suggested_email.textContent.toUpperCase());
             //alert(filter);
