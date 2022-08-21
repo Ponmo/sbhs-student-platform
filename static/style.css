@@ -1314,6 +1314,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   width: 90vw;
   margin: 0 auto;
   margin-top: 10px;
+  display: none;
 }
 /*Add User Select None Class*/
 

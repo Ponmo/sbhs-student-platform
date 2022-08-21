@@ -579,10 +579,14 @@
               });
               last_loaded = data[data.length - 1]._id.$oid;
               if (document.getElementById('reported-message-filter').checked) {
-                $(".admin-logs-deleted-message").hide();
+                $(".admin-logs-reported-message").show();
+              } else {
+                $(".admin-logs-reported-message").hide();
               }
               if (document.getElementById('deleted-message-filter').checked){
-                $(".admin-logs-reported-message").hide();
+                $(".admin-logs-deleted-message").show();
+              } else {
+                $(".admin-logs-deleted-message").hide();
               }
             }
           }
@@ -591,18 +595,16 @@
       
       document.getElementById('deleted-message-filter').onclick = function() {
         if (document.getElementById('deleted-message-filter').checked){
-          $(".admin-logs-reported-message").hide();
-        }
-        else {
-          $(".admin-logs-reported-message").show();
+          $(".admin-logs-deleted-message").show();
+        } else {
+          $(".admin-logs-deleted-message").hide();
         }
       }
       document.getElementById('reported-message-filter').onclick = function() {
         if (document.getElementById('reported-message-filter').checked) {
-          $(".admin-logs-deleted-message").hide();
-        }
-        else {
-          $(".admin-logs-deleted-message").show();
+          $(".admin-logs-reported-message").show();
+        } else {
+          $(".admin-logs-reported-message").hide();
         }
       }
 
