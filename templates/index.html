@@ -594,20 +594,20 @@
         }));
       }
       
-      document.getElementById('deleted-message-filter').onclick = function() {
+      $(".deleted-message-filter").click(function() {
         if (document.getElementById('deleted-message-filter').checked){
           $(".admin-logs-deleted-message").show();
         } else {
           $(".admin-logs-deleted-message").hide();
         }
-      }
-      document.getElementById('reported-message-filter').onclick = function() {
+      });
+      $(".reported-message-filter").click(function() {
         if (document.getElementById('reported-message-filter').checked) {
           $(".admin-logs-reported-message").show();
         } else {
           $(".admin-logs-reported-message").hide();
         }
-      }
+      });
 
       $(document).on('click', '#admin-users', function() {
         $('.active-space').attr('style', '');
