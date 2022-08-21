@@ -72,9 +72,11 @@ socketio = SocketIO(app, async_mode='gevent', manage_session = False)
 
 client = WebApplicationClient(GOOGLE_CLIENT_ID)
 
+# By default, server-side flask-sessions are permanent
+
 @app.before_first_request
 def make_session_permanent():
-    app.permanent_session_lifetime = timedelta(days=1)
+    app.permanent_session_lifetime = timedelta(seconds=10)
 
 # Redirects users on http to https.
 # Does not work with Heroku deployments
@@ -633,6 +635,9 @@ def stopped_typing(data):
 
 @socketio.on('send_message')
 def send_message(data):
+    if session_expired():
+        emit('expired')
+        return
     if space_member() and valid_room(data['room_id']):
         utc_dt = datetime.now().isoformat() + 'Z'
         data['datetime'] = utc_dt
@@ -700,6 +705,9 @@ def created_section(data):
 
 @socketio.on('deleted_message')
 def deleted_message(data):
+    if session_expired():
+        emit('expired')
+        return
     if space_admin() or session['admin'] or session['unique_id'] == collection_messages.find_one({'_id': ObjectId(data['message_id'])})['user_id']:
         socketio.emit('deleted_message', data, room = data['room_id'])
 
@@ -708,6 +716,9 @@ def deleted_message(data):
 
 @socketio.on('edited_message')
 def edited_message(data):
+    if session_expired():
+        emit('expired')
+        return
     if space_admin() or session['admin'] or session['unique_id'] == collection_messages.find_one({'_id': ObjectId(data['message_id'])})['user_id']:
         collection_messages.find_one_and_update({"_id": ObjectId(data['message_id'])}, {'$set': {'message': data['edit']}})
         socketio.emit('edited_message', data, room = data['room_id'])
