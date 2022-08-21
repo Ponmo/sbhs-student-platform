@@ -532,7 +532,7 @@ def sorted_spaces():
 @app.route('/server_logs', methods=['GET', 'POST'])
 def server_logs():
     if request.method == 'POST' and session['admin']:
-        logs = dumps(list(collection_logs.find().sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(50)))
+        logs = dumps(list(collection_logs.find().sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(1000)))
         return Response(logs, mimetype='application/json')
 
 @app.route('/server_users', methods=['GET', 'POST'])
