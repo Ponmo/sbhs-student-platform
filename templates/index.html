@@ -587,8 +587,6 @@
                 }
                 newNode.appendChild(newNodeChild);
                 newFragment.appendChild(newNode);
-
-
                 newNode = document.createElement('tr');
                 if (item.action == 'deleted message') {
                   newNode.className = 'admin-logs-deleted-message-details';
@@ -598,15 +596,11 @@
                 }
                 newNode.style.display = 'none';
                 newNode.style.backgroundColor = '#32353a';
-
-
                 newNodeChild = document.createElement('td');
                 newNodeChild.colSpan = 6;
                 newNodeChild.width = '100%';
-
                 let newNodeChildChild = document.createElement('div');
                 newNodeChildChild.className = 'message-container-logs';
-
                 let messageMoment = 'on' + moment(item.details.datetime).local().format('MMM Do YYYY, h:mm[]a');
                 let newNodeChildChildChild = document.createElement('img');
                 newNodeChildChildChild.src = item.details.picture;
@@ -620,14 +614,13 @@
                 newNodeChildChildChild.appendChild(newNodeChildChildChildChild);
                 newNodeChildChildChildChild = document.createElement('span');
                 newNodeChildChildChildChild.className = 'datetime';
-                newNodeChildChildChildChild.textContent = messageMoment;
+                newNodeChildChildChildChild.textContent = ' ' + messageMoment;
                 newNodeChildChildChild.appendChild(newNodeChildChildChildChild);
                 newNodeChildChild.appendChild(newNodeChildChildChild);
                 newNodeChildChildChild = document.createElement('p');
                 newNodeChildChildChild.textContent = item.details.message;
                 newNodeChildChild.appendChild(newNodeChildChildChild);
                 newNodeChild.appendChild(newNodeChildChild);
-                //newNodeChild.innerHTML = '<img class="profile-picture pointer" src="' + item.details.picture + '"><p class="message-title"><span class="name pointer"><b>' + item.details.name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message">' + item.details.message + '</p>';
                 newNode.append(newNodeChild);
                 newFragment.appendChild(newNode);
               });
