@@ -598,6 +598,9 @@
                 $(".admin-logs-deleted-message").hide();
                 $(".admin-logs-deleted-message-details").hide();
               }
+              if (isOverflown(document.getElementById('admin-table-wrapper'))) {
+                loadLogHistory();
+              }
             }
           }
         }));
@@ -2248,6 +2251,10 @@
         room_menu.hide();
       }
     });
+
+    function isOverflown(element) {
+      return element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth;
+    }
 
 
     //applyTheme function
