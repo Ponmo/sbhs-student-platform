@@ -74,7 +74,7 @@
         <div id="exit-server-settings" class="pointer">TEMP. EXIT</div>
       </div>
       <div id='admin-search'>
-        <textarea id="admin-search-bar" placeholder="Search..."></textarea>
+        <textarea id="admin-search-bar" placeholder="Search..." disabled></textarea>
       </div>
       <div id="admin-filters">
         <input type="checkbox" class="admin-log-filters" id="deleted-message-filter" name="deleted-message-filter" checked>
@@ -526,6 +526,7 @@
         $('#admin-users-table').css('display', 'none');
         $('#admin-settings-table').css('display', 'none');
         $('#admin-filters').css('display', 'block');
+        $("#admin-search-bar").prop('disabled', true);
         $('#admin-logs-body').empty();
         $('#admin-users-body').empty();
         $('#admin-settings-body').empty();
@@ -618,6 +619,7 @@
         $('#admin-users-table').css('display', 'table');
         $('#admin-settings-table').css('display', 'none');
         $('#admin-filters').css('display', 'none');
+        $("#admin-search-bar").prop('disabled', false);
         $('#admin-logs-body').empty();
         $('#admin-users-body').empty();
         $('#admin-settings-body').empty();
@@ -662,6 +664,7 @@
         $('#admin-users-table').css('display', 'none');
         $('#admin-settings-table').css('display', 'table');
         $('#admin-filters').css('display', 'none');
+        $("#admin-search-bar").prop('disabled', true);
         $('#admin-logs-body').empty();
         $('#admin-users-body').empty();
         $('#admin-settings-body').empty();
