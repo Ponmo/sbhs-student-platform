@@ -686,8 +686,7 @@
       $(document).on('click', '.admin-logs-table-row', function() {
         $(this.nextElementSibling).toggle();
         if ($(this.nextElementSibling).is(':visible')) {
-          $(this).find('.expand-log').animate({deg: -90}, 80);
-          /*$(this).find('.expand-log').animate(
+          $(this).find('.expand-log').animate(
             { deg: -90 },
             {
               duration: 80,
@@ -695,11 +694,10 @@
                 $(this).css({ transform: 'rotate(' + now + 'deg)' });
               }
             }
-          );*/
+          );
         }
         else {
-          $(this).find('.expand-log').animate({deg: 0}, 80);
-          /*$(this).find('.expand-log').animate(
+          $(this).find('.expand-log').animate(
             { deg: 0 },
             {
               duration: 80,
@@ -707,7 +705,7 @@
                 $(this).css({ transform: 'rotate(' + now + 'deg)' });
               }
             }
-          );*/
+          );
         }
       });
 
