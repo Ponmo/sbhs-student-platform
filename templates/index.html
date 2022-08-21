@@ -745,7 +745,7 @@
         if (filter != '') {
           if (document.getElementById('admin-users-table').style.display != 'none') {
             document.querySelectorAll('.admin-users-table-row').forEach(function(entry) {
-              if(entry.firstElementChild.firstElementChild.nextSibling.textContent.toUpperCase().indexOf(filter) > -1 || entry.firstElementChild.nextElementSibling.textContent.toUpperCase().indexOf(filter) > -1 || entry.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.firstElementChild.getAttribute('data-current').toUpperCase().indexOf(filter) > -1) {
+              if(entry.firstElementChild.firstElementChild.nextSibling.textContent.toUpperCase().indexOf(filter) > -1 || entry.firstElementChild.nextElementSibling.textContent.toUpperCase().indexOf(filter) > -1) {
                 $(entry).show();
               }
               else {
