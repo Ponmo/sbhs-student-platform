@@ -561,7 +561,28 @@
                 else if (item.action == 'reported message') {
                   newNode.className = 'admin-logs-table-row admin-logs-reported-message pointer';
                 }
-                newNode.innerHTML = '<td>' + item.name + '<br>' + item.email + '</td><td>' + item.action + '</td><td>' + item.by + '<br>' + item.by_email + '</td><td>' + item.in + '</td><td>' + moment(item.datetime).format('MMM Do YYYY, h:mm[]a') + '</td><td><img class="expand-log"  src="/static/images/expand.png"></td>';
+
+                let newNodeChild = document.createElement('td');
+                newNodeChild.style.whiteSpace = 'pre';
+                newNodeChild.textContent = item.name + '\r\n' + item.email;
+                newNode.appendChild(newNodeChild);
+                newNodeChild = document.createElement('td');
+                newNodeChild.textContent = item.action;
+                newNode.appendChild(newNodeChild);
+                newNodeChild = document.createElement('td');
+                newNodeChild.textContent = item.by + '\r\n' + item.by_email;
+                newNode.appendChild(newNodeChild);
+                newNodeChild = document.createElement('td');
+                newNodeChild.textContent = item.in;
+                newNode.appendChild(newNodeChild);
+                newNodeChild = document.createElement('td');
+                newNodeChild.textContent = moment(item.datetime).format('MMM Do YYYY, h:mm[]a');
+                newNode.appendChild(newNodeChild);
+                newNodeChild = document.createElement('td');
+                newNodeChild.innerHTML = '<img class="expand-log"  src="/static/images/expand.png">';
+                newNode.appendChild(newNodeChild);
+
+                //newNode.innerHTML = '<td>' + item.name + '<br>' + item.email + '</td><td>' + item.action + '</td><td>' + item.by + '<br>' + item.by_email + '</td><td>' + item.in + '</td><td>' + moment(item.datetime).format('MMM Do YYYY, h:mm[]a') + '</td><td><img class="expand-log"  src="/static/images/expand.png"></td>';
                 adminLogs.appendChild(newNode);
                 newNode = document.createElement('tr');
                 if (item.action == 'deleted message') {
@@ -572,7 +593,7 @@
                 }
                 newNode.style.display = 'none';
                 newNode.style.backgroundColor = '#32353a';
-                let newNodeChild = document.createElement('td');
+                newNodeChild = document.createElement('td');
                 newNodeChild.colSpan = 6;
                 newNodeChild.width = '100%';
                 newNode.appendChild(newNodeChild);
