@@ -690,7 +690,7 @@
           $(this).find('.expand-log').animate(
             { deg: -90 },
             {
-              duration: 1200,
+              duration: 120,
               step: function(now) {
                 $(this).css({ transform: 'rotate(' + now + 'deg)' });
               }
@@ -700,9 +700,9 @@
         else {
           //$(this).find('.expand-log').css('transform', 'rotate(-90deg)');
           $(this).find('.expand-log').animate(
-            { deg: -90 },
+            { deg: 90 },
             {
-              duration: 1200,
+              duration: 120,
               step: function(now) {
                 $(this).css({ transform: 'rotate(' + now + 'deg)' });
               }
