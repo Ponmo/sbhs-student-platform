@@ -1946,11 +1946,12 @@
               newNodeChild.className = 'section pointer';
               newNodeChild.id = section['_id']['$oid'];
               if (space_admin || admin) {
-                newNodeChild.innerHTML = '<div class="section-name"><span><img class="collapse-icon" src="/static/images/expand.png"></img></span>' + section['name'] + '</div><div class="create-room-button" type="button">+</div>';
+                newNodeChild.innerHTML = '<div class="section-name"><span><img class="collapse-icon" src="/static/images/expand.png"></img></span></div><div class="create-room-button" type="button">+</div>';
               }
               else {
-                newNodeChild.innerHTML = '<div class="section-name"><span><img class="collapse-icon" src="/static/images/expand.png"></img></span>' + section['name'] + '</div>';
+                newNodeChild.innerHTML = '<div class="section-name"><span><img class="collapse-icon" src="/static/images/expand.png"></img></span></div>';
               }
+              newNodeChild.firstElementChild.appendChild(document.createTextNode(section['name']));
               newNode.append(newNodeChild);
               let newNodeChildContainer = document.createElement('ul');
               newNodeChildContainer.className = 'room-group';
@@ -1961,12 +1962,7 @@
                   newNodeChild.id = room['_id']['$oid'];
                   newNodeChild.setAttribute('data-section', room['section']);
                   newNodeChild.setAttribute('data-name', room['name']);
-                  if (space_admin || admin) {
-                    newNodeChild.innerHTML = room['name'];
-                  }
-                  else {
-                    newNodeChild.innerHTML = room['name']
-                  }
+                  newNodeChild.textContent = room['name'];
                   newNodeChildContainer.append(newNodeChild);
                 }
                 newNode.append(newNodeChildContainer);
@@ -2001,19 +1997,27 @@
               $('#regular-channels').sortable('disable');
             }
             //try { //get rid of try block after deleting all spaces without member list another method
+            
+            const newFragmentMembers = document.createDocumentFragment();
+            const newFragmentEmails = document.createDocumentFragment();
             rooms_and_sections[2].forEach(function(member) {
               newNode = document.createElement('div');
               newNode.className = 'member pointer';
               newNode.setAttribute('data-id', member['_id']);
-              newNode.innerHTML = '<img class="profile-picture" src="' + member['picture'] + '" alt="!"><span class="member-name">' + member['name'] + '</span>';
-              document.getElementById('members').append(newNode);
-
+              newNode.innerHTML = '<img class="profile-picture" alt="!"><span class="member-name"></span>';
+              newNode.firstElementChild.src = member['picture'];
+              newNode.firstElementChild.nextElementSibling.textContent = member['name'];
+              newFragmentMembers.appendChild(newNode);
               newNode = document.createElement('div');
               newNode.className = 'suggested_email suggested_email_individual pointer';
               newNode.setAttribute('data-email', member['email']);
-              newNode.innerHTML = '<img class="profile-picture" src="' + member['picture'] + '">' + member['name'] + ' (' + member['email'] + ')'
-              document.getElementById('suggested_emails').append(newNode);
+              newNode.innerHTML = '<img class="profile-picture">'
+              newNode.firstElementChild.src = member['picture'];
+              newNode.appendChild(document.createTextNode(member['name'] + ' (' + member['email'] + ')'));
+              newFragmentEmails.appendChild(newNode);
             });
+            document.getElementById('members').append(newFragmentMembers);
+            document.getElementById('suggested_emails').append(newFragmentEmails);
             if (add_to_members) {
               socket.emit('joined_space');
               add_to_members = false;
