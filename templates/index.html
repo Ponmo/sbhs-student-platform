@@ -687,7 +687,7 @@
         $(this.nextElementSibling).toggle();
         if ($(this.nextElementSibling).is(':visible')) {
           //$(this).find('.expand-log').css('transform', 'rotate(0deg)');
-          $(this.find('.expand-log').animate(
+          $(this).find('.expand-log').animate(
             { deg: -90 },
             {
               duration: 1200,
@@ -695,11 +695,11 @@
                 $(this).css({ transform: 'rotate(' + now + 'deg)' });
               }
             }
-          ));
+          );
         }
         else {
           //$(this).find('.expand-log').css('transform', 'rotate(-90deg)');
-          $(this.find('.expand-log').animate(
+          $(this).find('.expand-log').animate(
             { deg: -90 },
             {
               duration: 1200,
@@ -707,7 +707,7 @@
                 $(this).css({ transform: 'rotate(' + now + 'deg)' });
               }
             }
-          ));
+          );
         }
       });
 
@@ -746,15 +746,15 @@
         if (filter != '') {
           document.querySelectorAll('.admin-users-table-row').forEach(function(user) {
             if(user.firstElementChild.firstElementChild.nextSibling.toUpperCase().indexOf(filter) > -1 || user.firstElementChild.nextElementSibling.toUpperCase().indexOf(filter) > -1) {
-              user.style.display = 'initial';
+              $(user).show();
             }
             else {
-              user.style.display = 'none';
+              $(user).hide();
             }
           });
         }
         else {
-          
+          $('.admin-users-table-row').show();
         }
       });
 
