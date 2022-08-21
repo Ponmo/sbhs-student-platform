@@ -588,6 +588,8 @@
                 }
                 newNode.appendChild(newNodeChild);
                 adminLogs.appendChild(newNode);
+
+
                 newNode = document.createElement('tr');
                 if (item.action == 'deleted message') {
                   newNode.className = 'admin-logs-deleted-message-details';
@@ -597,32 +599,34 @@
                 }
                 newNode.style.display = 'none';
                 newNode.style.backgroundColor = '#32353a';
+
+
                 newNodeChild = document.createElement('td');
                 newNodeChild.colSpan = 6;
                 newNodeChild.width = '100%';
-                newNode.appendChild(newNodeChild);
-                newNodeChild = document.createElement('div');
+
+                let newNodeChildChild = document.createElement('div');
                 let messageMoment = moment(item.details.datetime).local().format('MMM Do YYYY, h:mm[]a');
-                newNodeChild.className = 'message-container-logs';
+                newNodeChildChild.className = 'message-container-logs';
                 messageMoment = 'on ' + messageMoment;
-                let newNodeChildChild = document.createElement('img');
-                newNodeChildChild.src = item.details.picture;
-                newNodeChildChild.className = 'profile-picture pointer';
+                let newNodeChildChildChild = document.createElement('img');
+                newNodeChildChildChild.src = item.details.picture;
+                newNodeChildChildChild.className = 'profile-picture pointer';
+                newNodeChildChild.appendChild(newNodeChildChildChild);
+                newNodeChildChildChild = document.createElement('p');
+                newNodeChildChildChild.className = 'message-title';
+                let newNodeChildChildChildChild = document.createElement('span');
+                newNodeChildChildChildChild.style.fontWeight = 'bold';
+                newNodeChildChildChildChild.textContent = item.details.name;
+                newNodeChildChild.appendChild(newNodeChildChildChildChild);
+                newNodeChildChildChildChild = document.createElement('span');
+                newNodeChildChildChildChild.className = 'datetime';
+                newNodeChildChildChildChild.textContent = messageMoment;
+                newNodeChildChild.appendChild(newNodeChildChildChildChild);
                 newNodeChild.appendChild(newNodeChildChild);
                 newNodeChildChild = document.createElement('p');
-                newNodeChildChild.className = 'message-title';
-                let newNodeChildChildChild = document.createElement('span');
-                newNodeChildChildChild.style.fontWeight = 'bold';
-                newNodeChildChildChild.textContent = item.details.name;
-                newNodeChild.appendChild(newNodeChildChildChild);
-                newNodeChildChildChild = document.createElement('span');
-                newNodeChildChildChild.className = 'datetime';
-                newNodeChildChildChild.textContent = messageMoment;
-                newNodeChild.appendChild(newNodeChildChildChild);
-                newNode.appendChild(newNodeChild);
-                newNodeChild = document.createElement('p');
-                newNodeChild.textContent = item.details.message;
-                newNode.appendChild(newNodeChild);
+                newNodeChildChild.textContent = item.details.message;
+                newNodeChild.appendChild(newNodeChildChild);
                 //newNodeChild.innerHTML = '<img class="profile-picture pointer" src="' + item.details.picture + '"><p class="message-title"><span class="name pointer"><b>' + item.details.name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message">' + item.details.message + '</p>';
                 newNode.firstElementChild.append(newNodeChild);
                 adminLogs.appendChild(newNode);
