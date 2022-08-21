@@ -446,14 +446,13 @@ def create_space():
                 space_image = '/static/images/Space.jpeg'
         except:
             space_image = '/static/images/Space.jpeg'
-        request.json['space_image'] = space_image
         collection_spaces.insert_one({'_id': space_id, 'name': request.json['space_name'], 'picture': space_image, 'admins': [session['unique_id']], 'members': [[session['unique_id'], session['users_name']]]})
         collection_rooms.insert_many([room, special_rooms])
         collection_sections.insert_one(section)        
         joined = user['joined']
         joined.append(str(space_id))
         collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': joined, 'owns': user['owns'] + 1}})
-        return Response(dumps({'space_id': str(space_id)}), mimetype='application/json')
+        return Response(dumps({'space_id': str(space_id), 'space_image': space_image}), mimetype='application/json')
     return Response(dumps({'success': 'false'}), mimetype='application/json')
 
 # Adds space to user's list of joined spaces in MongoDB.
