@@ -1268,7 +1268,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 .expand-log {
   height: 15px;
   width: 15px;
-  transform: rotate(0deg);
+  transform: rotate(-90deg);
 }
 .change-user-status-form {
   color: black;
