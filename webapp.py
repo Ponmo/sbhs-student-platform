@@ -68,6 +68,10 @@ app.config['SESSION_TYPE'] = 'filesystem'
 app.request_class = ProxiedRequest
 Session(app)
 
+@app.before_first_request
+def make_session_permanent():
+    app.permanent_session_lifetime = timedelta(seconds=10)
+
 socketio = SocketIO(app, async_mode='gevent', manage_session = False)
 
 client = WebApplicationClient(GOOGLE_CLIENT_ID)
