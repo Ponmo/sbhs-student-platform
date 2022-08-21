@@ -76,7 +76,7 @@ client = WebApplicationClient(GOOGLE_CLIENT_ID)
 
 @app.before_first_request
 def make_session_permanent():
-    app.permanent_session_lifetime = timedelta(seconds=10)
+    app.permanent_session_lifetime = timedelta(days=1)
 
 # Redirects users on http to https.
 # Does not work with Heroku deployments
