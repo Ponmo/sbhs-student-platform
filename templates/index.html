@@ -686,10 +686,10 @@
       $(document).on('click', '.admin-logs-table-row', function() {
         $(this.nextElementSibling).toggle();
         if ($(this.nextElementSibling).is(':visible')) {
-          $(this).find('.expand-log').css('transform', 'rotate(0deg)');
-        } 
+          //$(this).find('.expand-log').css('transform', 'rotate(0deg)');
+        }
         else {
-          $(this).find('.expand-log').css('transform', 'rotate(-270deg)');
+          //$(this).find('.expand-log').css('transform', 'rotate(-90deg)');
         }
       });
 
@@ -726,23 +726,14 @@
       $('#admin-search-bar').keyup(function (e) {
         const filter = document.getElementById("admin-search-bar").value.toUpperCase();
         if (filter != '') {
-          document.querySelectorAll('.suggested_email').forEach(function(suggested_email) {
-            //alert(suggested_email.textContent.toUpperCase());
-            //alert(filter);
-            if(suggested_email.textContent.toUpperCase().indexOf(filter) > -1) {
-              suggested_email.style.display = 'block';
-              hide = false;
+          document.querySelectorAll('.admin-users-table-row').forEach(function(user) {
+            if(user.firstElementChild.firstElementChild.nextSibling.toUpperCase().indexOf(filter) > -1 || user.firstElementChild.nextElementSibling.toUpperCase().indexOf(filter) > -1) {
+              user.style.display = 'initial';
             }
             else {
-              suggested_email.style.display = 'none';
+              user.style.display = 'none';
             }
           });
-          if (hide) {
-            document.getElementById('suggested_emails').style.display = 'none';
-          }
-        }
-        else {
-          document.getElementById('suggested_emails').style.display = 'none';
         }
       });
 
