@@ -1770,12 +1770,7 @@
         newNode.className = 'room pointer';
         newNode.setAttribute('data-section', data.section_id);
         newNode.setAttribute('data-name', data.name);
-        if (space_admin || admin){
-        newNode.innerHTML = data.name;
-      }
-      else{
-        newNode.innerHTML = data.name;
-      }
+        newNode.textContent = data.name;
         const nodeList = document.querySelectorAll('li[data-section="' + data.section_id + '"]');
         if (nodeList.length != 0) {
           nodeList[nodeList.length - 1].parentNode.insertBefore(newNode, nodeList[nodeList.length - 1].nextElementSibling);
@@ -1791,7 +1786,8 @@
         let newNodeChild = document.createElement('li');
         newNodeChild.className = 'section pointer';
         newNodeChild.id = data.section_id;
-        newNodeChild.innerHTML = '<div class="section-name"><span><img class="collapse-icon" src="/static/images/expand.png"></img></span>' + data.name + '</div><div class="create-room-button" type="button">+</div>';
+        newNodeChild.innerHTML = '<div class="section-name"><span><img class="collapse-icon" src="/static/images/expand.png"></img></span></div><div class="create-room-button" type="button">+</div>';
+        newNodeChild.firstElementChild.appendChild(document.createTextNode(data.name))
         newNode.appendChild(newNodeChild);
         newNodeChild = document.createElement('ul');
         newNodeChild.className = 'room-group';
