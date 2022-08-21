@@ -559,10 +559,9 @@
                 if (item.action == 'deleted message') {
                   newNode.className = 'admin-logs-table-row admin-logs-deleted-message pointer';
                 }
-                else if ((item.action == 'reported message')) {
+                else if (item.action == 'reported message') {
                   newNode.className = 'admin-logs-table-row admin-logs-reported-message pointer';
                 }
-                newNode.className = 'admin-logs-table-row admin-logs-reported-message pointer';
                 newNode.innerHTML = '<td>' + item.name + '<br>' + item.email + '</td><td>' + item.action + '</td><td>' + item.by + '<br>' + item.by_email + '</td><td>' + item.in + '</td><td>' + moment(item.datetime).format('MMM Do YYYY, h:mm[]a') + '</td><td><img class="expand-log"  src="/static/images/expand.png"></td>';
                 adminLogs.appendChild(newNode);
                 newNode = document.createElement('tr');
@@ -716,8 +715,28 @@
 
 
       $('#admin-search-bar').keyup(function (e) {
-        let searchValue = document.getElementById('admin-search-bar').value;
-        
+        if (document.getElementById('email_to_input').value != '') {
+          document.getElementById('suggested_emails').style.display = 'block';
+          let hide = true;
+          const filter = document.getElementById("email_to_input").value.toUpperCase();
+          document.querySelectorAll('.suggested_email').forEach(function(suggested_email) {
+            //alert(suggested_email.textContent.toUpperCase());
+            //alert(filter);
+            if(suggested_email.textContent.toUpperCase().indexOf(filter) > -1) {
+              suggested_email.style.display = 'block';
+              hide = false;
+            }
+            else {
+              suggested_email.style.display = 'none';
+            }
+          });
+          if (hide) {
+            document.getElementById('suggested_emails').style.display = 'none';
+          }
+        }
+        else {
+          document.getElementById('suggested_emails').style.display = 'none';
+        }
       });
 
 
