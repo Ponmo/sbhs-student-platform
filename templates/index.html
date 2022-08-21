@@ -1882,7 +1882,7 @@
           newNode = document.createElement('div');
           newNode.className = 'suggested_email suggested_email_individual pointer';
           newNode.setAttribute('data-email', data['email']);
-          newNode.innerHTML = '<img class="profile-picture">' + data['name'] + ' (' + data['email'] + ')'
+          newNode.innerHTML = '<img class="profile-picture">';
           newNode.firstElementChild.src = data['picture'];
           newNode.appendChild(document.createTextNode(data['name'] + ' (' + data['email'] + ')'))
           document.getElementById('suggested_emails').append(newNode);
