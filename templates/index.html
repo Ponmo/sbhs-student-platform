@@ -600,6 +600,7 @@
                 $(".admin-logs-deleted-message-details").hide();
               }
               last_loaded = data[data.length - 1]._id.$oid;
+              loadLogTrigger = true;
             }
           }
         }));
@@ -722,9 +723,11 @@
         }
       });
 
+      var loadLogTrigger = true;
       $('#admin-table-wrapper').on('wheel', function() {
-        if ($('#admin-logs-table').is(':visible') && document.getElementById("admin-table-wrapper").scrollHeight - $("#admin-table-wrapper").scrollTop() - $("#admin-table-wrapper").outerHeight() < 1) {
+        if (loadLogTrigger && $('#admin-logs-table').is(':visible') && document.getElementById("admin-table-wrapper").scrollHeight - $("#admin-table-wrapper").scrollTop() - $("#admin-table-wrapper").outerHeight() < 1) {
           loadLogHistory();
+          loadLogTrigger = false;
         }
       });
 
