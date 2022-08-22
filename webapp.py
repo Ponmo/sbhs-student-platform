@@ -583,7 +583,7 @@ def server_logs():
     if session_expired():
         return 'expired', 200
     if request.method == 'POST' and session['admin']:
-        logs = dumps(list(collection_logs.find().sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(50)))
+        logs = dumps(list(collection_logs.find().sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(500)))
         return Response(logs, mimetype='application/json')
 
 @app.route('/server_users', methods=['GET', 'POST'])
