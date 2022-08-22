@@ -763,8 +763,9 @@
       });
 
       $('#admin-search-bar').on('paste', function (e) {
-        alert('esd');
-        document.getElementById("admin-search-bar").value = document.getElementById("admin-search-bar").value.replace(/\r?\n|\r/g, ' ');
+        setTimeout(function () {
+          document.getElementById("admin-search-bar").value = document.getElementById("admin-search-bar").value.replace(/\r?\n|\r/g, ' ');
+        }, 0);
       });
 
       $('#admin-search-bar').keyup(function (e) {
