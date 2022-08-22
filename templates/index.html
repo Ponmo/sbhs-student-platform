@@ -560,11 +560,12 @@
         if (document.getElementById('reported-message-filter').checked == false) {
           $(".admin-logs-reported-message").hide();
           $(".admin-logs-reported-message-details").hide();
-          $(".expand")
+          $(".expand-log-reported-message").removeAttr("style");
         }
         if (document.getElementById('deleted-message-filter').checked == false) {
           $(".admin-logs-deleted-message").hide();
           $(".admin-logs-deleted-message-details").hide();
+          $(".expand-log-deleted-message").removeAttr("style");
         }
         
         //appendmessage saying scrolldown for more
