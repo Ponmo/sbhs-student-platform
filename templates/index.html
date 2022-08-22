@@ -562,7 +562,7 @@
                 }
                 else if (item.action == 'reported message') {
                   newNode.className = 'admin-logs-table-row admin-logs-reported-message pointer';
-                  newNode.querySelector('.expand-log').className = ' expand-log-reported-message';
+                  newNode.querySelector('.expand-log').className += ' expand-log-reported-message';
                 }
                 newNode.firstElementChild.textContent = item.name + '\r\n' + item.email;
                 newNode.firstElementChild.nextElementSibling.textContent = item.action;
