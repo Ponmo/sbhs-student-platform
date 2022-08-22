@@ -207,10 +207,12 @@ img { /* make images and create button undraggable and unhighlitable*/
 
 
 #server-settings-button {
-  line-height: 48px;
   display: none;
   float: right;
-  margin-right: 24px;
+  margin-top: 10px;
+  margin-right: 10px;
+  width: 25px;
+  height: 25px;
 }
 #exit-server-settings {
   line-height: 48px;
