@@ -581,7 +581,7 @@
                 newNode.style.display = 'none';
                 newNode.style.backgroundColor = '#32353a';
                 newNode.firstElementChild.firstElementChild.firstElementChild.src = item.details.picture;
-                newNode.querySelector('.message-title').firstElementChild = item.details.name;
+                newNode.querySelector('.message-title').firstElementChild.textContent = item.details.name;
                 newNode.querySelector('.datetime').textContent = ' on ' + moment(item.details.datetime).local().format('MMM Do YYYY, h:mm[]a');
                 newNode.querySelector('.message-content-logs').textContent = item.details.message;
                 newFragment.appendChild(newNode);
