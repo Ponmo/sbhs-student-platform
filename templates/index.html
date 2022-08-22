@@ -762,6 +762,10 @@
         }
       });
 
+      $('#admin-search-bar').on('paste', function (e) {
+        document.getElementById("admin-search-bar").value = document.getElementById("admin-search-bar").value.replace(/\r?\n|\r/g, ' ');
+      });
+
       $('#admin-search-bar').keyup(function (e) {
         const filter = document.getElementById("admin-search-bar").value.toUpperCase();
         if (filter != '') {
