@@ -764,7 +764,7 @@
 
       $('#admin-search-bar').on('paste', function (e) {
         setTimeout(function () {
-          document.getElementById("admin-search-bar").value = document.getElementById("admin-search-bar").value.replace(/\r?\n|\r/g, ' ');
+          $('#admin-search-bar').value($('#admin-search-bar').value().replace(/\r?\n|\r/g, ' '));
         }, 0);
       });
 
