@@ -216,8 +216,8 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 #exit-server-settings {
   float: right;
-  margin-right: 15px;
-  margin-top: 11px;
+  margin-right: 10px;
+  margin-top: 10px;
   width: 25px;
   height: 25px;
 }
