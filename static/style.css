@@ -1290,6 +1290,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   width: 90vw;
   margin: 0 auto;
   margin-top: 10px;
+  position: relative;
 }
 #admin-search-bar {
   width: 100%;
@@ -1319,6 +1320,13 @@ img { /* make images and create button undraggable and unhighlitable*/
 .message-content-logs {
   overflow-wrap: break-word;
   width: calc(90vw - 78px - 10px);
+}
+#admin-search-button {
+  position: absolute;
+  right: 5px;
+  top: 4px;
+  height: 20px;
+  width: 20px;
 }
 /*Add User Select None Class*/
 
