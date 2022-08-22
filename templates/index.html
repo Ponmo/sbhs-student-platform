@@ -772,6 +772,35 @@
         });
       });
 
+      $('#directory-search-bar').keydown(function (e) {
+        if (e.keyCode == 13) {
+          e.preventDefault();
+        }
+      });
+
+      $('#directory-search-bar').on('paste', function (e) {
+        setTimeout(function () {
+          $('#directory-search-bar').val($('#directory-search-bar').val().replace(/\r?\n|\r/g, ' '));
+        }, 0);
+      });
+
+      $('#directory-search-bar').keyup(function (e) {
+        const filter = document.getElementById("admin-search-bar").value.toUpperCase();
+        if (filter != '') {
+          document.querySelectorAll('.form-space').forEach(function(entry) {
+            if(entry.textContent.toUpperCase().indexOf(filter) > -1) {
+              $(entry).show();
+            }
+            else {
+              $(entry).hide();
+            }
+          });
+        }
+        else {
+          $('.form-space').show();
+        }
+      });
+
       $('#admin-search-bar').keydown(function (e) {
         if (e.keyCode == 13) {
           e.preventDefault();
