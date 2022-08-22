@@ -1294,7 +1294,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   border-radius: 5px;
   border: 2px solid black;
 }
-#admin-search-bar {
+#admin-search-bar, #directory-search-bar {
   width: calc(100% - 30px);
   height: 100%;
   resize: none;
@@ -1309,7 +1309,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
-#admin-search-bar::-webkit-scrollbar {
+#admin-search-bar::-webkit-scrollbar, #directory-search-bar::-webkit-scrollbar {
   width: 0;
   height: 0;
 }
@@ -1323,12 +1323,21 @@ img { /* make images and create button undraggable and unhighlitable*/
   overflow-wrap: break-word;
   width: calc(90vw - 78px - 10px);
 }
-#admin-search-button {
+#admin-search-button, #directory-search-button {
   position: absolute;
   right: 5px;
   top: 3px;
   height: 20px;
   width: 20px;
+}
+#directory-search {
+  height: 30px;
+  width: calc(80vw - 150px);
+  top: 9px;
+  position: absolute;
+  right: 70px;
+  border-radius: 5px;
+  border: 2px solid black;
 }
 /*Add User Select None Class*/
 
