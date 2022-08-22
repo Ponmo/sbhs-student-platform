@@ -31,6 +31,10 @@
 
       <div id="space-directory-lfg-header">
         <span id="space-directory-lfg-title">Club Directory</span>
+        <div id="directory-search">
+          <textarea id="directory-search-bar" placeholder="Search..."></textarea>
+          <img src="/static/images/temporary-search.png" id="directory-search-button" class="pointer">
+        </div>
         <!--UI For Double Click (Back and Home Button Overlayed)-->
         <img class="pointer" id="close-space-search-button" src="/static/images/back.png">
       </div>
@@ -585,7 +589,7 @@
                 chat_history_skip += skip + 1;
                 data.splice(0, skip + 1);
               }
-              chat_history_skip += 50;
+              chat_history_skip += 500;
               const newFragment = document.createDocumentFragment();
               data.forEach(function (item) {
                 let newNode = document.createElement('tr');
