@@ -722,15 +722,9 @@
         }
       });
 
-      $('#admin-table-wrapper').scroll(function() { //$('#chat').scrollTop() + $('#chat').height();
-        if ($('#admin-logs-table').is(':visible') && document.getElementById("admin-table-wrapper").scrollHeight - $("#admin-table-wrapper").scrollTop() - $("#admin-table-wrapper").outerHeight() < 1) {
-          loadLogHistory();
-        }
-      });
-
       $('#admin-table-wrapper').on('wheel', function() {
         if ($('#admin-logs-table').is(':visible') && document.getElementById("admin-table-wrapper").scrollHeight - $("#admin-table-wrapper").scrollTop() - $("#admin-table-wrapper").outerHeight() < 1) {
-          console.log("Scrolled!");
+          loadLogHistory();
         }
       });
 
