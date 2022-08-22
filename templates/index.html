@@ -551,7 +551,7 @@
                 chat_history_skip += skip + 1;
                 data.splice(0, skip + 1);
               }
-              chat_history_skip += 1000;
+              chat_history_skip += 50;
               const newFragment = document.createDocumentFragment();
               data.forEach(function (item) {
                 let newNode = document.createElement('tr');
