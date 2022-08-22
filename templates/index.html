@@ -770,8 +770,8 @@
 
       $('#admin-search-bar').keyup(function (e) {
         const filter = document.getElementById("admin-search-bar").value.toUpperCase();
-        if (filter != '') {
-          if (document.getElementById('admin-users-table').style.display != 'none') {
+        if (document.getElementById('admin-users-table').style.display != 'none') {
+          if (filter != '') {
             document.querySelectorAll('.admin-users-table-row').forEach(function(entry) {
               if(entry.firstElementChild.firstElementChild.nextSibling.textContent.toUpperCase().indexOf(filter) > -1 || entry.firstElementChild.nextElementSibling.textContent.toUpperCase().indexOf(filter) > -1) {
                 $(entry).show();
@@ -781,13 +781,12 @@
               }
             });
           }
-          else if (document.getElementById('admin-logs-table').style.display != 'none') {
-            filterLogs();
+          else {
+            $('.admin-users-table-row').show();
           }
         }
-        else {
-          $('.admin-users-table-row').show();
-          $('.admin-logs-table-row').show();
+        else if (document.getElementById('admin-logs-table').style.display != 'none') {
+          filterLogs();
         }
       });
 
