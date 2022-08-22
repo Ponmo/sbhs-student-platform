@@ -1317,6 +1317,10 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin-top: 10px;
   display: none;
 }
+.message-content-logs {
+  overflow-wrap: break-word;
+  width: calc(90vw - 78px - 10px);
+}
 /*Add User Select None Class*/
 
 /* Mobile Media Query */

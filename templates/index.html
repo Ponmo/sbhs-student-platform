@@ -554,41 +554,24 @@
               chat_history_skip += 1000;
               const newFragment = document.createDocumentFragment();
               data.forEach(function (item) {
-                
                 let newNode = document.createElement('tr');
+                newNode.innerHTML = '<td style="white-space: pre;"></td><td></td><td style="white-space: pre;"></td><td></td><td></td><td><img class="expand-log" src="/static/images/expand.png"></td>'
                 if (item.action == 'deleted message') {
                   newNode.className = 'admin-logs-table-row admin-logs-deleted-message pointer';
+                  newNode.querySelector('.expand-log').className += ' expand-log-deleted-message';
                 }
                 else if (item.action == 'reported message') {
                   newNode.className = 'admin-logs-table-row admin-logs-reported-message pointer';
+                  newNode.querySelector('.expand-log').className = ' expand-log-reported-message';
                 }
-                let newNodeChild = document.createElement('td');
-                newNodeChild.style.whiteSpace = 'pre';
-                newNodeChild.textContent = item.name + '\r\n' + item.email;
-                newNode.appendChild(newNodeChild);
-                newNodeChild = document.createElement('td');
-                newNodeChild.textContent = item.action;
-                newNode.appendChild(newNodeChild);
-                newNodeChild = document.createElement('td');
-                newNodeChild.style.whiteSpace = 'pre';
-                newNodeChild.textContent = item.by + '\r\n' + item.by_email;
-                newNode.appendChild(newNodeChild);
-                newNodeChild = document.createElement('td');
-                newNodeChild.textContent = item.in;
-                newNode.appendChild(newNodeChild);
-                newNodeChild = document.createElement('td');
-                newNodeChild.textContent = moment(item.datetime).format('MMM Do YYYY, h:mm[]a');
-                newNode.appendChild(newNodeChild);
-                newNodeChild = document.createElement('td');
-                if (item.action == 'deleted message') {
-                  newNodeChild.innerHTML = '<img class="expand-log expand-log-deleted-message"  src="/static/images/expand.png">';
-                }
-                else if (item.action == 'reported message') {
-                  newNodeChild.innerHTML = '<img class="expand-log expand-log-reported-message"  src="/static/images/expand.png">';
-                }
-                newNode.appendChild(newNodeChild);
+                newNode.firstElementChild.textContent = item.name + '\r\n' + item.email;
+                newNode.firstElementChild.nextElementSibling.textContent = item.action;
+                newNode.firstElementChild.nextElementSibling.nextElementSibling.textContent = item.by + '\r\n' + item.by_email;
+                newNode.firstElementChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = item.in;
+                newNode.firstElementChild.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent = moment(item.datetime).format('MMM Do YYYY, h:mm[]a');
                 newFragment.appendChild(newNode);
                 newNode = document.createElement('tr');
+                newNode.innerHTML = '<td colspan="6" width="100%"><div class="message-container-logs"><img class="profile-picture pointer"><p class="message-title"><span style="font-weight: bold;"></span><span class="datetime"></span></p><p class="message-content-logs"></p></div></td>';
                 if (item.action == 'deleted message') {
                   newNode.className = 'admin-logs-deleted-message-details';
                 }
@@ -597,32 +580,10 @@
                 }
                 newNode.style.display = 'none';
                 newNode.style.backgroundColor = '#32353a';
-                newNodeChild = document.createElement('td');
-                newNodeChild.colSpan = 6;
-                newNodeChild.width = '100%';
-                let newNodeChildChild = document.createElement('div');
-                newNodeChildChild.className = 'message-container-logs';
-                let messageMoment = 'on' + moment(item.details.datetime).local().format('MMM Do YYYY, h:mm[]a');
-                let newNodeChildChildChild = document.createElement('img');
-                newNodeChildChildChild.src = item.details.picture;
-                newNodeChildChildChild.className = 'profile-picture pointer';
-                newNodeChildChild.appendChild(newNodeChildChildChild);
-                newNodeChildChildChild = document.createElement('p');
-                newNodeChildChildChild.className = 'message-title';
-                let newNodeChildChildChildChild = document.createElement('span');
-                newNodeChildChildChildChild.style.fontWeight = 'bold';
-                newNodeChildChildChildChild.textContent = item.details.name;
-                newNodeChildChildChild.appendChild(newNodeChildChildChildChild);
-                newNodeChildChildChildChild = document.createElement('span');
-                newNodeChildChildChildChild.className = 'datetime';
-                newNodeChildChildChildChild.textContent = ' ' + messageMoment;
-                newNodeChildChildChild.appendChild(newNodeChildChildChildChild);
-                newNodeChildChild.appendChild(newNodeChildChildChild);
-                newNodeChildChildChild = document.createElement('p');
-                newNodeChildChildChild.textContent = item.details.message;
-                newNodeChildChild.appendChild(newNodeChildChildChild);
-                newNodeChild.appendChild(newNodeChildChild);
-                newNode.append(newNodeChild);
+                newNode.firstElementChild.firstElementChild.firstElementChild.src = item.details.picture;
+                newNode.querySelector('.message-title').firstElementChild = item.details.name;
+                newNode.querySelector('.datetime').textContent = ' on ' + moment(item.details.datetime).local().format('MMM Do YYYY, h:mm[]a');
+                newNode.querySelector('.message-content-logs').textContent = item.details.message;
                 newFragment.appendChild(newNode);
               });
               document.getElementById('admin-logs-body').appendChild(newFragment);
