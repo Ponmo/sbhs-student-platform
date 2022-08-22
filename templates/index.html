@@ -545,6 +545,16 @@
           }
           else {
             $(entry).hide();
+            $(entry).find('.expand-log').animate(
+              { deg: -90 },
+              {
+                duration: 80,
+                step: function(now) {
+                  $(this).css({ transform: 'rotate(' + now + 'deg)' });
+                }
+              }
+            );
+            $(entry.nextElementSibling).hide();
           }
         });
         if (document.getElementById('reported-message-filter').checked == false) {
@@ -555,6 +565,7 @@
           $(".admin-logs-deleted-message").hide();
           $(".admin-logs-deleted-message-details").hide();
         }
+        
         //appendmessage saying scrolldown for more
       }
 
@@ -702,7 +713,7 @@
         $(this.nextElementSibling).toggle();
         if ($(this.nextElementSibling).is(':visible')) {
           $(this).find('.expand-log').animate(
-            { deg: 0 },
+            { deg: -90 },
             {
               duration: 80,
               step: function(now) {
