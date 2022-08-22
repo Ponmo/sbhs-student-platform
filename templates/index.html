@@ -1198,7 +1198,7 @@
       }
 
       $('#email_to_input').focusin(function (e) {
-        if (document.getElementById('email_to_input').value != '') {
+        if (document.getElementById('email_to_input').value != '' && $('#suggested_emails').height > 5) {
           document.getElementById('suggested_emails').style.display = 'block';
         }
       });
