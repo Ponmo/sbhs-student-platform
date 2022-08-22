@@ -1332,10 +1332,10 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 #directory-search {
   height: 30px;
-  width: calc(80vw - 150px);
   top: 9px;
   position: absolute;
-  right: 70px;
+  right: 80px;
+  left: 150px;
   border-radius: 5px;
   border: 2px solid black;
 }
