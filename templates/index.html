@@ -74,7 +74,7 @@
         <div id="exit-server-settings" class="pointer">TEMP. EXIT</div>
       </div>
       <div id='admin-search'>
-        <textarea id="admin-search-bar" placeholder="Search currently loaded..."></textarea>
+        <textarea id="admin-search-bar" placeholder="Search..."></textarea>
       </div>
       <div id="admin-filters">
         <form>
@@ -726,6 +726,10 @@
         if ($('#admin-logs-table').is(':visible') && document.getElementById("admin-table-wrapper").scrollHeight - $("#admin-table-wrapper").scrollTop() - $("#admin-table-wrapper").outerHeight() < 1) {
           loadLogHistory();
         }
+      });
+
+      $('#admin-table-wrapper').on('wheel', function() {
+        console.log("Scrolled!");s
       });
 
       $(document).on('change', '.user-status-select', function() {
