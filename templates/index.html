@@ -729,7 +729,9 @@
       });
 
       $('#admin-table-wrapper').on('wheel', function() {
-        console.log("Scrolled!");
+        if ($('#admin-logs-table').is(':visible') && document.getElementById("admin-table-wrapper").scrollHeight - $("#admin-table-wrapper").scrollTop() - $("#admin-table-wrapper").outerHeight() < 1) {
+          console.log("Scrolled!");
+        }
       });
 
       $(document).on('change', '.user-status-select', function() {
