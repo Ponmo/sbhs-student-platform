@@ -1198,8 +1198,11 @@
       }
 
       $('#email_to_input').focusin(function (e) {
-        if (document.getElementById('email_to_input').value != '' && $('#suggested_emails').height() > 5) {
+        if (document.getElementById('email_to_input').value != '') {
           document.getElementById('suggested_emails').style.display = 'block';
+          if ($('#suggested_emails').height() < 5) {
+            document.getElementById('suggested_emails').style.display = 'none';
+          }
         }
       });
 
