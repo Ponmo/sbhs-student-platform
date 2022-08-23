@@ -1145,13 +1145,14 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin-right: 0px;
 }
 .joined-icons {
-  height: 39px;
-  width: 59px;
+  height: 40px;
+  width: 55px;
   border-radius: 5px;
 }
 .icons-wrapper {
-  padding-bottom: 10px;
-  padding-right: 12px;
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 10px;
 }
 #overlay {
   z-index: 1000;
