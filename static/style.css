@@ -138,7 +138,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   border-radius: 11px;
 }
 .form-space-filler {
-  visibility: none;
+  visibility: hidden;
 }
 /* if image sizes are turned up to 40px instead of 39px, change aspect ratio */
 .directory-space-img {

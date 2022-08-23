@@ -456,7 +456,7 @@
               newNodeChild.textContent = 'Not Joined';
             }
             newNode.appendChild(newNodeChild);
-            document.getElementById('directory-space').append(newNode);
+            document.getElementById('directory-space').prepend(newNode);
           });
           if (window.location.href.indexOf('/sbhs/') != -1) {
             current_space = window.location.href.substring(window.location.href.indexOf('/sbhs/') + 6).replace('#','');;
