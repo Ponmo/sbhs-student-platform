@@ -1765,7 +1765,7 @@
           newNode.firstElementChild.src = data.picture;
           newNode.firstElementChild.nextElementSibling.firstElementChild.textContent = data.name;
           newNode.firstElementChild.nextElementSibling.firstElementChild.style.fontWeight = 'bold';
-          newNode.firstElementChild.nextElementSibling.nextElementSibling.textContent = data.message;
+          newNode.firstElementChild.nextElementSibling.nextElementSibling.innerHTML = parseMarkdown(escapeHTML(data.message));
         }
         else {
           newNode.className = 'message-container-combine';
@@ -1775,7 +1775,7 @@
           else{
             newNode.innerHTML = '<p class="message-combine-time"> ' + messageMoment + '</p><p class="message-combine"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.svg"></div>';
           }
-          newNode.firstElementChild.nextElementSibling.textContent = data.message;
+          newNode.firstElementChild.nextElementSibling.innerHTML = parseMarkdown(escapeHTML(data.message));
         }
         newNode.id = data.message_id;
         newNode.setAttribute('data-user', data.user_id);
@@ -2400,18 +2400,14 @@
       }
 
       function parseMarkdown(markdownText) {
-	      const htmlText = markdownText
+	      return markdownText
 		      .replace(/^### (.*$)/gim, '<h3>$1</h3>')
 		      .replace(/^## (.*$)/gim, '<h2>$1</h2>')
 		      .replace(/^# (.*$)/gim, '<h1>$1</h1>')
 		      .replace(/^\> (.*$)/gim, '<blockquote>$1</blockquote>')
-		      .replace(/\*\*(.*)\*\*/gim, '<b>$1</b>')3
-		      .replace(/\*(.*)\*/gim, '<i>$1</i>')
+		      .replace(/\*\*(.*)\*\*/gim, '<b>$1</b>')
+		      .replace(/\*(.*)\*/gim, '<i>$1</i>');
         }
-
-	return htmlText.trim()
-}
-
 
       async function checkImage(url){
         const res = await fetch(url);
