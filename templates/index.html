@@ -234,15 +234,15 @@
         <div id="space-settings-expand">
           <form id="edit-space-name">
             <label for="space-name" class="space-settings-header">Space Name</label><br>
-            <!--<input type="text" value="Current Name" id="space-name"> please dont repeat id-->
+            <input type="text" value="Current Name" id="edit-space-name-input">
           </form>
           <form id="edit-space-picture">
             <label for="space-picture">Space Picture</label><br>
-            <!--<input type="text" value="Current Link" id="space-picture"> please dont repeat id-->
+            <input type="text" value="Current Link" id="edit-space-picture-input"> 
           </form>
           <form id="edit-space-description">
             <label for="space-picture">Space Description</label><br>
-            <input type="text" value="Current Description" id="space-description">
+            <input type="text" value="Current Description" id="edit-space-description-input">
           </form>
           <form id="toggle-space-invite">
             <label for="invite-only" class="space-settings-header">Invite Only</label><br>
@@ -1246,12 +1246,12 @@
           const latestMessage = $('#messages').children().not('.temporary-message').last();
           if (latestMessage.data('user') == user_id && messageMoment.diff(moment(latestMessage.data('datetime'))) < 180000) {
             newNode.className = 'message-container-combine temporary-message';
-            newNode.innerHTML = '<p class="message-combine-time">' + messageMoment.format('h:mm A') + '</p><p class="message-combine">' + message + '</p>';
+            newNode.innerHTML = '<p class="message-combine-time">' + messageMoment.format('h:mm A') + '</p><p class="message-combine">' + DOMPurify.sanitize(message) + '</p>';
           }
           else {
             newNode.className = 'message-container temporary-message';
             messageMoment = 'at ' + messageMoment.format('h:mm A');
-            newNode.innerHTML = '<img class="profile-picture pointer" src="' + user_picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + user_name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message">' + message + '</p>';
+            newNode.innerHTML = '<img class="profile-picture pointer" src="' + DOMPurify.sanitize(user_picture) + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + DOMPurify.sanitize(user_name) + ' </b></span><span class="datetime">' + DOMPurify.sanitize(messageMoment) + '</span></p><p class="message">' + DOMPurify.sanitize(message) + '</p>';
           }
           document.getElementById('messages').append(newNode);
           socket.emit('send_message', {
