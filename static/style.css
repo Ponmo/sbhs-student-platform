@@ -1299,6 +1299,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   padding-right: 8px;
   border: none;
   background-color: transparent;
+  color: black;
   outline-width: 0;
   white-space: nowrap;
   overflow-x: scroll;
