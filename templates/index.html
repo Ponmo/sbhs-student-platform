@@ -1733,10 +1733,10 @@
           messageMoment = 'at ' + messageMoment;
           // TODO: Give pfp image default fallback image
           if (space_admin || admin || data.user_id == user_id) {
-            newNode.innerHTML = '<img class="profile-picture pointer" alt="!"><p class="message-title"><span class="name pointer"></span><span class="datetime"> ' + messageMoment + '</span></p><p class="message"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/edit.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>';
+            newNode.innerHTML = '<img class="profile-picture pointer" alt="!"><p class="message-title"><span class="name pointer"></span><span class="datetime"> ' + messageMoment + '</span></p><p class="message"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.svg"><img class="edit-message pointer" src="/static/images/edit.svg"><img class="delete-message pointer" src="/static/images/delete.svg"></div>';
           }
           else {
-            newNode.innerHTML = '<img class="profile-picture pointer" alt="!"><p class="message-title"><span class="name pointer"></span><span class="datetime"> ' + messageMoment + '</span></p><p class="message"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"></div>';
+            newNode.innerHTML = '<img class="profile-picture pointer" alt="!"><p class="message-title"><span class="name pointer"></span><span class="datetime"> ' + messageMoment + '</span></p><p class="message"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.svg"></div>';
           }
           newNode.firstElementChild.src = data.picture;
           newNode.firstElementChild.nextElementSibling.firstElementChild.textContent = data.name;
@@ -1746,10 +1746,10 @@
         else {
           newNode.className = 'message-container-combine';
           if (space_admin || admin || data.user_id == user_id){
-            newNode.innerHTML = '<p class="message-combine-time"> ' + messageMoment + '</p><p class="message-combine"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/edit.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>';
+            newNode.innerHTML = '<p class="message-combine-time"> ' + messageMoment + '</p><p class="message-combine"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.svg"><img class="edit-message pointer" src="/static/images/edit.svg"><img class="delete-message pointer" src="/static/images/delete.svg"></div>';
           }
           else{
-            newNode.innerHTML = '<p class="message-combine-time"> ' + messageMoment + '</p><p class="message-combine"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"></div>';
+            newNode.innerHTML = '<p class="message-combine-time"> ' + messageMoment + '</p><p class="message-combine"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.svg"></div>';
           }
           newNode.firstElementChild.nextElementSibling.textContent = data.message;
         }
@@ -2154,10 +2154,10 @@
                     messageDate = 'on ' + messageDate.format('M/D/YYYY');
                 }
                 if (space_admin || admin || item.user_id == user_id) {
-                  newNode.innerHTML = '<img class="profile-picture pointer" alt="!"><p class="message-title"><span class="name pointer"></span><span class="datetime"> ' + messageDate + '</span></p><p class="message"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/edit.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>';
+                  newNode.innerHTML = '<img class="profile-picture pointer" alt="!"><p class="message-title"><span class="name pointer"></span><span class="datetime"> ' + messageDate + '</span></p><p class="message"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.svg"><img class="edit-message pointer" src="/static/images/edit.svg"><img class="delete-message pointer" src="/static/images/delete.svg"></div>';
                 }
                 else {
-                  newNode.innerHTML = '<img class="profile-picture pointer" alt="!"><p class="message-title"><span class="name pointer"></span><span class="datetime"> ' + messageDate + '</span></p><p class="message"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"></div>';
+                  newNode.innerHTML = '<img class="profile-picture pointer" alt="!"><p class="message-title"><span class="name pointer"></span><span class="datetime"> ' + messageDate + '</span></p><p class="message"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.svg"></div>';
                 }
                 newNode.firstElementChild.src = item.picture;
                 newNode.firstElementChild.nextElementSibling.firstElementChild.textContent = item.name;
@@ -2169,10 +2169,10 @@
                 newNode.setAttribute('data-date', messageDate.format('M/D/YYYY'));
                 newNode.setAttribute('data-datetime', messageDate.format());
                 if (space_admin || admin || item.user_id == user_id) {
-                  newNode.innerHTML = '<p class="message-combine-time">' + messageDate.format('h:mm A') + '</p><p class="message-combine"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/edit.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>'; 
+                  newNode.innerHTML = '<p class="message-combine-time">' + messageDate.format('h:mm A') + '</p><p class="message-combine"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.svg"><img class="edit-message pointer" src="/static/images/edit.svg"><img class="delete-message pointer" src="/static/images/delete.svg"></div>'; 
                 } 
                 else {
-                  newNode.innerHTML = '<p class="message-combine-time">' + messageDate.format('h:mm A') + '</p><p class="message-combine"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"></div>';
+                  newNode.innerHTML = '<p class="message-combine-time">' + messageDate.format('h:mm A') + '</p><p class="message-combine"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.svg"></div>';
                 }
                 newNode.firstElementChild.nextElementSibling.textContent = item.message;
               }
@@ -2211,7 +2211,7 @@
               else {
                 emailDate = 'on ' + emailDate.format('M/D/YYYY');
               }
-              newNode.innerHTML = '<img class="profile-picture pointer" alt="!"><p class="message-title"><span class="name pointer"></span><span class="datetime"> ' + emailDate + '</span></p><div class="email-container-container"><div class="recipient-list"></div><img class="expand-recipient-list pointer" data-expanded="false" src="/static/images/expand.png"><div class="email-container"><p class="email-subject"></p><p class="email-message"></p></div></div>';
+              newNode.innerHTML = '<img class="profile-picture pointer" alt="!"><p class="message-title"><span class="name pointer"></span><span class="datetime"> ' + emailDate + '</span></p><div class="email-container-container"><div class="recipient-list"></div><img class="expand-recipient-list pointer" data-expanded="false" src="/static/images/expand.svg"><div class="email-container"><p class="email-subject"></p><p class="email-message"></p></div></div>';
               newNode.firstElementChild.src = item.picture;
               newNode.firstElementChild.nextElementSibling.firstElementChild.textContent = item.name;
               newNode.firstElementChild.nextElementSibling.firstElementChild.style.fontWeight = 'bold';

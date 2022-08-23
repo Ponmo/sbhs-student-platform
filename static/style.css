@@ -542,19 +542,16 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 .report-message {
   display: inline-block;
-  width: 16px;
   height: 16px;
   margin-left: 4px;
 }
 .edit-message {
   display: inline-block;
-  width: 16px;
   height: 16px;
   margin-left: 4px;
 }
 .delete-message {
   display: inline-block;
-  width: 16px;
   height: 16px;
   margin-left: 4px;
 }
