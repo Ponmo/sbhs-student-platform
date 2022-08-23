@@ -2399,6 +2399,20 @@
           .replace(/'/g, "&#039;");
       }
 
+      function parseMarkdown(markdownText) {
+	      const htmlText = markdownText
+		      .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+		      .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+		      .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+		      .replace(/^\> (.*$)/gim, '<blockquote>$1</blockquote>')
+		      .replace(/\*\*(.*)\*\*/gim, '<b>$1</b>')3
+		      .replace(/\*(.*)\*/gim, '<i>$1</i>')
+        }
+
+	return htmlText.trim()
+}
+
+
       async function checkImage(url){
         const res = await fetch(url);
         const buff = await res.blob();
