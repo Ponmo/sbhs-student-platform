@@ -108,10 +108,13 @@ img { /* make images and create button undraggable and unhighlitable*/
   overflow-x: hidden;
 }
 #space-directory-lfg-header {
-  margin-left: 18px;
-  margin-right: 18px;
-  border-bottom: 1px solid black;
-  width: auto;
+  position: fixed;
+  width: 100vw;
+  padding-left: 18px;
+  padding-right: 18px;
+  background-color: white;
+  background-color: #131921;
+  color: white;
   white-space: nowrap;
   overflow: hidden;
   height: 48px;
@@ -1296,6 +1299,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   position: relative;
   border-radius: 5px;
   border: 2px solid black;
+  background-color: white;
 }
 #admin-search-bar, #directory-search-bar {
   width: calc(100% - 30px);
@@ -1341,6 +1345,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   left: 150px;
   border-radius: 5px;
   border: 2px solid black;
+  background-color: white;
 }
 /*Add User Select None Class*/
 
