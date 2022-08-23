@@ -443,7 +443,7 @@
             newNode.appendChild(newNodeChild);
             newNodeChild = document.createElement('div');
             newNodeChild.className = 'directory-space-title';
-            newNodeChild.textContent = DOMPurify.sanitize(iitem['name']);
+            newNodeChild.textContent = DOMPurify.sanitize(item['name']);
             newNode.appendChild(newNodeChild);
             newNodeChild = document.createElement('div');
             newNodeChild.className = 'directory-space-description';
