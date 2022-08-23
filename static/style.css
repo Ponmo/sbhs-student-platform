@@ -1415,20 +1415,15 @@ img { /* make images and create button undraggable and unhighlitable*/
     right: 6px;
   }
   #profile-popup {
-    position: absolute;
-    color: #dcddde;
-    font-size: 14px;
+    border-radius: 0px;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
     left: 50%;
     transform: translate(-50%);
     width: 100vw;
     bottom: 0;
-    min-height: 100px;
-    background-color: #17181b;
-    pointer-events: initial;
-    overflow-x: hidden;
     top: auto!important;
+    padding-bottom: 80px;
   }
 }
 /* The switch - the box around the slider */
