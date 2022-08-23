@@ -466,7 +466,7 @@
           });
           if (window.location.href.indexOf('/sbhs/') != -1) {
             current_space = window.location.href.substring(window.location.href.indexOf('/sbhs/') + 6).replace('#','');;
-            document.querySelector('.form-space[data-id="' + current_space + '"]').firstChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = "Joined";
+            document.querySelector('.form-space[data-id="' + current_space + '"]').querySelector('.directory-space-joined-status').textContent = "Joined";
             joinSpace();
           }
         }
