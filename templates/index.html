@@ -61,12 +61,6 @@
       </div>
     </div>
 
-    <!--User Profile Page-->
-    <div id="user-page">
-      <div id="log-out">Log Out</div> 
-      <img class="pointer" id="close-user-page" src="/static/images/x.svg">
-    </div>
-
     <!--Home Page-->
     <div id="home-page">
       <img id="logo" src="/static/images/sbhs.png">
@@ -137,134 +131,139 @@
     </div>
 
     <!--Spaces Page-->
-      <div id="first-all">
-        <div id="mobile_touch_overlay" class="pointer"></div>
-        <div id="content">
-          <div id="header">
-            <span id="header_text"></span>
-            <img class="pointer" id="space-settings-button" src="/static/images/settings-white.png">
-          </div>
-          <div id="information">
-            <span id="left-info">
-              <img class="pointer" id="open_channels" src="/static/images/hamburger.png">
-              <p id="room-name-display"></p>
-            </span>
-            <span id="right-info">
-              <img class="pointer home" id="home_button" src="/static/images/home-white.png">
-              <img class="pointer" id="open_members" src="/static/images/person.png">
-            </span>
-          </div>
-          <div id="channels">
-            <ul id="special-channels"></ul>
-            <ul id="regular-channels"></ul>
-          </div>
+    <div id="first-all">
+      <div id="mobile_touch_overlay" class="pointer"></div>
+      <div id="content">
+        <div id="header">
+          <span id="header_text"></span>
+          <img class="pointer" id="space-settings-button" src="/static/images/settings-white.png">
+        </div>
+        <div id="information">
+          <span id="left-info">
+            <img class="pointer" id="open_channels" src="/static/images/hamburger.png">
+            <p id="room-name-display"></p>
+          </span>
+          <span id="right-info">
+            <img class="pointer home" id="home_button" src="/static/images/home-white.png">
+            <img class="pointer" id="open_members" src="/static/images/person.png">
+          </span>
+        </div>
+        <div id="channels">
+          <ul id="special-channels"></ul>
+          <ul id="regular-channels"></ul>
+        </div>
 
 <!--         when new message is sent, make the new message appear above the message bar and not mess up the scrolling (Safari only). -->
-          <div id="chats">
-            <div id="chat">
-              <div id="messages">
+        <div id="chats">
+          <div id="chat">
+            <div id="messages">
+            </div>
+          </div>
+          <!--Recipients, Message, Date, Theme,
+           Name of bmiter (email), Name of the space*/-->
+          <form id="email_input_form">
+            <div id="email_to_wrapper">
+              <div id="email_to">
+                <div id="email_to_list">
+                  <span><label id="email_to_label" for="email_to_input">To: </label></span>
+                  <span id="email_to_input_span"><input id="email_to_input" type="text" placeholder=""></input></span>
+                </div>
+              </div>
+              <div id="suggested_emails">
+                <div class="suggested_email suggested_email_everyone pointer">Everyone</div>
               </div>
             </div>
-            <!--Recipients, Message, Date, Theme,
-             Name of bmiter (email), Name of the space*/-->
-            <form id="email_input_form">
-              <div id="email_to_wrapper">
-                <div id="email_to">
-                  <div id="email_to_list">
-                    <span><label id="email_to_label" for="email_to_input">To: </label></span>
-                    <span id="email_to_input_span"><input id="email_to_input" type="text" placeholder=""></input></span>
-                  </div>
-                </div>
-                <div id="suggested_emails">
-                  <div class="suggested_email suggested_email_everyone pointer">Everyone</div>
-                </div>
-              </div>
-              <!-- <label id="email_cc_label">To:</label>
-              <textarea id="email_cc_input" rows="1" placeholder="Who are you sending it to?"></textarea>
-              <label id="email_bcc_label">To:</label>
-              <textarea id="email_bcc_input" rows="1" placeholder="Who are you sending it to?"></textarea> -->
-              <input id="email_subject_input" type="text" placeholder="Subject" required></input>
-              <textarea id="email_message_input" rows="1" required></textarea>
-              <div id="email_options">
-                <button type="submit" id="submit_email"><img class="send" src="/static/images/send.png" alt="Send"></button>
-              </div>
-            </form>
-            <form id="message_input_form">
-              <!--see w3schools input attributes like max char, spam, etc. -->
-              <textarea id="message_input" rows="1" placeholder="Enter message"></textarea>
+            <!-- <label id="email_cc_label">To:</label>
+            <textarea id="email_cc_input" rows="1" placeholder="Who are you sending it to?"></textarea>
+            <label id="email_bcc_label">To:</label>
+            <textarea id="email_bcc_input" rows="1" placeholder="Who are you sending it to?"></textarea> -->
+            <input id="email_subject_input" type="text" placeholder="Subject" required></input>
+            <textarea id="email_message_input" rows="1" required></textarea>
+            <div id="email_options">
+              <button type="submit" id="submit_email"><img class="send" src="/static/images/send.png" alt="Send"></button>
+            </div>
+          </form>
+          <form id="message_input_form">
+            <!--see w3schools input attributes like max char, spam, etc. -->
+            <textarea id="message_input" rows="1" placeholder="Enter message"></textarea>
 <!--             <input type="text" id="message_input" placeholder="Enter message"> -->
-              <button type="submit" id="submit"><img class="send" src="/static/images/send.png" alt="Send"></button>
-            </form>
-            <span id="typing_display"></span>
-          </div>
-          <div id="members">
-          </div>
-          <div id="members_header"></div>
-          <!-- can get rid of once mobile app created -->
-          <div id="channels_bottom"></div>
-          <div id="chats_bottom"></div>
-          <div id="members_bottom"></div>
+            <button type="submit" id="submit"><img class="send" src="/static/images/send.png" alt="Send"></button>
+          </form>
+          <span id="typing_display"></span>
         </div>
+        <div id="members">
+        </div>
+        <div id="members_header"></div>
+        <!-- can get rid of once mobile app created -->
+        <div id="channels_bottom"></div>
+        <div id="chats_bottom"></div>
+        <div id="members_bottom"></div>
+      </div>
+    </div>
+
+    <div id="footer">
+      <div id="profile">
+        <!-- load exclamation mark icon if not showing -->
+        <img src={{ user_picture }} alt="pfp" class="profile-picture pointer">
+        <p id="username" class="pointer">{{ user_name }}</p>
+        <p id="student_id" class="pointer">Santa Barbara High School</p>
+        <img class="pointer" id="settings" src="/static/images/settings-white.png">
       </div>
 
-      <div id="footer">
-        <div id="profile">
-          <!-- load exclamation mark icon if not showing -->
-          <img src={{ user_picture }} alt="pfp" class="profile-picture pointer">
-          <p id="username" class="pointer">{{ user_name }}</p>
-          <p id="student_id" class="pointer">Santa Barbara High School</p>
-          <img class="pointer" id="settings" src="/static/images/settings-white.png">
+      <img class="pointer home" id="home_button_mobile" src="/static/images/home-white.png">
+      <ul id="spaces">
+        <span id="space_align_helper"></span>
+        <button type="button" id="create-space-button"><img src="/static/images/ppicons-plus.svg" alt="create" style="width:25px;height:25px;"></button>
+        <button type="button" id="space-search-button"><img src="/static/images/temporary-search.png" alt="create" style="width:25px;height:25px;"></button>
+      </ul>
+     </div>
+
+    <!--Space Settings Page-->
+    <div class="settings-pages" id="space-settings">
+      <div class="space-settings-select">
+        <div id="space-settings-column">
+          <div class="space-settings-selection pointer" id="space-settings-general">Space Settings</div> 
         </div>
-
-        <img class="pointer home" id="home_button_mobile" src="/static/images/home-white.png">
-
-        <ul id="spaces">
-          <span id="space_align_helper"></span>
-            <button type="button" id="create-space-button"><img src="/static/images/ppicons-plus.svg" alt="create" style="width:25px;height:25px;"></button>
-            <button type="button" id="space-search-button"><img src="/static/images/temporary-search.png" alt="create" style="width:25px;height:25px;"></button>
-        </ul>
+      </div>
+      <div id="space-settings-expand">
+        <form id="edit-space-name">
+          <label for="space-name" class="space-settings-header">Space Name</label><br>
+          <input type="text" value="Current Name" id="edit-space-name-input">
+        </form>
+        <form id="edit-space-picture">
+          <label for="space-picture">Space Picture</label><br>
+          <input type="text" value="Current Link" id="edit-space-picture-input"> 
+        </form>
+        <form id="edit-space-description">
+          <label for="space-picture">Space Description</label><br>
+          <input type="text" value="Current Description" id="edit-space-description-input">
+        </form>
+        <form id="toggle-space-invite">
+          <label for="invite-only" class="space-settings-header">Invite Only</label><br>
+          <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+          </label>
+        </form>
+        <div id="theme-selection">
+          <div class="theme" id="dark-mode"></div>
+          <div class="theme" id="ultra-dark-mode"></div>
+          <div class="theme" id="light-mode"></div>
+        </div>
+        <p class="space-settings-header">Members</p>
       </div>
 
-      <div id="space-settings">
-        <div id="space-settings-select">
-          <div id="space-settings-column">
-            <div class="space-settings-selection pointer" id="space-settings-general">Space Settings</div> 
-          </div>
-        </div>
-        <div id="space-settings-expand">
-          <form id="edit-space-name">
-            <label for="space-name" class="space-settings-header">Space Name</label><br>
-            <input type="text" value="Current Name" id="edit-space-name-input">
-          </form>
-          <form id="edit-space-picture">
-            <label for="space-picture">Space Picture</label><br>
-            <input type="text" value="Current Link" id="edit-space-picture-input"> 
-          </form>
-          <form id="edit-space-description">
-            <label for="space-picture">Space Description</label><br>
-            <input type="text" value="Current Description" id="edit-space-description-input">
-          </form>
-          <form id="toggle-space-invite">
-            <label for="invite-only" class="space-settings-header">Invite Only</label><br>
-            <label class="switch">
-              <input type="checkbox">
-              <span class="slider round"></span>
-            </label>
-          </form>
-          <div id="theme-selection">
-            <div class="theme" id="dark-mode"></div>
-            <div class="theme" id="ultra-dark-mode"></div>
-            <div class="theme" id="light-mode"></div>
-          </div>
-          <p class="space-settings-header">Members</p>
-        </div>
-
-        <div id="exit-space-settings">
-          <img class="pointer white-icon" id="close-space-settings-button" src="/static/images/x.svg">
-        </div>
-
+      <div id="exit-space-settings">
+        <img class="pointer white-icon" id="close-space-settings-button" src="/static/images/x.svg">
       </div>
+    </div>
 
+    <!--User Settings Page-->
+    <div class="settings-pages" id="user-page">
+      
+      <div id="log-out">Log Out</div> 
+      <img class="pointer" id="close-user-page" src="/static/images/x.svg">
+    </div>
 
     <div id="create-space" class="modal">
       <div class="modal-content">
@@ -1251,7 +1250,7 @@
           else {
             newNode.className = 'message-container temporary-message';
             messageMoment = 'at ' + messageMoment.format('h:mm A');
-            newNode.innerHTML = '<img class="profile-picture pointer" src="' + DOMPurify.sanitize(user_picture) + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + DOMPurify.sanitize(user_name) + ' </b></span><span class="datetime">' + DOMPurify.sanitize(messageMoment) + '</span></p><p class="message">' + DOMPurify.sanitize(message) + '</p>';
+            newNode.innerHTML = '<img class="profile-picture pointer" srsc="' + DOMPurify.sanitize(user_picture) + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + DOMPurify.sanitize(user_name) + ' </b></span><span class="datetime">' + DOMPurify.sanitize(messageMoment) + '</span></p><p class="message">' + DOMPurify.sanitize(message) + '</p>';
           }
           document.getElementById('messages').append(newNode);
           socket.emit('send_message', {
@@ -2388,6 +2387,15 @@
         profile_popup.hide();
         section_menu.hide();
         room_menu.hide();
+      }
+
+      function escapeHTML(unsafe) {
+        return unsafe
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
       }
 
       async function checkImage(url){
