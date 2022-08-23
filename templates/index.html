@@ -1119,7 +1119,13 @@
               document.getElementById('popup-picture').src = data['picture'];
               document.getElementById('profile-name').textContent = data['name'];
               document.getElementById('profile-email').textContent = data['email'];
-              for (let i = 0; i < Math.ceil(data['joined'].length/4); i++) {
+              data['joined'].forEach(function(item) {
+                newNode = document.createElement('div');
+                newNode.innerHTML = '<div class="icons-wrapper pointer"><img class="joined-icons"><div>'
+                newNode.firstElementChild.firstElementChild.src = item[0];
+                newNode.firstElementChild.firstElementChild.setAttribute('data-id', item[1]);
+              });
+              /*for (let i = 0; i < Math.ceil(data['joined'].length/4); i++) {
                 newNode = document.createElement('tr');
                 for (let j = 0; j < 4; j++) {
                   if (data['joined'][i*4+j] != undefined) {
@@ -1145,7 +1151,7 @@
                   }
                 }
                 document.getElementById("joined-table").append(newNode);
-              }
+              }*/
               if (!mobile) {
                 if (member.getBoundingClientRect().top < $(window).height() / 2) {
                   document.getElementById('profile-popup').style.top = member.getBoundingClientRect().top + 'px';
