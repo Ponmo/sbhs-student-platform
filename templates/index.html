@@ -1111,7 +1111,12 @@
             success: function(data) {
               let member = document.querySelector('.member[data-id="' + selected_user + '"]');
               let newNode = document.createElement('div');
-              newNode.id = 'profile-popup';
+              if (mobile) {
+                newNode.id = 'profile-popup-mobile';
+              }
+              else {
+                newNode.id = 'profile-popup';
+              }
               document.getElementById('overlay').appendChild(newNode);
               member.className = 'member';
               member.style.backgroundColor = '#3c3f45';
