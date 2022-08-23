@@ -127,7 +127,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 #directory-space {
   margin-left: 20px;
   margin-right: 20px;
-  margin-top: 40px;
+  margin-top: 70px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: 20px;
