@@ -1662,7 +1662,7 @@
       });
 
       $(document).on('click', '#leave-space', function() {
-        document.querySelector('.form-space[data-id="' + current_space + '"]').firstChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = 'Not Joined';      
+        document.querySelector('.form-space[data-id="' + current_space + '"]').querySelector('.directory-space-joined-status').textContent = 'Not Joined';
         $.ajax({
           type: 'POST',
           url: '/leave_space',
