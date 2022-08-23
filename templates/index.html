@@ -273,6 +273,8 @@
           <!--Accept Files, Sanitize Files, Compress Files-->
           <label for="space-picture">Space Picture (currently only accepts links):</label><br>
           <input type="text" id="space-picture"  maxlength="2000"><br>
+          <label for="space-description">Space Description:</label><br>
+          <input type="text" id="space-description" maxlength="200"><br>
           <input type="submit" value="Submit">
         </form>
       </div>
@@ -446,6 +448,10 @@
             newNodeChild = document.createElement('div');
             newNodeChild.className = 'directory-space-description';
             newNodeChild.textContent = 'Description of Space';
+            newNode.appendChild(newNodeChild);
+            newNodeChild = document.createElement('div');
+            newNodeChild.className = 'directory-space-members';
+            newNodeChild.textContent = item['members'].length + ' members';
             newNode.appendChild(newNodeChild);
             newNodeChild = document.createElement('div');
             newNodeChild.className = 'directory-space-joined-status';
@@ -1595,12 +1601,13 @@
         e.preventDefault();
         let space_name = document.getElementById('space-name').value.trim();
         let space_image = document.getElementById('space-picture').value.trim();
+        let space_description = document.getElementById('space-description').value.trim();
         if (space_name.length) { 
           $.ajax({
             type: 'POST',
             url: '/create_space',
             dataType: "json",
-            data: JSON.stringify({'space_name': space_name, 'space_image': space_image}),
+            data: JSON.stringify({'space_name': space_name, 'space_image': space_image, 'space_description': space_description}),
             contentType: 'application/json;charset=UTF-8',
             success: function(data) {
               if ('success' in data) {
