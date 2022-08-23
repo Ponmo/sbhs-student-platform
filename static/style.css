@@ -1428,6 +1428,7 @@ img { /* make images and create button undraggable and unhighlitable*/
     background-color: #17181b;
     pointer-events: initial;
     overflow-x: hidden;
+    top: auto!important;
   }
 }
 /* The switch - the box around the slider */
