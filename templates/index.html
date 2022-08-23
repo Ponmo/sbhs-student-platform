@@ -1122,9 +1122,10 @@
               newFragment = document.createDocumentFragment();
               data['joined'].forEach(function(item) {
                 newNode = document.createElement('div');
-                newNode.innerHTML = '<div class="icons-wrapper pointer"><img class="joined-icons"><div>'
-                newNode.firstElementChild.firstElementChild.src = item[0];
-                newNode.firstElementChild.firstElementChild.setAttribute('data-id', item[1]);
+                newNode.className = 'icons-wrapper pointer';
+                newNode.innerHTML = '<img class="joined-icons">';
+                newNode.firstElementChild.src = item[0];
+                newNode.firstElementChild.setAttribute('data-id', item[1]);
                 newFragment.appendChild(newNode);
               });
               document.getElementById("joined-table").append(newFragment);
