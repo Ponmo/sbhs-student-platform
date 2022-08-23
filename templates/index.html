@@ -639,7 +639,7 @@
                 newNode.firstElementChild.firstElementChild.firstElementChild.src = item.details.picture;
                 newNode.querySelector('.message-title').firstElementChild.textContent = item.details.name;
                 newNode.querySelector('.datetime').textContent = ' on ' + moment(item.details.datetime).local().format('MMM Do YYYY, h:mm[]a');
-                newNode.querySelector('.message-content-logs').textContent = item.details.message;
+                newNode.querySelector('.message-content-logs').innerHTML = parseMarkdown(escapeHTML(item.details.message));
                 newFragment.appendChild(newNode);
               });
               document.getElementById('admin-logs-body').appendChild(newFragment);
@@ -1750,10 +1750,10 @@
 
       socket.on('edited_message', function(data) {
         if(data.combine == 'false') {
-          document.getElementById(data.message_id).firstChild.nextElementSibling.nextElementSibling.textContent = data.edit;
+          document.getElementById(data.message_id).firstChild.nextElementSibling.nextElementSibling.innerHTML = parseMarkdown(escapeHTML(data.edit));
         }
         else {
-          document.getElementById(data.message_id).firstChild.nextElementSibling.textContent = data.edit;
+          document.getElementById(data.message_id).firstChild.nextElementSibling.innerHTML = parseMarkdown(escapeHTML(data.edit));
         }
       });
 
