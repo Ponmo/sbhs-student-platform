@@ -210,7 +210,9 @@ img { /* make images and create button undraggable and unhighlitable*/
   color: white;
   background-color: #131921;
 }
-
+.white-icon {
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(46deg) brightness(102%) contrast(105%);
+}
 #server-settings-button {
   display: none;
   float: right;
