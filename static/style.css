@@ -161,8 +161,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin-left: 18px;
   margin-right: 18px;
 }
-#close-space-search-button {
-  display: inline-block;
+#close-space-search-button, #server-settings-button, #exit-server-settings {
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -212,21 +211,6 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 .white-icon {
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(46deg) brightness(102%) contrast(105%);
-}
-#server-settings-button {
-  display: none;
-  float: right;
-  margin-top: 10px;
-  margin-right: 10px;
-  width: 25px;
-  height: 25px;
-}
-#exit-server-settings {
-  float: right;
-  margin-right: 10px;
-  margin-top: 10px;
-  width: 25px;
-  height: 25px;
 }
 #space-settings-popup {
   display: none;
