@@ -95,6 +95,8 @@ def make_session_permanent():
 def render_login():
     if 'http://' in request.url:
         return redirect(request.url.replace('http://', 'https://', 1), 301)
+    if not session_expired():
+        return redirect(url_for('render_main_page'))
     if request.args.get('error') != None:
         return render_template('login.html', login_error = request.args.get('error'))
     return render_template('login.html')
