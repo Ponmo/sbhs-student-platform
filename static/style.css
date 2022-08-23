@@ -84,6 +84,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 #user-page {
   display: none;
   opacity: 0;
+  top: 0px;
 }
 
 #close-user-page {

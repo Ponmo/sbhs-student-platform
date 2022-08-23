@@ -3,6 +3,7 @@ from flask_socketio import SocketIO, emit, join_room, leave_room
 import json
 import os
 import re
+import html
 
 from flask import Flask, flash, redirect, Markup, url_for, session, request, jsonify, Response, request, Request
 from flask_session import Session
@@ -10,7 +11,6 @@ from flask import render_template
 
 from oauthlib.oauth2 import WebApplicationClient
 import requests
-
 from bson.objectid import ObjectId
 from bson.json_util import dumps
 
@@ -324,7 +324,7 @@ def send_email():
         sender_email = 'sbhs.platform.test@gmail.com'
         password = os.environ['EMAIL_ACCESS_PASSWORD']
         message = MIMEMultipart('alternative')
-        message['Subject'] = request.json['subject']
+        message['Subject'] = request.json['subject'][:70]
         message['From'] =  'Platform Test'
         recipients = request.json['to']
         stored_recipients = list(set(recipients)).reverse()
@@ -334,7 +334,7 @@ def send_email():
                 recipients.append(recipient['email'])
         recipients.append(session['users_email'])
         recipients = list(set(recipients))
-        text = (request.json['message'].replace('\n', '<br />') + '<br>' +
+        text = (request.json['message'][:10000].replace('\n', '<br />') + '<br>' +
         '--------------------------------------<br>' +
         session['users_name'] + '<br>' + 
         session['users_email'] + '<br>' +
@@ -346,7 +346,7 @@ def send_email():
         with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
             server.login(sender_email, password)
             server.sendmail(sender_email, recipients, message.as_string())
-        collection_emails.insert_one({'name': session['users_name'], 'picture': session['picture'], 'room': request.json['room_id'], 'email': session['users_email'], 'datetime': datetime.now().isoformat() + 'Z', 'from': session['unique_id'], 'recipients': stored_recipients, 'subject': request.json['subject'], 'message': request.json['message']})
+        collection_emails.insert_one({'name': session['users_name'], 'picture': session['picture'], 'room': request.json['room_id'], 'email': session['users_email'], 'datetime': datetime.now().isoformat() + 'Z', 'from': session['unique_id'], 'recipients': stored_recipients, 'subject': request.json['subject'][:70], 'message': request.json['message'][:10000]})
         return Response(dumps({'success': 'true'}), mimetype='application/json')
     return Response(dumps({'success': 'false'}), mimetype='application/json')
 
@@ -380,7 +380,7 @@ def create_room():
     if request.method == 'POST' and (space_admin() or session['admin']):
         room_id = ObjectId()
         room_list = list(collection_rooms.find({'space': session['current_space'], 'section': request.json['section_id']}))
-        room = {'_id': room_id, 'space': session['current_space'], 'section': request.json['section_id'], 'name': request.json['room_name'], 'order': len(room_list) + 1}
+        room = {'_id': room_id, 'space': session['current_space'], 'section': request.json['section_id'], 'name': request.json['room_name'][:200], 'order': len(room_list) + 1}
         collection_rooms.insert_one(room)
         room = dumps(room)
         return Response(room, mimetype='application/json')
@@ -395,7 +395,7 @@ def create_section():
     if request.method == 'POST' and (space_admin() or session['admin']):
         section_id = ObjectId()
         section_list = list(collection_sections.find({'space': session['current_space']}))
-        section = {'_id': section_id, 'space': session['current_space'], 'name': request.json['section_name'], 'order': len(section_list) + 1}
+        section = {'_id': section_id, 'space': session['current_space'], 'name': request.json['section_name'][:200], 'order': len(section_list) + 1}
         collection_sections.insert_one(section)
         section = dumps(section)
         return Response(section, mimetype='application/json')
@@ -450,7 +450,7 @@ def create_space():
                 space_image = '/static/images/Space.jpeg'
         except:
             space_image = '/static/images/Space.jpeg'
-        collection_spaces.insert_one({'_id': space_id, 'name': request.json['space_name'], 'picture': space_image, 'admins': [session['unique_id']], 'members': [[session['unique_id'], session['users_name']]]})
+        collection_spaces.insert_one({'_id': space_id, 'name': request.json['space_name'][:200], 'picture': space_image, 'admins': [session['unique_id']], 'members': [[session['unique_id'], session['users_name']]]})
         collection_rooms.insert_many([room, special_rooms])
         collection_sections.insert_one(section)        
         joined = user['joined']
@@ -643,7 +643,7 @@ def send_message(data):
     if space_member() and valid_room(data['room_id']):
         utc_dt = datetime.now().isoformat() + 'Z'
         data['datetime'] = utc_dt
-        data['message'] = re.sub('\\\n\\n\\\n+', '\\n\\n', data['message'])
+        data['message'] = re.sub('\\\n\\n\\\n+', '\\n\\n', data['message'][:2000])
         data['message_id'] = str(ObjectId())
         data['user_id'] = session['unique_id']
         data['picture'] = session['picture']
@@ -722,7 +722,7 @@ def edited_message(data):
         emit('expired')
         return
     if space_admin() or session['admin'] or session['unique_id'] == collection_messages.find_one({'_id': ObjectId(data['message_id'])})['user_id']:
-        collection_messages.find_one_and_update({"_id": ObjectId(data['message_id'])}, {'$set': {'message': data['edit']}})
+        collection_messages.find_one_and_update({"_id": ObjectId(data['message_id'])}, {'$set': {'message': data['edit'][:2000]}})
         socketio.emit('edited_message', data, room = data['room_id'])
 
 # When sections are sorted, update the order in MongoDB.

@@ -165,7 +165,7 @@
               <div id="email_to">
                 <div id="email_to_list">
                   <span><label id="email_to_label" for="email_to_input">To: </label></span>
-                  <span id="email_to_input_span"><input id="email_to_input" type="text" placeholder=""></input></span>
+                  <span id="email_to_input_span"><input id="email_to_input" type="text" placeholder="" maxlength="254"></input></span>
                 </div>
               </div>
               <div id="suggested_emails">
@@ -176,15 +176,15 @@
             <textarea id="email_cc_input" rows="1" placeholder="Who are you sending it to?"></textarea>
             <label id="email_bcc_label">To:</label>
             <textarea id="email_bcc_input" rows="1" placeholder="Who are you sending it to?"></textarea> -->
-            <input id="email_subject_input" type="text" placeholder="Subject" required></input>
-            <textarea id="email_message_input" rows="1" required></textarea>
+            <input id="email_subject_input" type="text" placeholder="Subject" maxlength="70" required></input>
+            <textarea id="email_message_input" maxlength="10000" rows="1" required></textarea>
             <div id="email_options">
               <button type="submit" id="submit_email"><img class="send" src="/static/images/send.png" alt="Send"></button>
             </div>
           </form>
           <form id="message_input_form">
             <!--see w3schools input attributes like max char, spam, etc. -->
-            <textarea id="message_input" rows="1" placeholder="Enter message"></textarea>
+            <textarea id="message_input" rows="1" placeholder="Enter message" maxlength="2000"></textarea>
 <!--             <input type="text" id="message_input" placeholder="Enter message"> -->
             <button type="submit" id="submit"><img class="send" src="/static/images/send.png" alt="Send"></button>
           </form>
@@ -269,10 +269,10 @@
         <span id="close-create-space" class="close">&times;</span>
         <form id="create-space-form">
           <label for="space-name">Space Name:</label><br>
-          <input type="text" id="space-name"><br>
+          <input type="text" id="space-name" maxlength="200"><br>
           <!--Accept Files, Sanitize Files, Compress Files-->
           <label for="space-picture">Space Picture (currently only accepts links):</label><br>
-          <input type="text" id="space-picture"><br>
+          <input type="text" id="space-picture"  maxlength="2000"><br>
           <input type="submit" value="Submit">
         </form>
       </div>
@@ -282,7 +282,7 @@
         <span id="close-create-room" class="close">&times;</span>
         <form id="create-room-form">
           <label for="room-name">Room Name:</label><br>
-          <input type="text" id="room-name"><br>
+          <input type="text" id="room-name"  maxlength="200"><br>
           <input type="submit" value="Submit">
         </form>
       </div>
@@ -292,7 +292,7 @@
         <span id="close-create-section" class="close">&times;</span>
         <form id="create-section-form">
           <label for="section-name">Section Name:</label><br>
-          <input type="text" id="section-name"><br>
+          <input type="text" id="section-name"  maxlength="200"><br>
           <input type="submit" value="Submit">
         </form>
       </div>
@@ -1406,7 +1406,7 @@
         let message_id = this.parentNode.parentNode.id;
         let message = this.parentNode.previousElementSibling.textContent;
         $(this.parentNode.previousElementSibling).hide();
-        $(this.parentNode.previousElementSibling).after('<form class="message_edit_input_form"><textarea class="message_edit" rows="1" placeholder="Remove message">' + message + '</textarea></form>');
+        $(this.parentNode.previousElementSibling).after('<form class="message_edit_input_form"><textarea class="message_edit" rows="1" placeholder="Remove message" maxlength="2000">' + message + '</textarea></form>');
         this.parentNode.previousElementSibling.firstChild.setAttribute("style", "height:" + (this.parentNode.previousElementSibling.firstChild.scrollHeight) + "px;overflow-y:hidden;");
       });
 
