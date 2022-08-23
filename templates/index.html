@@ -1013,6 +1013,7 @@
       $(document).on('click', '#profile', function() {
         $('#user-page').css('display', 'block');
         $("#user-page").animate({opacity: '1'}, 100);
+        $('#space-settings').css('display', 'none');
         $.ajax({
           type: "POST",
           url: '/profile',
@@ -1189,6 +1190,8 @@
 
       $(document).on('click', '#space-search-button', function() {
         $('#space-search').css('display', 'block');
+        $('#space-settings').css('display', 'none');
+        $('#user-page').css('display', 'none');
         $("#space-search").animate({opacity: '1'}, 100);
       });
         
