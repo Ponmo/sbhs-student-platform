@@ -1733,7 +1733,7 @@
           messageMoment = 'at ' + messageMoment;
           // TODO: Give pfp image default fallback image
           if (space_admin || admin || data.user_id == user_id) {
-            newNode.innerHTML = '<img class="profile-picture pointer" alt="!"><p class="message-title"><span class="name pointer"></span><span class="datetime"> ' + messageMoment + '</span></p><p class="message"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>';
+            newNode.innerHTML = '<img class="profile-picture pointer" alt="!"><p class="message-title"><span class="name pointer"></span><span class="datetime"> ' + messageMoment + '</span></p><p class="message"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/edit.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>';
           }
           else {
             newNode.innerHTML = '<img class="profile-picture pointer" alt="!"><p class="message-title"><span class="name pointer"></span><span class="datetime"> ' + messageMoment + '</span></p><p class="message"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"></div>';
@@ -1746,7 +1746,7 @@
         else {
           newNode.className = 'message-container-combine';
           if (space_admin || admin || data.user_id == user_id){
-            newNode.innerHTML = '<p class="message-combine-time"> ' + messageMoment + '</p><p class="message-combine"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>';
+            newNode.innerHTML = '<p class="message-combine-time"> ' + messageMoment + '</p><p class="message-combine"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/edit.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>';
           }
           else{
             newNode.innerHTML = '<p class="message-combine-time"> ' + messageMoment + '</p><p class="message-combine"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"></div>';
@@ -2154,7 +2154,7 @@
                     messageDate = 'on ' + messageDate.format('M/D/YYYY');
                 }
                 if (space_admin || admin || item.user_id == user_id) {
-                  newNode.innerHTML = '<img class="profile-picture pointer" alt="!"><p class="message-title"><span class="name pointer"></span><span class="datetime"> ' + messageDate + '</span></p><p class="message"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>';
+                  newNode.innerHTML = '<img class="profile-picture pointer" alt="!"><p class="message-title"><span class="name pointer"></span><span class="datetime"> ' + messageDate + '</span></p><p class="message"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/edit.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>';
                 }
                 else {
                   newNode.innerHTML = '<img class="profile-picture pointer" alt="!"><p class="message-title"><span class="name pointer"></span><span class="datetime"> ' + messageDate + '</span></p><p class="message"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"></div>';
@@ -2169,7 +2169,7 @@
                 newNode.setAttribute('data-date', messageDate.format('M/D/YYYY'));
                 newNode.setAttribute('data-datetime', messageDate.format());
                 if (space_admin || admin || item.user_id == user_id) {
-                  newNode.innerHTML = '<p class="message-combine-time">' + messageDate.format('h:mm A') + '</p><p class="message-combine"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/temporary-edit-icon.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>'; 
+                  newNode.innerHTML = '<p class="message-combine-time">' + messageDate.format('h:mm A') + '</p><p class="message-combine"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"><img class="edit-message pointer" src="/static/images/edit.png"><img class="delete-message pointer" src="/static/images/delete.png"></div>'; 
                 } 
                 else {
                   newNode.innerHTML = '<p class="message-combine-time">' + messageDate.format('h:mm A') + '</p><p class="message-combine"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.png"></div>';
