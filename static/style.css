@@ -73,6 +73,8 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin-bottom: 100px;
 }
 .settings-pages {
+  display: none;
+  
   background-color: #36393e;
   position: fixed;
   width: 100%;
