@@ -10,7 +10,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js" integrity="sha256-hlKLmzaRlE8SCJC1Kw8zoUbU8BxA+8kR3gseuKfMjxA=" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.11/purify.min.js"></script>
     <title>Santa Barbara High School</title>
   </head>
   <body>
@@ -442,11 +441,11 @@
             newNode.appendChild(newNodeChild);
             newNodeChild = document.createElement('div');
             newNodeChild.className = 'directory-space-title';
-            newNodeChild.textContent = DOMPurify.sanitize(item['name']);
+            newNodeChild.textContent = item['name'];
             newNode.appendChild(newNodeChild);
             newNodeChild = document.createElement('div');
             newNodeChild.className = 'directory-space-description';
-            newNodeChild.textContent = DOMPurify.sanitize('Description of Space');
+            newNodeChild.textContent = 'Description of Space';
             newNode.appendChild(newNodeChild);
             newNodeChild = document.createElement('div');
             newNodeChild.className = 'directory-space-joined-status';
@@ -615,10 +614,10 @@
                   newNode.className = 'admin-logs-table-row admin-logs-reported-message pointer';
                   newNode.querySelector('.expand-log').className += ' expand-log-reported-message';
                 }
-                newNode.firstElementChild.textContent = DOMPurify.sanitize(item.name + '\r\n' + item.email);
-                newNode.firstElementChild.nextElementSibling.textContent = DOMPurify.sanitize(item.action);
-                newNode.firstElementChild.nextElementSibling.nextElementSibling.textContent = DOMPurify.sanitize(item.by + '\r\n' + item.by_email);
-                newNode.firstElementChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = DOMPurify.sanitize(item.in);
+                newNode.firstElementChild.textContent = item.name + '\r\n' + item.email;
+                newNode.firstElementChild.nextElementSibling.textContent = item.action;
+                newNode.firstElementChild.nextElementSibling.nextElementSibling.textContent = item.by + '\r\n' + item.by_email;
+                newNode.firstElementChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = item.in;
                 newNode.firstElementChild.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent = moment(item.datetime).format('MMM Do YYYY, h:mm[]a');
                 newFragment.appendChild(newNode);
                 newNode = document.createElement('tr');
@@ -632,9 +631,9 @@
                 newNode.style.display = 'none';
                 newNode.style.backgroundColor = '#32353a';
                 newNode.firstElementChild.firstElementChild.firstElementChild.src = item.details.picture;
-                newNode.querySelector('.message-title').firstElementChild.textContent = DOMPurify.sanitize(item.details.name);
+                newNode.querySelector('.message-title').firstElementChild.textContent = item.details.name;
                 newNode.querySelector('.datetime').textContent = ' on ' + moment(item.details.datetime).local().format('MMM Do YYYY, h:mm[]a');
-                newNode.querySelector('.message-content-logs').textContent = DOMPurify.sanitize(item.details.message);
+                newNode.querySelector('.message-content-logs').textContent = item.details.message;
                 newFragment.appendChild(newNode);
               });
               document.getElementById('admin-logs-body').appendChild(newFragment);
@@ -701,7 +700,7 @@
               newNodeChild.appendChild(document.createTextNode(' ' + item.name))
               newNode.appendChild(newNodeChild);
               newNodeChild = document.createElement('td');
-              newNodeChild.textContent = DOMPurify.sanitize(item.email);
+              newNodeChild.textContent = item.email;
               newNode.appendChild(newNodeChild);
               newNodeChild = document.createElement('td');
               newNodeChild.innerHTML = formNode;
@@ -1118,8 +1117,8 @@
               member.style.backgroundColor = '#3c3f45';
               document.getElementById('profile-popup').innerHTML = '<ul id="profile-list"><li id="profile-picture-list"><img id="popup-picture" alt="!"></li><li id="profile-name"></li><li id="profile-email"></li><div id="joined-table"></div>';
               document.getElementById('popup-picture').src = data['picture'];
-              document.getElementById('profile-name').textContent = DOMPurify.sanitize(data['name']);
-              document.getElementById('profile-email').textContent = DOMPurify.sanitize(data['email']);
+              document.getElementById('profile-name').textContent = data['name'];
+              document.getElementById('profile-email').textContent = data['email'];
               newFragment = document.createDocumentFragment();
               data['joined'].forEach(function(item) {
                 newNode = document.createElement('div');
@@ -1245,13 +1244,14 @@
           const latestMessage = $('#messages').children().not('.temporary-message').last();
           if (latestMessage.data('user') == user_id && messageMoment.diff(moment(latestMessage.data('datetime'))) < 180000) {
             newNode.className = 'message-container-combine temporary-message';
-            newNode.innerHTML = '<p class="message-combine-time">' + messageMoment.format('h:mm A') + '</p><p class="message-combine">' + /*DOMPurify.sanitize(message)*/ + '</p>';
+            newNode.innerHTML = '<p class="message-combine-time">' + messageMoment.format('h:mm A') + '</p><p class="message-combine"></p>';
             newNode.querySelector('.message-combine').textContent = message;
           }
           else {
             newNode.className = 'message-container temporary-message';
             messageMoment = 'at ' + messageMoment.format('h:mm A');
-            newNode.innerHTML = '<img class="profile-picture pointer" srsc="' + DOMPurify.sanitize(user_picture) + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + DOMPurify.sanitize(user_name) + ' </b></span><span class="datetime">' + DOMPurify.sanitize(messageMoment) + '</span></p><p class="message">' + DOMPurify.sanitize(message) + '</p>';
+            newNode.innerHTML = '<img class="profile-picture pointer" srsc="' + user_picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + user_name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message"></p>';
+            newNode.querySelector('.message').textContent = message;
           }
           document.getElementById('messages').append(newNode);
           socket.emit('send_message', {
@@ -1291,7 +1291,7 @@
             newNode.className = 'rejected_email_bubble';
             let newNodeChild = document.createElement('span');
             newNodeChild.className = 'rejected_email';
-            newNodeChild.textContent = DOMPurify.sanitize(email);
+            newNodeChild.textContent = email;
             newNode.appendChild(newNodeChild);
             newNodeChild = document.createElement('img');
             newNodeChild.className = 'delete-email-icon'
@@ -1740,10 +1740,10 @@
 
       socket.on('edited_message', function(data) {
         if(data.combine == 'false') {
-          document.getElementById(data.message_id).firstChild.nextElementSibling.nextElementSibling.textContent = DOMPurify.sanitize(data.edit);
+          document.getElementById(data.message_id).firstChild.nextElementSibling.nextElementSibling.textContent = data.edit;
         }
         else {
-          document.getElementById(data.message_id).firstChild.nextElementSibling.textContent = DOMPurify.sanitize(data.edit);
+          document.getElementById(data.message_id).firstChild.nextElementSibling.textContent = data.edit;
         }
       });
 
@@ -1763,9 +1763,9 @@
             newNode.innerHTML = '<img class="profile-picture pointer" alt="!"><p class="message-title"><span class="name pointer"></span><span class="datetime"> ' + messageMoment + '</span></p><p class="message"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.svg"></div>';
           }
           newNode.firstElementChild.src = data.picture;
-          newNode.firstElementChild.nextElementSibling.firstElementChild.textContent = DOMPurify.sanitize(data.name);
+          newNode.firstElementChild.nextElementSibling.firstElementChild.textContent = data.name;
           newNode.firstElementChild.nextElementSibling.firstElementChild.style.fontWeight = 'bold';
-          newNode.firstElementChild.nextElementSibling.nextElementSibling.textContent = DOMPurify.sanitize(data.message);
+          newNode.firstElementChild.nextElementSibling.nextElementSibling.textContent = data.message;
         }
         else {
           newNode.className = 'message-container-combine';
@@ -1775,7 +1775,7 @@
           else{
             newNode.innerHTML = '<p class="message-combine-time"> ' + messageMoment + '</p><p class="message-combine"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.svg"></div>';
           }
-          newNode.firstElementChild.nextElementSibling.textContent = DOMPurify.sanitize(data.message);
+          newNode.firstElementChild.nextElementSibling.textContent = data.message;
         }
         newNode.id = data.message_id;
         newNode.setAttribute('data-user', data.user_id);
@@ -1813,7 +1813,7 @@
         newNode.className = 'room pointer';
         newNode.setAttribute('data-section', data.section_id);
         newNode.setAttribute('data-name', data.name);
-        newNode.textContent = DOMPurify.sanitize(data.name);
+        newNode.textContent = data.name;
         const nodeList = document.querySelectorAll('li[data-section="' + data.section_id + '"]');
         if (nodeList.length != 0) {
           nodeList[nodeList.length - 1].parentNode.insertBefore(newNode, nodeList[nodeList.length - 1].nextElementSibling);
@@ -1880,17 +1880,17 @@
           if ($('#' + data['message_id']).next().length != 0) {
             if (class_name == "message-container" && document.getElementById(data['message_id']).nextElementSibling.className == "message-container-combine") {
               let new_message_text = document.getElementById(data['message_id']).nextElementSibling.firstChild.nextElementSibling.textContent;
-              document.getElementById(data['message_id']).firstChild.nextElementSibling.nextElementSibling.textContent = DOMPurify.sanitize(new_message_text);
+              document.getElementById(data['message_id']).firstChild.nextElementSibling.nextElementSibling.textContent = new_message_text;
               if (document.getElementById(data['message_id']).firstChild.nextElementSibling.nextElementSibling.textContent.includes('Yesterday')) {
                 let new_message_time = document.getElementById(data['message_id']).nextElementSibling.firstChild.textContent; 
-                document.getElementById(data['message_id']).firstChild.nextElementSibling.firstChild.nextElementSibling.textContent = 'Yesterday at ' + DOMPurify.sanitize(new_message_time);
+                document.getElementById(data['message_id']).firstChild.nextElementSibling.firstChild.nextElementSibling.textContent = 'Yesterday at ' + new_message_time;
               } else if (document.getElementById(data['message_id']).firstChild.nextElementSibling.textContent.includes('/')){
                 let new_message_date = document.getElementById(data['message_id']).nextElementSibling.getAttribute("data-date");
-                document.getElementById(data['message_id']).firstChild.nextElementSibling.firstChild.nextElementSibling.textContent = DOMPurify.sanitize(new_message_date);
+                document.getElementById(data['message_id']).firstChild.nextElementSibling.firstChild.nextElementSibling.textContent = new_message_date;
               }
               else {
                 let new_message_time = document.getElementById(data['message_id']).nextElementSibling.firstChild.textContent; 
-                document.getElementById(data['message_id']).firstChild.nextElementSibling.firstChild.nextElementSibling.textContent = 'at ' + DOMPurify.sanitize(new_message_time);
+                document.getElementById(data['message_id']).firstChild.nextElementSibling.firstChild.nextElementSibling.textContent = 'at ' + new_message_time;
               }
               let message_id = document.getElementById(data['message_id']).nextElementSibling.id;
               document.getElementById(data['message_id']).nextElementSibling.remove();
@@ -1920,7 +1920,7 @@
           newNode.setAttribute('data-id', data['_id']);
           newNode.innerHTML = '<img class="profile-picture" alt="!"><span class="member-name">' + data['name'] + '</span>';
           newNode.firstElementChild.src = data['picture'];
-          newNode.firstElementChild.nextElementSibling.textContent = DOMPurify.sanitize(data['name']);
+          newNode.firstElementChild.nextElementSibling.textContent = data['name'];
           document.getElementById('members').append(newNode);
           newNode = document.createElement('div');
           newNode.className = 'suggested_email suggested_email_individual pointer';
@@ -2005,7 +2005,7 @@
                   newNodeChild.id = room['_id']['$oid'];
                   newNodeChild.setAttribute('data-section', room['section']);
                   newNodeChild.setAttribute('data-name', room['name']);
-                  newNodeChild.textContent = DOMPurify.sanitize(room['name']);
+                  newNodeChild.textContent = room['name'];
                   newNodeChildContainer.append(newNodeChild);
                 }
                 newNode.append(newNodeChildContainer);
@@ -2049,7 +2049,7 @@
               newNode.setAttribute('data-id', member['_id']);
               newNode.innerHTML = '<img class="profile-picture" alt="!"><span class="member-name"></span>';
               newNode.firstElementChild.src = member['picture'];
-              newNode.firstElementChild.nextElementSibling.textContent = DOMPurify.sanitize(member['name']);
+              newNode.firstElementChild.nextElementSibling.textContent = member['name'];
               newFragmentMembers.appendChild(newNode);
               newNode = document.createElement('div');
               newNode.className = 'suggested_email suggested_email_individual pointer';
@@ -2128,8 +2128,8 @@
           });
           $(document.getElementById(current_room)).attr('style', 'background-color: #43474d !important');
           document.getElementById('messages').textContent = '';
-          document.getElementById('room-name-display').textContent = DOMPurify.sanitize(document.getElementById(current_room).getAttribute('data-name'));
-          document.getElementById('members_header').textContent = DOMPurify.sanitize(document.getElementById(current_room).getAttribute('data-name'));
+          document.getElementById('room-name-display').textContent = document.getElementById(current_room).getAttribute('data-name');
+          document.getElementById('members_header').textContent = document.getElementById(current_room).getAttribute('data-name');
           if (special) {
             $('#message_input_form').hide();
             $('#email_input_form').show();
@@ -2186,9 +2186,9 @@
                   newNode.innerHTML = '<img class="profile-picture pointer" alt="!"><p class="message-title"><span class="name pointer"></span><span class="datetime"> ' + messageDate + '</span></p><p class="message"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.svg"></div>';
                 }
                 newNode.firstElementChild.src = item.picture;
-                newNode.firstElementChild.nextElementSibling.firstElementChild.textContent = DOMPurify.sanitize(item.name);
+                newNode.firstElementChild.nextElementSibling.firstElementChild.textContent = item.name;
                 newNode.firstElementChild.nextElementSibling.firstElementChild.style.fontWeight = 'bold';
-                newNode.firstElementChild.nextElementSibling.nextElementSibling.textContent = DOMPurify.sanitize(item.message);
+                newNode.firstElementChild.nextElementSibling.nextElementSibling.textContent = item.message;
               }
               else {
                 newNode.className = 'message-container-combine';
@@ -2200,7 +2200,7 @@
                 else {
                   newNode.innerHTML = '<p class="message-combine-time">' + messageDate.format('h:mm A') + '</p><p class="message-combine"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.svg"></div>';
                 }
-                newNode.firstElementChild.nextElementSibling.textContent = DOMPurify.sanitize(item.message);
+                newNode.firstElementChild.nextElementSibling.textContent = item.message;
               }
               newNode.id = item._id.$oid;
               newNode.setAttribute('data-user', item.user_id);
@@ -2239,11 +2239,11 @@
               }
               newNode.innerHTML = '<img class="profile-picture pointer" alt="!"><p class="message-title"><span class="name pointer"></span><span class="datetime"> ' + emailDate + '</span></p><div class="email-container-container"><div class="recipient-list"></div><img class="expand-recipient-list pointer" data-expanded="false" src="/static/images/expand.svg"><div class="email-container"><p class="email-subject"></p><p class="email-message"></p></div></div>';
               newNode.firstElementChild.src = item.picture;
-              newNode.firstElementChild.nextElementSibling.firstElementChild.textContent = DOMPurify.sanitize(item.name);
+              newNode.firstElementChild.nextElementSibling.firstElementChild.textContent = item.name;
               newNode.firstElementChild.nextElementSibling.firstElementChild.style.fontWeight = 'bold';
-              newNode.querySelector('.recipient-list').textContent = DOMPurify.sanitize('to ' + item.recipients.join(', '));
-              newNode.querySelector('.email-subject').textContent = DOMPurify.sanitize(item.subject);
-              newNode.querySelector('.email-message').textContent = DOMPurify.sanitize(item.message);
+              newNode.querySelector('.recipient-list').textContent = 'to ' + item.recipients.join(', ');
+              newNode.querySelector('.email-subject').textContent = item.subject;
+              newNode.querySelector('.email-message').textContent = item.message;
               document.getElementById('messages').prepend(newNode);
             });
           }
@@ -2306,24 +2306,24 @@
         }
         else if (typing_list.length == 1) {
           typing_display.innerHTML = '<b></b> is typing...';
-          typing_display.firstElementChild.textContent = DOMPurify.sanitize(typing_list[0]);
+          typing_display.firstElementChild.textContent = typing_list[0];
         }
         else if (typing_list.length == 2) {
           typing_display.innerHTML = '<b></b> and <b></b> are typing...';
-          typing_display.firstElementChild.textContent = DOMPurify.sanitize(typing_list[0]);
-          typing_display.firstElementChild.nextElementChild.textContent = DOMPurify.sanitize(typing_list[1]);
+          typing_display.firstElementChild.textContent = typing_list[0];
+          typing_display.firstElementChild.nextElementChild.textContent = typing_list[1];
         }
         else if (typing_list.length == 3) {
           typing_display.innerHTML = '<b></b>, <b></b>, and <b></b> are typing...';
-          typing_display.firstElementChild.textContent = DOMPurify.sanitize(typing_list[0]);
-          typing_display.firstElementChild.nextElementChild.textContent = DOMPurify.sanitize(typing_list[1]);
-          typing_display.firstElementChild.nextElementChild.nextElementChild.textContent = DOMPurify.sanitize(typing_list[2]);
+          typing_display.firstElementChild.textContent = typing_list[0];
+          typing_display.firstElementChild.nextElementChild.textContent = typing_list[1];
+          typing_display.firstElementChild.nextElementChild.nextElementChild.textContent = typing_list[2];
         }
         else {
           typing_display.innerHTML = '<b></b>, <b></b>, <b></b>, and' + String(typing_list.length - 3) + ' others are typing...';
-          typing_display.firstElementChild.textContent = DOMPurify.sanitize(typing_list[0]);
-          typing_display.firstElementChild.nextElementChild.textContent = DOMPurify.sanitize(typing_list[1]);
-          typing_display.firstElementChild.nextElementChild.nextElementChild.textContent = DOMPurify.sanitize(typing_list[2]);
+          typing_display.firstElementChild.textContent = typing_list[0];
+          typing_display.firstElementChild.nextElementChild.textContent = typing_list[1];
+          typing_display.firstElementChild.nextElementChild.nextElementChild.textContent = typing_list[2];
         }
       }
 
@@ -2355,7 +2355,7 @@
         newNode.className = 'accepted_email_bubble';
         let newNodeChild = document.createElement('span');
         newNodeChild.className = 'accepted_email';
-        newNodeChild.textContent = DOMPurify.sanitize(email);
+        newNodeChild.textContent = email;
         newNode.appendChild(newNodeChild);
         newNodeChild = document.createElement('img');
         newNodeChild.className = 'delete-email-icon'
