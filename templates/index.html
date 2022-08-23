@@ -1245,13 +1245,13 @@
           if (latestMessage.data('user') == user_id && messageMoment.diff(moment(latestMessage.data('datetime'))) < 180000) {
             newNode.className = 'message-container-combine temporary-message';
             newNode.innerHTML = '<p class="message-combine-time">' + messageMoment.format('h:mm A') + '</p><p class="message-combine"></p>';
-            newNode.querySelector('.message-combine').textContent = message;
+            newNode.querySelector('.message-combine').innerHTML = parseMarkdown(escapeHTML(message));
           }
           else {
             newNode.className = 'message-container temporary-message';
             messageMoment = 'at ' + messageMoment.format('h:mm A');
-            newNode.innerHTML = '<img class="profile-picture pointer" srsc="' + user_picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + user_name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message"></p>';
-            newNode.querySelector('.message').textContent = message;
+            newNode.innerHTML = '<img class="profile-picture pointer" src="' + user_picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + user_name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message"></p>';
+            newNode.querySelector('.message').innerHTML = parseMarkdown(escapeHTML(message));
           }
           document.getElementById('messages').append(newNode);
           socket.emit('send_message', {
@@ -2401,10 +2401,6 @@
 
       function parseMarkdown(markdownText) {
 	      return markdownText
-		      .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-		      .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-		      .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-		      .replace(/^\> (.*$)/gim, '<blockquote>$1</blockquote>')
 		      .replace(/\*\*(.*)\*\*/gim, '<b>$1</b>')
 		      .replace(/\*(.*)\*/gim, '<i>$1</i>');
         }
