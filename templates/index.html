@@ -36,7 +36,7 @@
           <img src="/static/images/temporary-search.png" id="directory-search-button" class="pointer">
         </div>
         <!--UI For Double Click (Back and Home Button Overlayed)-->
-        <img class="pointer" id="close-space-search-button" src="/static/images/back.png">
+        <img class="pointer" id="close-space-search-button" src="/static/images/x.svg">
       </div>
 
         <!--TODO: implement Table Layout Later-->
@@ -63,7 +63,7 @@
     <!--User Profile Page-->
     <div id="user-page">
       <div id="log-out">Log Out</div> 
-      <img class="pointer" id="close-user-page" src="/static/images/back.png">
+      <img class="pointer" id="close-user-page" src="/static/images/x.svg">
     </div>
 
     <!--Home Page-->
@@ -83,7 +83,7 @@
         <div id="admin-settings" class="pointer">Settings</div>
         <div id="admin-logs" class="pointer">Logs</div>
         <div id="admin-users" class="pointer">Users</div>
-        <img class="pointer" id="exit-server-settings" src="/static/images/back.png">
+        <img class="pointer" id="exit-server-settings" src="/static/images/x.svg">
       </div>
       <div id='admin-search'>
         <textarea id="admin-search-bar" placeholder="Search..."></textarea>
@@ -259,7 +259,7 @@
         </div>
 
         <div id="exit-space-settings">
-          <img class="pointer" id="close-space-settings-button" src="/static/images/back.png">
+          <img class="pointer" id="close-space-settings-button" src="/static/images/x.svg">
         </div>
 
       </div>
@@ -1271,7 +1271,7 @@
             newNode.appendChild(newNodeChild);
             newNodeChild = document.createElement('img');
             newNodeChild.className = 'delete-email-icon'
-            newNodeChild.src = '/static/images/X.png';
+            newNodeChild.src = '/static/images/x.svg';
             newNode.appendChild(newNodeChild);
             document.getElementById('email_to_list').insertBefore(newNode, document.getElementById('email_to_input_span'));
             document.getElementById('email_to_input').value = '';
@@ -2333,7 +2333,7 @@
         newNode.appendChild(newNodeChild);
         newNodeChild = document.createElement('img');
         newNodeChild.className = 'delete-email-icon'
-        newNodeChild.src = '/static/images/X.png';
+        newNodeChild.src = '/static/images/x.svg';
         newNode.appendChild(newNodeChild);
         document.getElementById('email_to_list').insertBefore(newNode, document.getElementById('email_to_input_span'));
       }
