@@ -73,15 +73,6 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin-bottom: 100px;
 }
 .settings-pages {
-  display: none;
-  
-  background-color: #36393e;
-  position: fixed;
-  width: 100%;
-  height: calc(100vh - 50px);
-  z-index: 10;
-  overflow-y: scroll;
-  overflow-x: hidden;
 }
 #user-page {
   display: none;
@@ -855,6 +846,14 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 #space-settings {
   display: none;
+
+  background-color: #36393e;
+  position: fixed;
+  width: 100%;
+  height: calc(100vh - 50px);
+  z-index: 10;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 #space-settings-select {
   display: inline-block;
