@@ -203,8 +203,9 @@ img { /* make images and create button undraggable and unhighlitable*/
 .main-header {
   height: 48px;
   width: 100vw;
+  padding-right: 18px;
+  padding-left: 18px;
   white-space: nowrap;
-  padding-left: 24px;
   font-size: 14px;
   color: white;
   background-color: #131921;
