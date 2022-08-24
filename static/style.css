@@ -281,10 +281,14 @@ img { /* make images and create button undraggable and unhighlitable*/
 #information {
   grid-column: 2 / 4;
   grid-row: 1;
+  display: flex;
+  justify-content: space-between;
   background-color: hotpink;
   border-bottom: 1px solid #232428;
   overflow: hidden;
+  
   -moz-user-select: -moz-none;
+  
   -khtml-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
@@ -292,14 +296,17 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 #left-info {
   height: 48px;
-  line-height: 48px;
   padding-left: 18px;
+  width: calc(100vw - 66px);
+  min-width: 220px;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
 }
 #right-info {
   padding-right: 18px;
   height: 48px;
   line-height: 48px;
-  float: right;
 }
 #open_channels {
   display: none;
@@ -315,6 +322,9 @@ img { /* make images and create button undraggable and unhighlitable*/
   display: inline-block;
   margin-left: 18px;
   color: white;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .home {
   width: 30px;
