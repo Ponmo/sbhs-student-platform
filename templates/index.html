@@ -1644,7 +1644,6 @@
         let container = document.getElementById('space-settings-popup');
         if (container.style.display == 'block') {
           container.style.display = 'none';
-          // document.addEventListener('click', removePopup(), {once: true});
         }
         else {
           container.style.display = 'block';
@@ -1987,7 +1986,10 @@
               $("#email_input_form :input").prop("disabled", true);
             }
             document.getElementById('messages').textContent = '';
-            document.getElementById('header_text').textContent = document.getElementById(current_space).getAttribute('data-name');
+            document.getElementById('header_text').textContent = rooms_and_sections[3][0].name;
+            document.getElementById('edit-space-name-input').textContent = rooms_and_sections[3][0].name;
+            document.getElementById('edit-space-picture-input').textContent = rooms_and_sections[3][0].picture;
+            document.getElementById('edit-space-description-input').textContent = rooms_and_sections[3][0].description;
             document.getElementById('special-channels').textContent = '';
             document.getElementById('regular-channels').textContent = '';
             $('.suggested_email_individual').remove();
