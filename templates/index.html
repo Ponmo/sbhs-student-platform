@@ -237,7 +237,7 @@
             <input type="checkbox">
             <span class="slider round"></span>
           </label>
-          <input type="submit" style="display: none">
+          <input type="submit" style="display: none;">
         </form>
         <div id="theme-selection">
           <div class="theme" id="dark-mode"></div>
@@ -1652,9 +1652,16 @@
 
       document.getElementById('edit-space-profile').onsubmit = function (e) {
         e.preventDefault();
-        alert(document.getElementById('edit-space-name-input').value);
-        alert(document.getElementById('edit-space-picture-input').value);
-        alert(document.getElementById('edit-space-description-input').value);
+        $.ajax({
+          type: 'POST',
+          url: '/edit_space_profile',
+          dataType: "json",
+          data: JSON.stringify({'space_name': document.getElementById('edit-space-name-input').value, 'space_image': document.getElementById('edit-space-picture-input').value, 'space_description': document.getElementById('edit-space-description-input').value}),
+          contentType: 'application/json;charset=UTF-8',
+          success: function(data) {
+            alert(data);
+          }
+        });
       }
 
       $(document).on('click', '#exit-space-settings', function() {

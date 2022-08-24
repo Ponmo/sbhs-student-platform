@@ -1,3 +1,4 @@
+from crypt import methods
 from flask_socketio import SocketIO, emit, join_room, leave_room
 
 import json
@@ -605,6 +606,15 @@ def change_user_status():
         if request.json['status'] in {'banned', 'user', 'admin'}:
             collection_users.find_one_and_update({"_id": request.json['user_id']}, {'$set': {'status': request.json['status']}})
             return Response(dumps({'success': 'true'}), mimetype='application/json')
+    return Response(dumps({'success': 'false'}), mimetype='application/json')
+
+@app.route('/edit_space_profile', methods=['POST'])
+def edit_space_profile():
+    if session_expired():
+        return 'expired', 200
+    if session['admin'] or space_admin():
+        collection_spaces.find_one_and_update({'_id': ObjectId(session['current_space'])}, {'$set': {'name': request.json['space_name'], 'picture': request.json['space_picture'], 'description': request.json['space_description']}})
+        return Response(dumps({'success': 'true'}), mimetype='application/json')
     return Response(dumps({'success': 'false'}), mimetype='application/json')
 
 # When a room is clicked, make user join room
