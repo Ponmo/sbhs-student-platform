@@ -327,7 +327,8 @@ def send_email():
         message['Subject'] = request.json['subject'][:70]
         message['From'] =  'Platform Test'
         recipients = request.json['to']
-        stored_recipients = list(set(recipients)).reverse()
+        stored_recipients = list(set(recipients))
+        stored_recipients.reverse()
         if 'Everyone' in recipients:
             everyone = collection_users.find({'joined': session['current_space']})
             for recipient in everyone:
