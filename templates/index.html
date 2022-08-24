@@ -2250,7 +2250,7 @@
               else {
                 emailDate = 'on ' + emailDate.format('M/D/YYYY');
               }
-              newNode.innerHTML = '<img class="profile-picture pointer" alt="!"><p class="message-title"><span class="name pointer"></span><span class="datetime"> ' + emailDate + '</span></p><div class="email-container-container"><div class="recipient-list"></div><img class="expand-recipient-list pointer" data-expanded="false" src="/static/images/expand.svg"><div class="email-container"><p class="email-subject"></p><p class="email-message"></p></div></div>';
+              newNode.innerHTML = '<img class="profile-picture pointer" alt="!"><p class="message-title"><span class="name pointer"></span><span class="datetime"> ' + emailDate + '</span></p><div class="email-container-container"><div class="recipient-list"></div><img class="expand-recipient-list pointer" data-expanded="false" src="/static/images/expand.png"><div class="email-container"><p class="email-subject"></p><p class="email-message"></p></div></div>';
               newNode.firstElementChild.src = item.picture;
               newNode.firstElementChild.nextElementSibling.firstElementChild.textContent = item.name;
               newNode.firstElementChild.nextElementSibling.firstElementChild.style.fontWeight = 'bold';
@@ -2442,6 +2442,8 @@
     // REST, please
 
     //preload images
+
+    //use id of space to get space name for admin tables
 
     // load more button admin tables
 

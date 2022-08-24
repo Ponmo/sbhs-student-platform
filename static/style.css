@@ -808,6 +808,8 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 .member {
   position: relative;
+  display: flex;
+  align-items: center;
   margin: 2px 8px 0px 8px;
   padding: 4px;
   border-radius: 4px;
@@ -819,6 +821,11 @@ img { /* make images and create button undraggable and unhighlitable*/
 
 }
 .member-name {
+  display: inline-block;
+  width: 140px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   margin-left: 10px;
   color: gray;
   font-weight: bold;
@@ -1040,7 +1047,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   height: 11px;
   background-color: white;
 }
-.space {
+.space, .joined-icons {
   object-fit: cover;
   width: 55px;
   height: 39px;
@@ -1165,11 +1172,6 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin-top: 10px;
   margin-bottom: 4px;
   margin-right: 0px;
-}
-.joined-icons {
-  height: 40px;
-  width: 55px;
-  border-radius: 5px;
 }
 .icons-wrapper {
   display: inline-block;
