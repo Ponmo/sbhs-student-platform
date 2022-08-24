@@ -1987,9 +1987,9 @@
             }
             document.getElementById('messages').textContent = '';
             document.getElementById('header_text').textContent = rooms_and_sections[3][0].name;
-            document.getElementById('edit-space-name-input').textContent = rooms_and_sections[3][0].name;
-            document.getElementById('edit-space-picture-input').textContent = rooms_and_sections[3][0].picture;
-            document.getElementById('edit-space-description-input').textContent = rooms_and_sections[3][0].description;
+            document.getElementById('edit-space-name-input').value = rooms_and_sections[3][0].name;
+            document.getElementById('edit-space-picture-input').value = rooms_and_sections[3][0].picture;
+            document.getElementById('edit-space-description-input').value = rooms_and_sections[3][0].description;
             document.getElementById('special-channels').textContent = '';
             document.getElementById('regular-channels').textContent = '';
             $('.suggested_email_individual').remove();
