@@ -1656,7 +1656,7 @@
           type: 'POST',
           url: '/edit_space_profile',
           dataType: "json",
-          data: JSON.stringify({'space_name': document.getElementById('edit-space-name-input').value, 'space_image': document.getElementById('edit-space-picture-input').value, 'space_description': document.getElementById('edit-space-description-input').value}),
+          data: JSON.stringify({'space_name': document.getElementById('edit-space-name-input').value, 'space_picture': document.getElementById('edit-space-picture-input').value, 'space_description': document.getElementById('edit-space-description-input').value}),
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
             alert(data);
