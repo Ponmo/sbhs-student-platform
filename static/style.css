@@ -981,6 +981,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   grid-column: 2;
   grid-row: 1;
   margin-bottom: 0px;
+  text-overflow: ellipsis;
 }
 #student_id {
   color: #d7d9da;
@@ -993,6 +994,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   overflow: hidden;
   grid-column: 2;
   grid-row: 2;
+  text-overflow: ellipsis;
 }
 #settings {
   width: 14px;

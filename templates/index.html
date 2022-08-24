@@ -227,11 +227,11 @@
       <div id="space-settings-expand">
         <form id="edit-space-profile">
           <label for="space-name" class="space-settings-header">Space Name</label><br>
-          <input type="text" value="Current Name" id="edit-space-name-input"><br>
+          <input type="text" id="edit-space-name-input"><br>
           <label for="space-picture">Space Picture</label><br>
-          <input type="text" value="Current Link" id="edit-space-picture-input"><br>
+          <input type="text" id="edit-space-picture-input"><br>
           <label for="space-picture">Space Description</label><br>
-          <input type="text" value="Current Description" id="edit-space-description-input"><br>
+          <input type="text" id="edit-space-description-input"><br>
           <label for="invite-only" class="space-settings-header">Invite Only</label><br>
           <label class="switch">
             <input type="checkbox">
@@ -1651,6 +1651,9 @@
 
       document.getElementById('edit-space-profile').onsubmit = function (e) {
         e.preventDefault();
+        alert(document.getElementById('edit-space-name-input').value);
+        alert(document.getElementById('edit-space-picture-input').value);
+        alert(document.getElementById('edit-space-description-input').value);
       }
 
       $(document).on('click', '#exit-space-settings', function() {
@@ -1985,11 +1988,11 @@
             }
             document.getElementById('messages').textContent = '';
             document.getElementById('header_text').textContent = rooms_and_sections[3][0].name;
-            document.getElementById('edit-space-name-input').textContent = rooms_and_sections[3][0].name;
+            document.getElementById('edit-space-name-input').value = rooms_and_sections[3][0].name;
             document.getElementById('edit-space-name-input').setAttribute('data-pre', rooms_and_sections[3][0].name);
-            document.getElementById('edit-space-picture-input').textContent = rooms_and_sections[3][0].picture;
+            document.getElementById('edit-space-picture-input').value = rooms_and_sections[3][0].picture;
             document.getElementById('edit-space-picture-input').setAttribute('data-pre', rooms_and_sections[3][0].picture);
-            document.getElementById('edit-space-description-input').textContent = rooms_and_sections[3][0].description;
+            document.getElementById('edit-space-description-input').value = rooms_and_sections[3][0].description;
             document.getElementById('edit-space-description-input').setAttribute('data-pre', rooms_and_sections[3][0].description);
             document.getElementById('special-channels').textContent = '';
             document.getElementById('regular-channels').textContent = '';
