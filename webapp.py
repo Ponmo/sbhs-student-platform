@@ -620,7 +620,7 @@ def edit_space_profile():
         except:
             space_picture = '/static/images/Space.jpeg'
         collection_spaces.find_one_and_update({'_id': ObjectId(session['current_space'])}, {'$set': {'name': request.json['space_name'][:200], 'picture': space_picture, 'description': request.json['space_description'][:200]}})
-        return Response(dumps({'success': 'true'}), mimetype='application/json')
+        return Response(dumps({'space_name': request.json['space_name'][:200], 'space_picture': space_picture, 'space_description': request.json['space_description'][:200]}), mimetype='application/json')
     return Response(dumps({'success': 'false'}), mimetype='application/json')
 
 # When a room is clicked, make user join room

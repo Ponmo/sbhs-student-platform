@@ -1668,6 +1668,9 @@
             success: function(data) {
               if (data['success'] == 'true') {
                 popupSuccess();
+                space_name_input.setAttribute('data-pre', data.space_name);
+                space_picture_input.setAttribute('data-pre', data.space_picture);
+                space_description_input.setAttribute('data-pre', data.space_description);
               }
             }
           }));
