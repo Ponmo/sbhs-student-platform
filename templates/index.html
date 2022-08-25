@@ -17,6 +17,7 @@
 
     <div id="overlay">
       <div id="space-settings-popup">
+        <img id="success-icon">
         <div class="pointer blue-entry-two" id="create-section-button">Create Section</div>
         <div class="pointer blue-entry-two" id="edit-space-button">Edit Space</div>
         <div class="pointer red-space-button" id="leave-space">Leave Space</div>
@@ -1661,10 +1662,8 @@
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
             if (data['success'] == 'true') {
-              const newNode = document.createElement('img');
-              newNode.src = '/static/images/success.gif';
-              newNode.className = 'success-icon';
-              document.getElementById('overlay').appendChild(newNode);
+              document.getElementById('success-icon').src = '';
+              document.getElementById('success-icon').src = '/static/images/success.gif';
             }
           }
         });
