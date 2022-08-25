@@ -308,6 +308,7 @@
     <div id="confirm-leave-space" class="modal">
       <div class="modal-content">
         <span id="close-confirm-leave-space" class="close">&times;</span>
+        <p class="modal-header">Are you sure you wa</p>
         <form id="confirm-delete-space-form">
           <label for="confirm-space-name">Enter space name to confirm deletion:</label><br>
           <input type="text" id="confirm-space-name"  maxlength="200"><br>
@@ -791,6 +792,7 @@
       });
 
       $('.admin-log-filters').on('click', function() {
+        $('#admin-logs-body').empty();
         last_loaded = '';
         chat_history_skip = 0;
         loadLogHistory();
