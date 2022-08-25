@@ -12,7 +12,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Santa Barbara High School</title>
   </head>
-  <body>
+  <body>z
 
     <div id="overlay">
       <div id="space-settings-popup">
@@ -1659,7 +1659,12 @@
           data: JSON.stringify({'space_name': document.getElementById('edit-space-name-input').value, 'space_picture': document.getElementById('edit-space-picture-input').value, 'space_description': document.getElementById('edit-space-description-input').value}),
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
-            alert(data);
+            if (data['success'] == 'true') {
+              const newNode = document.createElement('img');
+              newNode.src = '/static/images/success.gif';
+              newNode.className = 'success-icon';
+              document.getElementById('overlay').appendChild(newNode);
+            }
           }
         });
       }
