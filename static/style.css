@@ -1199,6 +1199,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  display: none;
 }
 .delete-email-icon {
   width: 9px;
