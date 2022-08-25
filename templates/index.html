@@ -295,6 +295,16 @@
         </form>
       </div>
     </div>
+    <div id="confirm-delete-space" class="modal">
+      <div class="modal-content">
+        <span id="close-confirm-delete-space" class="close">&times;</span>
+        <form id="confirm-delete-space-form">
+          <label for="confirm-space-name">Space Name:</label><br>
+          <input type="text" id="confirm-space-name"  maxlength="200"><br>
+          <input type="submit" value="Submit">
+        </form>
+      </div>
+    </div>
 
     <ul id="section-menu" class="context-menu">
       <li id="edit-section" class="blue-entry pointer">Edit Section</li> 
@@ -589,12 +599,13 @@
       }
 
       function loadLogHistory() {
+        const options = [document.getElementById('reported-message-filter').checked, document.getElementById('deleted-message-filter').checked];
         abortRequests();
         requests.push($.ajax({
           type: "POST",
           url: '/server_logs',
           dataType: "json",
-          data: JSON.stringify({'i': String(chat_history_skip), 'last_loaded': last_loaded}),
+          data: JSON.stringify({'i': String(chat_history_skip), 'last_loaded': last_loaded, 'options': options}),
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
             if (data.length != 0) {
@@ -764,6 +775,11 @@
           loadLogHistory();
           loadLogTrigger = false;
         }
+      });
+
+      $('.admin-log-filters').on('click', function() {
+        chat_history_skip = 0;
+        loadLogHistory();
       });
 
       $(document).on('change', '.user-status-select', function() {

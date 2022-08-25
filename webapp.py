@@ -587,7 +587,13 @@ def server_logs():
     if session_expired():
         return 'expired', 200
     if request.method == 'POST' and session['admin']:
-        logs = dumps(list(collection_logs.find().sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(500)))
+        logs = None
+        if request.json['options'][0] == 'true' and request.json['options'][1] == 'true':
+            logs = dumps(list(collection_logs.find().sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(500)))
+        elif request.json['options'][0] == 'true':
+            logs = dumps(list(collection_logs.find({'action': 'reported message'}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(500)))
+        elif request.json['options'][1] == 'true':
+            logs = dumps(list(collection_logs.find({'action': 'deleted message'}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(500)))
         return Response(logs, mimetype='application/json')
 
 @app.route('/server_users', methods=['GET', 'POST'])
