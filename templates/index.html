@@ -1666,6 +1666,7 @@
             contentType: 'application/json;charset=UTF-8',
             success: function(data) {
               popupSuccess();
+              document.activeElement.blur();
               space_name_input.setAttribute('data-pre', data.space_name);
               space_picture_input.setAttribute('data-pre', data.space_picture);
               space_description_input.setAttribute('data-pre', data.space_description);
