@@ -1654,9 +1654,9 @@
 
       document.getElementById('edit-space-profile').onsubmit = function (e) {
         e.preventDefault();
-        const space_name_input = document.getElementById('edit-space-name-input').value;
-        const space_picture_input = document.getElementById('edit-space-picture-input').value;
-        const space_description_input = document.getElementById('edit-space-description-input').value;
+        const space_name_input = document.getElementById('edit-space-name-input');
+        const space_picture_input = document.getElementById('edit-space-picture-input');
+        const space_description_input = document.getElementById('edit-space-description-input');
         if (space_name_input.value != space_name_input.getAttribute('data-pre') || space_picture_input.value != space_picture_input.getAttribute('data-pre') || space_description_input.value != space_description_input.getAttribute('data-pre')) {
           abortRequests();
           requests.push($.ajax({
