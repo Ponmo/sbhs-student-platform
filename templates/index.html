@@ -657,6 +657,7 @@
               chat_history_skip += 500;
               const newFragment = document.createDocumentFragment();
               data.forEach(function (item) {
+                item = item.doc[0];
                 let newNode = document.createElement('tr');
                 newNode.innerHTML = '<td style="white-space: pre;"></td><td></td><td style="white-space: pre;"></td><td></td><td></td><td><img class="expand-log" src="/static/images/expand.png"></td>'
                 if (item.action == 'deleted message') {
