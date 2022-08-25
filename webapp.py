@@ -591,9 +591,9 @@ def server_logs():
         if request.json['options'][0] == True and request.json['options'][1] == True:
             logs = dumps(list(collection_logs.find().sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(500)))
         elif request.json['options'][0] == True:
-            logs = dumps(list(collection_logs.find({'doc.0': {'action': 'reported message'}}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(500)))
+            logs = dumps(list(collection_logs.find({'doc.action': 'reported message'}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(500)))
         elif request.json['options'][1] == True:
-            logs = dumps(list(collection_logs.find({'doc.0': {'action': 'deleted message'}}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(500)))
+            logs = dumps(list(collection_logs.find({'doc.action': 'deleted message'}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(500)))
         return Response(logs, mimetype='application/json')
 
 @app.route('/server_users', methods=['GET', 'POST'])
