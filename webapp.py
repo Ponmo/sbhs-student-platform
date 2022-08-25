@@ -619,7 +619,7 @@ def edit_space_profile():
                 space_picture = '/static/images/Space.jpeg'
         except:
             space_picture = '/static/images/Space.jpeg'
-        collection_spaces.find_one_and_update({'_id': ObjectId(session['current_space'])}, {'$set': {'name': request.json['space_name'][:200], 'picture': request.json['space_picture'], 'description': request.json['space_description'][:200]}})
+        collection_spaces.find_one_and_update({'_id': ObjectId(session['current_space'])}, {'$set': {'name': request.json['space_name'][:200], 'picture': space_picture, 'description': request.json['space_description'][:200]}})
         return Response(dumps({'success': 'true'}), mimetype='application/json')
     return Response(dumps({'success': 'false'}), mimetype='application/json')
 
