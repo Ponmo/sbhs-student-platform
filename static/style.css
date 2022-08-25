@@ -1192,7 +1192,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   width: 100%;
   pointer-events: none;
 }
-.success-icon {
+#success-icon {
   width: 20vw;
   height: 15vw;
   position: absolute;

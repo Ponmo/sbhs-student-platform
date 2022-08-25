@@ -1662,9 +1662,16 @@
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
             if (data['success'] == 'true') {
-              document.getElementById('success-icon').src = '';
-              document.getElementById('success-icon').src = '/static/images/success.gif';
-            }
+              successPopup = document.getElementById('success-icon');
+              successPopup.src = '';
+              successPopup.src = '/static/images/success.gif';
+              $(successPopup).css('display', 'inline-block');
+              setTimeout(function() {
+                $(successPopup).animate({opacity: '0'}, 100, function() {
+                  $(successPopup).removeAttr("style");
+                });
+              }, 1000);
+              }
           }
         });
       }
