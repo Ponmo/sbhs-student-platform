@@ -2410,6 +2410,7 @@
 
       function popupSuccess() {
         successPopup = document.getElementById('success-icon');
+        document.getElementById('overlay').appendChild(successPopup);
         successPopup.src = '';
         successPopup.src = '/static/images/success.gif';
         $(successPopup).css('display', 'inline-block');
