@@ -1662,16 +1662,8 @@
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
             if (data['success'] == 'true') {
-              successPopup = document.getElementById('success-icon');
-              successPopup.src = '';
-              successPopup.src = '/static/images/success.gif';
-              $(successPopup).css('display', 'inline-block');
-              setTimeout(function() {
-                $(successPopup).animate({opacity: '0'}, 100, function() {
-                  $(successPopup).removeAttr("style");
-                });
-              }, 1000);
-              }
+              popupSuccess();
+            }
           }
         });
       }
@@ -2413,6 +2405,18 @@
         touchendX = e.changedTouches[0].screenX;
         touchendY = e.changedTouches[0].screenY;
         checkDirection();
+      }
+
+      function popupSuccess() {
+        successPopup = document.getElementById('success-icon');
+        successPopup.src = '';
+        successPopup.src = '/static/images/success.gif';
+        $(successPopup).css('display', 'inline-block');
+        setTimeout(function() {
+          $(successPopup).animate({opacity: '0'}, 300, function() {
+            $(successPopup).removeAttr("style");
+          });
+        }, 1000);
       }
 
       function hideSecondLayer() {
