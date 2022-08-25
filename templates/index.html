@@ -639,7 +639,7 @@
       }
 
       function loadLogHistory() {
-        const options = [document.getElementById('reported-message-filter').checked, document.getElementById('deleted-message-filter').checked];
+        const options = [document.getElementById("admin-search-bar").value.toUpperCase(), document.getElementById('reported-message-filter').checked, document.getElementById('deleted-message-filter').checked];
         abortRequests();
         requests.push($.ajax({
           type: "POST",
@@ -892,8 +892,12 @@
         }, 0);
       });
 
-      $('#admin-search-bar').keyup(function (e) {
-        const filter = document.getElementById("admin-search-bar").value.toUpperCase();
+      $('#admin-search-bar').keyup(function () {
+        $('#admin-logs-body').empty();
+        last_loaded = '';
+        chat_history_skip = 0;
+        loadLogHistory();
+        /*const filter = document.getElementById("admin-search-bar").value.toUpperCase();
         if (document.getElementById('admin-users-table').style.display != 'none') {
           if (filter != '') {
             document.querySelectorAll('.admin-users-table-row').forEach(function(entry) {
@@ -911,7 +915,7 @@
         }
         else if (document.getElementById('admin-logs-table').style.display != 'none') {
           filterLogs();
-        }
+        }*/
       });
 
       $(document).on('click', '#exit-server-settings', function() {
