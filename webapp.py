@@ -613,7 +613,13 @@ def edit_space_profile():
     if session_expired():
         return 'expired', 200
     if session['admin'] or space_admin():
-        collection_spaces.find_one_and_update({'_id': ObjectId(session['current_space'])}, {'$set': {'name': request.json['space_name'], 'picture': request.json['space_picture'], 'description': request.json['space_description']}})
+        space_picture = request.json['space_picture']
+        try:
+            if not requests.head(space_picture).headers["content-type"] in ("image/png", "image/jpeg", "image/jpg", "image/gif", "image/avif", "image/webp", "image/svg") or int(requests.get(space_picture, stream = True).headers['Content-length']) > 6000000:
+                space_picture = '/static/images/Space.jpeg'
+        except:
+            space_picture = '/static/images/Space.jpeg'
+        collection_spaces.find_one_and_update({'_id': ObjectId(session['current_space'])}, {'$set': {'name': request.json['space_name'][:200], 'picture': request.json['space_picture'], 'description': request.json['space_description'][:200]}})
         return Response(dumps({'success': 'true'}), mimetype='application/json')
     return Response(dumps({'success': 'false'}), mimetype='application/json')
 
