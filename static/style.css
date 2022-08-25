@@ -1193,10 +1193,12 @@ img { /* make images and create button undraggable and unhighlitable*/
   pointer-events: none;
 }
 .success-icon {
-  width: 150px;
-  height: 150px;
+  width: 20vw;
+  height: 15vw;
+  position: absolute;
   left: 50%;
   top: 50%;
+  transform: translate(-50%, -50%);
 }
 .delete-email-icon {
   width: 9px;
