@@ -1665,12 +1665,10 @@
             data: JSON.stringify({'space_name': space_name_input.value, 'space_picture': space_picture_input.value, 'space_description': space_description_input.value}),
             contentType: 'application/json;charset=UTF-8',
             success: function(data) {
-              if (data['success'] == 'true') {
-                popupSuccess();
-                space_name_input.setAttribute('data-pre', data.space_name);
-                space_picture_input.setAttribute('data-pre', data.space_picture);
-                space_description_input.setAttribute('data-pre', data.space_description);
-              }
+              popupSuccess();
+              space_name_input.setAttribute('data-pre', data.space_name);
+              space_picture_input.setAttribute('data-pre', data.space_picture);
+              space_description_input.setAttribute('data-pre', data.space_description);
             }
           }));
         }
