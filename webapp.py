@@ -588,11 +588,11 @@ def server_logs():
         return 'expired', 200
     if request.method == 'POST' and session['admin']:
         logs = None
-        if request.json['options'][0] == 'true' and request.json['options'][1] == 'true':
+        if request.json['options'][0] == True and request.json['options'][1] == True:
             logs = dumps(list(collection_logs.find().sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(500)))
-        elif request.json['options'][0] == 'true':
+        elif request.json['options'][0] == True:
             logs = dumps(list(collection_logs.find({'action': 'reported message'}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(500)))
-        elif request.json['options'][1] == 'true':
+        elif request.json['options'][1] == True:
             logs = dumps(list(collection_logs.find({'action': 'deleted message'}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(500)))
         return Response(logs, mimetype='application/json')
 
