@@ -444,11 +444,11 @@
             newNodeChild.className = 'directory-space-description';
             newNodeChild.textContent = item['description'];
             newNode.appendChild(newNodeChild);
-            newNodeChild = document.createElement('div');
+            newNodeChild = document.createElement('span');
             newNodeChild.className = 'directory-space-members';
-            newNodeChild.textContent = '👥' + item['members'].length;
+            newNodeChild.textContent = '👥 ' + item['members'].length;
             newNode.appendChild(newNodeChild);
-            newNodeChild = document.createElement('div');
+            newNodeChild = document.createElement('span');
             newNodeChild.className = 'directory-space-joined-status';
             if(item['members'].some(row => row.includes(user_id))){
               newNodeChild.textContent = 'Joined';
