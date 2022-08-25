@@ -1654,7 +1654,8 @@
 
       document.getElementById('edit-space-profile').onsubmit = function (e) {
         e.preventDefault();
-        $.ajax({
+        abortRequests();
+        requests.push($.ajax({
           type: 'POST',
           url: '/edit_space_profile',
           dataType: "json",
@@ -1665,7 +1666,7 @@
               popupSuccess();
             }
           }
-        });
+        }));
       }
 
       $(document).on('click', '#exit-space-settings', function() {
