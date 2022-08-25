@@ -295,6 +295,7 @@
         </form>
       </div>
     </div>
+    <!--New Modals Here-->
     <div id="confirm-delete-space" class="modal">
       <div class="modal-content">
         <span id="close-confirm-delete-space" class="close">&times;</span>
@@ -308,14 +309,42 @@
     <div id="confirm-leave-space" class="modal">
       <div class="modal-content">
         <span id="close-confirm-leave-space" class="close">&times;</span>
-        <p class="modal-header">Are you sure you wa</p>
-        <form id="confirm-delete-space-form">
-          <label for="confirm-space-name">Enter space name to confirm deletion:</label><br>
-          <input type="text" id="confirm-space-name"  maxlength="200"><br>
+        <p class="modal-header">Are you sure you want to leave this space?</p>
+        <div class="confirm-button" id="confirm-leave-space-button">Confirm</div>
+      </div>
+    </div>
+    <div id="confirm-delete-section" class="modal">
+      <div class="modal-content">
+        <span id="close-confirm-delete-section" class="close">&times;</span>
+        <p class="modal-header">Are you sure you want to delete this section?</p>
+        <div class="confirm-button" id="confirm-delete-section-button">Confirm</div>
+      </div>
+    </div>
+    <div id="confirm-delete-channel" class="modal">
+      <div class="modal-content">
+        <span id="close-confirm-delete-channel" class="close">&times;</span>
+        <p class="modal-header">Are you sure you want to delete this channel?</p>
+        <div class="confirm-button" id="confirm-delete-channel-button">Confirm</div>
+      </div>
+    </div>
+    <div id="confirm-delete-message" class="modal">
+      <div class="modal-content">
+        <span id="close-confirm-delete-message" class="close">&times;</span>
+        <p class="modal-header">Are you sure you want to delete this message?</p>
+        <div class="confirm-button" id="confirm-delete-message-button">Confirm</div>
+      </div>
+    </div>
+    <div id="confirm-report-message" class="modal"> <!--Backend check for character limit and other security-->
+      <div class="modal-content">
+        <span id="close-confirm-delete-message" class="close">&times;</span>
+        <form id="confirm-report-message-form">
+          <label for="confirm-report-message">Why are you reporting this message?</label><br>
+          <textarea class="report-message-note" rows="1" placeholder="Reason" maxlength="800"></textarea>
           <input type="submit" value="Submit">
         </form>
       </div>
     </div>
+
 
     <ul id="section-menu" class="context-menu">
       <li id="edit-section" class="blue-entry pointer">Edit Section</li> 
@@ -619,7 +648,6 @@
           data: JSON.stringify({'i': String(chat_history_skip), 'options': options}),
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
-            alert(JSON.stringify(data));
             if (data.length != 0) {
               const skip = data.map(function(e) { return e._id.$oid; }).indexOf(last_loaded);
               if (skip != -1) {

@@ -514,7 +514,7 @@ def delete_message():
                     collection_messages.find_one_and_update({'_id': ObjectId(document_list[message_index-1]['_id'])}, {'$set': {'combine': 'false'}}) 
             #collection_deleted.insert_one({'name': session['users_email'], 'datetime': datetime.now().isoformat() + 'Z', 'deleted_message_content': deleted_message}) Used to add to logs once deleted.
             collection_messages.delete_one({"_id": ObjectId(request.json['message_id'])})
-            collection_logs.insert_one({'name': session['users_name'], 'user_id': session['unique_id'], 'email': session['users_email'], 'action': 'deleted message', 'by': deleted_message['name'], 'by_email': deleted_message['email'], 'in': session['current_space_name'], 'details': deleted_message, 'datetime': datetime.now().isoformat() + 'Z'})
+            collection_logs.insert_one({'doc': [{'name': session['users_name'], 'user_id': session['unique_id'], 'email': session['users_email'], 'action': 'deleted message', 'by': deleted_message['name'], 'by_email': deleted_message['email'], 'in': session['current_space_name'], 'details': deleted_message, 'datetime': datetime.now().isoformat() + 'Z'}]})
             return Response(dumps({'success': message_index}), mimetype='application/json')
     return Response(dumps({'success': 'false'}), mimetype='application/json')
 
@@ -528,8 +528,8 @@ def report_message():
         return 'expired', 200
     if request.method == 'POST' and space_member():
         reported_message = collection_messages.find_one({'_id': ObjectId(request.json['message_id'])})
-        if collection_logs.count_documents({'details': reported_message}) == 0:
-            collection_logs.insert_one({'name': session['users_name'], 'user_id': session['unique_id'], 'email': session['users_email'], 'action': 'reported message', 'by': reported_message['name'], 'by_email': reported_message['email'], 'in': session['current_space_name'], 'details': reported_message, 'datetime': datetime.now().isoformat() + 'Z'})
+        if collection_logs.count_documents({'doc': {'details': reported_message}}) == 0:
+            collection_logs.insert_one({'doc': [{'name': session['users_name'], 'user_id': session['unique_id'], 'email': session['users_email'], 'action': 'reported message', 'by': reported_message['name'], 'by_email': reported_message['email'], 'in': session['current_space_name'], 'details': reported_message, 'datetime': datetime.now().isoformat() + 'Z'}]})
             return Response(dumps({'success': 'true'}), mimetype='application/json')
         else:
             return Response(dumps({'success': 'many'}), mimetype='application/json')
@@ -591,9 +591,9 @@ def server_logs():
         if request.json['options'][0] == True and request.json['options'][1] == True:
             logs = dumps(list(collection_logs.find().sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(500)))
         elif request.json['options'][0] == True:
-            logs = dumps(list(collection_logs.find({'action': 'reported message'}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(500)))
+            logs = dumps(list(collection_logs.find({'doc': {'action': 'reported message'}}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(500)))
         elif request.json['options'][1] == True:
-            logs = dumps(list(collection_logs.find({'action': 'deleted message'}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(500)))
+            logs = dumps(list(collection_logs.find({'doc': {'action': 'deleted message'}}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(500)))
         return Response(logs, mimetype='application/json')
 
 @app.route('/server_users', methods=['GET', 'POST'])
