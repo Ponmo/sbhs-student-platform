@@ -54,3 +54,9 @@
   margin-top: 10px;
   color: #dc3544;
 }
+
+@media only screen and (max-width: 400px) {
+  #log-in-container {
+    width: 100vw;
+  }
+}
