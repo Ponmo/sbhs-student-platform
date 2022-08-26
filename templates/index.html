@@ -1835,6 +1835,10 @@
       $(document).on('click', '#edit-room', function() {
         editChannelModal.style.display = "block";
       });
+
+      editChannelModal.onsubmit = function (e) {
+        e.preventDefault();
+      }
       
       $(document).on('click', '#close-edit-channel', function() {
         editChannelModal.style.display = "none";
@@ -1844,6 +1848,10 @@
       $(document).on('click', '#edit-section', function() {
         editSectionModal.style.display = "block";
       });
+
+      editSectionModal.onsubmit = function (e) {
+        e.preventDefault();
+      }
       
       $(document).on('click', '#close-edit-section', function() {
         editSectionModal.style.display = "none";
