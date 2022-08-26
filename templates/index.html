@@ -530,18 +530,15 @@
             newNodeChild.className = 'directory-space-members';
             newNodeChild.textContent = '👥 ' + item['members'].length;
             newNode2.appendChild(newNodeChild);
-            // newNode.appendChild(newNodeChild);
             newNodeChild = document.createElement('span');
-            newNodeChild.className = 'directory-space-joined-status';
             if(item['members'].some(row => row.includes(user_id))){
               newNodeChild.textContent = 'Joined';
-              newNodeChild.className = 'joined-status';
+              newNodeChild.className = 'directory-space-joined-status joined-status';
             }
             else { // Have invite only/open instead
               newNodeChild.textContent = 'Not Joined';
-              newNodeChild.className = 'not-joined-status';
+              newNodeChild.className = 'directory-space-joined-status not-joined-status';
             }
-            // newNode.appendChild(newNodeChild);
             newNode2.appendChild(newNodeChild);
             document.getElementById('directory-space').prepend(newNode);
           });
@@ -1193,7 +1190,7 @@
                     tableData.appendChild(toolTip);
                     tableData.appendChild(newNodeChild);
                     
-                    let newNodeChildChild = document.createElement('span');
+                    let newNodeChildChild = documentx.createElement('span');
                     newNodeChildChild.className = "tooltiptext tooltip-top";
                     newNodeChildChild.textContent = data['joined_spaces_names'][i*4+j];
                     toolTip.appendChild(newNodeChildChild);
