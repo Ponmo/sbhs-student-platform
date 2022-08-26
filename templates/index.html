@@ -1797,7 +1797,8 @@
         createSectionModal.style.display = "none";
       });
 
-      let spaceSettingsPopup = document.getElementById('space-settings-popup'); 
+      let deleteSpaceModal = document.getElementById("con");
+
       window.onclick = function(event) {
         if (event.target == createRoomModal) {
           createRoomModal.style.display = "none";
@@ -1808,7 +1809,7 @@
         if (event.target == createSectionModal) {
           createSectionModal.style.display = "none";
         }
-        }
+      }
 
       $("#chat").on('mouseenter', '.message-container-combine', function(){
         $(this).find(".message-combine-time").css("visibility", "visible");
