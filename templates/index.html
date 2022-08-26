@@ -85,13 +85,15 @@
         <img src="/static/images/temporary-search.png" id="admin-search-button" class="pointer">
       </div>
       <div id="admin-filters">
-        <form>
+        <form class="no-drag">
           <input type="checkbox" class="admin-log-filters" id="deleted-message-filter" name="deleted-message-filter" checked>
           <label for="deleted-message-filter">Deleted messages</label>
           <input type="checkbox" class="admin-log-filters" id="reported-message-filter" name="reported-message-filter" checked>
           <label for="reported-message-filter">Reported messages</label>
           <input type="checkbox" class="admin-log-filters" id="edited-message-filter" name="edited-message-filter" checked>
           <label for="edited-message-filter">Edited messages</label>
+          <input type="checkbox" class="admin-log-filters" id="expand-message-filter" name="expand-message-filter">
+          <label for="expand-message-filter">Expand all</label>
         </form>
       </div>
       <div id="admin-table-wrapper">
@@ -346,12 +348,22 @@
         </form>
       </div>
     </div>
-    <div id="edit-channel" class="modal"> <!--Backend check for character limit and other security-->
+    <div id="edit-channel-modal" class="modal"> <!--Backend check for character limit and other security-->
       <div class="modal-content">
         <span id="close-edit-channel" class="close">&times;</span>
         <form id="edit-channel-form">
           <label for="new-channel-name">Channel Name:</label><br>
           <input type="text" id="new-channel-name"  maxlength="200"><br>
+          <input type="submit" value="Submit">
+        </form>
+      </div>
+    </div>
+    <div id="edit-section-modal" class="modal"> <!--Backend check for character limit and other security-->
+      <div class="modal-content">
+        <span id="close-edit-section" class="close">&times;</span>
+        <form id="edit-section-form">
+          <label for="new-section-name">Section Name:</label><br>
+          <input type="text" id="new-section-name"  maxlength="200"><br>
           <input type="submit" value="Submit">
         </form>
       </div>
@@ -647,7 +659,9 @@
                 newFragment.appendChild(newNode);
                 newNode = document.createElement('tr');
                 newNode.innerHTML = '<td colspan="6" width="100%"><div class="message-container-logs"><img class="profile-picture pointer"><p class="message-title"><span style="font-weight: bold;"></span><span class="datetime"></span></p><p class="message-content-logs"></p></div></td>';
-                newNode.style.display = 'none';
+                if (!document.getElementById('expand-message-filter').checked) {
+                  newNode.style.display = 'none';
+                }
                 newNode.style.backgroundColor = '#32353a';
                 newNode.firstElementChild.firstElementChild.firstElementChild.src = item.details.picture;
                 newNode.querySelector('.message-title').firstElementChild.textContent = item.details.name;
@@ -1769,6 +1783,33 @@
         deleteMessageModal.style.display = "none";
       });
 
+      let reportMessageModal = document.getElementById("confirm-report-message");
+      $(document).on('click', '#report-message', function() {
+        reportMessageModal.style.display = "block";
+      });
+      
+      $(document).on('click', '#close-confirm-report-message', function() {
+        reportMessageModal.style.display = "none";
+      });
+
+      let editChannelModal = document.getElementById("edit-channel-modal");
+      $(document).on('click', '#edit-room', function() {
+        editChannelModal.style.display = "block";
+      });
+      
+      $(document).on('click', '#close-edit-channel', function() {
+        editChannelModal.style.display = "none";
+      });
+
+      let editSectionModal = document.getElementById("edit-section-modal");
+      $(document).on('click', '#edit-section', function() {
+        editSectionModal.style.display = "block";
+      });
+      
+      $(document).on('click', '#close-edit-section', function() {
+        editSectionModal.style.display = "none";
+      });
+
       // confirm-delete-message confirm-report-message edit-channel
       window.onclick = function(event) {
         if (event.target == createRoomModal) {
@@ -1789,8 +1830,17 @@
         if (event.target == deleteChannelModal) {
           deleteChannelModal.style.display = "none";
         }
-        if (event.target == deleteChannelModal) {
+        if (event.target == deleteMessageModal) {
+          deleteMessageModal.style.display = "none";
+        }
+        if (event.target == reportMessageModal) {
           deleteChannelModal.style.display = "none";
+        }
+        if (event.target == editChannelModal) {
+          editChannelModal.style.display = "none";
+        }
+        if (event.target == editSectionModal) {
+          editSectionModal.style.display = "none";
         }
       }
 
