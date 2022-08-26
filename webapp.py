@@ -590,11 +590,11 @@ def server_logs():
         logs = None
         search = '.*' + request.json['options'][0] + '.*'
         if request.json['options'][1] == True and request.json['options'][2] == True:
-            logs = dumps(list(collection_logs.find({'$or': [{'name': {'$regex': search}}, {'email': {'$regex': search}}, {'by': {'$regex': search}}, {'by_email': {'$regex': search}}, {'in': {'$regex': search}}, {'details.message': {'$regex': search}}]}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(500)))
+            logs = dumps(list(collection_logs.find({'$or': [{'name': {'$regex': search}}, {'email': {'$regex': search}}, {'by': {'$regex': search}}, {'by_email': {'$regex': search}}, {'in': {'$regex': search}}, {'details.message': {'$regex': search}}]}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(10)))
         elif request.json['options'][1] == True:
-            logs = dumps(list(collection_logs.find({'action': 'reported message'}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(500)))
+            logs = dumps(list(collection_logs.find({'$and': [{'action': 'reported message'}, {'$or': [{'name': {'$regex': search}}, {'email': {'$regex': search}}, {'by': {'$regex': search}}, {'by_email': {'$regex': search}}, {'in': {'$regex': search}}, {'details.message': {'$regex': search}}]}]}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(10)))
         elif request.json['options'][2] == True:
-            logs = dumps(list(collection_logs.find({'action': 'deleted message'}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(500)))
+            logs = dumps(list(collection_logs.find({'$and': [{'action': 'deleted message'}, {'$or': [{'name': {'$regex': search}}, {'email': {'$regex': search}}, {'by': {'$regex': search}}, {'by_email': {'$regex': search}}, {'in': {'$regex': search}}, {'details.message': {'$regex': search}}]}]}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(10)))
         return Response(logs, mimetype='application/json')
 
 @app.route('/server_users', methods=['GET', 'POST'])

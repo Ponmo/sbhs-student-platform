@@ -605,39 +605,6 @@
         loadLogHistory();
       });
 
-      function filterLogs() {
-        /*const filter = document.getElementById("admin-search-bar").value.toUpperCase();
-        document.querySelectorAll('.admin-logs-table-row').forEach(function(entry) {
-          if(entry.textContent.toUpperCase().indexOf(filter) > -1) {
-            $(entry).show();
-          }
-          else {
-            $(entry).hide();
-            $(entry).find('.expand-log').animate(
-              { deg: -90 },
-              {
-                duration: 80,
-                step: function(now) {
-                  $(this).css({ transform: 'rotate(' + now + 'deg)' });
-                }
-              }
-            );
-            $(entry.nextElementSibling).hide();
-          }
-        });
-        if (document.getElementById('reported-message-filter').checked == false) {
-          $(".admin-logs-reported-message").hide();
-          $(".admin-logs-reported-message-details").hide();
-          $(".expand-log-reported-message").removeAttr("style");
-        }
-        if (document.getElementById('deleted-message-filter').checked == false) {
-          $(".admin-logs-deleted-message").hide();
-          $(".admin-logs-deleted-message-details").hide();
-          $(".expand-log-deleted-message").removeAttr("style");
-        }
-        //reappend existing tr that says scrolldown for more...*/
-      }
-
       function loadLogHistory() {
         const options = [document.getElementById("admin-search-bar").value, document.getElementById('reported-message-filter').checked, document.getElementById('deleted-message-filter').checked];
         abortRequests();
@@ -654,19 +621,19 @@
                 chat_history_skip += skip + 1;
                 data.splice(0, skip + 1);
               }
-              chat_history_skip += 500;
+              chat_history_skip += 10;
               const newFragment = document.createDocumentFragment();
               data.forEach(function (item) {
                 let newNode = document.createElement('tr');
                 newNode.innerHTML = '<td style="white-space: pre;"></td><td></td><td style="white-space: pre;"></td><td></td><td></td><td><img class="expand-log" src="/static/images/expand.png"></td>'
-                if (item.action == 'deleted message') {
+                /*if (item.action == 'deleted message') {
                   newNode.className = 'admin-logs-table-row admin-logs-deleted-message pointer';
                   newNode.querySelector('.expand-log').className += ' expand-log-deleted-message';
                 }
                 else if (item.action == 'reported message') {
                   newNode.className = 'admin-logs-table-row admin-logs-reported-message pointer';
                   newNode.querySelector('.expand-log').className += ' expand-log-reported-message';
-                }
+                }*/
                 newNode.firstElementChild.textContent = item.name + '\r\n' + item.email;
                 newNode.firstElementChild.nextElementSibling.textContent = item.action;
                 newNode.firstElementChild.nextElementSibling.nextElementSibling.textContent = item.by + '\r\n' + item.by_email;
@@ -690,22 +657,12 @@
                 newFragment.appendChild(newNode);
               });
               document.getElementById('admin-logs-body').appendChild(newFragment);
-              filterLogs();
               last_loaded = data[data.length - 1]._id.$oid;
               loadLogTrigger = true;
             }
           }
         }));
       }
-
-      /*$("#deleted-message-filter").click(function() {
-        last_loaded = '';
-        loadLogHistory();
-      });
-      $("#reported-message-filter").click(function() {
-        last_loaded = '';
-        loadLogHistory();
-      });*/
 
       $(document).on('click', '#admin-users', function() {
         $('.active-space').attr('style', '');
@@ -896,25 +853,6 @@
         last_loaded = '';
         chat_history_skip = 0;
         loadLogHistory();
-        /*const filter = document.getElementById("admin-search-bar").value.toUpperCase();
-        if (document.getElementById('admin-users-table').style.display != 'none') {
-          if (filter != '') {
-            document.querySelectorAll('.admin-users-table-row').forEach(function(entry) {
-              if(entry.firstElementChild.firstElementChild.nextSibling.textContent.toUpperCase().indexOf(filter) > -1 || entry.firstElementChild.nextElementSibling.textContent.toUpperCase().indexOf(filter) > -1) {
-                $(entry).show();
-              }
-              else {
-                $(entry).hide();
-              }
-            });
-          }
-          else {
-            $('.admin-users-table-row').show();
-          }
-        }
-        else if (document.getElementById('admin-logs-table').style.display != 'none') {
-          filterLogs();
-        }*/
       });
 
       $(document).on('click', '#exit-server-settings', function() {
