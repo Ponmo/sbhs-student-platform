@@ -214,7 +214,7 @@ def render_main_page(space_id = None):
 
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():
-    if session_expired():
+    if session_expired() or banned():
         return 'expired', 200
     if request.method == 'POST':
         session['logged'] = False # Prevents browsers from using cached session data to log in. NOTE: We use server-side sessions now
@@ -225,7 +225,7 @@ def logout():
 
 @app.route('/list_spaces', methods=['GET', 'POST'])
 def list_spaces():
-    if session_expired():
+    if session_expired() or banned():
         return 'expired', 200
     if request.method == 'POST':
         user_spaces = collection_users.find_one({"_id": session['unique_id']})['joined']
@@ -243,7 +243,7 @@ def list_spaces():
 
 @app.route('/user_spaces', methods=['GET', 'POST'])
 def user_spaces():
-    if session_expired():
+    if session_expired() or banned():
         return 'expired', 200
     if request.method == 'POST':
         user_spaces = collection_users.find_one({"_id": session['unique_id']})['joined']
@@ -260,7 +260,7 @@ def user_spaces():
 
 @app.route('/space', methods=['GET', 'POST'])
 def render_space():
-    if session_expired():
+    if session_expired() or banned():
         return 'expired', 200
     if request.method == 'POST':
         space = collection_spaces.find_one({'_id': ObjectId(request.json['space_id'])})
@@ -280,7 +280,7 @@ def render_space():
 
 @app.route('/leave_space', methods=['GET', 'POST'])
 def leave_space():
-    if session_expired():
+    if session_expired() or banned():
         return 'expired', 200
     if request.method == 'POST' and not space_owner():
         joined = collection_users.find_one({"_id": session['unique_id']})['joined']
@@ -298,7 +298,7 @@ def leave_space():
 
 @app.route('/chat_history', methods=['GET', 'POST'])
 def chat_history():
-    if session_expired():
+    if session_expired() or banned():
         return 'expired', 200
     if request.method == 'POST' and space_member():
         chat_history = dumps(list(collection_messages.find({'room': request.json['room_id']}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(50)))
@@ -306,7 +306,7 @@ def chat_history():
 
 @app.route('/email_history', methods=['GET', 'POST']) #return only emails users can see, and check if space admin
 def email_history():
-    if session_expired():
+    if session_expired() or banned():
         return 'expired', 200
     if request.method == 'POST':
         email_history = collection_emails.find({'room': request.json['room_id']}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(50)
@@ -318,7 +318,7 @@ def email_history():
 
 @app.route('/send_email', methods=['GET', 'POST'])
 def send_email():
-    if session_expired():
+    if session_expired() or banned():
         return 'expired', 200
     if request.method == 'POST' and (space_admin() or session['admin']):
         sender_email = 'sbhs.platform.test@gmail.com'
@@ -355,7 +355,7 @@ def send_email():
 
 @app.route('/delete_room', methods=['GET', 'POST'])
 def delete_room():
-    if session_expired():
+    if session_expired() or banned():
         return 'expired', 200
     if request.method == 'POST' and (space_admin() or session['admin']):
         room_count = collection_rooms.count_documents({'space': session['current_space']}) - collection_rooms.count_documents({'space': session['current_space'], 'section': 'special'})
@@ -376,7 +376,7 @@ def delete_room():
 
 @app.route('/create_room', methods=['GET', 'POST'])
 def create_room():
-    if session_expired():
+    if session_expired() or banned():
         return 'expired', 200
     if request.method == 'POST' and (space_admin() or session['admin']):
         room_id = ObjectId()
@@ -391,7 +391,7 @@ def create_room():
 
 @app.route('/create_section', methods=['GET', 'POST'])
 def create_section():
-    if session_expired():
+    if session_expired() or banned():
         return 'expired', 200
     if request.method == 'POST' and (space_admin() or session['admin']):
         section_id = ObjectId()
@@ -407,7 +407,7 @@ def create_section():
 
 @app.route('/delete_section', methods=['GET', 'POST'])
 def delete_section():
-    if session_expired():
+    if session_expired() or banned():
         return 'expired', 200
     if request.method == 'POST' and (space_admin() or session['admin']):
         section_count = collection_sections.count_documents({'space': session['current_space']})
@@ -434,7 +434,7 @@ def delete_section():
 
 @app.route('/create_space', methods=['GET', 'POST']) #Check if space with name already exists...
 def create_space():
-    if session_expired():
+    if session_expired() or banned():
         return 'expired', 200
     user = collection_users.find_one({"_id": session['unique_id']})
     if request.method == 'POST' and user['owns'] < 3:
@@ -466,7 +466,7 @@ def create_space():
 
 @app.route('/delete_space', methods=['GET', 'POST'])
 def delete_space():
-    if session_expired():
+    if session_expired() or banned():
         return 'expired', 200
     if request.method == 'POST' and (space_owner() or session['admin']):
         space = collection_spaces.find_one({'_id': ObjectId(session['current_space'])})
@@ -482,7 +482,7 @@ def delete_space():
 
 @app.route('/join_space', methods=['GET', 'POST'])
 def join_space():
-    if session_expired():
+    if session_expired() or banned():
         return 'expired', 200
     if request.method == 'POST':
         joined = collection_users.find_one({"_id": session['unique_id']})['joined']
@@ -500,7 +500,7 @@ def join_space():
 
 @app.route('/delete_message', methods=['GET', 'POST']) #space admin and message in space
 def delete_message():
-    if session_expired():
+    if session_expired() or banned():
         return 'expired', 200
     if request.method == 'POST':
         deleted_message = collection_messages.find_one({'_id': ObjectId(request.json['message_id'])})
@@ -523,7 +523,7 @@ def delete_message():
 
 @app.route('/report_message', methods=['GET', 'POST'])
 def report_message():
-    if session_expired():
+    if session_expired() or banned():
         return 'expired', 200
     if request.method == 'POST' and space_member():
         reported_message = collection_messages.find_one({'_id': ObjectId(request.json['message_id'])})
@@ -540,7 +540,7 @@ def report_message():
 
 @app.route('/open_member_profile', methods=['GET', 'POST'])
 def member_profile():
-    if session_expired():
+    if session_expired() or banned():
         return 'expired', 200
     if request.method == 'POST':
         member = collection_users.find_one({'_id': request.json['user_id']})
@@ -563,7 +563,7 @@ def member_profile():
 
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
-    if session_expired():
+    if session_expired() or banned():
         return 'expired', 200
     if request.method == 'POST':
         data = collection_users.find_one({'_id': session['unique_id']})
@@ -573,7 +573,7 @@ def profile():
 
 @app.route('/sorted_spaces', methods=['GET', 'POST'])
 def sorted_spaces():
-    if session_expired():
+    if session_expired() or banned():
         return 'expired', 200
     if request.method == 'POST':
         collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': request.json['space_list']}})
@@ -585,7 +585,7 @@ def sorted_spaces():
 
 @app.route('/server_logs', methods=['GET', 'POST'])
 def server_logs():
-    if session_expired():
+    if session_expired() or banned():
         return 'expired', 200
     if request.method == 'POST' and session['admin']:
         logs = None
@@ -610,7 +610,7 @@ def server_logs():
 
 @app.route('/server_users', methods=['GET', 'POST'])
 def server_users():
-    if session_expired():
+    if session_expired() or banned():
         return 'expired', 200
     if request.method == 'POST' and session['admin']:
         users = dumps(list(collection_users.find().sort('_id', pymongo.DESCENDING)))
@@ -618,7 +618,7 @@ def server_users():
 
 @app.route('/change_user_status', methods=['GET', 'POST'])
 def change_user_status():
-    if session_expired():
+    if session_expired() or banned():
         return 'expired', 200
     if request.method == 'POST' and session['admin']:
         if request.json['status'] in {'banned', 'user', 'admin'}:
@@ -628,7 +628,7 @@ def change_user_status():
 
 @app.route('/edit_space_profile', methods=['POST'])
 def edit_space_profile():
-    if session_expired():
+    if session_expired() or banned():
         return 'expired', 200
     if session['admin'] or space_admin():
         space_picture = request.json['space_picture']
@@ -672,7 +672,7 @@ def stopped_typing(data):
 
 @socketio.on('send_message')
 def send_message(data):
-    if session_expired():
+    if session_expired() or banned():
         emit('expired')
         return
     if space_member() and valid_room(data['room_id']):
@@ -742,7 +742,7 @@ def created_section(data):
 
 @socketio.on('deleted_message')
 def deleted_message(data):
-    if session_expired():
+    if session_expired() or banned():
         emit('expired')
         return
     if space_admin() or session['admin'] or session['unique_id'] == collection_messages.find_one({'_id': ObjectId(data['message_id'])})['user_id']:
@@ -753,7 +753,7 @@ def deleted_message(data):
 
 @socketio.on('edited_message')
 def edited_message(data):
-    if session_expired():
+    if session_expired() or banned():
         emit('expired')
         return
     if space_admin() or session['admin'] or session['unique_id'] == collection_messages.find_one({'_id': ObjectId(data['message_id'])})['user_id']:
@@ -818,6 +818,12 @@ def space_owner():
 
 def space_member():
     if any(session['unique_id'] in item for item in collection_spaces.find_one({'_id': ObjectId(session['current_space'])})['members']):
+        return True
+    return False
+
+def banned():
+    if collection_users.find_one({'_id': session['unique_id']})['status'] == 'banned':
+        session.clear()
         return True
     return False
 
