@@ -535,9 +535,11 @@
             newNodeChild.className = 'directory-space-joined-status';
             if(item['members'].some(row => row.includes(user_id))){
               newNodeChild.textContent = 'Joined';
+              newNodeChild.className = 'joined-status';
             }
-            else {
+            else { // Have invite only/open instead
               newNodeChild.textContent = 'Not Joined';
+              newNodeChild.className = 'not-joined-status';
             }
             // newNode.appendChild(newNodeChild);
             newNode2.appendChild(newNodeChild);
