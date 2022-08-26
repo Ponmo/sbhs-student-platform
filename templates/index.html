@@ -1503,7 +1503,7 @@
 
       $(document).on('click', '#delete-room', function(e) {
         const deleted_room = selected_room;
-        const deleted_room_section = $('#' + selected_room).attr('data-section');
+        const deleted_room_section = $('#' + deleted_room).attr('data-section');
         $.ajax({
           type: "POST",
           url: '/delete_room',
@@ -1530,6 +1530,7 @@
           document.getElementById('room-menu').style.top = mouseY(event) + 'px';
           document.getElementById('room-menu').style.left = mouseX(event) + 'px';
           $(document.getElementById('room-menu')).show();
+          document.getElementById('new-channel-name').value = document.getElementById(selected_room).textContent;
           e.preventDefault();
         }
       });
@@ -1537,18 +1538,19 @@
       document.getElementById('create-room-form').onsubmit = function (e) {
         e.preventDefault();
         let room_name = document.getElementById('room-name').value.trim();
+        let section_id = selected_section;
         if (room_name.length) {
           $.ajax({
             type: 'POST',
             url: '/create_room',
             dataType: 'json',
-            data: JSON.stringify({'room_name': room_name, 'section_id': selected_section}),
+            data: JSON.stringify({'room_name': room_name, 'section_id': section_id}),
             contentType: 'application/json;charset=UTF-8',
             success: function(room) {
               socket.emit('created_room', {
                 room_id: room['_id']['$oid'],
                 name: room_name,
-                section_id: selected_section
+                section_id: section_id
               });
               document.getElementById("create-room").style.display = "none";
             }
@@ -1578,16 +1580,17 @@
       }
 
       $(document).on('click', '#delete-section', function () {
+        section_id = selected_section;
         $.ajax({
           type: 'POST',
           url: '/delete_section',
           dataType: "json",
-          data: JSON.stringify({'section_id': selected_section}),
+          data: JSON.stringify({'section_id': section_id}),
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
             if (data['success'] == 'true') {
               socket.emit('deleted_section', {
-                section_id: selected_section
+                section_id: section_id
               });
             }
             else {
@@ -1604,6 +1607,7 @@
           document.getElementById('section-menu').style.top = mouseY(event) + 'px';
           document.getElementById('section-menu').style.left = mouseX(event) + 'px';
           $(document.getElementById('section-menu')).show();
+          document.getElementById('new-section-name').value = document.getElementById(selected_section).textContent;
           e.preventDefault();
         }
       });
