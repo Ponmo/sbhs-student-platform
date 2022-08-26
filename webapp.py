@@ -590,7 +590,7 @@ def server_logs():
     if request.method == 'POST' and session['admin']:
         logs = None
         search = '.*' + request.json['options'][0] + '.*'
-        if any(request.json['options']):
+        if not any(request.json['options']):
             logs = dumps(list(collection_logs.find({'$or': [{'name': {'$regex': search}}, {'email': {'$regex': search}}, {'by': {'$regex': search}}, {'by_email': {'$regex': search}}, {'in': {'$regex': search}}, {'details.message': {'$regex': search}}]}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(50)))
         #elif request.json['options'][1] and request.json['options'][2]:
             #logs = dumps(list(collection_logs.find({'$and': [{'action': {'$in': ['reported message', ]}}, {'$or': [{'name': {'$regex': search}}, {'email': {'$regex': search}}, {'by': {'$regex': search}}, {'by_email': {'$regex': search}}, {'in': {'$regex': search}}, {'details.message': {'$regex': search}}]}]}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(50)))
