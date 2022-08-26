@@ -65,7 +65,7 @@
     <div id="home-page">
       <img id="logo" src="/static/images/sbhs.png">
       <div class="main-header">
-        <img class="pointer" id="server-settings-button" src="/static/images/settings-white.png">
+        <img class="white-icon pointer" id="server-settings-button" src="/static/images/settings.svg">
       </div>
       <div class="feed"><p>This webapp was made possible by students of the Computer Science Academy and the Multimedia Arts and Design Academy.</p></div>
       <!--<div id="special-announcements" class="home-grid"></div>
@@ -136,7 +136,7 @@
       <div id="content">
         <div id="header">
           <span id="header_text"></span>
-          <img class="pointer" id="space-settings-button" src="/static/images/settings-white.png">
+          <img class="white-icon pointer" id="space-settings-button" src="/static/images/settings.svg">
         </div>
         <div id="information">
           <span id="left-info">
@@ -207,7 +207,7 @@
         <img src={{ user_picture }} alt="pfp" class="profile-picture pointer">
         <p id="username" class="pointer">{{ user_name }}</p>
         <p id="student_id" class="pointer">Santa Barbara High School</p>
-        <img class="pointer" id="settings" src="/static/images/settings-white.png">
+        <img class="white-icon pointer" id="settings" src="/static/images/settings.svg">
       </div>
 
       <img class="pointer home" id="home_button_mobile" src="/static/images/home-white.png">
@@ -296,7 +296,7 @@
       </div>
     </div>
     <!--New Modals Here-->
-    <div id="confirm-delete-space" class="modal">
+    <div id="confirm-delete-space" class="modal">  <!--Backend check for character limit and other security-->
       <div class="modal-content">
         <span id="close-confirm-delete-space" class="close">&times;</span>
         <form id="confirm-delete-space-form">
@@ -339,7 +339,17 @@
         <span id="close-confirm-delete-message" class="close">&times;</span>
         <form id="confirm-report-message-form">
           <label for="confirm-report-message">Why are you reporting this message?</label><br>
-          <textarea class="report-message-note" rows="1" placeholder="Reason" maxlength="800"></textarea>
+          <textarea id="report-message-note" rows="1" placeholder="Reason" maxlength="800"></textarea>
+          <input type="submit" value="Submit">
+        </form>
+      </div>
+    </div>
+    <div id="edit-channel" class="modal"> <!--Backend check for character limit and other security-->
+      <div class="modal-content">
+        <span id="close-edit-channel" class="close">&times;</span>
+        <form id="edit-channel-form">
+          <label for="section-name">Section Name:</label><br>
+          <input type="text" id="section-name"  maxlength="200"><br>
           <input type="submit" value="Submit">
         </form>
       </div>
@@ -621,7 +631,7 @@
                 chat_history_skip += skip + 1;
                 data.splice(0, skip + 1);
               }
-              chat_history_skip += 10;
+              chat_history_skip += 50;
               const newFragment = document.createDocumentFragment();
               data.forEach(function (item) {
                 let newNode = document.createElement('tr');
@@ -1730,6 +1740,25 @@
         deleteSpaceModal.style.display = "none";
       });
 
+      let deleteSectionModal = document.getElementById("confirm-delete-section");
+      $(document).on('click', '#delete-room', function() {
+        deleteSectionModal.style.display = "block";
+      });
+      
+      $(document).on('click', '#close-confirm-delete-section', function() {
+        deleteSectionModal.style.display = "none";
+      });
+
+      let deleteChannelModal = document.getElementById("confirm-delete-channel");
+      $(document).on('click', '#delete-room', function() {
+        deleteChannelModal.style.display = "block";
+      });
+      
+      $(document).on('click', '#close-confirm-delete-channel', function() {
+        deleteChannelModal.style.display = "none";
+      });
+
+
       window.onclick = function(event) {
         if (event.target == createRoomModal) {
           createRoomModal.style.display = "none";
@@ -1742,6 +1771,12 @@
         }
         if (event.target == deleteSpaceModal) {
           deleteSpaceModal.style.display = "none";
+        }
+        if (event.target == deleteSectionModal) {
+          deleteSectionModal.style.display = "none";
+        }
+        if (event.target == deleteChannelModal) {
+          deleteChannelModal.style.display = "none";
         }
       }
 
