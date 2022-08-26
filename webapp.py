@@ -45,7 +45,6 @@ collection_spaces = db['Spaces']
 collection_rooms = db['Rooms']
 collection_messages = db['Messages']
 collection_sections = db['Sections']
-collection_reports = db['Reports']
 collection_deleted = db['Deleted Messages']
 collection_logs = db['Logs']
 collection_emails = db['Emails']
@@ -582,6 +581,8 @@ def sorted_spaces():
     else:
         return Response(dumps({'success': 'false'}), mimetype='application/json')
 
+# TODO: tokenize and make queries more efficient
+
 @app.route('/server_logs', methods=['GET', 'POST'])
 def server_logs():
     if session_expired():
@@ -746,7 +747,8 @@ def edited_message(data):
         emit('expired')
         return
     if space_admin() or session['admin'] or session['unique_id'] == collection_messages.find_one({'_id': ObjectId(data['message_id'])})['user_id']:
-        collection_messages.find_one_and_update({"_id": ObjectId(data['message_id'])}, {'$set': {'message': data['edit'][:2000]}})
+        edited_message = collection_messages.find_one_and_update({"_id": ObjectId(data['message_id'])}, {'$set': {'message': data['edit'][:2000]}})
+        collection_logs.insert_one({'name': session['users_name'], 'user_id': session['unique_id'], 'email': session['users_email'], 'action': 'edited message', 'by': edited_message['name'], 'by_email': edited_message['email'], 'in': session['current_space_name'], 'details': edited_message, 'datetime': datetime.now().isoformat() + 'Z'})
         socketio.emit('edited_message', data, room = data['room_id'])
 
 # When sections are sorted, update the order in MongoDB.
