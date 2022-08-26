@@ -329,7 +329,7 @@
         <div class="confirm-button" id="confirm-delete-channel-button">Confirm</div>
       </div>
     </div>
-    <div id="confirm-delete-message" class="modal">
+    <div id="confirm-delete-message" class="modal"> 
       <div class="modal-content">
         <span id="close-confirm-delete-message" class="close">&times;</span>
         <p class="modal-header">Are you sure you want to delete this message?</p>
@@ -1760,7 +1760,16 @@
         deleteChannelModal.style.display = "none";
       });
 
+      let deleteMessageModal = document.getElementById("confirm-delete-message");
+      $(document).on('click', '#delete-message', function() {
+        deleteMessageModal.style.display = "block";
+      });
+      
+      $(document).on('click', '#close-confirm-delete-message', function() {
+        deleteMessageModal.style.display = "none";
+      });
 
+      // confirm-delete-message confirm-report-message edit-channel
       window.onclick = function(event) {
         if (event.target == createRoomModal) {
           createRoomModal.style.display = "none";
@@ -1776,6 +1785,9 @@
         }
         if (event.target == deleteSectionModal) {
           deleteSectionModal.style.display = "none";
+        }
+        if (event.target == deleteChannelModal) {
+          deleteChannelModal.style.display = "none";
         }
         if (event.target == deleteChannelModal) {
           deleteChannelModal.style.display = "none";
