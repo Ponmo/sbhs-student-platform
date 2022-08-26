@@ -139,6 +139,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 /*Make Responsive with Overlay Overflow Resize, word-break, etc. */
 .form-space, .form-space-filler {
+  position: relative;
   width: 100%;
   background-color: #2b2b2b;
   overflow-wrap: break-word;
