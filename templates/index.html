@@ -659,9 +659,7 @@
                 newFragment.appendChild(newNode);
                 newNode = document.createElement('tr');
                 newNode.innerHTML = '<td colspan="6" width="100%"><div class="message-container-logs"><img class="profile-picture pointer"><p class="message-title"><span style="font-weight: bold;"></span><span class="datetime"></span></p><p class="message-content-logs"></p></div></td>';
-                if (!document.getElementById('expand-message-filter').checked) {
-                  newNode.style.display = 'none';
-                }
+                newNode.className = 'admin-logs-table-row-details';
                 newNode.style.backgroundColor = '#32353a';
                 newNode.firstElementChild.firstElementChild.firstElementChild.src = item.details.picture;
                 newNode.querySelector('.message-title').firstElementChild.textContent = item.details.name;
@@ -670,6 +668,9 @@
                 newFragment.appendChild(newNode);
               });
               document.getElementById('admin-logs-body').appendChild(newFragment);
+              if (!document.getElementById('expand-message-filter').checked) {
+                $('.admin-logs-table-row-details').hide();
+              }
               last_loaded = data[data.length - 1]._id.$oid;
               loadLogTrigger = true;
             }
@@ -790,10 +791,20 @@
       });
 
       $('.admin-log-filters').on('click', function() {
-        $('#admin-logs-body').empty();
-        last_loaded = '';
-        chat_history_skip = 0;
-        loadLogHistory();
+        if (this.id != 'expand-message-filter') {
+          $('#admin-logs-body').empty();
+          last_loaded = '';
+          chat_history_skip = 0;
+          loadLogHistory();
+        }
+        else {
+          if (!document.getElementById('expand-message-filter').checked) {
+            $('.admin-logs-table-row-details').hide();
+          }
+          else {
+            $('.admin-logs-table-row-details').show();
+          }
+        }
       });
 
       $(document).on('change', '.user-status-select', function() {
