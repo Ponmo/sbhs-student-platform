@@ -639,7 +639,7 @@
       }
 
       function loadLogHistory() {
-        const options = [document.getElementById("admin-search-bar").value.toUpperCase(), document.getElementById('reported-message-filter').checked, document.getElementById('deleted-message-filter').checked];
+        const options = [document.getElementById("admin-search-bar").value, document.getElementById('reported-message-filter').checked, document.getElementById('deleted-message-filter').checked];
         abortRequests();
         requests.push($.ajax({
           type: "POST",
