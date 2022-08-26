@@ -588,8 +588,9 @@ def server_logs():
         return 'expired', 200
     if request.method == 'POST' and session['admin']:
         logs = None
+        search = request.json['options'][0]
         if request.json['options'][1] == True and request.json['options'][2] == True:
-            logs = dumps(list(collection_logs.find({'$or': [{'doc.name': {'$regex': '.*Ramon.*'}}]}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(500)))
+            logs = dumps(list(collection_logs.find({'$or': [{'doc.name': {'$regex': '.*' + search + '.*'}}]}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(500)))
         elif request.json['options'][1] == True:
             logs = dumps(list(collection_logs.find({'doc.action': 'reported message'}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(500)))
         elif request.json['options'][2] == True:

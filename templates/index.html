@@ -1797,7 +1797,14 @@
         createSectionModal.style.display = "none";
       });
 
-      let deleteSpaceModal = document.getElementById("con");
+      let deleteSpaceModal = document.getElementById("confirm-delete-space");
+      $(document).on('click', '#delete-space', function() {
+        deleteSpaceModal.style.display = "block";
+      });
+      
+      $(document).on('click', '#close-confirm-delete-space', function() {
+        deleteSpaceModal.style.display = "none";
+      });
 
       window.onclick = function(event) {
         if (event.target == createRoomModal) {
@@ -1808,6 +1815,9 @@
         }
         if (event.target == createSectionModal) {
           createSectionModal.style.display = "none";
+        }
+        if (event.target == deleteSpaceModal) {
+          deleteSpaceModal.style.display = "none";
         }
       }
 
