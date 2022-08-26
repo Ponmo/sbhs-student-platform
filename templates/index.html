@@ -1693,8 +1693,7 @@
         leaveSpaceModal.style.display = "block";
       });
 
-      leaveSpaceModal.onsubmit = function (e) {
-        e.preventDefault();
+      $(document).on('click', '#confirm-leave-space-button', function() {
         document.querySelector('.form-space[data-id="' + current_space + '"]').querySelector('.directory-space-joined-status').textContent = 'Not Joined';
         $.ajax({
           type: 'POST',
@@ -1702,12 +1701,12 @@
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
             leaveSpaceModal.style.display = 'none';
-            $('#first-all').css('display', 'none');
+            $('#first-all').css('display', 'none');//
             $("#home-page").show();
             $("#" + current_space).parent().remove();
           }
         });
-      }
+      });
       
       $(document).on('click', '#close-confirm-leave-space', function() {
         leaveSpaceModal.style.display = "none";
@@ -1718,8 +1717,7 @@
         deleteSectionModal.style.display = "block";
       });
 
-      deleteSectionModal.onsubmit = function (e) {
-        e.preventDefault();
+      $(document).on('click', '#confirm-delete-section-button', function() {
         const section_id = selected_section;
         $.ajax({
           type: 'POST',
@@ -1739,7 +1737,7 @@
             }
           }
         });
-      }
+      });
       
       $(document).on('click', '#close-confirm-delete-section', function() {
         deleteSectionModal.style.display = "none";
@@ -1750,8 +1748,7 @@
         deleteChannelModal.style.display = "block";
       });
 
-      deleteChannelModal.onsubmit = function (e) {
-        e.preventDefault();
+      $(document).on('click', '#confirm-delete-channel-button', function() {
         const deleted_room = selected_room;
         const deleted_room_section = $('#' + deleted_room).attr('data-section');
         $.ajax({
@@ -1772,7 +1769,7 @@
             }
           }
         });
-      }
+      });
       
       $(document).on('click', '#close-confirm-delete-channel', function() {
         deleteChannelModal.style.display = "none";
@@ -1783,21 +1780,20 @@
         deleteMessageModal.style.display = "block";
       });
 
-      deleteMessageModal.onsubmit = function (e) {
-        e.preventDefault();
+      $(document).on('click', '#confirm-delete-message-button', function() {
         let message_id = selected_message;
         $.ajax({
           type: 'POST',
           url: '/delete_message',
           dataType: 'json',
-          data: JSON.stringify({'message_id': message_id, 'room_id': current_room}),
+          data: JSON.stringify({'message_id': message_id, 'room_id': current_room}),//
           contentType: 'application/json;charset=UTF-8',
           success: function (delete_message) {
             deleteMessageModal.style.display = "none";
             socket.emit('deleted_message', {'message_id': message_id, 'room_id': current_room});
           }
         });
-      }
+      });
       
       $(document).on('click', '#close-confirm-delete-message', function() {
         deleteMessageModal.style.display = "none";
