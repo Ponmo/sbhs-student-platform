@@ -90,6 +90,8 @@
           <label for="deleted-message-filter">Deleted messages</label>
           <input type="checkbox" class="admin-log-filters" id="reported-message-filter" name="reported-message-filter" checked>
           <label for="reported-message-filter">Reported messages</label>
+          <input type="checkbox" class="admin-log-filters" id="edited-message-filter" name="edited-message-filter" checked>
+          <label for="edited-message-filter">Edited messages</label>
         </form>
       </div>
       <div id="admin-table-wrapper">
@@ -616,7 +618,7 @@
       });
 
       function loadLogHistory() {
-        const options = [document.getElementById("admin-search-bar").value, document.getElementById('reported-message-filter').checked, document.getElementById('deleted-message-filter').checked];
+        const options = [document.getElementById("admin-search-bar").value, document.getElementById('reported-message-filter').checked, document.getElementById('deleted-message-filter').checked, document.getElementById('deleted-message-filter').checked];
         abortRequests();
         requests.push($.ajax({
           type: "POST",

@@ -590,12 +590,22 @@ def server_logs():
     if request.method == 'POST' and session['admin']:
         logs = None
         search = '.*' + request.json['options'][0] + '.*'
-        if request.json['options'][1] == True and request.json['options'][2] == True:
+        if any(request.json['options']):
             logs = dumps(list(collection_logs.find({'$or': [{'name': {'$regex': search}}, {'email': {'$regex': search}}, {'by': {'$regex': search}}, {'by_email': {'$regex': search}}, {'in': {'$regex': search}}, {'details.message': {'$regex': search}}]}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(50)))
-        elif request.json['options'][1] == True:
-            logs = dumps(list(collection_logs.find({'$and': [{'action': 'reported message'}, {'$or': [{'name': {'$regex': search}}, {'email': {'$regex': search}}, {'by': {'$regex': search}}, {'by_email': {'$regex': search}}, {'in': {'$regex': search}}, {'details.message': {'$regex': search}}]}]}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(50)))
-        elif request.json['options'][2] == True:
-            logs = dumps(list(collection_logs.find({'$and': [{'action': 'deleted message'}, {'$or': [{'name': {'$regex': search}}, {'email': {'$regex': search}}, {'by': {'$regex': search}}, {'by_email': {'$regex': search}}, {'in': {'$regex': search}}, {'details.message': {'$regex': search}}]}]}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(50)))
+        #elif request.json['options'][1] and request.json['options'][2]:
+            #logs = dumps(list(collection_logs.find({'$and': [{'action': {'$in': ['reported message', ]}}, {'$or': [{'name': {'$regex': search}}, {'email': {'$regex': search}}, {'by': {'$regex': search}}, {'by_email': {'$regex': search}}, {'in': {'$regex': search}}, {'details.message': {'$regex': search}}]}]}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(50)))
+        else:
+            options = []
+            if request.json['options'][1]:
+                options.append('reported message')
+                #logs = dumps(list(collection_logs.find({'$and': [{'action': 'reported message'}, {'$or': [{'name': {'$regex': search}}, {'email': {'$regex': search}}, {'by': {'$regex': search}}, {'by_email': {'$regex': search}}, {'in': {'$regex': search}}, {'details.message': {'$regex': search}}]}]}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(50)))
+            if request.json['options'][2]:
+                options.append('deleted message')
+                #logs = dumps(list(collection_logs.find({'$and': [{'action': 'deleted message'}, {'$or': [{'name': {'$regex': search}}, {'email': {'$regex': search}}, {'by': {'$regex': search}}, {'by_email': {'$regex': search}}, {'in': {'$regex': search}}, {'details.message': {'$regex': search}}]}]}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(50)))
+            if request.json['options'][3]:
+                options.append('edited message')
+                #ogs = dumps(list(collection_logs.find({'$and': [{'action': 'edited message'}, {'$or': [{'name': {'$regex': search}}, {'email': {'$regex': search}}, {'by': {'$regex': search}}, {'by_email': {'$regex': search}}, {'in': {'$regex': search}}, {'details.message': {'$regex': search}}]}]}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(50)))
+            logs = dumps(list(collection_logs.find({'$and': [{'action': {'$in': options}}, {'$or': [{'name': {'$regex': search}}, {'email': {'$regex': search}}, {'by': {'$regex': search}}, {'by_email': {'$regex': search}}, {'in': {'$regex': search}}, {'details.message': {'$regex': search}}]}]}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(50)))
         return Response(logs, mimetype='application/json')
 
 @app.route('/server_users', methods=['GET', 'POST'])
