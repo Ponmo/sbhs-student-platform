@@ -707,7 +707,7 @@
                 formNode = '<form class="change-user-status-form"><select data-current="user" class="user-status-select"><option value="banned">banned</option><option selected="selected" value="user">user</option><option value="admin">admin</option></select> <input class="user-status-select-submit" type="submit" value="✓"></form>';
               } 
               else if (item.status == 'admin') {
-                formNode = '<form class="change-user-status-form"><select data-current="admin" class="user-status-select"><option value="banned">banned</option><option value="user">user</option><option selected="selected" value="admin">admin</option></select> <input class="user-status-select-submit" type="submit" value="✓"></form>';
+                formNode = '<form class="change-user-status-form"><select data-current="admin" class="user-status-select"><option value="user">user</option><option selected="selected" value="admin">admin</option></select> <input class="user-status-select-submit" type="submit" value="✓"></form>';
               }
               else if (item.status == 'banned') {
                 formNode = '<form class="change-user-status-form"><select data-current="banned" class="user-status-select"><option selected="selected" value="banned">banned</option><option value="user">user</option><option value="admin">admin</option></select> <input class="user-status-select-submit" type="submit" value="✓"></form>';
@@ -1768,7 +1768,7 @@
       });
 
       let deleteSectionModal = document.getElementById("confirm-delete-section");
-      $(document).on('click', '#delete-room', function() {
+      $(document).on('click', '#delete-section', function() {
         deleteSectionModal.style.display = "block";
       });
       
