@@ -528,7 +528,7 @@ def report_message():
         return 'expired', 200
     if request.method == 'POST' and space_member():
         reported_message = collection_messages.find_one({'_id': ObjectId(request.json['message_id'])})
-        if collection_logs.count_documents({'doc': {'details': reported_message}}) == 0:
+        if collection_logs.count_documents({'doc.details': reported_message}) == 0:
             collection_logs.insert_one({'doc': [{'name': session['users_name'], 'user_id': session['unique_id'], 'email': session['users_email'], 'action': 'reported message', 'by': reported_message['name'], 'by_email': reported_message['email'], 'in': session['current_space_name'], 'details': reported_message, 'datetime': datetime.now().isoformat() + 'Z'}]})
             return Response(dumps({'success': 'true'}), mimetype='application/json')
         else:
@@ -589,7 +589,7 @@ def server_logs():
     if request.method == 'POST' and session['admin']:
         logs = None
         if request.json['options'][1] == True and request.json['options'][2] == True:
-            logs = dumps(list(collection_logs.find({'doc': request.json['options'][0]}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(500)))
+            logs = dumps(list(collection_logs.find().sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(500)))
         elif request.json['options'][1] == True:
             logs = dumps(list(collection_logs.find({'doc.action': 'reported message'}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(500)))
         elif request.json['options'][2] == True:
