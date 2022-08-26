@@ -163,7 +163,17 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin-right: 18px;
   margin-top: 10px;
 }
-.directory-space-description, .directory-space-members {
+.member-joined-status-wrapper {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  bottom: 12px;
+}
+.directory-space-description {
+  margin-bottom: 28px;
+}
+.directory-space-description, .directory-space-members, .directory-space-joined-status {
   color: white;
   margin-left: 18px;
   margin-right: 18px;
@@ -1240,11 +1250,6 @@ img { /* make images and create button undraggable and unhighlitable*/
   padding-top: 2px;
   padding-left: 3px;
   white-space: pre-wrap;
-}
-.directory-space-joined-status {
-  color: white;
-  margin-left: 18px;
-  margin-right: 18px;
 }
 .expand-recipient-list {
   position: absolute;
