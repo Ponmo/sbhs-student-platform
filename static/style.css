@@ -1466,6 +1466,9 @@ img { /* make images and create button undraggable and unhighlitable*/
     top: auto!important;
     padding-bottom: 80px;
   }
+  .modal-content {
+    width: 100vw;
+  }
 }
 /* The switch - the box around the slider */
 .switch {
