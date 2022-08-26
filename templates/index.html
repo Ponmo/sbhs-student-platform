@@ -1724,17 +1724,6 @@
         });
       });
 
-      $(document).on('click', '#delete-space', function(){
-        $.ajax({
-          type: 'POST',
-          url: '/delete_space',
-          contentType: 'application/json;charset=UTF-8',
-          success: function (delete_space) {
-            socket.emit('deleted_space')
-          }
-        });
-      });
-
       let createSpaceModal = document.getElementById("create-space");
       $(document).on('click', '#create-space-button', function() {
         createSpaceModal.style.display = "block";
@@ -1766,6 +1755,22 @@
       $(document).on('click', '#delete-space', function() {
         deleteSpaceModal.style.display = "block";
       });
+
+      deleteSpaceModal.onsubmit = function (e) {
+        if (document.getElementById('confirm-space-name').textContent = document.getElementById(header_text).textContent) {
+          $.ajax({
+            type: 'POST',
+            url: '/delete_space',
+            contentType: 'application/json;charset=UTF-8',
+            success: function (delete_space) {
+              socket.emit('deleted_space')
+            }
+          });
+        }
+        else {
+          alert('hah');
+        }
+      }
       
       $(document).on('click', '#close-confirm-delete-space', function() {
         deleteSpaceModal.style.display = "none";
