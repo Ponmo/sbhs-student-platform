@@ -621,8 +621,11 @@ def change_user_status():
     if session_expired() or banned():
         return 'expired', 200
     if request.method == 'POST' and session['admin']:
-        if request.json['status'] in {'banned', 'user', 'admin'}:
+        if request.json['status'] in {'user', 'admin'}:
             collection_users.find_one_and_update({"_id": request.json['user_id']}, {'$set': {'status': request.json['status']}})
+            return Response(dumps({'success': 'true'}), mimetype='application/json')
+        elif request.json['status'] == 'banned' and collection_users.find({'_id': request.json['user_id']})['status'] not in {'admin', 'owner'}:
+            collection_users.find_one_and_update({"_id": request.json['user_id']}, {'$set': {'status': 'banned'}})
             return Response(dumps({'success': 'true'}), mimetype='application/json')
     return Response(dumps({'success': 'false'}), mimetype='application/json')
 
