@@ -1136,7 +1136,8 @@
             $('.member').addClass('pointer');
           }
           selected_user = this.getAttribute('data-id');
-          $.ajax({
+          abortRequests();
+          requests.push($.ajax({
             type: "POST",
             url: '/open_member_profile',
             dataType: "json",
@@ -1202,7 +1203,7 @@
                 }
               }
             }
-          });
+          }));
         }
         else if (!!document.getElementById("profile-popup") && $('.member').is(e.target) || $('.member').is(e.target.parentNode)) {
           $('#profile-popup').remove();
