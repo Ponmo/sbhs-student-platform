@@ -520,10 +520,17 @@
             newNodeChild.className = 'directory-space-description';
             newNodeChild.textContent = item['description'];
             newNode.appendChild(newNodeChild);
+
+            let newNode2 = document.createElement("div");
+            newNode2.className = "member-joined-status-wrapper";
+            newNode.appendChild(newNode2);
+
+
             newNodeChild = document.createElement('span');
             newNodeChild.className = 'directory-space-members';
             newNodeChild.textContent = '👥 ' + item['members'].length;
-            newNode.appendChild(newNodeChild);
+            newNode2.appendChild(newNodeChild);
+            // newNode.appendChild(newNodeChild);
             newNodeChild = document.createElement('span');
             newNodeChild.className = 'directory-space-joined-status';
             if(item['members'].some(row => row.includes(user_id))){
@@ -532,7 +539,8 @@
             else {
               newNodeChild.textContent = 'Not Joined';
             }
-            newNode.appendChild(newNodeChild);
+            // newNode.appendChild(newNodeChild);
+            newNode2.appendChild(newNodeChild);
             document.getElementById('directory-space').prepend(newNode);
           });
           if (window.location.href.indexOf('/sbhs/') != -1) {
