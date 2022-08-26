@@ -1757,6 +1757,7 @@
       });
 
       deleteSpaceModal.onsubmit = function (e) {
+        e.preventDefault();
         if (document.getElementById('confirm-space-name').textContent = document.getElementById(header_text).textContent) {
           $.ajax({
             type: 'POST',
