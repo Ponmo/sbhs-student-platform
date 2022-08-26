@@ -1607,7 +1607,7 @@
           document.getElementById('section-menu').style.top = mouseY(event) + 'px';
           document.getElementById('section-menu').style.left = mouseX(event) + 'px';
           $(document.getElementById('section-menu')).show();
-          document.getElementById('new-section-name').value = document.getElementById(selected_section).textContent;
+          document.getElementById('new-section-name').value = document.getElementById(selected_section).querySelector('.section-name').textContent;
           e.preventDefault();
         }
       });
