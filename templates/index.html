@@ -398,6 +398,7 @@
       var typing_list = [];
       var selected_section = '';
       var selected_room = '';
+      var selected_message = '';
       var space_admin = false;
       var admin = false;
       var user_id = '{{ user_id }}';
@@ -1084,6 +1085,10 @@
         }, 100);
       });
 
+      $(document).on('click', '.message-container, .message-container-combine', function() {
+        selected_message = this.id;
+      });
+
       $(document).on('click', '.section', function(e) {
         selected_section = this.id;
         if (e.target.className != 'create-room-button') {
@@ -1412,27 +1417,6 @@
         }
       });
 
-      $(document).on('click', '.report-message', function() {
-        $.ajax({
-          type: "POST",
-          url: '/report_message',
-          dataType: "json",
-          data: JSON.stringify({'message_id': this.parentNode.parentNode.id}),
-          contentType: 'application/json;charset=UTF-8',
-          success: function(data) {
-            if (data['success'] == 'true') {
-              alert("Your report has been received.")
-            }
-            else if (data['success'] == 'many') {
-              alert("Message has already been reported.")
-            }
-            else {
-              alert("Your report failed.")
-            }
-          }
-        });
-      });
-
       $(document).on('click', '.edit-message', function() {
         let message_id = this.parentNode.parentNode.id;
         let message = this.parentNode.previousElementSibling.textContent;
@@ -1479,48 +1463,12 @@
         $(this).remove();
       });
 
-      $(document).on('click', '.delete-message', function() {
-        let message_id = this.parentNode.parentNode.id;
-        $.ajax({
-          type: 'POST',
-          url: '/delete_message',
-          dataType: 'json',
-          data: JSON.stringify({'message_id': message_id, 'room_id': current_room}),
-          contentType: 'application/json;charset=UTF-8',
-          success: function (delete_message){
-            socket.emit('deleted_message', {'message_id': message_id, 'room_id': current_room});
-          }
-        })
-      });
-
       $(document).on('click', '.room', function(e) {
         joinRoom(this.id);
       });
 
       $(document).on('click', '.special-room', function(e) {
         joinRoom(this.id, true);
-      });
-
-      $(document).on('click', '#delete-room', function(e) {
-        const deleted_room = selected_room;
-        const deleted_room_section = $('#' + deleted_room).attr('data-section');
-        $.ajax({
-          type: "POST",
-          url: '/delete_room',
-          dataType: "json",
-          data: JSON.stringify({'room_id': deleted_room, 'section_id': deleted_room_section}),
-          contentType: 'application/json;charset=UTF-8',
-          success: function(data) {
-            if (data['success'] == 'true') {
-              socket.emit('deleted_room', {
-                room: deleted_room
-              });
-            }
-            else {
-              alert('Spaces must have at least one room');
-            }
-          }
-        });
       });
 
       $(document).on('contextmenu', '.room', function (e) {
@@ -1578,27 +1526,6 @@
           });
         }
       }
-
-      $(document).on('click', '#delete-section', function () {
-        section_id = selected_section;
-        $.ajax({
-          type: 'POST',
-          url: '/delete_section',
-          dataType: "json",
-          data: JSON.stringify({'section_id': section_id}),
-          contentType: 'application/json;charset=UTF-8',
-          success: function(data) {
-            if (data['success'] == 'true') {
-              socket.emit('deleted_section', {
-                section_id: section_id
-              });
-            }
-            else {
-              alert('There must be at least one section.');
-            }
-          }
-        });
-      });
 
       $(document).on('contextmenu', '.section', function (e) {
         hideSecondLayer();
@@ -1710,20 +1637,6 @@
         $('#first-all').css('display', 'block');
       });
 
-      $(document).on('click', '#leave-space', function() {
-        document.querySelector('.form-space[data-id="' + current_space + '"]').querySelector('.directory-space-joined-status').textContent = 'Not Joined';
-        $.ajax({
-          type: 'POST',
-          url: '/leave_space',
-          contentType: 'application/json;charset=UTF-8',
-          success: function(data) {
-            $('#first-all').css('display', 'none');
-            $("#home-page").show();
-            $("#" + current_space).parent().remove();
-          }
-        });
-      });
-
       let createSpaceModal = document.getElementById("create-space");
       $(document).on('click', '#create-space-button', function() {
         createSpaceModal.style.display = "block";
@@ -1764,12 +1677,10 @@
             url: '/delete_space',
             contentType: 'application/json;charset=UTF-8',
             success: function (delete_space) {
+              deleteSpaceModal.style.display = 'none';
               socket.emit('deleted_space')
             }
           });
-        }
-        else {
-          alert('hah');
         }
       }
       
@@ -1781,6 +1692,22 @@
       $(document).on('click', '#leave-space', function() {
         leaveSpaceModal.style.display = "block";
       });
+
+      leaveSpaceModal.onsubmit = function (e) {
+        e.preventDefault();
+        document.querySelector('.form-space[data-id="' + current_space + '"]').querySelector('.directory-space-joined-status').textContent = 'Not Joined';
+        $.ajax({
+          type: 'POST',
+          url: '/leave_space',
+          contentType: 'application/json;charset=UTF-8',
+          success: function(data) {
+            leaveSpaceModal.style.display = 'none';
+            $('#first-all').css('display', 'none');
+            $("#home-page").show();
+            $("#" + current_space).parent().remove();
+          }
+        });
+      }
       
       $(document).on('click', '#close-confirm-leave-space', function() {
         leaveSpaceModal.style.display = "none";
@@ -1790,6 +1717,29 @@
       $(document).on('click', '#delete-section', function() {
         deleteSectionModal.style.display = "block";
       });
+
+      deleteSectionModal.onsubmit = function (e) {
+        e.preventDefault();
+        const section_id = selected_section;
+        $.ajax({
+          type: 'POST',
+          url: '/delete_section',
+          dataType: "json",
+          data: JSON.stringify({'section_id': section_id}),
+          contentType: 'application/json;charset=UTF-8',
+          success: function(data) {
+            deleteSectionModal.style.display = 'none';
+            if (data['success'] == 'true') {
+              socket.emit('deleted_section', {
+                section_id: section_id
+              });
+            }
+            else {
+              alert('There must be at least one section.');
+            }
+          }
+        });
+      }
       
       $(document).on('click', '#close-confirm-delete-section', function() {
         deleteSectionModal.style.display = "none";
@@ -1799,6 +1749,30 @@
       $(document).on('click', '#delete-room', function() {
         deleteChannelModal.style.display = "block";
       });
+
+      deleteChannelModal.onsubmit = function (e) {
+        e.preventDefault();
+        const deleted_room = selected_room;
+        const deleted_room_section = $('#' + deleted_room).attr('data-section');
+        $.ajax({
+          type: "POST",
+          url: '/delete_room',
+          dataType: "json",
+          data: JSON.stringify({'room_id': deleted_room, 'section_id': deleted_room_section}),
+          contentType: 'application/json;charset=UTF-8',
+          success: function(data) {
+            deleteChannelModal.style.display = "none";
+            if (data['success'] == 'true') {
+              socket.emit('deleted_room', {
+                room: deleted_room
+              });
+            }
+            else {
+              alert('Spaces must have at least one room');
+            }
+          }
+        });
+      }
       
       $(document).on('click', '#close-confirm-delete-channel', function() {
         deleteChannelModal.style.display = "none";
@@ -1808,6 +1782,22 @@
       $(document).on('click', '.delete-message', function() {
         deleteMessageModal.style.display = "block";
       });
+
+      deleteMessageModal.onsubmit = function (e) {
+        e.preventDefault();
+        let message_id = selected_message;
+        $.ajax({
+          type: 'POST',
+          url: '/delete_message',
+          dataType: 'json',
+          data: JSON.stringify({'message_id': message_id, 'room_id': current_room}),
+          contentType: 'application/json;charset=UTF-8',
+          success: function (delete_message) {
+            deleteMessageModal.style.display = "none";
+            socket.emit('deleted_message', {'message_id': message_id, 'room_id': current_room});
+          }
+        });
+      }
       
       $(document).on('click', '#close-confirm-delete-message', function() {
         deleteMessageModal.style.display = "none";
@@ -1817,6 +1807,29 @@
       $(document).on('click', '.report-message', function() {
         reportMessageModal.style.display = "block";
       });
+
+      reportMessageModal.onsubmit = function (e) {
+        e.preventDefault();
+        $.ajax({
+          type: "POST",
+          url: '/report_message',
+          dataType: "json",
+          data: JSON.stringify({'message_id': selected_message}),
+          contentType: 'application/json;charset=UTF-8',
+          success: function(data) {
+            reportMessageModal.style.display = "none";
+            if (data['success'] == 'true') {
+              alert("Your report has been received.")
+            }
+            else if (data['success'] == 'many') {
+              alert("Message has already been reported.")
+            }
+            else {
+              alert("Your report failed.")
+            }
+          }
+        });
+      }
       
       $(document).on('click', '#close-confirm-report-message', function() {
         reportMessageModal.style.display = "none";
