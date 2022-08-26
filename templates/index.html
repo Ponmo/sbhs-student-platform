@@ -1767,6 +1767,15 @@
         deleteSpaceModal.style.display = "none";
       });
 
+      let leaveSpaceModal = document.getElementById("confirm-leave-space");
+      $(document).on('click', '#leave-space', function() {
+        leaveSpaceModal.style.display = "block";
+      });
+      
+      $(document).on('click', '#close-confirm-leave-space', function() {
+        leaveSpaceModal.style.display = "none";
+      });
+
       let deleteSectionModal = document.getElementById("confirm-delete-section");
       $(document).on('click', '#delete-section', function() {
         deleteSectionModal.style.display = "block";
@@ -1786,7 +1795,7 @@
       });
 
       let deleteMessageModal = document.getElementById("confirm-delete-message");
-      $(document).on('click', '#delete-message', function() {
+      $(document).on('click', '.delete-message', function() {
         deleteMessageModal.style.display = "block";
       });
       
@@ -1795,7 +1804,7 @@
       });
 
       let reportMessageModal = document.getElementById("confirm-report-message");
-      $(document).on('click', '#report-message', function() {
+      $(document).on('click', '.report-message', function() {
         reportMessageModal.style.display = "block";
       });
       
@@ -1834,6 +1843,9 @@
         }
         if (event.target == deleteSpaceModal) {
           deleteSpaceModal.style.display = "none";
+        }
+        if (event.target == leaveSpaceModal) {
+          leaveSpaceModal.style.display = "none";
         }
         if (event.target == deleteSectionModal) {
           deleteSectionModal.style.display = "none";
