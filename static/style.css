@@ -183,6 +183,9 @@ img { /* make images and create button undraggable and unhighlitable*/
 .directory-space-joined-status {
   padding: 4px 10px;
 }
+.joined-members-icon {
+  width: 30px;
+}
 .joined-status {
   background-color: gray;
 }
@@ -197,6 +200,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin-top: 9px;
   float: right;
 }
+
 #content {  /* make calc good on all browsers ; Make margin and padding 0 because of broswer differences ; */
   display: grid;
   grid-template-rows: 48px calc(100vh - 98px);
@@ -247,6 +251,9 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 .red-icon {
   filter: invert(29%) sepia(55%) saturate(7435%) hue-rotate(349deg) brightness(87%) contrast(95%);
+}
+.green-icon {
+  filter: invert(60%) sepia(73%) saturate(370%) hue-rotate(85deg) brightness(93%) contrast(93%);
 }
 #space-settings-popup {
   display: none;

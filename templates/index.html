@@ -521,16 +521,16 @@
             newNodeChild.textContent = item['description'];
             newNode.appendChild(newNodeChild);
 
-            let newNode2 = document.createElement("div");
-            newNode2.className = "member-joined-status-wrapper";
-            newNode.appendChild(newNode2);
+            let newNodeWrapper = document.createElement("div");
+            newNodeWrapper.className = "member-joined-status-wrapper";
+            newNode.appendChild(newNodeWrapper);
 
 
             newNodeChild = document.createElement('span');
-            newNodeChild.innerHTML = '<img class="white-icon" id="joined-members-icon" src="/static/images/members.svg">';
+            newNodeChild.innerHTML = '<img class="green-icon joined-members-icon" src="/static/images/members.svg">';
             newNodeChild.className = 'directory-space-members';
             newNodeChild.appendChild(document.createTextNode(item['members'].length));
-            newNode2.appendChild(newNodeChild);
+            newNodeWrapper.appendChild(newNodeChild);
             newNodeChild = document.createElement('span');
             if(item['members'].some(row => row.includes(user_id))){
               newNodeChild.textContent = 'Joined';
