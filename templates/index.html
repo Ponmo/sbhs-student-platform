@@ -527,8 +527,9 @@
 
 
             newNodeChild = document.createElement('span');
+            newNodeChild.innerHTML = '<img src="/static/images/members.svg">';
             newNodeChild.className = 'directory-space-members';
-            newNodeChild.textContent = '👥 ' + item['members'].length;
+            newNodeChild.appendChild(document.createTextNode(item['members'].length));
             newNode2.appendChild(newNodeChild);
             newNodeChild = document.createElement('span');
             if(item['members'].some(row => row.includes(user_id))){

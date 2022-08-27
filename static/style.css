@@ -168,16 +168,26 @@ img { /* make images and create button undraggable and unhighlitable*/
   position: absolute;
   display: flex;
   width: 100%;
+  align-items: center;
   justify-content: space-between;
   bottom: 12px;
 }
 .directory-space-description {
-  margin-bottom: 28px;
+  margin-bottom: 40px;
 }
 .directory-space-description, .directory-space-members, .directory-space-joined-status {
   color: white;
   margin-left: 18px;
   margin-right: 18px;
+}
+.directory-space-joined-status {
+  padding: 4px 10px;
+}
+.joined-status {
+  background-color: gray;
+}
+.not-joined-status {
+  background-color: #1f52a3;
 }
 #close-space-search-button, #server-settings-button, #exit-server-settings {
   width: 30px;
@@ -187,7 +197,6 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin-top: 9px;
   float: right;
 }
-
 #content {  /* make calc good on all browsers ; Make margin and padding 0 because of broswer differences ; */
   display: grid;
   grid-template-rows: 48px calc(100vh - 98px);
