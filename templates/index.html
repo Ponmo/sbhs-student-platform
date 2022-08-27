@@ -540,7 +540,7 @@
               newNodeChild.textContent = 'Not Joined';
               newNodeChild.className = 'directory-space-joined-status not-joined-status';
             }
-            newNode2.appendChild(newNodeChild);
+            newNodeWrapper.appendChild(newNodeChild);
             document.getElementById('directory-space').prepend(newNode);
           });
           if (window.location.href.indexOf('/sbhs/') != -1) {
