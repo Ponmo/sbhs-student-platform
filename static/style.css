@@ -187,10 +187,12 @@ img { /* make images and create button undraggable and unhighlitable*/
   width: 30px;
 }
 .joined-status {
-  background-color: gray;
+  background-color: #43c46a;
+  border-radius: 4px;
 }
 .not-joined-status {
   background-color: #1f52a3;
+  border-radius: 4px;
 }
 #close-space-search-button, #server-settings-button, #exit-server-settings {
   width: 30px;
