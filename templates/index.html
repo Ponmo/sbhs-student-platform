@@ -1866,15 +1866,14 @@
 
       document.getElementById('edit-channel-form').onsubmit = function (e) {
         e.preventDefault();
-        alert('d');
         socket.emit('edit_channel', {
           room_id: selected_room,
-          new_name: document.getElementById('new-channel-name').value.trim()
+          room_name: document.getElementById('new-channel-name').value.trim()
         });
       }
 
       socket.on('edit_channel', function (data) {
-        alert(JSON.stringify(data));
+        document.getElementById(data['room_id']).textContent = data['room_name'];
       });
       
       $(document).on('click', '#close-edit-channel', function() {
