@@ -184,7 +184,7 @@
             <input id="email_subject_input" type="text" placeholder="Subject" maxlength="70" required></input>
             <textarea id="email_message_input" maxlength="10000" rows="1" required></textarea>
             <div id="email_options">
-              <button type="submit" id="submit_email"><img class="send" src="/static/images/send.png" alt="Send"></button>
+              <div id="submit_email">Send</div>
             </div>
           </form>
           <form id="message_input_form">
@@ -1398,6 +1398,10 @@
         }
         document.getElementById('email_to_input').value = '';
         document.getElementById('suggested_emails').style.display = 'none';
+      });
+
+      $(document).on('click', '#submit_email', function() {
+        document.getElementById('email_input_form').submit();
       });
 
       document.getElementById('email_input_form').onsubmit = function (e) {
