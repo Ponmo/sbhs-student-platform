@@ -19,7 +19,7 @@
       <div id="space-settings-popup">
         <div class="pointer blue-entry-two" id="create-section-button">Create Section</div>
         <div class="pointer blue-entry-two" id="edit-space-button">Edit Space</div>
-        <div class="pointer blue-entry-two" id="invite-link-button">Invite Member</div>
+        <div class="pointer blue-entry-two" id="invite-link-button">Copy Invite</div>
         <div class="pointer red-space-button" id="leave-space">Leave Space</div>
         <div class="pointer red-space-button" id="delete-space">Delete Space</div>
       </div>
@@ -1680,6 +1680,7 @@
             contentType: 'application/json;charset=UTF-8',
             success: function(data) {
               navigator.clipboard.writeText(data['code']);
+              popupSuccess();
             }
           });
       });
