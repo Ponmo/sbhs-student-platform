@@ -809,7 +809,7 @@ def joined_space():
 @socketio.on('edit_channel')
 def edit_channel(data):
     if space_admin() or session['admin']:
-        collection_rooms.find_one_and_update({'_id': request.json['room_id']}, {'$set': {'name': request.json['room_name'].strip()}})
+        collection_rooms.find_one_and_update({'_id': ObjectId(request.json['room_id'])}, {'$set': {'name': request.json['room_name'].strip()}})
         for room in room_list():
             socketio.emit('edit_channel', data, room = room)
 
