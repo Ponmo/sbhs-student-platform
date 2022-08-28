@@ -621,6 +621,8 @@ def change_user_status():
     if session_expired() or banned():
         return 'expired', 200
     if request.method == 'POST' and session['admin']:
+        if request.json['user_id'] == session['unique_id']:
+            session['unique_id'] = request.json['user_id']
         if request.json['status'] in {'user', 'admin'}:
             collection_users.find_one_and_update({"_id": request.json['user_id']}, {'$set': {'status': request.json['status']}})
             return Response(dumps({'success': 'true'}), mimetype='application/json')
