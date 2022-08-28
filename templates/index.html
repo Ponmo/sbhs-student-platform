@@ -1680,8 +1680,14 @@
               popupSuccess();
               document.activeElement.blur();
               space_name_input.setAttribute('data-pre', data.space_name);
+              document.getElementById('header_text').textContent = data.space_name;
               space_picture_input.setAttribute('data-pre', data.space_picture);
+              document.getElementById(current_space).src = data.space_picture;
               space_description_input.setAttribute('data-pre', data.space_description);
+              formSpace = document.querySelector('.form-space["data-id = ' + current_space + '"]')
+              formSpace.querySelector('.directory-space-img') = data.space_picture;
+              formSpace.querySelector('.directory-space-description').textContent = data.space_picture;
+              formSpace.querySelector('.directory-space-title').textContent = data.space_name;
             }
           }));
         }
@@ -2003,7 +2009,6 @@
       socket.on('receive_message', function (data) {
         const newNode = document.createElement('div');
         chat_history_skip += 1;
-        newNode.setAttribute('data-datetime', moment(data.datetime).format());
         let messageMoment = moment(data.datetime).local().format('h:mm A');
         if (data.combine == 'false') {
           newNode.className = 'message-container';
@@ -2031,7 +2036,6 @@
           newNode.firstElementChild.nextElementSibling.innerHTML = parseMarkdown(escapeHTML(data.message));
         }
         newNode.id = data.message_id;
-        newNode.setAttribute('data-user', data.user_id);
         $('.temporary-message').remove();
         document.getElementById('messages').append(newNode);
       });
@@ -2431,7 +2435,6 @@
               if (item.combine == 'false') {
                 newNode.className = 'message-container';
                 newNode.setAttribute('data-date', messageDate.format('M/D/YYYY'));
-                newNode.setAttribute('data-datetime', messageDate.format());
                 if(moment(messageDate).isSame(todayDate, 'day')) {
                   messageDate = 'at ' + messageDate.format('h:mm A');
                 }
@@ -2460,7 +2463,6 @@
               else {
                 newNode.className = 'message-container-combine';
                 newNode.setAttribute('data-date', messageDate.format('M/D/YYYY'));
-                newNode.setAttribute('data-datetime', messageDate.format());
                 if (space_admin || admin || item.user_id == user_id) {
                   newNode.innerHTML = '<p class="message-combine-time">' + messageDate.format('h:mm A') + '</p><p class="message-combine"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.svg"><img class="edit-message pointer" src="/static/images/edit.svg"><img class="delete-message red-icon pointer" src="/static/images/delete.svg"></div>'; 
                 } 
@@ -2475,7 +2477,6 @@
                 }
               }
               newNode.id = item._id.$oid;
-              newNode.setAttribute('data-user', item.user_id);
               document.getElementById('messages').prepend(newNode);
             });
           } 
