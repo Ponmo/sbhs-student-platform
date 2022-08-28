@@ -1253,6 +1253,7 @@
       });
         
       $(document).on('click', '#close-space-search-button', function() {
+        $('#space-settings').hide();
         $("#space-search").animate({opacity: '0'}, 100);
         setTimeout(function() {
           $('#space-search').css('display', 'none');

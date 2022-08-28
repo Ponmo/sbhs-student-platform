@@ -288,8 +288,12 @@ img { /* make images and create button undraggable and unhighlitable*/
   background-color: #3c46a6;
   color: white;
 }
-#edit-space-button {
+#invite-link-button {
   border-bottom: 1px solid white;
+  color: cornflowerblue;
+}
+#invite-link-button:hover {
+  color: white;
 }
 .red-space-button {
   margin-top: 2px;
