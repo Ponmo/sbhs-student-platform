@@ -1238,6 +1238,9 @@
         $('#profile-popup').remove();
         selected_user = '';
         current_space = this.getAttribute('data-id');
+        const formSpace = document.querySelector('.form-space[data-id="' + current_space + '"]').querySelector('.directory-space-joined-status')
+        formSpace.textContent = "Joined";
+        formSpace.className = 'directory-space-joined-status joined-status';
         joinSpace();
       });
 
