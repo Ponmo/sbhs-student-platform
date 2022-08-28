@@ -625,6 +625,7 @@ def change_user_status():
         if request.json['status'] in {'user', 'admin'}:
             if request.json['user_id'] == session['unique_id'] and request.json['status'] == 'user':
                 session['admin'] = False
+                session.clear()
                 return Response(dumps({'success': 'self'}), mimetype='application/json')
             collection_users.find_one_and_update({"_id": request.json['user_id']}, {'$set': {'status': request.json['status']}})
             return Response(dumps({'success': 'true'}), mimetype='application/json')
