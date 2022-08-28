@@ -1864,7 +1864,7 @@
         editChannelModal.style.display = "block";
       });
 
-      editChannelModal.onsubmit = function (e) {
+      document.getElementById('edit-channel-form').onsubmit = function (e) {
         e.preventDefault();
         socket.emit('edit_channel', {
           room_id: selected_room,
