@@ -1714,7 +1714,9 @@
       });
 
       $(document).on('click', '#confirm-leave-space-button', function() {
-        document.querySelector('.form-space[data-id="' + current_space + '"]').querySelector('.directory-space-joined-status').textContent = 'Not Joined';
+        const formSpace = document.querySelector('.form-space[data-id="' + current_space + '"]').querySelector('.directory-space-joined-status')
+        formSpace.textContent = 'Not Joined';
+        formSpace.className = 'directory-space-joined-status not-joined-status';
         $.ajax({
           type: 'POST',
           url: '/leave_space',
