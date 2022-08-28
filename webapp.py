@@ -1,4 +1,3 @@
-from crypt import methods
 from flask_socketio import SocketIO, emit, join_room, leave_room
 
 import json
@@ -811,7 +810,7 @@ def joined_space():
 def edit_channel(data):
     if space_admin() or session['admin']:
         for room in room_list():
-            emit('edit_channel', data, room = room, include_self=False)
+            emit('edit_channel', data, room = room)
 
 def session_expired():
     if not session.get('logged'):

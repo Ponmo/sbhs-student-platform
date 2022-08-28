@@ -109,7 +109,8 @@ img { /* make images and create button undraggable and unhighlitable*/
   width: 100%;
   height: 100%;
   z-index: 10;
-  overflow: hidden;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 #space-directory-lfg-header {
   position: fixed;
@@ -133,11 +134,8 @@ img { /* make images and create button undraggable and unhighlitable*/
   padding-right: 20px;
   padding-top: 70px;
   display: grid;
-  height: calc(100vh - 50px);
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: 20px;
-  overflow-y: scroll;
-  overflow-x: hidden;
 }
 /*Make Responsive with Overlay Overflow Resize, word-break, etc. */
 .form-space, .form-space-filler {
