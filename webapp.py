@@ -279,12 +279,13 @@ def render_space():
 def space_invite():
     if session_expired() or banned():
         return 'expired', 200
-    invite = collection_invites.find_one({'space': session['current_space'], 'user': session['unique_id']})
-    if invite != None:
-        return Response(dumps({'code': invite['code']}), mimetype='application/json')
-    code = shortuuid.uuid()
-    #else:
-        #collection_invites.
+    if space_member():
+        invite = collection_invites.find_one({'space': session['current_space'], 'user': session['unique_id']})
+        if invite != None:
+            return Response(dumps({'code': invite['_id']}), mimetype='application/json')
+        code = shortuuid.uuid()[:7]
+        collection_invites.insert_one({'_id': code, 'space': session['current_space'], 'user': session['unique_id'], 'datetime': datetime.now().isoformat() + 'Z'})
+        return Response(dumps({'code': code}), mimetype='application/json')
 
 # When user clicks leave space button, that space is removed
 # from their list of joined spaces in MongoDB.
