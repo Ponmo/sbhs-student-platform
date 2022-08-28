@@ -47,6 +47,7 @@ collection_sections = db['Sections']
 collection_deleted = db['Deleted Messages']
 collection_logs = db['Logs']
 collection_emails = db['Emails']
+collection_invites = db['Invites']
 
 # Support SSL termination. Mutate the host_url within Flask to use https://
 # if the SSL was terminated.
@@ -273,10 +274,15 @@ def render_space():
             session['current_space_name'] = space['name']
             return Response(rooms_and_sections, mimetype='application/json')
 
-@app.route('/space_invite', methods=['GET', 'POST'])
+@app.route('/space_invite', methods=['POST'])
 def leave_space():
     if session_expired() or banned():
-        return
+        return 'expired', 200
+    invite = collection_invites.find_one({'space': session['current_space'], 'user': session['unique_id']})
+    if invite != None:
+        return Response(dumps({'code': invite['code']}), mimetype='application/json')
+    #else:
+        #collection_invites.
 
 # When user clicks leave space button, that space is removed
 # from their list of joined spaces in MongoDB.
