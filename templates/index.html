@@ -845,8 +845,7 @@
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
             if (data['success'] == 'self') {
-              $('#administrator-page').hide();
-              $('#home-page').show();
+              window.location.href = "https://sbhs-platform.herokuapp.com";
             }
            }
         });
