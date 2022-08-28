@@ -121,6 +121,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   white-space: nowrap;
   overflow: hidden;
   height: 48px;
+  z-index: 1000;
 }
 #space-directory-lfg-title {
   line-height: 48px;
