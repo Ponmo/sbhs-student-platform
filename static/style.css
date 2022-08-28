@@ -989,10 +989,10 @@ img { /* make images and create button undraggable and unhighlitable*/
   height: 100%;
 }
 #close-space-settings-button {
-  width: 40px;
-  height: 40px;
-  margin-top: 40px;
-  overflow-wrap: none;
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  width: 30px;
   white-space: initial;
 }
 #footer {

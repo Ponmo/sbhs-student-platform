@@ -204,12 +204,27 @@ def render_main_page(space_id = None):
             session['invite'] = space_id
             return redirect(url_for('render_login'))
     if 'invite' in session:
-        space_id = session['invite']
+        invite = session['invite']
         session.pop('invite')
-        return redirect('https://sbhs-platform.herokuapp.com/sbhs/' + space_id)
+        if len(invite) == 7:
+            joined = collection_users.find_one({"_id": session['unique_id']})['joined']
+            space_id = collection_invites.find_one({'_id': invite})['space']
+            if space_id not in joined:
+                joined.append(space_id)
+                collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': joined}})
+                collection_spaces.find_one_and_update({"_id": ObjectId(space_id)}, {'$push': {'members': [session['unique_id'], session['users_name']]}})
+            return redirect('https://sbhs-platform.herokuapp.com/sbhs/' + space_id)
+        return redirect('https://sbhs-platform.herokuapp.com/sbhs/' + invite)
     if 'logged' not in session or session['logged'] == False:
        return redirect(url_for('render_login'))
     return render_template('index.html', user_name = session['users_name'], room = '1', user_picture = session['picture'], user_id = session['unique_id'])
+
+@app.route('/invite/<invite_code>')
+def render(invite_code = None):
+    if invite_code != None:
+        if 'logged' not in session:
+            session['invite'] = invite_code
+            return redirect(url_for('render_login'))
 
 # When logout button is clicked, destroy session.
 
