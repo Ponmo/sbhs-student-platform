@@ -1685,6 +1685,7 @@
               space_name_input.setAttribute('data-pre', data.space_name);
               document.getElementById('header_text').textContent = data.space_name;
               space_picture_input.setAttribute('data-pre', data.space_picture);
+              space_picture_input.value = data.space_picture;
               document.getElementById(current_space).src = data.space_picture;
               space_description_input.setAttribute('data-pre', data.space_description);
               formSpace = document.querySelector('.form-space[data-id="' + current_space + '"]');
