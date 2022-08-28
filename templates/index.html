@@ -1866,6 +1866,7 @@
 
       document.getElementById('edit-channel-form').onsubmit = function (e) {
         e.preventDefault();
+        alert('d');
         socket.emit('edit_channel', {
           room_id: selected_room,
           new_name: document.getElementById('new-channel-name').value.trim()
