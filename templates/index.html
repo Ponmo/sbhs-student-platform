@@ -1678,8 +1678,8 @@
             type: 'POST',
             url: '/space_invite',
             contentType: 'application/json;charset=UTF-8',
-            success: function(da) {
-              alert(JSON.stringify(da));
+            success: function(data) {
+              navigator.clipboard.writeText(data['code']);
             }
           });
       });
