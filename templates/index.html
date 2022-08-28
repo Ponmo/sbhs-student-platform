@@ -844,7 +844,11 @@
           data: JSON.stringify({'user_id': this.parentElement.parentElement.getAttribute('data-id'), 'status': this.firstElementChild.value}), 
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
-          }
+            if (data['success'] == 'self') {
+              $('#administrator-page').hide();
+              $('#home-page').show();
+            }
+           }
         });
       });
 
