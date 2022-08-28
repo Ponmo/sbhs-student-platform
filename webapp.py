@@ -273,6 +273,11 @@ def render_space():
             session['current_space_name'] = space['name']
             return Response(rooms_and_sections, mimetype='application/json')
 
+@app.route('/space_invite', methods=['GET', 'POST'])
+def leave_space():
+    if session_expired() or banned():
+        return
+
 # When user clicks leave space button, that space is removed
 # from their list of joined spaces in MongoDB.
 # Returns updated list of joined spaces.

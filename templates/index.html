@@ -228,32 +228,36 @@
       <div class="space-settings-select">
         <div id="space-settings-column">
           <div class="space-settings-selection pointer" id="space-settings-general">Space Settings</div> 
+          <div class="space-settings-selection pointer" id="space-settings-members">Members</div> 
         </div>
-      </div>
-      <div id="space-settings-expand">
-        <form id="edit-space-profile">
-          <label for="space-name" class="space-settings-header">Space Name</label><br>
-          <input type="text" id="edit-space-name-input"><br>
-          <label for="space-picture">Space Picture</label><br>
-          <input type="text" id="edit-space-picture-input"><br>
-          <label for="space-picture">Space Description</label><br>
-          <input type="text" id="edit-space-description-input"><br>
-          <label for="invite-only" class="space-settings-header">Invite Only</label><br>
-          <label class="switch">
-            <input type="checkbox">
-            <span class="slider round"></span>
-          </label>
-          <input type="submit" style="display: none;">
-        </form>
-        <div id="theme-selection">
-          <div class="theme" id="dark-mode"></div>
-          <div class="theme" id="ultra-dark-mode"></div>
-          <div class="theme" id="light-mode"></div>
-        </div>
-        <p class="space-settings-header">Members</p>
       </div>
 
-      <div id="exit-space-settings">
+      <div id="space-settings-expand">
+        <div id="space-settings-general-selection">
+          <form id="edit-space-profile">
+            <label for="space-name" class="space-settings-header">Space Name</label><br>
+            <input type="text" id="edit-space-name-input"><br>
+            <label for="space-picture">Space Picture</label><br>
+            <input type="text" id="edit-space-picture-input"><br>
+            <label for="space-picture">Space Description</label><br>
+            <input type="text" id="edit-space-description-input"><br>
+            <label for="invite-only" class="space-settings-header">Invite Only</label><br>
+            <label class="switch">
+              <input type="checkbox">
+              <span class="slider round"></span>
+            </label>
+            <input type="submit" style="display: none;">
+          </form>
+          <div id="theme-selection">
+            <div class="theme" id="dark-mode"></div>
+            <div class="theme" id="ultra-dark-mode"></div>
+            <div class="theme" id="light-mode"></div>
+          </div>
+        </div>
+        <div id="space-settings-members-selection">
+          <p class="space-settings-header">Members</p>
+          <p class="space-settings-header">Invites</p>
+        </div>
         <img class="pointer white-icon" id="close-space-settings-button" src="/static/images/x.svg">
       </div>
     </div>
@@ -1253,7 +1257,7 @@
       });
         
       $(document).on('click', '#close-space-search-button', function() {
-        $('#space-settings').hide();
+        $('#first-all').show();
         $("#space-search").animate({opacity: '0'}, 100);
         setTimeout(function() {
           $('#space-search').css('display', 'none');
@@ -1700,7 +1704,7 @@
         }
       }
 
-      $(document).on('click', '#exit-space-settings', function() {
+      $(document).on('click', '#close-space-settings-button', function() {
         $('#space-settings').hide();
         $('#first-all').css('display', 'block');
       });
