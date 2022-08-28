@@ -13,6 +13,7 @@ from oauthlib.oauth2 import WebApplicationClient
 import requests
 from bson.objectid import ObjectId
 from bson.json_util import dumps
+import shortuuid
 
 #import pprint
 #import sys
@@ -275,12 +276,13 @@ def render_space():
             return Response(rooms_and_sections, mimetype='application/json')
 
 @app.route('/space_invite', methods=['POST'])
-def leave_space():
+def space_invite():
     if session_expired() or banned():
         return 'expired', 200
     invite = collection_invites.find_one({'space': session['current_space'], 'user': session['unique_id']})
     if invite != None:
         return Response(dumps({'code': invite['code']}), mimetype='application/json')
+    code = shortuuid.uuid()
     #else:
         #collection_invites.
 
