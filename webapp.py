@@ -807,6 +807,12 @@ def joined_space():
     for room in room_list():
         emit('joined_space', user, room = room, include_self=False)
 
+@socketio.on('edit_channel')
+def edit_channel(data):
+    if space_admin() or session['admin']:
+        for room in room_list():
+            emit('joined_space', data, room = room, include_self=False)
+
 def session_expired():
     if not session.get('logged'):
         return True

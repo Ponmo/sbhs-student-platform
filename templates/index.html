@@ -1639,13 +1639,13 @@
         const space_name_input = document.getElementById('edit-space-name-input');
         const space_picture_input = document.getElementById('edit-space-picture-input');
         const space_description_input = document.getElementById('edit-space-description-input');
-        if (space_name_input.value != space_name_input.getAttribute('data-pre') || space_picture_input.value != space_picture_input.getAttribute('data-pre') || space_description_input.value != space_description_input.getAttribute('data-pre')) {
+        if (space_name_input.value.trim() != space_name_input.getAttribute('data-pre') || space_picture_input.value.trim() != space_picture_input.getAttribute('data-pre') || space_description_input.valuetrim() != space_description_input.getAttribute('data-pre')) {
           abortRequests();
           requests.push($.ajax({
             type: 'POST',
             url: '/edit_space_profile',
             dataType: "json",
-            data: JSON.stringify({'space_name': space_name_input.value, 'space_picture': space_picture_input.value, 'space_description': space_description_input.value}),
+            data: JSON.stringify({'space_name': space_name_input.value.trim(), 'space_picture': space_picture_input.value.trim(), 'space_description': space_description_input.value.trim()}),
             contentType: 'application/json;charset=UTF-8',
             success: function(data) {
               popupSuccess();
@@ -1866,21 +1866,15 @@
 
       editChannelModal.onsubmit = function (e) {
         e.preventDefault();
-        const new_name = document.getElementById('new-channel-name').value.trim();
         socket.emit('edit_channel', {
           room_id: selected_room,
-          new_name: new_name;
-        });
-        $.ajax({
-          type: "POST",
-          url: '/edit_channel',
-          dataType: "json",
-          data: JSON.stringify({'room_id': selected_room, 'new_name': newName}),
-          contentType: 'application/json;charset=UTF-8',
-          success: function(data) {
-          }
+          new_name: document.getElementById('new-channel-name').value.trim()
         });
       }
+
+      socket.on('edit_channel', function (data) {
+        alert(JSON.stringify(data));
+      });
       
       $(document).on('click', '#close-edit-channel', function() {
         editChannelModal.style.display = "none";
