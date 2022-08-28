@@ -407,7 +407,6 @@ def create_section():
 
 @app.route('/delete_section', methods=['GET', 'POST'])
 def delete_section():
-    collection_messages.update_many({},{ '$set': {"edited": False}})
     if session_expired() or banned():
         return 'expired', 200
     if request.method == 'POST' and (space_admin() or session['admin']):
