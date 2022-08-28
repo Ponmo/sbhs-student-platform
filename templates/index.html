@@ -1946,10 +1946,10 @@
 
       socket.on('edited_message', function(data) {
         if (data.combine == 'false') {
-          document.getElementById(data.message_id).firstChild.nextElementSibling.nextElementSibling.innerHTML = parseMarkdown(escapeHTML(data.edit))  + '<span class="edited-note"> (edited)</span>';;
+          document.getElementById(data.message_id).firstChild.nextElementSibling.nextElementSibling.innerHTML = parseMarkdown(escapeHTML(data.edit))  + '<span class="edited-note"> (edited)</span>';
         }
         else {
-          document.getElementById(data.message_id).firstChild.nextElementSibling.innerHTML = parseMarkdown(escapeHTML(data.edit)) + '<span class="edited-note"> (edited)</span>';;
+          document.getElementById(data.message_id).firstChild.nextElementSibling.innerHTML = parseMarkdown(escapeHTML(data.edit)) + '<span class="edited-note"> (edited)</span>';
         }
       });
 
@@ -2403,7 +2403,7 @@
                 newNode.firstElementChild.src = item.picture;
                 newNode.firstElementChild.nextElementSibling.firstElementChild.textContent = item.name;
                 newNode.firstElementChild.nextElementSibling.firstElementChild.style.fontWeight = 'bold';
-                if (item.edited = true) {
+                if (item.edited == true) {
                   newNode.firstElementChild.nextElementSibling.nextElementSibling.innerHTML = parseMarkdown(escapeHTML(item.message)) + '<span class="edited-note"> (edited)</span>';
                 }
                 else {
@@ -2420,7 +2420,7 @@
                 else {
                   newNode.innerHTML = '<p class="message-combine-time">' + messageDate.format('h:mm A') + '</p><p class="message-combine"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.svg"></div>';
                 }
-                if (item.edited = true) {
+                if (item.edited == true) {
                   newNode.firstElementChild.nextElementSibling.innerHTML = parseMarkdown(escapeHTML(item.message)) + '<span class="edited-note"> (edited)</span>';
                 }
                 else {
