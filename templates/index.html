@@ -1866,6 +1866,20 @@
 
       editChannelModal.onsubmit = function (e) {
         e.preventDefault();
+        const new_name = document.getElementById('new-channel-name').value.trim();
+        socket.emit('edit_channel', {
+          room_id: selected_room,
+          new_name: new_name;
+        });
+        $.ajax({
+          type: "POST",
+          url: '/edit_channel',
+          dataType: "json",
+          data: JSON.stringify({'room_id': selected_room, 'new_name': newName}),
+          contentType: 'application/json;charset=UTF-8',
+          success: function(data) {
+          }
+        });
       }
       
       $(document).on('click', '#close-edit-channel', function() {
