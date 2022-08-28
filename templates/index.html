@@ -1401,11 +1401,6 @@
       });
 
       $(document).on('click', '#submit_email', function() {
-        document.getElementById('email_input_form').submit();
-      });
-
-      document.getElementById('email_input_form').onsubmit = function (e) {
-        e.preventDefault();
         let recipient_list = [];
         document.querySelectorAll('.accepted_email').forEach(function (e) {
           recipient_list.push(e.textContent);
@@ -1432,7 +1427,37 @@
           document.getElementById('email_subject_input').value = '';
           document.getElementById('email_message_input').value = '';
         }
-      }
+      });
+
+      // document.getElementById('email_input_form').onsubmit = function (e) {
+      //   e.preventDefault();
+      //   let recipient_list = [];
+      //   document.querySelectorAll('.accepted_email').forEach(function (e) {
+      //     recipient_list.push(e.textContent);
+      //   });
+      //   if (/\S+@\S+\.\S+/.test(document.getElementById('email_to_input').value)) {
+      //     recipient_list.push(document.getElementById('email_to_input').value);
+      //   }
+      //   if (recipient_list.length != 0) {
+      //     $.ajax({
+      //       type: 'POST',
+      //       url: '/send_email',
+      //       dataType: 'json',
+      //       data: JSON.stringify({'to': recipient_list, 'subject': document.getElementById('email_subject_input').value, 'message': document.getElementById('email_message_input').value, 'room_id': current_room}),
+      //       contentType: 'application/json;charset=UTF-8',
+      //       success: function(data) {
+      //         socket.emit('sent_email', {
+      //           room_id: current_room
+      //         })
+      //       }
+      //     });
+      //     $('.accepted_email_bubble').remove();
+      //     $('.rejected_email_bubble').remove();
+      //     document.getElementById('email_to_input').value = '';
+      //     document.getElementById('email_subject_input').value = '';
+      //     document.getElementById('email_message_input').value = '';
+      //   }
+      // }
 
       $(document).on('click', '.expand-recipient-list', function() {
         if (this.getAttribute('data-expanded') == 'false') {
