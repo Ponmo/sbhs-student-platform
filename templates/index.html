@@ -1886,10 +1886,10 @@
         editSectionModal.style.display = "block";
       });
 
-      editSectionModal.onsubmit = function (e) {
+      document.getElementById('edit-section-form').onsubmit = function (e) {
         e.preventDefault();
         socket.emit('edit_section', {
-          section_id: selected_room,
+          section_id: selected_section,
           section_name: document.getElementById('new-section-name').value.trim()
         });
       }
