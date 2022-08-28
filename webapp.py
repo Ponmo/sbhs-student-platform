@@ -811,7 +811,7 @@ def joined_space():
 def edit_channel(data):
     if space_admin() or session['admin']:
         for room in room_list():
-            emit('joined_space', data, room = room, include_self=False)
+            emit('edit_channel', data, room = room, include_self=False)
 
 def session_expired():
     if not session.get('logged'):
