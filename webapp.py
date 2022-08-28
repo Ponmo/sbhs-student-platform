@@ -811,7 +811,7 @@ def edit_channel(data):
     if space_admin() or session['admin']:
         collection_rooms.find_one_and_update({'_id': request.json['room_id']}, {'$set': {'name': request.json['room_name'].strip()}})
         for room in room_list():
-            emit('edit_channel', data, room = room)
+            socketio.emit('edit_channel', data, room = room)
 
 def session_expired():
     if not session.get('logged'):
