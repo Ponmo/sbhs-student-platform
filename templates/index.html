@@ -544,8 +544,10 @@
             document.getElementById('directory-space').prepend(newNode);
           });
           if (window.location.href.indexOf('/sbhs/') != -1) {
-            current_space = window.location.href.substring(window.location.href.indexOf('/sbhs/') + 6).replace('#','');;
-            document.querySelector('.form-space[data-id="' + current_space + '"]').querySelector('.directory-space-joined-status').textContent = "Joined";
+            current_space = window.location.href.substring(window.location.href.indexOf('/sbhs/') + 6).replace('#','');
+            const formSpace = document.querySelector('.form-space[data-id="' + current_space + '"]').querySelector('.directory-space-joined-status')
+            formSpace.textContent = "Joined";
+            formSpace.className = 'directory-space-joined-status joined-status';
             joinSpace();
           }
         }
@@ -633,6 +635,8 @@
         $('#admin-logs-body').empty();
         $('#admin-users-body').empty();
         $('#admin-settings-body').empty();
+        $('.admin-tab').removeClass('admin-tab-selected');
+        $(this).addClass('admin-tab-selected');
         chat_history_skip = 0;
         last_loaded = '';
         loadLogHistory();
@@ -702,6 +706,8 @@
         $('#admin-logs-body').empty();
         $('#admin-users-body').empty();
         $('#admin-settings-body').empty();
+        $('.admin-tab').removeClass('admin-tab-selected');
+        $(this).addClass('admin-tab-selected');
 
         abortRequests();
         requests.push($.ajax({
@@ -763,6 +769,8 @@
         $('#admin-logs-body').empty();
         $('#admin-users-body').empty();
         $('#admin-settings-body').empty();
+        $('.admin-tab').removeClass('admin-tab-selected');
+        $(this).addClass('admin-tab-selected');
       });
 
       $(document).on('click', '.admin-logs-table-row', function() {
