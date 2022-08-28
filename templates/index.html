@@ -1671,7 +1671,7 @@
         const space_name_input = document.getElementById('edit-space-name-input');
         const space_picture_input = document.getElementById('edit-space-picture-input');
         const space_description_input = document.getElementById('edit-space-description-input');
-        if (space_name_input.value.trim() != space_name_input.getAttribute('data-pre') || space_picture_input.value.trim() != space_picture_input.getAttribute('data-pre') || space_description_input.valuetrim() != space_description_input.getAttribute('data-pre')) {
+        if (space_name_input.value.trim() != space_name_input.getAttribute('data-pre') || space_picture_input.value.trim() != space_picture_input.getAttribute('data-pre') || space_description_input.value.trim() != space_description_input.getAttribute('data-pre')) {
           abortRequests();
           requests.push($.ajax({
             type: 'POST',
