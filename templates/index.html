@@ -1265,6 +1265,9 @@
         $("#space-search").css('pointer-events', 'none');
         current_space = this.getAttribute('data-id');
         let clicked_space = this;
+        const formSpace = document.querySelector('.form-space[data-id="' + current_space + '"]').querySelector('.directory-space-joined-status')
+        formSpace.textContent = "Joined";
+        formSpace.className = 'directory-space-joined-status joined-status';
         joinSpace();
       });
 
