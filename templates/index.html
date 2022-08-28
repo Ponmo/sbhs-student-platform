@@ -1873,7 +1873,7 @@
       }
 
       socket.on('edit_channel', function (data) {
-        alert('k');
+        editChannelModal.style.display = "none";
         document.getElementById(data['room_id']).textContent = data['room_name'];
       });
       
@@ -1888,7 +1888,16 @@
 
       editSectionModal.onsubmit = function (e) {
         e.preventDefault();
+        socket.emit('edit_section', {
+          section_id: selected_room,
+          section_name: document.getElementById('new-section-name').value.trim()
+        });
       }
+
+      socket.on('edit_section', function (data) {
+        editSectionModal.style.display = "none";
+        document.getElementById(data['section_id']).firstElementChild.firstElementChild.nextSibling.textContent = data['section_name'];
+      });
       
       $(document).on('click', '#close-edit-section', function() {
         editSectionModal.style.display = "none";

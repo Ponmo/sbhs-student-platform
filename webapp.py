@@ -813,6 +813,13 @@ def edit_channel(data):
         for room in room_list():
             socketio.emit('edit_channel', data, room = room)
 
+@socketio.on('edit_section')
+def edit_section(data):
+    if space_admin() or session['admin']:
+        collection_sections.find_one_and_update({'_id': ObjectId(data['section_id'])}, {'$set': {'name': data['section_name'].strip()}})
+        for room in room_list():
+            socketio.emit('edit_section', data, room = room)
+
 def session_expired():
     if not session.get('logged'):
         return True
