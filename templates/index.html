@@ -901,10 +901,29 @@
       });
 
       $('#admin-search-bar').keyup(function () {
-        $('#admin-logs-body').empty();
-        last_loaded = '';
-        chat_history_skip = 0;
-        loadLogHistory();
+        if (document.getElementById('admin-logs-table').style.display != 'none') {
+          $('#admin-logs-body').empty();
+          last_loaded = '';
+          chat_history_skip = 0;
+          loadLogHistory();
+        }
+        else if (document.getElementById('admin-users-table').style.display != 'none') {
+          const filter = document.getElementById("admin-search-bar").value.toUpperCase();
+          if (filter != '') {
+            document.querySelectorAll('.admin-users-table-row').forEach(function(entry) {
+              if(entry.textContent.toUpperCase().indexOf(filter) > -1) {
+                $(entry).show();
+              }
+              else {
+                $(entry).hide();
+              }
+            });
+          }
+          else {
+            $('.admin-users-table-row').show();
+          }
+        }
+        
       });
 
       $(document).on('click', '#exit-server-settings', function() {
@@ -1670,6 +1689,16 @@
           container.style.display = 'block';
         }
       });
+
+      $(document).on('click', '#space-settings-member', function() {
+        let container = document.getElementById('space-settings-members-selection');
+        if (container.style.display == 'none') {
+          document.getElementById("space-settings-general-selection").style.backgroundColor = "transparent";
+          this.style.backgroundColor = ""
+          container.style.display = 'block';
+        }
+      });
+
 
       $(document).on('click', '#edit-space-button', function() {
         $('#space-settings').show();
