@@ -76,10 +76,11 @@ img { /* make images and create button undraggable and unhighlitable*/
   background-color: #36393e;
   position: fixed;
   width: 100%;
-  min-width: 600px;
+  min-width: 500px;
   height: calc(100vh - 50px);
   z-index: 10;
   overflow: hidden;
+  white-space: nowrap;
 }
 #user-page {
   display: none;
@@ -201,6 +202,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin-right: 12px;
   margin-top: 9px;
   float: right;
+  display: none;
 }
 
 #content {  /* make calc good on all browsers ; Make margin and padding 0 because of broswer differences ; */
