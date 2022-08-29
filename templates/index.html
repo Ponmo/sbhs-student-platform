@@ -1695,10 +1695,7 @@
 
       $(document).on('click', '#space-settings-members', function() {
         let container = document.getElementById('space-settings-members-selection');
-        alert("hello");
-        alert(container.style.display);
-        if (container.style.display == 'none') {
-          alert("hello2");
+        if ($(container).css('display') == 'none') {
           document.getElementById("space-settings-general").style.backgroundColor = "transparent";
           this.style.backgroundColor = "#43474d!important";
           document.getElementById("space-settings-general-selection").style.display = "none";
@@ -1708,7 +1705,7 @@
 
       $(document).on('click', '#space-settings-general', function() {
         let container = document.getElementById('space-settings-general-selection');
-        if (container.style.display == 'none') {
+        if ($(container).css('display') == 'none') {
           document.getElementById("space-settings-members").style.backgroundColor = "transparent";
           this.style.backgroundColor = "#43474d!important"
           document.getElementById("space-settings-members-selection").style.display = "none";
