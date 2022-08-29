@@ -674,12 +674,13 @@
               const newFragment = document.createDocumentFragment();
               data.forEach(function (item) {
                 let newNode = document.createElement('tr');
-                newNode.innerHTML = '<td style="white-space: pre;"></td><td></td><td style="white-space: pre;"></td><td></td><td></td><td><img class="expand-log" src="/static/images/expand.png"></td>'
+                newNode.innerHTML = '<td style="white-space: pre;"></td><td></td><td style="white-space: pre;"></td><td><div class="admin-logs-space-link"></div></td><td></td><td><img class="expand-log" src="/static/images/expand.png"></td>'
                 newNode.className = 'admin-logs-table-row pointer';
                 newNode.firstElementChild.textContent = item.name + '\r\n' + item.email;
                 newNode.firstElementChild.nextElementSibling.textContent = item.action;
                 newNode.firstElementChild.nextElementSibling.nextElementSibling.textContent = item.by + '\r\n' + item.by_email;
-                newNode.firstElementChild.nextElementSibling.nextElementSibling.nextElementSibling.textContent = item.in;
+                newNode.querySelector('.admin-logs-space-link').textContent = item.in;
+                newNode.querySelector('.admin-logs-space-link').setAttribute('data-id', item.space_id);
                 newNode.firstElementChild.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent = moment(item.datetime).format('MMM Do YYYY, h:mm[]a');
                 newFragment.appendChild(newNode);
                 newNode = document.createElement('tr');
@@ -703,6 +704,11 @@
           }
         }));
       }
+
+      $(document).on('click', '#admin-logs-space-link', function() {
+        current_space = this.getAttribute('data-id');
+        joinSpace();
+      });
 
       $(document).on('click', '#admin-users', function() {
         $('.active-space').attr('style', '');
@@ -2812,6 +2818,8 @@
     // REST, please
 
     //preload images
+
+    // autoupdate settings
 
     //use id of space to get space name for admin tables
 

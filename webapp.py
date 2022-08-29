@@ -553,7 +553,7 @@ def report_message():
     if request.method == 'POST' and space_member():
         reported_message = collection_messages.find_one({'_id': ObjectId(request.json['message_id'])})
         if collection_logs.count_documents({'details': reported_message}) == 0:
-            collection_logs.insert_one({'name': session['users_name'], 'user_id': session['unique_id'], 'email': session['users_email'], 'action': 'reported message', 'by': reported_message['name'], 'by_email': reported_message['email'], 'in': session['current_space_name'], 'details': reported_message, 'datetime': datetime.now().isoformat() + 'Z'})
+            collection_logs.insert_one({'name': session['users_name'], 'user_id': session['unique_id'], 'email': session['users_email'], 'action': 'reported message', 'by': reported_message['name'], 'by_email': reported_message['email'], 'in': session['current_space_name'], 'space_id': session['current_space'], 'details': reported_message, 'datetime': datetime.now().isoformat() + 'Z'})
             return Response(dumps({'success': 'true'}), mimetype='application/json')
         else:
             return Response(dumps({'success': 'many'}), mimetype='application/json')
@@ -660,7 +660,6 @@ def change_user_status():
 
 @app.route('/edit_space_profile', methods=['POST'])
 def edit_space_profile():
-    collection_spaces.update_many({}, {'$set': {'invite_only': False}})
     if session_expired() or banned():
         return 'expired', 200
     if session['admin'] or space_admin():
