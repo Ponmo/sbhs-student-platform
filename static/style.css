@@ -1128,6 +1128,15 @@ img { /* make images and create button undraggable and unhighlitable*/
   background-color: rgba(0,0,0,0.4);
   height: 100%;
 }
+.confirm-button {
+  margin-left: auto;
+  margin-right: 12px;
+  padding: 8px 10px;
+  color: white;
+  background-color: #1f52a3;
+  border-radius: 4px;
+  cursor: pointer;
+}
 .modal-content {
   display: flex;
   flex-direction: column;
