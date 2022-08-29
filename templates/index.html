@@ -1701,8 +1701,10 @@
           // $(document.getElementById("space-settings-general-selection")).css('display') = "none";
           // $(container).css('display') = "block";
 
-          document.getElementById("space-settings-general").style.backgroundColor = "";
-          document.getElementById("space-settings-members").style.backgroundColor = "#43474d !important"
+          // document.getElementById("space-settings-general").style.backgroundColor = "";
+          $(document.getElementById("space-settings-general")).attr('style', '');
+          // document.getElementById("space-settings-members").style.backgroundColor = "#43474d !important"
+          $(document.getElementById("space-settings-members")).attr('style', 'background-color: #43474d !important');
           document.getElementById("space-settings-general-selection").style.display = "none";
           container.style.display = 'block';
         }
