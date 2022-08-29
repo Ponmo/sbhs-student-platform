@@ -640,7 +640,7 @@
         $('#admin-logs-body').empty();
         $('#admin-users-body').empty();
         $('#admin-settings-body').empty();
-        $('.admin-search-bar').val('');
+        $('#admin-search-bar').val('');
         $('.admin-tab').removeClass('admin-tab-selected');
         $('#admin-logs').addClass('admin-tab-selected');
         chat_history_skip = 0;
@@ -713,7 +713,7 @@
         $('#admin-logs-body').empty();
         $('#admin-users-body').empty();
         $('#admin-settings-body').empty();
-        $('.admin-search-bar').val('');
+        $('#admin-search-bar').val('');
         $('.admin-tab').removeClass('admin-tab-selected');
         $(this).addClass('admin-tab-selected');
 
@@ -777,7 +777,7 @@
         $('#admin-logs-body').empty();
         $('#admin-users-body').empty();
         $('#admin-settings-body').empty();
-        $('.admin-search-bar').val('');
+        $('#admin-search-bar').val('');
         $('.admin-tab').removeClass('admin-tab-selected');
         $(this).addClass('admin-tab-selected');
       });
@@ -1701,9 +1701,7 @@
           // $(document.getElementById("space-settings-general-selection")).css('display') = "none";
           // $(container).css('display') = "block";
 
-          // document.getElementById("space-settings-general").style.backgroundColor = "";
           $(document.getElementById("space-settings-general")).attr('style', '');
-          // document.getElementById("space-settings-members").style.backgroundColor = "#43474d !important"
           $(document.getElementById("space-settings-members")).attr('style', 'background-color: #43474d !important');
           document.getElementById("space-settings-general-selection").style.display = "none";
           container.style.display = 'block';
