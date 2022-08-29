@@ -2077,12 +2077,14 @@
       });
 
       socket.on('edited_message', function(data) {
+        message = document.getElementById(data.message_id);
         if (data.combine == 'false') {
-          document.getElementById(data.message_id).firstChild.nextElementSibling.nextElementSibling.innerHTML = '<span>' + parseMarkdown(escapeHTML(data.edit))  + '</span><span class="edited-note"> (edited)</span>';
+          message.firstChild.nextElementSibling.nextElementSibling.innerHTML = '<span>' + parseMarkdown(escapeHTML(data.edit))  + '</span><span class="edited-note"> (edited)</span>';
         }
         else {
           document.getElementById(data.message_id).firstChild.nextElementSibling.innerHTML = '<span>' + parseMarkdown(escapeHTML(data.edit)) + '</span><span class="edited-note"> (edited)</span>';
         }
+        message.setAttribute('data-markdown', data.edit);
       });
 
       socket.on('receive_message', function (data) {
