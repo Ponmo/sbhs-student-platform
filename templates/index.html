@@ -2096,11 +2096,11 @@
 
       socket.on('receive_message', function (data) {
         const newNode = document.createElement('div');
+        newNode.setAttribute('data-markdown', data.message);
         chat_history_skip += 1;
         let messageMoment = moment(data.datetime).local().format('h:mm A');
         if (data.combine == 'false') {
           newNode.className = 'message-container';
-          newNode.setAttribute('data-markdown', item.message);
           messageMoment = 'at ' + messageMoment;
           // TODO: Give pfp image default fallback image
           if (space_admin || admin || data.user_id == user_id) {
@@ -2521,10 +2521,10 @@
             chat_history.forEach(function(item) {
               let messageDate = moment(item.datetime);
               const newNode = document.createElement('div');
+              newNode.setAttribute('data-markdown', item.message);
               if (item.combine == 'false') {
                 newNode.className = 'message-container';
                 newNode.setAttribute('data-date', messageDate.format('M/D/YYYY'));
-                newNode.setAttribute('data-markdown', item.message);
                 if(moment(messageDate).isSame(todayDate, 'day')) {
                   messageDate = 'at ' + messageDate.format('h:mm A');
                 }
