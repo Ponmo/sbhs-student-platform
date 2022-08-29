@@ -991,6 +991,11 @@ img { /* make images and create button undraggable and unhighlitable*/
   width: 30px;
   white-space: initial;
 }
+.close {
+  position: absolute;
+  right: 12px;
+  top: 4px;
+}
 #footer {
   /* padding-bottom: env(safe-area-inset-bottom);
   padding-bottom: constant(safe-area-inset-bottom); */
