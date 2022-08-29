@@ -689,7 +689,7 @@
               document.getElementById('admin-logs-body').appendChild(newFragment);
               if (!document.getElementById('expand-message-filter').checked) {
                 $('.admin-logs-table-row-details').hide();
-                $('.expand-log').css({transform: 'rotate(-90deg)'});
+                $('.expand-log').css({transform: 'rotate(0deg)'});
               }
               last_loaded = data[data.length - 1]._id.$oid;
               loadLogTrigger = true;
@@ -1696,10 +1696,11 @@
       $(document).on('click', '#space-settings-members', function() {
         let container = document.getElementById('space-settings-members-selection');
         alert("hello");
+        alert(container.style.display);
         if (container.style.display == 'none') {
           alert("hello2");
           document.getElementById("space-settings-general").style.backgroundColor = "transparent";
-          this.style.backgroundColor = "#43474d!important"
+          this.style.backgroundColor = "#43474d!important";
           document.getElementById("space-settings-general-selection").style.display = "none";
           container.style.display = 'block';
         }
