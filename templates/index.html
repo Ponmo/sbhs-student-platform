@@ -696,6 +696,8 @@
               document.getElementById('admin-logs-body').appendChild(newFragment);
               if (!document.getElementById('expand-message-filter').checked) {
                 $('.admin-logs-table-row-details').hide();
+              }
+              else {
                 $('.expand-log').css({transform: 'rotate(0deg)'});
               }
               last_loaded = data[data.length - 1]._id.$oid;
