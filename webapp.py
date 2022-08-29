@@ -76,7 +76,7 @@ client = WebApplicationClient(GOOGLE_CLIENT_ID)
 # By default, server-side flask-sessions are permanent
 
 @app.before_first_request
-def make_session_permanent():
+def set_session_lifetime():
     app.permanent_session_lifetime = timedelta(days=1)
 
 # Redirects users on http to https.
