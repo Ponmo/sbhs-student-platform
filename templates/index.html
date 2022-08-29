@@ -1679,7 +1679,7 @@
             url: '/space_invite',
             contentType: 'application/json;charset=UTF-8',
             success: function(data) {
-              navigator.clipboard.writeText(data['code']);
+              navigator.clipboard.writeText('https://sbhs-platform.herokuapp.com/invite/' + data['code']);
               popupSuccess();
             }
           });
