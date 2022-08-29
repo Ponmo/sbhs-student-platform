@@ -1322,6 +1322,9 @@ img { /* make images and create button undraggable and unhighlitable*/
 .admin-logs-space-link {
   text-decoration: underline;
 }
+.admin-logs-space-link:hover {
+  color: skyblue;
+}
 #admin-settings {
   display: inline-block;
 }
