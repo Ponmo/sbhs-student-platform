@@ -93,15 +93,6 @@ img { /* make images and create button undraggable and unhighlitable*/
   height: 30px;
   border-radius: 50%;
 }
-#log-out {
-  background-color: hotpink;
-  width: 230px;
-  height: 32px;
-  border-radius: 2px;
-  line-height: 32px;
-  padding-left: 24px;
-  color: white;
-}
 #space-search {
   background-color: white;
   opacity: 0;
@@ -948,7 +939,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   min-width: 210px;
   overflow: hidden;
 }
-#space-settings-column {
+.space-settings-column {
   width: 200px;
   padding-top: 40px;
   padding-bottom: 80px;
@@ -977,7 +968,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 .space-settings-selection:hover {
   background-color: #3c3f45;
 }
-#space-settings-expand {
+.space-settings-expand {
   display: inline-block;
   width: 65%;
   height: 100%;
@@ -993,7 +984,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 #space-settings-members-selection {
   display: none;
 }
-#close-space-settings-button {
+.close-settings-page {
   position: absolute;
   top: 40px;
   right: 40px;

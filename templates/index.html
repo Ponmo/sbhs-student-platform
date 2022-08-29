@@ -226,13 +226,13 @@
     <!--Space Settings Page-->
     <div class="settings-pages" id="space-settings">
       <div class="space-settings-select">
-        <div id="space-settings-column">
+        <div class="space-settings-column">
           <div class="space-settings-selection pointer" id="space-settings-general" style="background-color: #43474d !important">Space Settings</div> 
           <div class="space-settings-selection pointer" id="space-settings-members">Members</div> 
         </div>
       </div>
 
-      <div id="space-settings-expand">
+      <div class="space-settings-expand">
         <div id="space-settings-general-selection">
           <form id="edit-space-profile">
             <label for="space-name" class="space-settings-header">Space Name</label><br>
@@ -258,15 +258,21 @@
           <p class="space-settings-header">Members</p>
           <p class="space-settings-header">Invites</p>
         </div>
-        <img class="pointer white-icon" id="close-space-settings-button" src="/static/images/x.svg">
+        <img class="pointer white-icon close-settings-page" id="close-space-settings-button" src="/static/images/x.svg">
       </div>
     </div>
 
     <!--User Settings Page-->
     <div class="settings-pages" id="user-page">
-      
+      <div class="space-settings-select">
+        <div class="space-settings-column">
+
+        </div>
+      </div>
+      <div class="space-settings-expand">
+        <img class="pointer white-icon close-settings-page" id="close-user-page" src="/static/images/x.svg">
+      </div>
       <div id="log-out">Log Out</div> 
-      <img class="pointer" id="close-user-page" src="/static/images/x.svg">
     </div>
 
     <div id="create-space" class="modal">
