@@ -945,7 +945,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   width: 35%;
   height: 100%;
   float: left;
-  min-width: 200px;
+  min-width: 210px;
   overflow: hidden;
 }
 #space-settings-column {
@@ -964,7 +964,6 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 
 .space-settings-selection {
-  background-color: #43474D;
   width: 190px;
   height: 32px;
   border-radius: 4px;
@@ -973,7 +972,9 @@ img { /* make images and create button undraggable and unhighlitable*/
   padding-left: 6px;
   margin-top: 2px;
 }
-
+.space-settings-selection:hover {
+  background-color: #43474D;
+}
 #space-settings-expand {
   display: inline-block;
   width: 65%;
@@ -987,11 +988,8 @@ img { /* make images and create button undraggable and unhighlitable*/
   padding-top: 40px;
   padding-bottom: 40px;
 }
-#exit-space-settings {
-  float: right;
-  display: inline-block;
-  width: 10%;
-  height: 100%;
+#space-settings-members-selection {
+  display: none;
 }
 #close-space-settings-button {
   position: absolute;
