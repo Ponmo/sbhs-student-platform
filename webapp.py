@@ -660,6 +660,7 @@ def change_user_status():
 
 @app.route('/edit_space_profile', methods=['POST'])
 def edit_space_profile():
+    collection_spaces.update({}, {'$set': {'invite_only': False}})
     if session_expired() or banned():
         return 'expired', 200
     if session['admin'] or space_admin():
