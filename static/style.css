@@ -995,6 +995,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   position: absolute;
   right: 12px;
   top: 4px;
+  font-size: 22px;
 }
 #footer {
   /* padding-bottom: env(safe-area-inset-bottom);
