@@ -1504,11 +1504,11 @@
       });
 
       $(document).on('click', '.edit-message', function() {
-        let message_id = this.parentNode.parentNode.id;
-        let message = this.parentNode.previousElementSibling.firstChild.textContent;
-        $(this.parentNode.previousElementSibling).hide();
-        $(this.parentNode.previousElementSibling).after('<form class="message_edit_input_form"><textarea class="message_edit" rows="1" placeholder="Remove message" maxlength="2000">' + message + '</textarea></form>');
-        this.parentNode.previousElementSibling.firstChild.setAttribute("style", "height:" + (this.parentNode.previousElementSibling.firstChild.scrollHeight) + "px;overflow-y:hidden;");
+        let message_id = this.parentElement.parentElement.id;
+        let message = this.parentElement.parentElement.getAttribute('data-markdown');
+        $(this.parentElement.previousElementSibling).hide();
+        $(this.parentElement.previousElementSibling).after('<form class="message_edit_input_form"><textarea class="message_edit" rows="1" placeholder="Remove message" maxlength="2000">' + message + '</textarea></form>');
+        this.parentElement.previousElementSibling.firstChild.setAttribute("style", "height:" + (this.parentElement.previousElementSibling.firstChild.scrollHeight) + "px;overflow-y:hidden;");
       });
 
       $(document).on('input', '.message_edit', function() {
@@ -1527,9 +1527,9 @@
         e.preventDefault();
         let message_id = this.parentNode.id;
         let edit = this.firstChild.value.trim();
-        if (edit.length && edit != this.previousElementSibling.textContent) {
+        if (edit.length && edit != this.parentElement.getAttribute('data-markdown')) {
           let combine = null;
-          if(this.parentNode.className == 'message-container') {
+          if(this.parentElement.className == 'message-container') {
             combine = 'false';
           } 
           else {
@@ -2091,6 +2091,7 @@
         let messageMoment = moment(data.datetime).local().format('h:mm A');
         if (data.combine == 'false') {
           newNode.className = 'message-container';
+          newNode.setAttribute('data-markdown', item.message);
           messageMoment = 'at ' + messageMoment;
           // TODO: Give pfp image default fallback image
           if (space_admin || admin || data.user_id == user_id) {
@@ -2514,6 +2515,7 @@
               if (item.combine == 'false') {
                 newNode.className = 'message-container';
                 newNode.setAttribute('data-date', messageDate.format('M/D/YYYY'));
+                newNode.setAttribute('data-markdown', item.message);
                 if(moment(messageDate).isSame(todayDate, 'day')) {
                   messageDate = 'at ' + messageDate.format('h:mm A');
                 }
@@ -2767,7 +2769,15 @@
 	      return markdownText
 		      .replace(/\*\*(.*)\*\*/gim, '<b>$1</b>')
 		      .replace(/\*(.*)\*/gim, '<i>$1</i>');
-        }
+      }
+
+      function toMarkdown(markdownHTML) {
+        return markdownHTML
+          .replace('<b>', '**')
+          .replace('</b>', '**')
+          .replace('<i>', '*')
+          .replace('</i>', '*');
+      }
 
       async function checkImage(url){
         const res = await fetch(url);
