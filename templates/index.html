@@ -1787,9 +1787,7 @@
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
             leaveSpaceModal.style.display = 'none';
-            const url = window.location.href;
-            const newUrl = url.slice(0, url.lastIndexOf('/'));
-            window.location.href = newUrl;
+            window.history.pushState('', '', '/sbhs'); //l
             $('#first-all').css('display', 'none');
             $("#home-page").show();
             $("#" + current_space).parent().remove();
