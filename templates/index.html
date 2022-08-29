@@ -1696,29 +1696,29 @@
       $(document).on('click', '#space-settings-members', function() {
         let container = document.getElementById('space-settings-members-selection');
         if ($(container).css('display') == 'none') {
-          $(document.getElementById('space-settings-general')).css('background-color') = 'transparent';
-          $(this).css('background-color') = "#43474d!important";
-          $(document.getElementById("space-settings-general-selection")).css('display') = "none";
-          $(container).css('display') = "block";
+          // $(document.getElementById('space-settings-general')).css('background-color') = 'transparent';
+          // $(this).css('background-color') = "#43474d!important";
+          // $(document.getElementById("space-settings-general-selection")).css('display') = "none";
+          // $(container).css('display') = "block";
 
-          // document.getElementById("space-settings-general").style.backgroundColor = "transparent";
-          // this.style.backgroundColor = "#43474d!important";
-          // document.getElementById("space-settings-general-selection").style.display = "none";
-          // container.style.display = 'block';
+          document.getElementById("space-settings-general").style.backgroundColor = "transparent";
+          document.getElementById("space-settings-members").style.backgroundColor = "#43474d!important"
+          document.getElementById("space-settings-general-selection").style.display = "none";
+          container.style.display = 'block';
         }
       });
 
       $(document).on('click', '#space-settings-general', function() {
         let container = document.getElementById('space-settings-general-selection');
         if ($(container).css('display') == 'none') {
-          $(document.getElementById('space-settings-members')).css('background-color') = 'transparent';
-          $(this).css('background-color') = "#43474d!important";
-          $(document.getElementById("space-settings-members-selection")).css('display') = "none";
-          $(container).css('display') = "block";
-          // document.getElementById("space-settings-members").style.backgroundColor = "transparent";
-          // this.style.backgroundColor = "#43474d!important"
-          // document.getElementById("space-settings-members-selection").style.display = "none";
-          // container.style.display = 'block';
+          // $(document.getElementById('space-settings-members')).css('background-color') = 'transparent';
+          // $(this).css('background-color') = "#43474d!important";
+          // $(document.getElementById("space-settings-members-selection")).css('display') = "none";
+          // $(container).css('display') = "block";
+          document.getElementById("space-settings-members").style.backgroundColor = "transparent";
+          document.getElementById("space-settings-general").style.backgroundColor = "#43474d!important"
+          document.getElementById("space-settings-members-selection").style.display = "none";
+          container.style.display = 'block';
         }
       });
 
