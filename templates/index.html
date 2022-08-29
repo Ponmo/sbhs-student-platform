@@ -825,6 +825,7 @@
         else {
           if (!document.getElementById('expand-message-filter').checked) {
             $('.admin-logs-table-row-details').hide();
+    
           }
           else {
             $('.admin-logs-table-row-details').show();
@@ -1690,11 +1691,22 @@
         }
       });
 
-      $(document).on('click', '#space-settings-member', function() {
+      $(document).on('click', '#space-settings-members', function() {
         let container = document.getElementById('space-settings-members-selection');
         if (container.style.display == 'none') {
-          document.getElementById("space-settings-general-selection").style.backgroundColor = "transparent";
-          this.style.backgroundColor = ""
+          document.getElementById("space-settings-general").style.backgroundColor = "transparent";
+          this.style.backgroundColor = "#43474d!important"
+          document.getElementById("space-settings-general-selection").style.display = "none";
+          container.style.display = 'block';
+        }
+      });
+
+      $(document).on('click', '#space-settings-general', function() {
+        let container = document.getElementById('space-settings-general-selection');
+        if (container.style.display == 'none') {
+          document.getElementById("space-settings-members").style.backgroundColor = "transparent";
+          this.style.backgroundColor = "#43474d!important"
+          document.getElementById("space-settings-members-selection").style.display = "none";
           container.style.display = 'block';
         }
       });
