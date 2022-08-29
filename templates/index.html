@@ -227,7 +227,7 @@
     <div class="settings-pages" id="space-settings">
       <div class="space-settings-select">
         <div id="space-settings-column">
-          <div class="space-settings-selection pointer" id="space-settings-general" style="background-color: #43474d !important;">Space Settings</div> 
+          <div class="space-settings-selection pointer" id="space-settings-general">Space Settings</div> 
           <div class="space-settings-selection pointer" id="space-settings-members">Members</div> 
         </div>
       </div>
@@ -1696,10 +1696,15 @@
       $(document).on('click', '#space-settings-members', function() {
         let container = document.getElementById('space-settings-members-selection');
         if ($(container).css('display') == 'none') {
-          document.getElementById("space-settings-general").style.backgroundColor = "transparent";
-          this.style.backgroundColor = "#43474d!important";
-          document.getElementById("space-settings-general-selection").style.display = "none";
-          container.style.display = 'block';
+          $(document.getElementById('space-settings-general')).css('background-color') = 'transparent';
+          $(this).css('background-color') = "#43474d!important";
+          $(document.getElementById("space-settings-general-selection")).css('display') = "none";
+          $(container).css('display') = "block";
+
+          // document.getElementById("space-settings-general").style.backgroundColor = "transparent";
+          // this.style.backgroundColor = "#43474d!important";
+          // document.getElementById("space-settings-general-selection").style.display = "none";
+          // container.style.display = 'block';
         }
       });
 
