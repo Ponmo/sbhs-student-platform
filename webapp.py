@@ -538,7 +538,7 @@ def delete_message():
                     collection_messages.find_one_and_update({'_id': ObjectId(document_list[message_index-1]['_id'])}, {'$set': {'combine': 'false'}}) 
             #collection_deleted.insert_one({'name': session['users_email'], 'datetime': datetime.now().isoformat() + 'Z', 'deleted_message_content': deleted_message}) Used to add to logs once deleted.
             collection_messages.delete_one({"_id": ObjectId(request.json['message_id'])})
-            collection_logs.insert_one({'name': session['users_name'], 'user_id': session['unique_id'], 'email': session['users_email'], 'action': 'deleted message', 'by': deleted_message['name'], 'by_email': deleted_message['email'], 'in': session['current_space_name'], 'details': deleted_message, 'datetime': datetime.now().isoformat() + 'Z'})
+            collection_logs.insert_one({'name': session['users_name'], 'user_id': session['unique_id'], 'email': session['users_email'], 'action': 'deleted message', 'by': deleted_message['name'], 'by_email': deleted_message['email'], 'in': session['current_space_name'], 'space_id': session['current_space'], 'details': deleted_message, 'datetime': datetime.now().isoformat() + 'Z'})
             return Response(dumps({'success': message_index}), mimetype='application/json')
     return Response(dumps({'success': 'false'}), mimetype='application/json')
 
@@ -615,21 +615,13 @@ def server_logs():
     if request.method == 'POST' and session['admin']:
         logs = None
         search = '.*' + request.json['options'][0] + '.*'
-        #if not any(request.json['options']):
-        #    logs = dumps(list(collection_logs.find({'$or': [{'name': {'$regex': search}}, {'email': {'$regex': search}}, {'by': {'$regex': search}}, {'by_email': {'$regex': search}}, {'in': {'$regex': search}}, {'details.message': {'$regex': search}}]}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(50)))
-        #elif request.json['options'][1] and request.json['options'][2]:
-            #logs = dumps(list(collection_logs.find({'$and': [{'action': {'$in': ['reported message', ]}}, {'$or': [{'name': {'$regex': search}}, {'email': {'$regex': search}}, {'by': {'$regex': search}}, {'by_email': {'$regex': search}}, {'in': {'$regex': search}}, {'details.message': {'$regex': search}}]}]}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(50)))
-        #else:
         options = []
         if request.json['options'][1]:
             options.append('reported message')
-                #logs = dumps(list(collection_logs.find({'$and': [{'action': 'reported message'}, {'$or': [{'name': {'$regex': search}}, {'email': {'$regex': search}}, {'by': {'$regex': search}}, {'by_email': {'$regex': search}}, {'in': {'$regex': search}}, {'details.message': {'$regex': search}}]}]}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(50)))
         if request.json['options'][2]:
             options.append('deleted message')
-                #logs = dumps(list(collection_logs.find({'$and': [{'action': 'deleted message'}, {'$or': [{'name': {'$regex': search}}, {'email': {'$regex': search}}, {'by': {'$regex': search}}, {'by_email': {'$regex': search}}, {'in': {'$regex': search}}, {'details.message': {'$regex': search}}]}]}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(50)))
         if request.json['options'][3]:
             options.append('edited message')
-                #ogs = dumps(list(collection_logs.find({'$and': [{'action': 'edited message'}, {'$or': [{'name': {'$regex': search}}, {'email': {'$regex': search}}, {'by': {'$regex': search}}, {'by_email': {'$regex': search}}, {'in': {'$regex': search}}, {'details.message': {'$regex': search}}]}]}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(50)))
         if len(options) != 0:
             logs = dumps(list(collection_logs.find({'$and': [{'action': {'$in': options}}, {'$or': [{'name': {'$regex': search}}, {'email': {'$regex': search}}, {'by': {'$regex': search}}, {'by_email': {'$regex': search}}, {'in': {'$regex': search}}, {'details.message': {'$regex': search}}]}]}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(50)))
         return Response(logs, mimetype='application/json')
@@ -790,7 +782,7 @@ def edited_message(data):
         return
     if space_admin() or session['admin'] or session['unique_id'] == collection_messages.find_one({'_id': ObjectId(data['message_id'])})['user_id']:
         edited_message = collection_messages.find_one_and_update({"_id": ObjectId(data['message_id'])}, {'$set': {'message': data['edit'][:2000], 'edited': True}})
-        collection_logs.insert_one({'name': session['users_name'], 'user_id': session['unique_id'], 'email': session['users_email'], 'action': 'edited message', 'by': edited_message['name'], 'by_email': edited_message['email'], 'in': session['current_space_name'], 'details': edited_message, 'datetime': datetime.now().isoformat() + 'Z'})
+        collection_logs.insert_one({'name': session['users_name'], 'user_id': session['unique_id'], 'email': session['users_email'], 'action': 'edited message', 'by': edited_message['name'], 'by_email': edited_message['email'], 'in': session['current_space_name'], 'space_id': session['current_space'], 'details': edited_message, 'datetime': datetime.now().isoformat() + 'Z'})
         socketio.emit('edited_message', data, room = data['room_id'])
 
 # When sections are sorted, update the order in MongoDB.
