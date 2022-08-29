@@ -545,7 +545,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   background-color: #32353a;
 }
 .edited-note {
-  opacity: 0.9;
+  opacity: 0.7;
   font-size: 12px;
 }
 .message-combine-time {
