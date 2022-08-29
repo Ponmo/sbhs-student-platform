@@ -972,8 +972,11 @@ img { /* make images and create button undraggable and unhighlitable*/
   padding-left: 6px;
   margin-top: 2px;
 }
+#space-settings-general {
+  background-color: #43474d!important;
+}
 .space-settings-selection:hover {
-  background-color: #43474D;
+  background-color: #3c3f45;
 }
 #space-settings-expand {
   display: inline-block;
