@@ -202,6 +202,8 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin-right: 12px;
   margin-top: 9px;
   float: right;
+}
+#server-settings-button {
   display: none;
 }
 
