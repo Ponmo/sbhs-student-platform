@@ -1319,6 +1319,9 @@ img { /* make images and create button undraggable and unhighlitable*/
   display: inline-block;
   margin-left: 24px;
 }
+.admin-logs-space-link {
+  text-decoration: underline;
+}
 #admin-settings {
   display: inline-block;
 }
