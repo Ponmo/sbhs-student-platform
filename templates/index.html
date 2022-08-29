@@ -1695,8 +1695,9 @@
 
       $(document).on('click', '#space-settings-members', function() {
         let container = document.getElementById('space-settings-members-selection');
-        alert("hello")
+        alert("hello");
         if (container.style.display == 'none') {
+          alert("hello2");
           document.getElementById("space-settings-general").style.backgroundColor = "transparent";
           this.style.backgroundColor = "#43474d!important"
           document.getElementById("space-settings-general-selection").style.display = "none";
