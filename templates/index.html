@@ -1338,13 +1338,13 @@
           if (latestMessage.data('user') == user_id && messageMoment.diff(moment(latestMessage.data('datetime'))) < 180000) {
             newNode.className = 'message-container-combine temporary-message';
             newNode.innerHTML = '<p class="message-combine-time">' + messageMoment.format('h:mm A') + '</p><p class="message-combine"></p>';
-            newNode.querySelector('.message-combine').innerHTML = parseMarkdown(escapeHTML(message));
+            newNode.querySelector('.message-combine').innerHTML = '<span>' + parseMarkdown(escapeHTML(message)) + '</span>';
           }
           else {
             newNode.className = 'message-container temporary-message';
             messageMoment = 'at ' + messageMoment.format('h:mm A');
             newNode.innerHTML = '<img class="profile-picture pointer" src="' + user_picture + '" alt="!"><p class="message-title"><span class="name pointer"><b>' + user_name + ' </b></span><span class="datetime">' + messageMoment + '</span></p><p class="message"></p>';
-            newNode.querySelector('.message').innerHTML = parseMarkdown(escapeHTML(message));
+            newNode.querySelector('.message').innerHTML = '<span>' + parseMarkdown(escapeHTML(message)) + '</span>';
           }
           document.getElementById('messages').append(newNode);
           socket.emit('send_message', {
@@ -2078,10 +2078,10 @@
 
       socket.on('edited_message', function(data) {
         if (data.combine == 'false') {
-          document.getElementById(data.message_id).firstChild.nextElementSibling.nextElementSibling.innerHTML = parseMarkdown(escapeHTML(data.edit))  + '<span class="edited-note"> (edited)</span>';
+          document.getElementById(data.message_id).firstChild.nextElementSibling.nextElementSibling.innerHTML = '<span>' + parseMarkdown(escapeHTML(data.edit))  + '</span><span class="edited-note"> (edited)</span>';
         }
         else {
-          document.getElementById(data.message_id).firstChild.nextElementSibling.innerHTML = parseMarkdown(escapeHTML(data.edit)) + '<span class="edited-note"> (edited)</span>';
+          document.getElementById(data.message_id).firstChild.nextElementSibling.innerHTML = '<span>' + parseMarkdown(escapeHTML(data.edit)) + '</span><span class="edited-note"> (edited)</span>';
         }
       });
 
@@ -2102,7 +2102,7 @@
           newNode.firstElementChild.src = data.picture;
           newNode.firstElementChild.nextElementSibling.firstElementChild.textContent = data.name;
           newNode.firstElementChild.nextElementSibling.firstElementChild.style.fontWeight = 'bold';
-          newNode.firstElementChild.nextElementSibling.nextElementSibling.innerHTML = parseMarkdown(escapeHTML(data.message));
+          newNode.firstElementChild.nextElementSibling.nextElementSibling.innerHTML = '<span>' + parseMarkdown(escapeHTML(data.message)) + '</span>';
         }
         else {
           newNode.className = 'message-container-combine';
@@ -2112,7 +2112,7 @@
           else{
             newNode.innerHTML = '<p class="message-combine-time"> ' + messageMoment + '</p><p class="message-combine"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.svg"></div>';
           }
-          newNode.firstElementChild.nextElementSibling.innerHTML = parseMarkdown(escapeHTML(data.message));
+          newNode.firstElementChild.nextElementSibling.innerHTML = '</span>' + parseMarkdown(escapeHTML(data.message)) + '</span>';
         }
         newNode.id = data.message_id;
         $('.temporary-message').remove();
@@ -2533,10 +2533,10 @@
                 newNode.firstElementChild.nextElementSibling.firstElementChild.textContent = item.name;
                 newNode.firstElementChild.nextElementSibling.firstElementChild.style.fontWeight = 'bold';
                 if (item.edited == true) {
-                  newNode.firstElementChild.nextElementSibling.nextElementSibling.innerHTML = parseMarkdown(escapeHTML(item.message)) + '<span class="edited-note"> (edited)</span>';
+                  newNode.firstElementChild.nextElementSibling.nextElementSibling.innerHTML = '</span>' + parseMarkdown(escapeHTML(item.message)) + '</span><span class="edited-note"> (edited)</span>';
                 }
                 else {
-                  newNode.firstElementChild.nextElementSibling.nextElementSibling.innerHTML = parseMarkdown(escapeHTML(item.message));
+                  newNode.firstElementChild.nextElementSibling.nextElementSibling.innerHTML = '<span>' + parseMarkdown(escapeHTML(item.message)) + '</span>';
                 }
               }
               else {
@@ -2549,10 +2549,10 @@
                   newNode.innerHTML = '<p class="message-combine-time">' + messageDate.format('h:mm A') + '</p><p class="message-combine"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.svg"></div>';
                 }
                 if (item.edited == true) {
-                  newNode.firstElementChild.nextElementSibling.innerHTML = parseMarkdown(escapeHTML(item.message)) + '<span class="edited-note"> (edited)</span>';
+                  newNode.firstElementChild.nextElementSibling.innerHTML = '<span>' +  parseMarkdown(escapeHTML(item.message)) + '</span><span class="edited-note"> (edited)</span>';
                 }
                 else {
-                  newNode.firstElementChild.nextElementSibling.innerHTML = parseMarkdown(escapeHTML(item.message));
+                  newNode.firstElementChild.nextElementSibling.innerHTML = '<span>' +  parseMarkdown(escapeHTML(item.message)) + '</span>';
                 }
               }
               newNode.id = item._id.$oid;
