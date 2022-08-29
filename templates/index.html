@@ -227,7 +227,7 @@
     <div class="settings-pages" id="space-settings">
       <div class="space-settings-select">
         <div id="space-settings-column">
-          <div class="space-settings-selection pointer" id="space-settings-general" style="background-color: #43474d !important;">Space Settings</div> 
+          <div class="space-settings-selection pointer" id="space-settings-general" style="background-color: #43474d !important">Space Settings</div> 
           <div class="space-settings-selection pointer" id="space-settings-members">Members</div> 
         </div>
       </div>
@@ -1715,8 +1715,9 @@
           // $(this).css('background-color') = "#43474d!important";
           // $(document.getElementById("space-settings-members-selection")).css('display') = "none";
           // $(container).css('display') = "block";
-          document.getElementById("space-settings-members").style.backgroundColor = "";
-          document.getElementById("space-settings-general").style.backgroundColor = "#43474d !important"
+
+          $(document.getElementById("space-settings-members")).attr('style', '');
+          $(document.getElementById("space-settings-general")).attr('style', 'background-color: #43474d !important');
           document.getElementById("space-settings-members-selection").style.display = "none";
           container.style.display = 'block';
         }
