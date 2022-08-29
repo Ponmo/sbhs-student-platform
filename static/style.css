@@ -971,7 +971,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 
 #space-settings-expand {
   display: inline-block;
-  width: 55%;
+  width: 65%;
   height: 100%;
   min-width: 300px;
   padding-left: 40px;
