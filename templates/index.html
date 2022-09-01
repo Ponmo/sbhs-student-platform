@@ -1867,8 +1867,8 @@
 
       $(document).on('click', '#confirm-leave-space-button', function() {
         const formSpace = document.querySelector('.form-space[data-id="' + current_space + '"]').querySelector('.directory-space-joined-status')
-        formSpace.textContent = 'Not Joined';
-        formSpace.className = 'directory-space-joined-status not-joined-status';
+        formSpace.textContent = 'Open';
+        formSpace.className = 'directory-space-joined-status open-status';
         $.ajax({
           type: 'POST',
           url: '/leave_space',
