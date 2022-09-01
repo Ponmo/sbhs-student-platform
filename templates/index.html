@@ -2481,6 +2481,7 @@
           data: JSON.stringify({'space_id': current_space}),
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
+            alert(JSON.stringify(data));
             if ('invalid_invite' in data) {
               alert('Your invite is invalid');
               current_space = '';
