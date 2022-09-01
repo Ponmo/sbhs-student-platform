@@ -1309,7 +1309,6 @@
         $("#space-search").animate({opacity: '0'}, 100);
         $("#space-search").css('pointer-events', 'none');
         current_space = this.getAttribute('data-id');
-        let clicked_space = this;
         joinSpace();
       });
 
@@ -1704,7 +1703,8 @@
         }
       });
 
-      function settingsSelectionSwitch(selected_settings, selected_expand) {
+      function spaceSettingsSelectionSwitch(selected_settings, selected_expand) {
+
         if ($(selected_settings).css('display') == 'none') {
           $(document.getElementById("space-settings-general")).attr('style', '');
           $(document.getElementById("space-settings-themes")).attr('style', '');
@@ -1718,11 +1718,11 @@
       }
 
       $(document).on('click', '#space-settings-themes', function() {
-        settingsSelectionSwitch(document.getElementById('space-settings-themes-selection'), document.getElementById("space-settings-themes"));
+        spaceSettingsSelectionSwitch(document.getElementById('space-settings-themes-selection'), document.getElementById("space-settings-themes"));
       });
 
       $(document).on('click', '#space-settings-members', function() {
-        settingsSelectionSwitch(document.getElementById('space-settings-members-selection'), document.getElementById("space-settings-members"));
+        spaceSettingsSelectionSwitch(document.getElementById('space-settings-members-selection'), document.getElementById("space-settings-members"));
         // let container = document.getElementById('space-settings-members-selection');
         // if ($(container).css('display') == 'none') {
 
@@ -1739,8 +1739,7 @@
       });
 
       $(document).on('click', '#space-settings-general', function() {
-        alert("madeIt0");
-        settingsSelectionSwitch(document.getElementById('space-settings-general-selection'), document.getElementById("space-settings-general"));
+        spaceSettingsSelectionSwitch(document.getElementById('space-settings-general-selection'), document.getElementById("space-settings-general"));
 
         // let container = document.getElementById('space-settings-general-selection');
         // if ($(container).css('display') == 'none') {
