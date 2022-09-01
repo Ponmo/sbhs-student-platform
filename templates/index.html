@@ -2466,12 +2466,12 @@
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
             alert(JSON.stringify(data));
-            /*if ('invite_only' in data) {
-              alert('This space is invite only');
+            if ('invalid_invite' in data) {
+              alert('Your invite is invalid');
             }
             else if ('exists' in data) {
               alert('This space does not exist');
-            }*/
+            }
             if(!data['members'].some(row => row.includes(user_id))) {
               let newNode = document.createElement('li');
               newNode.className = 'space-wrapper';
