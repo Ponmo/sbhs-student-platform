@@ -243,7 +243,7 @@
             <input type="text" id="edit-space-description-input"><br>
             <label for="invite-only" class="space-settings-header">Invite Only</label><br>
             <label class="switch">
-              <input type="checkbox">
+              <input type="checkbox" id='edit-space-invite-switch'>
               <span class="slider round"></span>
             </label>
             <input type="submit" style="display: none;">
@@ -2022,6 +2022,10 @@
           section_name: document.getElementById('new-section-name').value.trim()
         });
       }
+
+      $(document).on('click', '#close-confirm-report-message', function() { 
+        alert('a');
+      });
 
       socket.on('edit_section', function (data) {
         editSectionModal.style.display = "none";
