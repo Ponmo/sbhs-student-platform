@@ -1554,7 +1554,11 @@ img { /* make images and create button undraggable and unhighlitable*/
   }
   .space-settings-expand {
     padding-left: 20px;
-    width: 70%;
+    width: calc(100vw - 170px);
+  }
+  .close-settings-page {
+    top: 15px;
+    width: 20px;
   }
 }
 @media only screen and (max-width: 368px) {
@@ -1570,10 +1574,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   }
   .space-settings-expand {
     padding-left: 4px;
-    width: 70%;
-  }
-  .close-settings-page {
-    top: 15px;
+    width: calc(100vw - 150px);
   }
 }
 /* The switch - the box around the slider */
