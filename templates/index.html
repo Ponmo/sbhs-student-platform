@@ -1704,41 +1704,52 @@
         }
       });
 
-      function settingsSelectionSwitch(selected_settings) {
+      function settingsSelectionSwitch(selected_settings, selected_expand) {
         if ($(selected_settings).css('display') == 'none') {
-
+          $(document.getElementById("space-settings-general")).attr('style', '');
+          $(document.getElementById("space-settings-themes")).attr('style', '');
+          $(document.getElementById("space-settings-members")).attr('style', '');
+          document.getElementById("space-settings-general-selection").style.display = "none";
+          document.getElementById("space-settings-themes-selection").style.display = "none";
+          document.getElementById("space-settings-members-selection").style.display = "none";
+          $(selected_expand).attr('style', 'background-color: #43474d !important');
+          selected_settings.style.display = 'block';
         }
       }
 
       $(document).on('click', '#space-settings-members', function() {
-        settingsSelectionSwitch(document.getElementByID('space-settings-members-selection'))
-        let container = document.getElementById('space-settings-members-selection');
-        if ($(container).css('display') == 'none') {
-          // $(document.getElementById('space-settings-general')).css('background-color') = 'transparent';
-          // $(this).css('background-color') = "#43474d!important";
-          // $(document.getElementById("space-settings-general-selection")).css('display') = "none";
-          // $(container).css('display') = "block";
+        settingsSelectionSwitch(document.getElementByID('space-settings-members-selection'), document.getElementById("space-settings-members"));
+        // let container = document.getElementById('space-settings-members-selection');
+        // if ($(container).css('display') == 'none') {
 
-          $(document.getElementById("space-settings-general")).attr('style', '');
-          $(document.getElementById("space-settings-members")).attr('style', 'background-color: #43474d !important');
-          document.getElementById("space-settings-general-selection").style.display = "none";
-          container.style.display = 'block';
-        }
+        //   // $(document.getElementById('space-settings-general')).css('background-color') = 'transparent';
+        //   // $(this).css('background-color') = "#43474d!important";
+        //   // $(document.getElementById("space-settings-general-selection")).css('display') = "none";
+        //   // $(container).css('display') = "block";
+
+        //   $(document.getElementById("space-settings-general")).attr('style', '');
+        //   $(document.getElementById("space-settings-members")).attr('style', 'background-color: #43474d !important');
+        //   document.getElementById("space-settings-general-selection").style.display = "none";
+        //   container.style.display = 'block';
+        // }
       });
 
       $(document).on('click', '#space-settings-general', function() {
-        let container = document.getElementById('space-settings-general-selection');
-        if ($(container).css('display') == 'none') {
-          // $(document.getElementById('space-settings-members')).css('background-color') = 'transparent';
-          // $(this).css('background-color') = "#43474d!important";
-          // $(document.getElementById("space-settings-members-selection")).css('display') = "none";
-          // $(container).css('display') = "block";
+        settingsSelectionSwitch(document.getElementByID('space-settings-general-selection'), document.getElementById("space-settings-general"));
 
-          $(document.getElementById("space-settings-members")).attr('style', '');
-          $(document.getElementById("space-settings-general")).attr('style', 'background-color: #43474d !important');
-          document.getElementById("space-settings-members-selection").style.display = "none";
-          container.style.display = 'block';
-        }
+        // let container = document.getElementById('space-settings-general-selection');
+        // if ($(container).css('display') == 'none') {
+
+        //   // $(document.getElementById('space-settings-members')).css('background-color') = 'transparent';
+        //   // $(this).css('background-color') = "#43474d!important";
+        //   // $(document.getElementById("space-settings-members-selection")).css('display') = "none";
+        //   // $(container).css('display') = "block";
+
+        //   $(document.getElementById("space-settings-members")).attr('style', '');
+        //   $(document.getElementById("space-settings-general")).attr('style', 'background-color: #43474d !important');
+        //   document.getElementById("space-settings-members-selection").style.display = "none";
+        //   container.style.display = 'block';
+        // }
       });
 
 
