@@ -1704,7 +1704,14 @@
         }
       });
 
+      function settingsSelectionSwitch(selected_settings) {
+        if ($(selected_settings).css('display') == 'none') {
+
+        }
+      }
+
       $(document).on('click', '#space-settings-members', function() {
+        settingsSelectionSwitch(document.getElementByID('space-settings-members-selection'))
         let container = document.getElementById('space-settings-members-selection');
         if ($(container).css('display') == 'none') {
           // $(document.getElementById('space-settings-general')).css('background-color') = 'transparent';
@@ -2461,9 +2468,13 @@
           success: function(data) {
             if ('invalid_invite' in data) {
               alert('Your invite is invalid');
+              current_space = '';
+              $("#space-search").css('pointer-events', '');
             }
             else if ('exists' in data) {
               alert('This space does not exist');
+              current_space = '';
+              $("#space-search").css('pointer-events', '');
             }
             else if(!data['members'].some(row => row.includes(user_id))) {
               const formSpace = document.querySelector('.form-space[data-id="' + current_space + '"]').querySelector('.directory-space-joined-status')
