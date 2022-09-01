@@ -2468,6 +2468,9 @@
             if ('invite_only' in data) {
               alert('This space is invite only');
             }
+            else if ('exists' in data) {
+              alert('This space does not exist');
+            }
             else if(!data['members'].some(row => row.includes(user_id))) {
               let newNode = document.createElement('li');
               newNode.className = 'space-wrapper';

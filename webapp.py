@@ -518,15 +518,14 @@ def join_space():
     space = collection_spaces.find_one({'_id': ObjectId(request.json['space_id'])})
     if space == None:
         return Response({'exists': False}, mimetype='application/json')
-    if space['invite_only'] and str(space['_id']) != session['code']:
-        return Response({'invite_only': True}, mimetype='application/json')
     joined = collection_users.find_one({"_id": session['unique_id']})['joined']
-    space = dumps(space)
     if request.json['space_id'] not in joined:
+        if space['invite_only'] and str(space['_id']) != session['code']:
+            return Response({'invite_only': True}, mimetype='application/json')
         joined.append(request.json['space_id'])
         collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': joined}})
         collection_spaces.find_one_and_update({"_id": ObjectId(request.json['space_id'])}, {'$push': {'members': [session['unique_id'], session['users_name']]}})
-    return Response(space, mimetype='application/json')
+    return Response(dumps(space), mimetype='application/json')
 
 # When user deletes a message, delete that message from MongoDB.
 # If the combine status of the next message is true, then
