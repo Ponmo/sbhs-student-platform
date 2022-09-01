@@ -210,7 +210,7 @@ def render_main_page(space_id = None):
         if len(space_id) == 7:
             space_id = collection_invites.find_one({'_id': space_id})['space']
             return redirect('https://sbhs-platform.herokuapp.com/sbhs/' + space_id)
-        elif not invite_only(space_id):
+        elif not collection_spaces.find_one({'_id': ObjectId(space_id)})['invite_only']:
             return redirect('https://sbhs-platform.herokuapp.com/sbhs/' + space_id)
     if 'logged' not in session or session['logged'] == False:
        return redirect(url_for('render_login'))
