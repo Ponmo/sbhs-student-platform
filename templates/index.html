@@ -1705,9 +1705,7 @@
       });
 
       function settingsSelectionSwitch(selected_settings, selected_expand) {
-        alert("madeIt1");
         if ($(selected_settings).css('display') == 'none') {
-          alert("madeIt2");
           $(document.getElementById("space-settings-general")).attr('style', '');
           $(document.getElementById("space-settings-themes")).attr('style', '');
           $(document.getElementById("space-settings-members")).attr('style', '');
@@ -1720,12 +1718,10 @@
       }
 
       $(document).on('click', '#space-settings-themes', function() {
-        alert("madeIt0");
         settingsSelectionSwitch(document.getElementById('space-settings-themes-selection'), document.getElementById("space-settings-themes"));
       });
 
       $(document).on('click', '#space-settings-members', function() {
-        alert("madeIt0");
         settingsSelectionSwitch(document.getElementById('space-settings-members-selection'), document.getElementById("space-settings-members"));
         // let container = document.getElementById('space-settings-members-selection');
         // if ($(container).css('display') == 'none') {
