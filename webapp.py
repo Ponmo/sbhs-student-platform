@@ -519,7 +519,7 @@ def join_space():
         return Response({'exists': False}, mimetype='application/json')
     joined = collection_users.find_one({"_id": session['unique_id']})['joined']
     if request.json['space_id'] not in joined:
-        if space['invite_only'] and request.json['space_id'] != session['code'] and not session['admin']:
+        if space['invite_only'] and 'code' in session and request.json['space_id'] != session['code'] and not session['admin']:
             return Response({'invalid_invite': True}, mimetype='application/json')
         joined.append(request.json['space_id'])
         collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': joined}})
