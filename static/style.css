@@ -969,10 +969,11 @@ img { /* make images and create button undraggable and unhighlitable*/
   background-color: #3c3f45;
 }
 .space-settings-expand {
+  position: relative;
   display: inline-block;
   width: 65%;
   height: 100%;
-  min-width: 300px;
+  /* min-width: 300px; */
   padding-left: 40px;
   color: #d7d9da;
   font-weight: bold;
@@ -1555,7 +1556,7 @@ img { /* make images and create button undraggable and unhighlitable*/
     padding-left: 20px;
   }
 }
-@media only screen and (max-width: 468px) {
+@media only screen and (max-width: 408px) {
   .space-settings-select {
     min-width: 150px;
     width: 30%;
