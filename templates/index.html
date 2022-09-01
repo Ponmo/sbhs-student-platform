@@ -228,6 +228,7 @@
       <div class="space-settings-select">
         <div class="space-settings-column">
           <div class="space-settings-selection pointer" id="space-settings-general" style="background-color: #43474d !important">Space Settings</div> 
+          <div class="space-settings-selection pointer" id="space-settings-themes">Themes</div> 
           <div class="space-settings-selection pointer" id="space-settings-members">Members</div> 
         </div>
       </div>
@@ -271,6 +272,8 @@
         </div>
       </div>
       <div class="space-settings-expand">
+        <div id="user-settings-general-selection">
+        </div>
         <img class="pointer white-icon close-settings-page" id="close-user-page" src="/static/images/x.svg">
       </div>
     </div>
@@ -2462,7 +2465,10 @@
           data: JSON.stringify({'space_id': current_space}),
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
-            if(!data['members'].some(row => row.includes(user_id))) {
+            if ('invite_only' in data) {
+              alert('This space is invite only');
+            }
+            else if(!data['members'].some(row => row.includes(user_id))) {
               let newNode = document.createElement('li');
               newNode.className = 'space-wrapper';
               let newNodeChild = document.createElement('img');

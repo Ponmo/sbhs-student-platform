@@ -1,3 +1,4 @@
+import mimetypes
 from flask_socketio import SocketIO, emit, join_room, leave_room
 
 import json
@@ -510,7 +511,7 @@ def delete_space():
 def join_space():
     if session_expired() or banned():
         return 'expired', 200
-    if request.method == 'POST':
+    if not invite_only(request.json['space_id']):
         joined = collection_users.find_one({"_id": session['unique_id']})['joined']
         space = dumps(collection_spaces.find_one({'_id': ObjectId(request.json['space_id'])}))
         if request.json['space_id'] not in joined:
@@ -518,6 +519,8 @@ def join_space():
             collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': joined}})
             collection_spaces.find_one_and_update({"_id": ObjectId(request.json['space_id'])}, {'$push': {'members': [session['unique_id'], session['users_name']]}})
         return Response(space, mimetype='application/json')
+    else:
+        return Response({'invite_only': True}, mimetype='application/json')
 
 # When user deletes a message, delete that message from MongoDB.
 # If the combine status of the next message is true, then

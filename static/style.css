@@ -1541,6 +1541,28 @@ img { /* make images and create button undraggable and unhighlitable*/
   .modal-content {
     width: 100vw;
   }
+  .space-settings-select {
+    min-width: 170px;
+    width: 30%;
+  }
+  .space-settings-column {
+    width: 160px;
+  }
+  .space-settings-selection {
+    width: 150px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .space-settings-select {
+    min-width: 150px;
+    width: 30%;
+  }
+  .space-settings-column {
+    width: 140px;
+  }
+  .space-settings-selection {
+    width: 130px;
+  }
 }
 /* The switch - the box around the slider */
 .switch {
