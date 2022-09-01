@@ -76,7 +76,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   background-color: #36393e;
   position: fixed;
   width: 100%;
-  min-width: 500px;
+  /* min-width: 500px; */
   height: calc(100vh - 50px);
   z-index: 10;
   overflow: hidden;
@@ -1554,9 +1554,10 @@ img { /* make images and create button undraggable and unhighlitable*/
   }
   .space-settings-expand {
     padding-left: 20px;
+    width: 70%;
   }
 }
-@media only screen and (max-width: 408px) {
+@media only screen and (max-width: 368px) {
   .space-settings-select {
     min-width: 150px;
     width: 30%;
@@ -1569,10 +1570,10 @@ img { /* make images and create button undraggable and unhighlitable*/
   }
   .space-settings-expand {
     padding-left: 4px;
-    width: 40%;
+    width: 70%;
   }
   .close-settings-page {
-    top: 20px;
+    top: 15px;
   }
 }
 /* The switch - the box around the slider */
