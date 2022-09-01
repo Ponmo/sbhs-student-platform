@@ -2478,12 +2478,15 @@
           success: function(data) {
             if ('invalid_invite' in data) {
               alert('Your invite is invalid');
+              $("#space-search").css('pointer-events', 'initial');
             }
             else if ('only_invite' in data) {
               alert('This space is invite only');
+              $("#space-search").css('pointer-events', 'initial');
             }
             else if ('exists' in data) {
               alert('This space does not exist');
+              $("#space-search").css('pointer-events', 'initial');
             }
             else {
               $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
