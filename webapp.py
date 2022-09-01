@@ -208,7 +208,11 @@ def render_main_page(space_id = None):
         space_id = session['invite']
         session.pop('invite')
         if len(space_id) == 7:
-            space_id = collection_invites.find_one({'_id': space_id})['space']
+            invite = collection_invites.find_one({'_id': space_id})
+            if invite == None:
+                return render_template('index.html', user_name = session['users_name'], room = '1', user_picture = session['picture'], user_id = session['unique_id'])
+            space_id = invite['space']
+            session['code'] = space_id
             return redirect('https://sbhs-platform.herokuapp.com/sbhs/' + space_id)
         elif not collection_spaces.find_one({'_id': ObjectId(space_id)})['invite_only']:
             return redirect('https://sbhs-platform.herokuapp.com/sbhs/' + space_id)
@@ -514,7 +518,7 @@ def join_space():
     space = collection_spaces.find_one({'_id': ObjectId(request.json['space_id'])})
     if space == None:
         return Response({'exists': False}, mimetype='application/json')
-    if space['invite_only']:
+    if space['invite_only'] and str(space['_id']) != session['code']:
         return Response({'invite_only': True}, mimetype='application/json')
     joined = collection_users.find_one({"_id": session['unique_id']})['joined']
     space = dumps(space)
