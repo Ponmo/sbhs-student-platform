@@ -559,9 +559,6 @@
           });
           if (window.location.href.indexOf('/sbhs/') != -1) {
             current_space = window.location.href.substring(window.location.href.indexOf('/sbhs/') + 6).replace('#','');
-            const formSpace = document.querySelector('.form-space[data-id="' + current_space + '"]').querySelector('.directory-space-joined-status')
-            formSpace.textContent = "Joined";
-            formSpace.className = 'directory-space-joined-status joined-status';
             joinSpace();
           }
         }
@@ -1285,9 +1282,6 @@
         $('#profile-popup').remove();
         selected_user = '';
         current_space = this.getAttribute('data-id');
-        const formSpace = document.querySelector('.form-space[data-id="' + current_space + '"]').querySelector('.directory-space-joined-status')
-        formSpace.textContent = "Joined";
-        formSpace.className = 'directory-space-joined-status joined-status';
         joinSpace();
       });
 
@@ -1313,9 +1307,6 @@
         $("#space-search").css('pointer-events', 'none');
         current_space = this.getAttribute('data-id');
         let clicked_space = this;
-        const formSpace = document.querySelector('.form-space[data-id="' + current_space + '"]').querySelector('.directory-space-joined-status')
-        formSpace.textContent = "Joined";
-        formSpace.className = 'directory-space-joined-status joined-status';
         joinSpace();
       });
 
@@ -2472,7 +2463,10 @@
             else if ('exists' in data) {
               alert('This space does not exist');
             }
-            if(!data['members'].some(row => row.includes(user_id))) {
+            else if(!data['members'].some(row => row.includes(user_id))) {
+              const formSpace = document.querySelector('.form-space[data-id="' + current_space + '"]').querySelector('.directory-space-joined-status')
+              formSpace.textContent = "Joined";
+              formSpace.className = 'directory-space-joined-status joined-status';
               let newNode = document.createElement('li');
               newNode.className = 'space-wrapper';
               let newNodeChild = document.createElement('img');
