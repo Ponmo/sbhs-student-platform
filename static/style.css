@@ -1543,8 +1543,7 @@ img { /* make images and create button undraggable and unhighlitable*/
     width: 100vw;
   }
   .space-settings-select {
-    min-width: 170px;
-    width: 30%;
+    width: 170px;
   }
   .space-settings-column {
     width: 160px;
@@ -1554,7 +1553,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   }
   .space-settings-expand {
     padding-left: 20px;
-    width: 70%;
+    width: calc(100vw - 170px);
   }
   .close-settings-page {
     top: 15px;
