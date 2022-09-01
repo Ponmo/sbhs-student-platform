@@ -567,8 +567,7 @@
             document.getElementById('directory-space').prepend(newNode);
           });
           if (window.location.href.indexOf('/sbhs/') != -1) {
-            current_space = window.location.href.substring(window.location.href.indexOf('/sbhs/') + 6).replace('#','');
-            joinSpace();
+            joinSpace(window.location.href.substring(window.location.href.indexOf('/sbhs/') + 6).replace('#',''));
           }
         }
       });
@@ -717,8 +716,7 @@
       }
 
       $(document).on('click', '.admin-logs-space-link', function() {
-        current_space = this.getAttribute('data-id');
-        joinSpace();
+        joinSpace(this.getAttribute('data-id'));
       });
 
       $(document).on('click', '#admin-users', function() {
@@ -1286,12 +1284,8 @@
       });
 
       $(document).on('click', '.joined-icons', function() {
-        $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
-        $(document.getElementById(current_space)).attr('style', '');
-        $('#profile-popup').remove();
-        selected_user = '';
-        current_space = this.getAttribute('data-id');
-        joinSpace();
+        $("#space-search").css('pointer-events', 'none');
+        joinSpace(this.getAttribute('data-id'));
       });
 
       $(document).on('click', '#space-search-button', function() {
@@ -1310,12 +1304,7 @@
       });
 
       $(document).on('click', '.form-space', function() {
-        $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
-        $(document.getElementById(current_space)).attr('style', '');
-        $("#space-search").animate({opacity: '0'}, 100);
-        $("#space-search").css('pointer-events', 'none');
-        current_space = this.getAttribute('data-id');
-        joinSpace();
+        joinSpace(this.getAttribute('data-id'));
       });
 
       $('#chat').scroll(function() { //$('#chat').scrollTop() + $('#chat').height();
@@ -2479,52 +2468,58 @@
         });
       }
 
-      function joinSpace() { //Use Socket.io to add to members
+      function joinSpace(space_id) { //Use Socket.io to add to members
         $.ajax({
           type: "POST",
           url: '/join_space',
           dataType: "json",
-          data: JSON.stringify({'space_id': current_space}),
+          data: JSON.stringify({'space_id': space_id}),
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
-            alert(JSON.stringify(data));
             if ('invalid_invite' in data) {
               alert('Your invite is invalid');
-              current_space = '';
-              $("#space-search").css('pointer-events', '');
+            }
+            else if ('only_invite' in data) {
+              alert('This space is invite only');
             }
             else if ('exists' in data) {
               alert('This space does not exist');
-              current_space = '';
-              $("#space-search").css('pointer-events', '');
-            }
-            else if(!data['members'].some(row => row.includes(user_id))) {
-              const formSpace = document.querySelector('.form-space[data-id="' + current_space + '"]').querySelector('.directory-space-joined-status')
-              formSpace.textContent = "Joined";
-              formSpace.className = 'directory-space-joined-status joined-status';
-              let newNode = document.createElement('li');
-              newNode.className = 'space-wrapper';
-              let newNodeChild = document.createElement('img');
-              newNodeChild.className = 'space pointer';
-              newNodeChild.id = data['_id']['$oid'];
-              newNodeChild.style.borderRadius = '3px';
-              newNodeChild.setAttribute('data-name', data['name']);
-              newNodeChild.src = data['picture'];
-              newNode.appendChild(newNodeChild);
-              newNodeChild = document.createElement('div');
-              newNodeChild.className = 'active-space';
-              newNodeChild.style.width = '39px';
-              newNode.appendChild(newNodeChild);
-              referenceNode = document.getElementById('space_align_helper');
-              referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-              add_to_members = true;
-              space();
             }
             else {
-              current_room = '';
-              $('#' + current_space).css('border-radius', '3px');
-              $('#' + current_space).closest('.space-wrapper').find('.active-space').css('width', '39px');
-              space();
+              $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
+              $(document.getElementById(current_space)).attr('style', '');
+              $('#profile-popup').remove();
+              selected_user = '';
+              $("#space-search").animate({opacity: '0'}, 100);
+              current_space = space_id; 
+              if(!data['members'].some(row => row.includes(user_id))) {
+                const formSpace = document.querySelector('.form-space[data-id="' + current_space + '"]').querySelector('.directory-space-joined-status')
+                formSpace.textContent = "Joined";
+                formSpace.className = 'directory-space-joined-status joined-status';
+                let newNode = document.createElement('li');
+                newNode.className = 'space-wrapper';
+                let newNodeChild = document.createElement('img');
+                newNodeChild.className = 'space pointer';
+                newNodeChild.id = data['_id']['$oid'];
+                newNodeChild.style.borderRadius = '3px';
+                newNodeChild.setAttribute('data-name', data['name']);
+                newNodeChild.src = data['picture'];
+                newNode.appendChild(newNodeChild);
+                newNodeChild = document.createElement('div');
+                newNodeChild.className = 'active-space';
+                newNodeChild.style.width = '39px';
+                newNode.appendChild(newNodeChild);
+                referenceNode = document.getElementById('space_align_helper');
+                referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+                add_to_members = true;
+                space();
+              }
+              else {
+                current_room = '';
+                $('#' + current_space).css('border-radius', '3px');
+                $('#' + current_space).closest('.space-wrapper').find('.active-space').css('width', '39px');
+                space();
+              }
             }
           }
         });
