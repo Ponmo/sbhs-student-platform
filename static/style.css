@@ -1551,6 +1551,9 @@ img { /* make images and create button undraggable and unhighlitable*/
   .space-settings-selection {
     width: 150px;
   }
+  .space-settings-expand {
+    padding-left: 20px;
+  }
 }
 @media only screen and (max-width: 768px) {
   .space-settings-select {
@@ -1562,6 +1565,9 @@ img { /* make images and create button undraggable and unhighlitable*/
   }
   .space-settings-selection {
     width: 130px;
+  }
+  .space-settings-expand {
+    padding-left: 4px;
   }
 }
 /* The switch - the box around the slider */
