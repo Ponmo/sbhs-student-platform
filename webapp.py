@@ -512,6 +512,7 @@ def delete_space():
 
 @app.route('/join_space', methods=['GET', 'POST'])
 def join_space():
+    return Response({'invalid_invite': True}, mimetype='application/json')
     if session_expired() or banned():
         return 'expired', 200
     space = collection_spaces.find_one({'_id': ObjectId(request.json['space_id'])})

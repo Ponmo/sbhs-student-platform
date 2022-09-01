@@ -1553,7 +1553,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   }
   .space-settings-expand {
     padding-left: 20px;
-    width: calc(100vw - 170px);
+    width: calc(100vw - 210px);
   }
   .close-settings-page {
     top: 15px;
