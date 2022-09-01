@@ -2032,7 +2032,7 @@
           data: JSON.stringify({'invite_only': document.getElementById('edit-space-invite-switch').checked}),
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
-            alert(JSON.stringify(data));
+            popupSuccess();
           }
         }));
       });
