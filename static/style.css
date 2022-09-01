@@ -1555,7 +1555,7 @@ img { /* make images and create button undraggable and unhighlitable*/
     padding-left: 20px;
   }
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 468px) {
   .space-settings-select {
     min-width: 150px;
     width: 30%;
