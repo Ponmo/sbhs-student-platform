@@ -562,7 +562,6 @@
           });
           if (window.location.href.indexOf('/sbhs/') != -1) {
             current_space = window.location.href.substring(window.location.href.indexOf('/sbhs/') + 6).replace('#','');
-            alert('d');
             joinSpace();
           }
         }
@@ -2460,7 +2459,6 @@
           data: JSON.stringify({'space_id': current_space}),
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
-            alert(JSON.stringify(data));
             if ('invalid_invite' in data) {
               alert('Your invite is invalid');
             }
