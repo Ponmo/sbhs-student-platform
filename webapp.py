@@ -516,13 +516,13 @@ def join_space():
         return 'expired', 200
     space = collection_spaces.find_one({'_id': ObjectId(request.json['space_id'])})
     if space == None:
-        return Response({'exists': 'false'}, mimetype='application/json')
+        return Response(dumps({'exists': 'false'}), mimetype='application/json')
     joined = collection_users.find_one({"_id": session['unique_id']})['joined']
     if request.json['space_id'] not in joined:
         if space['invite_only'] and 'code' not in session:
-            return Response({'invalid_invite': 'true'}, mimetype='application/json')
+            return Response(dumps({'invalid_invite': 'true'}), mimetype='application/json')
         if space['invite_only'] and 'code' in session and request.json['space_id'] != session['code'] and not session['admin']:
-            return Response({'invalid_invite': 'true'}, mimetype='application/json')
+            return Response(dumps({'invalid_invite': 'true'}), mimetype='application/json')
         joined.append(request.json['space_id'])
         collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': joined}})
         collection_spaces.find_one_and_update({"_id": ObjectId(request.json['space_id'])}, {'$push': {'members': [session['unique_id'], session['users_name']]}})

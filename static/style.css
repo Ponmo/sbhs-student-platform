@@ -985,6 +985,21 @@ img { /* make images and create button undraggable and unhighlitable*/
 #space-settings-members-selection {
   display: none;
 }
+#theme-selection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: calc(100% - 100px);
+  background-color: gray;
+}
+
+.theme-container {
+  width: 120px;
+  height: 100px;
+  border: 1px solid white;
+  border-radius: 4px;
+}
+
 .close-settings-page {
   position: absolute;
   top: 40px;
