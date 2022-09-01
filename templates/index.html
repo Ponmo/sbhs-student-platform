@@ -2465,13 +2465,14 @@
           data: JSON.stringify({'space_id': current_space}),
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
-            if ('invite_only' in data) {
+            alert(JSON.stringify(data));
+            /*if ('invite_only' in data) {
               alert('This space is invite only');
             }
             else if ('exists' in data) {
               alert('This space does not exist');
-            }
-            else if(!data['members'].some(row => row.includes(user_id))) {
+            }*/
+            if(!data['members'].some(row => row.includes(user_id))) {
               let newNode = document.createElement('li');
               newNode.className = 'space-wrapper';
               let newNodeChild = document.createElement('img');
