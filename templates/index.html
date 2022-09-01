@@ -1719,6 +1719,11 @@
         }
       }
 
+      $(document).on('click', '#space-settings-themes', function() {
+        alert("madeIt0");
+        settingsSelectionSwitch(document.getElementById('space-settings-themes-selection'), document.getElementById("space-settings-themes"));
+      });
+
       $(document).on('click', '#space-settings-members', function() {
         alert("madeIt0");
         settingsSelectionSwitch(document.getElementById('space-settings-members-selection'), document.getElementById("space-settings-members"));
