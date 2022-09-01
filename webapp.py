@@ -511,16 +511,18 @@ def delete_space():
 def join_space():
     if session_expired() or banned():
         return 'expired', 200
-    if not invite_only(request.json['space_id']):
-        joined = collection_users.find_one({"_id": session['unique_id']})['joined']
-        space = dumps(collection_spaces.find_one({'_id': ObjectId(request.json['space_id'])}))
-        if request.json['space_id'] not in joined:
-            joined.append(request.json['space_id'])
-            collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': joined}})
-            collection_spaces.find_one_and_update({"_id": ObjectId(request.json['space_id'])}, {'$push': {'members': [session['unique_id'], session['users_name']]}})
-        return Response(space, mimetype='application/json')
-    else:
+    space = collection_spaces.find_one({'_id': ObjectId(request.json['space_id'])})
+    if space == None:
+        return Response({'exists': False}, mimetype='application/json')
+    if space['invite_only']:
         return Response({'invite_only': True}, mimetype='application/json')
+    joined = collection_users.find_one({"_id": session['unique_id']})['joined']
+    space = dumps(space)
+    if request.json['space_id'] not in joined:
+        joined.append(request.json['space_id'])
+        collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': joined}})
+        collection_spaces.find_one_and_update({"_id": ObjectId(request.json['space_id'])}, {'$push': {'members': [session['unique_id'], session['users_name']]}})
+    return Response(space, mimetype='application/json')
 
 # When user deletes a message, delete that message from MongoDB.
 # If the combine status of the next message is true, then
@@ -888,10 +890,6 @@ def valid_room(room_id):
     if session['current_space'] == collection_rooms.find_one({'_id': ObjectId(room_id)})['space']:
         return True
     return False
-
-def invite_only(space_id):
-    return collection_spaces.find({'_id': ObjectId(space_id)})['invite_only']
     
-
 #if __name__ == '__main__':
 #    socketio.run(app, debug=False)
