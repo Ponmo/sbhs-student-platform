@@ -559,9 +559,13 @@
               newNodeChild.textContent = 'Joined';
               newNodeChild.className = 'directory-space-joined-status joined-status';
             }
-            else { // Have invite only/open instead
-              newNodeChild.textContent = 'Not Joined';
-              newNodeChild.className = 'directory-space-joined-status not-joined-status';
+            else if (item['invite_only'] == true) { // Have invite only/open instead
+              newNodeChild.textContent = 'Invite Only';
+              newNodeChild.className = 'directory-space-joined-status invite-status';
+            }
+            else {
+              newNodeChild.textContent = 'Open';
+              newNodeChild.className = 'directory-space-joined-status open-status';
             }
             newNodeWrapper.appendChild(newNodeChild);
             document.getElementById('directory-space').prepend(newNode);

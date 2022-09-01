@@ -182,8 +182,12 @@ img { /* make images and create button undraggable and unhighlitable*/
   background-color: #43c46a;
   border-radius: 4px;
 }
-.not-joined-status {
+.invite-status {
   background-color: #1f52a3;
+  border-radius: 4px;
+}
+.open-status {
+  background-color: #43c46a;
   border-radius: 4px;
 }
 #close-space-search-button, #server-settings-button, #exit-server-settings {
