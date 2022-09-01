@@ -214,8 +214,7 @@ def render_main_page(space_id = None):
             space_id = invite['space']
             session['code'] = space_id
             return redirect('https://sbhs-platform.herokuapp.com/sbhs/' + space_id)
-        elif not collection_spaces.find_one({'_id': ObjectId(space_id)})['invite_only']:
-            return redirect('https://sbhs-platform.herokuapp.com/sbhs/' + space_id)
+        return redirect('https://sbhs-platform.herokuapp.com/sbhs/' + space_id)
     if 'logged' not in session or session['logged'] == False:
        return redirect(url_for('render_login'))
     return render_template('index.html', user_name = session['users_name'], room = '1', user_picture = session['picture'], user_id = session['unique_id'])
