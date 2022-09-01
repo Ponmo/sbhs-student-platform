@@ -204,12 +204,13 @@ def render_main_page(space_id = None):
             session['invite'] = space_id
             return redirect(url_for('render_login'))
     if 'invite' in session:
-        invite = session['invite']
+        space_id = session['invite']
         session.pop('invite')
-        if len(invite) == 7:
-            space_id = collection_invites.find_one({'_id': invite})['space']
+        if len(space_id) == 7:
+            space_id = collection_invites.find_one({'_id': space_id})['space']
             return redirect('https://sbhs-platform.herokuapp.com/sbhs/' + space_id)
-        return redirect('https://sbhs-platform.herokuapp.com/sbhs/' + invite)
+        elif not invite_only(space_id):
+            return redirect('https://sbhs-platform.herokuapp.com/sbhs/' + space_id)
     if 'logged' not in session or session['logged'] == False:
        return redirect(url_for('render_login'))
     return render_template('index.html', user_name = session['users_name'], room = '1', user_picture = session['picture'], user_id = session['unique_id'])
@@ -884,6 +885,10 @@ def valid_room(room_id):
     if session['current_space'] == collection_rooms.find_one({'_id': ObjectId(room_id)})['space']:
         return True
     return False
+
+def invite_only(space_id):
+    return collection_spaces.find({'_id': ObjectId(space_id)})['invite_only']
+    
 
 #if __name__ == '__main__':
 #    socketio.run(app, debug=False)

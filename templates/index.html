@@ -92,7 +92,7 @@
           <input type="checkbox" class="admin-log-filters" id="reported-message-filter" name="reported-message-filter" checked>
           <label for="reported-message-filter">Reported messages</label>
           <input type="checkbox" class="admin-log-filters" id="edited-message-filter" name="edited-message-filter" checked>
-          <label for="edited-message-filter">Edited messages</label>
+          <label for="edited-message-filter">Edited messages (details before change)</label>
           <input type="checkbox" class="admin-log-filters" id="expand-message-filter" name="expand-message-filter">
           <label for="expand-message-filter">Expand all</label>
         </form>
@@ -2773,7 +2773,7 @@
           $(successPopup).animate({opacity: '0'}, 300, function() {
             $(successPopup).removeAttr("style");
           });
-        }, 300);
+        }, 500);
       }
 
       function hideSecondLayer() {
