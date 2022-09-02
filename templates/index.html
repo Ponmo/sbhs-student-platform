@@ -2459,10 +2459,9 @@
             }
             else {
               $('#regular-channels').sortable('disable');
-            }
-            //try { //get rid of try block after deleting all spaces without member list another method
-            
+            }            
             const newFragmentMembers = document.createDocumentFragment();
+            const newFragmentSettingsMembers = document.createDocumentFragment();
             const newFragmentEmails = document.createDocumentFragment();
             rooms_and_sections[2].forEach(function(member) {
               newNode = document.createElement('div');
@@ -2479,9 +2478,29 @@
               newNode.firstElementChild.src = member['picture'];
               newNode.appendChild(document.createTextNode(member['name'] + ' (' + member['email'] + ')'));
               newFragmentEmails.appendChild(newNode);
+
+/*<div id="space-invites-list">
+            <div class="space-invites-list-item">
+              <img><span class="invite-information">Name (Email) created invite</span><span class="invite-code">Invite Link</span><span class="revoke-link">Revoke</span>
+            </div> 
+          </div>
+
+          <div id="space-members-list">
+            <div class="space-members-list-item">
+              <img><span class="member-information">Name (Email)</span><span class="user-role">Banned/User/Admin</span>
+            </div>
+          </div>*/
+
+              newNode = document.createElement('div');
+              newNode.id = 'space-members-list-item';
+              newNode.innerHTML = '<img class="profile-picture"><span class="member-information">Name (Email)</span><span class="user-role">Banned/User/Admin</span>';
+              newNode.firstElementChild.src = member['picture'];
+              newNode.querySelector('.member-information').textContent = member['name'] + ' (' + member['email'] + ')';
+              newFragmentSettingsMembers.appendChild(newNode);
             });
             document.getElementById('members').append(newFragmentMembers);
             document.getElementById('suggested_emails').append(newFragmentEmails);
+            document.getElementById('space-members-list').append(newFragmentSettingsMembers);
             if (add_to_members) {
               socket.emit('joined_space');
               add_to_members = false;
