@@ -283,7 +283,7 @@ def render_space():
         return 'expired', 200
     if request.method == 'POST':
         space = collection_spaces.find_one({'_id': ObjectId(request.json['space_id'])})
-        rooms_and_sections = dumps([list(collection_rooms.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_sections.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_users.find({'joined': {'$in': [request.json['space_id']]}})), list(collection_spaces.find({'_id': ObjectId(request.json['space_id'])}).limit(1))])
+        rooms_and_sections = dumps([list(collection_rooms.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_sections.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_users.find({'joined': {'$in': [request.json['space_id']]}})), list(collection_spaces.find({'_id': ObjectId(request.json['space_id'])}).limit(1)), list(collection_invites.find({'space': request.json['space_id']}))])
         if session['unique_id'] in space['admins'] or session['admin']:
             session['current_space'] = request.json['space_id']
             session['current_space_name'] = space['name']
