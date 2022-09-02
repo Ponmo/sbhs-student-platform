@@ -2497,7 +2497,7 @@
             document.getElementById('space-members-list').append(newFragmentSettingsMembers);
 
             if (admin || space_admin) {
-              newFragmentInvites = document.createDocumentFragment();
+              const newFragmentInvites = document.createDocumentFragment();
               rooms_and_sections[4].forEach(function(invite) {
                 newNode = document.createElement('div');
                 newNode.className = 'space-invites-list-item';
@@ -2505,6 +2505,7 @@
                 newNode.querySelector('.invite-information').textContent = invite['user']
                 newNode.querySelector('.invite-code').textContent = 'https://sbhs-platform.herokuapp.com/invite/' + invite['_id'];
               });
+              document.getElementById('space-invites-list').append(newFragmentInvites);
             }
 
             if (add_to_members) {
