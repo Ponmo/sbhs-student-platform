@@ -2384,6 +2384,7 @@
             document.getElementById('edit-space-picture-input').setAttribute('data-pre', rooms_and_sections[3][0].picture);
             document.getElementById('edit-space-description-input').value = rooms_and_sections[3][0].description;
             document.getElementById('edit-space-description-input').setAttribute('data-pre', rooms_and_sections[3][0].description);
+            $('#edit-space-invite-switch').prop('checked', rooms_and_sections[3][0].invite_only);
             document.getElementById('special-channels').textContent = '';
             document.getElementById('regular-channels').textContent = '';
             $('.suggested_email_individual').remove();
