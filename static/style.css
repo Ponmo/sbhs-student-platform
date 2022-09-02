@@ -985,6 +985,9 @@ img { /* make images and create button undraggable and unhighlitable*/
 #space-settings-members-selection {
   display: none;
 }
+#space-settings-theme {
+  display: none;
+}
 #theme-selection {
   display: flex;
   flex-wrap: wrap;
