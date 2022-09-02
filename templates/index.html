@@ -2055,9 +2055,6 @@
 
       $(document).on('click', '#edit-space-invite-switch', function() {
         $("#edit-space-invite-switch").prop('disabled', true);
-        setTimeout(function() {
-          $("#edit-space-invite-switch").prop('disabled', false);
-        }, 800);
         abortRequests();
         requests.push($.ajax({
           type: "POST",
@@ -2067,6 +2064,9 @@
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
             popupSuccess();
+            setTimeout(function() {
+              $("#edit-space-invite-switch").prop('disabled', false);
+            }, 1000);
           }
         }));
       });
