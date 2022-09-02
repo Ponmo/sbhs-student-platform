@@ -226,6 +226,7 @@ def render(invite_code = None):
             session['invite'] = invite_code
             return redirect(url_for('render_login'))
         space_id = collection_invites.find_one({'_id': invite_code})['space']
+        session['code'] = space_id
         return redirect('https://sbhs-platform.herokuapp.com/sbhs/' + space_id)
 
 # When logout button is clicked, destroy session.
