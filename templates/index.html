@@ -2391,6 +2391,8 @@
               $("#email_input_form :input").prop("disabled", true);
             }
             document.getElementById('messages').textContent = '';
+            document.getElementById('space-invites-list').textContent = '';
+            document.getElementById('space-members-list').textContent = '';
             document.getElementById('header_text').textContent = rooms_and_sections[3][0].name;
             document.getElementById('edit-space-name-input').value = rooms_and_sections[3][0].name;
             document.getElementById('edit-space-name-input').setAttribute('data-pre', rooms_and_sections[3][0].name);
@@ -2478,13 +2480,6 @@
               newNode.firstElementChild.src = member['picture'];
               newNode.appendChild(document.createTextNode(member['name'] + ' (' + member['email'] + ')'));
               newFragmentEmails.appendChild(newNode);
-
-/*<div id="space-invites-list">
-            <div class="space-invites-list-item">
-              <img><span class="invite-information">Name (Email) created invite</span><span class="invite-code">Invite Link</span><span class="revoke-link">Revoke</span>
-            </div> 
-          </div>*/
-
               newNode = document.createElement('div');
               newNode.id = 'space-members-list-item';
               newNode.innerHTML = '<img class="profile-picture"><span class="member-information"></span><span class="user-role">Banned/User/Admin</span>';
@@ -2504,6 +2499,7 @@
                 newNode.innerHTML = '<span class="invite-information"></span><span class="invite-code"></span><span class="revoke-link">Revoke</span>';
                 newNode.querySelector('.invite-information').textContent = invite['user']
                 newNode.querySelector('.invite-code').textContent = 'https://sbhs-platform.herokuapp.com/invite/' + invite['_id'];
+                newFragmentInvites.appendChild(newNode);
               });
               document.getElementById('space-invites-list').append(newFragmentInvites);
             }
