@@ -229,7 +229,7 @@
         <div class="space-settings-column">
           <div class="space-settings-selection pointer" id="space-settings-general" style="background-color: #43474d !important">Space Settings</div> 
           <div class="space-settings-selection pointer" id="space-settings-themes">Themes</div> 
-          <div class="space-settings-selection pointer" id="space-settings-members">Members</div> 
+          <div class="space-settings-selection pointer" id="space-settings-members">Manage Users</div> 
         </div>
       </div>
 
@@ -266,7 +266,17 @@
         </div>
         <div id="space-settings-members-selection">
           <p class="space-settings-header">Members</p>
+          <div id="space-members-list">
+            <div class="space-members-list-item">
+              <img><span class="member-information">Name (Email)</span><span class="user-role">Banned/User/Admin</span>
+            </div>
+          </div>
           <p class="space-settings-header">Invites</p>
+          <div id="space-invites-list">
+            <div class="space-invites-list-item">
+              <img><span class="invite-information">Name (Email) created invite</span><span class="invite-code">Invite Link</span><span class="revoke-link">Revoke</span>
+            </div> 
+          </div>
         </div>
         <img class="pointer white-icon close-settings-page" id="close-space-settings-button" src="/static/images/x.svg">
       </div>
