@@ -1224,18 +1224,10 @@ img { /* make images and create button undraggable and unhighlitable*/
   background-color: #b53739;
   color: white;
 }
+/* Necessary for USB mouse on OSX laptops, need a scrollbar specification for every overflow element. */
 ::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background-color: #2e3338;
-  border-radius: 10px;
-  margin-top: 4px;
-  margin-bottom: 8px;
-}
-::-webkit-scrollbar-thumb {
-  background-color: #202225;
-  border-radius: 10px;
+  width: 0px;
+  height: 0px;
 }
 #chat::-webkit-scrollbar {
   width: 8px;
@@ -1250,21 +1242,19 @@ img { /* make images and create button undraggable and unhighlitable*/
   background-color: #202225;
   border-radius: 10px;
 }
-#channels::-webkit-scrollbar {
+/* .space-settings-column and #members needs a special scrollbar */
+#channels::-webkit-scrollbar, #members::-webkit-scrollbar, .space-settings-column::-webkit-scrollbar  {
   width: 4px;
 }
-#channels::-webkit-scrollbar-track {
+#channels::-webkit-scrollbar-track, #members::-webkit-scrollbar-track, .space-settings-column::-webkit-scrollbar-track {
   background-color: #2e3338;
   border-radius: 4px;
   margin-top: 2px;
   margin-bottom: 2px;
 }
-#channels::-webkit-scrollbar-thumb {
+#channels::-webkit-scrollbar-thumb, #members::-webkit-scrollbar-thumb, .space-settings-column::-webkit-scrollbar-thumb {
   background-color: #202225;
   border-radius: 4px;
-}
-#spaces::-webkit-scrollbar {
-  height: 0px;
 }
 #joined-table {
   margin-top: 10px;
