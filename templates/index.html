@@ -2336,12 +2336,13 @@
           contentType: 'application/json;charset=UTF-8',
           success: function(rooms_and_sections) {
             window.history.pushState('', '', '/sbhs/' + current_space);
-            if (rooms_and_sections[3][0].admins[0] == user_id) { //Accounts for only one space admin, which is owner, admin.
+            if (rooms_and_sections[3][0].admins[0] == user_id) {
               space_admin = true;
               $('#delete-space').show();
               $('#leave-space').hide();
               $('#create-section-button').show();
               $('#edit-space-button').show();
+              $('#invite-link-button').show();
               $("#email_input_form :input").prop("disabled", false);
             }
             else if (admin) {
@@ -2349,6 +2350,7 @@
               $('#leave-space').show();
               $('#create-section-sbutton').show();
               $('#edit-space-button').show();
+              $('#invite-link-button').show();
               $("#email_input_form :input").prop("disabled", false);
             }
             else if (rooms_and_sections[3][0].admins.includes(user_id)) {
@@ -2357,6 +2359,7 @@
               $('#leave-space').show();
               $('#create-section-button').show();
               $('#edit-space-button').show();
+              $('#invite-link-button').show();
               $("#email_input_form :input").prop("disabled", false);
             }
             else {
@@ -2365,6 +2368,12 @@
               $('#leave-space').show();
               $('#create-section-button').hide();
               $('#edit-space-button').hide();
+              if (rooms_and_sections[3][0].invite_only) {
+                $('#invite-link-button').hide();
+              }
+              else {
+                $('#invite-link-button').show();
+              }
               $("#email_input_form :input").prop("disabled", true);
             }
             document.getElementById('messages').textContent = '';
