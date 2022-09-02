@@ -2053,7 +2053,11 @@
         });
       }
 
-      $(document).on('click', '#edit-space-invite-switch', function() { 
+      $(document).on('click', '#edit-space-invite-switch', function() {
+        $("#edit-space-invite-switch").prop('disabled', true);
+        setTimeout(function() {
+          $("#edit-space-invite-switch").prop('disabled', false);
+        }, 500);
         abortRequests();
         requests.push($.ajax({
           type: "POST",
