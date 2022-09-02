@@ -1290,7 +1290,6 @@
       });
 
       $(document).on('click', '.joined-icons', function() {
-        $("#space-search").css('pointer-events', 'none');
         joinSpace(this.getAttribute('data-id'));
       });
 
@@ -1310,6 +1309,7 @@
       });
 
       $(document).on('click', '.form-space', function() {
+        $("#space-search").css('pointer-events', 'none');
         joinSpace(this.getAttribute('data-id'));
       });
 
@@ -2501,8 +2501,8 @@
               selected_user = '';
               $("#space-search").animate({opacity: '0'}, 100);
               current_room = '';
+              current_space = space_id;
               if(!data['members'].some(row => row.includes(user_id))) {
-                current_space = space_id;
                 const formSpace = document.querySelector('.form-space[data-id="' + current_space + '"]').querySelector('.directory-space-joined-status')
                 formSpace.textContent = "Joined";
                 formSpace.className = 'directory-space-joined-status joined-status';
@@ -2522,13 +2522,12 @@
                 referenceNode = document.getElementById('space_align_helper');
                 referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
                 add_to_members = true;
-                space();
               }
               else {
                 $('#' + current_space).css('border-radius', '3px');
                 $('#' + current_space).closest('.space-wrapper').find('.active-space').css('width', '39px');
-                space();
               }
+              space();
             }
           }
         });
