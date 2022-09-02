@@ -296,7 +296,8 @@ def render_space():
 def space_invite():
     if session_expired() or banned():
         return 'expired', 200
-    if space_member():
+    invite_only = collection_spaces.find_one({'_id': ObjectId(session['current_space'])})['invite_only']
+    if ((not invite_only and space_member) or (invite_only and (space_admin() or session['admin']))):
         invite = collection_invites.find_one({'space': session['current_space'], 'user': session['unique_id']})
         if invite != None:
             return Response(dumps({'code': invite['_id']}), mimetype='application/json')

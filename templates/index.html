@@ -92,7 +92,7 @@
           <input type="checkbox" class="admin-log-filters" id="reported-message-filter" name="reported-message-filter" checked>
           <label for="reported-message-filter">Reported messages</label>
           <input type="checkbox" class="admin-log-filters" id="edited-message-filter" name="edited-message-filter" checked>
-          <label for="edited-message-filter">Edited messages (details before change)</label>
+          <label for="edited-message-filter">Edited messages — Before change</label>
           <input type="checkbox" class="admin-log-filters" id="expand-message-filter" name="expand-message-filter">
           <label for="expand-message-filter">Expand all</label>
         </form>
@@ -555,17 +555,19 @@
             newNodeChild.appendChild(document.createTextNode(item['members'].length));
             newNodeWrapper.appendChild(newNodeChild);
             newNodeChild = document.createElement('span');
-            if(item['members'].some(row => row.includes(user_id))){
-              newNodeChild.textContent = 'Joined';
-              newNodeChild.className = 'directory-space-joined-status joined-status';
-            }
-            else if (item['invite_only'] == true) { // Have invite only/open instead
+            if (item['invite_only'] == true) { // Have invite only/open instead
               newNodeChild.textContent = 'Invite Only';
               newNodeChild.className = 'directory-space-joined-status invite-status';
+              newNodeChild.setAttribute('data-original', 'Invite Only');
             }
             else {
               newNodeChild.textContent = 'Open';
               newNodeChild.className = 'directory-space-joined-status open-status';
+              newNodeChild.setAttribute('data-original', 'Open');
+            }
+            if (item['members'].some(row => row.includes(user_id))){
+              newNodeChild.textContent = 'Joined';
+              newNodeChild.className = 'directory-space-joined-status joined-status';
             }
             newNodeWrapper.appendChild(newNodeChild);
             document.getElementById('directory-space').prepend(newNode);
