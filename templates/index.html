@@ -2502,8 +2502,8 @@
                 newNode = document.createElement('div');
                 newNode.className = 'space-invites-list-item';
                 newNode.innerHTML = '<span class="invite-information"></span><span class="invite-code"></span><span class="revoke-link">Revoke</span>';
-                newNode.querySelector('#invite-information').textContent = invite['user']
-                newNode.querySelector('#invite-link').textContent = 'https://sbhs-platform.herokuapp.com/invite/' + invite['_id'];
+                newNode.querySelector('.invite-information').textContent = invite['user']
+                newNode.querySelector('.invite-link').textContent = 'https://sbhs-platform.herokuapp.com/invite/' + invite['_id'];
               });
             }
 
