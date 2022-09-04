@@ -945,6 +945,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   float: right;
   margin-top: 16px;
   margin-right: 18px;
+  background-color: var(--main-bg-color)
 }
 #space-settings-button:hover {
   border-radius: 4px;
