@@ -693,7 +693,7 @@ def revoke_invite():
     if session_expired() or banned():
         return 'expired', 200
     collection_invites.delete_one({'_id': request.json['invite-code']})
-    return Response(dumps({'success': 'true', 'invite-code': request.json['invite-code']}), mimetype='application/json')
+    return Response(dumps({'success': 'true'}), mimetype='application/json')
     
 # When a room is clicked, make user join room
 # and leave old room.

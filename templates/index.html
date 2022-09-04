@@ -1903,8 +1903,11 @@
           data: JSON.stringify({'invite-code': this.parentElement.id}),
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
-            getElementById(data['invite-code']).remove();
-          }
+            if (data['success'] == "true") {
+              alert('success')
+              this.parentElement.remove();
+            }
+          }      
         });
       });
 
