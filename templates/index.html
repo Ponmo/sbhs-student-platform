@@ -2515,7 +2515,7 @@
               else if (rooms_and_sections[3][0].admins.includes(member['_id'])) {
                 newNode.innerHTML = '<img class="profile-picture"><span class="member-information"></span><span class="user-role"><form class="change-user-status-form"><select data-current="moderator" class="user-status-select"><option value="banned">banned</option><option value="user">user</option><option selected="selected" value="moderator">moderator</option></select><input class="user-status-select-submit" type="submit" value="✓"></form></span>';
               }
-              else if (isItemInArray(rooms_and_sections[3][0].members, [member['_id']])) {
+              else if (isItemInArray(rooms_and_sections[3][0].members, [member['_id'], true])) {
                 newNode.innerHTML = '<img class="profile-picture"><span class="member-information"></span><span class="user-role"><form class="change-user-status-form"><select data-current="banned" class="user-status-select"><option selected="selected" value="banned">banned</option><option value="member">member</option><option value="moderator">moderator</option></select><input class="user-status-select-submit" type="submit" value="✓"></form></span>';
               }
               else {
