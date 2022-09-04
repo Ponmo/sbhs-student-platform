@@ -688,7 +688,7 @@ def edit_space_invite():
     return Response(dumps({'success': 'false'}), mimetype='application/json')
 
 
-@app.route('/revoke_invite', methods=['POST'])
+@app.route('/revoke_link', methods=['POST'])
 def revoke_invite():
     if session_expired() or banned():
         return 'expired', 200

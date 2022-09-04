@@ -1,4 +1,4 @@
-/* Color Themes; SVGs, JavaS; Border */
+/* Color Themes; SVGs, JavaS; Border; Fonts; Textcolors; Borders */
 :root {
   --main-bg-color: #2f3136;
   --main-font-color: white;
@@ -249,7 +249,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin-left: 18px;
   font-size: 16px;
   font-weight: bold;
-  color: #ffffff;
+  color: var(--main-font-color);
 }
 .main-header {
   height: 48px;
@@ -368,7 +368,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 #room-name-display {
   display: inline-block;
   margin-left: 18px;
-  color: white;
+  color: var(--main-font-color);
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -410,7 +410,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   width: 254px;
   height: 32px;
   border-radius: 4px;
-  color: #ffffff;
+  color: var(--main-font-color);
   margin-left: 8px;
   line-height: 32px;
   padding-left: 6px;
@@ -434,7 +434,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 .section {
   margin-top: 14px;
-  color: white;
+  color: var(--main-font-color);
   width: 100%;
 }
 .section-name {
@@ -457,7 +457,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   width: 254px;
   height: 32px;
   border-radius: 4px;
-  color: #ffffff;
+  color: var(--main-font-color);
   margin-left: 8px;
   line-height: 32px;
   padding-left: 24px;
@@ -505,7 +505,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 .message-container {
   position: relative;
   display: grid;
-  color: #d7d9da;
+  color: var(--second-font-color);
   grid-template-columns: 52px auto;
   /*grid-auto-rows: minmax(min-content, max-content);*/
   padding-top: 4px;
@@ -520,7 +520,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 .message-container-logs {
   display: grid;
-  color: #d7d9da;
+  color: var(--second-font-color);
   background-color: var(--second-hover-color);
   grid-template-columns: 52px auto;
 }
