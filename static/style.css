@@ -5,7 +5,8 @@
   --second-bg-color: #36393e;
   --second-font-color: #d7d9da;
   --third-bg-color: hotpink;
-  --footer-bg-color: ;
+  --footer-bg-color: #282a2e;
+  --footer-border-color: #232428;
   --footer-font-color: ;
   --thumb-color: #202225;
   --track-color: #2e3338;
@@ -1043,9 +1044,9 @@ img { /* make images and create button undraggable and unhighlitable*/
   bottom: 0;
   width: 100%;
   height: 50px;
-  background-color: #282a2e;
+  background-color: var(--footer-bg-color);
   /* Remove and use pseudo element to prevent it from messing up centering of profile? Alternative way possible */
-  border-top: 1px solid #232428;
+  border-top: 1px solid var(--footer-border-color) ;
   overflow: hidden;
 }
 #profile {

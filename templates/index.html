@@ -1903,7 +1903,7 @@
           data: JSON.stringify({'invite-code': getElementByClassName('invite-code').id}),
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
-            if ('success' == 'true') {
+            if (data['success'] == 'true') {
               alert('success!')
             }
             else {
