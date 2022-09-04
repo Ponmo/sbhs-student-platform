@@ -1896,7 +1896,16 @@
       });
       
       $(document).on('click', '#revoke-link', function() {
-        leaveSpaceModal.style.display = "none";
+        $.ajax({
+          type: 'POST',
+          url: '/revoke_link',
+          dataType: "json",
+          data: JSON.stringify({'invite-code': getElementByClassName('invite-code').id}),
+          contentType: 'application/json;charset=UTF-8',
+          success: function(data) {
+            alert('success')
+          }
+        });
       });
 
       $(document).on('click', '#close-confirm-leave-space', function() {
@@ -2465,6 +2474,7 @@
               const newFragmentInvites = document.createDocumentFragment();
               rooms_and_sections[4].forEach(function(invite) {
                 newNode = document.createElement('div');
+                newNode.id = invite['_id'];
                 newNode.className = 'space-invites-list-item';
                 newNode.innerHTML = '<img class="profile-picture"><span class="invite-information"></span><span class="invite-code"></span><span class="revoke-link">Revoke</span>';
                 newNode.firstElementChild.src = invite['picture'];
@@ -2498,6 +2508,9 @@
               newNode = document.createElement('div');
               newNode.id = 'space-members-list-item';
               newNode.innerHTML = '<img class="profile-picture"><span class="member-information"></span><span class="user-role"><form class="change-user-status-form"><select data-current="user" class="user-status-select"><option value="banned">banned</option><option selected="selected" value="user">user</option><option value="moderator">moderator</option></select> <input class="user-status-select-submit" type="submit" value="✓"></form></span>';
+              //if (rooms_and_sections[3][0].admins == user_id)
+              //elif (rooms_and_sections[3][0].admins.includes(user_id)
+              //elif (rooms_and_sections[3][0].admins.includes(user_id)
               newNode.firstElementChild.src = member['picture'];
               newNode.querySelector('.member-information').textContent = member['name'] + ' (' + member['email'] + ')';
               newFragmentSettingsMembers.appendChild(newNode);

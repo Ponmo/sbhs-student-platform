@@ -5,6 +5,8 @@
   --second-bg-color: #36393e;
   --second-font-color: #d7d9da;
   --third-bg-color: hotpink;
+  --footer-bg-color: ;
+  --footer-font-color: ;
   --thumb-color: #202225;
   --track-color: #2e3338;
   --border-color: #232428;
@@ -1407,7 +1409,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   width: 15px;
   transform: rotate(-90deg);
 }
-.admin-change-user-status-form {
+.admin-change-user-status-form, .change-user-status-form {
   color: black;
 }
 .user-status-select-submit {

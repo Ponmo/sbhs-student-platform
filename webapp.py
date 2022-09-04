@@ -687,6 +687,15 @@ def edit_space_invite():
         return Response(dumps({'success': 'true'}), mimetype='application/json')
     return Response(dumps({'success': 'false'}), mimetype='application/json')
 
+
+@app.route('/revoke_invite', methods=['POST'])
+def revoke_invite():
+    if session_expired() or banned():
+        return 'expired', 200
+    deleted_invite = collection_invites.find_one({'_id': "invite-code"})
+    collection_invites.delete_one(deleted_invite)
+    return Response(dumps({'success': 'true'}), mimetype='application/json')
+    
 # When a room is clicked, make user join room
 # and leave old room.
 
