@@ -16,7 +16,7 @@
   --selected-color: #43474D;
 }
 html {
-  background-color: #36393e;
+  background-color: var(--second-bg-color);
 }
 /* Will not work with all broswers; Make blur animation on overscroll, or attach footer to grid */
 body {
@@ -26,7 +26,7 @@ body {
   touch-action: none;
   -webkit-overflow-scrolling: none;
   overflow: hidden;
-  background-color: #36393e;
+  background-color: var(--second-bg-color);
 }
 /* flex and width: 100% - 290px*/
 img { /* make images and create button undraggable and unhighlitable*/
