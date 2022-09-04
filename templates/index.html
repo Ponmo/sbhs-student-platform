@@ -899,6 +899,24 @@
         });
       });
 
+      $(document).on('submit', '.change-user-status-form', function(e) {
+        e.preventDefault();
+        this.firstElementChild.nextElementSibling.style.display = 'none';
+        this.firstElementChild.setAttribute('data-current', this.firstElementChild.value)
+        $.ajax({
+          type: "POST",
+          url: '/change_user_status',
+          dataType: "json",
+          data: JSON.stringify({'user_id': this.parentElement.parentElement.getAttribute('data-id'), 'status': this.firstElementChild.value}), 
+          contentType: 'application/json;charset=UTF-8',
+          success: function(data) {
+            if (data['success'] == 'self') {
+              window.location.href = "https://sbhs-platform.herokuapp.com";
+            }
+           }
+        });
+      });
+
       $('#directory-search-bar').keydown(function (e) {
         if (e.keyCode == 13) {
           e.preventDefault();
