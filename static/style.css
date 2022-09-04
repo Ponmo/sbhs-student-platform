@@ -1492,9 +1492,9 @@ img { /* make images and create button undraggable and unhighlitable*/
   user-select: none;
 }
 .revoke-invite-button {
-  align-items: right;
-  width: 16px;
-  height: 16px;
+  justify-content: right;
+  width: 10px;
+  height: 10px;
 }
 /*Add User Select None Class*/
 
