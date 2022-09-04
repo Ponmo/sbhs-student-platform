@@ -907,12 +907,10 @@
           type: "POST",
           url: '/change_user_status',
           dataType: "json",
-          data: JSON.stringify({'user_id': this.parentElement.parentElement.getAttribute('data-id'), 'status': this.firstElementChild.value}), 
+          data: JSON.stringify({'user_id': this.closest('.space-members-list-item').getAttribute('data-id'), 'status': this.firstElementChild.value}), 
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
-            if (data['success'] == 'self') {
-              window.location.href = "https://sbhs-platform.herokuapp.com";
-            }
+            alert('d');
            }
         });
       });
@@ -2525,7 +2523,7 @@
               newNode.appendChild(document.createTextNode(member['name'] + ' (' + member['email'] + ')'));
               newFragmentEmails.appendChild(newNode);
               newNode = document.createElement('div');
-              newNode.id = 'space-members-list-item';
+              newNode.className = 'space-members-list-item';
               newNode.setAttribute('data-id', member['_id']);
               if (rooms_and_sections[3][0].admins == member['_id']) {
                 newNode.innerHTML = '<img class="profile-picture"><span class="member-information"></span><span class="user-role"><select class="user-status-select" disabled><option>owner</option></select></span>';
