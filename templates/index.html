@@ -1904,7 +1904,6 @@
           data: JSON.stringify({'invite-code': revoke_id}),
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
-            alert('success')
             document.getElementById(revoke_id).remove();
           }      
         });
