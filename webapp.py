@@ -303,7 +303,7 @@ def space_invite():
         if invite != None:
             return Response(dumps({'code': invite['_id']}), mimetype='application/json')
         code = shortuuid.uuid()[:7]
-        collection_invites.insert_one({'_id': code, 'space': session['current_space'], 'user': session['unique_id'], 'datetime': datetime.now().isoformat() + 'Z'})
+        collection_invites.insert_one({'_id': code, 'space': session['current_space'], 'picture': session['picture'], 'name': session['users_name'], 'email': session['users_email'], 'datetime': datetime.now().isoformat() + 'Z'})
         return Response(dumps({'code': code}), mimetype='application/json')
 
 # When user clicks leave space button, that space is removed
