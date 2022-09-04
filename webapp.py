@@ -528,7 +528,7 @@ def join_space():
             return Response(dumps({'invalid_invite': 'true'}), mimetype='application/json')
         joined.append(request.json['space_id'])
         collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': joined}})
-        collection_spaces.find_one_and_update({"_id": ObjectId(request.json['space_id'])}, {'$push': {'members': [session['unique_id'], session['users_name']]}})
+        collection_spaces.find_one_and_update({"_id": ObjectId(request.json['space_id'])}, {'$push': {'members': [session['unique_id'], session['users_name'], False]}})
     return Response(dumps(space), mimetype='application/json')
 
 # When user deletes a message, delete that message from MongoDB.
@@ -692,8 +692,8 @@ def edit_space_invite():
 def revoke_invite():
     if session_expired() or banned():
         return 'expired', 200
-    deleted_invite = collection_invites.find_one({'_id': "invite-code"})
-    collection_invites.delete_one(deleted_invite)
+    revoked_invite = collection_invites.find_one({'_id': "invite-code"})
+    collection_invites.delete_one(revoked_invite)
     return Response(dumps({'success': 'true'}), mimetype='application/json')
     
 # When a room is clicked, make user join room

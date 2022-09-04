@@ -1,4 +1,4 @@
-/* Color Themes */
+/* Color Themes; SVGs, JavaS; Border */
 :root {
   --main-bg-color: #2f3136;
   --main-font-color: white;
@@ -90,7 +90,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin-bottom: 100px;
 }
 .settings-pages {
-  background-color: #36393e;
+  background-color: var(--second-bg-color);
   position: fixed;
   width: 100%;
   /* min-width: 500px; */
@@ -229,7 +229,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   position: relative;
   grid-column: 1;
   grid-row: 1;
-  background-color: #2f3136;
+  background-color: var(--main-bg-color);
   border-bottom: 1px solid #232428; /* pseudo element for double border */
   overflow: hidden;
   -moz-user-select: -moz-none;
@@ -1250,13 +1250,13 @@ img { /* make images and create button undraggable and unhighlitable*/
   width: 8px;
 }
 #chat::-webkit-scrollbar-track {
-  background-color: #2e3338;
+  background-color: var(--track-color);
   border-radius: 10px;
   margin-top: 4px;
   margin-bottom: 8px;
 }
 #chat::-webkit-scrollbar-thumb {
-  background-color: #202225;
+  background-color: var(--thumb-color);
   border-radius: 10px;
 }
 /* .space-settings-column and #members needs a special scrollbar */
@@ -1264,13 +1264,13 @@ img { /* make images and create button undraggable and unhighlitable*/
   width: 4px;
 }
 #channels::-webkit-scrollbar-track, #members::-webkit-scrollbar-track, .space-settings-column::-webkit-scrollbar-track {
-  background-color: #2e3338;
+  background-color: var(--track-color);
   border-radius: 4px;
   margin-top: 2px;
   margin-bottom: 2px;
 }
 #channels::-webkit-scrollbar-thumb, #members::-webkit-scrollbar-thumb, .space-settings-column::-webkit-scrollbar-thumb {
-  background-color: #202225;
+  background-color: var(--thumb-color);
   border-radius: 4px;
 }
 #joined-table {
@@ -1310,7 +1310,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 
 .email-container {
-  background-color: white;
+  background-color: var(--textarea-bg-color);
   color: black;
   border-radius: 3px;
   padding-top: 4px;
@@ -1548,20 +1548,20 @@ img { /* make images and create button undraggable and unhighlitable*/
   #channels_bottom {
     grid-column: 1;
     grid-row: 3;
-    background-color: #2f3136;
+    background-color: var(--main-bg-color);
     overflow: hidden;
   }
   #chats_bottom {
     grid-column: 2;
     grid-row: 3;
-    background-color: #36393e;
+    background-color: var(--second-bg-color);
     overflow: hidden;
   }
   #members_bottom {
     grid-column: 3;
     grid-row: 3;
     overflow: hidden;
-    background-color: #2f3136;
+    background-color: var(--main-bg-color);
   }
   #submit {
     right: 6px;
