@@ -692,8 +692,8 @@ def edit_space_invite():
 def revoke_invite():
     if session_expired() or banned():
         return 'expired', 200
-    revoked_invite = collection_invites.find_one({'_id': "invite-code"})
-    collection_invites.delete_one(revoked_invite)
+    revoked_link_id = collection_invites.find_one({'_id': "invite-code"})
+    collection_invites.delete_one(revoked_link_id)
     return Response(dumps({'success': 'true'}), mimetype='application/json')
     
 # When a room is clicked, make user join room

@@ -12,6 +12,7 @@
   --track-color: #2e3338;
   --border-color: #232428;
   --textarea-bg-color: white;
+  --textarea-font-color: black;
   --main-hover-color: #3c3f45;
   --second-hover-color: #32353a;
   --selected-color: #43474D;
@@ -551,7 +552,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 .message-container-combine {
   position: relative;
   display: grid;
-  color: #d7d9da;
+  color: var(--second-font-color);
   grid-template-columns: 52px auto;
   padding-right: 51px;
   padding-left: 20px;
@@ -595,7 +596,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 .message_edit {
   resize: none;
-  color: black;
+  color: var(--textarea-font-color);
   width: 100%;
   overflow-wrap: break-word;
   overflow: hidden;
@@ -675,7 +676,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 #typing_display {
   height: 20px;
   line-height: 20px;
-  color: #d7d9da;
+  color: var(--second-font-color);
   margin-left: 29px;
   font-size: 12px;
 }
@@ -848,7 +849,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   display: none;
   grid-column: 3;
   grid-row: 1;
-  color: #d7d9da;
+  color: vaer;
   padding-left: 18px;
   line-height: 48px;
   background-color: var(--main-bg-color);
@@ -1489,6 +1490,10 @@ img { /* make images and create button undraggable and unhighlitable*/
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+#revoke-invite-button {
+  width: 20px;
+  height: 20px;
 }
 /*Add User Select None Class*/
 
