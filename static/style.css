@@ -1392,7 +1392,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   width: 15px;
   transform: rotate(-90deg);
 }
-.change-user-status-form {
+.admin-change-user-status-form {
   color: black;
 }
 .user-status-select-submit {
