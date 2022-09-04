@@ -1,4 +1,4 @@
-/* Color Themes; SVGs, JavaS; Border; Fonts; Textcolors; Borders */
+/* Color Themes; SVGs, JavaS; Border; Fonts; Textcolors; Borders SEE 852 search colors: */
 :root {
   --main-bg-color: #2f3136;
   --main-font-color: white;
@@ -849,7 +849,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   display: none;
   grid-column: 3;
   grid-row: 1;
-  color: vaer;
+  color: vaer; EJFPEJWOPFKEW
   padding-left: 18px;
   line-height: 48px;
   background-color: var(--main-bg-color);
