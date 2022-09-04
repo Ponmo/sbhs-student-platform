@@ -1491,7 +1491,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   -ms-user-select: none;
   user-select: none;
 }
-#revoke-invite-button {
+.revoke-invite-button {
   width: 20px;
   height: 20px;
 }
