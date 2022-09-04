@@ -1,3 +1,18 @@
+/* Color Themes */
+:root {
+  --main-bg-color: #2f3136;
+  --main-font-color: white;
+  --second-bg-color: #36393e;
+  --second-font-color: #d7d9da;
+  --third-bg-color: hotpink;
+  --thumb-color: #202225;
+  --track-color: #2e3338;
+  --border-color: #232428;
+  --textarea-bg-color: white;
+  --main-hover-color: #3c3f45;
+  --second-hover-color: #32353a;
+  --selected-color: #43474D;
+}
 html {
   background-color: #36393e;
 }
