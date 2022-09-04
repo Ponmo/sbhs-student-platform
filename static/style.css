@@ -330,7 +330,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   grid-row: 1;
   display: flex;
   justify-content: space-between;
-  background-color: hotpink;
+  background-color: var(--third-bg-color);
   border-bottom: 1px solid #232428;
   overflow: hidden;
   
@@ -389,7 +389,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   grid-column: 1;
   grid-row: 2;
   border-top: 1px solid #2b2d32; /*remove once double border*/
-  background-color: #2f3136;
+  background-color: var(--main-bg-color);
   -moz-user-select: -moz-none;
   -khtml-user-select: none;
   -webkit-user-select: none;
@@ -417,7 +417,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin-top: 2px;
 }
 .special-room:hover {
-  background-color: #3c3f45;
+  background-color: var(--main-hover-color);
 }
 #regular-channels {
   list-style-type: none;
@@ -468,7 +468,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   padding-right: 12px;
 }
 .room:hover {
-  background-color: #3c3f45;
+  background-color: var(--main-hover-color);
 }
 .room .room-settings {
   visibility: hidden;
@@ -490,7 +490,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   grid-column: 2;
   grid-row: 2;
   max-width: auto;
-  background-color: #36393e;
+  background-color: var(--second-bg-color);
 }
 #chat {
   flex: 1;
@@ -516,12 +516,12 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin-top: -10px;
 }
 .message-container:hover {
-  background-color: #32353a;
+  background-color: var(--second-hover-color);
 }
 .message-container-logs {
   display: grid;
   color: #d7d9da;
-  background-color: #32353a;
+  background-color: var(--second-hover-color);
   grid-template-columns: 52px auto;
 }
 .message-title {
@@ -560,7 +560,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   
 }
 .message-container-combine:hover {
-  background-color: #32353a;
+  background-color: var(--second-hover-color);
 }
 .edited-note {
   opacity: 0.7;
@@ -606,7 +606,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   display: none;
   right: 10px;
   top: -10px;
-  background-color: #36393e;
+  background-color: var(--second-bg-color);
   width: 68px;
   height: 25px;
   border-radius: 2px;
@@ -817,7 +817,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 #admin-table-wrapper {
   width: 90vw;
   height: 70vh;
-  background-color: #3c3f45;
+  background-color: var(--main-hover-color);
   color: white;
   border: 1px solid black;
   margin: 0 auto;
@@ -851,7 +851,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   color: #d7d9da;
   padding-left: 18px;
   line-height: 48px;
-  background-color: #2f3136;
+  background-color: var(--main-bg-color);
   border-bottom: 1px solid #232428;
 }
 #members {
@@ -859,7 +859,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   z-index: 1; /* to make the send button not overlay the members div on small screen sizes can change once small version introduced */
   grid-row: 2;
   padding-top: 5px;
-  background-color: #2f3136;
+  background-color: var(--main-bg-color);
   overflow-x: hidden;
   overflow-y: scroll;
   white-space: nowrap; 
@@ -890,7 +890,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 
 }
 .member:hover {
-  background-color: #3c3f45;
+  background-color: var(--main-hover-color);
 }
 
 /* If instead make it relative to document border instead of being inside member, then logic for getting rid of the popup must be changed*/
@@ -950,7 +950,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 .space-settings-select {
   display: inline-block;
-  background-color: #2f3136;
+  background-color: var(--main-bg-color);
   width: 35%;
   height: 100%;
   float: left;
@@ -984,7 +984,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 #space-settings-general {
 }
 .space-settings-selection:hover {
-  background-color: #3c3f45;
+  background-color: var(--main-hover-color);
 }
 .space-settings-expand {
   position: relative;
