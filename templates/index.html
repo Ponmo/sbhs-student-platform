@@ -2481,7 +2481,7 @@
                 newNode = document.createElement('div');
                 newNode.id = invite['_id'];
                 newNode.className = 'space-invites-list-item';
-                newNode.innerHTML = '<img class="profile-picture"><span class="invite-information"></span><span class="invite-code"></span><span class="revoke-link pointer"><img clas</span>';
+                newNode.innerHTML = '<img class="profile-picture"><span class="invite-information"></span><span class="invite-code"></span><span class="revoke-link"><img class="pointer white-icon revoke-invite" id="revoke-invite-button" src="/static/images/x.svg"><span>';
                 newNode.firstElementChild.src = invite['picture'];
                 newNode.querySelector('.invite-information').textContent = invite['name'] + ' (' + invite['email'] + ')';
                 newNode.querySelector('.invite-code').textContent = 'https://sbhs-platform.herokuapp.com/invite/' + invite['_id'];
