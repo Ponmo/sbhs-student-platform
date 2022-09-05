@@ -941,16 +941,16 @@ img { /* make images and create button undraggable and unhighlitable*/
 
 }
 #space-settings-button {
-
-}
-.highlight {
   height: 14px;
-  float: right;
-  margin-top: 16px;
-  margin-right: 18px;
 }
-.highlight:hover {
+#space-settings-button-container {
+  float: right;
+  margin-top: 12px;
+  margin-right: 18px;
+  padding: 4px;
   border-radius: 4px;
+}
+#space-settings-button-container:hover {
   background-color: var(--main-hover-color);
 }
 #space-settings {
