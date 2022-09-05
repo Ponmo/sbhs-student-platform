@@ -647,8 +647,8 @@ def server_users():
         users = dumps(list(collection_users.find().sort('_id', pymongo.DESCENDING)))
         return Response(users, mimetype='application/json')
 
-@app.route('/change_user_status', methods=['GET', 'POST'])
-def change_user_status():
+@app.route('/admin_change_user_status', methods=['GET', 'POST'])
+def admin_change_user_status():
     if session_expired() or banned():
         return 'expired', 200
     if request.method == 'POST' and session['admin']:
@@ -662,6 +662,14 @@ def change_user_status():
             collection_users.find_one_and_update({"_id": request.json['user_id']}, {'$set': {'status': 'banned'}})
             return Response(dumps({'success': 'true'}), mimetype='application/json')
     return Response(dumps({'success': 'false'}), mimetype='application/json')
+
+@app.route('/change_user_status', methods=['POST'])
+def change_user_status():
+    if session_expired() or banned():
+        return 'expired', 200
+    if space_admin() and request.json['user_id'] != collection_spaces.find_one({'_id': ObjectId(session['current_space'])})['admins'][0]::
+        if request.json['status'] == 'banned' and collection_spaces.find_one({'_id': ObjectId(session['current_space'])})['admins']:
+            print()
 
 @app.route('/edit_space_profile', methods=['POST'])
 def edit_space_profile():

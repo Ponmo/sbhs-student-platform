@@ -946,9 +946,9 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin-top: 16px;
   margin-right: 18px;
 }
-#space-settings-button:hover {
+#highlight:hover {
   border-radius: 4px;
-  background-color: #3c3f45
+  background-color: var(--main-hover-color);
 }
 #space-settings {
   display: none;
