@@ -668,9 +668,14 @@ def change_user_status():
     if session_expired() or banned():
         return 'expired', 200
     if space_admin() and request.json['user_id'] != collection_spaces.find_one({'_id': ObjectId(session['current_space'])})['admins'][0]:
+        space = collection_spaces.find_one({'_id': ObjectId(session['current_space'])})
         if request.json['status'] == 'banned':
-            collection_spaces.find_one_and_update({'_id': ObjectId(session['current_space'])}, {'$set': {''}})
-
+            space['admins']
+            collection_spaces.update_one({"_id": ObjectId(session['current_space'])}, { "$pull": {"members": {'$in': [session['unique_id']]}}})
+            collection_spaces.find_one_and_update({"_id": ObjectId(request.json['space_id'])}, {'$push': {'members': [session['unique_id'], session['users_name'], True]}})
+            return Response(dumps({'success': 'true'}), mimetype='application/json')
+    return Response(dumps({'success': 'false'}), mimetype='application/json')
+    
 @app.route('/edit_space_profile', methods=['POST'])
 def edit_space_profile():
     if session_expired() or banned():
