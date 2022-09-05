@@ -671,7 +671,7 @@ def change_user_status():
         user = collection_users.find_one({'_id': request.json['user_id']})
         space = collection_spaces.find_one({'_id': ObjectId(session['current_space'])})
         if request.json['status'] == 'banned':
-            collection_spaces.update_one({"_id": ObjectId(session['current_space'])}, { "$pull": {"members": {'$in': request.json['user_id']}}})
+            collection_spaces.update_one({"_id": ObjectId(session['current_space'])}, { "$pull": {"members": {'$in': [request.json['user_id']]}}})
             collection_spaces.find_one_and_update({"_id": ObjectId(request.json['current_space'])}, {'$push': {'members': [request.json['user_id'], user['name'], True]}})
             return Response(dumps({'success': 'true'}), mimetype='application/json')
     return Response(dumps({'success': 'false'}), mimetype='application/json')
