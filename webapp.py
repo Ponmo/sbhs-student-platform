@@ -667,9 +667,9 @@ def admin_change_user_status():
 def change_user_status():
     if session_expired() or banned():
         return 'expired', 200
-    if space_admin() and request.json['user_id'] != collection_spaces.find_one({'_id': ObjectId(session['current_space'])})['admins'][0]::
-        if request.json['status'] == 'banned' and collection_spaces.find_one({'_id': ObjectId(session['current_space'])})['admins']:
-            print()
+    if space_admin() and request.json['user_id'] != collection_spaces.find_one({'_id': ObjectId(session['current_space'])})['admins'][0]:
+        if request.json['status'] == 'banned':
+            collection_spaces.find_one_and_update({'_id': ObjectId(session['current_space'])}, {'$set': {''}})
 
 @app.route('/edit_space_profile', methods=['POST'])
 def edit_space_profile():
