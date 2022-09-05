@@ -914,7 +914,7 @@
           data: JSON.stringify({'user_id': this.closest('.space-members-list-item').getAttribute('data-id'), 'status': this.firstElementChild.value}), 
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
-            alert('d');
+            alert(JSON.stringify(data));
            }
         });
       });
