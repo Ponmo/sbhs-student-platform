@@ -231,7 +231,7 @@
     <div class="settings-pages" id="space-settings">
       <div class="space-settings-select">
         <div class="space-settings-column">
-          <div class="space-settings-selection pointer" id="space-settings-general" style="background-color: #43474d !important">Space Settings</div> 
+          <div class="space-settings-selection pointer" id="space-settings-general" style="background-color: var(--selected-color) !important">Space Settings</div> 
           <div class="space-settings-selection pointer" id="space-settings-themes">Themes</div> 
           <div class="space-settings-selection pointer" id="space-settings-members">Manage Users</div> 
         </div>
@@ -290,7 +290,7 @@
     <div class="settings-pages" id="user-page">
       <div class="space-settings-select">
         <div class="space-settings-column">
-          <div class="space-settings-selection pointer" id="personal-settings-general" style="background-color: #43474d !important">Preferences</div> 
+          <div class="space-settings-selection pointer" id="personal-settings-general" style="background-color: var(--selected-color) !important">Preferences</div> 
           <div class="space-settings-selection pointer" id="log-out">Log Out</div> 
         </div>
       </div>
@@ -1255,7 +1255,7 @@
               newNode.id = 'profile-popup';
               document.getElementById('overlay').appendChild(newNode);
               member.className = 'member';
-              member.style.backgroundColor = '#3c3f45';
+              member.style.backgroundColor = 'var(--main-hover-color';
               document.getElementById('profile-popup').innerHTML = '<ul id="profile-list"><li id="profile-picture-list"><img id="popup-picture" alt="!"></li><li id="profile-name"></li><li id="profile-email"></li><div id="joined-table"></div>';
               document.getElementById('popup-picture').src = data['picture'];
               document.getElementById('profile-name').textContent = data['name'];
@@ -1743,7 +1743,7 @@
           document.getElementById("space-settings-general-selection").style.display = "none";
           document.getElementById("space-settings-themes-selection").style.display = "none";
           document.getElementById("space-settings-members-selection").style.display = "none";
-          $(selected_expand).attr('style', 'background-color: #43474d !important');
+          $(selected_expand).attr('style', 'background-color: var(--selected-color) !important');
           selected_settings.style.display = 'block';
         }
       }
@@ -2635,7 +2635,7 @@
             room_id: current_room,
             old_room: old_room
           });
-          $(document.getElementById(current_room)).attr('style', 'background-color: #43474d !important');
+          $(document.getElementById(current_room)).attr('style', 'background-color: var(--selected-color) !important');
           document.getElementById('messages').textContent = '';
           document.getElementById('room-name-display').textContent = document.getElementById(current_room).getAttribute('data-name');
           document.getElementById('members_header').textContent = document.getElementById(current_room).getAttribute('data-name');
