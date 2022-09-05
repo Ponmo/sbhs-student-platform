@@ -942,7 +942,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 #space-settings-button-container {
   float: right;
-  margin-top: 12px;
+  margin-top: 8px;
   margin-right: 18px;
   padding: 4px;
   border-radius: 4px;
@@ -1094,10 +1094,16 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 #settings {
   width: 14px;
-  height: 14px;
-  grid-column: 3;
-  grid-row: 1/3;
-  margin-bottom: 0px;
+}
+#settings-continer {
+  float: right;
+  margin-top: 8px;
+  margin-right: 18px;
+  padding: 4px;
+  border-radius: 4px;
+}
+#settings-container:hover {
+  background-color: var(--main-hover-color);
 }
 #spaces {
   width: calc(100% - 290px);
