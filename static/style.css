@@ -849,7 +849,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   display: none;
   grid-column: 3;
   grid-row: 1;
-  color: vaer; EJFPEJWOPFKEW
+  color: white; /*??*/
   padding-left: 18px;
   line-height: 48px;
   background-color: var(--main-bg-color);
@@ -936,9 +936,6 @@ img { /* make images and create button undraggable and unhighlitable*/
 #profile-joined {
   padding-top: 20px;
   padding-bottom: 40px;
-}
-.chats-popup {
-
 }
 #space-settings-button {
   height: 14px;
