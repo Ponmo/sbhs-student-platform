@@ -519,6 +519,8 @@ def join_space():
     space = collection_spaces.find_one({'_id': ObjectId(request.json['space_id'])})
     if space == None:
         return Response(dumps({'exists': 'false'}), mimetype='application/json')
+    if session['unique_id'] in space['banned']:
+        return Response(dumps({'banned': 'true'}), mimetype='application/json')
     joined = collection_users.find_one({"_id": session['unique_id']})['joined']
     if request.json['space_id'] not in joined:
         if space['invite_only'] and 'code' not in session:
