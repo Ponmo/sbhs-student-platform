@@ -2188,6 +2188,8 @@
       socket.on('receive_message', function (data) {
         const newNode = document.createElement('div');
         newNode.setAttribute('data-markdown', data.message);
+        newNode.setAttribute('data-datetime', data.datetime);
+        newNode.setAttribute('data-user', data.user_id);
         chat_history_skip += 1;
         let messageMoment = moment(data.datetime).local().format('h:mm A');
         if (data.combine == 'false') {
@@ -2677,6 +2679,8 @@
               let messageDate = moment(item.datetime);
               const newNode = document.createElement('div');
               newNode.setAttribute('data-markdown', item.message);
+              newNode.setAttribute('data-datetime', item.datetime);
+              newNode.setAttribute('data-user', item.user_id);
               if (item.combine == 'false') {
                 newNode.className = 'message-container';
                 newNode.setAttribute('data-date', messageDate.format('M/D/YYYY'));

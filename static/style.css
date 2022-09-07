@@ -942,9 +942,9 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 #space-settings-button-container {
   float: right;
-  margin-top: 8px;
+  margin-top: 12px;
   margin-right: 18px;
-  padding: 4px;
+  padding: 0px 4px 4px 4px;
   border-radius: 4px;
 }
 #space-settings-button-container:hover {
