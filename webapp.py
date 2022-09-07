@@ -483,7 +483,7 @@ def create_space():
                 space_image = '/static/images/Space.jpeg'
         except:
             space_image = '/static/images/Space.jpeg'
-        collection_spaces.insert_one({'_id': space_id, 'name': request.json['space_name'][:200], 'picture': space_image, 'description': request.json['space_description'][:200], 'admins': [session['unique_id']], 'members': [[session['unique_id'], session['users_name']]]})
+        collection_spaces.insert_one({'_id': space_id, 'name': request.json['space_name'][:200], 'picture': space_image, 'description': request.json['space_description'][:200], 'admins': [session['unique_id']], 'members': [[session['unique_id'], session['users_name']]], 'banned': []})
         collection_rooms.insert_many([room, special_rooms])
         collection_sections.insert_one(section)        
         joined = user['joined']
@@ -651,7 +651,7 @@ def server_users():
 def admin_change_user_status():
     if session_expired() or banned():
         return 'expired', 200
-    if request.method == 'POST' and session['admin']:
+    if request.method == 'POST' and session['admin'] and collection_users.find_one({'_id': ObjectId(request.json['user_id'])}['status'] != 'owner'):
         if request.json['status'] in {'user', 'admin'}:
             collection_users.find_one_and_update({"_id": request.json['user_id']}, {'$set': {'status': request.json['status']}})
             if request.json['user_id'] == session['unique_id'] and request.json['status'] == 'user':
@@ -672,7 +672,7 @@ def change_user_status():
         space = collection_spaces.find_one({'_id': ObjectId(session['current_space'])})
         if request.json['status'] == 'banned':
             collection_spaces.update_one({"_id": ObjectId(session['current_space'])}, { "$pull": {"members": {'$in': [request.json['user_id']]}}})
-            collection_spaces.find_one_and_update({"_id": ObjectId(session['current_space'])}, {'$push': {'members': [request.json['user_id'], user['name'], True]}})
+            collection_spaces.find_one_and_update({"_id": ObjectId(session['current_space'])}, {'$push': {'banned': [request.json['user_id'], user['name']]}})
             return Response(dumps({'success': 'true'}), mimetype='application/json')
     return Response(dumps({'success': 'false'}), mimetype='application/json')
     
