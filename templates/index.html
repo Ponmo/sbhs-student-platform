@@ -1373,10 +1373,12 @@
         stoppedTyping();
         clearTimeout(timeout);
         if (message.length) {
-          const newNode = document.createElement('div');
-          newNode.style.opacity = 0.5;
           let messageMoment = moment();
-          const latestMessage = $('#messages').children().not('.temporary-message').last();
+          const newNode = document.createElement('div');
+          newNode.setAttribute('data-datetime', messageMoment.format())
+          newNode.setAttribute('data-user', user_id)
+          newNode.style.opacity = 0.5;
+          const latestMessage = $('#messages').children()/*.not('.temporary-message')*/.last();
           if (latestMessage.data('user') == user_id && messageMoment.diff(moment(latestMessage.data('datetime'))) < 180000) {
             newNode.className = 'message-container-combine temporary-message';
             newNode.innerHTML = '<p class="message-combine-time">' + messageMoment.format('h:mm A') + '</p><p class="message-combine"></p>';
@@ -2218,7 +2220,7 @@
           newNode.firstElementChild.nextElementSibling.innerHTML = '</span>' + parseMarkdown(escapeHTML(data.message)) + '</span>';
         }
         newNode.id = data.message_id;
-        $('.temporary-message').remove();
+        $(document.querySelector('.temporary-message')).remove();
         document.getElementById('messages').append(newNode);
       });
       
