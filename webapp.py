@@ -281,7 +281,7 @@ def user_spaces():
 def render_space():
     if session_expired() or banned():
         return 'expired', 200
-    if request.method == 'POST':
+    if request.method == 'POST': # quicken query by querying ('$in') members with array of ObjectIds from members array...
         space = collection_spaces.find_one({'_id': ObjectId(request.json['space_id'])})
         rooms_and_sections = dumps([list(collection_rooms.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_sections.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_users.find({'joined': {'$in': [request.json['space_id']]}})), list(collection_spaces.find({'_id': ObjectId(request.json['space_id'])}).limit(1)), list(collection_invites.find({'space': request.json['space_id']}))])
         if session['unique_id'] in space['admins'] or session['admin']:
@@ -672,7 +672,8 @@ def change_user_status():
         space = collection_spaces.find_one({'_id': ObjectId(session['current_space'])})
         if request.json['status'] == 'banned':
             collection_spaces.update_one({"_id": ObjectId(session['current_space'])}, { "$pull": {"members": {'$in': [request.json['user_id']]}}})
-            collection_spaces.find_one_and_update({"_id": ObjectId(session['current_space'])}, {'$push': {'banned': [request.json['user_id'], user['name']]}})
+            collection_spaces.find_one_and_update({'_id': ObjectId(session['current_space'])}, {'$push': {'banned': [request.json['user_id'], user['name']]}})
+            collection_users.find_one_and_update({'_id': request.json['user_id']}, {'$pull': {'joined': session['current_space']}})
             return Response(dumps({'success': 'true'}), mimetype='application/json')
     return Response(dumps({'success': 'false'}), mimetype='application/json')
     
