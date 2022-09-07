@@ -1038,6 +1038,13 @@ img { /* make images and create button undraggable and unhighlitable*/
   padding-top: 4px;
   padding-bottom: 4px;
 }
+.member-information {
+  padding-left: 6px;
+}
+.user-role {
+  padding-left: 6px;
+  display: inline-block;
+}
 .close-settings-page {
   position: absolute;
   top: 40px;
