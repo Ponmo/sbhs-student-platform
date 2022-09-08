@@ -672,7 +672,7 @@ def change_user_status():
     if (space_admin() or session['admin']) and request.json['user_id'] != collection_spaces.find_one({'_id': ObjectId(session['current_space'])})['admins'][0]:
         user = collection_users.find_one({'_id': request.json['user_id']})
         space = collection_spaces.find_one({'_id': ObjectId(session['current_space'])})
-        if request.json['status'] == 'banned' and request.json['user_id'] not in space['banned']:
+        if request.json['status'] == 'banned' and request.json['user_id'] not in space['banned'] and user['status'] != 'admin' and user['status'] != 'owner':
             collection_spaces.update_one({"_id": ObjectId(session['current_space'])}, {"$pull": {"members": {'$in': [request.json['user_id']]}, 'admins': request.json['user_id']}})
             collection_spaces.update_one({'_id': ObjectId(session['current_space'])}, {'$push': {'banned': request.json['user_id']}})
             collection_users.update_one({'_id': request.json['user_id']}, {'$pull': {'joined': session['current_space']}})
