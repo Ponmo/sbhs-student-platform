@@ -671,7 +671,7 @@ def change_user_status():
     if session_expired() or banned():
         return 'expired', 200
     space = collection_spaces.find_one({'_id': ObjectId(session['current_space'])})
-    return Response(dumps({'success': space['admins'][0]}), mimetype='application/json')
+    return Response(dumps({'success': request.json['user_id']}), mimetype='application/json')
     if (space_admin() or session['admin']) and request.json['user_id'] != space['admins'][0]:
         user = collection_users.find_one({'_id': request.json['user_id']})
         if request.json['status'] == 'banned' and request.json['user_id'] not in space['banned'] and request.json['user_id'] != space['admins'][0] and user['status'] != 'admin' and user['status'] != 'owner':
