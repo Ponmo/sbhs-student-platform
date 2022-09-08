@@ -878,7 +878,7 @@
       });
 
       $(document).on('change', '.user-status-select', function() {
-        this.form.submit();
+        this.parentNode.submit();
       });
 
       $(document).on('submit', '.admin-change-user-status-form', function(e) {
