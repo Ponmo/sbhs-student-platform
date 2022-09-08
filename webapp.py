@@ -654,7 +654,7 @@ def server_users():
 def admin_change_user_status():
     if session_expired() or banned():
         return 'expired', 200
-    if request.method == 'POST' and session['admin'] and collection_users.find_one({'_id': ObjectId(request.json['user_id'])}['status'] != 'owner'):
+    if request.method == 'POST' and session['admin'] and collection_users.find_one({'_id': request.json['user_id']}['status'] != 'owner'):
         if request.json['status'] in {'user', 'admin'}:
             collection_users.find_one_and_update({"_id": request.json['user_id']}, {'$set': {'status': request.json['status']}})
             if request.json['user_id'] == session['unique_id'] and request.json['status'] == 'user':
