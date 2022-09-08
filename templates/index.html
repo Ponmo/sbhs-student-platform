@@ -878,12 +878,7 @@
       });
 
       $(document).on('change', '.user-status-select', function() {
-        /*if (this.getAttribute('data-current') != this.value) {
-          this.nextElementSibling.style.display = 'initial';
-        }
-        else {
-          this.nextElementSibling.style.display = 'none';
-        }*/
+        this.form.submit();
       });
 
       $(document).on('submit', '.admin-change-user-status-form', function(e) {
@@ -907,7 +902,7 @@
       $(document).on('submit', '.change-user-status-form', function(e) {
         e.preventDefault();
         //this.firstElementChild.nextElementSibling.style.display = 'none';
-        //this.firstElementChild.setAttribute('data-current', this.firstElementChild.value)
+        this.firstElementChild.setAttribute('data-current', this.firstElementChild.value)
         $.ajax({
           type: "POST",
           url: '/change_user_status',
