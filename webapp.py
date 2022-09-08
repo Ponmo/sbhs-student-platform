@@ -531,7 +531,7 @@ def join_space():
             return Response(dumps({'invalid_invite': 'true'}), mimetype='application/json')
         joined.append(request.json['space_id'])
         collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': joined}})
-        collection_spaces.find_one_and_update({"_id": ObjectId(request.json['space_id'])}, {'$push': {'members': [session['unique_id'], session['users_name'], False]}})
+        collection_spaces.find_one_and_update({"_id": ObjectId(request.json['space_id'])}, {'$push': {'members': [session['unique_id'], session['users_name']]}})
     return Response(dumps(space), mimetype='application/json')
 
 # When user deletes a message, delete that message from MongoDB.
