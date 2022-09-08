@@ -2589,6 +2589,10 @@
               alert('This space does not exist');
               $("#space-search").css('pointer-events', 'initial');
             }
+            else if ('banned' in data) {
+              alert('You are banned from this space');
+              $("#space-search").css('pointer-events', 'initial');
+            }
             else {
               $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
               $(document.getElementById(current_space)).attr('style', '');
