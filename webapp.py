@@ -684,6 +684,7 @@ def change_user_status():
         elif request.json['status'] == 'member':
             collection_spaces.update_one({"_id": ObjectId(session['current_space'])}, {"$pull": {'banned': request.json['user_id'], 'admins': request.json['user_id']}})
             return Response(dumps({'success': 'true'}), mimetype='application/json')
+        return Response(dumps({'success': 'a'}), mimetype='application/json')
     return Response(dumps({'success': 'false'}), mimetype='application/json')
     
 @app.route('/edit_space_profile', methods=['POST'])
