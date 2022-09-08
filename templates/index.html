@@ -2517,20 +2517,22 @@
             const newFragmentSettingsMembers = document.createDocumentFragment();
             const newFragmentEmails = document.createDocumentFragment();
             rooms_and_sections[2].forEach(function(member) {
-              newNode = document.createElement('div');
-              newNode.className = 'member pointer';
-              newNode.setAttribute('data-id', member['_id']);
-              newNode.innerHTML = '<img class="profile-picture" alt="!"><span class="member-name"></span>';
-              newNode.firstElementChild.src = member['picture'];
-              newNode.firstElementChild.nextElementSibling.textContent = member['name'];
-              newFragmentMembers.appendChild(newNode);
-              newNode = document.createElement('div');
-              newNode.className = 'suggested_email suggested_email_individual pointer';
-              newNode.setAttribute('data-email', member['email']);
-              newNode.innerHTML = '<img class="profile-picture">'
-              newNode.firstElementChild.src = member['picture'];
-              newNode.appendChild(document.createTextNode(member['name'] + ' (' + member['email'] + ')'));
-              newFragmentEmails.appendChild(newNode);
+              if (!rooms_and_sections[3][0].banned.includes(member['_id'])) {
+                newNode = document.createElement('div');
+                newNode.className = 'member pointer';
+                newNode.setAttribute('data-id', member['_id']);
+                newNode.innerHTML = '<img class="profile-picture" alt="!"><span class="member-name"></span>';
+                newNode.firstElementChild.src = member['picture'];
+                newNode.firstElementChild.nextElementSibling.textContent = member['name'];
+                newFragmentMembers.appendChild(newNode);
+                newNode = document.createElement('div');
+                newNode.className = 'suggested_email suggested_email_individual pointer';
+                newNode.setAttribute('data-email', member['email']);
+                newNode.innerHTML = '<img class="profile-picture">'
+                newNode.firstElementChild.src = member['picture'];
+                newNode.appendChild(document.createTextNode(member['name'] + ' (' + member['email'] + ')'));
+                newFragmentEmails.appendChild(newNode);
+              }
               newNode = document.createElement('div');
               newNode.className = 'space-members-list-item';
               newNode.setAttribute('data-id', member['_id']);
