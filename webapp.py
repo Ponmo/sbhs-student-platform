@@ -678,7 +678,7 @@ def change_user_status():
             collection_spaces.update_one({'_id': ObjectId(session['current_space'])}, {'$push': {'banned': request.json['user_id']}})
             collection_users.update_one({'_id': request.json['user_id']}, {'$pull': {'joined': session['current_space']}})
             return Response(dumps({'success': 'true'}), mimetype='application/json')
-        elif request.json['status'] == 'admin' and request.json['user_id'] not in space['admins']:
+        elif request.json['status'] == 'moderator' and request.json['user_id'] not in space['admins']:
             collection_spaces.update_one({'_id': ObjectId(session['current_space'])}, {'$push': {'admins': request.json['user_id']}})
             return Response(dumps({'success': 'true'}), mimetype='application/json')
         elif request.json['status'] == 'member':
