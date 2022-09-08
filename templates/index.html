@@ -769,13 +769,13 @@
             data.forEach(function (item) {
               let formNode = '';
               if (item.status == 'user') {
-                formNode = '<form class="admin-change-user-status-form"><select data-current="user" class="user-status-select"><option value="banned">banned</option><option selected="selected" value="user">user</option><option value="admin">admin</option></select> <input class="user-status-select-submit" type="submit" value="✓"></form>';
+                formNode = '<form class="admin-change-user-status-form"><select class="user-status-select"><option value="banned">banned</option><option selected="selected" value="user">user</option><option value="admin">admin</option></select></form>';
               } 
               else if (item.status == 'admin') {
-                formNode = '<form class="admin-change-user-status-form"><select data-current="admin" class="user-status-select"><option value="user">user</option><option selected="selected" value="admin">admin</option></select> <input class="user-status-select-submit" type="submit" value="✓"></form>';
+                formNode = '<form class="admin-change-user-status-form"><select class="user-status-select"><option value="user">user</option><option selected="selected" value="admin">admin</option></select></form>';
               }
               else if (item.status == 'banned') {
-                formNode = '<form class="admin-change-user-status-form"><select data-current="banned" class="user-status-select"><option selected="selected" value="banned">banned</option><option value="user">user</option><option value="admin">admin</option></select> <input class="user-status-select-submit" type="submit" value="✓"></form>';
+                formNode = '<form class="admin-change-user-status-form"><select class="user-status-select"><option selected="selected" value="banned">banned</option><option value="user">user</option><option value="admin">admin</option></select></form>';
               }
               else {
                 formNode = '<select class="user-status-select" disabled><option value="owner">owner</option></select>';
@@ -883,8 +883,6 @@
 
       $(document).on('submit', '.admin-change-user-status-form', function(e) {
         e.preventDefault();
-        this.firstElementChild.nextElementSibling.style.display = 'none';
-        this.firstElementChild.setAttribute('data-current', this.firstElementChild.value);
         $.ajax({
           type: "POST",
           url: '/admin_change_user_status',
@@ -902,8 +900,6 @@
 
       $(document).on('submit', '.change-user-status-form', function(e) {
         e.preventDefault();
-        //this.firstElementChild.nextElementSibling.style.display = 'none';
-        this.firstElementChild.setAttribute('data-current', this.firstElementChild.value)
         $.ajax({
           type: "POST",
           url: '/change_user_status',
@@ -2536,13 +2532,13 @@
                 newNode.innerHTML = '<img class="profile-picture"><span class="member-information"></span><span class="user-role"><select class="user-status-select" disabled><option>owner</option></select></span>';
               }
               else if (rooms_and_sections[3][0].admins.includes(member['_id'])) {
-                newNode.innerHTML = '<img class="profile-picture"><span class="member-information"></span><span class="user-role"><form class="change-user-status-form"><select data-current="moderator" class="user-status-select"><option value="banned">banned</option><option value="member">member</option><option selected="selected" value="moderator">moderator</option></select><input class="user-status-select-submit" type="submit" value="✓"></form></span>';
+                newNode.innerHTML = '<img class="profile-picture"><span class="member-information"></span><span class="user-role"><form class="change-user-status-form"><select class="user-status-select"><option value="banned">banned</option><option value="member">member</option><option selected="selected" value="moderator">moderator</option></select></form></span>';
               }
               else if (rooms_and_sections[3][0].banned.includes(member['_id'])) {
-                newNode.innerHTML = '<img class="profile-picture"><span class="member-information"></span><span class="user-role"><form class="change-user-status-form"><select data-current="banned" class="user-status-select"><option selected="selected" value="banned">banned</option><option value="member">member</option><option value="moderator">moderator</option></select><input class="user-status-select-submit" type="submit" value="✓"></form></span>';
+                newNode.innerHTML = '<img class="profile-picture"><span class="member-information"></span><span class="user-role"><form class="change-user-status-form"><select class="user-status-select"><option selected="selected" value="banned">banned</option><option value="member">member</option><option value="moderator">moderator</option></select></form></span>';
               }
               else {
-                newNode.innerHTML = '<img class="profile-picture"><span class="member-information"></span><span class="user-role"><form class="change-user-status-form"><select data-current="member" class="user-status-select"><option value="banned">banned</option><option selected="selected" value="member">member</option><option value="moderator">moderator</option></select><input class="user-status-select-submit" type="submit" value="✓"></form></span>';
+                newNode.innerHTML = '<img class="profile-picture"><span class="member-information"></span><span class="user-role"><form class="change-user-status-form"><select class="user-status-select"><option value="banned">banned</option><option selected="selected" value="member">member</option><option value="moderator">moderator</option></select></form></span>';
               }
               newNode.firstElementChild.src = member['picture'];
               newNode.querySelector('.member-information').textContent = member['name'] + ' (' + member['email'] + ')';
