@@ -283,8 +283,7 @@ def render_space():
         return 'expired', 200
     if request.method == 'POST': # quicken query by querying ('$in') members with array of ObjectIds from members array...
         space = collection_spaces.find_one({'_id': ObjectId(request.json['space_id'])})
-        members = list(collection_users.find({'_id': {'$in': [i[0] for i in space['members'] + space['banned']]}}))
-        #members += collection_users.find({'_id': {'$in': space['banned']}})
+        members = collection_users.find({'_id': {'$in': [i[0] for i in space['members'] + space['banned']]}})
         rooms_and_sections = dumps([list(collection_rooms.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_sections.find({'space': request.json['space_id']}).sort('order', 1)), list(members), list(collection_spaces.find({'_id': ObjectId(request.json['space_id'])}).limit(1)), list(collection_invites.find({'space': request.json['space_id']}))])
         if session['unique_id'] in space['admins'] or session['admin']:
             session['current_space'] = request.json['space_id']
@@ -300,7 +299,7 @@ def space_invite():
     if session_expired() or banned():
         return 'expired', 200
     invite_only = collection_spaces.find_one({'_id': ObjectId(session['current_space'])})['invite_only']
-    if ((not invite_only and space_member) or (invite_only and (space_admin() or session['admin']))):
+    if ((not invite_only and space_member()) or (invite_only and (space_admin() or session['admin']))):
         invite = collection_invites.find_one({'space': session['current_space'], 'user': session['unique_id']})
         if invite != None:
             return Response(dumps({'code': invite['_id']}), mimetype='application/json')
