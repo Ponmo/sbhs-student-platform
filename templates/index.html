@@ -572,7 +572,7 @@
             newNodeChild = document.createElement('span');
             if (item['invite_only'] == true) { // Have invite only/open instead
               newNodeChild.textContent = 'Invite Only';
-              newNodeChild.className = 'directory-space-joined-status open-status';
+              newNodeChild.className = 'directory-space-joined-status invite-status';
               newNodeChild.setAttribute('data-original', 'Invite Only');
             }
             else {
@@ -1894,8 +1894,14 @@
 
       $(document).on('click', '#confirm-leave-space-button', function() {
         const formSpace = document.querySelector('.form-space[data-id="' + current_space + '"]').querySelector('.directory-space-joined-status')
-        formSpace.textContent = formSpace.getAttribute('data-original');
-        formSpace.className = 'directory-space-joined-status open-status';
+        original = formSpace.getAttribute('data-original');
+        formSpace.textContent = original;
+        if (original == 'Invite Only') {
+          formSpace.className = 'directory-space-joined-status invite-status';
+        }
+        else {
+          formSpace.className = 'directory-space-joined-status open-status';
+        }
         $.ajax({
           type: 'POST',
           url: '/leave_space',
