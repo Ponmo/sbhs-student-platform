@@ -183,6 +183,10 @@ img { /* make images and create button undraggable and unhighlitable*/
   justify-content: space-between;
   bottom: 12px;
 }
+.status-icon {
+  width: 12px;
+  height: 12px;
+}
 .directory-space-description {
   margin-bottom: 40px;
 }
@@ -202,11 +206,11 @@ img { /* make images and create button undraggable and unhighlitable*/
   border-radius: 4px;
 }
 .open-status {
-  background-color: #1f52a3;
+  background-color: #f55a1d;
   border-radius: 4px;
 }
 .invite-status {
-  background-color: #f55a1d;
+  background-color: #1f52a3;
   border-radius: 4px;
 }
 #close-space-search-button, #server-settings-button, #exit-server-settings {
