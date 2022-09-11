@@ -1201,7 +1201,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   white-space: nowrap;
   visibility: hidden;
   opacity: 0;
-  transition: opacity 1s;
+  transition: opacity 0.2s;
 }
 .icons-wrapper:hover .joined-icons-tooltip {
   visibility: visible;
