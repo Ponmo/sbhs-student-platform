@@ -1190,7 +1190,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   height: 40px;
   border-radius: 7px;
 }
-.joined-icons-tooltip {
+.joined-icons-tooltip, .space-tooltip {
   position: absolute;
   background-color: black;
   bottom: 100%;
@@ -1203,7 +1203,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   opacity: 0;
   transition: opacity 0.2s;
 }
-.icons-wrapper:hover .joined-icons-tooltip {
+.icons-wrapper:hover .joined-icons-tooltip, .space-wrapper:hover .space-tooltip {
   visibility: visible;
   opacity: 1;
 }

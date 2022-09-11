@@ -529,11 +529,15 @@
             try {
               let newNode = document.createElement('li'); 
               newNode.className = 'space-wrapper';
-              let newNodeChild = document.createElement('img'); 
+              let newNodeChild = document.createElement('img');
               newNodeChild.className = 'space pointer';
               newNodeChild.id = item._id.$oid;
               newNodeChild.setAttribute('data-name', item.name);
               newNodeChild.src = item.picture;
+              newNode.appendChild(newNodeChild);
+              newNodeChild = document.createElement('div');
+              newNodeChild.className = 'space-tooltip';
+              newNodeChild.textContent = item.name;
               newNode.appendChild(newNodeChild);
               newNodeChild = document.createElement('div');
               newNodeChild.className = 'active-space';
