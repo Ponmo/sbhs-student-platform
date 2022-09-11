@@ -1089,7 +1089,10 @@ img { /* make images and create button undraggable and unhighlitable*/
 #profile {
   display: flex;
   align-items: center;
-  width: 270px;
+  height: 100%;
+  background-color: var(--footer-bg-color);
+  z-index: 100000;
+  width: 290px;
   padding-left: 20px;
 }
 #profile-info-wrapper {
@@ -1139,15 +1142,15 @@ img { /* make images and create button undraggable and unhighlitable*/
   background-color: var(--main-hover-color);
 }
 #spaces {
-  width: calc(100% - 290px);
-  height: 50px;
+  position: absolute;
+  width: 100%;
+  height: 105px;
   border-radius: 2px;
   overflow-y: hidden;
-  overflow-x: scroll;
+  overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  padding: 0px 10px 0px 4px;
+  padding: 0px 10px 0px 294px;
   margin: 0;
-  margin-left: 20px;
   list-style-type: none;
   white-space: nowrap;
 
@@ -1165,8 +1168,9 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 .space-wrapper {
   display: inline-block;
+  position: relative;
   width: 55px;
-  height: 39px;
+  height: 40px;
   margin-right: 3px;
 }
 .space-wrapper:hover .active-space {
