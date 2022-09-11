@@ -1191,14 +1191,18 @@ img { /* make images and create button undraggable and unhighlitable*/
   border-radius: 7px;
 }
 .joined-icons-tooltip {
-  z-index: 10000000000;
   position: absolute;
-  background-color: aliceblue;
+  background-color: black;
   bottom: 100%;
   left: 50%;
   transform: translate(-50%, -4px);
   padding: 2px;
   border-radius: 4px;
+  white-space: nowrap;
+  display: none;
+}
+.joined-icons-tooltip {
+  display: block;
 }
 .space:hover {
   border-radius: 3px;
