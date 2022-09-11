@@ -1572,11 +1572,7 @@ img { /* make images and create button undraggable and unhighlitable*/
     grid-template-rows: 48px calc(100vh - 98px) 600px;
   }
   #profile {
-    display: grid;
-    align-items: center;
-    grid-template-columns: 52px 0px 0px;
     width: 52px;
-    padding-left: 20px;
   }
   #username {
     display: none;
@@ -1588,7 +1584,8 @@ img { /* make images and create button undraggable and unhighlitable*/
     display: none;
   }
   #spaces {
-    width: calc(100% - 72px);
+    padding: 0px 10px 0px 138px;
+    
   }
   #open_channels {
     display: inline-block;
