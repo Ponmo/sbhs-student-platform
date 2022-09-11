@@ -1142,6 +1142,9 @@ img { /* make images and create button undraggable and unhighlitable*/
 #settings-container:hover {
   background-color: var(--main-hover-color);
 }
+#mobile-negative-space {
+  padding-right: 0px;
+}
 #spaces {
   position: absolute;
   width: 100%;
@@ -1194,12 +1197,6 @@ img { /* make images and create button undraggable and unhighlitable*/
   width: 55px;
   height: 40px;
   border-radius: 7px;
-}
-#mobile-negative-space {
-  background-color: var(--footer-bg-color);
-  HEIGHT: 100%;
-  padding-right: 14px;
-  z-index: 1000;
 }
 .joined-icons-tooltip, .space-tooltip {
   position: absolute;
@@ -1674,6 +1671,12 @@ img { /* make images and create button undraggable and unhighlitable*/
     top: 15px;
     width: 20px;
     right: 15px;
+  }
+  #mobile-negative-space {
+    background-color: var(--footer-bg-color);
+    height: 100%;
+    padding-right: 14px;
+    z-index: 1000;
   }
 }
 @media only screen and (max-width: 418px) {
