@@ -1190,6 +1190,16 @@ img { /* make images and create button undraggable and unhighlitable*/
   height: 40px;
   border-radius: 7px;
 }
+.joined-icons-tooltip {
+  z-index: 10000000000;
+  position: absolute;
+  background-color: aliceblue;
+  bottom: 100%;
+  left: 50%;
+  transform: translate(-50%, -4px);
+  padding: 2px;
+  border-radius: 4px;
+}
 .space:hover {
   border-radius: 3px;
   -webkit-transition: border-radius 0.15s ease-out;
@@ -1324,6 +1334,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin-right: 0px;
 }
 .icons-wrapper {
+  position: relative;
   display: inline-block;
   margin-right: 10px;
   margin-bottom: 10px;
