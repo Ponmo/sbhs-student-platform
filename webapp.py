@@ -319,7 +319,7 @@ def leave_space():
         joined = collection_users.find_one({"_id": session['unique_id']})['joined']
         joined.remove(session['current_space'])
         collection_users.update_one({"_id": session['unique_id']}, {"$set": {"joined": joined}})
-        collection_spaces.update_one({"_id": ObjectId(session['current_space'])}, { "$pull": {"members": {'$in': [session['unique_id']]}}})#[session['unique_id'], session['users_name'], False]}})
+        collection_spaces.update_one({"_id": ObjectId(session['current_space'])}, { "$pull": {"members": {'$in': [session['unique_id']]}, 'admins': request.json['user_id']}})
         joined = dumps(joined)
         session['current_space'] = ''
         session['current_space_name'] = ''
