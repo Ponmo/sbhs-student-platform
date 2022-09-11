@@ -1084,7 +1084,8 @@ img { /* make images and create button undraggable and unhighlitable*/
   background-color: var(--footer-bg-color);
   /* Remove and use pseudo element to prevent it from messing up centering of profile? Alternative way possible */
   border-top: 1px solid var(--footer-border-color) ;
-  overflow: hidden;
+
+  /* overflow: hidden; Necessary for tooltip on space hover */
 }
 #profile {
   display: flex;
