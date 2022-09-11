@@ -101,6 +101,10 @@ img { /* make images and create button undraggable and unhighlitable*/
   overflow: hidden;
   white-space: nowrap;
 }
+.settings-pages textarea, .settings-pages input {
+  background-color: var(--textarea-bg-color);
+  color: var(--textarea-font-color);
+}
 #user-page {
   display: none;
   opacity: 0;
@@ -644,7 +648,6 @@ img { /* make images and create button undraggable and unhighlitable*/
 .message-container-combine:hover .message-options {
   display: block;
 }
-
 #message_input_form {
   position: relative;
   z-index: 1; /* For more chrome versions; the hightlight focus on textarea top gets obscured by chat div*/
