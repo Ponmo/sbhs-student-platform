@@ -1259,39 +1259,13 @@
               data['joined'].forEach(function(item) {
                 newNode = document.createElement('div');
                 newNode.className = 'icons-wrapper pointer';
-                newNode.innerHTML = '<img class="joined-icons">';
+                newNode.innerHTML = '<img class="joined-icons"><div class="joined-icons-tooltip"></div>';
                 newNode.firstElementChild.src = item[0];
                 newNode.firstElementChild.setAttribute('data-id', item[1]);
+                newNode.firstElementChild.nextElementSibling.textContent = item[2];
                 newFragment.appendChild(newNode);
               });
               document.getElementById("joined-table").append(newFragment);
-              /*for (let i = 0; i < Math.ceil(data['joined'].length/4); i++) {
-                newNode = document.createElement('tr');
-                for (let j = 0; j < 4; j++) {
-                  if (data['joined'][i*4+j] != undefined) {
-                    let tableData = document.createElement('td');
-                    tableData.className = 'icons-wrapper pointer';
-                    
-                    let toolTip = document.createElement('div');
-                    toolTip.className = 'tooltip';
-                    toolTip.textContent = "tooltip-checker";
-
-                    let newNodeChild = document.createElement('img');
-                    newNodeChild.setAttribute('src', data['joined'][i*4+j][0]);
-                    newNodeChild.className = 'joined-icons';
-                    newNodeChild.setAttribute('data-id', data['joined'][i*4+j][1]);
-                    newNode.appendChild(tableData);
-                    tableData.appendChild(toolTip);
-                    tableData.appendChild(newNodeChild);
-                    
-                    let newNodeChildChild = documentx.createElement('span');
-                    newNodeChildChild.className = "tooltiptext tooltip-top";
-                    newNodeChildChild.textContent = data['joined_spaces_names'][i*4+j];
-                    toolTip.appendChild(newNodeChildChild);
-                  }
-                }
-                document.getElementById("joined-table").append(newNode);
-              }*/
               if (!mobile) {
                 if (member.getBoundingClientRect().top < $(window).height() / 2) {
                   document.getElementById('profile-popup').style.top = member.getBoundingClientRect().top + 'px';

@@ -918,7 +918,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   min-height: 100px;
   background-color: #17181b;
   pointer-events: initial;
-  overflow-x: hidden;
+  /*overflow-x: hidden;    for tooltip to overflow*/
 }
 #profile-list {
   list-style: none;
