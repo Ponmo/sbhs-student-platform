@@ -1084,11 +1084,13 @@ img { /* make images and create button undraggable and unhighlitable*/
   overflow: hidden;
 }
 #profile {
-  display: grid;
+  display: flex;
   align-items: center;
-  grid-template-columns: 40px 180px 30px;
   width: 270px;
   padding-left: 20px;
+}
+#profile-info-wrapper {
+  width: 160px;
 }
 .profile-picture {
   width: 40px;
@@ -1125,10 +1127,9 @@ img { /* make images and create button undraggable and unhighlitable*/
   width: 14px;
 }
 #settings-container {
-  float: right;
-  margin-top: 8px;
-  margin-right: 18px;
+  margin-left: 12px;
   padding: 4px;
+  padding-top: 0px;
   border-radius: 4px;
 }
 #settings-container:hover {

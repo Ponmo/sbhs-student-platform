@@ -213,8 +213,10 @@
       <div id="profile">
         <!-- load exclamation mark icon if not showing -->
         <img src={{ user_picture }} alt="pfp" class="profile-picture pointer">
-        <p id="username" class="pointer">{{ user_name }}</p>
-        <p id="student_id" class="pointer">Santa Barbara High School</p>
+        <div id="profile-info-wrapper">
+          <p id="username" class="pointer">{{ user_name }}</p>
+          <p id="student_id" class="pointer">Santa Barbara High School</p>
+        </div>
         <div id="settings-container">
           <img class="white-icon pointer" id="settings" src="/static/images/settings.svg">
         </div>
