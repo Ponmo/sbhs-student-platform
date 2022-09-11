@@ -2375,10 +2375,10 @@
           document.getElementById('suggested_emails').append(newNode);
           newNode = document.createElement('div');
           newNode.className = 'space-members-list-item';
-          newNode.setAttribute('data-id', member['_id']);
+          newNode.setAttribute('data-id', data['_id']);
           newNode.innerHTML = '<img class="profile-picture"><span class="member-information"></span><span class="user-role"><form class="change-user-status-form"><select class="user-status-select"><option value="banned">banned</option><option selected="selected" value="member">member</option><option value="moderator">moderator</option></select></form></span>';
-          newNode.firstElementChild.src = member['picture'];
-          newNode.querySelector('.member-information').textContent = member['name'] + ' (' + member['email'] + ')';
+          newNode.firstElementChild.src = data['picture'];
+          newNode.querySelector('.member-information').textContent = data['name'] + ' (' + data['email'] + ')';
           document.getElementById('space-members-list').appendChild(newNode);
         }
       });
