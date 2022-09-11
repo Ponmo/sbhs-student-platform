@@ -316,10 +316,10 @@ def leave_space():
     if session_expired() or banned():
         return 'expired', 200
     if request.method == 'POST' and not space_owner():
+        collection_spaces.update_one({"_id": ObjectId(session['current_space'])}, { "$pull": {"members": {'$in': [session['unique_id']]}, 'admins': session['unique_id']}})
         joined = collection_users.find_one({"_id": session['unique_id']})['joined']
         joined.remove(session['current_space'])
         collection_users.update_one({"_id": session['unique_id']}, {"$set": {"joined": joined}})
-        collection_spaces.update_one({"_id": ObjectId(session['current_space'])}, { "$pull": {"members": {'$in': [session['unique_id']]}, 'admins': request.json['user_id']}})
         joined = dumps(joined)
         session['current_space'] = ''
         session['current_space_name'] = ''
