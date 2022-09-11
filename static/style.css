@@ -1187,7 +1187,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 .space, .joined-icons {
   object-fit: cover;
   width: 55px;
-  height: 39px;
+  height: 40px;
   border-radius: 7px;
 }
 .space:hover {
