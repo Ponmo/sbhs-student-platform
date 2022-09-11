@@ -2514,6 +2514,8 @@
               $('#regular-channels').sortable('disable');
             }            
             const newFragmentMembers = document.createDocumentFragment();
+            const newFragmentMembersOwner = document.createDocumentFragment();
+            const newFragmentMembersModerators = document.createDocumentFragment();
             const newFragmentSettingsMembers = document.createDocumentFragment();
             const newFragmentEmails = document.createDocumentFragment();
             rooms_and_sections[2].forEach(function(member) {
@@ -2523,16 +2525,22 @@
                 newNode.setAttribute('data-id', member['_id']);
                 if (rooms_and_sections[3][0].admins[0] == member['_id']) {
                   newNode.innerHTML = '<img class="profile-picture" alt="!"><span class="member-name"></span><img class="status-icon white-icon" src="/static/images/owner.svg">';
+                  newNode.firstElementChild.src = member['picture'];
+                  newNode.firstElementChild.nextElementSibling.textContent = member['name'];
+                  newFragmentMembersOwner.appendChild(newNode);
                 }
                 else if (rooms_and_sections[3][0].admins.includes(member['_id'])) {
-                  newNode.innerHTML = '<img class="profile-picture" alt="!"><span class="member-name"></span><img class="status-icon white-icon" src="/static/images/moderator.svg">'
+                  newNode.innerHTML = '<img class="profile-picture" alt="!"><span class="member-name"></span><img class="status-icon white-icon" src="/static/images/moderator.svg">';
+                  newNode.firstElementChild.src = member['picture'];
+                  newNode.firstElementChild.nextElementSibling.textContent = member['name'];
+                  newFragmentMembersModerators.appendChild(newNode);
                 }
                 else {
                   newNode.innerHTML = '<img class="profile-picture" alt="!"><span class="member-name"></span>';
+                  newNode.firstElementChild.src = member['picture'];
+                  newNode.firstElementChild.nextElementSibling.textContent = member['name'];
+                  newFragmentMembers.appendChild(newNode);
                 }
-                newNode.firstElementChild.src = member['picture'];
-                newNode.firstElementChild.nextElementSibling.textContent = member['name'];
-                newFragmentMembers.appendChild(newNode);
                 newNode = document.createElement('div');
                 newNode.className = 'suggested_email suggested_email_individual pointer';
                 newNode.setAttribute('data-email', member['email']);
@@ -2560,6 +2568,8 @@
               newNode.querySelector('.member-information').textContent = member['name'] + ' (' + member['email'] + ')';
               newFragmentSettingsMembers.appendChild(newNode);
             });
+            document.getElementById('members').append(newFragmentMembersOwner);
+            document.getElementById('members').append(newFragmentMembersModerators);
             document.getElementById('members').append(newFragmentMembers);
             document.getElementById('suggested_emails').append(newFragmentEmails);
             document.getElementById('space-members-list').append(newFragmentSettingsMembers);
