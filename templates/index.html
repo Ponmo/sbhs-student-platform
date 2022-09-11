@@ -1399,7 +1399,7 @@
             newNodeChild.textContent = email;
             newNode.appendChild(newNodeChild);
             newNodeChild = document.createElement('img');
-            newNodeChild.className = 'delete-email-icon'
+            newNodeChild.className = 'delete-email-icon pointer'
             newNodeChild.src = '/static/images/x.svg';
             newNode.appendChild(newNodeChild);
             document.getElementById('email_to_list').insertBefore(newNode, document.getElementById('email_to_input_span'));
@@ -2887,7 +2887,7 @@
         newNodeChild.textContent = email;
         newNode.appendChild(newNodeChild);
         newNodeChild = document.createElement('img');
-        newNodeChild.className = 'delete-email-icon'
+        newNodeChild.className = 'delete-email-icon pointer'
         newNodeChild.src = '/static/images/x.svg';
         newNode.appendChild(newNodeChild);
         document.getElementById('email_to_list').insertBefore(newNode, document.getElementById('email_to_input_span'));
