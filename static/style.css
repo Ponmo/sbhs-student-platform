@@ -1196,7 +1196,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   bottom: 100%;
   left: 50%;
   transform: translate(-50%, -4px);
-  padding: 2px;
+  padding: 4px 6px;
   border-radius: 4px;
   white-space: nowrap;
   visibility: hidden;
