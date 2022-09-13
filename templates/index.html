@@ -2980,7 +2980,7 @@
     });
 
     function applyTheme(theme) {
-      const root = document.querySelector(':root').style.setProperty('--blue', 'lightblue');
+      let root = document.querySelector(':root').style.setProperty('--blue', 'lightblue');
       root.style.setProperty('--main-bg-color', themes[theme][0]);
       root.style.setProperty('--main-font-color', themes[theme][1]);
       root.style.setProperty('--second-bg-color', themes[theme][2]);
