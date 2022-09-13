@@ -1064,6 +1064,9 @@ img { /* make images and create button undraggable and unhighlitable*/
   border-top: 1px solid var(--main-bg-color);
   padding-top: 4px;
   padding-bottom: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 #space-invites-list {
   max-height: 400px;
@@ -1077,6 +1080,15 @@ img { /* make images and create button undraggable and unhighlitable*/
   border-top: 1px solid var(--main-bg-color);
   padding-top: 4px;
   padding-bottom: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.invite-code {
+  margin-left: 8px;
+}
+.revoke-link {
+  margin-left: 8px;
 }
 .member-information {
   padding-left: 6px;
