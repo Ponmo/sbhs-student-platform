@@ -450,7 +450,11 @@
       var mobile_column = 1;
       var mobile = ($(window).width() <= 768);
       var requests = [];
-      
+
+      var themes = {'default': ['#2f3136', 'white', '#36393e', '#d7d9da', 'hotpink', '#282a2e', '#232428', 'white', '#202225', '#2e3338', '#232428', 'white', 'black', '#3c3f45', '#32353a', '#43474d'],
+                    'dark': ['#111112', 'white', '#111112', '#d7d9da', '#111112', '#111112', '#232428', 'white', '#5e5e5e', '#333333', '#232428', 'white', 'black', '#3c3f45', '#222224', '#43474d'],
+                    'light': []}
+
       //Check if it's Safari Mobile
       var ua = window.navigator.userAgent;
       var iOS = !!ua.match(/iPhone/i);
@@ -654,6 +658,7 @@
       });
 
       $(document).on('click', '.home', function() {
+        applyTheme('default');
         window.history.pushState('', '', '/sbhs');
         $('#' + current_space).attr('style', '');
         current_space = '';
@@ -668,6 +673,7 @@
       });
 
       $(document).on('click', '#server-settings-button, #admin-logs', function() {
+        applyTheme('dark');
         $('.active-space').attr('style', '');
         $('#home-page').css('display', 'none');
         $('#first-all').css('display', 'none');
@@ -2973,17 +2979,27 @@
       });
     });
 
-    function isItemInArray(array, item) {
-    for (var i = 0; i < array.length; i++) {
-        // This if statement depends on the format of your array
-        if (array[i][0] == item[0] && array[i][2] == item[1]) {
-            return true;   // Found it
-        }
+    function applyTheme(theme) {
+      const root = document.querySelector(':root').style.setProperty('--blue', 'lightblue');
+      root.style.setProperty('--main-bg-color', themes[theme][0]);
+      root.style.setProperty('--main-font-color', themes[theme][1]);
+      root.style.setProperty('--second-bg-color', themes[theme][2]);
+      root.style.setProperty('--second-font-color', themes[theme][3]);
+      root.style.setProperty('--third-bg-color:', themes[theme][4]);
+      root.style.setProperty('--footer-bg-color', themes[theme][5]);
+      root.style.setProperty('--footer-border-color', themes[theme][6]);
+      root.style.setProperty('--footer-font-color', themes[theme][7]);
+      root.style.setProperty('--thumb-color', themes[theme][8]);
+      root.style.setProperty('--track-color', themes[theme][9]);
+      root.style.setProperty('--border-color', themes[theme][10]);
+      root.style.setProperty('--textarea-bg-color', themes[theme][11]);
+      root.style.setProperty('--textarea-font-color', themes[theme][12]);
+      root.style.setProperty('--main-hover-color', themes[theme][13]);
+      root.style.setProperty('--second-hover-color', themes[theme][14]);
+      root.style.setProperty('--selected-color', themes[theme][15]);
     }
-    return false;   // Not found
-}
 
-    //applyTheme function
+    //applyTheme function, Home Button, Click Space, Join Space admin change
 
     //Don't use innerHTML, replace later.
 
