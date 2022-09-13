@@ -920,8 +920,7 @@ def space_member():
     return False
 
 def server_admin():
-    server = collection_users.find_one({'_id': session['unique_id']})
-    if session['unique_id'] in server['admins'].append(server['owner']):
+    if collection_users.find_one({'_id': session['unique_id']})['status'] in ('admin', 'owner'):
         return True
     return False
 
