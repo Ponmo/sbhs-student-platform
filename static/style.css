@@ -1133,7 +1133,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   grid-row: 1/3;
 }
 #username {
-  color: var(--foort-font-color);
+  color: var(--footer-font-color);
   font-weight: bold;
   margin-left: 10px;
   white-space: nowrap;
@@ -1144,7 +1144,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   text-overflow: ellipsis;
 }
 #student_id {
-  color: var(--second-font-color);
+  color: var(--footer-font-color);
   font-size: 12px;
   margin-bottom: 0px;
   white-space: nowrap;
@@ -1726,7 +1726,7 @@ img { /* make images and create button undraggable and unhighlitable*/
     width: 130px;
   }
   .space-settings-expand {
-    padding-left: 4px;
+    padding-left: 18px;
     width: calc(100vw - 150px);
   }
   .close-settings-page {
