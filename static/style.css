@@ -1064,6 +1064,19 @@ img { /* make images and create button undraggable and unhighlitable*/
   padding-top: 4px;
   padding-bottom: 4px;
 }
+#space-invites-list {
+  max-height: 400px;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  width: calc(100% - 100px);
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--main-bg-color);
+}
+.space-invites-list-item {
+  border-top: 1px solid var(--main-bg-color);
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
 .member-information {
   padding-left: 6px;
 }
@@ -1695,6 +1708,9 @@ img { /* make images and create button undraggable and unhighlitable*/
     width: calc(100% - 50px);
   }
   #space-members-list {
+    width: calc(100% - 50px);
+  }
+  #space-invites-list {
     width: calc(100% - 50px);
   }
 }

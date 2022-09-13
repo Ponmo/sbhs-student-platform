@@ -49,7 +49,6 @@ collection_deleted = db['Deleted Messages']
 collection_logs = db['Logs']
 collection_emails = db['Emails']
 collection_invites = db['Invites']
-collection_server = db['Server']
 
 # Support SSL termination. Mutate the host_url within Flask to use https://
 # if the SSL was terminated.
@@ -921,7 +920,7 @@ def space_member():
     return False
 
 def server_admin():
-    server = collection_server.find_one({'_id': ObjectId('62f2a7b5cae83bc30c1d3bd6')})
+    server = collection_users.find_one({'_id': session['unique_id']})
     if session['unique_id'] in server['admins'].append(server['owner']):
         return True
     return False
