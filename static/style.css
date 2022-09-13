@@ -1034,7 +1034,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 
 .theme-container {
   width: 120px;
-  height: 100px;
+  height: 120px;
   border: 1px solid var(--main-font-color);
   background-color: var(--main-bg-color);
   -moz-border-radius: 0px;
