@@ -1030,7 +1030,6 @@ img { /* make images and create button undraggable and unhighlitable*/
   flex-wrap: wrap;
   gap: 8px;
   width: calc(100% - 100px);
-  background-color: gray;
 }
 
 .theme-container {
@@ -1693,6 +1692,9 @@ img { /* make images and create button undraggable and unhighlitable*/
     height: 100%;
     padding-right: 14px;
     z-index: 1000;
+  }
+  #theme-selection {
+    width: calc(100% - 50px);
   }
 }
 @media only screen and (max-width: 418px) {

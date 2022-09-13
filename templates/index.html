@@ -2978,8 +2978,9 @@
       });
 
       $(document).on('click', '.theme-container', function() {
+        alert(this.id.slice(0, -6));
         socket.emit('change_theme', {
-          theme: this.id.slice(0, -6),
+          theme: this.id.slice(0, -6)
         });
       });
 
