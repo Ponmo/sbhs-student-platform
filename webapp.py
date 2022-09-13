@@ -921,7 +921,7 @@ def space_member():
     return False
 
 def server_admin():
-    server = collection_server.find({'_id': ObjectId('62f2a7b5cae83bc30c1d3bd6')})
+    server = collection_server.find_one({'_id': ObjectId('62f2a7b5cae83bc30c1d3bd6')})
     if session['unique_id'] in server['admins'].append(server['owner']):
         return True
     return False
