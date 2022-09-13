@@ -261,13 +261,13 @@
         <div id="space-settings-themes-selection">
           <p class="space-settings-header">Themes</p>
           <div id="theme-selection">
-            <div class="theme-container" id="default-mode">
+            <div class="theme-container pointer" id="default-theme">
               <div class="theme-preview"></div>
-              <div class="theme-name"></div>
+              <div class="theme-name">Default</div>
             </div>
-            <div class="theme-container" id="dark-mode">
+            <div class="theme-container" id="dark-theme">
               <div class="theme-preview"></div>
-              <div class="theme-name"></div>
+              <div class="theme-name">Dark</div>
             </div>
           </div>
         </div>
@@ -2976,6 +2976,13 @@
           window.location.reload();
         }
       });
+
+      $(document).on('click', '.theme-container', function() {
+        socket.emit('change_theme', {
+          theme: this.id.slice(0, -6),
+        });
+      });
+
 
       function applyTheme(theme) {
         const root = document.querySelector(':root');
