@@ -2378,7 +2378,7 @@
           contentType: 'application/json;charset=UTF-8',
           success: function(rooms_and_sections) {
             window.history.pushState('', '', '/sbhs/' + current_space);
-              applyTheme(rooms_and_sections[3][0].theme);
+              //applyTheme(rooms_and_sections[3][0].theme);
             if (rooms_and_sections[3][0].admins[0] == user_id) {
               space_admin = true;
               $('#delete-space').show();
@@ -2983,7 +2983,7 @@
       });
 
       socket.on('change_theme', function (data) {
-        applyTheme(data['theme'])
+        //applyTheme(data['theme'])
       });
 
       function applyTheme(theme) {
