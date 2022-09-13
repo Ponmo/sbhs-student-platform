@@ -891,6 +891,14 @@ def edit_section(data):
         for room in room_list():
             socketio.emit('edit_section', data, room = room)
 
+@socketio.on('change_theme')
+def change_theme(data):
+    if space_admin() or session['admin']:
+        if data['theme'] in ('default', 'dark'):
+            collection_spaces.update_one({'_id': ObjectId(session['current_space'])}, {'$set': {'theme': data['theme']}})
+            for room in room_list():
+                socketio.emit('change_theme', data, room = room)
+
 def session_expired():
     if not session.get('logged'):
         return True

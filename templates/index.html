@@ -265,7 +265,7 @@
               <div class="theme-preview"></div>
               <div class="theme-name">Default</div>
             </div>
-            <div class="theme-container" id="dark-theme">
+            <div class="theme-container pointer" id="dark-theme">
               <div class="theme-preview"></div>
               <div class="theme-name">Dark</div>
             </div>
@@ -657,7 +657,6 @@
       });
 
       $(document).on('click', '.home', function() {
-        applyTheme('default');
         window.history.pushState('', '', '/sbhs');
         $('#' + current_space).attr('style', '');
         current_space = '';
@@ -672,7 +671,6 @@
       });
 
       $(document).on('click', '#server-settings-button, #admin-logs', function() {
-        applyTheme('dark');
         $('.active-space').attr('style', '');
         $('#home-page').css('display', 'none');
         $('#first-all').css('display', 'none');
@@ -2380,6 +2378,12 @@
           contentType: 'application/json;charset=UTF-8',
           success: function(rooms_and_sections) {
             window.history.pushState('', '', '/sbhs/' + current_space);
+            try {
+              applyTheme(rooms_and_sections[3][0].theme);
+            }
+            catch(e) {
+
+            }
             if (rooms_and_sections[3][0].admins[0] == user_id) {
               space_admin = true;
               $('#delete-space').show();
@@ -2984,6 +2988,9 @@
         });
       });
 
+      socket.on('change_theme', function (data) {
+        applyTheme(data['theme'])
+      });
 
       function applyTheme(theme) {
         const root = document.querySelector(':root');
