@@ -1085,10 +1085,10 @@ img { /* make images and create button undraggable and unhighlitable*/
   align-items: center;
 }
 .invite-code {
-  margin-left: 8px;
+  margin-left: 16px;
 }
 .revoke-link {
-  margin-left: 8px;
+  margin-left: 16px;
 }
 .member-information {
   padding-left: 6px;
