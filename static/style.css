@@ -624,7 +624,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   right: 10px;
   top: -10px;
   background-color: var(--second-bg-color);
-  width: 68px;
+  padding: 0px 4px;
   height: 25px;
   border-radius: 2px;
   border: 1px solid var(--border-color);
@@ -632,7 +632,6 @@ img { /* make images and create button undraggable and unhighlitable*/
 .report-message {
   display: inline-block;
   height: 16px;
-  margin-left: 4px;
 }
 .edit-message {
   display: inline-block;
