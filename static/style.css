@@ -1120,7 +1120,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   grid-row: 1/3;
 }
 #username {
-  color: var(--main-font-color);
+  color: var(--foort-font-color);
   font-weight: bold;
   margin-left: 10px;
   white-space: nowrap;
