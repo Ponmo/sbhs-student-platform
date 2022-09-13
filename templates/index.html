@@ -451,7 +451,7 @@
       var requests = [];
 
       var themes = {'default': ['#2f3136', 'white', '#36393e', '#d7d9da', 'hotpink', '#282a2e', '#232428', 'white', '#202225', '#2e3338', '#232428', 'white', 'black', '#3c3f45', '#32353a', '#43474d', ''],
-                    'dark': ['#111112', 'white', '#111112', '#d7d9da', '#111112', '#111112', '#232428', 'white', '#5e5e5e', '#333333', '#232428', 'white', 'black', '#3c3f45', '#222224', '#43474d', 'invert(100%) sepia(100%) saturate(0%) hue-rotate(46deg) brightness(102%) contrast(105%)'],
+                    'dark': ['#111112', 'white', '#111112', '#d7d9da', '#111112', '#111112', '#232428', 'white', '#5e5e5e', '#333333', '#232428', 'white', 'black', '#3c3f45', '#222224', '#43474d', 'white-icon'],
                     'light': []};
 
       //Check if it's Safari Mobile
@@ -2995,8 +2995,16 @@
         root.style.setProperty('--main-hover-color', themes[theme][13]);
         root.style.setProperty('--second-hover-color', themes[theme][14]);
         root.style.setProperty('--selected-color', themes[theme][15]);
-        root.style.setProperty('--icon-color', themes[theme][16]);
+        modifyCSS('.black-icon', 'filter', 'brightness(0) invert(1)');
       }
+
+      function modifyCSS(selector, property, value) {
+        for (var i=0; i<document.styleSheets.length;i++) {//Loop through all styles
+            //Try add rule
+            try { document.styleSheets[i].insertRule(selector+ ' {'+property+':'+value+'}', document.styleSheets[i].cssRules.length);
+            } catch(err) {try { document.styleSheets[i].addRule(selector, property+':'+value);} catch(err) {}}//IE
+        }
+}
 
     });
 

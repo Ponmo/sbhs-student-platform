@@ -16,7 +16,6 @@
   --main-hover-color: #3c3f45;
   --second-hover-color: #32353a;
   --selected-color: #43474D;
-  --icon-color: '';
 }
 html {
   background-color: var(--second-bg-color);
@@ -276,9 +275,6 @@ img { /* make images and create button undraggable and unhighlitable*/
   font-size: 14px;
   color: white;
   background-color: #131921;
-}
-.black-icon {
-  filter: var('--icon-color');
 }
 .white-icon {
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(46deg) brightness(102%) contrast(105%);
