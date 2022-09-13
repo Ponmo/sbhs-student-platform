@@ -49,6 +49,7 @@ collection_deleted = db['Deleted Messages']
 collection_logs = db['Logs']
 collection_emails = db['Emails']
 collection_invites = db['Invites']
+collection_server = db['Server']
 
 # Support SSL termination. Mutate the host_url within Flask to use https://
 # if the SSL was terminated.
@@ -284,7 +285,7 @@ def render_space():
         space = collection_spaces.find_one({'_id': ObjectId(request.json['space_id'])})
         members = collection_users.find({'_id': {'$in': [i[0] for i in space['members']] + space['banned']}})
         rooms_and_sections = dumps([list(collection_rooms.find({'space': request.json['space_id']}).sort('order', 1)), list(collection_sections.find({'space': request.json['space_id']}).sort('order', 1)), list(members), list(collection_spaces.find({'_id': ObjectId(request.json['space_id'])}).limit(1)), list(collection_invites.find({'space': request.json['space_id']}))])
-        if session['unique_id'] in space['admins'] or session['admin']:
+        if session['unique_id'] in space['admins'] or server_admin():
             session['current_space'] = request.json['space_id']
             session['current_space_name'] = space['name']
             return Response(rooms_and_sections, mimetype='application/json')
@@ -298,7 +299,7 @@ def space_invite():
     if session_expired() or banned():
         return 'expired', 200
     invite_only = collection_spaces.find_one({'_id': ObjectId(session['current_space'])})['invite_only']
-    if ((not invite_only and space_member()) or (invite_only and (space_admin() or session['admin']))):
+    if ((not invite_only and space_member()) or (invite_only and (space_admin() or server_admin()))):
         invite = collection_invites.find_one({'space': session['current_space'], 'user': session['unique_id']})
         if invite != None:
             return Response(dumps({'code': invite['_id']}), mimetype='application/json')
@@ -344,7 +345,7 @@ def email_history():
         email_history = collection_emails.find({'room': request.json['room_id']}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(50)
         email_list = []
         for email in email_history:
-            if session['users_email'] in email['recipients'] or 'Everyone' in email['recipients'] or space_admin() or session['admin']:
+            if session['users_email'] in email['recipients'] or 'Everyone' in email['recipients'] or space_admin() or server_admin():
                 email_list.append(email)
         return Response(dumps(email_list), mimetype='application/json')
 
@@ -352,7 +353,7 @@ def email_history():
 def send_email():
     if session_expired() or banned():
         return 'expired', 200
-    if request.method == 'POST' and (space_admin() or session['admin']):
+    if request.method == 'POST' and (space_admin() or server_admin()):
         sender_email = 'sbhs.platform.test@gmail.com'
         password = os.environ['EMAIL_ACCESS_PASSWORD']
         message = MIMEMultipart('alternative')
@@ -389,7 +390,7 @@ def send_email():
 def delete_room():
     if session_expired() or banned():
         return 'expired', 200
-    if request.method == 'POST' and (space_admin() or session['admin']):
+    if request.method == 'POST' and (space_admin() or server_admin()):
         room_count = collection_rooms.count_documents({'space': session['current_space']}) - collection_rooms.count_documents({'space': session['current_space'], 'section': 'special'})
         if room_count > 1:
             collection_rooms.delete_one({'_id': ObjectId(request.json['room_id'])})
@@ -410,7 +411,7 @@ def delete_room():
 def create_room():
     if session_expired() or banned():
         return 'expired', 200
-    if request.method == 'POST' and (space_admin() or session['admin']):
+    if request.method == 'POST' and (space_admin() or server_admin()):
         room_id = ObjectId()
         room_list = list(collection_rooms.find({'space': session['current_space'], 'section': request.json['section_id']}))
         room = {'_id': room_id, 'space': session['current_space'], 'section': request.json['section_id'], 'name': request.json['room_name'][:200], 'order': len(room_list) + 1}
@@ -425,7 +426,7 @@ def create_room():
 def create_section():
     if session_expired() or banned():
         return 'expired', 200
-    if request.method == 'POST' and (space_admin() or session['admin']):
+    if request.method == 'POST' and (space_admin() or server_admin()):
         section_id = ObjectId()
         section_list = list(collection_sections.find({'space': session['current_space']}))
         section = {'_id': section_id, 'space': session['current_space'], 'name': request.json['section_name'][:200], 'order': len(section_list) + 1}
@@ -441,7 +442,7 @@ def create_section():
 def delete_section():
     if session_expired() or banned():
         return 'expired', 200
-    if request.method == 'POST' and (space_admin() or session['admin']):
+    if request.method == 'POST' and (space_admin() or server_admin()):
         section_count = collection_sections.count_documents({'space': session['current_space']})
         if section_count > 1:
             collection_sections.delete_one({'_id': ObjectId(request.json['section_id'])})
@@ -500,7 +501,7 @@ def create_space():
 def delete_space():
     if session_expired() or banned():
         return 'expired', 200
-    if request.method == 'POST' and (space_owner() or session['admin']):
+    if request.method == 'POST' and (space_owner() or server_admin()):
         space = collection_spaces.find_one({'_id': ObjectId(session['current_space'])})
         collection_spaces.delete_one({'_id': ObjectId(session['current_space'])})
         collection_users.find_one_and_update({"_id": space['admins'][0]}, {'$inc': {'owns': -1}})
@@ -523,9 +524,9 @@ def join_space():
         return Response(dumps({'ban': 'true'}), mimetype='application/json')
     joined = collection_users.find_one({"_id": session['unique_id']})['joined']
     if request.json['space_id'] not in joined:
-        if space['invite_only'] and 'code' not in session and not session['admin']:
+        if space['invite_only'] and 'code' not in session and not server_admin():
             return Response(dumps({'only_invite': 'true'}), mimetype='application/json')
-        if space['invite_only'] and 'code' in session and request.json['space_id'] != session['code'] and not session['admin']:
+        if space['invite_only'] and 'code' in session and request.json['space_id'] != session['code'] and not server_admin():
             session.pop('code')
             return Response(dumps({'invalid_invite': 'true'}), mimetype='application/json')
         joined.append(request.json['space_id'])
@@ -544,7 +545,7 @@ def delete_message():
         return 'expired', 200
     if request.method == 'POST':
         deleted_message = collection_messages.find_one({'_id': ObjectId(request.json['message_id'])})
-        if deleted_message['user_id'] == session['unique_id'] or space_admin() or session['admin']:
+        if deleted_message['user_id'] == session['unique_id'] or space_admin() or server_admin():
             deleted_email = collection_messages.find({'room': request.json['room_id'], 'email': deleted_message['email']}).sort('_id', pymongo.DESCENDING)
             document_list = list(deleted_email)
             message_index = document_list.index(deleted_message)
@@ -627,7 +628,7 @@ def sorted_spaces():
 def server_logs():
     if session_expired() or banned():
         return 'expired', 200
-    if request.method == 'POST' and session['admin']:
+    if request.method == 'POST' and server_admin():
         logs = None
         search = '.*' + request.json['options'][0] + '.*'
         options = []
@@ -645,7 +646,7 @@ def server_logs():
 def server_users():
     if session_expired() or banned():
         return 'expired', 200
-    if request.method == 'POST' and session['admin']:
+    if request.method == 'POST' and server_admin():
         users = dumps(list(collection_users.find().sort('_id', pymongo.DESCENDING)))
         return Response(users, mimetype='application/json')
 
@@ -653,7 +654,7 @@ def server_users():
 def admin_change_user_status():
     if session_expired() or banned():
         return 'expired', 200
-    if request.method == 'POST' and session['admin'] and collection_users.find_one({'_id': request.json['user_id']})['status'] != 'owner':
+    if request.method == 'POST' and server_admin() and collection_users.find_one({'_id': request.json['user_id']})['status'] != 'owner':
         if request.json['status'] in {'user', 'admin'}:
             collection_users.find_one_and_update({"_id": request.json['user_id']}, {'$set': {'status': request.json['status']}})
             if request.json['user_id'] == session['unique_id'] and request.json['status'] == 'user':
@@ -670,7 +671,7 @@ def change_user_status():
     if session_expired() or banned():
         return 'expired', 200
     space = collection_spaces.find_one({'_id': ObjectId(session['current_space'])})
-    if (space_admin() or session['admin']) and request.json['user_id'] != space['admins'][0]:
+    if (space_admin() or server_admin()) and request.json['user_id'] != space['admins'][0]:
         user = collection_users.find_one({'_id': request.json['user_id']})
         if request.json['status'] == 'banned' and request.json['user_id'] not in space['banned'] and request.json['user_id'] != space['admins'][0] and user['status'] != 'admin' and user['status'] != 'owner':
             collection_spaces.update_one({"_id": ObjectId(session['current_space'])}, {"$pull": {"members": {'$in': [request.json['user_id']]}, 'admins': request.json['user_id']}})
@@ -689,7 +690,7 @@ def change_user_status():
 def edit_space_profile():
     if session_expired() or banned():
         return 'expired', 200
-    if session['admin'] or space_admin():
+    if server_admin() or space_admin():
         space_picture = request.json['space_picture'].strip()
         try:
             if not requests.head(space_picture).headers["content-type"] in ("image/png", "image/jpeg", "image/jpg", "image/gif", "image/avif", "image/webp", "image/svg") or int(requests.get(space_picture, stream = True).headers['Content-length']) > 6000000:
@@ -704,7 +705,7 @@ def edit_space_profile():
 def edit_space_invite():
     if session_expired() or banned():
         return 'expired', 200
-    if session['admin'] or space_admin():
+    if server_admin() or space_admin():
         collection_spaces.find_one_and_update({'_id': ObjectId(session['current_space'])}, {'$set': {'invite_only': request.json['invite_only']}})
         return Response(dumps({'success': 'true'}), mimetype='application/json')
     return Response(dumps({'success': 'false'}), mimetype='application/json')
@@ -776,7 +777,7 @@ def send_message(data):
 
 @socketio.on('created_room')
 def created_room(data):
-    if space_admin() or session['admin']:
+    if space_admin() or server_admin():
         for room in room_list():
             socketio.emit('created_room', data, room = room)
 
@@ -785,7 +786,7 @@ def created_room(data):
 
 @socketio.on('deleted_room')
 def deleted_room(data):
-    if space_admin() or session['admin']:
+    if space_admin() or server_admin():
         for room in room_list():
             socketio.emit('deleted_room', data, room = room)
 
@@ -800,7 +801,7 @@ def deleted_space():
 
 @socketio.on('created_section')
 def created_section(data):
-    if space_admin() or session['admin']:
+    if space_admin() or server_admin():
         for room in room_list():
             socketio.emit('created_section', data, room = room)
 
@@ -809,7 +810,7 @@ def created_section(data):
 
 @socketio.on('deleted_section')
 def created_section(data):
-    if space_admin() or session['admin']:
+    if space_admin() or server_admin():
         for room in room_list():
             socketio.emit('deleted_section', data, room = room)
 
@@ -821,7 +822,7 @@ def deleted_message(data):
     if session_expired() or banned():
         emit('expired')
         return
-    if space_admin() or session['admin'] or session['unique_id'] == collection_messages.find_one({'_id': ObjectId(data['message_id'])})['user_id']:
+    if space_admin() or server_admin() or session['unique_id'] == collection_messages.find_one({'_id': ObjectId(data['message_id'])})['user_id']:
         socketio.emit('deleted_message', data, room = data['room_id'])
 
 # When a message is edited, update the message in MongoDB and
@@ -832,7 +833,7 @@ def edited_message(data):
     if session_expired() or banned():
         emit('expired')
         return
-    if space_admin() or session['admin'] or session['unique_id'] == collection_messages.find_one({'_id': ObjectId(data['message_id'])})['user_id']:
+    if space_admin() or server_admin() or session['unique_id'] == collection_messages.find_one({'_id': ObjectId(data['message_id'])})['user_id']:
         edited_message = collection_messages.find_one_and_update({"_id": ObjectId(data['message_id'])}, {'$set': {'message': data['edit'][:2000], 'edited': True}})
         collection_logs.insert_one({'name': session['users_name'], 'user_id': session['unique_id'], 'email': session['users_email'], 'action': 'edited message', 'by': edited_message['name'], 'by_email': edited_message['email'], 'in': session['current_space_name'], 'space_id': session['current_space'], 'details': edited_message, 'datetime': datetime.now().isoformat() + 'Z'})
         socketio.emit('edited_message', data, room = data['room_id'])
@@ -841,7 +842,7 @@ def edited_message(data):
 
 @socketio.on('sorted_sections')
 def sorted_sections(data):
-    if space_admin() or session['admin']:
+    if space_admin() or server_admin():
         for section in data['section_list']:
             collection_sections.find_one_and_update({"_id": ObjectId(section)}, {'$set': {'order': data['section_list'].index(section) + 1}})
         for room in room_list():
@@ -851,7 +852,7 @@ def sorted_sections(data):
 
 @socketio.on('sorted_rooms')
 def sorted_rooms(data):
-    if space_admin() or session['admin']:
+    if space_admin() or server_admin():
         for section in data['room_group_list']:
             if len(section) > 1:
                 for room in section[1:]:
@@ -868,7 +869,7 @@ def sorted_rooms(data):
 
 @socketio.on('sent_email')
 def sent_email(data):
-    if valid_room(data['room_id']) and (space_admin() or session['admin']):
+    if valid_room(data['room_id']) and (space_admin() or server_admin()):
         socketio.emit('sent_email', data, room = data['room_id'])
 
 @socketio.on('joined_space')
@@ -879,21 +880,21 @@ def joined_space():
 
 @socketio.on('edit_channel')
 def edit_channel(data):
-    if space_admin() or session['admin']:
+    if space_admin() or server_admin():
         collection_rooms.find_one_and_update({'_id': ObjectId(data['room_id'])}, {'$set': {'name': data['room_name'].strip()}})
         for room in room_list():
             socketio.emit('edit_channel', data, room = room)
 
 @socketio.on('edit_section')
 def edit_section(data):
-    if space_admin() or session['admin']:
+    if space_admin() or server_admin():
         collection_sections.find_one_and_update({'_id': ObjectId(data['section_id'])}, {'$set': {'name': data['section_name'].strip()}})
         for room in room_list():
             socketio.emit('edit_section', data, room = room)
 
 @socketio.on('change_theme')
 def change_theme(data):
-    if space_admin() or session['admin']:
+    if space_admin() or server_admin():
         if data['theme'] in ('default', 'dark'):
             collection_spaces.update_one({'_id': ObjectId(session['current_space'])}, {'$set': {'theme': data['theme']}})
             for room in room_list():
@@ -916,6 +917,12 @@ def space_owner():
 
 def space_member():
     if any(session['unique_id'] in item for item in collection_spaces.find_one({'_id': ObjectId(session['current_space'])})['members']):
+        return True
+    return False
+
+def server_admin():
+    server = collection_server.find({'_id': ObjectId('62f2a7b5cae83bc30c1d3bd6')})
+    if session['unique_id'] in server['admins'].append(server['owner']):
         return True
     return False
 

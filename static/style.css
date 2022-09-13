@@ -1694,6 +1694,9 @@ img { /* make images and create button undraggable and unhighlitable*/
   #theme-selection {
     width: calc(100% - 50px);
   }
+  #space-members-list {
+    width: calc(100% - 50px);
+  }
 }
 @media only screen and (max-width: 418px) {
   .space-settings-select {
