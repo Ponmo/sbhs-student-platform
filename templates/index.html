@@ -278,6 +278,7 @@
               <img><span class="member-information">Name (Email)</span><span class="user-role">Banned/User/Admin</span>
             </div>
           </div>
+
           <p class="space-settings-header">Invites</p>
           <div id="space-invites-list">
             <div class="space-invites-list-item">
@@ -2358,7 +2359,7 @@
           newNode = document.createElement('div');
           newNode.className = 'space-members-list-item';
           newNode.setAttribute('data-id', data['_id']);
-          newNode.innerHTML = '<img class="profile-picture"><span class="member-information"></span><span class="user-role"><form class="change-user-status-form"><select class="user-status-select"><option value="banned">banned</option><option selected="selected" value="member">member</option><option value="moderator">moderator</option></select></form></span>';
+          newNode.innerHTML = '<span class="space-members-list-item-wrapper"><img class="profile-picture"><span class="member-information"></span></span><span class="user-role"><form class="change-user-status-form"><select class="user-status-select"><option value="banned">banned</option><option selected="selected" value="member">member</option><option value="moderator">moderator</option></select></form></span>';
           newNode.firstElementChild.src = data['picture'];
           newNode.querySelector('.member-information').textContent = data['name'] + ' (' + data['email'] + ')';
           document.getElementById('space-members-list').appendChild(newNode);
@@ -2492,7 +2493,7 @@
                 newNode = document.createElement('div');
                 newNode.id = invite['_id'];
                 newNode.className = 'space-invites-list-item';
-                newNode.innerHTML = '<img class="profile-picture"><span class="invite-information"></span><span class="invite-code"></span><span class="revoke-link"><img class="pointer white-icon revoke-invite-button" src="/static/images/x.svg"><span>';
+                newNode.innerHTML = '<span class="invite-information-wrapper"><img class="profile-picture"><span class="invite-information"></span></span><span class="invite-code"></span><span class="revoke-link"><img class="pointer white-icon revoke-invite-button" src="/static/images/x.svg"><span>';
                 newNode.firstElementChild.src = invite['picture'];
                 newNode.querySelector('.invite-information').textContent = invite['name'] + ' (' + invite['email'] + ')';
                 newNode.querySelector('.invite-code').textContent = invite['_id'];
@@ -2543,16 +2544,16 @@
               newNode.className = 'space-members-list-item';
               newNode.setAttribute('data-id', member['_id']);
               if (rooms_and_sections[3][0].admins[0] == member['_id']) {
-                newNode.innerHTML = '<img class="profile-picture"><span class="member-information"></span><span class="user-role"><select class="user-status-select" disabled><option>owner</option></select></span>';
+                newNode.innerHTML = '<span class="space-members-list-item-wrapper"><img class="profile-picture"><span class="member-information"></span></span><span class="user-role"><select class="user-status-select" disabled><option>owner</option></select></span>';
               }
               else if (rooms_and_sections[3][0].admins.includes(member['_id'])) {
-                newNode.innerHTML = '<img class="profile-picture"><span class="member-information"></span><span class="user-role"><form class="change-user-status-form"><select class="user-status-select"><option value="banned">banned</option><option value="member">member</option><option selected="selected" value="moderator">moderator</option></select></form></span>';
+                newNode.innerHTML = '<span class="space-members-list-item-wrapper"><img class="profile-picture"><span class="member-information"></span></span><span class="user-role"><form class="change-user-status-form"><select class="user-status-select"><option value="banned">banned</option><option value="member">member</option><option selected="selected" value="moderator">moderator</option></select></form></span>';
               }
               else if (rooms_and_sections[3][0].banned.includes(member['_id'])) {
-                newNode.innerHTML = '<img class="profile-picture"><span class="member-information"></span><span class="user-role"><form class="change-user-status-form"><select class="user-status-select"><option selected="selected" value="banned">banned</option><option value="member">member</option><option value="moderator">moderator</option></select></form></span>';
+                newNode.innerHTML = '<span class="space-members-list-item-wrapper"><img class="profile-picture"><span class="member-information"></span></span><span class="user-role"><form class="change-user-status-form"><select class="user-status-select"><option selected="selected" value="banned">banned</option><option value="member">member</option><option value="moderator">moderator</option></select></form></span>';
               }
               else {
-                newNode.innerHTML = '<img class="profile-picture"><span class="member-information"></span><span class="user-role"><form class="change-user-status-form"><select class="user-status-select"><option value="banned">banned</option><option selected="selected" value="member">member</option><option value="moderator">moderator</option></select></form></span>';
+                newNode.innerHTML = '<span class="space-members-list-item-wrapper"><img class="profile-picture"><span class="member-information"></span></span><span class="user-role"><form class="change-user-status-form"><select class="user-status-select"><option value="banned">banned</option><option selected="selected" value="member">member</option><option value="moderator">moderator</option></select></form></span>';
               }
               newNode.firstElementChild.src = member['picture'];
               newNode.querySelector('.member-information').textContent = member['name'] + ' (' + member['email'] + ')';

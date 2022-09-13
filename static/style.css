@@ -231,6 +231,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   display: none;
 }
 
+
 #content {  /* make calc good on all browsers ; Make margin and padding 0 because of broswer differences ; */
   display: grid;
   grid-template-rows: 48px calc(100vh - 98px);
@@ -1078,6 +1079,9 @@ img { /* make images and create button undraggable and unhighlitable*/
   padding-bottom: 4px;
 }
 .member-information {
+  padding-left: 6px;
+}
+.invite-information {
   padding-left: 6px;
 }
 .user-role {
