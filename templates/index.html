@@ -2183,10 +2183,10 @@
           messageMoment = 'at ' + messageMoment;
           // TODO: Give pfp image default fallback image
           if (space_admin || admin || data.user_id == user_id) {
-            newNode.innerHTML = '<img class="profile-picture pointer" alt="!"><p class="message-title"><span class="name pointer"></span><span class="datetime"> ' + messageMoment + '</span></p><p class="message"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.svg"><img class="edit-message pointer" src="/static/images/edit.svg"><img class="delete-message red-icon pointer" src="/static/images/delete.svg"></div>';
+            newNode.innerHTML = '<img class="profile-picture pointer" alt="!"><p class="message-title"><span class="name pointer"></span><span class="datetime"> ' + messageMoment + '</span></p><p class="message"></p><div class="message-options"><img class="report-message black-icon pointer" src="/static/images/report.svg"><img class="edit-message black-icon pointer" src="/static/images/edit.svg"><img class="delete-message red-icon pointer" src="/static/images/delete.svg"></div>';
           }
           else {
-            newNode.innerHTML = '<img class="profile-picture pointer" alt="!"><p class="message-title"><span class="name pointer"></span><span class="datetime"> ' + messageMoment + '</span></p><p class="message"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.svg"></div>';
+            newNode.innerHTML = '<img class="profile-picture pointer" alt="!"><p class="message-title"><span class="name pointer"></span><span class="datetime"> ' + messageMoment + '</span></p><p class="message"></p><div class="message-options"><img class="report-message black-icon pointer" src="/static/images/report.svg"></div>';
           }
           newNode.firstElementChild.src = data.picture;
           newNode.firstElementChild.nextElementSibling.firstElementChild.textContent = data.name;
@@ -2196,10 +2196,10 @@
         else {
           newNode.className = 'message-container-combine';
           if (space_admin || admin || data.user_id == user_id){
-            newNode.innerHTML = '<p class="message-combine-time"> ' + messageMoment + '</p><p class="message-combine"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.svg"><img class="edit-message pointer" src="/static/images/edit.svg"><img class="delete-message red-icon pointer" src="/static/images/delete.svg"></div>';
+            newNode.innerHTML = '<p class="message-combine-time"> ' + messageMoment + '</p><p class="message-combine"></p><div class="message-options"><img class="report-message black-icon pointer" src="/static/images/report.svg"><img class="edit-message pointer" src="/static/images/edit.svg"><img class="delete-message red-icon pointer" src="/static/images/delete.svg"></div>';
           }
           else{
-            newNode.innerHTML = '<p class="message-combine-time"> ' + messageMoment + '</p><p class="message-combine"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.svg"></div>';
+            newNode.innerHTML = '<p class="message-combine-time"> ' + messageMoment + '</p><p class="message-combine"></p><div class="message-options"><img class="report-message black-icon pointer" src="/static/images/report.svg"></div>';
           }
           newNode.firstElementChild.nextElementSibling.innerHTML = '</span>' + parseMarkdown(escapeHTML(data.message)) + '</span>';
         }
@@ -2711,10 +2711,10 @@
                     messageDate = 'on ' + messageDate.format('M/D/YYYY');
                 }
                 if (space_admin || admin || item.user_id == user_id) {
-                  newNode.innerHTML = '<img class="profile-picture pointer" alt="!"><p class="message-title"><span class="name pointer"></span><span class="datetime"> ' + messageDate + '</span></p><p class="message"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.svg"><img class="edit-message pointer" src="/static/images/edit.svg"><img class="delete-message red-icon pointer" src="/static/images/delete.svg"></div>';
+                  newNode.innerHTML = '<img class="profile-picture pointer" alt="!"><p class="message-title"><span class="name pointer"></span><span class="datetime"> ' + messageDate + '</span></p><p class="message"></p><div class="message-options"><img class="report-message black-icon pointer" src="/static/images/report.svg"><img class="edit-message black-icon pointer" src="/static/images/edit.svg"><img class="delete-message red-icon pointer" src="/static/images/delete.svg"></div>';
                 }
                 else {
-                  newNode.innerHTML = '<img class="profile-picture pointer" alt="!"><p class="message-title"><span class="name pointer"></span><span class="datetime"> ' + messageDate + '</span></p><p class="message"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.svg"></div>';
+                  newNode.innerHTML = '<img class="profile-picture pointer" alt="!"><p class="message-title"><span class="name pointer"></span><span class="datetime"> ' + messageDate + '</span></p><p class="message"></p><div class="message-options"><img class="report-message black-icon pointer" src="/static/images/report.svg"></div>';
                 }
                 newNode.firstElementChild.src = item.picture;
                 newNode.firstElementChild.nextElementSibling.firstElementChild.textContent = item.name;
@@ -2730,10 +2730,10 @@
                 newNode.className = 'message-container-combine';
                 newNode.setAttribute('data-date', messageDate.format('M/D/YYYY'));
                 if (space_admin || admin || item.user_id == user_id) {
-                  newNode.innerHTML = '<p class="message-combine-time">' + messageDate.format('h:mm A') + '</p><p class="message-combine"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.svg"><img class="edit-message pointer" src="/static/images/edit.svg"><img class="delete-message red-icon pointer" src="/static/images/delete.svg"></div>'; 
+                  newNode.innerHTML = '<p class="message-combine-time">' + messageDate.format('h:mm A') + '</p><p class="message-combine"></p><div class="message-options"><img class="report-message black-icon pointer" src="/static/images/report.svg"><img class="edit-message black-icon pointer" src="/static/images/edit.svg"><img class="delete-message red-icon pointer" src="/static/images/delete.svg"></div>'; 
                 } 
                 else {
-                  newNode.innerHTML = '<p class="message-combine-time">' + messageDate.format('h:mm A') + '</p><p class="message-combine"></p><div class="message-options"><img class="report-message pointer" src="/static/images/report.svg"></div>';
+                  newNode.innerHTML = '<p class="message-combine-time">' + messageDate.format('h:mm A') + '</p><p class="message-combine"></p><div class="message-options"><img class="report-message black-icon pointer" src="/static/images/report.svg"></div>';
                 }
                 if (item.edited == true) {
                   newNode.firstElementChild.nextElementSibling.innerHTML = '<span>' +  parseMarkdown(escapeHTML(item.message)) + '</span><span class="edited-note"> (edited)</span>';
