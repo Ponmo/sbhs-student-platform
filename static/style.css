@@ -1089,6 +1089,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 .revoke-link {
   margin-left: 16px;
+  margin-right: 8px;
 }
 .member-information {
   padding-left: 6px;
@@ -1098,6 +1099,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 .user-role {
   padding-left: 6px;
+  margin-right: 8px;
   display: inline-block;
 }
 .close-settings-page {
