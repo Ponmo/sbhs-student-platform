@@ -1825,6 +1825,9 @@
           popupSuccess();
           document.activeElement.blur();
         }
+        const space_name_input = document.getElementById('edit-space-name-input');
+        const space_picture_input = document.getElementById('edit-space-picture-input');
+        const space_description_input = document.getElementById('edit-space-description-input');
         space_name_input.setAttribute('data-pre', data['space_name']);
         document.getElementById('header_text').textContent = data['space_name'];
         space_picture_input.setAttribute('data-pre', data['space_picture']);
