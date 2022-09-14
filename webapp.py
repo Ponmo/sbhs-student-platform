@@ -660,8 +660,10 @@ def sorted_spaces():
     if session_expired() or banned():
         return 'expired', 200
     if request.method == 'POST':
-        collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': request.json['space_list']}})
-        return Response(dumps({'success': 'true'}), mimetype='application/json')
+        collection_users.find_one({"_id": session['unique_id']})['joined']
+        if sorted(collection_users.find_one({"_id": session['unique_id']})['joined']) == sorted(request.json['space_list']):
+            collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': request.json['space_list']}})
+            return Response(dumps({'success': 'true'}), mimetype='application/json')
     session['logged'] = False
     session.clear()
     return 'not allowed', 405
@@ -740,6 +742,28 @@ def change_user_status():
     session.clear()
     return 'not allowed', 405
     
+@socketio.on('edit_space_profile')
+def edit_space_profile(data):
+    if server_admin() or space_admin():
+        space_picture = request.json['space_picture'].strip()
+        try:
+            if not requests.head(space_picture).headers["content-type"] in ("image/png", "image/jpeg", "image/jpg", "image/gif", "image/avif", "image/webp", "image/svg") or int(requests.get(space_picture, stream = True).headers['Content-length']) > 6000000:
+                space_picture = '/static/images/Space.jpeg'
+        except:
+            space_picture = '/static/images/Space.jpeg'
+        collection_spaces.find_one_and_update({'_id': ObjectId(session['current_space'])}, {'$set': {'name': request.json['space_name'][:200].strip(), 'picture': space_picture, 'description': request.json['space_description'][:200].strip()}})
+        return Response(dumps({'space_name': request.json['space_name'][:200].strip(), 'space_picture': space_picture, 'space_description': request.json['space_description'][:200].strip()}), mimetype='application/json')
+    
+    if space_admin() or server_admin():
+        if data['theme'] in ('default', 'dark'):
+            collection_spaces.update_one({'_id': ObjectId(session['current_space'])}, {'$set': {'theme': data['theme']}})
+            for room in room_list():
+                socketio.emit('change_theme', data, room = room)
+    else:
+        session['logged'] = False
+        session.clear()
+        emit('expired')
+
 @app.route('/edit_space_profile', methods=['POST'])
 def edit_space_profile():
     if session_expired() or banned():
