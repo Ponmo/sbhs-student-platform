@@ -789,7 +789,10 @@ def change_room(data):
         except:
             pass
         join_room(data['room_id'])
-    emit('expired')
+    else:
+        session['logged'] = False
+        session.clear()
+        emit('expired')
 
 # When user starts typing, notify all users in that room.
 
@@ -797,7 +800,10 @@ def change_room(data):
 def is_typing(data):
     if space_member() and valid_room(data['room_id']):
         socketio.emit('is_typing', data, room = data['room_id'])
-    emit('expired')
+    else:
+        session['logged'] = False
+        session.clear()
+        emit('expired')
 
 # When user stops typing, notify all users in that room.
 
@@ -805,7 +811,10 @@ def is_typing(data):
 def stopped_typing(data):
     if space_member() and valid_room(data['room_id']):
         socketio.emit('stopped_typing', data, room = data['room_id'])
-    emit('expired')
+    else:
+        session['logged'] = False
+        session.clear()
+        emit('expired')
 
 # When a message is sent, verify and store it in MongoDB.
 # Send the message data to all users in that room.
@@ -834,6 +843,10 @@ def send_message(data):
             data['combine'] = 'false'
         collection_messages.insert_one({'_id': ObjectId(data['message_id']), 'name': data['name'], 'user_id': data['user_id'], 'picture': data['picture'], 'room': data['room_id'], 'datetime': utc_dt, 'message': data['message'], 'combine': data['combine'], 'email': session['users_email']})
         socketio.emit('receive_message', data, room = data['room_id'])
+    else:
+        session['logged'] = False
+        session.clear()
+        emit('expired')
     
 # When a room is created, send that room data to all
 # users in the space.
@@ -843,7 +856,10 @@ def created_room(data):
     if space_admin() or server_admin():
         for room in room_list():
             socketio.emit('created_room', data, room = room)
-    emit('expired')
+    else:
+        session['logged'] = False
+        session.clear()
+        emit('expired')
 
 # When a room is deleted, send that room data to all
 # users in the space.
@@ -853,7 +869,10 @@ def deleted_room(data):
     if space_admin() or server_admin():
         for room in room_list():
             socketio.emit('deleted_room', data, room = room)
-    emit('expired')
+    else:
+        session['logged'] = False
+        session.clear()
+        emit('expired')
 
 @socketio.on('deleted_space')
 def deleted_space():
@@ -869,7 +888,10 @@ def created_section(data):
     if space_admin() or server_admin():
         for room in room_list():
             socketio.emit('created_section', data, room = room)
-    emit('expired')
+    else:
+        session['logged'] = False
+        session.clear()
+        emit('expired')
 
 # When a section is deleted, send that section data to all
 # users in the space.
@@ -879,7 +901,10 @@ def created_section(data):
     if space_admin() or server_admin():
         for room in room_list():
             socketio.emit('deleted_section', data, room = room)
-    emit('expired')
+    else:
+        session['logged'] = False
+        session.clear()
+        emit('expired')
 
 # When a message is deleted, send that message data to all
 # users in the space.
@@ -891,7 +916,10 @@ def deleted_message(data):
         return
     if space_admin() or server_admin() or session['unique_id'] == collection_messages.find_one({'_id': ObjectId(data['message_id'])})['user_id']:
         socketio.emit('deleted_message', data, room = data['room_id'])
-    emit('expired')
+    else:
+        session['logged'] = False
+        session.clear()
+        emit('expired')
 
 # When a message is edited, update the message in MongoDB and
 # send the message data to all users in that room.
@@ -905,8 +933,10 @@ def edited_message(data):
         edited_message = collection_messages.find_one_and_update({"_id": ObjectId(data['message_id'])}, {'$set': {'message': data['edit'][:2000], 'edited': True}})
         collection_logs.insert_one({'name': session['users_name'], 'user_id': session['unique_id'], 'email': session['users_email'], 'action': 'edited message', 'by': edited_message['name'], 'by_email': edited_message['email'], 'in': session['current_space_name'], 'space_id': session['current_space'], 'details': edited_message, 'datetime': datetime.now().isoformat() + 'Z'})
         socketio.emit('edited_message', data, room = data['room_id'])
-    emit('expired')
-
+    else:
+        session['logged'] = False
+        session.clear()
+        emit('expired')
 # When sections are sorted, update the order in MongoDB.
 
 @socketio.on('sorted_sections')
@@ -916,7 +946,10 @@ def sorted_sections(data):
             collection_sections.find_one_and_update({"_id": ObjectId(section)}, {'$set': {'order': data['section_list'].index(section) + 1}})
         for room in room_list():
             socketio.emit('sorted_sections', data, room = room)
-    emit('expired')
+    else:
+        session['logged'] = False
+        session.clear()
+        emit('expired')
     
 # When rooms are sorted, update the order in MongoDB.
 
@@ -936,20 +969,25 @@ def sorted_rooms(data):
                     order += 1
                     socketio.emit('sorted_rooms', data, room = room)
             order = 1
-    emit('expired')
+    else:
+        session['logged'] = False
+        session.clear()
+        emit('expired')
 
 @socketio.on('sent_email')
 def sent_email(data):
     if valid_room(data['room_id']) and (space_admin() or server_admin()):
         socketio.emit('sent_email', data, room = data['room_id'])
-    emit('expired')
+    else:
+        session['logged'] = False
+        session.clear()
+        emit('expired')
 
 @socketio.on('joined_space')
 def joined_space():
     user = collection_users.find_one({'_id': session['unique_id']})
     for room in room_list():
         emit('joined_space', user, room = room, include_self=False)
-    emit('expired')
 
 @socketio.on('edit_channel')
 def edit_channel(data):
@@ -957,7 +995,10 @@ def edit_channel(data):
         collection_rooms.find_one_and_update({'_id': ObjectId(data['room_id'])}, {'$set': {'name': data['room_name'].strip()}})
         for room in room_list():
             socketio.emit('edit_channel', data, room = room)
-    emit('expired')
+    else:
+        session['logged'] = False
+        session.clear()
+        emit('expired')
 
 @socketio.on('edit_section')
 def edit_section(data):
@@ -965,7 +1006,10 @@ def edit_section(data):
         collection_sections.find_one_and_update({'_id': ObjectId(data['section_id'])}, {'$set': {'name': data['section_name'].strip()}})
         for room in room_list():
             socketio.emit('edit_section', data, room = room)
-    emit('expired')
+    else:
+        session['logged'] = False
+        session.clear()
+        emit('expired')
 
 @socketio.on('change_theme')
 def change_theme(data):
@@ -974,7 +1018,10 @@ def change_theme(data):
             collection_spaces.update_one({'_id': ObjectId(session['current_space'])}, {'$set': {'theme': data['theme']}})
             for room in room_list():
                 socketio.emit('change_theme', data, room = room)
-    emit('expired')
+    else:
+        session['logged'] = False
+        session.clear()
+        emit('expired')
 
 def session_expired():
     if not session.get('logged'):
