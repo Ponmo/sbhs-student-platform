@@ -256,6 +256,9 @@ def list_spaces():
         all_spaces = list(collection_spaces.find())
         data = [all_spaces, space_list, str(session['admin'])]
         return Response(dumps(data), mimetype='application/json')
+    session['logged'] = False
+    session.clear()
+    return 'not allowed', 405
 
 # Returns user's joined spaces.
 
@@ -273,6 +276,9 @@ def user_spaces():
                 pass
         space_list = dumps(space_list)
         return Response(space_list, mimetype='application/json')
+    session['logged'] = False
+    session.clear()
+    return 'not allowed', 405
 
 # Returns all room and section data of the clicked space from MongoDB.
 
@@ -292,6 +298,9 @@ def render_space():
             session['current_space'] = request.json['space_id']
             session['current_space_name'] = space['name']
             return Response(rooms_and_sections, mimetype='application/json')
+    session['logged'] = False
+    session.clear()
+    return 'not allowed', 405
 
 @app.route('/space_invite', methods=['POST'])
 def space_invite():
@@ -305,6 +314,9 @@ def space_invite():
         code = shortuuid.uuid()[:7]
         collection_invites.insert_one({'_id': code, 'space': session['current_space'], 'picture': session['picture'], 'user': session['unique_id'], 'name': session['users_name'], 'email': session['users_email'], 'datetime': datetime.now().isoformat() + 'Z'})
         return Response(dumps({'code': code}), mimetype='application/json')
+    session['logged'] = False
+    session.clear()
+    return 'not allowed', 405
 
 # When user clicks leave space button, that space is removed
 # from their list of joined spaces in MongoDB.
@@ -323,6 +335,9 @@ def leave_space():
         session['current_space'] = ''
         session['current_space_name'] = ''
         return Response(joined, mimetype='application/json')
+    session['logged'] = False
+    session.clear()
+    return 'not allowed', 405
 
 # Returns selected range of messages of the loaded room.
 # Called either when user first loads a room
@@ -335,6 +350,9 @@ def chat_history():
     if request.method == 'POST' and space_member():
         chat_history = dumps(list(collection_messages.find({'room': request.json['room_id']}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(50)))
         return Response(chat_history, mimetype='application/json')
+    session['logged'] = False
+    session.clear()
+    return 'not allowed', 405
 
 @app.route('/email_history', methods=['GET', 'POST']) #return only emails users can see, and check if space admin
 def email_history():
@@ -347,6 +365,9 @@ def email_history():
             if session['users_email'] in email['recipients'] or 'Everyone' in email['recipients'] or space_admin() or server_admin():
                 email_list.append(email)
         return Response(dumps(email_list), mimetype='application/json')
+    session['logged'] = False
+    session.clear()
+    return 'not allowed', 405
 
 @app.route('/send_email', methods=['GET', 'POST'])
 def send_email():
@@ -381,7 +402,9 @@ def send_email():
             server.sendmail(sender_email, recipients, message.as_string())
         collection_emails.insert_one({'name': session['users_name'], 'picture': session['picture'], 'room': request.json['room_id'], 'email': session['users_email'], 'datetime': datetime.now().isoformat() + 'Z', 'from': session['unique_id'], 'recipients': stored_recipients, 'subject': request.json['subject'][:70], 'message': request.json['message'][:10000]})
         return Response(dumps({'success': 'true'}), mimetype='application/json')
-    return Response(dumps({'success': 'false'}), mimetype='application/json')
+    session['logged'] = False
+    session.clear()
+    return 'not allowed', 405
 
 # Deletes the room and all of its messages in MongoDB. 
 
@@ -402,6 +425,9 @@ def delete_room():
             return Response(dumps({'success': 'true'}), mimetype='application/json')
         else:
             return Response(dumps({'success': 'false'}), mimetype='application/json')
+    session['logged'] = False
+    session.clear()
+    return 'not allowed', 405
 
 # Adds the newly created room to MongoDB.
 # Returns the room data.
@@ -417,6 +443,9 @@ def create_room():
         collection_rooms.insert_one(room)
         room = dumps(room)
         return Response(room, mimetype='application/json')
+    session['logged'] = False
+    session.clear()
+    return 'not allowed', 405
 
 # Adds the newly created section to MongoDB.
 # Returns the section data.
@@ -432,6 +461,9 @@ def create_section():
         collection_sections.insert_one(section)
         section = dumps(section)
         return Response(section, mimetype='application/json')
+    session['logged'] = False
+    session.clear()
+    return 'not allowed', 405
 
 # Deletes a section from MongoDB.
 # Updates the order and positioning of the other 
@@ -459,6 +491,9 @@ def delete_section():
             return Response(dumps({'success': 'true'}), mimetype='application/json')
         else:
             return Response(dumps({'success': 'false'}), mimetype='application/json')
+    session['logged'] = False
+    session.clear()
+    return 'not allowed', 405
 
 # Adds the newly created space, default room, and default
 # section to MongoDB.
@@ -490,7 +525,9 @@ def create_space():
         joined.append(str(space_id))
         collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': joined, 'owns': user['owns'] + 1}})
         return Response(dumps({'space_id': str(space_id), 'space_image': space_image}), mimetype='application/json')
-    return Response(dumps({'success': 'false'}), mimetype='application/json')
+    session['logged'] = False
+    session.clear()
+    return 'not allowed', 405
 
 # Adds space to user's list of joined spaces in MongoDB.
 # Returns space data.
@@ -510,7 +547,9 @@ def delete_space():
             collection_users.update_one({"_id": member[0]}, {"$set": {"joined": joined}})
         session['current_space_name'] = ''
         return Response(dumps({'success': 'true'}), mimetype='application/json')
-    return Response(dumps({'success': 'false'}), mimetype='application/json')
+    session['logged'] = False
+    session.clear()
+    return 'not allowed', 405
 
 @app.route('/join_space', methods=['GET', 'POST'])
 def join_space():
@@ -555,7 +594,9 @@ def delete_message():
             collection_messages.delete_one({"_id": ObjectId(request.json['message_id'])})
             collection_logs.insert_one({'name': session['users_name'], 'user_id': session['unique_id'], 'email': session['users_email'], 'action': 'deleted message', 'by': deleted_message['name'], 'by_email': deleted_message['email'], 'in': session['current_space_name'], 'space_id': session['current_space'], 'details': deleted_message, 'datetime': datetime.now().isoformat() + 'Z'})
             return Response(dumps({'success': message_index}), mimetype='application/json')
-    return Response(dumps({'success': 'false'}), mimetype='application/json')
+    session['logged'] = False
+    session.clear()
+    return 'not allowed', 405
 
 # When a user reports a message, add a report with
 # relevant information to MongoDB.
@@ -572,8 +613,9 @@ def report_message():
             return Response(dumps({'success': 'true'}), mimetype='application/json')
         else:
             return Response(dumps({'success': 'many'}), mimetype='application/json')
-    else:
-        return Response(dumps({'success': 'false'}), mimetype='application/json')
+    session['logged'] = False
+    session.clear()
+    return 'not allowed', 405
     
 # When user accesses another user's profile,
 # return their public profile data.
@@ -595,8 +637,9 @@ def member_profile():
                 pass
         user_data = {'name': member['name'], 'email': member['email'], 'picture': member['picture'], 'joined': queried_spaces, 'joined_spaces_names': names_list}
         return Response(dumps(user_data), mimetype='application/json')
-    else:
-        return Response(dumps({'success': 'false'}), mimetype='application/json')
+    session['logged'] = False
+    session.clear()
+    return 'not allowed', 405
 
 # When user accesses their own profile,
 # return all of their personal profile data.
@@ -608,8 +651,9 @@ def profile():
     if request.method == 'POST':
         data = collection_users.find_one({'_id': session['unique_id']})
         return Response(dumps(data), mimetype='application/json')
-    else:
-        return Response(dumps({'success': 'false'}), mimetype='application/json')
+    session['logged'] = False
+    session.clear()
+    return 'not allowed', 405
 
 @app.route('/sorted_spaces', methods=['GET', 'POST'])
 def sorted_spaces():
@@ -618,8 +662,9 @@ def sorted_spaces():
     if request.method == 'POST':
         collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': request.json['space_list']}})
         return Response(dumps({'success': 'true'}), mimetype='application/json')
-    else:
-        return Response(dumps({'success': 'false'}), mimetype='application/json')
+    session['logged'] = False
+    session.clear()
+    return 'not allowed', 405
 
 # TODO: tokenize and make queries more efficient
 
@@ -640,6 +685,9 @@ def server_logs():
         if len(options) != 0:
             logs = dumps(list(collection_logs.find({'$and': [{'action': {'$in': options}}, {'$or': [{'name': {'$regex': search}}, {'email': {'$regex': search}}, {'by': {'$regex': search}}, {'by_email': {'$regex': search}}, {'in': {'$regex': search}}, {'details.message': {'$regex': search}}]}]}).sort('_id', pymongo.DESCENDING).skip(int(request.json['i'])).limit(50)))
         return Response(logs, mimetype='application/json')
+    session['logged'] = False
+    session.clear()
+    return 'not allowed', 405
 
 @app.route('/server_users', methods=['GET', 'POST'])
 def server_users():
@@ -648,6 +696,9 @@ def server_users():
     if request.method == 'POST' and server_admin():
         users = dumps(list(collection_users.find().sort('_id', pymongo.DESCENDING)))
         return Response(users, mimetype='application/json')
+    session['logged'] = False
+    session.clear()
+    return 'not allowed', 405
 
 @app.route('/admin_change_user_status', methods=['GET', 'POST'])
 def admin_change_user_status():
@@ -663,7 +714,9 @@ def admin_change_user_status():
         elif request.json['status'] == 'banned' and collection_users.find({'_id': request.json['user_id']})['status'] not in {'admin', 'owner'}:
             collection_users.find_one_and_update({"_id": request.json['user_id']}, {'$set': {'status': 'banned'}})
             return Response(dumps({'success': 'true'}), mimetype='application/json')
-    return Response(dumps({'success': 'false'}), mimetype='application/json')
+    session['logged'] = False
+    session.clear()
+    return 'not allowed', 405
 
 @app.route('/change_user_status', methods=['POST'])
 def change_user_status():
@@ -683,7 +736,9 @@ def change_user_status():
         elif request.json['status'] == 'member':
             collection_spaces.update_one({"_id": ObjectId(session['current_space'])}, {"$pull": {'banned': request.json['user_id'], 'admins': request.json['user_id']}})
             return Response(dumps({'success': 'true'}), mimetype='application/json')
-    return Response(dumps({'success': 'false'}), mimetype='application/json')
+    session['logged'] = False
+    session.clear()
+    return 'not allowed', 405
     
 @app.route('/edit_space_profile', methods=['POST'])
 def edit_space_profile():
@@ -698,7 +753,9 @@ def edit_space_profile():
             space_picture = '/static/images/Space.jpeg'
         collection_spaces.find_one_and_update({'_id': ObjectId(session['current_space'])}, {'$set': {'name': request.json['space_name'][:200].strip(), 'picture': space_picture, 'description': request.json['space_description'][:200].strip()}})
         return Response(dumps({'space_name': request.json['space_name'][:200].strip(), 'space_picture': space_picture, 'space_description': request.json['space_description'][:200].strip()}), mimetype='application/json')
-    return Response(dumps({'success': 'false'}), mimetype='application/json')
+    session['logged'] = False
+    session.clear()
+    return 'not allowed', 405
 
 @app.route('/edit_space_invite', methods=['POST'])
 def edit_space_invite():
@@ -707,15 +764,19 @@ def edit_space_invite():
     if server_admin() or space_admin():
         collection_spaces.find_one_and_update({'_id': ObjectId(session['current_space'])}, {'$set': {'invite_only': request.json['invite_only']}})
         return Response(dumps({'success': 'true'}), mimetype='application/json')
-    return Response(dumps({'success': 'false'}), mimetype='application/json')
-
+    session['logged'] = False
+    session.clear()
+    return 'not allowed', 405
 
 @app.route('/revoke_link', methods=['POST'])
 def revoke_invite():
     if session_expired() or banned():
         return 'expired', 200
-    collection_invites.delete_one({'_id': request.json['invite-code']})
-    return Response(dumps({'success': 'true'}), mimetype='application/json')
+    if server_admin() or space_admin():
+        collection_invites.delete_one({'_id': request.json['invite-code']})
+    session['logged'] = False
+    session.clear()
+    return 'not allowed', 405
     
 # When a room is clicked, make user join room
 # and leave old room.
@@ -728,20 +789,23 @@ def change_room(data):
         except:
             pass
         join_room(data['room_id'])
+    emit('expired')
 
 # When user starts typing, notify all users in that room.
 
 @socketio.on('is_typing')
 def is_typing(data):
     if space_member() and valid_room(data['room_id']):
-	    socketio.emit('is_typing', data, room = data['room_id'])
+        socketio.emit('is_typing', data, room = data['room_id'])
+    emit('expired')
 
 # When user stops typing, notify all users in that room.
 
 @socketio.on('stopped_typing')
 def stopped_typing(data):
     if space_member() and valid_room(data['room_id']):
-	    socketio.emit('stopped_typing', data, room = data['room_id'])
+        socketio.emit('stopped_typing', data, room = data['room_id'])
+    emit('expired')
 
 # When a message is sent, verify and store it in MongoDB.
 # Send the message data to all users in that room.
@@ -779,6 +843,7 @@ def created_room(data):
     if space_admin() or server_admin():
         for room in room_list():
             socketio.emit('created_room', data, room = room)
+    emit('expired')
 
 # When a room is deleted, send that room data to all
 # users in the space.
@@ -788,6 +853,7 @@ def deleted_room(data):
     if space_admin() or server_admin():
         for room in room_list():
             socketio.emit('deleted_room', data, room = room)
+    emit('expired')
 
 @socketio.on('deleted_space')
 def deleted_space():
@@ -803,6 +869,7 @@ def created_section(data):
     if space_admin() or server_admin():
         for room in room_list():
             socketio.emit('created_section', data, room = room)
+    emit('expired')
 
 # When a section is deleted, send that section data to all
 # users in the space.
@@ -812,6 +879,7 @@ def created_section(data):
     if space_admin() or server_admin():
         for room in room_list():
             socketio.emit('deleted_section', data, room = room)
+    emit('expired')
 
 # When a message is deleted, send that message data to all
 # users in the space.
@@ -823,6 +891,7 @@ def deleted_message(data):
         return
     if space_admin() or server_admin() or session['unique_id'] == collection_messages.find_one({'_id': ObjectId(data['message_id'])})['user_id']:
         socketio.emit('deleted_message', data, room = data['room_id'])
+    emit('expired')
 
 # When a message is edited, update the message in MongoDB and
 # send the message data to all users in that room.
@@ -836,6 +905,7 @@ def edited_message(data):
         edited_message = collection_messages.find_one_and_update({"_id": ObjectId(data['message_id'])}, {'$set': {'message': data['edit'][:2000], 'edited': True}})
         collection_logs.insert_one({'name': session['users_name'], 'user_id': session['unique_id'], 'email': session['users_email'], 'action': 'edited message', 'by': edited_message['name'], 'by_email': edited_message['email'], 'in': session['current_space_name'], 'space_id': session['current_space'], 'details': edited_message, 'datetime': datetime.now().isoformat() + 'Z'})
         socketio.emit('edited_message', data, room = data['room_id'])
+    emit('expired')
 
 # When sections are sorted, update the order in MongoDB.
 
@@ -846,6 +916,7 @@ def sorted_sections(data):
             collection_sections.find_one_and_update({"_id": ObjectId(section)}, {'$set': {'order': data['section_list'].index(section) + 1}})
         for room in room_list():
             socketio.emit('sorted_sections', data, room = room)
+    emit('expired')
     
 # When rooms are sorted, update the order in MongoDB.
 
@@ -865,17 +936,20 @@ def sorted_rooms(data):
                     order += 1
                     socketio.emit('sorted_rooms', data, room = room)
             order = 1
+    emit('expired')
 
 @socketio.on('sent_email')
 def sent_email(data):
     if valid_room(data['room_id']) and (space_admin() or server_admin()):
         socketio.emit('sent_email', data, room = data['room_id'])
+    emit('expired')
 
 @socketio.on('joined_space')
 def joined_space():
     user = collection_users.find_one({'_id': session['unique_id']})
     for room in room_list():
         emit('joined_space', user, room = room, include_self=False)
+    emit('expired')
 
 @socketio.on('edit_channel')
 def edit_channel(data):
@@ -883,6 +957,7 @@ def edit_channel(data):
         collection_rooms.find_one_and_update({'_id': ObjectId(data['room_id'])}, {'$set': {'name': data['room_name'].strip()}})
         for room in room_list():
             socketio.emit('edit_channel', data, room = room)
+    emit('expired')
 
 @socketio.on('edit_section')
 def edit_section(data):
@@ -890,6 +965,7 @@ def edit_section(data):
         collection_sections.find_one_and_update({'_id': ObjectId(data['section_id'])}, {'$set': {'name': data['section_name'].strip()}})
         for room in room_list():
             socketio.emit('edit_section', data, room = room)
+    emit('expired')
 
 @socketio.on('change_theme')
 def change_theme(data):
@@ -898,6 +974,7 @@ def change_theme(data):
             collection_spaces.update_one({'_id': ObjectId(session['current_space'])}, {'$set': {'theme': data['theme']}})
             for room in room_list():
                 socketio.emit('change_theme', data, room = room)
+    emit('expired')
 
 def session_expired():
     if not session.get('logged'):
