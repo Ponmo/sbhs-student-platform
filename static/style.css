@@ -1205,7 +1205,6 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 .space-wrapper {
   display: inline-block;
-  position: relative;
   width: 55px;
   height: 40px;
   margin-right: 3px;
