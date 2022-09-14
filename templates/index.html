@@ -2996,6 +2996,9 @@
         if (xhr.status === 200 && contentType.toLowerCase().indexOf("text/html") >= 0) {
           window.location.reload();
         }
+        if (xhr.status === 405 && contentType.toLowerCase().indexOf("text/html") >= 0) {
+          window.location.reload();
+        }
       });
 
       $(document).on('click', '.theme-container', function() {
