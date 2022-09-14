@@ -1825,16 +1825,16 @@
           popupSuccess();
           document.activeElement.blur();
         }
-        space_name_input.setAttribute('data-pre', data.space_name);
-        document.getElementById('header_text').textContent = data.space_name;
-        space_picture_input.setAttribute('data-pre', data.space_picture);
-        space_picture_input.value = data.space_picture;
-        document.getElementById(current_space).src = data.space_picture;
-        space_description_input.setAttribute('data-pre', data.space_description);
+        space_name_input.setAttribute('data-pre', data['space_name']);
+        document.getElementById('header_text').textContent = data['space_name'];
+        space_picture_input.setAttribute('data-pre', data['space_picture']);
+        space_picture_input.value = data['space_picture'];
+        document.getElementById(current_space).src = data['space_picture'];
+        space_description_input.setAttribute('data-pre', data['space_description']);
         formSpace = document.querySelector('.form-space[data-id="' + current_space + '"]');
-        formSpace.querySelector('.directory-space-img').src = data.space_picture;
-        formSpace.querySelector('.directory-space-description').textContent = data.space_description;
-        formSpace.querySelector('.directory-space-title').textContent = data.space_name;
+        formSpace.querySelector('.directory-space-img').src = data['space_picture'];
+        formSpace.querySelector('.directory-space-description').textContent = data['space_description'];
+        formSpace.querySelector('.directory-space-title').textContent = data['space_name'];
       });
 
       $(document).on('click', '#close-space-settings-button', function() {
