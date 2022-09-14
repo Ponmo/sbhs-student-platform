@@ -422,7 +422,6 @@
   </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script type="text/javascript" charset="utf-8">
     //Give small space to empty categories room-group 
     $(document).ready(function() {
@@ -1794,29 +1793,6 @@
             'space_picture': space_picture_input.value.trim(),
             'space_description': space_description_input.value.trim()
           });
-          /*abortRequests();
-          requests.push($.ajax({
-            type: 'POST',
-            url: '/edit_space_profile',
-            dataType: "json",
-            data: JSON.stringify({'space_name': space_name_input.value.trim(), 'space_picture': space_picture_input.value.trim(), 'space_description': space_description_input.value.trim()}),
-            contentType: 'application/json;charset=UTF-8',
-            success: function(data) {
-              popupSuccess();
-              document.activeElement.blur();
-              space_name_input.setAttribute('data-pre', data.space_name);
-              document.getElementById('header_text').textContent = data.space_name;
-              space_picture_input.setAttribute('data-pre', data.space_picture);
-              space_picture_input.value = data.space_picture;
-              document.getElementById(current_space).src = data.space_picture;
-              space_description_input.setAttribute('data-pre', data.space_description);
-              formSpace = document.querySelector('.form-space[data-id="' + current_space + '"]');
-              formSpace.querySelector('.directory-space-img').src = data.space_picture;
-              formSpace.querySelector('.directory-space-description').textContent = data.space_description;
-              formSpace.querySelector('.directory-space-title').textContent = data.space_name;
-            }
-          }));
-        }*/
         }
       }
       
