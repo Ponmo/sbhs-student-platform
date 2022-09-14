@@ -221,9 +221,7 @@
           <img class="white-icon pointer" id="settings" src="/static/images/settings.svg">
         </div>
       </div>
-      <div id="mobile-negative-space">
-        <img class="pointer home" id="home_button_mobile" src="/static/images/home-white.png">
-      </div>
+      <img class="pointer home" id="home_button_mobile" src="/static/images/home-white.png">
       <ul id="spaces">
         <span id="space_align_helper"></span>
         <button type="button" id="create-space-button"><img src="/static/images/ppicons-plus.svg" alt="create" style="width:25px;height:25px;"></button>
@@ -1791,7 +1789,12 @@
         const space_picture_input = document.getElementById('edit-space-picture-input');
         const space_description_input = document.getElementById('edit-space-description-input');
         if (space_name_input.value.trim() != space_name_input.getAttribute('data-pre') || space_picture_input.value.trim() != space_picture_input.getAttribute('data-pre') || space_description_input.value.trim() != space_description_input.getAttribute('data-pre')) {
-          abortRequests();
+          socket.emit('edit_space_profile', {
+            'space_name': space_name_input.value.trim(),
+            'space_picture': space_picture_input.value.trim(),
+            'space_description': space_description_input.value.trim()
+          });
+          /*abortRequests();
           requests.push($.ajax({
             type: 'POST',
             url: '/edit_space_profile',
@@ -1813,8 +1816,12 @@
               formSpace.querySelector('.directory-space-title').textContent = data.space_name;
             }
           }));
-        }
+        }*/
       }
+      
+      socket.on('edit_space_profile', {
+        
+      });
 
       $(document).on('click', '#close-space-settings-button', function() {
         $('#space-settings').hide();

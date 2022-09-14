@@ -1132,9 +1132,6 @@ img { /* make images and create button undraggable and unhighlitable*/
 #profile {
   display: flex;
   align-items: center;
-  height: 100%;
-  background-color: var(--footer-bg-color);
-  z-index: 100000;
   width: 290px;
   padding-left: 20px;
 }
@@ -1184,22 +1181,16 @@ img { /* make images and create button undraggable and unhighlitable*/
 #settings-container:hover {
   background-color: var(--main-hover-color);
 }
-#mobile-negative-space {
-  padding-right: 0px;
-}
 #spaces {
-  position: absolute;
   width: 100%;
-  height: 105px;
-  border-radius: 2px;
+  height: 50px;
   overflow-y: hidden;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  padding: 0px 10px 0px 294px;
-  margin: 0;
+  padding: 0px 10px 0px 4px;
+  margin: 0px 0px 0px 20px;
   list-style-type: none;
   white-space: nowrap;
-
 }
 #space_align_helper {
   display: inline-block;
@@ -1630,7 +1621,7 @@ img { /* make images and create button undraggable and unhighlitable*/
     display: none;
   }
   #spaces {
-    padding: 0px 10px 0px 138px;
+    padding: 0px 10px 0px 4px;
     
   }
   #open_channels {
@@ -1713,12 +1704,6 @@ img { /* make images and create button undraggable and unhighlitable*/
     top: 15px;
     width: 20px;
     right: 15px;
-  }
-  #mobile-negative-space {
-    background-color: var(--footer-bg-color);
-    height: 100%;
-    padding-right: 14px;
-    z-index: 1000;
   }
   #theme-selection {
     width: calc(100% - 50px);
