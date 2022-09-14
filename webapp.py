@@ -745,20 +745,18 @@ def change_user_status():
 @socketio.on('edit_space_profile')
 def edit_space_profile(data):
     if server_admin() or space_admin():
-        space_picture = request.json['space_picture'].strip()
+        space_picture = data['space_picture'].strip()
         try:
             if not requests.head(space_picture).headers["content-type"] in ("image/png", "image/jpeg", "image/jpg", "image/gif", "image/avif", "image/webp", "image/svg") or int(requests.get(space_picture, stream = True).headers['Content-length']) > 6000000:
                 space_picture = '/static/images/Space.jpeg'
         except:
             space_picture = '/static/images/Space.jpeg'
-        collection_spaces.find_one_and_update({'_id': ObjectId(session['current_space'])}, {'$set': {'name': request.json['space_name'][:200].strip(), 'picture': space_picture, 'description': request.json['space_description'][:200].strip()}})
-        return Response(dumps({'space_name': request.json['space_name'][:200].strip(), 'space_picture': space_picture, 'space_description': request.json['space_description'][:200].strip()}), mimetype='application/json')
-    
-    if space_admin() or server_admin():
-        if data['theme'] in ('default', 'dark'):
-            collection_spaces.update_one({'_id': ObjectId(session['current_space'])}, {'$set': {'theme': data['theme']}})
-            for room in room_list():
-                socketio.emit('change_theme', data, room = room)
+        data['space_name'] = data['space_name'][:200].strip()
+        data['space_description'] = data['space_description'][:200].strip()
+        data['user_id'] = session['unique_id']
+        collection_spaces.find_one_and_update({'_id': ObjectId(session['current_space'])}, {'$set': {'name': data['space_name'], 'picture': space_picture, 'description': data['space_description']}})
+        for room in room_list():
+            socketio.emit('edit_space_profile', data, room = room)
     else:
         session['logged'] = False
         session.clear()
