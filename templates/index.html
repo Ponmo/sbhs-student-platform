@@ -629,7 +629,7 @@
       $(document).on("mouseover", '.space', function () {
         alert('a')
         var location = this.getBoundingClientRect();
-        $('#space-tooltip').textContent = this.getAttribute('data-name');
+        $('#space-tooltip').text(this.getAttribute('data-name'));
         $('#space-tooltip').css({'left': location.left + 22 - $('#space-tooltip').width() / 2, 'bottom': 55})
         $("#space-tooltip").css('visibility', 'visible');
         $("#space-tooltip").stop();
