@@ -609,14 +609,12 @@
       $(document).on("mouseover", '.space', function () {
         var location = this.getBoundingClientRect();
         $('#space-tooltip').text(this.getAttribute('data-name'));
-        $('#space-tooltip').css({'left': location.left + 22 - $('#space-tooltip').width() / 2, 'bottom': 55})
-        $("#space-tooltip").css('visibility', 'visible');
-        $("#space-tooltip").animate({opacity: '1'}, 50);
+        $('#space-tooltip').css({'left': location.left + 22 - $('#space-tooltip').width() / 2, 'bottom': 55, 'visibility': 'visible'})
+        $("#space-tooltip").animate({opacity: '1'}, 100);
       });
 
       $(document).on("mouseleave", '.space', function () {
-        $("#space-tooltip").css('opacity', '0');
-        $('#space-tooltip').css('visibility', 'hidden');
+        $("#space-tooltip").css({'opacity': '0', 'visibility': 'hidden'});
       });
 
       $(document).on('click', function(e) {
