@@ -1247,17 +1247,13 @@ img { /* make images and create button undraggable and unhighlitable*/
   position: absolute;
   background-color: black;
   color: white;
-  bottom: calc(100% + 1px);
-  left: 50%;
-  transform: translate(-50%, -4px);
   padding: 4px 6px;
   border-radius: 4px;
   white-space: nowrap;
   visibility: hidden;
   opacity: 0;
-  transition: opacity 0.2s;
 }
-.icons-wrapper:hover .joined-icons-tooltip, .space-wrapper:hover .space-tooltip {
+.icons-wrapper:hover .joined-icons-tooltip {
   visibility: visible;
   opacity: 1;
 }
