@@ -308,11 +308,14 @@ def space_invite():
     if ((not invite_only and space_member()) or (invite_only and (space_admin() or server_admin()))):
         invite = collection_invites.find_one({'space': session['current_space'], 'user': session['unique_id']})
         if invite != None:
+            invite['exists'] = True
             for room in room_list():
                 socketio.emit('space_invite', invite, room = room)
+            return
         code = shortuuid.uuid()[:7]
         invite = {'_id': code, 'space': session['current_space'], 'picture': session['picture'], 'user': session['unique_id'], 'name': session['users_name'], 'email': session['users_email'], 'datetime': datetime.now().isoformat() + 'Z'}
         collection_invites.insert_one(invite)
+        invite['exists'] = False
         for room in room_list():
             socketio.emit('space_invite', invite, room = room)
         return
@@ -814,7 +817,7 @@ def revoke_invite():
         return 'expired', 200
     if server_admin() or space_admin():
         collection_invites.delete_one({'_id': request.json['invite-code']})
-        return
+        return Response(dumps({'success': 'true'}), mimetype='application/json')
     session['logged'] = False
     session.clear()
     return 'not allowed', 405

@@ -1786,15 +1786,6 @@
       });
 
       $(document).on('click', '#invite-link-button', function() {
-        // $.ajax({
-        //     type: 'POST',
-        //     url: '/space_invite',
-        //     contentType: 'application/json;charset=UTF-8',
-        //     success: function(data) {
-        //       navigator.clipboard.writeText('https://sbhs-platform.herokuapp.com/invite/' + data['code']);
-        //       popupSuccess();
-        //     }
-        //   });
         socket.emit("space_invite"); 
       });
 
@@ -1803,7 +1794,7 @@
         if (data['user_id'] == user_id) {
           popupSuccess();
         }
-        if (space_admin || admin) {
+        if (!data['exists'] && (space_admin || admin)) {
           const newNode = document.createElement('div');
           newNode.id = data['_id'];
           newNode.className = 'space-invites-list-item';
