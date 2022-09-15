@@ -947,7 +947,7 @@
           popupSuccess();
         }
         if (space_admin || admin) {
-          $(document.querySelector('.space-members-list-item[data-id="' + data['user_id'] + '"]').querySelector('.user-status-select')).val(data['status']).change();
+          $(document.querySelector('.space-members-list-item[data-id="' + data['user_id'] + '"]').querySelector('.user-status-select')).val(data['status']);
         }
         member = document.querySelector('.member[data-id="' + data['user_id'] + '"]');
         if (data['status'] == 'banned') {
