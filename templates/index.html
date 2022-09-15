@@ -627,7 +627,6 @@
       // });
 
       $(document).on("mouseover", '.space', function () {
-        alert('a')
         var location = this.getBoundingClientRect();
         $('#space-tooltip').text(this.getAttribute('data-name'));
         $('#space-tooltip').css({'left': location.left + 22 - $('#space-tooltip').width() / 2, 'bottom': 55})
@@ -637,7 +636,6 @@
       });
 
       $(document).on("mouseleave", '.space', function () {
-        alert('a')
         $("#space-tooltip").stop();
         $("#space-tooltip").animate({opacity: '1'}, 100);
         setTimeout(function() {
