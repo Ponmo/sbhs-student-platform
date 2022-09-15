@@ -800,27 +800,41 @@ def edit_space_profile():
     session.clear()
     return 'not allowed', 405
 
-@app.route('/edit_space_invite', methods=['POST'])
-def edit_space_invite():
-    if session_expired() or banned():
-        return 'expired', 200
+@socketio.on('edit-space-invite-switch')
+def edit_space_invite(data):
     if server_admin() or space_admin():
-        collection_spaces.find_one_and_update({'_id': ObjectId(session['current_space'])}, {'$set': {'invite_only': request.json['invite_only']}})
-        return Response(dumps({'success': 'true'}), mimetype='application/json')
+        invite = collection_spaces.find_one_and_update({'_id': ObjectId(session['current_space'])}, {'$set': {'invite_only': data['invite_only']}})
+        for room in room_list():
+            socketio.emit('edit_space_invite_switch', invite, room = room)
+        # return Response(dumps({'success': 'true'}), mimetype='application/json')
+        return
     session['logged'] = False
     session.clear()
-    return 'not allowed', 405
+    emit('expired')
+    
+    
 
-@app.route('/revoke_link', methods=['POST'])
-def revoke_invite():
-    if session_expired() or banned():
-        return 'expired', 200
+# @app.route('/edit_space_invite', methods=['POST'])
+# def edit_space_invite():
+#     if session_expired() or banned():
+#         return 'expired', 200
+#     if server_admin() or space_admin():
+#         collection_spaces.find_one_and_update({'_id': ObjectId(session['current_space'])}, {'$set': {'invite_only': request.json['invite_only']}})
+#         return Response(dumps({'success': 'true'}), mimetype='application/json')
+#     session['logged'] = False
+#     session.clear()
+#     return 'not allowed', 405
+
+@socketio.on('revoke_link')
+def revoke_invite(data):
     if server_admin() or space_admin():
-        collection_invites.delete_one({'_id': request.json['invite-code']})
-        return Response(dumps({'success': 'true'}), mimetype='application/json')
-    session['logged'] = False
-    session.clear()
-    return 'not allowed', 405
+        collection_invites.delete_one({'_id': data['invite_id']})
+        for room in room_list():
+            socketio.emit('revoke_link', data, room = room)
+    else:
+        session['logged'] = False
+        session.clear()
+        emit('expired')
     
 # When a room is clicked, make user join room
 # and leave old room.

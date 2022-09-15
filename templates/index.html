@@ -1926,17 +1926,15 @@
       });
       
       $(document).on('click', '.revoke-link', function() {
-        revoke_id = this.parentElement.id
-        $.ajax({
-          type: 'POST',
-          url: '/revoke_link',
-          dataType: "json",
-          data: JSON.stringify({'invite-code': revoke_id}),
-          contentType: 'application/json;charset=UTF-8',
-          success: function(data) {
-            document.getElementById(revoke_id).remove();
-          }      
+        socket.emit('revoke_link', {
+          'invite_id': this.parentElement.id
         });
+      });
+
+      socket.on('revoke_link', function(data) {
+        if (space_admin || admin) {
+          document.getElementById(data['invite_id']).remove();
+        }
       });
 
       $(document).on('click', '#close-confirm-leave-space', function() {
@@ -2099,23 +2097,29 @@
 
       $(document).on('click', '#edit-space-invite-switch', function() {
         $("#edit-space-invite-switch").prop('disabled', true);
-        abortRequests();
-        requests.push($.ajax({
-          type: "POST",
-          url: '/edit_space_invite',
-          dataType: "json",
-          data: JSON.stringify({'invite_only': document.getElementById('edit-space-invite-switch').checked}),
-          contentType: 'application/json;charset=UTF-8',
-          success: function(data) {
-            popupSuccess();
-            setTimeout(function() {
-              $("#edit-space-invite-switch").prop('disabled', false);
-            }, 1000);
-          }
-        }));
+        socket.emit('edit-space-invite-switch', {'invite_only': document.getElementById('edit-space-invite-switch').checked});
+          
+        // abortRequests();
+        // requests.push($.ajax({
+        //   type: "POST",
+        //   url: '/edit_space_invite',
+        //   dataType: "json",
+        //   data: JSON.stringify({'invite_only': document.getElementById('edit-space-invite-switch').checked}),
+        //   contentType: 'application/json;charset=UTF-8',
+        //   success: function(data) {
+        //     popupSuccess();
+        //     setTimeout(function() {
+        //       $("#edit-space-invite-switch").prop('disabled', false);
+        //     }, 1000);
+        //   }
+        // }));
       });
 
-      socket.on('edit_section', function (data) {
+      socket.on('edit-space-invite-switch', function(data) {
+        document.getElementById('edit-space-invite-switch').checked == !data['invite_only'];
+      });
+
+      socket.on('edit_section', function(data) {
         editSectionModal.style.display = "none";
         document.getElementById(data['section_id']).firstElementChild.firstElementChild.nextSibling.textContent = data['section_name'];
       });
