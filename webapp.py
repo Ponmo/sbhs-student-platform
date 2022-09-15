@@ -302,21 +302,38 @@ def render_space():
     session.clear()
     return 'not allowed', 405
 
-@app.route('/space_invite', methods=['POST'])
+@socketio.on('space_invite')
 def space_invite():
-    if session_expired() or banned():
-        return 'expired', 200
     invite_only = collection_spaces.find_one({'_id': ObjectId(session['current_space'])})['invite_only']
     if ((not invite_only and space_member()) or (invite_only and (space_admin() or server_admin()))):
         invite = collection_invites.find_one({'space': session['current_space'], 'user': session['unique_id']})
         if invite != None:
-            return Response(dumps({'code': invite['_id']}), mimetype='application/json')
+            for room in room_list():
+                socketio.emit('space_invite', invite, room = room)
         code = shortuuid.uuid()[:7]
-        collection_invites.insert_one({'_id': code, 'space': session['current_space'], 'picture': session['picture'], 'user': session['unique_id'], 'name': session['users_name'], 'email': session['users_email'], 'datetime': datetime.now().isoformat() + 'Z'})
-        return Response(dumps({'code': code}), mimetype='application/json')
+        invite = {'_id': code, 'space': session['current_space'], 'picture': session['picture'], 'user': session['unique_id'], 'name': session['users_name'], 'email': session['users_email'], 'datetime': datetime.now().isoformat() + 'Z'}
+        collection_invites.insert_one(invite)
+        for room in room_list():
+                socketio.emit('space_invite', invite, room = room)
     session['logged'] = False
     session.clear()
-    return 'not allowed', 405
+    emit('expired')
+
+# @app.route('/space_invite', methods=['POST'])
+# def space_invite():
+#     if session_expired() or banned():
+#         return 'expired', 200
+#     invite_only = collection_spaces.find_one({'_id': ObjectId(session['current_space'])})['invite_only']
+#     if ((not invite_only and space_member()) or (invite_only and (space_admin() or server_admin()))):
+#         invite = collection_invites.find_one({'space': session['current_space'], 'user': session['unique_id']})
+#         if invite != None:
+#             return Response(dumps({'code': invite['_id']}), mimetype='application/json')
+#         code = shortuuid.uuid()[:7]
+#         collection_invites.insert_one({'_id': code, 'space': session['current_space'], 'picture': session['picture'], 'user': session['unique_id'], 'name': session['users_name'], 'email': session['users_email'], 'datetime': datetime.now().isoformat() + 'Z'})
+#         return Response(dumps({'code': code}), mimetype='application/json')
+#     session['logged'] = False
+#     session.clear()
+#     return 'not allowed', 405
 
 # When user clicks leave space button, that space is removed
 # from their list of joined spaces in MongoDB.

@@ -1786,15 +1786,31 @@
       });
 
       $(document).on('click', '#invite-link-button', function() {
-        $.ajax({
-            type: 'POST',
-            url: '/space_invite',
-            contentType: 'application/json;charset=UTF-8',
-            success: function(data) {
-              navigator.clipboard.writeText('https://sbhs-platform.herokuapp.com/invite/' + data['code']);
-              popupSuccess();
-            }
-          });
+        // $.ajax({
+        //     type: 'POST',
+        //     url: '/space_invite',
+        //     contentType: 'application/json;charset=UTF-8',
+        //     success: function(data) {
+        //       navigator.clipboard.writeText('https://sbhs-platform.herokuapp.com/invite/' + data['code']);
+        //       popupSuccess();
+        //     }
+        //   });
+        socket.emit("space_invite"); 
+      });
+
+      socket.on("space_invite", function (data) {
+        navigator.clipboard.writeText('https://sbhs-platform.herokuapp.com/invite/' + data['_id']);
+        popupSuccess();
+        if (space_admin || admin) {
+          const newNode = document.createElement('div');
+          newNode.id = data['_id'];
+          newNode.className = 'space-invites-list-item';
+          newNode.innerHTML = '<span class="invite-information-wrapper"><img class="profile-picture"><span class="invite-information"></span></span><span class="invite-code"></span><span class="revoke-link"><img class="pointer white-icon revoke-invite-button" src="/static/images/x.svg"><span>';
+          newNode.querySelector('.profile-picture').src = data['picture'];
+          newNode.querySelector('.invite-information').textContent = data['name'] + ' (' + data['email'] + ')';
+          newNode.querySelector('.invite-code').textContent = data['_id'];
+          document.getElementById('space-invites-list').append(newNode);
+        }
       });
 
       document.getElementById('edit-space-profile').onsubmit = function (e) {
