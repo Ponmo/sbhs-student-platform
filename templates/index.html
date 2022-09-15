@@ -2097,7 +2097,7 @@
 
       $(document).on('click', '#edit-space-invite-switch', function() {
         $("#edit-space-invite-switch").prop('disabled', true);
-        socket.emit('edit-space-invite-switch', {'invite_only': document.getElementById('edit-space-invite-switch').checked});
+        socket.emit('edit_space_invite_switch', {'invite_only': document.getElementById('edit-space-invite-switch').checked});
           
         // abortRequests();
         // requests.push($.ajax({
@@ -2115,8 +2115,14 @@
         // }));
       });
 
-      socket.on('edit-space-invite-switch', function(data) {
+      socket.on('edit_space_invite_switch', function(data) {
         document.getElementById('edit-space-invite-switch').checked = !data['invite_only'];
+        if (data['user_id'] == user_id) {
+          popupSuccess();
+          setTimeout(function() {
+            $("#edit-space-invite-switch").prop('disabled', false);
+          }, 1000);
+        }
       });
 
       socket.on('edit_section', function(data) {
