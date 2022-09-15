@@ -947,7 +947,7 @@
           popupSuccess();
         }
         if (space_admin || admin) {
-          $(document.querySelector('.space-members-list-item[data-id="' + data['user_id'] + '"]')).val(data['status']);
+          $(document.querySelector('.space-members-list-item[data-id="' + data['user_id'] + '"]').querySelector('.user-status-select')).val(data['status']).change();
         }
         member = document.querySelector('.member[data-id="' + data['user_id'] + '"]');
         if (data['status'] == 'banned') {
@@ -2413,7 +2413,7 @@
             newNode.className = 'space-members-list-item';
             newNode.setAttribute('data-id', data['_id']);
             newNode.innerHTML = '<span class="space-members-list-item-wrapper"><img class="profile-picture"><span class="member-information"></span></span><span class="user-role"><form class="change-user-status-form"><select class="user-status-select"><option value="banned">banned</option><option selected="selected" value="member">member</option><option value="moderator">moderator</option></select></form></span>';
-            newNode.firstElementChild.src = data['picture'];
+            newNode.firstElementChild.firstElementChild.src = data['picture'];
             newNode.querySelector('.member-information').textContent = data['name'] + ' (' + data['email'] + ')';
             document.getElementById('space-members-list').appendChild(newNode);
           }
