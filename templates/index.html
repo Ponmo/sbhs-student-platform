@@ -1791,7 +1791,7 @@
 
       socket.on("space_invite", function (data) {
         navigator.clipboard.writeText('https://sbhs-platform.herokuapp.com/invite/' + data['_id']);
-        if (data['user_id'] == user_id) {
+        if (data['user'] == user_id) {
           popupSuccess();
         }
         if (!data['exists'] && (space_admin || admin)) {
