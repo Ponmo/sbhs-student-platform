@@ -247,7 +247,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   grid-column: 1;
   grid-row: 1;
   background-color: var(--main-bg-color);
-  border-bottom: 1px solid var(--border-color); 
+  border-bottom: 1px solid rgba(var(--border-color)); 
   box-shadow: 0px 1px 0px 0px rgba(var(--border-color), 0.5);   
   overflow: hidden;
   -moz-user-select: -moz-none;
@@ -350,7 +350,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   display: flex;
   justify-content: space-between;
   background-color: var(--third-bg-color);
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid rgba(var(--border-color)); ;
   box-shadow: 0px 1px 0px 0px rgba(var(--border-color), 0.5);
   overflow: hidden;
   -moz-user-select: -moz-none;
@@ -421,7 +421,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin: 0;
   padding-top: 10px;
   padding-bottom: 12px;
-  border: 1px solid rgba(var(--border-color), 0.5);
+  border-bottom: 1px solid rgba(var(--border-color), 0.5);
   -webkit-background-clip: padding-box; /* for Safari */
   background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
 }
@@ -629,7 +629,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   padding: 0px 4px;
   height: 25px;
   border-radius: 2px;
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(var(--border-color)); 
 }
 .report-message {
   display: inline-block;
@@ -869,7 +869,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   padding-left: 18px;
   line-height: 48px;
   background-color: var(--main-bg-color);
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid rgba(var(--border-color)); 
   box-shadow: 0px 1px 0px 0px rgba(var(--border-color), 0.5);   
 }
 #members {
