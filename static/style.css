@@ -1048,6 +1048,16 @@ img { /* make images and create button undraggable and unhighlitable*/
 .theme-preview {
   width: 120px;
   height: 80px;
+  margin-bottom: 4px;
+}
+#nature-preview {
+
+}
+#dark-preview {
+  
+}
+#default-preview {
+  
 }
 .theme-name {
   display: flex;
