@@ -940,11 +940,8 @@
       });
 
       socket.on('change_user_status', function (data) {
-        if (data['user_id'] == user_id && data['status'] == 'moderator') {
-          space_admin = true;
-        }
-        else {
-          space_admin = false;
+        if (data['user_id'] == user_id) {
+          window.location.reload();
         }
         if (data['user'] == user_id) {
           popupSuccess();
