@@ -314,7 +314,8 @@ def space_invite():
         invite = {'_id': code, 'space': session['current_space'], 'picture': session['picture'], 'user': session['unique_id'], 'name': session['users_name'], 'email': session['users_email'], 'datetime': datetime.now().isoformat() + 'Z'}
         collection_invites.insert_one(invite)
         for room in room_list():
-                socketio.emit('space_invite', invite, room = room)
+            socketio.emit('space_invite', invite, room = room)
+        return
     session['logged'] = False
     session.clear()
     emit('expired')
