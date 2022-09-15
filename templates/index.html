@@ -940,7 +940,7 @@
       });
 
       socket.on('change_user_status', function (data) {
-        if (data['user'] = user_id) {
+        if (data['user'] == user_id) {
           popupSuccess();
         }
         if (space_admin || admin) {
@@ -950,11 +950,11 @@
         if (data['status'] == 'banned') {
           member.remove();
         }
-        else if (data['status'] == 'admin') {
+        else if (data['status'] == 'moderator') {
           alert('w');
         }
         else if (data['status'] == 'member') {
-          member.querySelector('.status-icon').remove();
+          member.querySelector('.status-icon')?.remove();
         }
       });
 
