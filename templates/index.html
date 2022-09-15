@@ -951,7 +951,11 @@
           member.remove();
         }
         else if (data['status'] == 'moderator') {
-          alert('w');
+          if (!member.querySelector('.status-icon')) {
+            const newNode = document.createElement('img');
+            newNode.innerHTML = '<img class="status-icon white-icon" src="/static/images/moderator.svg">';
+            member.appendChild(newNode);
+          }
         }
         else if (data['status'] == 'member') {
           member.querySelector('.status-icon')?.remove();
