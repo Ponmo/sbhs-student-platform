@@ -1051,13 +1051,13 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin-bottom: 4px;
 }
 #nature-preview {
-
+  background-image: linear-gradient(to right, #1b4332, #2d6a4f , #e9c46a, #0a241b);
 }
 #dark-preview {
-  
+  background-image: linear-gradient(to right, #36393e, #2f3136 , hotpink, #282a2e);
 }
 #default-preview {
-  
+  background-image: linear-gradient(to right, #111112, #333333 , #5e5e5e, #222224);
 }
 .theme-name {
   display: flex;

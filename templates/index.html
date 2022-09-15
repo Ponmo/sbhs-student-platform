@@ -611,11 +611,10 @@
         $('#space-tooltip').text(this.getAttribute('data-name'));
         $('#space-tooltip').css({'left': location.left + 22 - $('#space-tooltip').width() / 2, 'bottom': 55})
         $("#space-tooltip").css('visibility', 'visible');
-        $("#space-tooltip").animate({opacity: '1'}, 100);
+        $("#space-tooltip").animate({opacity: '1'}, 50);
       });
 
       $(document).on("mouseleave", '.space', function () {
-        $("#space-tooltip").stop();
         $("#space-tooltip").css('opacity', '0');
         $('#space-tooltip').css('visibility', 'hidden');
       });
