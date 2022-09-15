@@ -2096,6 +2096,7 @@
       }
 
       $(document).on('click', '#edit-space-invite-switch', function() {
+        alert('pressed');
         $("#edit-space-invite-switch").prop('disabled', true);
         socket.emit('edit_space_invite_switch', {
           invite_only: document.getElementById('edit-space-invite-switch').checked
@@ -2118,6 +2119,7 @@
       });
 
       socket.on('edit_space_invite_switch', function(data) {
+        alert('on')
         document.getElementById('edit-space-invite-switch').checked = !data['invite_only'];
         if (data['user_id'] == user_id) {
           popupSuccess();
