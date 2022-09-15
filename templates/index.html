@@ -2119,7 +2119,7 @@
       });
 
       socket.on('edit_space_invite_switch', function(data) {
-        alert('on')
+        alert('on');
         document.getElementById('edit-space-invite-switch').checked = !data['invite_only'];
         if (data['user_id'] == user_id) {
           popupSuccess();
