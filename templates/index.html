@@ -636,6 +636,7 @@
       });
 
       $(document).on("mouseleave", '.space', function () {
+        $("#space-tooltip").css('opacity', $("#space-tooltip").css('opacity'));
         $("#space-tooltip").stop();
         $("#space-tooltip").animate({opacity: '0'}, 100);
         setTimeout(function() {
