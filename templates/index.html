@@ -2116,7 +2116,7 @@
       });
 
       socket.on('edit-space-invite-switch', function(data) {
-        document.getElementById('edit-space-invite-switch').checked == !data['invite_only'];
+        document.getElementById('edit-space-invite-switch').checked = !data['invite_only'];
       });
 
       socket.on('edit_section', function(data) {
