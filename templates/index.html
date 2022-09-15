@@ -637,7 +637,7 @@
 
       $(document).on("mouseleave", '.space', function () {
         $("#space-tooltip").stop();
-        $("#space-tooltip").animate({opacity: '1'}, 100);
+        $("#space-tooltip").animate({opacity: '0'}, 100);
         setTimeout(function() {
           $('#space-tooltip').css('visibility', 'hidden');
         }, 100);
