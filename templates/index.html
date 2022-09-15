@@ -602,24 +602,43 @@
         }
       });
 
-      $(".space").on({
-        mouseenter: function () {
-          alert('a')
-          var location = this.getBoundingClientRect();
-          $('#space-tooltip').css({'left': location.left + 22, 'bottom': location.bottom + 50})
-          $('#space-tooltip').textContent = this.getAttribute('data-name');
-          $("#space-tooltip").css('visibility', 'visible');
-          $("#space-tooltip").stop();
-          $("#space-tooltip").animate({opacity: '1'}, 100);
-        },
-        mouseleave: function () {
-          alert('a')
-          $("#space-tooltip").stop();
-          $("#space-tooltip").animate({opacity: '1'}, 100);
-          setTimeout(function() {
-            $('#space-tooltip').css('visibility', 'hidden');
-          }, 100);
-        }
+      // $(".space").on({
+      //   mouseenter: function () {
+      //     alert('a')
+      //     var location = this.getBoundingClientRect();
+      //     $('#space-tooltip').css({'left': location.left + 22, 'bottom': location.bottom + 50})
+      //     $('#space-tooltip').textContent = this.getAttribute('data-name');
+      //     $("#space-tooltip").css('visibility', 'visible');
+      //     $("#space-tooltip").stop();
+      //     $("#space-tooltip").animate({opacity: '1'}, 100);
+      //   },
+      //   mouseleave: function () {
+      //     alert('a')
+      //     $("#space-tooltip").stop();
+      //     $("#space-tooltip").animate({opacity: '1'}, 100);
+      //     setTimeout(function() {
+      //       $('#space-tooltip').css('visibility', 'hidden');
+      //     }, 100);
+      //   }
+      // });
+
+      $(document).on("mouseover", '.space', function () {
+        alert('a')
+        var location = this.getBoundingClientRect();
+        $('#space-tooltip').css({'left': location.left + 22, 'bottom': location.bottom + 50})
+        $('#space-tooltip').textContent = this.getAttribute('data-name');
+        $("#space-tooltip").css('visibility', 'visible');
+        $("#space-tooltip").stop();
+        $("#space-tooltip").animate({opacity: '1'}, 100);
+      });
+
+      $(document).on("mouseleave", '.space', function () {
+        alert('a')
+        $("#space-tooltip").stop();
+        $("#space-tooltip").animate({opacity: '1'}, 100);
+        setTimeout(function() {
+          $('#space-tooltip').css('visibility', 'hidden');
+        }, 100);
       });
 
       $(document).on('click', function(e) {
