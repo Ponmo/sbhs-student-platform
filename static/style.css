@@ -348,9 +348,10 @@ img { /* make images and create button undraggable and unhighlitable*/
   grid-column: 2 / 4;
   grid-row: 1;
   display: flex;
+  z-index: 2; /* for box shadow */
   justify-content: space-between;
   background-color: var(--third-bg-color);
-  border-bottom: 1px solid rgba(var(--border-color)); ;
+  border-bottom: 1px solid rgba(var(--border-color));
   box-shadow: 0px 1px 0px 0px rgba(var(--border-color), 0.5);
   overflow: hidden;
   -moz-user-select: -moz-none;
@@ -871,6 +872,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   background-color: var(--main-bg-color);
   border-bottom: 1px solid rgba(var(--border-color)); 
   box-shadow: 0px 1px 0px 0px rgba(var(--border-color), 0.5);   
+  z-index: 2; /* for box shadow */
 }
 #members {
   grid-column: 3;
