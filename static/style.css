@@ -247,7 +247,8 @@ img { /* make images and create button undraggable and unhighlitable*/
   grid-column: 1;
   grid-row: 1;
   background-color: var(--main-bg-color);
-  border-bottom: 1px solid var(--border-color); /* pseudo element for double border */
+  border-bottom: 1px solid var(--border-color); 
+  box-shadow: 0px 1px 0px 0px rgba(var(--border-color), 0.5);   
   overflow: hidden;
   -moz-user-select: -moz-none;
   -khtml-user-select: none;
@@ -350,6 +351,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   justify-content: space-between;
   background-color: var(--third-bg-color);
   border-bottom: 1px solid var(--border-color);
+  box-shadow: 0px 1px 0px 0px rgba(var(--border-color), 0.5);
   overflow: hidden;
   -moz-user-select: -moz-none;
   -khtml-user-select: none;
@@ -419,7 +421,9 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin: 0;
   padding-top: 10px;
   padding-bottom: 12px;
-  border-bottom: 1px solid var(--border-color);
+  border: 1px solid rgba(var(--border-color), 0.5);
+  -webkit-background-clip: padding-box; /* for Safari */
+  background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
 }
 .special-room {
   width: 254px;
@@ -866,6 +870,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   line-height: 48px;
   background-color: var(--main-bg-color);
   border-bottom: 1px solid var(--border-color);
+  box-shadow: 0px 1px 0px 0px rgba(var(--border-color), 0.5);   
 }
 #members {
   grid-column: 3;
