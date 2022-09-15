@@ -800,12 +800,16 @@ def edit_space_profile():
     session.clear()
     return 'not allowed', 405
 
-@socketio.on('edit-space-invite-switch')
-def edit_space_invite(data):
+@socketio.on('edit_space_invite_switch')
+def edit_space_invite_switch(data):
+    session['logged'] = False
+    session.clear()
+    emit('expired')
     if server_admin() or space_admin():
-        invite = collection_spaces.find_one_and_update({'_id': ObjectId(session['current_space'])}, {'$set': {'invite_only': data['invite_only']}})
+        space = collection_spaces.find_one_and_update({'_id': ObjectId(session['current_space'])}, {'$set': {'invite_only': data['invite_only']}})
+        space['user_id'] = session['unique_id']
         for room in room_list():
-            socketio.emit('edit_space_invite_switch', invite, room = room)
+            socketio.emit('edit_space_invite_switch', space, room = room)
         # return Response(dumps({'success': 'true'}), mimetype='application/json')
         return
     session['logged'] = False
