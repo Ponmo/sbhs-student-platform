@@ -1039,15 +1039,13 @@ img { /* make images and create button undraggable and unhighlitable*/
 
 .theme-container {
   width: 120px;
-  height: 110px;
-  border: 1px solid var(--main-font-color);
-  background-color: var(--main-bg-color);
-  border-radius: 4px;
   overflow: hidden;
 }
 .theme-preview {
   width: 120px;
-  height: 80px;
+  height: 110px;
+  border: 1px solid white;
+  border-radius: 4px;
   margin-bottom: 4px;
 }
 #nature-preview {
