@@ -1229,7 +1229,21 @@ img { /* make images and create button undraggable and unhighlitable*/
   height: 40px;
   border-radius: 7px;
 }
-.joined-icons-tooltip, .space-tooltip {
+.joined-icons-tooltip {
+  position: absolute;
+  background-color: black;
+  color: white;
+  bottom: calc(100% + 1px);
+  left: 50%;
+  transform: translate(-50%, -4px);
+  padding: 4px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.space-tooltip {
   position: absolute;
   background-color: black;
   color: white;

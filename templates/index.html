@@ -15,6 +15,7 @@
   <body>
 
     <div id="overlay">
+      <div id="space-tooltip"></div>
       <img id="success-icon">
       <div id="space-settings-popup">
         <div class="pointer blue-entry-two" id="create-section-button">Create Section</div>
@@ -537,10 +538,10 @@
               newNodeChild.setAttribute('data-name', item.name);
               newNodeChild.src = item.picture;
               newNode.appendChild(newNodeChild);
-              newNodeChild = document.createElement('div');
-              newNodeChild.className = 'space-tooltip';
-              newNodeChild.textContent = item.name;
-              newNode.appendChild(newNodeChild);
+              //newNodeChild = document.createElement('div');
+              //newNodeChild.className = 'space-tooltip';
+              //newNodeChild.textContent = item.name;
+              //newNode.appendChild(newNodeChild);
               newNodeChild = document.createElement('div');
               newNodeChild.className = 'active-space';
               newNode.appendChild(newNodeChild); 
@@ -601,6 +602,23 @@
         }
       });
 
+      $(".space").on({
+        mouseenter: function () {
+          var location = this.getBoundingClientRect();
+          $('#space-tooltip').css({'left': location.left + 22, 'bottom': location.bottom + 50})
+          $('#space-tooltip').textContent = this.getAttribute('data-name');
+          $("#space-tooltip").css('visibility', 'visible');
+          $("#space-tooltip").stop();
+          $("#space-tooltip").animate({opacity: '1'}, 100);
+        },
+        mouseleave: function () {
+          $("#space-tooltip").stop();
+          $("#space-tooltip").animate({opacity: '1'}, 100);
+          setTimeout(function() {
+            $('#space-tooltip').css('visibility', 'hidden');
+          }, 100);
+        }
+      });
 
       $(document).on('click', function(e) {
         //// If you input: "&& profile_popup.has(e.target).length === 0)"" it makes it so clicking on a child will not remove it
