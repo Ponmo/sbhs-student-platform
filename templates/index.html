@@ -1271,7 +1271,7 @@
               newNode.id = 'profile-popup';
               document.getElementById('overlay').appendChild(newNode);
               member.className = 'member';
-              member.style.backgroundColor = 'var(--main-hover-color';
+              member.style.backgroundColor = 'var(--selected-color)';
               document.getElementById('profile-popup').innerHTML = '<ul id="profile-list"><li id="profile-picture-list"><img id="popup-picture" alt="!"></li><li id="profile-name"></li><li id="profile-email"></li><div id="joined-table"></div>';
               document.getElementById('popup-picture').src = data['picture'];
               document.getElementById('profile-name').textContent = data['name'];

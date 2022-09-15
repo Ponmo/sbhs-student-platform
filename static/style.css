@@ -910,7 +910,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 
 }
 .member:hover {
-  background-color: var(--second-hover-color);
+  background-color: var(--main-hover-color);
 }
 
 /* If instead make it relative to document border instead of being inside member, then logic for getting rid of the popup must be changed*/
