@@ -610,7 +610,7 @@
         var location = this.getBoundingClientRect();
         $('#space-tooltip').text(this.getAttribute('data-name'));
         $('#space-tooltip').css({'left': location.left + 22 - $('#space-tooltip').width() / 2, 'bottom': 55, 'visibility': 'visible'})
-        $("#space-tooltip").animate({opacity: '1'}, 100);
+        $("#space-tooltip").animate({opacity: '1'}, 200);
       });
 
       $(document).on("mouseleave", '.space', function () {
