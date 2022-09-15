@@ -814,6 +814,7 @@ def revoke_invite():
         return 'expired', 200
     if server_admin() or space_admin():
         collection_invites.delete_one({'_id': request.json['invite-code']})
+        return
     session['logged'] = False
     session.clear()
     return 'not allowed', 405
