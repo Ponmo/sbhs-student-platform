@@ -1243,7 +1243,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   opacity: 0;
   transition: opacity 0.2s;
 }
-.space-tooltip {
+#space-tooltip {
   position: absolute;
   background-color: black;
   color: white;
