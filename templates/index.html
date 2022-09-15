@@ -953,7 +953,8 @@
         else if (data['status'] == 'moderator') {
           if (!member.querySelector('.status-icon')) {
             const newNode = document.createElement('img');
-            newNode.innerHTML = '<img class="status-icon white-icon" src="/static/images/moderator.svg">';
+            newNode.className = 'status-icon white-icon';
+            newNode.src = '/static/images/moderator.svg';
             member.appendChild(newNode);
           }
         }
