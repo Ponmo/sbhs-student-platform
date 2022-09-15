@@ -404,7 +404,6 @@ img { /* make images and create button undraggable and unhighlitable*/
 #channels {
   grid-column: 1;
   grid-row: 2;
-  border-top: 1px solid #2b2d32; /*remove once double border*/
   background-color: var(--main-bg-color);
   -moz-user-select: -moz-none;
   -khtml-user-select: none;
@@ -420,7 +419,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   margin: 0;
   padding-top: 10px;
   padding-bottom: 12px;
-  border-bottom: 1px solid #2b2d32;
+  border-bottom: 1px solid var(--border-color);
 }
 .special-room {
   width: 254px;
@@ -899,7 +898,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   white-space: nowrap;
   text-overflow: ellipsis;
   margin-left: 10px;
-  color: gray;
+  color: var(--main-font-color);
   font-weight: bold;
 
 }
