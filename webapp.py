@@ -1036,7 +1036,7 @@ def edit_section(data):
 @socketio.on('change_theme')
 def change_theme(data):
     if space_admin() or server_admin():
-        if data['theme'] in ('default', 'dark'):
+        if data['theme'] in ('default', 'dark', 'nature'):
             collection_spaces.update_one({'_id': ObjectId(session['current_space'])}, {'$set': {'theme': data['theme']}})
             for room in room_list():
                 socketio.emit('change_theme', data, room = room)

@@ -455,7 +455,7 @@
 
       var themes = {'default': ['#2f3136', 'white', '#36393e', '#d7d9da', 'hotpink', '#282a2e', '#232428', 'white', '#202225', '#2e3338', '35, 36, 40', 'white', 'black', '#3c3f45', '#32353a', '#43474d', 'brightness(0)'],
                     'dark': ['#111112', 'white', '#111112', '#d7d9da', '#111112', '#111112', '#232428', 'white', '#5e5e5e', '#333333', '35, 36, 40', 'white', 'black', '#3c3f45', '#222224', '#43474d', 'brightness(0) invert(1)'],
-                    'nature': ['#1b4332', 'white','#2d6a4f','white','#e9c46a','#0a241b','black','white','#d8f3dc','#3d8262','16, 41, 30','white','black','#2d6a4f','#40916c','#40916c']};
+                    'nature': ['#1b4332', 'white','#2d6a4f','white','#e9c46a','#0a241b','black','white','#d8f3dc','#3d8262','16, 41, 30','white','black','#2d6a4f','#40916c','#40916c', 'brightness(0)']};
 
       // Check if it's Safari Mobile
       var ua = window.navigator.userAgent;
@@ -2394,7 +2394,7 @@
           contentType: 'application/json;charset=UTF-8',
           success: function(rooms_and_sections) {
             window.history.pushState('', '', '/sbhs/' + current_space);
-              //applyTheme(rooms_and_sections[3][0].theme);
+            applyTheme(rooms_and_sections[3][0].theme);
             if (rooms_and_sections[3][0].admins[0] == user_id) {
               space_admin = true;
               $('#delete-space').show();
@@ -3002,7 +3002,7 @@
       });
 
       socket.on('change_theme', function (data) {
-        //applyTheme(data['theme'])
+        applyTheme(data['theme'])
       });
 
       function applyTheme(theme) {
