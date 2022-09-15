@@ -457,7 +457,7 @@
                     'dark': ['#111112', 'white', '#111112', '#d7d9da', '#111112', '#111112', '#232428', 'white', '#5e5e5e', '#333333', '35, 36, 40', 'white', 'black', '#3c3f45', '#222224', '#43474d', 'brightness(0) invert(1)'],
                     'nature': ['#1b4332', 'white','#2d6a4f','white','#e9c46a','#0a241b','black','white','#d8f3dc','#3d8262','16, 41, 30','white','black','#2d6a4f','#40916c','#40916c']};
 
-      //Check if it's Safari Mobile
+      // Check if it's Safari Mobile
       var ua = window.navigator.userAgent;
       var iOS = !!ua.match(/iPhone/i);
       var webkit = !!ua.match(/WebKit/i);
@@ -629,8 +629,8 @@
       $(document).on("mouseover", '.space', function () {
         alert('a')
         var location = this.getBoundingClientRect();
-        $('#space-tooltip').css({'left': location.left + 22, 'bottom': location.bottom + 50})
         $('#space-tooltip').textContent = this.getAttribute('data-name');
+        $('#space-tooltip').css({'left': location.left + 22 - $('#space-tooltip').width() / 2, 'bottom': 55})
         $("#space-tooltip").css('visibility', 'visible');
         $("#space-tooltip").stop();
         $("#space-tooltip").animate({opacity: '1'}, 100);
