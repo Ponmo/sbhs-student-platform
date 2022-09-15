@@ -741,6 +741,34 @@ def admin_change_user_status():
     session.clear()
     return 'not allowed', 405
 
+@socketio.on('change_user_status')
+def change_user_status(data):
+    if server_admin() or space_admin():
+        data['user'] = session['unique_id']
+        space = collection_spaces.find_one({'_id': ObjectId(session['current_space'])})
+        if (space_admin() or server_admin()) and data['user_id'] != space['admins'][0]:
+            user = collection_users.find_one({'_id': data['user_id']})
+            if data['status'] == 'banned' and data['user_id'] not in space['banned'] and data['user_id'] != space['admins'][0] and user['status'] != 'admin' and user['status'] != 'owner':
+                collection_spaces.update_one({"_id": ObjectId(session['current_space'])}, {"$pull": {"members": {'$in': [data['user_id']]}, 'admins': data['user_id']}})
+                collection_spaces.update_one({'_id': ObjectId(session['current_space'])}, {'$push': {'banned': data['user_id']}})
+                collection_users.update_one({'_id': data['user_id']}, {'$pull': {'joined': session['current_space']}})
+                for room in room_list():
+                    socketio.emit('change_user_status', data, room = room)
+                return
+            elif data['status'] == 'moderator' and data['user_id'] not in space['admins']:
+                collection_spaces.update_one({'_id': ObjectId(session['current_space'])}, {'$push': {'admins': data['user_id']}})
+                for room in room_list():
+                    socketio.emit('change_user_status', data, room = room)
+                return
+            elif data['status'] == 'member':
+                collection_spaces.update_one({"_id": ObjectId(session['current_space'])}, {"$pull": {'banned': data['user_id'], 'admins': data['user_id']}})
+                for room in room_list():
+                    socketio.emit('change_user_status', data, room = room)
+                return
+    session['logged'] = False
+    session.clear()
+    emit('expired')
+
 @app.route('/change_user_status', methods=['POST'])
 def change_user_status():
     if session_expired() or banned():
@@ -778,10 +806,10 @@ def edit_space_profile(data):
         collection_spaces.find_one_and_update({'_id': ObjectId(session['current_space'])}, {'$set': {'name': data['space_name'], 'picture': data['space_picture'], 'description': data['space_description']}})
         for room in room_list():
             socketio.emit('edit_space_profile', data, room = room)
-    else:
-        session['logged'] = False
-        session.clear()
-        emit('expired')
+        return
+    session['logged'] = False
+    session.clear()
+    emit('expired')
 
 @app.route('/edit_space_profile', methods=['POST'])
 def edit_space_profile():

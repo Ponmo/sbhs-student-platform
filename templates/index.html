@@ -923,16 +923,39 @@
 
       $(document).on('submit', '.change-user-status-form', function(e) {
         e.preventDefault();
-        $.ajax({
-          type: "POST",
-          url: '/change_user_status',
-          dataType: "json",
-          data: JSON.stringify({'user_id': this.closest('.space-members-list-item').getAttribute('data-id'), 'status': this.firstElementChild.value}), 
-          contentType: 'application/json;charset=UTF-8',
-          success: function(data) {
-            popupSuccess();
-           }
+        socket.emit('change_user_status', {
+          'user_id': this.closest('.space-members-list-item').getAttribute('data-id'),
+          'status': this.firstElementChild.value
         });
+        // $.ajax({
+        //   type: "POST",
+        //   url: '/change_user_status',
+        //   dataType: "json",
+        //   data: JSON.stringify({'user_id': this.closest('.space-members-list-item').getAttribute('data-id'), 'status': this.firstElementChild.value}), 
+        //   contentType: 'application/json;charset=UTF-8',
+        //   success: function(data) {
+        //     popupSuccess();
+        //    }
+        // });
+      });
+
+      socket.on('change_user_status', function (data) {
+        if (data['user'] = user_id) {
+          popupSuccess();
+        }
+        if (space_admin || admin) {
+          $(document.querySelector('.space-members-list-item[data-id="' + data['user_id'] + '"]')).val(data['status']);
+        }
+        member = document.querySelector('.member[data-id="' + data['user_id'] + '"]');
+        if (data['status'] == 'banned') {
+          member.remove();
+        }
+        else if (data['status'] == 'admin') {
+          alert('w');
+        }
+        else if (data['status'] == 'member') {
+          member.querySelector('.status-icon').remove();
+        }
       });
 
       $('#directory-search-bar').keydown(function (e) {
@@ -2100,21 +2123,6 @@
         socket.emit('edit_space_invite_switch', {
           invite_only: document.getElementById('edit-space-invite-switch').checked
         });
-          
-        // abortRequests();
-        // requests.push($.ajax({
-        //   type: "POST",
-        //   url: '/edit_space_invite',
-        //   dataType: "json",
-        //   data: JSON.stringify({'invite_only': document.getElementById('edit-space-invite-switch').checked}),
-        //   contentType: 'application/json;charset=UTF-8',
-        //   success: function(data) {
-        //     popupSuccess();
-        //     setTimeout(function() {
-        //       $("#edit-space-invite-switch").prop('disabled', false);
-        //     }, 1000);
-        //   }
-        // }));
       });
 
       socket.on('edit_space_invite_switch', function(data) {
