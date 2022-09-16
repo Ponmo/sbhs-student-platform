@@ -463,19 +463,20 @@
       var webkit = !!ua.match(/WebKit/i);
       var iOSSafari = iOS && webkit && !ua.match(/CriOS/i) && !ua.match(/OPiOS/i) && !ua.match(/EdgiOS/i) && !ua.match(/xiOS/);
       if (iOSSafari) {
-        // $('#content').css('grid-template-rows', '48px calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px - 48px)');
-        // $('#mobile_touch_overlay').css('height', 'calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px + 50px)');
+        $('#content').css('grid-template-rows', '48px calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px - 48px)');
+        $('#mobile_touch_overlay').css('height', 'calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px + 50px)');
         window.addEventListener("scroll", (e) => {
           e.preventDefault();
           window.scrollTo(0, 0);
         });
       }
       
-      $('#content').css('grid-template-rows', '48px calc(100vh ' - getComputedStyle(document.documentElement).getPropertyValue("--sab") + 'px - 48px)');
-      $('#mobile_touch_overlay').css('height', 'calc(100vh ' - getComputedStyle(document.documentElement).getPropertyValue("--sab") + 'px + 50px)');
+      // $('#content').css('grid-template-rows', '48px calc(100vh ' - getComputedStyle(document.documentElement).getPropertyValue("--sab") + 'px - 48px)');
+      // $('#mobile_touch_overlay').css('height', 'calc(100vh ' - getComputedStyle(document.documentElement).getPropertyValue("--sab") + 'px + 50px)');
 
-      alert(getComputedStyle(document.documentElement).getPropertyValue("--sab"));
-      alert(getComputedStyle(document.documentElement).getPropertyValue("--sat"));
+      // alert(getComputedStyle(document.documentElement).getPropertyValue("--sab"));
+      // alert(getComputedStyle(document.documentElement).getPropertyValue("--sat"));
+      
       $("#regular-channels").sortable({
         axis: 'y',
         opacity: 0.7,
@@ -1128,22 +1129,21 @@
       function leaveContent() {
         // if Mobile, revert all when going to home page or space search page
         mobile_column = 1;
-
-          $('#header').css("margin-right", "0px");
-          $('#channels').css("margin-right", "0px");
-          $('#chats').css("margin-left", "0px");
-          $('#information').css("margin-left", "0px");
-          $('#chats').css("margin-right", "0px");
-          $('#information').css("margin-right", "0px");
-          $('#members').css("margin-left", "0px");
-          $('#members_header').css("margin-left", "0px");
-          $('#chats').css("margin-left", "0px");
-          $('#chats').css("margin-right", "0px");
-          $('#information').css("margin-left", "0px");
-          $('#information').css("margin-right", "0px");
-          $('#mobile_touch_overlay').css("display", "none");
-          $('#mobile_touch_overlay').css("left", "0px");
-          $('#mobile_touch_overlay').css("width", "0px");
+        $('#header').css("margin-right", "0px");
+        $('#channels').css("margin-right", "0px");
+        $('#chats').css("margin-left", "0px");
+        $('#information').css("margin-left", "0px");
+        $('#chats').css("margin-right", "0px");
+        $('#information').css("margin-right", "0px");
+        $('#members').css("margin-left", "0px");
+        $('#members_header').css("margin-left", "0px");
+        $('#chats').css("margin-left", "0px");
+        $('#chats').css("margin-right", "0px");
+        $('#information').css("margin-left", "0px");
+        $('#information').css("margin-right", "0px");
+        $('#mobile_touch_overlay').css("display", "none");
+        $('#mobile_touch_overlay').css("left", "0px");
+        $('#mobile_touch_overlay').css("width", "0px");
       }
 
 
@@ -1194,8 +1194,7 @@
           $('#mobile_touch_overlay').css('height', 'calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px)');
           $('#content').css('grid-template-rows', '48px calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px - 48px)');
         }
-        alert(getComputedStyle(document.documentElement).getPropertyValue("--sab"));
-        alert(getComputedStyle(document.documentElement).getPropertyValue("--sat"));
+
           //$('#footer').css('top', document.getElementById('footer').getBoundingClientRect().top + 'px');
         if ($(window).width() > 768) {
           leaveContent();
