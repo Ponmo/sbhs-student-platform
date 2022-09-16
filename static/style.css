@@ -16,6 +16,10 @@
   --main-hover-color: #3c3f45;
   --second-hover-color: #32353a;
   --selected-color: #43474D;
+  --sat: env(safe-area-inset-top);
+  --sar: env(safe-area-inset-right);
+  --sab: env(safe-area-inset-bottom); /* THIS ONE GETS US THE HOME BAR HEIGHT */
+  --sal: env(safe-area-inset-left);
 }
 html {
   background-color: var(--second-bg-color);

@@ -463,26 +463,16 @@
       var webkit = !!ua.match(/WebKit/i);
       var iOSSafari = iOS && webkit && !ua.match(/CriOS/i) && !ua.match(/OPiOS/i) && !ua.match(/EdgiOS/i) && !ua.match(/xiOS/);
       if (iOSSafari) {
-        // $('#content').css('grid-template-rows', '48px calc(100vh - 98px - 66px)');
-        $('#content').css('grid-template-rows', '48px calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px - 48px)');
-        $('#mobile_touch_overlay').css('height', 'calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px + 50px)');
+        // $('#content').css('grid-template-rows', '48px calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px - 48px)');
+        // $('#mobile_touch_overlay').css('height', 'calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px + 50px)');
         window.addEventListener("scroll", (e) => {
           e.preventDefault();
           window.scrollTo(0, 0);
         });
       }
-
-      // Safari Mobile and iPhone X bottom inset env
-
-      // $('#content').css('grid-template-rows', '48px calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px - 48px)');
-
-      //$('#first-all').css('top,)
-      //$('#footer').css('top', document.getElementById('footer').getBoundingClientRect().top + 'px');
-
-      // window.addEventListener('scroll', (e) => {
-      //   e.preventDefault;
-      //   window.scrollTo(0, 0);
-      // });
+      
+      $('#content').css('grid-template-rows', '48px calc(100vh ' - getComputedStyle(document.documentElement).getPropertyValue("--sab") + 'px - 48px)');
+      $('#mobile_touch_overlay').css('height', 'calc(100vh ' - getComputedStyle(document.documentElement).getPropertyValue("--sab") + 'px + 50px)');
 
       $("#regular-channels").sortable({
         axis: 'y',
@@ -927,16 +917,6 @@
           'user_id': this.closest('.space-members-list-item').getAttribute('data-id'),
           'status': this.firstElementChild.value
         });
-        // $.ajax({
-        //   type: "POST",
-        //   url: '/change_user_status',
-        //   dataType: "json",
-        //   data: JSON.stringify({'user_id': this.closest('.space-members-list-item').getAttribute('data-id'), 'status': this.firstElementChild.value}), 
-        //   contentType: 'application/json;charset=UTF-8',
-        //   success: function(data) {
-        //     popupSuccess();
-        //    }
-        // });
       });
 
       socket.on('change_user_status', function (data) {
