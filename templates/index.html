@@ -474,8 +474,8 @@
       // $('#content').css('grid-template-rows', '48px calc(100vh ' - getComputedStyle(document.documentElement).getPropertyValue("--sab") + 'px - 48px)');
       // $('#mobile_touch_overlay').css('height', 'calc(100vh ' - getComputedStyle(document.documentElement).getPropertyValue("--sab") + 'px + 50px)');
 
-      // alert(getComputedStyle(document.documentElement).getPropertyValue("--sab"));
-      // alert(getComputedStyle(document.documentElement).getPropertyValue("--sat"));
+      alert(getComputedStyle(document.documentElement).getPropertyValue("--sab2"));
+      alert(getComputedStyle(document.documentElement).getPropertyValue("--sat2"));
       
       $("#regular-channels").sortable({
         axis: 'y',
@@ -1199,7 +1199,7 @@
         if ($(window).width() > 768) {
           leaveContent();
           mobile = false;
-        }
+        } // h
         else {
           mobile = true;
         }
