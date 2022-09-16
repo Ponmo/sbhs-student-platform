@@ -1145,7 +1145,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   z-index: 999;
   bottom: 0;
   width: 100%;
-  height: 50px;
+  height: calc(50px + --sab);
   background-color: var(--footer-bg-color);
   /* Remove and use pseudo element to prevent it from messing up centering of profile? Alternative way possible */
   border-top: 1px solid var(--footer-border-color) ;
