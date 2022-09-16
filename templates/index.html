@@ -1194,6 +1194,8 @@
           $('#mobile_touch_overlay').css('height', 'calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px)');
           $('#content').css('grid-template-rows', '48px calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px - 48px)');
         }
+        alert(getComputedStyle(document.documentElement).getPropertyValue("--sab"));
+        alert(getComputedStyle(document.documentElement).getPropertyValue("--sat"));
           //$('#footer').css('top', document.getElementById('footer').getBoundingClientRect().top + 'px');
         if ($(window).width() > 768) {
           leaveContent();
