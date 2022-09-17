@@ -1198,7 +1198,11 @@
       $(window).resize(function() {
         if (iOSSafari) {
           $('#mobile_touch_overlay').css('height', 'calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px)');
-          $('#content').css('grid-template-rows', '48px calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px - 48px - var(--sab))');
+          $('#content').css('grid-template-rows', '48px calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px - 48px)');
+
+          // TODO: Make every div that has a calc(100vh) in the CSS be added here, as well as in the if iOSSafari above
+          // $('#home-page').css('height', 'calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px)');
+          // $('#settings-pages').css('grid-template-rows', '48px calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px - 48px - var(--sab))');
         }
 
           //$('#footer').css('top', document.getElementById('footer').getBoundingClientRect().top + 'px');
