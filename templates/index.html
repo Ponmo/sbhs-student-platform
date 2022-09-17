@@ -467,7 +467,7 @@
       //          navigator.userAgent.indexOf('FxiOS') == -1;
       var ua = window.navigator.userAgent;
       var webkit = !!ua.match(/WebKit/i);
-      var iOSSafari = webkit && !ua.match(/CriOS/i) && !ua.match(/OPiOS/i) && !ua.match(/EdgiOS/i) && !ua.match(/xiOS/);
+      var iOSSafari = webkit && !ua.match(/CriOS/i) && !ua.match(/OPiOS/i) && !ua.match(/EdgiOS/i) && !ua.match(/FxiOS/);
       if (iOSSafari) {
         $('#content').css('grid-template-rows', '48px calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px - 48px)');
         $('#mobile_touch_overlay').css('height', 'calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px + 50px)');
@@ -1196,9 +1196,6 @@
 
       // Switch back to Desktop version if on Desktop
       $(window).resize(function() {
-
-      alert(getComputedStyle(document.documentElement).getPropertyValue("--sab"));
-      alert(getComputedStyle(document.documentElement).getPropertyValue("--sat"));
         if (iOSSafari) {
           $('#mobile_touch_overlay').css('height', 'calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px)');
           $('#content').css('grid-template-rows', '48px calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px - 48px)');
