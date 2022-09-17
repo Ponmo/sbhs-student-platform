@@ -629,8 +629,8 @@ def report_message():
         return 'expired', 200
     if request.method == 'POST' and space_member():
         reported_message = collection_messages.find_one({'_id': ObjectId(request.json['message_id'])})
-        if collection_logs.count_documents({'details': reported_message}) == 0:
-            collection_logs.insert_one({'name': session['users_name'], 'user_id': session['unique_id'], 'email': session['users_email'], 'action': 'reported message', 'by': reported_message['name'], 'by_email': reported_message['email'], 'in': session['current_space_name'], 'space_id': session['current_space'], 'details': reported_message, 'datetime': datetime.now().isoformat() + 'Z'})
+        if collection_logs.count_documents({'details._id': reported_message['_id']}) == 0:
+            collection_logs.insert_one({'name': session['users_name'], 'user_id': session['unique_id'], 'email': session['users_email'], 'action': 'reported message', 'by': reported_message['name'], 'by_email': reported_message['email'], 'in': session['current_space_name'], 'space_id': session['current_space'], 'details': reported_message, 'datetime': datetime.now().isoformat() + 'Z', 'note': request.json['note']})
             return Response(dumps({'success': 'true'}), mimetype='application/json')
         else:
             return Response(dumps({'success': 'many'}), mimetype='application/json')

@@ -738,7 +738,7 @@
                 newNode = document.createElement('tr');
                 newNode.innerHTML = '<td colspan="6" width="100%"><div class="message-container-logs"><img class="profile-picture pointer"><p class="message-title"><span style="font-weight: bold;"></span><span class="datetime"></span></p><p class="message-content-logs"></p></div></td>';
                 newNode.className = 'admin-logs-table-row-details';
-                newNode.style.backgroundColor = '#32353a';
+                newNode.style.backgroundColor = 'var(--second-hover-color)';
                 newNode.firstElementChild.firstElementChild.firstElementChild.src = item.details.picture;
                 newNode.querySelector('.message-title').firstElementChild.textContent = item.details.name;
                 newNode.querySelector('.datetime').textContent = ' on ' + moment(item.details.datetime).local().format('MMM Do YYYY, h:mm[]a');
@@ -2064,18 +2064,18 @@
           type: "POST",
           url: '/report_message',
           dataType: "json",
-          data: JSON.stringify({'message_id': selected_message}),
+          data: JSON.stringify({'message_id': selected_message, 'note': $.trim($('#report-message-note').val())}),
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
             reportMessageModal.style.display = "none";
             if (data['success'] == 'true') {
-              alert("Your report has been received.")
+              popupSuccess();
             }
             else if (data['success'] == 'many') {
-              alert("Message has already been reported.")
+              alert("Message has already been reported.");
             }
             else {
-              alert("Your report failed.")
+              alert("Your report failed.");
             }
           }
         });
