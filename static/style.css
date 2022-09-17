@@ -20,10 +20,6 @@
   --sar: env(safe-area-inset-right);
   --sab: env(safe-area-inset-bottom); /* THIS ONE GETS US THE HOME BAR HEIGHT */
   --sal: env(safe-area-inset-left);
-  --sat2: constant(safe-area-inset-top);
-  --sar2: constant(safe-area-inset-right);
-  --sab2: constant(safe-area-inset-bottom); /* THIS ONE GETS US THE HOME BAR HEIGHT */
-  --sal2: constant(safe-area-inset-left);
 }
 html {
   background-color: var(--second-bg-color);

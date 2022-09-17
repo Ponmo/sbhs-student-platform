@@ -3,7 +3,10 @@
   <head>
     <!--Disables zoom, may need a workaround if it reduces accessibility: https://stackoverflow.com/questions/4472891/how-can-i-disable-zoom-on-a-mobile-web-page-->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, maximum-scale=1, viewport-fit=cover">
+    <meta name="viewport" content="viewport-fit=cover, shrink-to-fit=no, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
+    <meta name="viewport" content="initial-scale=1.0, width=device-width">
+    <meta name="viewport" content="viewport-fit=cover"> 
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, maximum-scale=1, viewport-fit=cover"> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
@@ -474,8 +477,8 @@
       // $('#content').css('grid-template-rows', '48px calc(100vh ' - getComputedStyle(document.documentElement).getPropertyValue("--sab") + 'px - 48px)');
       // $('#mobile_touch_overlay').css('height', 'calc(100vh ' - getComputedStyle(document.documentElement).getPropertyValue("--sab") + 'px + 50px)');
 
-      alert(getComputedStyle(document.documentElement).getPropertyValue("--sab2"));
-      alert(getComputedStyle(document.documentElement).getPropertyValue("--sat2"));
+      alert(getComputedStyle(document.documentElement).getPropertyValue("--sab"));
+      alert(getComputedStyle(document.documentElement).getPropertyValue("--sat"));
       
       $("#regular-channels").sortable({
         axis: 'y',
@@ -3084,7 +3087,5 @@
       // new NOTE: just use a hashmap man
       // ['2hu45iu2323', 'Hi I love apples and cakes they are cool', '34yubjub42', 'I love appels']
       // Loop through this and check if joined room id is equal to any of these. If so, get index of that ID add one and make the message that message. Yep okay easy peasy lemon SQUEEEEZY.
-      alert(getComputedStyle(document.documentElement).getPropertyValue("--sab"));
-      alert(getComputedStyle(document.documentElement).getPropertyValue("--sat"));
   </script>
 </html>
