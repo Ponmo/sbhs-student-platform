@@ -743,7 +743,7 @@
                 newNode.querySelector('.message-title').firstElementChild.textContent = item.details.name;
                 newNode.querySelector('.datetime').textContent = ' on ' + moment(item.details.datetime).local().format('MMM Do YYYY, h:mm[]a');
                 if (item.action == 'reported message') {
-                  newNode.querySelector('.message-content-logs').innerHTML = parseMarkdown(escapeHTML(item.details.message + '\n\nNote:' + item.note))
+                  newNode.querySelector('.message-content-logs').innerHTML = parseMarkdown(escapeHTML(item.details.message + '\n\n<b>Note:</b> ' + item.note))
                 }
                 else {
                   newNode.querySelector('.message-content-logs').innerHTML = parseMarkdown(escapeHTML(item.details.message));
