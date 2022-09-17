@@ -59,7 +59,6 @@ img { /* make images and create button undraggable and unhighlitable*/
   overflow: hidden;
   display: block;
   height: calc(100vh - 50px);
-  min-height: -webkit-fill-available;
   background-color: white;
 }
 .home-grid {
@@ -102,7 +101,6 @@ img { /* make images and create button undraggable and unhighlitable*/
   width: 100%;
   /* min-width: 500px; */
   height: calc(100vh - 50px);
-  min-height: -webkit-fill-available;
   z-index: 10;
   overflow: hidden;
   white-space: nowrap;
@@ -243,7 +241,6 @@ img { /* make images and create button undraggable and unhighlitable*/
   grid-template-rows: 48px calc(100vh - 98px);
   grid-template-columns: 270px minmax(278px, auto) 220px;
   height: 100vh;
-  min-height: -webkit-fill-available;
   width: 100vw;
   overflow: hidden;
   /* Remove? */
@@ -1496,7 +1493,6 @@ img { /* make images and create button undraggable and unhighlitable*/
 #administrator-page {
   display: none;
   height: calc(100vh - 50px);
-  min-height: -webkit-fill-available;
   background-color: white;
 }
 #admin-users {
@@ -1528,7 +1524,6 @@ img { /* make images and create button undraggable and unhighlitable*/
   font-size: 12px;
   color: gray;
   height: calc(100vh - 98px);
-  min-height: -webkit-fill-available;
 }
 .feed p {
   position: absolute;
@@ -1683,7 +1678,6 @@ img { /* make images and create button undraggable and unhighlitable*/
     position: absolute;
     z-index: 5;
     height: calc(100vh - 50px);
-    min-height: -webkit-fill-available;
     background-color: black;
     opacity: 0.5;
   }
