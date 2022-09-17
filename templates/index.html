@@ -742,7 +742,12 @@
                 newNode.firstElementChild.firstElementChild.firstElementChild.src = item.details.picture;
                 newNode.querySelector('.message-title').firstElementChild.textContent = item.details.name;
                 newNode.querySelector('.datetime').textContent = ' on ' + moment(item.details.datetime).local().format('MMM Do YYYY, h:mm[]a');
-                newNode.querySelector('.message-content-logs').innerHTML = parseMarkdown(escapeHTML(item.details.message));
+                if (item.action == 'reported message') {
+                  newNode.querySelector('.message-content-logs').innerHTML = parseMarkdown(escapeHTML(item.details.message + '\n\nNote:' + item.note))
+                }
+                else {
+                  newNode.querySelector('.message-content-logs').innerHTML = parseMarkdown(escapeHTML(item.details.message));
+                }
                 newFragment.appendChild(newNode);
               });
               document.getElementById('admin-logs-body').appendChild(newFragment);
