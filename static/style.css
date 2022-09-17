@@ -58,7 +58,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 #home-page {
   overflow: hidden;
   display: block;
-  height: calc(100vh - 50px);
+  height: calc(100vh - 50px - var(--sab));
   background-color: white;
 }
 .home-grid {
@@ -100,7 +100,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   position: fixed;
   width: 100%;
   /* min-width: 500px; */
-  height: calc(100vh - 50px);
+  height: calc(100vh - 50px - var(--sab));
   z-index: 10;
   overflow: hidden;
   white-space: nowrap;
@@ -238,7 +238,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 
 #content {  /* make calc good on all browsers ; Make margin and padding 0 because of broswer differences ; */
   display: grid;
-  grid-template-rows: 48px calc(100vh - 98px);
+  grid-template-rows: 48px calc(100vh - 98px - var(--sab));
   grid-template-columns: 270px minmax(278px, auto) 220px;
   height: 100vh;
   width: 100vw;
@@ -1492,7 +1492,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 #administrator-page {
   display: none;
-  height: calc(100vh - 50px);
+  height: calc(100vh - 50px - var(--sab));
   background-color: white;
 }
 #admin-users {
@@ -1523,7 +1523,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   overflow-y: scroll;
   font-size: 12px;
   color: gray;
-  height: calc(100vh - 98px);
+  height: calc(100vh - 98px - var(--sab));
 }
 .feed p {
   position: absolute;
@@ -1677,7 +1677,7 @@ img { /* make images and create button undraggable and unhighlitable*/
   #mobile_touch_overlay {
     position: absolute;
     z-index: 5;
-    height: calc(100vh - 50px);
+    height: calc(100vh - 50px - var(--sab));
     background-color: black;
     opacity: 0.5;
   }
