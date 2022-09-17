@@ -460,11 +460,14 @@
                     'dark': ['#111112', 'white', '#111112', '#d7d9da', '#111112', '#111112', '#232428', 'white', '#5e5e5e', '#333333', '35, 36, 40', 'white', 'black', '#3c3f45', '#222224', '#43474d', 'brightness(0) invert(1)'],
                     'nature': ['#1b4332', 'white','#2d6a4f','white','#e9c46a','#0a241b','black','white','#d8f3dc','#3d8262','16, 41, 30','white','black','#2d6a4f','#40916c','#40916c', 'brightness(0)']};
 
-      // Check if it's Safari Mobile
+      // Check if it's Safari on anything besides desktop
+      // var isSafari = navigator.vendor && navigator.vendor.indexOf('Apple') > -1 &&
+      //          navigator.userAgent &&
+      //          navigator.userAgent.indexOf('CriOS') == -1 &&
+      //          navigator.userAgent.indexOf('FxiOS') == -1;
       var ua = window.navigator.userAgent;
-      var iOS = !!ua.match(/iPhone/i);
       var webkit = !!ua.match(/WebKit/i);
-      var iOSSafari = iOS && webkit && !ua.match(/CriOS/i) && !ua.match(/OPiOS/i) && !ua.match(/EdgiOS/i) && !ua.match(/xiOS/);
+      var iOSSafari = webkit && !ua.match(/CriOS/i) && !ua.match(/OPiOS/i) && !ua.match(/EdgiOS/i) && !ua.match(/xiOS/);
       if (iOSSafari) {
         $('#content').css('grid-template-rows', '48px calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px - 48px)');
         $('#mobile_touch_overlay').css('height', 'calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px + 50px)');
@@ -1193,6 +1196,9 @@
 
       // Switch back to Desktop version if on Desktop
       $(window).resize(function() {
+
+      alert(getComputedStyle(document.documentElement).getPropertyValue("--sab"));
+      alert(getComputedStyle(document.documentElement).getPropertyValue("--sat"));
         if (iOSSafari) {
           $('#mobile_touch_overlay').css('height', 'calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px)');
           $('#content').css('grid-template-rows', '48px calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px - 48px)');
