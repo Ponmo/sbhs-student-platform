@@ -546,10 +546,6 @@
               newNodeChild.setAttribute('data-name', item.name);
               newNodeChild.src = item.picture;
               newNode.appendChild(newNodeChild);
-              //newNodeChild = document.createElement('div');
-              //newNodeChild.className = 'space-tooltip';
-              //newNodeChild.textContent = item.name;
-              //newNode.appendChild(newNodeChild);
               newNodeChild = document.createElement('div');
               newNodeChild.className = 'active-space';
               newNode.appendChild(newNodeChild); 
@@ -613,7 +609,7 @@
       $(document).on("mouseover", '.space', function () {
         var location = this.getBoundingClientRect();
         $('#space-tooltip').text(this.getAttribute('data-name'));
-        $('#space-tooltip').css({'left': location.left + 22 - $('#space-tooltip').width() / 2, 'bottom': 55, 'visibility': 'visible'})
+        $('#space-tooltip').css({'left': location.left + 22 - $('#space-tooltip').width() / 2, 'bottom': 55 + Integer.parseInt(getComputedStyle(document.documentElement).getPropertyValue("--sab").slice(0, -2)), 'visibility': 'visible'})
         $("#space-tooltip").animate({opacity: '1'}, 150);
       });
 
