@@ -468,9 +468,17 @@
       var ua = window.navigator.userAgent;
       var webkit = !!ua.match(/WebKit/i);
       var iOSSafari = webkit && !ua.match(/CriOS/i) && !ua.match(/OPiOS/i) && !ua.match(/EdgiOS/i) && !ua.match(/FxiOS/);
+
+
       if (iOSSafari) {
-        $('#content').css('grid-template-rows', '48px calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px - 48px - var(--sab))');
-        $('#mobile_touch_overlay').css('height', 'calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px + 50px - var(--sab))');
+        if(getComputedStyle(document.documentElement).getPropertyValue("--sab") == "0px") {
+          $('#content').css('grid-template-rows', '48px calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px - 48px - var(--sab))');
+          $('#mobile_touch_overlay').css('height', 'calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px + 50px - var(--sab))');
+        }
+        else {
+          $('#content').css('grid-template-rows', '48px calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px - 48px)');
+          $('#mobile_touch_overlay').css('height', 'calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px + 50px)');
+        }
         window.addEventListener("scroll", (e) => {
           e.preventDefault();
           window.scrollTo(0, 0);
