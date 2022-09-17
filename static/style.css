@@ -1600,6 +1600,7 @@ img { /* make images and create button undraggable and unhighlitable*/
 }
 .message-content-logs {
   overflow-wrap: break-word;
+  white-space: pre-wrap;
   width: calc(90vw - 78px - 10px);
 }
 #admin-search-button, #directory-search-button {
