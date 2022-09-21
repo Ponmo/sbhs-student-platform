@@ -488,6 +488,7 @@
           $('#content').css('grid-template-rows', '48px calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px - 48px)');
           $('#mobile_touch_overlay').css('height', 'calc(' + document.getElementById('footer').getBoundingClientRect().top + 'px + 50px)');
         }
+        // TODO: Whenever a user presses on a textarea, remove this eventlistener then add it back when they are done.
         window.addEventListener("scroll", (e) => {
           e.preventDefault();
           window.scrollTo(0, 0);
