@@ -33,3 +33,4 @@ gevent==21.12.0
 gevent-websocket==0.10.1
 flask-session==0.4.0
 shortuuid
+better_profanity
