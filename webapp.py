@@ -220,8 +220,8 @@ def render_main_page(space_id = None):
                 return render_template('index.html', user_name = session['users_name'], room = '1', user_picture = session['picture'], user_id = session['unique_id'])
             space_id = invite['space']
             session['code'] = space_id
-            return redirect('https://www.oneconnected.app/school/' + space_id)
-        return redirect('https://www.oneconnected.app/school/' + space_id)
+            return redirect('https://sbhs-platform.herokuapp.com/school/' + space_id)
+        return redirect('https://sbhs-platform.herokuapp.com/school/' + space_id)
     if 'logged' not in session or session['logged'] == False:
        return redirect(url_for('render_login'))
     return render_template('index.html', user_name = session['users_name'], room = '1', user_picture = session['picture'], user_id = session['unique_id'])
@@ -234,8 +234,9 @@ def render(invite_code = None):
             return redirect(url_for('render_login'))
         space_id = collection_invites.find_one({'_id': invite_code})['space']
         session['code'] = space_id
-        return redirect('https://www.oneconnected.app/school/' + space_id)
+        return redirect('https://sbhs-platform.herokuapp.com/school/' + space_id)
 
+    
 # When logout button is clicked, destroy session.
 
 @app.route('/logout', methods=['GET', 'POST'])
@@ -427,11 +428,11 @@ def send_email():
     if session_expired() or banned():
         return 'expired', 200
     if request.method == 'POST' and (space_admin() or server_admin()):
-        sender_email = 'oneconnected.application@gmail.com'
+        sender_email = 'sbhs.platform.test@gmail.com'
         password = os.environ['EMAIL_ACCESS_PASSWORD']
         message = MIMEMultipart('alternative')
         message['Subject'] = request.json['subject'][:70]
-        message['From'] =  'One Connected'
+        message['From'] = 'Platform Test'
         recipients = request.json['to']
         stored_recipients = list(set(recipients))
         stored_recipients.reverse()
@@ -445,7 +446,7 @@ def send_email():
         '--------------------------------------<br>' +
         session['users_name'] + '<br>' + 
         session['users_email'] + '<br>' +
-        '<a href="https://www.oneconnected.app/school/' + session['current_space'] + '">' + session['current_space_name'] + '</a><br>' +
+        '<a href="https://sbhs-platform.herokuapp.com/school/' + session['current_space'] + '">' + session['current_space_name'] + '</a><br>' +
         '--------------------------------------<br>' +
         '<div style="color:lightgray;">do not reply</div>')
         message.attach(MIMEText(text, 'html'))
@@ -557,7 +558,7 @@ def delete_section():
 def create_space():
     if session_expired() or banned():
         return 'expired', 200
-    user = collection_users.find_one({'_id': request.json['request_owner_id']})
+    user = collection_users.find_one({"_id": session['unique_id']})
     if request.method == 'POST' and user['owns'] < 5:
         space_id = ObjectId()
         room_id = ObjectId()
@@ -572,12 +573,12 @@ def create_space():
                 space_image = '/static/images/Space.jpeg'
         except:
             space_image = '/static/images/Space.jpeg'
-        collection_spaces.insert_one({'_id': space_id, 'name': request.json['space_name'][:200], 'picture': space_image, 'description': request.json['space_description'][:200], 'admins': [request.json['request_owner_id']], 'members': [[request.json['request_owner_id'], user['name']]], 'banned': [], 'theme': 'default', 'invite_only': False})
+        collection_spaces.insert_one({'_id': space_id, 'name': request.json['space_name'][:200], 'picture': space_image, 'description': request.json['space_description'][:200], 'admins': [session['unique_id']], 'members': [[request.json['request_owner_id'], user['name']]], 'banned': [], 'theme': 'default', 'invite_only': False})
         collection_rooms.insert_many([room, special_rooms])
         collection_sections.insert_one(section)        
         joined = user['joined']
         joined.append(str(space_id))
-        collection_users.find_one_and_update({"_id": request.json['request_owner_id']}, {'$set': {'joined': joined, 'owns': user['owns'] + 1}})
+        collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': joined, 'owns': user['owns'] + 1}})
         return Response(dumps({'space_id': str(space_id), 'space_image': space_image}), mimetype='application/json')
     session['logged'] = False
     session.clear()
