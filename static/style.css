@@ -1,4 +1,4 @@
-/* Color Themes; SVGs, JavaS; Border; Fonts; Textcolors; Borders SEE 852 search colors: ; Selected Color*/
+* Color Themes; SVGs, JavaS; Border; Fonts; Textcolors; Borders SEE 852 search colors: ; Selected Color*/
 :root {
   --main-bg-color: #2f3136;
   --main-font-color: white;
@@ -1496,6 +1496,11 @@ img { /* make images and create button undraggable and unhighlitable*/
   background-color: white;
 }
 #admin-users {
+  line-height: 48px;
+  display: inline-block;
+  margin-left: 24px;
+}
+#admin-pending {
   line-height: 48px;
   display: inline-block;
   margin-left: 24px;
