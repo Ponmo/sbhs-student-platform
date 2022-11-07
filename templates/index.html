@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+  
   <head>
     <!--Disables zoom, may need a workaround if it reduces accessibility: https://stackoverflow.com/questions/4472891/how-can-i-disable-zoom-on-a-mobile-web-page-->
     <meta charset="utf-8">
@@ -73,7 +74,7 @@
         <!-- <p>One Connected Application</p> -->
         <img class="white-icon pointer" id="server-settings-button" src="/static/images/settings.svg">
       </div>
-      <div class="feed"><p>This webapp was made possible by students of the Computer Science Academy and the Multimedia Arts and Design Academy.</p></div>
+      <div class="feed"><p>This webapp was made possible by students of the Computer Science Academy. Follow us on Instagram @oneconnected.app</p></div>
       <!--<div id="special-announcements" class="home-grid"></div>
       <div id="feed" class="home-grid"></div>
       <div id="direct-messaging" class="home-grid"></div>-->
@@ -84,6 +85,7 @@
         <div id="admin-settings" class="admin-tab pointer">Settings</div>
         <div id="admin-logs" class="admin-tab pointer">Logs</div>
         <div id="admin-users" class="admin-tab pointer">Users</div>
+        <div id="admin-pending" class="admin-tab pointer">Pending Spaces</div>
         <img class="pointer white-icon" id="exit-server-settings" src="/static/images/x.svg">
       </div>
       <div id='admin-search'>
@@ -135,6 +137,19 @@
             </tr>
           </thead>
           <tbody id="admin-users-body">
+          </tbody>
+        </table>
+        <table class="admin-table" id="admin-pending-table">
+          <thead>
+            <tr>
+              <th width="20%">User</th>
+              <th width="20%">Email</th>
+              <th width="20%">Space Name</th>
+              <th width="20%">Space Description</th>
+              <th width="15%">Approved?</th>
+            </tr>
+          </thead>
+          <tbody id="admin-pending-body">
           </tbody>
         </table>
       </div>
@@ -315,13 +330,13 @@
       <div class="modal-content">
         <span id="close-create-space" class="close">&times;</span>
         <form id="create-space-form">
-          <label for="space-name">Space Name:</label><br>
-          <input type="text" id="space-name" maxlength="200"><br>
+          <label for="space-name">Space Name (will be verified by school officials):</label><br>
+          <input type="text" id="space-name" maxlength="200" required><br>
           <!--Accept Files, Sanitize Files, Compress Files-->
           <label for="space-picture">Space Picture (currently only accepts links):</label><br>
           <input type="text" id="space-picture"  maxlength="2000"><br>
           <label for="space-description">Space Description:</label><br>
-          <input type="text" id="space-description" maxlength="200"><br>
+          <input type="text" id="space-description" maxlength="200" required><br>
           <input type="submit" value="Submit">
         </form>
       </div>
@@ -347,6 +362,13 @@
       </div>
     </div>
     <!--New Modals Here-->
+    <div id="confirm-accept-policies" class="modal"> <!--modal for policies-->
+      <div class="modal-content">
+        <span id="close-confirm-accept-policies" class="close">&times;</span>
+        <p class="modal-header">Do you agree to our <a href="https://privacypolicy.oneconnected.repl.co">privacy policy</a> and <a href="https://cookiepolicy.oneconnected.repl.co">cookie policy</a>?</p>
+        <div class="confirm-button" id="confirm-accept-policies-button">Yes</div>
+      </div>
+    </div>
     <div id="confirm-delete-space" class="modal">  <!--Backend check for character limit and other security-->
       <div class="modal-content">
         <span id="close-confirm-delete-space" class="close">&times;</span>
@@ -355,6 +377,13 @@
           <input type="text" id="confirm-space-name"  maxlength="200"><br>
           <input type="submit" value="Submit">
         </form>
+      </div>
+    </div>
+    <div id="confirm-approve-space" class="modal"> 
+      <div class="modal-content">
+        <span id="close-confirm-approve-space" class="close">&times;</span>
+        <p class="modal-header">Are you sure you want to approve this space?</p>
+        <div class="confirm-button" id="confirm-approve-space-button">Confirm</div>
       </div>
     </div>
     <div id="confirm-leave-space" class="modal">
@@ -430,6 +459,7 @@
   </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
+  
   <script type="text/javascript" charset="utf-8">
     //Give small space to empty categories room-group 
     $(document).ready(function() {
@@ -537,6 +567,48 @@
         }
       });
 
+      // Policy Modal
+      let acceptPoliciesModal = document.getElementById("confirm-accept-policies"); 
+
+      document.getElementById('confirm-accept-policies').style.display = "none"
+      
+      $.ajax({
+        type:'POST',
+        url: '/display_policies',
+        contentType: 'application/json;charset=UTF-8',
+        success: function(data) {
+          if(data == 'true') {
+            document.getElementById('confirm-accept-policies').style.display = "none";
+          }
+          else {
+            document.getElementById('confirm-accept-policies').style.display = "block";
+          }
+        }
+      });
+
+      $(document).on('click', '#close-confirm-accept-policies', function() {
+        $.ajax({
+          type: 'POST',
+          url: '/logout',
+          dataType: "json",
+          success: function(data) {
+            window.location.href = "https://www.oneconnected.app";
+          }
+        });
+      });
+
+      $(document).on('click', '#confirm-accept-policies-button', function() {
+        $.ajax({
+          type:'POST',
+          url: '/accept_policies',
+          contentType: 'application/json;charset=UTF-8',
+          success: function(data) {
+            document.getElementById('confirm-accept-policies').style.display = "none";
+          }
+        });
+      });
+      
+
       $.ajax({
         type: 'POST',
         url: '/list_spaces',
@@ -610,8 +682,8 @@
             newNodeWrapper.appendChild(newNodeChild);
             document.getElementById('directory-space').prepend(newNode);
           });
-          if (window.location.href.indexOf('/sbhs/') != -1) {
-            joinSpace(window.location.href.substring(window.location.href.indexOf('/sbhs/') + 6).replace('#',''));
+          if (window.location.href.indexOf('/school/') != -1) {
+            joinSpace(window.location.href.substring(window.location.href.indexOf('/school/') + 8).replace('#',''));//number 8 is for the character count of "/school/"
           }
         }
       });
@@ -674,13 +746,13 @@
           url: '/logout',
           dataType: "json",
           success: function(data) {
-            window.location.href = "https://sbhs-platform.herokuapp.com";
+            window.location.href = "https://www.oneconnected.app";
           }
         });
       });
 
       $(document).on('click', '.home', function() {
-        window.history.pushState('', '', '/sbhs');
+        window.history.pushState('', '', '/school');
         $('#' + current_space).attr('style', '');
         current_space = '';
         current_room = '';
@@ -690,7 +762,7 @@
         $('#administrator-page').css('display', 'none');
         $('#user-page').css('display', 'none');
         $('#space-settings').css('display', 'none');
-        $('#space-search').css('display', 'none');
+        $('#space-search').css('display', 'none');//a possible solution to first-login bug
       });
 
       $(document).on('click', '#server-settings-button, #admin-logs', function() {
@@ -703,11 +775,13 @@
         $('#administrator-page').css('display', 'block');
         $('#admin-logs-table').css('display', 'table');
         $('#admin-users-table').css('display', 'none');
+        $('#admin-pending-table').css('display', 'none');
         $('#admin-settings-table').css('display', 'none');
         $('#admin-filters').css('display', 'block');
         $('#admin-logs-body').empty();
         $('#admin-users-body').empty();
         $('#admin-settings-body').empty();
+        $('#admin-pending-body').empty();
         $('#admin-search-bar').val('');
         $('.admin-tab').removeClass('admin-tab-selected');
         $('#admin-logs').addClass('admin-tab-selected');
@@ -788,11 +862,13 @@
         $('#administrator-page').css('display', 'block');
         $('#admin-logs-table').css('display', 'none');
         $('#admin-users-table').css('display', 'table');
+        $('#admin-pending-table').css('display', 'none');
         $('#admin-settings-table').css('display', 'none');
         $('#admin-filters').css('display', 'none');
         $('#admin-logs-body').empty();
         $('#admin-users-body').empty();
         $('#admin-settings-body').empty();
+        $('#admin-pending-body').empty();
         $('#admin-search-bar').val('');
         $('.admin-tab').removeClass('admin-tab-selected');
         $(this).addClass('admin-tab-selected');
@@ -841,6 +917,75 @@
           }
         }));
       });
+      $(document).on('click', '#admin-pending', function() {
+        $('.active-space').attr('style', '');
+        $('#home-page').css('display', 'none');
+        $('#first-all').css('display', 'none');
+        $('#space-search').css('display', 'none');
+        $('#user-page').css('display', 'none');
+        $('#space-settings').css('display', 'none');
+        $('#administrator-page').css('display', 'block');
+        $('#admin-logs-table').css('display', 'none');
+        $('#admin-users-table').css('display', 'none');
+        $('#admin-pending-table').css('display', 'table');
+        $('#admin-settings-table').css('display', 'none');
+        $('#admin-filters').css('display', 'none');
+        $('#admin-logs-body').empty();
+        $('#admin-pending-body').empty();
+        $('#admin-users-body').empty();
+        $('#admin-settings-body').empty();
+        $('#admin-search-bar').val('');
+        $('.admin-tab').removeClass('admin-tab-selected');
+        $(this).addClass('admin-tab-selected');
+      
+        abortRequests();
+        requests.push($.ajax({
+          type: "POST",
+          url: '/server_spaceApproval',
+          contentType: 'application/json;charset=UTF-8',
+          success: function(data) {
+            const newFragment = document.createDocumentFragment();
+            data.forEach(function (item) {
+              let formNode = '';
+              formNode = '<form class="approve-space"><div class="confirm-button">Approve</div></form>';
+              let newNode = document.createElement('tr');
+              newNode.className = 'admin-pending-table-row';
+              //newNode.setAttribute('data-id', item._id);
+              let newNodeChild = document.createElement('td');
+              let newNodeChildChild = document.createElement('img');
+              newNodeChildChild.className = 'profile-picture';
+              newNodeChildChild.src = item['picture'];
+              newNodeChild.appendChild(newNodeChildChild);
+              newNodeChild.appendChild(document.createTextNode(' ' + item['by']))
+              newNode.appendChild(newNodeChild);
+
+              newNodeChild = document.createElement('td');
+              newNodeChild.textContent = item['email'];
+              newNode.appendChild(newNodeChild);
+
+              newNodeChild = document.createElement('td')
+              newNodeChildChild = document.createElement('img');
+              newNodeChildChild.className = 'profile-picture';
+              newNodeChildChild.src = item['space_image'];
+              newNodeChild.appendChild(newNodeChildChild);
+              newNodeChild.appendChild(document.createTextNode(' ' + item['space_name']))
+              newNode.appendChild(newNodeChild);
+
+              newNodeChild = document.createElement('td');
+              newNodeChild.textContent = item['space_description']
+              newNode.appendChild(newNodeChild);
+
+              newNodeChild = document.createElement('td');
+              newNodeChild.innerHTML = formNode;
+              newNode.appendChild(newNodeChild);
+              newNode.setAttribute('data-id', item['_id']['$oid']);
+              newFragment.appendChild(newNode);
+              //newNode.innerHTML = '<td><img class="profile-picture" src="' + item.picture + '"> ' + item.name + '</td><td>' + item.email + '</td><td>' + formNode + '</td>';
+            });
+            document.getElementById('admin-pending-body').appendChild(newFragment);
+          }
+        }));
+      });
 
       $(document).on('click', '#admin-settings', function() {
         $('.active-space').attr('style', '');
@@ -852,11 +997,13 @@
         $('#administrator-page').css('display', 'block');
         $('#admin-logs-table').css('display', 'none');
         $('#admin-users-table').css('display', 'none');
+        $('#admin-users-pending').css('display', 'none');
         $('#admin-settings-table').css('display', 'table');
         $('#admin-filters').css('display', 'none');
         $('#admin-logs-body').empty();
         $('#admin-users-body').empty();
         $('#admin-settings-body').empty();
+        $('#admin-pending-body').empty();
         $('#admin-search-bar').val('');
         $('.admin-tab').removeClass('admin-tab-selected');
         $(this).addClass('admin-tab-selected');
@@ -929,7 +1076,7 @@
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
             if (data['success'] == 'self') {
-              window.location.href = "https://sbhs-platform.herokuapp.com";
+              window.location.href = "https://www.oneconnected.app";
             }
             popupSuccess();
            }
@@ -970,7 +1117,7 @@
           member?.querySelector('.status-icon')?.remove();
         }
       });
-
+      
       $('#directory-search-bar').keydown(function (e) {
         if (e.keyCode == 13) {
           e.preventDefault();
@@ -1048,6 +1195,7 @@
         $('#admin-logs-body').empty();
         $('#admin-users-body').empty();
         $('#admin-settings-body').empty();
+        $('#admin-pending-body').empty();
       });
       
       /* Does not work for laptops or computers, need to check compatibility with wider-screen tablets */
@@ -1685,7 +1833,6 @@
           });
         }
       }
-
       $(document).on('contextmenu', '.section', function (e) {
         hideSecondLayer();
         if (space_admin || admin) {
@@ -1713,48 +1860,83 @@
         }
       });
 
+      
+      
       document.getElementById('create-space-form').onsubmit = function (e) {
-        e.preventDefault();
+        alert("Your request to make a space has been received. After being reviewed by school officials, your request will be approved and your space will be displayed on the Club Directory.")
         let space_name = document.getElementById('space-name').value.trim();
         let space_image = document.getElementById('space-picture').value.trim();
         let space_description = document.getElementById('space-description').value.trim();
-        if (space_name.length) { 
-          $.ajax({
-            type: 'POST',
-            url: '/create_space',
-            dataType: "json",
-            data: JSON.stringify({'space_name': space_name, 'space_image': space_image, 'space_description': space_description}),
-            contentType: 'application/json;charset=UTF-8',
-            success: function(data) {
-              if ('success' in data) {
-                alert('You may only create up to 3 spaces.');
-              }
-              else {
-                document.getElementById("create-space").style.display = "none";
-                $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
-                $(document.getElementById(current_space)).attr('style', '');
-                let newNode = document.createElement('li');
-                newNode.className = 'space-wrapper';
-                let newNodeChild = document.createElement('img');
-                newNodeChild.className = 'space pointer';
-                newNodeChild.id = data.space_id;
-                newNodeChild.setAttribute('data-name', space_name);
-                newNodeChild.style.borderRadius = '3px';
-                newNodeChild.src = data.space_image;
-                newNode.appendChild(newNodeChild);
-                newNodeChild = document.createElement('div');
-                newNodeChild.className = 'active-space';
-                newNodeChild.style.width = '39px'
-                newNode.appendChild(newNodeChild);
-                referenceNode = document.getElementById('space_align_helper');
-                referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-                current_space = data.space_id;
-                space();
-              }
-            }
-          });
-        }
+        $.ajax({
+          type: 'POST',
+          url: '/approve_space',
+          dataType: "json",
+          data: JSON.stringify({'space_name': space_name, 'space_image': space_image, 'space_description': space_description}),
+          contentType: 'application/json;charset=UTF-8',
+          success: function(data) {
+          }
+        });
       }
+      
+      let approveSpaceModal = document.getElementById("confirm-approve-space")
+      $(document).on('click', '.approve-space', function () {
+        approveSpaceModal.setAttribute('data-id', this.parentElement.parentElement.getAttribute('data-id'))
+        approveSpaceModal.style.display = "block";
+      });
+
+      $(document).on('click', '#close-confirm-approve-space', function () {
+        approveSpaceModal.style.display = "none";
+      });
+
+      $(document).on('click', '#confirm-approve-space-button', function (e) {
+        e.preventDefault();
+        $.ajax({
+          type:'POST',
+          url: '/confirm_approve_space',
+          dataType: "json",
+          data: JSON.stringify({'request_id': this.parentElement.parentElement.getAttribute('data-id')}),
+          contentType: 'application/json;charset=UTF-8',
+          success: function(data) {
+            let space_name = data['space_name'].trim();
+            let space_image = data['space_image'].trim();
+            let space_description = data['space_description'].trim();
+            if (space_name.length) {    
+              $.ajax({
+                type: 'POST',
+                url: '/create_space',
+                dataType: "json",
+                data: JSON.stringify({'request_owner_id': data['user_id'],'space_name': space_name, 'space_image': space_image, 'space_description': space_description}),
+                contentType: 'application/json;charset=UTF-8',
+                success: function(data) {
+                  approveSpaceModal.style.display = "none";
+                  alert("Space has been approved!")
+                  /*else {
+                    document.getElementById("create-space").style.display = "none";
+                    $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
+                    $(document.getElementById(current_space)).attr('style', '');
+                    let newNode = document.createElement('li');
+                    newNode.className = 'space-wrapper';
+                    let newNodeChild = document.createElement('img');
+                    newNodeChild.className = 'space pointer';
+                    newNodeChild.id = data.space_id;
+                    newNodeChild.setAttribute('data-name', space_name);
+                    newNodeChild.style.borderRadius = '3px';
+                    newNodeChild.src = data.space_image;
+                    newNode.appendChild(newNodeChild);
+                    newNodeChild = document.createElement('div');
+                    newNodeChild.className = 'active-space';
+                    newNodeChild.style.width = '39px'
+                    newNode.appendChild(newNodeChild);
+                    referenceNode = document.getElementById('space_align_helper');
+                    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+                    current_space = data.space_id;
+                  }*/
+                }
+              });
+            }
+          }
+        });
+      });
 
       $(document).on('click', '#space-settings-button', function() {
         let container = document.getElementById('space-settings-popup');
@@ -1829,8 +2011,9 @@
         socket.emit("space_invite"); 
       });
 
-      socket.on("space_invite", function (data) {
-        navigator.clipboard.writeText('https://sbhs-platform.herokuapp.com/invite/' + data['_id']);
+      socket.on("space_invite", function (data) {    
+        navigator.clipboard.writeText('https://www.oneconnected.app/invite/' + data['_id']);
+        alert('https://www.oneconnected.app/invite/' + data['_id']);
         if (data['user'] == user_id) {
           popupSuccess();
         }
@@ -1932,6 +2115,10 @@
         }
       }
       
+      $(document).on('click', '#confirm-delete-message-button', function() {//modal for policies
+        //const
+      });
+      
       $(document).on('click', '#close-confirm-delete-space', function() {
         deleteSpaceModal.style.display = "none";
       });
@@ -1957,7 +2144,7 @@
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
             leaveSpaceModal.style.display = 'none';
-            window.history.pushState('', '', '/sbhs'); //l
+            window.history.pushState('', '', '/school'); //l
             $('#first-all').css('display', 'none');
             $("#home-page").show();
             $("#" + current_space).parent().remove();
@@ -2057,9 +2244,9 @@
           dataType: 'json',
           data: JSON.stringify({'message_id': message_id, 'room_id': current_room}),//
           contentType: 'application/json;charset=UTF-8',
-          success: function (delete_message) {
+          success: function (deleted_message) {
             deleteMessageModal.style.display = "none";
-            socket.emit('deleted_message', {'message_id': message_id, 'room_id': current_room});
+            socket.emit('delete_message', {'message_id': message_id, 'room_id': current_room});
           }
         });
       });
@@ -2165,9 +2352,6 @@
       window.onclick = function(event) {
         if (event.target == createRoomModal) {
           createRoomModal.style.display = "none";
-        }
-        if (event.target == createSpaceModal) {
-          createSpaceModal.style.display = "none";
         }
         if (event.target == createSectionModal) {
           createSectionModal.style.display = "none";
@@ -2441,7 +2625,7 @@
           data: JSON.stringify({'space_id': current_space}),
           contentType: 'application/json;charset=UTF-8',
           success: function(rooms_and_sections) {
-            window.history.pushState('', '', '/sbhs/' + current_space);
+            window.history.pushState('', '', '/school/' + current_space);
             applyTheme(rooms_and_sections[3][0].theme);
             if (rooms_and_sections[3][0].admins[0] == user_id) {
               space_admin = true;
