@@ -556,7 +556,7 @@ def create_space():
         room = {'_id': room_id, 'space': str(space_id), 'section': str(section_id), 'name': 'general', 'order': 1}
         special_rooms = {'_id': email_room_id, 'space': str(space_id), 'section': 'special', 'name': 'Email', 'order': 1}
         section = {'_id': section_id, 'space': str(space_id), 'name': 'discussion', 'order': 1}
-        space_picture = request.json['space_picture'].strip()
+        space_picture = request.json['space_picture']
         try:
             if not requests.head(space_picture).headers["content-type"] in ("image/png", "image/jpeg", "image/jpg", "image/gif", "image/avif", "image/webp", "image/svg") or int(requests.get(space_picture, stream = True).headers['Content-length']) > 6000000:
                 space_picture = '/static/images/Space.jpeg'
