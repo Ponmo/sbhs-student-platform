@@ -568,7 +568,7 @@ def create_space():
         joined = user['joined']
         joined.append(str(space_id))
         collection_users.find_one_and_update({"_id": session['unique_id']}, {'$set': {'joined': joined, 'owns': user['owns'] + 1}})
-        return Response(dumps({'space_id': str(space_id), 'space_image': space_image}), mimetype='application/json')
+        return Response(dumps({'space_id': str(space_id), 'space_picture': space_picture}), mimetype='application/json')
     session['logged'] = False
     session.clear()
     return 'not allowed', 405
