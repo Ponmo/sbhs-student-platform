@@ -556,13 +556,13 @@ def create_space():
         room = {'_id': room_id, 'space': str(space_id), 'section': str(section_id), 'name': 'general', 'order': 1}
         special_rooms = {'_id': email_room_id, 'space': str(space_id), 'section': 'special', 'name': 'Email', 'order': 1}
         section = {'_id': section_id, 'space': str(space_id), 'name': 'discussion', 'order': 1}
-        space_image = request.json['space_image']
+        space_picture = request.json['space_picture'].strip()
         try:
-            if not requests.head(space_image).headers["content-type"] in ("image/png", "image/jpeg", "image/jpg", "image/gif", "image/avif", "image/webp", "image/svg") or int(requests.get(space_image, stream = True).headers['Content-length']) > 6000000:
-                space_image = '/static/images/Space.jpeg'
+            if not requests.head(space_picture).headers["content-type"] in ("image/png", "image/jpeg", "image/jpg", "image/gif", "image/avif", "image/webp", "image/svg") or int(requests.get(space_picture, stream = True).headers['Content-length']) > 6000000:
+                space_picture = '/static/images/Space.jpeg'
         except:
-            space_image = '/static/images/Space.jpeg'
-        collection_spaces.insert_one({'_id': space_id, 'name': request.json['space_name'][:200], 'picture': space_image, 'description': request.json['space_description'][:200], 'admins': [session['unique_id']], 'members': [[session['unique_id'], session['users_name']]], 'banned': [], 'theme': 'default', 'invite_only': False})
+            space_picture = '/static/images/Space.jpeg'
+        collection_spaces.insert_one({'_id': space_id, 'name': request.json['space_name'][:200], 'picture': space_picture, 'description': request.json['space_description'][:200], 'admins': [session['unique_id']], 'members': [[session['unique_id'], session['users_name']]], 'banned': [], 'theme': 'default', 'invite_only': False})
         collection_rooms.insert_many([room, special_rooms])
         collection_sections.insert_one(section)        
         joined = user['joined']
