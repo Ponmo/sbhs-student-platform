@@ -316,12 +316,12 @@
         <span id="close-create-space" class="close">&times;</span>
         <form id="create-space-form">
           <label for="space-name">Space Name:</label><br>
-          <input type="text" id="space-name" maxlength="200"><br>
+          <input type="text" id="space-name" maxlength="200" required><br>
           <!--Accept Files, Sanitize Files, Compress Files-->
           <label for="space-picture">Space Picture (currently only accepts links):</label><br>
           <input type="text" id="space-picture"  maxlength="2000"><br>
           <label for="space-description">Space Description:</label><br>
-          <input type="text" id="space-description" maxlength="200"><br>
+          <input type="text" id="space-description" maxlength="200" required><br>
           <input type="submit" value="Submit">
         </form>
       </div>
@@ -347,6 +347,13 @@
       </div>
     </div>
     <!--New Modals Here-->
+    <div id="confirm-accept-policies" class="modal"> <!--modal for policies-->
+      <div class="modal-content">
+        <span id="close-confirm-accept-policies" class="close">&times;</span>
+        <p class="modal-header">Do you agree to our <a href="https://privacypolicy.oneconnected.repl.co">privacy policy</a> and <a href="https://cookiepolicy.oneconnected.repl.co">cookie policy</a>?</p>
+        <div class="confirm-button" id="confirm-accept-policies-button">Yes</div>
+      </div>
+    </div>
     <div id="confirm-delete-space" class="modal">  <!--Backend check for character limit and other security-->
       <div class="modal-content">
         <span id="close-confirm-delete-space" class="close">&times;</span>
@@ -536,6 +543,47 @@
           });
         }
       });
+	    
+      // Policy Modal
+      let acceptPoliciesModal = document.getElementById("confirm-accept-policies"); 
+
+      document.getElementById('confirm-accept-policies').style.display = "none"
+
+      $.ajax({
+        type:'POST',
+        url: '/display_policies',
+        contentType: 'application/json;charset=UTF-8',
+        success: function(data) {
+          if(data == 'true') {
+            document.getElementById('confirm-accept-policies').style.display = "none";
+          }
+          else {
+            document.getElementById('confirm-accept-policies').style.display = "block";
+          }
+        }
+      });
+
+      $(document).on('click', '#close-confirm-accept-policies', function() {
+        $.ajax({
+          type: 'POST',
+          url: '/logout',
+          dataType: "json",
+          success: function(data) {
+            window.location.href = "https://www.oneconnected.app";
+          }
+        });
+      });
+
+      $(document).on('click', '#confirm-accept-policies-button', function() {
+        $.ajax({
+          type:'POST',
+          url: '/accept_policies',
+          contentType: 'application/json;charset=UTF-8',
+          success: function(data) {
+            document.getElementById('confirm-accept-policies').style.display = "none";
+          }
+        });
+      });
 
       $.ajax({
         type: 'POST',
@@ -610,8 +658,8 @@
             newNodeWrapper.appendChild(newNodeChild);
             document.getElementById('directory-space').prepend(newNode);
           });
-          if (window.location.href.indexOf('/sbhs/') != -1) {
-            joinSpace(window.location.href.substring(window.location.href.indexOf('/sbhs/') + 6).replace('#',''));
+          if (window.location.href.indexOf('/school/') != -1) {
+            joinSpace(window.location.href.substring(window.location.href.indexOf('/school/') + 8).replace('#',''));
           }
         }
       });
@@ -680,7 +728,7 @@
       });
 
       $(document).on('click', '.home', function() {
-        window.history.pushState('', '', '/sbhs');
+        window.history.pushState('', '', '/school');
         $('#' + current_space).attr('style', '');
         current_space = '';
         current_room = '';
@@ -1830,8 +1878,9 @@
       });
 
       socket.on("space_invite", function (data) {
-        navigator.clipboard.writeText('https://sbhs-platform.herokuapp.com/invite/' + data['_id']);
         if (data['user'] == user_id) {
+	  navigator.clipboard.writeText('https://sbhs-platform.herokuapp.com/invite/' + data['_id']);
+	  alert('https://sbhs-platform.herokuapp.com/invite/' + data['_id']);
           popupSuccess();
         }
         if (!data['exists'] && (space_admin || admin)) {
@@ -1957,7 +2006,7 @@
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
             leaveSpaceModal.style.display = 'none';
-            window.history.pushState('', '', '/sbhs'); //l
+            window.history.pushState('', '', '/school'); //l
             $('#first-all').css('display', 'none');
             $("#home-page").show();
             $("#" + current_space).parent().remove();
@@ -2441,7 +2490,7 @@
           data: JSON.stringify({'space_id': current_space}),
           contentType: 'application/json;charset=UTF-8',
           success: function(rooms_and_sections) {
-            window.history.pushState('', '', '/sbhs/' + current_space);
+            window.history.pushState('', '', '/school/' + current_space);
             applyTheme(rooms_and_sections[3][0].theme);
             if (rooms_and_sections[3][0].admins[0] == user_id) {
               space_admin = true;
