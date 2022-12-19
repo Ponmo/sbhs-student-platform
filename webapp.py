@@ -550,7 +550,7 @@ def create_space():
     user = collection_users.find_one({"_id": session['unique_id']})
     if request.method == 'POST' and user['owns'] < 3:
         if user['owns'] < 3:
-            return Response(dumps({'success': false), mimetype='application/json')
+            return Response(dumps({'success': false}), mimetype='application/json')
         space_id = ObjectId()
         room_id = ObjectId()
         email_room_id = ObjectId()
