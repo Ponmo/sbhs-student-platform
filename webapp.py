@@ -548,9 +548,9 @@ def create_space():
     if session_expired() or banned():
         return 'expired', 200
     user = collection_users.find_one({"_id": session['unique_id']})
-    if request.method == 'POST':
-        if user['owns'] > 3:
+    if user['owns'] > 2:
             return Response(dumps({'success': false}), mimetype='application/json')
+    if request.method == 'POST':
         space_id = ObjectId()
         room_id = ObjectId()
         email_room_id = ObjectId()
