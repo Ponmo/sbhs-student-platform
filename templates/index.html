@@ -2013,9 +2013,9 @@
       });
 
       socket.on("space_invite", function (data) {    
-        navigator.clipboard.writeText('https://sbhs-plaform.herokuapp.com/invite/' + data['_id']);
-        alert('https://sbhs-platform.herokuapp.com/invite/' + data['_id']);
         if (data['user'] == user_id) {
+	  navigator.clipboard.writeText('https://sbhs-plaform.herokuapp.com/invite/' + data['_id']);
+	  alert('https://sbhs-platform.herokuapp.com/invite/' + data['_id']);
           popupSuccess();
         }
         if (!data['exists'] && (space_admin || admin)) {
