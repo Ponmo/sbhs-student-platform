@@ -212,8 +212,8 @@ def render_main_page(space_id = None):
                 return render_template('index.html', user_name = session['users_name'], room = '1', user_picture = session['picture'], user_id = session['unique_id'])
             space_id = invite['space']
             session['code'] = space_id
-            return redirect('https://sbhs-platform.herokuapp.com/sbhs/' + space_id)
-        return redirect('https://sbhs-platform.herokuapp.com/sbhs/' + space_id)
+            return redirect('https://sbhs-platform.herokuapp.com/school/' + space_id)
+        return redirect('https://sbhs-platform.herokuapp.com/school/' + space_id)
     if 'logged' not in session or session['logged'] == False:
        return redirect(url_for('render_login'))
     return render_template('index.html', user_name = session['users_name'], room = '1', user_picture = session['picture'], user_id = session['unique_id'])
@@ -226,7 +226,7 @@ def render(invite_code = None):
             return redirect(url_for('render_login'))
         space_id = collection_invites.find_one({'_id': invite_code})['space']
         session['code'] = space_id
-        return redirect('https://sbhs-platform.herokuapp.com/sbhs/' + space_id)
+        return redirect('https://sbhs-platform.herokuapp.com/school/' + space_id)
 
 # When logout button is clicked, destroy session.
 
@@ -436,7 +436,7 @@ def send_email():
         '--------------------------------------<br>' +
         session['users_name'] + '<br>' + 
         session['users_email'] + '<br>' +
-        '<a href="https://sbhs-platform.herokuapp.com/sbhs/' + session['current_space'] + '">' + session['current_space_name'] + '</a><br>' +
+        '<a href="https://sbhs-platform.herokuapp.com/school/' + session['current_space'] + '">' + session['current_space_name'] + '</a><br>' +
         '--------------------------------------<br>' +
         '<div style="color:lightgray;">do not reply</div>')
         message.attach(MIMEText(text, 'html'))
