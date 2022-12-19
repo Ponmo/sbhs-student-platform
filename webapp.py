@@ -618,32 +618,6 @@ def join_space():
         collection_spaces.find_one_and_update({"_id": ObjectId(request.json['space_id'])}, {'$push': {'members': [session['unique_id'], session['users_name']]}})
     return Response(dumps(space), mimetype='application/json')
 
-# When user deletes a message, delete that message from MongoDB.
-# If the combine status of the next message is true, then
-# change the combine status of it to false.
-# TODO: Add deleted message to the report collection in MongoDB.
-
-@app.route('/delete_message', methods=['GET', 'POST']) #space admin and message in space
-def delete_message():
-    if session_expired() or banned():
-        return 'expired', 200
-    if request.method == 'POST':
-        deleted_message = collection_messages.find_one({'_id': ObjectId(request.json['message_id'])})
-        if deleted_message['user_id'] == session['unique_id'] or space_admin() or server_admin():
-            deleted_email = collection_messages.find({'room': request.json['room_id'], 'email': deleted_message['email']}).sort('_id', pymongo.DESCENDING)
-            document_list = list(deleted_email)
-            message_index = document_list.index(deleted_message)
-            if message_index != 0:
-                if document_list[message_index-1]["combine"] == "true" and document_list[message_index]["combine"] == "false":
-                    collection_messages.find_one_and_update({'_id': ObjectId(document_list[message_index-1]['_id'])}, {'$set': {'combine': 'false'}}) 
-            #collection_deleted.insert_one({'name': session['users_email'], 'datetime': datetime.now().isoformat() + 'Z', 'deleted_message_content': deleted_message}) Used to add to logs once deleted.
-            collection_messages.delete_one({"_id": ObjectId(request.json['message_id'])})
-            collection_logs.insert_one({'name': session['users_name'], 'user_id': session['unique_id'], 'email': session['users_email'], 'action': 'deleted message', 'by': deleted_message['name'], 'by_email': deleted_message['email'], 'in': session['current_space_name'], 'space_id': session['current_space'], 'details': deleted_message, 'datetime': datetime.now().isoformat() + 'Z'})
-            return Response(dumps({'success': message_index}), mimetype='application/json')
-    session['logged'] = False
-    session.clear()
-    return 'not allowed', 405
-
 # When a user reports a message, add a report with
 # relevant information to MongoDB.
 # TODO: Store more information like reported time, reason for report, etc.
@@ -1003,13 +977,26 @@ def created_section(data):
 
 # When a message is deleted, send that message data to all
 # users in the space.
+# When user deletes a message, delete that message from MongoDB.
+# If the combine status of the next message is true, then
+# change the combine status of it to false.
 
 @socketio.on('deleted_message')
 def deleted_message(data):
     if session_expired() or banned():
         emit('expired')
         return
-    if space_admin() or server_admin() or session['unique_id'] == collection_messages.find_one({'_id': ObjectId(data['message_id'])})['user_id']:
+    deleted_message = collection_messages.find_one({'_id': ObjectId(request.json['message_id'])})
+    if deleted_message['user_id'] == session['unique_id'] or space_admin() or server_admin():
+        deleted_email = collection_messages.find({'room': request.json['room_id'], 'email': deleted_message['email']}).sort('_id', pymongo.DESCENDING)
+        document_list = list(deleted_email)
+        message_index = document_list.index(deleted_message)
+        if message_index != 0:
+            if document_list[message_index-1]["combine"] == "true" and document_list[message_index]["combine"] == "false":
+                collection_messages.find_one_and_update({'_id': ObjectId(document_list[message_index-1]['_id'])}, {'$set': {'combine': 'false'}}) 
+        #collection_deleted.insert_one({'name': session['users_email'], 'datetime': datetime.now().isoformat() + 'Z', 'deleted_message_content': deleted_message}) Used to add to logs once deleted.
+        collection_messages.delete_one({"_id": ObjectId(request.json['message_id'])})
+        collection_logs.insert_one({'name': session['users_name'], 'user_id': session['unique_id'], 'email': session['users_email'], 'action': 'deleted message', 'by': deleted_message['name'], 'by_email': deleted_message['email'], 'in': session['current_space_name'], 'space_id': session['current_space'], 'details': deleted_message, 'datetime': datetime.now().isoformat() + 'Z'})
         socketio.emit('deleted_message', data, room = data['room_id'])
     else:
         session['logged'] = False
