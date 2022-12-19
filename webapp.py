@@ -22,9 +22,6 @@ from datetime import datetime, date, timedelta
 import pytz
 from pytz import timezone
 
-from better_profanity import profanity
-
-
 import smtplib, ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -48,10 +45,10 @@ collection_spaces = db['Spaces']
 collection_rooms = db['Rooms']
 collection_messages = db['Messages']
 collection_sections = db['Sections']
+collection_deleted = db['Deleted Messages']
 collection_logs = db['Logs']
 collection_emails = db['Emails']
 collection_invites = db['Invites']
-collection_spaceRequests = db['SpaceRequests']
 
 # Support SSL termination. Mutate the host_url within Flask to use https://
 # if the SSL was terminated.
@@ -99,14 +96,11 @@ def set_session_lifetime():
 def render_login():
     if 'http://' in request.url:
         return redirect(request.url.replace('http://', 'https://', 1), 301)
-    if 'https://oneconnected.herokuapp.com' in request.url:
-        return redirect('https://www.oneconnected.app')
     if not session_expired():
         return redirect(url_for('render_main_page'))
     if request.args.get('error') != None:
         return render_template('login.html', login_error = request.args.get('error'))
     return render_template('login.html')
-
 
 @app.route('/login')
 def login():
@@ -167,14 +161,13 @@ def callback():
         users_email = userinfo_response.json()['email']
         picture = userinfo_response.json()['picture']
         users_name = userinfo_response.json()['name']
-#         if not users_email.endswith('@my.sbunified.org') and not users_email.endswith('@sbunified.org'):
-#             return redirect(url_for('render_login', error = "Please use your SBUnified school email"))
+        ##if not users_email.endswith('@my.sbunified.org') and not users_email.endswith('@sbunified.org'):
+            ##return redirect(url_for('render_login', error = "Please use your SBUnified school email"))
     else:
         return redirect(url_for('render_login', error = "Email not available or verified"))
     
     if not collection_users.count_documents({ '_id': unique_id}, limit = 1):
-        collection_users.insert_one({'_id': unique_id, 'name': users_name, 'email': users_email, 'picture': picture, 'joined': [], 'status': 'user', 'owns': 0, 'agreed': 'false'}) #check if profile picture the same !
-        session['admin'] = False
+        collection_users.insert_one({'_id': unique_id, 'name': users_name, 'email': users_email, 'picture': picture, 'joined': [], 'status': 'user', 'owns': 0}) #check if profile picture the same !
     else:
         user_status = collection_users.find_one({ '_id': unique_id})['status']
         if user_status == 'banned':
@@ -193,7 +186,6 @@ def callback():
     session['logged'] = True
     session['current_space'] = ''
     session['current_space_name'] = ''
-    #maybe add session['spaces'] = ''
     
     return redirect(url_for('render_main_page'))
 
@@ -204,8 +196,8 @@ def get_google_provider_cfg():
     
 # Loads platform after login. Comment
 
-@app.route('/school')
-@app.route('/school/<space_id>')
+@app.route('/sbhs')
+@app.route('/sbhs/<space_id>')
 def render_main_page(space_id = None):
     if space_id != None:
         if 'logged' not in session or session['logged'] == False:
@@ -220,8 +212,8 @@ def render_main_page(space_id = None):
                 return render_template('index.html', user_name = session['users_name'], room = '1', user_picture = session['picture'], user_id = session['unique_id'])
             space_id = invite['space']
             session['code'] = space_id
-            return redirect('https://sbhs-platform.herokuapp.com/school/' + space_id)
-        return redirect('https://sbhs-platform.herokuapp.com/school/' + space_id)
+            return redirect('https://sbhs-platform.herokuapp.com/sbhs/' + space_id)
+        return redirect('https://sbhs-platform.herokuapp.com/sbhs/' + space_id)
     if 'logged' not in session or session['logged'] == False:
        return redirect(url_for('render_login'))
     return render_template('index.html', user_name = session['users_name'], room = '1', user_picture = session['picture'], user_id = session['unique_id'])
@@ -234,9 +226,8 @@ def render(invite_code = None):
             return redirect(url_for('render_login'))
         space_id = collection_invites.find_one({'_id': invite_code})['space']
         session['code'] = space_id
-        return redirect('https://sbhs-platform.herokuapp.com/school/' + space_id)
+        return redirect('https://sbhs-platform.herokuapp.com/sbhs/' + space_id)
 
-    
 # When logout button is clicked, destroy session.
 
 @app.route('/logout', methods=['GET', 'POST'])
@@ -247,30 +238,6 @@ def logout():
         session['logged'] = False # Prevents browsers from using cached session data to log in. NOTE: We use server-side sessions now
         session.clear()
         return Response(dumps({'success': 'true'}), mimetype='application/json')
-
-@app.route('/accept_policies', methods=['GET', 'POST'])
-def accept_policies():
-    if session_expired() or banned():
-        return 'expired', 200
-    if request.method == 'POST':
-        collection_users.update_one({'_id': session['unique_id']}, {'$set': {'agreed': 'true'}}) #used for modal policies
-        return Response(dumps({'success':'true'}), mimetype='application/json')
-    session['logged'] = False # Prevents browsers from using cached session data to log in. NOTE: We use server-side sessions now
-    session.clear()
-    return 'not allowed', 405
-
-@app.route('/display_policies', methods=['GET', 'POST'])
-def display_policies():
-    if session_expired() or banned():
-        return 'expired', 200
-    if request.method == 'POST':
-        profile = collection_users.find_one({'_id': session['unique_id']})
-        data = profile['agreed']
-        return Response(dumps(data), mimetype='application/json')
-    session['logged'] = False # Prevents browsers from using cached session data to log in. NOTE: We use server-side sessions now
-    session.clear()
-    return 'not allowed', 405
-
         
 # Returns all space data from MongoDB.
 
@@ -432,7 +399,7 @@ def send_email():
         password = os.environ['EMAIL_ACCESS_PASSWORD']
         message = MIMEMultipart('alternative')
         message['Subject'] = request.json['subject'][:70]
-        message['From'] = 'Platform Test'
+        message['From'] =  'Platform Test'
         recipients = request.json['to']
         stored_recipients = list(set(recipients))
         stored_recipients.reverse()
@@ -446,7 +413,7 @@ def send_email():
         '--------------------------------------<br>' +
         session['users_name'] + '<br>' + 
         session['users_email'] + '<br>' +
-        '<a href="https://sbhs-platform.herokuapp.com/school/' + session['current_space'] + '">' + session['current_space_name'] + '</a><br>' +
+        '<a href="https://sbhs-platform.herokuapp.com/sbhs/' + session['current_space'] + '">' + session['current_space_name'] + '</a><br>' +
         '--------------------------------------<br>' +
         '<div style="color:lightgray;">do not reply</div>')
         message.attach(MIMEText(text, 'html'))
@@ -553,13 +520,12 @@ def delete_section():
 # section to MongoDB.
 # Returns the room and section data.
 
-
 @app.route('/create_space', methods=['GET', 'POST']) #Check if space with name already exists...
 def create_space():
     if session_expired() or banned():
         return 'expired', 200
     user = collection_users.find_one({"_id": session['unique_id']})
-    if request.method == 'POST' and user['owns'] < 5:
+    if request.method == 'POST' and user['owns'] < 3:
         space_id = ObjectId()
         room_id = ObjectId()
         email_room_id = ObjectId()
@@ -573,7 +539,7 @@ def create_space():
                 space_image = '/static/images/Space.jpeg'
         except:
             space_image = '/static/images/Space.jpeg'
-        collection_spaces.insert_one({'_id': space_id, 'name': request.json['space_name'][:200], 'picture': space_image, 'description': request.json['space_description'][:200], 'admins': [session['unique_id']], 'members': [[request.json['request_owner_id'], user['name']]], 'banned': [], 'theme': 'default', 'invite_only': False})
+        collection_spaces.insert_one({'_id': space_id, 'name': request.json['space_name'][:200], 'picture': space_image, 'description': request.json['space_description'][:200], 'admins': [session['unique_id']], 'members': [[session['unique_id'], session['users_name']]], 'banned': [], 'theme': 'default', 'invite_only': False})
         collection_rooms.insert_many([room, special_rooms])
         collection_sections.insert_one(section)        
         joined = user['joined']
@@ -632,21 +598,6 @@ def join_space():
 # change the combine status of it to false.
 # TODO: Add deleted message to the report collection in MongoDB.
 
-# When a message is deleted, send that message data to all
-# users in the space.
-
-@socketio.on('delete_message')
-def deleted_message(data):
-    if session_expired() or banned():
-        emit('expired')
-        return 
-    if space_admin() or server_admin() or session['unique_id'] == collection_messages.find_one({'_id': ObjectId(data['message_id']['user_id'])}):
-        socketio.emit('deleted_message', data, room = data['room_id'])
-    else:
-        session['logged'] = False
-        session.clear()
-        emit('expired')
-        
 @app.route('/delete_message', methods=['GET', 'POST']) #space admin and message in space
 def delete_message():
     if session_expired() or banned():
@@ -683,37 +634,6 @@ def report_message():
             return Response(dumps({'success': 'true'}), mimetype='application/json')
         else:
             return Response(dumps({'success': 'many'}), mimetype='application/json')
-    session['logged'] = False
-    session.clear()
-    return 'not allowed', 405
-
-#When a user submits a space creation request, add the request to the database.
-#If user is deleted from database, space request remains. Fix later maybe.
-
-@app.route('/approve_space', methods=['GET', 'POST'])
-def approve_space():
-    if session_expired() or banned():
-        return 'expired', 200
-    if request.method == 'POST':
-        try:
-            if not requests.head(request.json['space_name']).headers["content-type"] in ("image/png", "image/jpeg", "image/jpg", "image/gif", "image/avif", "image/webp", "image/svg") or int(requests.get(request.json['space_name'], stream = True).headers['Content-length']) > 6000000:
-                request.json['space_image'] = '/static/images/Space.jpeg'
-        except:
-            request.json['space_image'] = '/static/images/Space.jpeg'
-        collection_spaceRequests.insert_one({'by': session['users_name'], 'picture': session['picture'], 'user_id': session['unique_id'], 'email': session['users_email'], 'space_name': request.json['space_name'], 'space_image': request.json['space_image'], 'space_description': request.json['space_description']})
-        return Response(dumps({'success': 'true'}), mimetype='application/json')
-    session['logged'] = False
-    session.clear()
-    return 'not allowed', 405
-
-@app.route('/confirm_approve_space', methods=['GET', 'POST'])
-def confirm_approve_space():
-    if session_expired() or banned():
-        return 'expired', 200
-    if request.method == 'POST':
-        space_data = collection_spaceRequests.find_one({'_id': ObjectId(request.json['request_id'])})
-        collection_spaceRequests.delete_one({'_id': ObjectId(request.json['request_id'])})
-        return Response(dumps(space_data), mimetype='application/json')
     session['logged'] = False
     session.clear()
     return 'not allowed', 405
@@ -799,17 +719,6 @@ def server_users():
     if request.method == 'POST' and server_admin():
         users = dumps(list(collection_users.find().sort('_id', pymongo.DESCENDING)))
         return Response(users, mimetype='application/json')
-    session['logged'] = False
-    session.clear()
-    return 'not allowed', 405
-
-@app.route('/server_spaceApproval', methods=['GET', 'POST'])
-def server_spaceApproval():
-    if session_expired() or banned():
-        return 'expired', 200
-    if request.method == 'POST' and server_admin():
-        requests = dumps(list(collection_spaceRequests.find().sort('_id', pymongo.DESCENDING)))
-        return Response(requests, mimetype='application/json')
     session['logged'] = False
     session.clear()
     return 'not allowed', 405
@@ -999,14 +908,13 @@ def stopped_typing(data):
 
 @socketio.on('send_message')
 def send_message(data):
-    profanity.load_censor_words();
     if session_expired() or banned():
         emit('expired')
         return
     if space_member() and valid_room(data['room_id']):
         utc_dt = datetime.now().isoformat() + 'Z'
         data['datetime'] = utc_dt
-        data['message'] = profanity.censor(re.sub('\\\n\\n\\\n+', '\\n\\n', data['message'][:2000]), '#')
+        data['message'] = re.sub('\\\n\\n\\\n+', '\\n\\n', data['message'][:2000])
         data['message_id'] = str(ObjectId())
         data['user_id'] = session['unique_id']
         data['picture'] = session['picture']
@@ -1080,6 +988,21 @@ def created_section(data):
     if space_admin() or server_admin():
         for room in room_list():
             socketio.emit('deleted_section', data, room = room)
+    else:
+        session['logged'] = False
+        session.clear()
+        emit('expired')
+
+# When a message is deleted, send that message data to all
+# users in the space.
+
+@socketio.on('deleted_message')
+def deleted_message(data):
+    if session_expired() or banned():
+        emit('expired')
+        return
+    if space_admin() or server_admin() or session['unique_id'] == collection_messages.find_one({'_id': ObjectId(data['message_id'])})['user_id']:
+        socketio.emit('deleted_message', data, room = data['room_id'])
     else:
         session['logged'] = False
         session.clear()
