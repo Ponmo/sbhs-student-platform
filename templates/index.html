@@ -1764,14 +1764,14 @@
       document.getElementById('create-space-form').onsubmit = function (e) {
         e.preventDefault();
         let space_name = document.getElementById('space-name').value.trim();
-        let space_image = document.getElementById('space-picture').value.trim();
+        let space_picture = document.getElementById('space-picture').value.trim();
         let space_description = document.getElementById('space-description').value.trim();
         if (space_name.length) { 
           $.ajax({
             type: 'POST',
             url: '/create_space',
             dataType: "json",
-            data: JSON.stringify({'space_name': space_name, 'space_image': space_image, 'space_description': space_description}),
+            data: JSON.stringify({'space_name': space_name, 'space_picture': space_picture, 'space_description': space_description}),
             contentType: 'application/json;charset=UTF-8',
             success: function(data) {
               if ('success' in data) {
@@ -1788,7 +1788,7 @@
                 newNodeChild.id = data.space_id;
                 newNodeChild.setAttribute('data-name', space_name);
                 newNodeChild.style.borderRadius = '3px';
-                newNodeChild.src = data.space_image;
+                newNodeChild.src = data.space_picture;
                 newNode.appendChild(newNodeChild);
                 newNodeChild = document.createElement('div');
                 newNodeChild.className = 'active-space';
