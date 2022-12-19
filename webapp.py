@@ -986,16 +986,16 @@ def deleted_message(data):
     if session_expired() or banned():
         emit('expired')
         return
-    deleted_message = collection_messages.find_one({'_id': ObjectId(request.json['message_id'])})
+    deleted_message = collection_messages.find_one({'_id': ObjectId(data['message_id'])})
     if deleted_message['user_id'] == session['unique_id'] or space_admin() or server_admin():
-        deleted_email = collection_messages.find({'room': request.json['room_id'], 'email': deleted_message['email']}).sort('_id', pymongo.DESCENDING)
+        deleted_email = collection_messages.find({'room': data['room_id'], 'email': deleted_message['email']}).sort('_id', pymongo.DESCENDING)
         document_list = list(deleted_email)
         message_index = document_list.index(deleted_message)
         if message_index != 0:
             if document_list[message_index-1]["combine"] == "true" and document_list[message_index]["combine"] == "false":
                 collection_messages.find_one_and_update({'_id': ObjectId(document_list[message_index-1]['_id'])}, {'$set': {'combine': 'false'}}) 
         #collection_deleted.insert_one({'name': session['users_email'], 'datetime': datetime.now().isoformat() + 'Z', 'deleted_message_content': deleted_message}) Used to add to logs once deleted.
-        collection_messages.delete_one({"_id": ObjectId(request.json['message_id'])})
+        collection_messages.delete_one({"_id": ObjectId(data['message_id'])})
         collection_logs.insert_one({'name': session['users_name'], 'user_id': session['unique_id'], 'email': session['users_email'], 'action': 'deleted message', 'by': deleted_message['name'], 'by_email': deleted_message['email'], 'in': session['current_space_name'], 'space_id': session['current_space'], 'details': deleted_message, 'datetime': datetime.now().isoformat() + 'Z'})
         socketio.emit('deleted_message', data, room = data['room_id'])
     else:
