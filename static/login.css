@@ -10,12 +10,6 @@
   z-index: -1;
   opacity: 0;
 }
-#oneconnected-logo {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
 #log-in-container {
   margin: 0 auto;
   margin-top: 80px;
@@ -60,9 +54,12 @@
   margin-top: 10px;
   color: #dc3544;
 }
-
+#agreement {
+  padding-left: 30px;
+  padding-right: 30px;
+}
 @media only screen and (max-width: 400px) {
   #log-in-container {
-    width: 90vw;
+    width: 85vw;
   }
 }
