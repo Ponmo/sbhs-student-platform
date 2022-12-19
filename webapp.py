@@ -549,7 +549,7 @@ def create_space():
         return 'expired', 200
     user = collection_users.find_one({"_id": session['unique_id']})
     if request.method == 'POST':
-        if user['owns'] < 3:
+        if user['owns'] > 3:
             return Response(dumps({'success': false}), mimetype='application/json')
         space_id = ObjectId()
         room_id = ObjectId()
