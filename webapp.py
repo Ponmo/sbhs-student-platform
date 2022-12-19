@@ -45,7 +45,6 @@ collection_spaces = db['Spaces']
 collection_rooms = db['Rooms']
 collection_messages = db['Messages']
 collection_sections = db['Sections']
-collection_deleted = db['Deleted Messages']
 collection_logs = db['Logs']
 collection_emails = db['Emails']
 collection_invites = db['Invites']
@@ -167,7 +166,8 @@ def callback():
         return redirect(url_for('render_login', error = "Email not available or verified"))
     
     if not collection_users.count_documents({ '_id': unique_id}, limit = 1):
-        collection_users.insert_one({'_id': unique_id, 'name': users_name, 'email': users_email, 'picture': picture, 'joined': [], 'status': 'user', 'owns': 0}) #check if profile picture the same !
+        collection_users.insert_one({'_id': unique_id, 'name': users_name, 'email': users_email, 'picture': picture, 'joined': [], 'status': 'user', 'owns': 0, 'agreed': 'false'})
+        session['admin'] = False
     else:
         user_status = collection_users.find_one({ '_id': unique_id})['status']
         if user_status == 'banned':
@@ -196,8 +196,8 @@ def get_google_provider_cfg():
     
 # Loads platform after login. Comment
 
-@app.route('/sbhs')
-@app.route('/sbhs/<space_id>')
+@app.route('/school')
+@app.route('/school/<space_id>')
 def render_main_page(space_id = None):
     if space_id != None:
         if 'logged' not in session or session['logged'] == False:
@@ -239,6 +239,29 @@ def logout():
         session.clear()
         return Response(dumps({'success': 'true'}), mimetype='application/json')
         
+@app.route('/accept_policies', methods=['GET', 'POST'])
+def accept_policies():
+    if session_expired() or banned():
+        return 'expired', 200
+    if request.method == 'POST':
+        collection_users.update_one({'_id': session['unique_id']}, {'$set': {'agreed': 'true'}}) #used for modal policies
+        return Response(dumps({'success':'true'}), mimetype='application/json')
+    session['logged'] = False # Prevents browsers from using cached session data to log in. NOTE: We use server-side sessions now
+    session.clear()
+    return 'not allowed', 405
+
+@app.route('/display_policies', methods=['GET', 'POST'])
+def display_policies():
+    if session_expired() or banned():
+        return 'expired', 200
+    if request.method == 'POST':
+        profile = collection_users.find_one({'_id': session['unique_id']})
+        data = profile['agreed']
+        return Response(dumps(data), mimetype='application/json')
+    session['logged'] = False # Prevents browsers from using cached session data to log in. NOTE: We use server-side sessions now
+    session.clear()
+    return 'not allowed', 405
+      
 # Returns all space data from MongoDB.
 
 @app.route('/list_spaces', methods=['GET', 'POST'])
